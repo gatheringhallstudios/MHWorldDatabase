@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.gathinghallstudios.mhworlddatabase.features.monsters.MonsterFragment;
+import com.gathinghallstudios.mhworlddatabase.features.monsters.MonsterListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
 
     private void loadInitialFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.content_main_frame, new MonsterFragment())
+        ft.add(R.id.content_main_frame, new MonsterListFragment())
                 .commit();
     }
 
