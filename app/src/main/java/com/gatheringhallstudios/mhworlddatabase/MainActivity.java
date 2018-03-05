@@ -1,4 +1,4 @@
-package com.gathinghallstudios.mhworlddatabase;
+package com.gatheringhallstudios.mhworlddatabase;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.gathinghallstudios.mhworlddatabase.features.monsters.MonsterListFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -1,7 +1,6 @@
-package com.gathinghallstudios.mhworlddatabase.data.raw;
+package com.gatheringhallstudios.mhworlddatabase.data.raw;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.support.annotation.NonNull;
 
 /**

@@ -1,11 +1,11 @@
-package com.gathinghallstudios.mhworlddatabase.features.monsters;
+package com.gatheringhallstudios.mhworlddatabase.features.monsters;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 
-import com.gathinghallstudios.mhworlddatabase.data.MHWDatabase;
-import com.gathinghallstudios.mhworlddatabase.data.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
+import com.gatheringhallstudios.mhworlddatabase.data.Monster;
 
 import java.util.List;
 

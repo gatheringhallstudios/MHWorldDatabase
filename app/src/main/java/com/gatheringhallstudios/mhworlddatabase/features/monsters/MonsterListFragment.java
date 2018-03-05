@@ -1,4 +1,4 @@
-package com.gathinghallstudios.mhworlddatabase.features.monsters;
+package com.gatheringhallstudios.mhworlddatabase.features.monsters;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gathinghallstudios.mhworlddatabase.R;
-import com.gathinghallstudios.mhworlddatabase.data.Monster;
+import com.gatheringhallstudios.mhworlddatabase.R;
+import com.gatheringhallstudios.mhworlddatabase.data.Monster;
 
 /**
  * Monster list

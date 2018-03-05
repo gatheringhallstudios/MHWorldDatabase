@@ -1,11 +1,11 @@
-package com.gathinghallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import com.gathinghallstudios.mhworlddatabase.data.raw.MonsterRaw;
-import com.gathinghallstudios.mhworlddatabase.data.raw.MonsterText;
+import com.gatheringhallstudios.mhworlddatabase.data.raw.MonsterRaw;
+import com.gatheringhallstudios.mhworlddatabase.data.raw.MonsterText;
 import com.huma.room_for_asset.RoomAsset;
 
 /**

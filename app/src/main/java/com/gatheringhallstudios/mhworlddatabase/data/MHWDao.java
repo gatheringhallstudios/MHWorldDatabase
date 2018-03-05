@@ -1,4 +1,4 @@
-package com.gathinghallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

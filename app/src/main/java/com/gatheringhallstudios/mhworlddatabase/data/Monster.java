@@ -1,4 +1,4 @@
-package com.gathinghallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data;
 
 /**
  * Represents basic information for a single monster.

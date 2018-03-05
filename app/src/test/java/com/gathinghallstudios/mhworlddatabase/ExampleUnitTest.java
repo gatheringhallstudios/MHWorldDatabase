@@ -1,4 +1,4 @@
-package com.gathinghallstudios.mhworlddatabase;
+package com.gatheringhallstudios.mhworlddatabase;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.gathinghallstudios.mhworlddatabase;
+package com.gatheringhallstudios.mhworlddatabase;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
