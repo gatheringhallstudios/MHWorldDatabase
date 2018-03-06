@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data;
 
+import android.app.Application;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
@@ -14,6 +15,15 @@ import com.huma.room_for_asset.RoomAsset;
 @Database(entities={MonsterRaw.class, MonsterText.class}, version=2)
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;
+
+    /**
+     * Returns a singleton instance of the MHWDatabase object.
+     * @param app
+     * @return
+     */
+    private static MHWDatabase getDatabase(Application app) {
+        return getDatabase(app.getApplicationContext());
+    }
 
     /**
      * Returns a singleton instance of the MHWDatabase object.

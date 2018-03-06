@@ -30,7 +30,7 @@ public class MonsterListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_monsters, container, false);
-        viewModel.getMonsters(getContext()).observe(this, (item) -> {
+        viewModel.getMonsters().observe(this, (item) -> {
             for (Monster monster : item) {
                 // todo: do something with this
                 Log.w("MHWTest", monster.name);
