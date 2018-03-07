@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.gathinghallstudios.mhworlddatabase"
+        applicationId "com.gatheringhallstudios.mhworlddatabase"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
@@ -57,5 +57,6 @@ dependencies {
     /*
      * Others
      */
-    implementation "com.github.humazed:RoomAsset:v1.0"
+    //implementation "com.github.humazed:RoomAsset:v1.0"
+    implementation 'com.github.daolq3012:AssetSQLiteOpenHelper:1.0'
 }

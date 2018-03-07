@@ -2,17 +2,25 @@ package com.gatheringhallstudios.mhworlddatabase.data;
 
 import android.app.Application;
 import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-import com.gatheringhallstudios.mhworlddatabase.data.raw.MonsterRaw;
-import com.gatheringhallstudios.mhworlddatabase.data.raw.MonsterText;
-import com.huma.room_for_asset.RoomAsset;
+// laziness, since we need to manually add all entities which is quite cumbersome
+import com.fstyle.library.helper.AssetSQLiteOpenHelperFactory;
+import com.gatheringhallstudios.mhworlddatabase.data.raw.*;
 
 /**
  * Created by Carlos on 3/4/2018.
  */
-@Database(entities={MonsterRaw.class, MonsterText.class}, version=2)
+@Database(
+    entities={
+        MonsterRaw.class, MonsterText.class,
+        SkillTreeRaw.class, SkillTreeText.class, SkillRaw.class,
+        ArmorRaw.class, ArmorText.class, ArmorSkill.class
+    }, version=1)
+@TypeConverters({ Converters.class })
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;
 
@@ -21,7 +29,7 @@ public abstract class MHWDatabase extends RoomDatabase {
      * @param app
      * @return
      */
-    private static MHWDatabase getDatabase(Application app) {
+    public static MHWDatabase getDatabase(Application app) {
         return getDatabase(app.getApplicationContext());
     }
 
@@ -37,7 +45,11 @@ public abstract class MHWDatabase extends RoomDatabase {
         // A change in the database will require you to delete local data in the emulator if there is no version bump.
         // https://stackoverflow.com/questions/44263891/how-to-use-room-persistence-library-with-pre-populated-database
         if (instance == null) {
-            instance = RoomAsset.databaseBuilder(ctx, MHWDatabase.class, "mhw.db").build();
+            instance = Room.databaseBuilder(ctx, MHWDatabase.class, "mhw.db")
+                    .openHelperFactory(new AssetSQLiteOpenHelperFactory())
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return instance;
     }

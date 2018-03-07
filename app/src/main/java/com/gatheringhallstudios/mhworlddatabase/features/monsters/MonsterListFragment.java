@@ -33,7 +33,7 @@ public class MonsterListFragment extends Fragment {
         viewModel.getMonsters().observe(this, (item) -> {
             for (Monster monster : item) {
                 // todo: do something with this
-                Log.w("MHWTest", monster.name);
+                //Log.w("MHWTest", monster.getName());
             }
         });
         return root;

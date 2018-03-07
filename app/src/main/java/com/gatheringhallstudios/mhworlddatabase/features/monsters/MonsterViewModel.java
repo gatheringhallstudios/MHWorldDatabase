@@ -3,7 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
@@ -29,7 +28,7 @@ public class MonsterViewModel extends AndroidViewModel {
             return monsters;
         }
 
-        monsters = db.mhwDao().loadAllMonsters("en");
+        monsters = db.mhwDao().loadMonsterList("en");
         return monsters;
     }
 }
