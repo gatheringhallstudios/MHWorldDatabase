@@ -5,4 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- Monsters -->
+    <string name="monsters_title">Monsters</string>
+    <string name="monsters_small">Small</string>
+    <string name="monsters_large">Large</string>
+    <string name="monsters_all">All</string>
 </resources>

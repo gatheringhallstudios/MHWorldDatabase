@@ -48,6 +48,12 @@ dependencies {
     testImplementation "android.arch.persistence.room:testing:1.0.0"
 
     /*
+     * Butterknife
+     */
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    /*
      * Testing
      */
     testImplementation "junit:junit:4.12"

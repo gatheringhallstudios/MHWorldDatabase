@@ -8,17 +8,18 @@ import android.support.annotation.NonNull;
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.Monster;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * A viewmodel for any monster fragment, used to contain data between fragment recreations.
  * Created by Carlos on 3/4/2018.
  */
-public class MonsterViewModel extends AndroidViewModel {
+public class MonsterHubViewModel extends AndroidViewModel {
     private MHWDatabase db;
     private LiveData<List<Monster>> monsters;
 
-    public MonsterViewModel(@NonNull Application application) {
+    public MonsterHubViewModel(@NonNull Application application) {
         super(application);
         db = MHWDatabase.getDatabase(application);
     }
@@ -29,6 +30,30 @@ public class MonsterViewModel extends AndroidViewModel {
         }
 
         monsters = db.mhwDao().loadMonsterList("en");
+        return monsters;
+    }
+
+    public LiveData<List<Monster>> getLargeMonsters() {
+        if (monsters != null) {
+            return monsters;
+        }
+
+        monsters = db.mhwDao().loadMonsterList("en");
+
+        Collections.shuffle(monsters.getValue());
+
+        return monsters;
+    }
+
+    public LiveData<List<Monster>> getSmallMonsters() {
+        if (monsters != null) {
+            return monsters;
+        }
+
+        monsters = db.mhwDao().loadMonsterList("en");
+
+        Collections.shuffle(monsters.getValue());
+
         return monsters;
     }
 }
