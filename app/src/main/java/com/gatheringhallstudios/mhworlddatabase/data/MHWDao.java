@@ -19,6 +19,13 @@ public abstract class MHWDao {
             "ORDER BY t.name ASC")
     public abstract LiveData<List<Monster>> loadMonsterList(String langId);
 
+    @Query( "SELECT m.*, t.name, t.description " +
+            "from monster m JOIN monster_text t USING (id) " +
+            "WHERE t.lang_id = :langId " +
+            "  AND m.size = :size " +
+            "ORDER BY t.name ASC")
+    public abstract LiveData<List<Monster>> loadMonsterList(String langId, MonsterSize size);
+
     @Query( "SELECT id, name, description " +
             "FROM skilltree join skilltree_text USING (id) " +
             "WHERE lang_id = :langId " +

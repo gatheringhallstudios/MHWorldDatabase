@@ -48,13 +48,6 @@ public class MonsterHubFragment extends Fragment {
         // Bind butterknife
         ButterKnife.bind(this, root);
 
-        viewModel.getMonsters().observe(this, (item) -> {
-            for (Monster monster : item) {
-                // todo: do something with this
-                //Log.w("MHWTest", monster.getName());
-            }
-        });
-
         // Initialize ViewPager
         viewPager.setAdapter(new MonsterGridPagerAdapter(getFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);

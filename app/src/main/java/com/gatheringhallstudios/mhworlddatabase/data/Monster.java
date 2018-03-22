@@ -13,4 +13,5 @@ public class Monster {
     public int id;
     public String name;
     public String description;
+    public MonsterSize size;
 }

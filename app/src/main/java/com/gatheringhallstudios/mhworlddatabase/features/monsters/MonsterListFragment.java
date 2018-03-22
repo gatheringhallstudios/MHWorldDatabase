@@ -52,9 +52,10 @@ public class MonsterListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext()));
 
         if (getArguments() != null) {
-            if (tabTitleLarge.equals(getArguments().getString(ARG_TAB))) {
+            String tabName = getArguments().getString(ARG_TAB);
+            if (tabTitleLarge.equals(tabName)) {
                 loadLargeMonsterList();
-            } else if (tabTitleSmall.equals(getArguments().getString(ARG_TAB))) {
+            } else if (tabTitleSmall.equals(tabName)) {
                 loadSmallMonstersList();
             } else {
                 loadAllMonsterList();

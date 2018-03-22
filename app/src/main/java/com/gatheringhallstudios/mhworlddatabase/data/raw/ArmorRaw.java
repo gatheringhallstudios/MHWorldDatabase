@@ -3,6 +3,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.raw;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.gatheringhallstudios.mhworlddatabase.data.ArmorType;
+
 /**
  * Raw entity for Armor
  * Created by Carlos on 3/5/2018.
@@ -13,7 +15,7 @@ public class ArmorRaw {
     public int id;
 
     public int rarity;
-    public String armor_type; // todo: change to enum
+    public ArmorType armor_type;
     public boolean male;
     public boolean female;
 

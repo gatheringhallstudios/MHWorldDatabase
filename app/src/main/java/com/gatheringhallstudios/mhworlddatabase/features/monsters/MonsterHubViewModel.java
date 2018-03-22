@@ -7,8 +7,10 @@ import android.support.annotation.NonNull;
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.MonsterSize;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,7 +19,10 @@ import java.util.List;
  */
 public class MonsterHubViewModel extends AndroidViewModel {
     private MHWDatabase db;
-    private LiveData<List<Monster>> monsters;
+
+    LiveData<List<Monster>> allMonsters;
+    LiveData<List<Monster>> largeMonsters;
+    LiveData<List<Monster>> smallMonsters;
 
     public MonsterHubViewModel(@NonNull Application application) {
         super(application);
@@ -25,35 +30,29 @@ public class MonsterHubViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Monster>> getMonsters() {
-        if (monsters != null) {
-            return monsters;
+        if (allMonsters != null) {
+            return allMonsters;
         }
 
-        monsters = db.mhwDao().loadMonsterList("en");
-        return monsters;
+        allMonsters = db.mhwDao().loadMonsterList("en");
+        return allMonsters;
     }
 
     public LiveData<List<Monster>> getLargeMonsters() {
-        if (monsters != null) {
-            return monsters;
+        if (largeMonsters != null) {
+            return largeMonsters;
         }
 
-        monsters = db.mhwDao().loadMonsterList("en");
-
-        Collections.shuffle(monsters.getValue());
-
-        return monsters;
+        largeMonsters = db.mhwDao().loadMonsterList("en", MonsterSize.LARGE);
+        return largeMonsters;
     }
 
     public LiveData<List<Monster>> getSmallMonsters() {
-        if (monsters != null) {
-            return monsters;
+        if (smallMonsters != null) {
+            return smallMonsters;
         }
 
-        monsters = db.mhwDao().loadMonsterList("en");
-
-        Collections.shuffle(monsters.getValue());
-
-        return monsters;
+        smallMonsters = db.mhwDao().loadMonsterList("en", MonsterSize.SMALL);
+        return smallMonsters;
     }
 }

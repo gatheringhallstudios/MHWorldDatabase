@@ -19,7 +19,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.raw.*;
         MonsterRaw.class, MonsterText.class,
         SkillTreeRaw.class, SkillTreeText.class, SkillRaw.class,
         ArmorRaw.class, ArmorText.class, ArmorSkill.class
-    }, version=1)
+    }, version=2)
 @TypeConverters({ Converters.class })
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;
