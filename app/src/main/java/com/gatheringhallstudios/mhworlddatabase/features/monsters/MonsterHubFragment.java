@@ -60,7 +60,6 @@ public class MonsterHubFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         getActivity().setTitle(getString(R.string.monsters_title));
-
     }
 
     public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
@@ -78,18 +77,11 @@ public class MonsterHubFragment extends Fragment {
 
         @Override
         public Fragment getItem(int index) {
-            switch (index) {
-                case 0:
-                    // Monster grid (large monsters)
-                    return MonsterListFragment.newInstance(tabTitleLarge);
-                case 1:
-                    // Monster grid (small monsters)
-                    return MonsterListFragment.newInstance(tabTitleSmall);
-                case 2:
-                    // Monster grid (all monsters)
-                    return MonsterListFragment.newInstance(tabTitleAll);
-                default:
-                    return null;
+            try {
+                String tabName = tabs[index];
+                return MonsterListFragment.newInstance(tabName);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                return null;
             }
         }
 
@@ -101,7 +93,7 @@ public class MonsterHubFragment extends Fragment {
         @Override
         public int getCount() {
             // get item count - equal to number of tabs
-            return 3;
+            return tabs.length;
         }
 
     }
