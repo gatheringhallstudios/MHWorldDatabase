@@ -58,13 +58,13 @@ public class DatabaseTest {
 
     @Test
     public void Can_Query_MonsterList() throws Exception {
-        List<Monster> results = getValue(db.mhwDao().loadMonsterList("en"));
+        List<Monster> results = getValue(db.monsterDao().loadList("en"));
         assertFalse("expected results", results.isEmpty());
     }
 
     @Test
     public void Can_Query_SkillList() throws Exception {
-        List<SkillTreeBasic> results = getValue(db.mhwDao().loadSkillTreeList("en"));
+        List<SkillTreeBasic> results = getValue(db.skillDao().loadSkillTreeList("en"));
         assertFalse("expected results", results.isEmpty());
     }
 
@@ -73,7 +73,7 @@ public class DatabaseTest {
         // this is a hardcoded test, but we don't have any other way to test this...
         // this tests if the joining works
 
-        SkillTree result = getValue(db.mhwDao().loadSkill("en", 5));
+        SkillTree result = getValue(db.skillDao().loadSkill("en", 5));
         assertEquals("name should match", "Attack Boost", result.name);
         assertEquals("levels should match", 7, result.skills.size());
 
@@ -85,13 +85,13 @@ public class DatabaseTest {
 
     @Test
     public void Can_Query_ArmorList() throws Exception {
-        List<ArmorBasic> results = getValue(db.mhwDao().loadArmorList("en"));
+        List<ArmorBasic> results = getValue(db.armorDao().loadArmorList("en"));
         assertFalse("expected results", results.isEmpty());
     }
 
     @Test
     public void Can_Filter_ArmorList_Rarity() throws Exception {
-        List<ArmorBasic> results = getValue(db.mhwDao().loadArmorList("en", 3, 3));
+        List<ArmorBasic> results = getValue(db.armorDao().loadArmorList("en", 3, 3));
         boolean allAre3 = results.stream().allMatch((a) -> a.rarity == 3);
         assertTrue("All armor should be rarity 3", allAre3);
     }
@@ -99,7 +99,7 @@ public class DatabaseTest {
     @Test
     public void Can_Query_Armor() throws Exception {
         int armorId = 489; // Zorah Hide Alpha
-        Armor result = getValue(db.mhwDao().loadArmor("en", armorId));
+        Armor result = getValue(db.armorDao().loadArmor("en", armorId));
 
         assertEquals("expect name match", "Zorah Hide Alpha", result.name);
         assertEquals("expected type to match", ArmorType.CHEST, result.armor_type);

@@ -9,6 +9,9 @@ import android.content.Context;
 
 // laziness, since we need to manually add all entities which is quite cumbersome
 import com.fstyle.library.helper.AssetSQLiteOpenHelperFactory;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.raw.*;
 
 /**
@@ -54,5 +57,9 @@ public abstract class MHWDatabase extends RoomDatabase {
         return instance;
     }
 
-    public abstract MHWDao mhwDao();
+    public abstract MonsterDao monsterDao();
+
+    public abstract SkillDao skillDao();
+
+    public abstract ArmorDao armorDao();
 }

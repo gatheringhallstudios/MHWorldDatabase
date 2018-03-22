@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterHubFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -45,10 +47,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void loadInitialFragment() {
+    /**
+     * Loads a new main fragment, clearing the back stack.
+     * Use this when navigating using the main drawer
+     * @param f
+     */
+    private void loadFragment(Fragment f) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.content_main_frame, new MonsterHubFragment())
-                .commit();
+        ft.replace(R.id.content_main_frame, f).commit();
+    }
+
+    private void loadInitialFragment() {
+        loadFragment(new MonsterHubFragment());
     }
 
     @Override
@@ -89,18 +99,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_monsters) {
+            loadFragment(new MonsterHubFragment());
+        } else if (id == R.id.nav_weapons) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_armor) {
+            loadFragment(new ArmorListFragment());
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -11,4 +11,11 @@
     <string name="monsters_small">Small</string>
     <string name="monsters_large">Large</string>
     <string name="monsters_all">All</string>
+
+    <!-- Armor -->
+    <string name="armor_title">Armor</string>
+
+    <!-- Skills -->
+    <string name="skills_title">Armor</string>
+
 </resources>

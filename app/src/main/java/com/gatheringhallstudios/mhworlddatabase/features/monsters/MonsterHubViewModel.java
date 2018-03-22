@@ -7,10 +7,9 @@ import android.support.annotation.NonNull;
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.MonsterSize;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ import java.util.List;
  * Created by Carlos on 3/4/2018.
  */
 public class MonsterHubViewModel extends AndroidViewModel {
-    private MHWDatabase db;
+    private MonsterDao dao;
 
     LiveData<List<Monster>> allMonsters;
     LiveData<List<Monster>> largeMonsters;
@@ -26,7 +25,8 @@ public class MonsterHubViewModel extends AndroidViewModel {
 
     public MonsterHubViewModel(@NonNull Application application) {
         super(application);
-        db = MHWDatabase.getDatabase(application);
+        MHWDatabase db = MHWDatabase.getDatabase(application);
+        dao = db.monsterDao();
     }
 
     public LiveData<List<Monster>> getMonsters() {
@@ -34,7 +34,7 @@ public class MonsterHubViewModel extends AndroidViewModel {
             return allMonsters;
         }
 
-        allMonsters = db.mhwDao().loadMonsterList("en");
+        allMonsters = dao.loadList("en");
         return allMonsters;
     }
 
@@ -43,7 +43,7 @@ public class MonsterHubViewModel extends AndroidViewModel {
             return largeMonsters;
         }
 
-        largeMonsters = db.mhwDao().loadMonsterList("en", MonsterSize.LARGE);
+        largeMonsters = dao.loadList("en", MonsterSize.LARGE);
         return largeMonsters;
     }
 
@@ -52,7 +52,7 @@ public class MonsterHubViewModel extends AndroidViewModel {
             return smallMonsters;
         }
 
-        smallMonsters = db.mhwDao().loadMonsterList("en", MonsterSize.SMALL);
+        smallMonsters = dao.loadList("en", MonsterSize.SMALL);
         return smallMonsters;
     }
 }
