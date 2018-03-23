@@ -23,7 +23,9 @@ public class ArmorRaw {
     public int slot_2;
     public int slot_3;
 
-    public int defense;
+    public int defense_base;
+    public int defense_max;
+    public int defense_augment_max;
     public int fire;
     public int water;
     public int thunder;

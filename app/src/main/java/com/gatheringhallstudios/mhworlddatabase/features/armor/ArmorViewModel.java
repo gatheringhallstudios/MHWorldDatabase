@@ -25,6 +25,6 @@ public class ArmorViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<ArmorBasic>> GetArmorList() {
-        return dao.loadArmorList("en");
+        return dao.loadList("en");
     }
 }

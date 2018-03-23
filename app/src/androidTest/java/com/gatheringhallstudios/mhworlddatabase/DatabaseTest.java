@@ -85,13 +85,13 @@ public class DatabaseTest {
 
     @Test
     public void Can_Query_ArmorList() throws Exception {
-        List<ArmorBasic> results = getValue(db.armorDao().loadArmorList("en"));
+        List<ArmorBasic> results = getValue(db.armorDao().loadList("en"));
         assertFalse("expected results", results.isEmpty());
     }
 
     @Test
     public void Can_Filter_ArmorList_Rarity() throws Exception {
-        List<ArmorBasic> results = getValue(db.armorDao().loadArmorList("en", 3, 3));
+        List<ArmorBasic> results = getValue(db.armorDao().loadList("en", 3, 3));
         boolean allAre3 = results.stream().allMatch((a) -> a.rarity == 3);
         assertTrue("All armor should be rarity 3", allAre3);
     }

@@ -8,7 +8,7 @@ public class Armor {
     public int id;
     public String name;
     public int rarity;
-    public ArmorType armor_type; // todo: change to enum
+    public ArmorType armor_type;
     public boolean male;
     public boolean female;
 
@@ -16,10 +16,14 @@ public class Armor {
     public int slot_2;
     public int slot_3;
 
-    public int defense;
+    public int defense_base;
+    public int defense_max;
+    public int defense_augment_max;
     public int fire;
     public int water;
     public int thunder;
     public int ice;
     public int dragon;
+
+    // todo: one to manys like how to craft, skills, etc.
 }
