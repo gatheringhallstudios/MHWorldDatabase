@@ -51,7 +51,6 @@ public abstract class MHWDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(ctx, MHWDatabase.class, "mhw.db")
                     .openHelperFactory(new AssetSQLiteOpenHelperFactory())
                     .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration()
                     .build();
         }
         return instance;
