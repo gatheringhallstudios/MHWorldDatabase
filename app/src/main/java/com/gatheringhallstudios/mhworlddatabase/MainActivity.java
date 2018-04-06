@@ -15,6 +15,8 @@ import android.view.MenuItem;
 
 import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterHubFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListViewModel;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,7 +35,9 @@ public class MainActivity extends AppCompatActivity
         // Instantiate our MainViewModel
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
-        loadInitialFragment();
+        // Load the initial fragment
+        Fragment initial = getFragmentForNavId(R.id.nav_monsters);
+        loadFragment(initial);
     }
 
     private void setupNavigationDrawer(Toolbar toolbar) {
@@ -54,11 +58,8 @@ public class MainActivity extends AppCompatActivity
      */
     private void loadFragment(Fragment f) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_main_frame, f).commit();
-    }
-
-    private void loadInitialFragment() {
-        loadFragment(new MonsterHubFragment());
+        ft.replace(R.id.content_main_frame, f);
+        ft.commit();
     }
 
     @Override
@@ -98,17 +99,32 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment destination = getFragmentForNavId(id);
+        if (destination != null) {
+            loadFragment(destination);
 
-        if (id == R.id.nav_monsters) {
-            loadFragment(new MonsterHubFragment());
-        } else if (id == R.id.nav_weapons) {
-
-        } else if (id == R.id.nav_armor) {
-            loadFragment(new ArmorListFragment());
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * Internal method that determines the fragment that should be loaded
+     * when the given nav item is selected.
+     * @param navId A layout id such as R.id.nav_monsters
+     * @return the new fragment
+     */
+    protected Fragment getFragmentForNavId(int navId) {
+        switch (navId) {
+            case R.id.nav_monsters:
+                return new MonsterHubFragment();
+            case R.id.nav_armor:
+                return new ArmorListFragment();
+            default:
+                // throw an exception in the future, but for now return null
+                return null;
+        }
     }
 }
