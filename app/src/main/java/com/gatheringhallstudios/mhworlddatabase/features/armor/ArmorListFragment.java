@@ -13,27 +13,31 @@ import android.view.ViewGroup;
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.ArmorListAdapter;
 
+import java.util.ArrayList;
+
 /**
  * Created by Carlos on 3/22/2018.
  */
 
 public class ArmorListFragment extends Fragment {
     ArmorViewModel viewModel;
-    RecyclerView view;
+    RecyclerView recyclerView;
+    ArmorListAdapter armorListAdapter = new ArmorListAdapter(new ArrayList<>());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
-        view = (RecyclerView) inflater.inflate(R.layout.list_generic, parent, false);
-        view.setLayoutManager(new LinearLayoutManager(parent.getContext()));
+        recyclerView = (RecyclerView) inflater.inflate(R.layout.list_generic, parent, false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext()));
+        recyclerView.setAdapter(armorListAdapter);
 
         viewModel = ViewModelProviders.of(getActivity()).get(ArmorViewModel.class);
 
-        viewModel.GetArmorList().observe(this, (list) -> {
-            view.setAdapter(new ArmorListAdapter(list));
+        viewModel.getArmorList().observe(this, (list) -> {
+            armorListAdapter.replaceData(list);
         });
 
-        return view;
+        return recyclerView;
     }
 
     @Override

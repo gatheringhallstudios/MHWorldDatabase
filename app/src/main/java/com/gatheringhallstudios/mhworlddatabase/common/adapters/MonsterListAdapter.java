@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.data.Monster;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +19,7 @@ import java.util.List;
 
 public class MonsterListAdapter extends RecyclerView.Adapter<MonsterListAdapter.ViewHolder> {
 
-    List<Monster> monsterList = new ArrayList<>();
+    private List<Monster> monsterList;
 
     public MonsterListAdapter(List<Monster> monsters) {
         monsterList = monsters;
@@ -46,6 +45,11 @@ public class MonsterListAdapter extends RecyclerView.Adapter<MonsterListAdapter.
     @Override
     public int getItemCount() {
         return monsterList.size();
+    }
+
+    public void replaceData(List<Monster> list) {
+        monsterList = list;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

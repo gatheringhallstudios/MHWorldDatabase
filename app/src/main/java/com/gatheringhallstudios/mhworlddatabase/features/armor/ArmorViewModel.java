@@ -24,7 +24,7 @@ public class ArmorViewModel extends AndroidViewModel {
         dao = MHWDatabase.getDatabase(application).armorDao();
     }
 
-    public LiveData<List<ArmorBasic>> GetArmorList() {
+    public LiveData<List<ArmorBasic>> getArmorList() {
         return dao.loadList("en");
     }
 }

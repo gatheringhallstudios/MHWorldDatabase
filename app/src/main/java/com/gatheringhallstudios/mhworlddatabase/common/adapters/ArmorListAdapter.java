@@ -47,6 +47,11 @@ public class ArmorListAdapter extends RecyclerView.Adapter<ArmorListAdapter.View
         return armorList.size();
     }
 
+    public void replaceData(List<ArmorBasic> list) {
+        armorList = list;
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.icon_monster) ImageView armorIcon;
         @BindView(R.id.name_monster) TextView armorName;
