@@ -24,30 +24,31 @@ import butterknife.ButterKnife;
  */
 
 public class MonsterHubFragment extends Fragment {
-    MonsterHubViewModel viewModel;
+    MonsterListViewModel viewModel;
 
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.pager_list_monsters) ViewPager viewPager;
 
-    @BindString(R.string.monsters_small) String tabTitleSmall;
     @BindString(R.string.monsters_large) String tabTitleLarge;
+    @BindString(R.string.monsters_small) String tabTitleSmall;
     @BindString(R.string.monsters_all) String tabTitleAll;
+
+    private MonsterListViewModel.Tab[] tabs = {
+            MonsterListViewModel.Tab.LARGE,
+            MonsterListViewModel.Tab.SMALL,
+            MonsterListViewModel.Tab.ALL
+    };
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Get ViewModel
-        if (getActivity() != null) {
-            viewModel = ViewModelProviders.of(getActivity()).get(MonsterHubViewModel.class);
-        }
-
         // Inflate view
         View root = inflater.inflate(R.layout.fragment_monsters, container, false);
 
         // Bind butterknife
         ButterKnife.bind(this, root);
 
-        // Initialize ViewPager
+        // Initialize ViewPager (tab behavior)
         viewPager.setAdapter(new MonsterGridPagerAdapter(getFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
 
@@ -63,13 +64,6 @@ public class MonsterHubFragment extends Fragment {
 
     public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
 
-        // Tab titles
-        private String[] tabs = {
-                tabTitleLarge,
-                tabTitleSmall,
-                tabTitleAll
-        };
-
         MonsterGridPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -77,8 +71,7 @@ public class MonsterHubFragment extends Fragment {
         @Override
         public Fragment getItem(int index) {
             try {
-                String tabName = tabs[index];
-                return MonsterListFragment.newInstance(tabName);
+                return MonsterListFragment.newInstance(tabs[index]);
             } catch (ArrayIndexOutOfBoundsException ex) {
                 return null;
             }
@@ -86,7 +79,15 @@ public class MonsterHubFragment extends Fragment {
 
         @Override
         public CharSequence getPageTitle(int index) {
-            return tabs[index];
+            MonsterListViewModel.Tab tab = tabs[index];
+            switch (tab) {
+                case LARGE:
+                    return tabTitleLarge;
+                case SMALL:
+                    return tabTitleSmall;
+                default:
+                    return tabTitleAll;
+            }
         }
 
         @Override
