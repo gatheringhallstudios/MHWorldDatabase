@@ -49,7 +49,7 @@ public class MonsterHubFragment extends Fragment {
         ButterKnife.bind(this, root);
 
         // Initialize ViewPager (tab behavior)
-        viewPager.setAdapter(new MonsterGridPagerAdapter(getFragmentManager()));
+        viewPager.setAdapter(new MonsterGridPagerAdapter(getChildFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
 
         return root;
