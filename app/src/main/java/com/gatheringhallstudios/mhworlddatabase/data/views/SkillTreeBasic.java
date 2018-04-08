@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.views;
 
 /**
  * Basic representation of a skill tree.

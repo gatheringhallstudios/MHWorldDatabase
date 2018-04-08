@@ -1,8 +1,8 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.views;
 
 import android.arch.persistence.room.Relation;
 
-import com.gatheringhallstudios.mhworlddatabase.data.raw.SkillRaw;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillRaw;
 
 import java.util.List;
 

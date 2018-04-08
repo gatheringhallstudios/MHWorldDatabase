@@ -1,10 +1,13 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.views;
+
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType;
 
 /**
+ * Contains basic armor information.
+ * For more information, query for the armor directly
  * Created by Carlos on 3/6/2018.
  */
-
-public class Armor {
+public class ArmorBasic {
     public int id;
     public String name;
     public int rarity;
@@ -24,6 +27,4 @@ public class Armor {
     public int thunder;
     public int ice;
     public int dragon;
-
-    // todo: one to manys like how to craft, skills, etc.
 }

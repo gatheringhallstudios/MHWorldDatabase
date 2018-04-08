@@ -1,19 +1,14 @@
-package com.gatheringhallstudios.mhworlddatabase.data.raw;
+package com.gatheringhallstudios.mhworlddatabase.data.views;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
-import com.gatheringhallstudios.mhworlddatabase.data.ArmorType;
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType;
 
 /**
- * Raw entity for Armor
- * Created by Carlos on 3/5/2018.
+ * Created by Carlos on 3/6/2018.
  */
-@Entity(tableName = "armor")
-public class ArmorRaw {
-    @PrimaryKey
-    public int id;
 
+public class Armor {
+    public int id;
+    public String name;
     public int rarity;
     public ArmorType armor_type;
     public boolean male;
@@ -31,4 +26,6 @@ public class ArmorRaw {
     public int thunder;
     public int ice;
     public int dragon;
+
+    // todo: one to manys like how to craft, skills, etc.
 }

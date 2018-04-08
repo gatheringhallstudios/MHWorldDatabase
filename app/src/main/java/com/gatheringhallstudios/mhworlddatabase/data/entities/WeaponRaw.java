@@ -1,9 +1,9 @@
-package com.gatheringhallstudios.mhworlddatabase.data.raw;
+package com.gatheringhallstudios.mhworlddatabase.data.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import com.gatheringhallstudios.mhworlddatabase.data.WeaponType;
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType;
 
 /**
  * Created by Carlos on 3/20/2018.

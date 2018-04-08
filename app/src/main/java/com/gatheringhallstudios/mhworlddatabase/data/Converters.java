@@ -1,10 +1,10 @@
-package com.gatheringhallstudios.mhworlddatabase.data.raw;
+package com.gatheringhallstudios.mhworlddatabase.data;
 
 import android.arch.persistence.room.TypeConverter;
 
-import com.gatheringhallstudios.mhworlddatabase.data.ArmorType;
-import com.gatheringhallstudios.mhworlddatabase.data.MonsterSize;
-import com.gatheringhallstudios.mhworlddatabase.data.WeaponType;
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType;
+import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize;
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType;
 import com.google.common.collect.EnumHashBiMap;
 
 /**

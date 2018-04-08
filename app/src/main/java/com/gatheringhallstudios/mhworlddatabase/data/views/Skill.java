@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.views;
 
 /**
  * Created by Carlos on 3/6/2018.

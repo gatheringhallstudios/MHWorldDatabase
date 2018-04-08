@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.data.raw;
+package com.gatheringhallstudios.mhworlddatabase.data.entities;
 
 /**
  * Created by Carlos on 3/21/2018.

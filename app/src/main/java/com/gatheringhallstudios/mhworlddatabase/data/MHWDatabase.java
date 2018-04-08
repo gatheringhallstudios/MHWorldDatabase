@@ -11,7 +11,7 @@ import android.content.Context;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
-import com.gatheringhallstudios.mhworlddatabase.data.raw.*;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.*;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
 /**

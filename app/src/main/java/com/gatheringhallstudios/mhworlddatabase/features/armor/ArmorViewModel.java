@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.gatheringhallstudios.mhworlddatabase.data.ArmorBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 

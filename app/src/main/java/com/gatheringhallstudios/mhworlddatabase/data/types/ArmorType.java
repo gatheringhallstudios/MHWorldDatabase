@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.types;
 
 /**
  * An enumeration that defines where a piece of armor is worn.

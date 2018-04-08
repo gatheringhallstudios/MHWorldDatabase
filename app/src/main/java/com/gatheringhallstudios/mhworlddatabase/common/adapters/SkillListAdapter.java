@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.data.ArmorBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
 
 import java.util.List;
 

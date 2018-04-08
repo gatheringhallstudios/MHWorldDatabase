@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.types;
 
 /**
  * An enumeration that defines the type of weapon.

@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
 
-import com.gatheringhallstudios.mhworlddatabase.data.Armor;
-import com.gatheringhallstudios.mhworlddatabase.data.ArmorBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.Armor;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
 
 import java.util.List;
 

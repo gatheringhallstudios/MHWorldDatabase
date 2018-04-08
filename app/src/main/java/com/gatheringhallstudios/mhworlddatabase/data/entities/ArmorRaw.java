@@ -1,15 +1,19 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.entities;
 
-import com.gatheringhallstudios.mhworlddatabase.data.ArmorType;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType;
 
 /**
- * Contains basic armor information.
- * For more information, query for the armor directly
- * Created by Carlos on 3/6/2018.
+ * Raw entity for Armor
+ * Created by Carlos on 3/5/2018.
  */
-public class ArmorBasic {
+@Entity(tableName = "armor")
+public class ArmorRaw {
+    @PrimaryKey
     public int id;
-    public String name;
+
     public int rarity;
     public ArmorType armor_type;
     public boolean male;

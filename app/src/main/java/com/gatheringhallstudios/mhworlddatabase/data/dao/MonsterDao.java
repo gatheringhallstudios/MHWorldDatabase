@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
 
-import com.gatheringhallstudios.mhworlddatabase.data.Monster;
-import com.gatheringhallstudios.mhworlddatabase.data.MonsterSize;
+import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize;
 
 import java.util.List;
 

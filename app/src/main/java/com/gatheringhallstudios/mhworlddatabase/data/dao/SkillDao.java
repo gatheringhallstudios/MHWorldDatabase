@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
 
-import com.gatheringhallstudios.mhworlddatabase.data.SkillTree;
-import com.gatheringhallstudios.mhworlddatabase.data.SkillTreeBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTree;
+import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeBasic;
 
 import java.util.List;
 

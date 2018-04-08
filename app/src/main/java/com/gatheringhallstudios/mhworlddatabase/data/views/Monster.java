@@ -1,4 +1,6 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.views;
+
+import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize;
 
 /**
  * Represents basic information for a single monster.

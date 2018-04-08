@@ -1,4 +1,6 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.views;
+
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType;
 
 /**
  * A view for basic weapon information.

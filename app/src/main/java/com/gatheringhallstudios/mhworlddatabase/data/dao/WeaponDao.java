@@ -4,9 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
 
-import com.gatheringhallstudios.mhworlddatabase.data.Weapon;
-import com.gatheringhallstudios.mhworlddatabase.data.WeaponBasic;
-import com.gatheringhallstudios.mhworlddatabase.data.WeaponType;
+import com.gatheringhallstudios.mhworlddatabase.data.views.WeaponBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType;
 
 /**
  * Created by Carlos on 3/21/2018.

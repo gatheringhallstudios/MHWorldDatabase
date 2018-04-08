@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.types;
 
 /**
  * An enumeration used to represent a monster's size.

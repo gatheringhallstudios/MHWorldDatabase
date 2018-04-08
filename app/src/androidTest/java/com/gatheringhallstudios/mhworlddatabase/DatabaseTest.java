@@ -5,14 +5,14 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.gatheringhallstudios.mhworlddatabase.data.Armor;
-import com.gatheringhallstudios.mhworlddatabase.data.ArmorType;
+import com.gatheringhallstudios.mhworlddatabase.data.views.Armor;
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType;
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
-import com.gatheringhallstudios.mhworlddatabase.data.Monster;
-import com.gatheringhallstudios.mhworlddatabase.data.Skill;
-import com.gatheringhallstudios.mhworlddatabase.data.SkillTree;
-import com.gatheringhallstudios.mhworlddatabase.data.SkillTreeBasic;
-import com.gatheringhallstudios.mhworlddatabase.data.ArmorBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.views.Skill;
+import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTree;
+import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

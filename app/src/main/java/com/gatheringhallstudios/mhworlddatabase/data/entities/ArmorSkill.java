@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.data.raw;
+package com.gatheringhallstudios.mhworlddatabase.data.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
@@ -7,7 +7,7 @@ import android.arch.persistence.room.ForeignKey;
  * Created by Carlos on 3/6/2018.
  */
 @Entity(tableName = "armor_skill",
-        primaryKeys = {"armor_id", "skill_id"},
+        primaryKeys = {"armor_id", "skilltree_id"},
         foreignKeys = {
             @ForeignKey(
                     entity=ArmorRaw.class,
@@ -17,10 +17,10 @@ import android.arch.persistence.room.ForeignKey;
             @ForeignKey(
                     entity=SkillTreeRaw.class,
                     parentColumns = "id",
-                    childColumns = "skill_id"
+                    childColumns = "skilltree_id"
             )})
 public class ArmorSkill {
     public int armor_id;
-    public int skill_id;
+    public int skilltree_id;
     public int level;
 }

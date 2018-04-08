@@ -1,15 +1,15 @@
-package com.gatheringhallstudios.mhworlddatabase.data.raw;
+package com.gatheringhallstudios.mhworlddatabase.data.entities;
 
 import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
 /**
- * Translation data for Item
+ * Translation data for armor
  * Created by Carlos on 3/5/2018.
  */
-@Entity(tableName = "item_text",
+@Entity(tableName = "armor_text",
         primaryKeys = {"id", "lang_id"})
-public class ItemText {
+public class ArmorText {
     public int id;
 
     @NonNull

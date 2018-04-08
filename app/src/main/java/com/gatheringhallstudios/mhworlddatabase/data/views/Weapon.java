@@ -1,4 +1,6 @@
-package com.gatheringhallstudios.mhworlddatabase.data;
+package com.gatheringhallstudios.mhworlddatabase.data.views;
+
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType;
 
 /**
  * Created by Carlos on 3/21/2018.

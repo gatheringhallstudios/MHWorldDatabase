@@ -6,9 +6,9 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
-import com.gatheringhallstudios.mhworlddatabase.data.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
-import com.gatheringhallstudios.mhworlddatabase.data.MonsterSize;
+import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize;
 
 import java.util.List;
 
