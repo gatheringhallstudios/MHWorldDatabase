@@ -1,6 +1,5 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -45,7 +44,7 @@ public class MonsterHubFragment extends Fragment {
         // Inflate view
         View root = inflater.inflate(R.layout.fragment_monsters, container, false);
 
-        // Bind butterknife
+        // Bind ButterKnife
         ButterKnife.bind(this, root);
 
         // Initialize ViewPager (tab behavior)
