@@ -8,11 +8,11 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 // laziness, since we need to manually add all entities which is quite cumbersome
-import com.fstyle.library.helper.AssetSQLiteOpenHelperFactory;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.raw.*;
+import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
 /**
  * Created by Carlos on 3/4/2018.
@@ -49,7 +49,7 @@ public abstract class MHWDatabase extends RoomDatabase {
         // https://stackoverflow.com/questions/44263891/how-to-use-room-persistence-library-with-pre-populated-database
         if (instance == null) {
             instance = Room.databaseBuilder(ctx, MHWDatabase.class, "mhw.db")
-                    .openHelperFactory(new AssetSQLiteOpenHelperFactory())
+                    .openHelperFactory(new SQLiteAssetHelperFactory(true))
                     .allowMainThreadQueries()
                     .build();
         }

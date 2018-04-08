@@ -63,12 +63,6 @@ dependencies {
     // explicit export to resolve guava and expresso conflict
     implementation 'com.google.code.findbugs:jsr305:2.0.1'
 
-    /*
-     * Others
-     */
-    //implementation "com.github.humazed:RoomAsset:v1.0"
-    implementation 'com.github.daolq3012:AssetSQLiteOpenHelper:1.0'
-
     // provisional basis. Keep if we use more of its features
     implementation 'com.google.guava:guava:24.1-android'
 }
