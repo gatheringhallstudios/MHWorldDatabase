@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/primaryColor</color>
+    <color name="colorPrimaryDark">@color/primaryDarkColor</color>
+    <color name="colorAccent">@color/secondaryColor</color>
 
-    <!-- Temp color palette for now -->
-    <color name="primaryColor">#0277bd</color>
-    <color name="primaryLightColor">#58a5f0</color>
-    <color name="primaryDarkColor">#004c8c</color>
-    <color name="secondaryColor">#26a69a</color>
-    <color name="secondaryLightColor">#64d8cb</color>
-    <color name="secondaryDarkColor">#00766c</color>
+    <!-- Generated from https://material.io/color/#!/?view.left=0&view.right=1&primary.color=212121&secondary.color=C8EE31 -->
+    <color name="primaryColor">#353232</color>
+    <color name="primaryLightColor">#5f5b5b</color>
+    <color name="primaryDarkColor">#0f0a0a</color>
+    <color name="secondaryColor">#c8ee31</color>
+    <color name="secondaryLightColor">#feff6a</color>
+    <color name="secondaryDarkColor">#93bb00</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
+
+    <color name="backgroundColor">#211F20</color>
 
 </resources>
