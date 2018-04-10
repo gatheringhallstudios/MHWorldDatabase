@@ -21,8 +21,7 @@ public class MonsterListViewModel extends AndroidViewModel {
 
     public enum Tab {
         LARGE,
-        SMALL,
-        ALL
+        SMALL
     }
 
     Tab currentTab;

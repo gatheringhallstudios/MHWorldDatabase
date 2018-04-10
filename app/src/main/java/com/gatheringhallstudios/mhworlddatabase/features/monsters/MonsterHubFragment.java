@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,19 +24,16 @@ import butterknife.ButterKnife;
  */
 
 public class MonsterHubFragment extends Fragment {
-    MonsterListViewModel viewModel;
 
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.pager_list_monsters) ViewPager viewPager;
 
     @BindString(R.string.monsters_large) String tabTitleLarge;
     @BindString(R.string.monsters_small) String tabTitleSmall;
-    @BindString(R.string.monsters_all) String tabTitleAll;
 
     private MonsterListViewModel.Tab[] tabs = {
             MonsterListViewModel.Tab.LARGE,
-            MonsterListViewModel.Tab.SMALL,
-            MonsterListViewModel.Tab.ALL
+            MonsterListViewModel.Tab.SMALL
     };
 
     @Nullable
@@ -63,6 +61,8 @@ public class MonsterHubFragment extends Fragment {
 
     public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
 
+        private final String TAG = getClass().getSimpleName();
+
         MonsterGridPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -85,7 +85,8 @@ public class MonsterHubFragment extends Fragment {
                 case SMALL:
                     return tabTitleSmall;
                 default:
-                    return tabTitleAll;
+                    Log.d(TAG, "getPageTitle: Unknown tab!");
+                    return tabTitleLarge;
             }
         }
 

@@ -44,8 +44,7 @@ public class MonsterListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext()));
         recyclerView.setAdapter(monsterListAdapter);
 
-
-        MonsterListViewModel.Tab tab = MonsterListViewModel.Tab.ALL;
+        MonsterListViewModel.Tab tab = MonsterListViewModel.Tab.LARGE;
         Bundle args = getArguments();
         if (args != null) {
             tab = (MonsterListViewModel.Tab) args.getSerializable(ARG_TAB);
