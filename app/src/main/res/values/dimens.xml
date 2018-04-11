@@ -18,4 +18,8 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="image_size_small">32dp</dimen>
+    <dimen name="image_size_medium">48dp</dimen>
+    <dimen name="image_size_large">72dp</dimen>
 </resources>

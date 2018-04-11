@@ -21,9 +21,17 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Image Styles -->
+    <!-- All images should include their own padding -->
     <style name="IconLarge">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">@dimen/image_size_large</item>
+        <item name="android:layout_height">@dimen/image_size_large</item>
+        <item name="android:padding">@dimen/material_padding_large</item>
+    </style>
+
+    <style name="IconSmall">
+        <item name="android:layout_width">@dimen/image_size_small</item>
+        <item name="android:layout_height">@dimen/image_size_small</item>
+        <item name="android:padding">@dimen/material_padding_small</item>
     </style>
 
     <style name="ImageXLarge">
@@ -47,7 +55,7 @@
     <style name="HorizontalDivider">
         <item name = "android:layout_width">match_parent</item>
         <item name = "android:layout_height">2dp</item>
-        <item name = "android:layout_margin">@dimen/default_padding_margin_large</item>
+        <item name = "android:layout_margin">@dimen/material_margin_large</item>
         <item name = "android:background">@color/primaryLightColor</item>
     </style>
 

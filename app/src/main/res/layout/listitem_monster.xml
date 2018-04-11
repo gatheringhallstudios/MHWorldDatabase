@@ -8,7 +8,6 @@
     <ImageView
         android:id="@+id/monster_icon"
         style="@style/IconLarge"
-        android:layout_marginStart="@dimen/material_margin_medium"
         android:src="@drawable/question_mark_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -18,7 +17,6 @@
         android:id="@+id/monster_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/material_margin_medium"
         android:layout_marginRight="@dimen/material_margin_medium"
         android:textAppearance="?android:textAppearanceLarge"
         app:layout_constraintBottom_toBottomOf="parent"
