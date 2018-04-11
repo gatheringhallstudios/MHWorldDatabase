@@ -44,8 +44,8 @@ public class SkillListAdapter extends RecyclerView.Adapter<SkillListAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.icon_monster) ImageView skillIcon;
-        @BindView(R.id.name_monster) TextView skillName;
+        @BindView(R.id.monster_icon) ImageView skillIcon;
+        @BindView(R.id.monster_name) TextView skillName;
 
         ViewHolder(View itemView) {
             super(itemView);

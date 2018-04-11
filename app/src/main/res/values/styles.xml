@@ -20,9 +20,35 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="iconLarge">
+    <!-- Image Styles -->
+    <style name="IconLarge">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="ImageXLarge">
+        <item name="android:layout_width">72dp</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <!-- Text Styles -->
+    <!-- https://material.io/guidelines/style/typography.html#typography-other-typographic-guidelines -->
+    <style name="TextDisplay1" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:textColor">@color/md_text_color_display_1_dark_theme</item>
+        <item name="android:textSize">@dimen/md_text_size_display_1_regular</item>
+    </style>
+
+    <style name="TextBody1" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/md_text_color_body_1_dark_theme</item>
+        <item name="android:textSize">@dimen/md_text_size_medium</item>
+    </style>
+
+    <style name="HorizontalDivider">
+        <item name = "android:layout_width">match_parent</item>
+        <item name = "android:layout_height">2dp</item>
+        <item name = "android:layout_margin">@dimen/default_padding_margin_large</item>
+        <item name = "android:background">@color/primaryLightColor</item>
     </style>
 
 </resources>

@@ -58,8 +58,8 @@ public class MonsterListAdapter extends RecyclerView.Adapter<MonsterListAdapter.
 
         ViewHolder(View itemView) {
             super(itemView);
-            monsterIcon = itemView.findViewById(R.id.icon_monster);
-            monsterName = itemView.findViewById(R.id.name_monster);
+            monsterIcon = itemView.findViewById(R.id.monster_icon);
+            monsterName = itemView.findViewById(R.id.monster_name);
         }
     }
 }

@@ -53,8 +53,8 @@ public class ArmorListAdapter extends RecyclerView.Adapter<ArmorListAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.icon_monster) ImageView armorIcon;
-        @BindView(R.id.name_monster) TextView armorName;
+        @BindView(R.id.monster_icon) ImageView armorIcon;
+        @BindView(R.id.monster_name) TextView armorName;
 
         ViewHolder(View itemView) {
             super(itemView);

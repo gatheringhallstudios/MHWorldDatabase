@@ -32,7 +32,7 @@ public abstract class BaseHubFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate view
-        View root = inflater.inflate(R.layout.fragment_hub_generic, container, false);
+        View root = inflater.inflate(R.layout.fragment_generic_hub, container, false);
 
         // Bind ButterKnife
         ButterKnife.bind(this, root);
