@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="IconStarView">
+    <!-- Attributes that share the same name can only be defined once. Subsequent uses should not define 'format' again -->
+
+    <declare-styleable name="IconStarCell">
+        <attr name="iconSrc" format="integer"/>
         <attr name="numStars" format="integer" />
-        <attr name="iconSrc" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="IconLabelTextCell">
+        <attr name="iconSrc" />
+        <attr name="labelText" format="string" />
+        <attr name="valueText" format="string" />
     </declare-styleable>
 </resources>

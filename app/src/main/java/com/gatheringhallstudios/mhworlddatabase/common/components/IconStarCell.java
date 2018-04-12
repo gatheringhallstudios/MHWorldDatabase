@@ -22,35 +22,35 @@ import butterknife.ButterKnife;
  * Used in Monster Summary page to display element/status effectiveness
  */
 
-public class IconStarView extends LinearLayout {
+public class IconStarCell extends LinearLayout {
 
     private final String TAG = getClass().getSimpleName();
 
     @BindView(R.id.generic_icon) ImageView imageView;
     @BindView(R.id.star_layout) LinearLayout starLayout;
 
-    public IconStarView(Context context, @DrawableRes int imgSrc, int numStars) {
+    public IconStarCell(Context context, @DrawableRes int imgSrc, int numStars) {
         super(context);
         Drawable drawable = ContextCompat.getDrawable(getContext(), imgSrc);
         init(drawable, numStars);
     }
 
-    public IconStarView(Context context) {
+    public IconStarCell(Context context) {
         super(context);
         init(null, 0);
     }
 
-    public IconStarView(Context context, @Nullable AttributeSet attrs) {
+    public IconStarCell(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.IconStarView);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.IconStarCell);
 
         // Set values from attributes
         Drawable drawable;
         int numStars;
         try {
-            drawable = attributes.getDrawable(R.styleable.IconStarView_iconSrc);
-            numStars = attributes.getInt(R.styleable.IconStarView_numStars, 0);
+            drawable = attributes.getDrawable(R.styleable.IconStarCell_iconSrc);
+            numStars = attributes.getInt(R.styleable.IconStarCell_numStars, 0);
         } finally {
             // Typed arrays should be recycled after use
             attributes.recycle();

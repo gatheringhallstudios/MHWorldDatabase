@@ -6,12 +6,17 @@
     android:layout_width="match_parent"
     tools:parentTag="android.widget.LinearLayout"
     tools:orientation="horizontal">
+    <!-- This layout uses the merge tag so its actual layout is dependent on
+    the class that inflates it. Use parentTag is used to preview the layout in the editor -->
 
     <ImageView
         android:id="@+id/generic_icon"
-        style="@style/IconLarge"
+        style="@style/IconMedium"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/question_mark_grey" />
+        android:src="@drawable/question_mark_grey"
+        android:layout_marginStart="@dimen/material_margin_large"
+        android:layout_marginTop="@dimen/material_margin_medium"
+        android:layout_marginBottom="@dimen/material_margin_medium"/>
 
     <LinearLayout
         android:id="@+id/star_layout"
@@ -20,9 +25,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/generic_icon"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginEnd="@dimen/material_margin_medium">
 
         <!-- Stars will be added here programmatically -->
 
