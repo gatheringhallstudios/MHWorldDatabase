@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.features.common.BaseHubFragment;
+import com.gatheringhallstudios.mhworlddatabase.common.BaseHubFragment;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -29,42 +29,18 @@ public class MonsterHubFragment extends BaseHubFragment {
     @BindString(R.string.monsters_small)
     String tabTitleSmall;
 
-    private MonsterListViewModel.Tab[] tabs = {
-            MonsterListViewModel.Tab.LARGE,
-            MonsterListViewModel.Tab.SMALL
-    };
+    public MonsterHubFragment() {
+        addTab(tabTitleLarge, () ->
+                MonsterListFragment.newInstance(MonsterListViewModel.Tab.LARGE)
+        );
 
-    @Override
-    public CharSequence getTabTitles(int index) {
-        MonsterListViewModel.Tab tab = tabs[index];
-        switch (tab) {
-            case LARGE:
-                return tabTitleLarge;
-            case SMALL:
-                return tabTitleSmall;
-            default:
-                Log.d(TAG, "getPageTitle: Unknown tab!");
-                return tabTitleLarge;
-        }
+        addTab(tabTitleSmall, () ->
+                MonsterListFragment.newInstance(MonsterListViewModel.Tab.SMALL)
+        );
     }
 
     @Override
     public String getHubTitle() {
         return getString(R.string.monsters_title);
-    }
-
-    @Override
-    public int getTabCount() {
-        // get item count - equal to number of tabs
-        return tabs.length;
-    }
-
-    @Override
-    public Fragment getTab(int index) {
-        try {
-            return MonsterListFragment.newInstance(tabs[index]);
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            return null;
-        }
     }
 }
