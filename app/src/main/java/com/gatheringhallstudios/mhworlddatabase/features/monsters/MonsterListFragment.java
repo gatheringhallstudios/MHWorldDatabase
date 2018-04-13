@@ -10,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.MonsterListAdapter;
+import com.gatheringhallstudios.mhworlddatabase.common.BasicListDelegationAdapter;
+import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
+import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -26,7 +30,8 @@ public class MonsterListFragment extends Fragment {
 
     MonsterListViewModel viewModel;
     RecyclerView recyclerView;
-    MonsterListAdapter monsterListAdapter = new MonsterListAdapter(new ArrayList<>());
+
+    BasicListDelegationAdapter<Monster> adapter;
 
     public static MonsterListFragment newInstance(MonsterListViewModel.Tab tab) {
         MonsterListFragment f = new MonsterListFragment();
@@ -39,10 +44,14 @@ public class MonsterListFragment extends Fragment {
                              Bundle savedInstanceState) {
         ButterKnife.bind(this, parent);
 
+        // Setup Adapter
+        MonsterAdapterDelegate delegate = new MonsterAdapterDelegate(this::handleSelection);
+        adapter = new BasicListDelegationAdapter<>(delegate);
+
         // Setup RecyclerView
         recyclerView = (RecyclerView) inflater.inflate(R.layout.list_generic, parent, false);
         recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext()));
-        recyclerView.setAdapter(monsterListAdapter);
+        recyclerView.setAdapter(adapter);
 
         MonsterListViewModel.Tab tab = MonsterListViewModel.Tab.LARGE;
         Bundle args = getArguments();
@@ -53,10 +62,20 @@ public class MonsterListFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(MonsterListViewModel.class);
         viewModel.setTab(tab);
 
-        viewModel.getData().observe(this, (list) -> {
-            monsterListAdapter.replaceData(list);
-        });
+        viewModel.getData().observe(this, this::setItems);
 
         return recyclerView;
+    }
+
+    public void setItems(List<Monster> monsters) {
+        if (adapter != null) {
+            adapter.setItems(monsters);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void handleSelection(Monster monster) {
+        Navigator nav = (Navigator)getActivity();
+        nav.navigateTo(new ArmorListFragment());
     }
 }
