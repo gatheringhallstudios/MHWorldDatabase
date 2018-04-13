@@ -1,12 +1,12 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.features.common.BaseHubFragment;
+import com.gatheringhallstudios.mhworlddatabase.common.BaseHubFragment;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -29,42 +29,21 @@ public class MonsterHubFragment extends BaseHubFragment {
     @BindString(R.string.monsters_small)
     String tabTitleSmall;
 
-    private MonsterListViewModel.Tab[] tabs = {
-            MonsterListViewModel.Tab.LARGE,
-            MonsterListViewModel.Tab.SMALL
-    };
-
     @Override
-    public CharSequence getTabTitles(int index) {
-        MonsterListViewModel.Tab tab = tabs[index];
-        switch (tab) {
-            case LARGE:
-                return tabTitleLarge;
-            case SMALL:
-                return tabTitleSmall;
-            default:
-                Log.d(TAG, "getPageTitle: Unknown tab!");
-                return tabTitleLarge;
-        }
+    public void onAddTabs(TabAdder tabs) {
+        tabs.addTab(tabTitleLarge, () ->
+                MonsterListFragment.newInstance(MonsterListViewModel.Tab.LARGE)
+        );
+
+        tabs.addTab(tabTitleSmall, () ->
+                MonsterListFragment.newInstance(MonsterListViewModel.Tab.SMALL)
+        );
     }
 
     @Override
-    public String getHubTitle() {
-        return getString(R.string.monsters_title);
-    }
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-    @Override
-    public int getTabCount() {
-        // get item count - equal to number of tabs
-        return tabs.length;
-    }
-
-    @Override
-    public Fragment getTab(int index) {
-        try {
-            return MonsterListFragment.newInstance(tabs[index]);
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            return null;
-        }
+        getActivity().setTitle(getString(R.string.monsters_title));
     }
 }
