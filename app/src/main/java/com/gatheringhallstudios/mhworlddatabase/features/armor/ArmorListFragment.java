@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.ArmorListAdapter;
+import com.gatheringhallstudios.mhworlddatabase.common.BasicListDelegationAdapter;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Carlos on 3/22/2018.
@@ -22,20 +24,21 @@ import java.util.ArrayList;
 public class ArmorListFragment extends Fragment {
     ArmorViewModel viewModel;
     RecyclerView recyclerView;
-    ArmorListAdapter armorListAdapter = new ArmorListAdapter(new ArrayList<>());
+
+    ArmorAdapterDelegate delegate = new ArmorAdapterDelegate();
+    BasicListDelegationAdapter<ArmorBasic> adapter
+            = new BasicListDelegationAdapter<>(delegate);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
         recyclerView = (RecyclerView) inflater.inflate(R.layout.list_generic, parent, false);
         recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext()));
-        recyclerView.setAdapter(armorListAdapter);
+        recyclerView.setAdapter(adapter);
 
         viewModel = ViewModelProviders.of(getActivity()).get(ArmorViewModel.class);
 
-        viewModel.getArmorList().observe(this, (list) -> {
-            armorListAdapter.replaceData(list);
-        });
+        viewModel.getArmorList().observe(this, this::setItems);
 
         return recyclerView;
     }
@@ -45,5 +48,10 @@ public class ArmorListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         getActivity().setTitle(getString(R.string.armor_title));
+    }
+
+    public void setItems(List<ArmorBasic> armor) {
+        adapter.setItems(armor);
+        adapter.notifyDataSetChanged();
     }
 }
