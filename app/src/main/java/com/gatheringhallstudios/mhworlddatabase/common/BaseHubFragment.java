@@ -53,9 +53,9 @@ public abstract class BaseHubFragment extends Fragment {
     /**
      * Adds a tab to the fragment
      * @param title The title to display for the tab
-     * @param builder A TabBuilder or functional interface to build tab fragment
+     * @param builder A TabFactory or lambda that builds the tab fragment
      */
-    public void addTab(String title, TabBuilder builder) {
+    public void addTab(String title, TabFactory builder) {
         tabs.add(new HubTab(title, builder));
     }
 
@@ -70,7 +70,7 @@ public abstract class BaseHubFragment extends Fragment {
     /**
      * Defines an interface for a class that builds a fragment for a tab.
      */
-    public interface TabBuilder {
+    public interface TabFactory {
         Fragment build();
     }
 
@@ -79,8 +79,8 @@ public abstract class BaseHubFragment extends Fragment {
      */
     private class HubTab {
         public String title;
-        public TabBuilder builder;
-        public HubTab(String name, TabBuilder builder) {
+        public TabFactory builder;
+        public HubTab(String name, TabFactory builder) {
             this.title = name;
             this.builder = builder;
         }
