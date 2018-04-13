@@ -12,4 +12,8 @@
         <attr name="labelText" format="string" />
         <attr name="valueText" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="SectionHeaderCell">
+        <attr name="labelText" />
+    </declare-styleable>
 </resources>

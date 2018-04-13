@@ -17,6 +17,11 @@ import com.gatheringhallstudios.mhworlddatabase.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * This is a full height, full width cell that displays an icon, label, and value. Used to generate
+ * data rows in RecyclerView or inside XML layouts.
+ */
+
 public class IconLabelTextCell extends ConstraintLayout{
 
     private final String TAG = getClass().getSimpleName();

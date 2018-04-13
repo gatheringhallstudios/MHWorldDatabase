@@ -17,4 +17,8 @@
     <!-- Skills -->
     <string name="skills_title">Armor</string>
 
+    <!-- Headers -->
+    <string name="header_habitat">Habitat</string>
+    <string name="header_weakness">Weakness</string>
+
 </resources>
