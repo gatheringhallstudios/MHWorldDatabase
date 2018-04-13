@@ -1,9 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BaseHubFragment;
@@ -29,18 +29,21 @@ public class MonsterHubFragment extends BaseHubFragment {
     @BindString(R.string.monsters_small)
     String tabTitleSmall;
 
-    public MonsterHubFragment() {
-        addTab(tabTitleLarge, () ->
+    @Override
+    public void onAddTabs(TabAdder tabs) {
+        tabs.addTab(tabTitleLarge, () ->
                 MonsterListFragment.newInstance(MonsterListViewModel.Tab.LARGE)
         );
 
-        addTab(tabTitleSmall, () ->
+        tabs.addTab(tabTitleSmall, () ->
                 MonsterListFragment.newInstance(MonsterListViewModel.Tab.SMALL)
         );
     }
 
     @Override
-    public String getHubTitle() {
-        return getString(R.string.monsters_title);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        getActivity().setTitle(getString(R.string.monsters_title));
     }
 }
