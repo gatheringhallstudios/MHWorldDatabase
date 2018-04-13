@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasicListDelegationAdapter;
+import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
 import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import java.util.ArrayList;
@@ -29,8 +31,7 @@ public class MonsterListFragment extends Fragment {
     MonsterListViewModel viewModel;
     RecyclerView recyclerView;
 
-    MonsterAdapterDelegate delegate = new MonsterAdapterDelegate();
-    BasicListDelegationAdapter<Monster> adapter = new BasicListDelegationAdapter<>(delegate);
+    BasicListDelegationAdapter<Monster> adapter;
 
     public static MonsterListFragment newInstance(MonsterListViewModel.Tab tab) {
         MonsterListFragment f = new MonsterListFragment();
@@ -42,6 +43,10 @@ public class MonsterListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
         ButterKnife.bind(this, parent);
+
+        // Setup Adapter
+        MonsterAdapterDelegate delegate = new MonsterAdapterDelegate(this::handleSelection);
+        adapter = new BasicListDelegationAdapter<>(delegate);
 
         // Setup RecyclerView
         recyclerView = (RecyclerView) inflater.inflate(R.layout.list_generic, parent, false);
@@ -63,7 +68,14 @@ public class MonsterListFragment extends Fragment {
     }
 
     public void setItems(List<Monster> monsters) {
-        adapter.setItems(monsters);
-        adapter.notifyDataSetChanged();
+        if (adapter != null) {
+            adapter.setItems(monsters);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void handleSelection(Monster monster) {
+        Navigator nav = (Navigator)getActivity();
+        nav.navigateTo(new ArmorListFragment());
     }
 }

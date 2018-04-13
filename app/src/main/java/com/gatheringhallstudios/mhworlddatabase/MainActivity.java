@@ -13,13 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
 import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterHubFragment;
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListFragment;
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListViewModel;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Navigator {
 
     public MainViewModel mainViewModel;
 
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 
         // Load the initial fragment
         Fragment initial = getFragmentForNavId(R.id.nav_monsters);
-        loadFragment(initial);
+        navigateTo(initial, Behavior.RESET);
     }
 
     private void setupNavigationDrawer(Toolbar toolbar) {
@@ -51,14 +50,16 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    /**
-     * Loads a new main fragment, clearing the back stack.
-     * Use this when navigating using the main drawer
-     * @param f
-     */
-    private void loadFragment(Fragment f) {
+    public void navigateTo(Fragment f, Navigator.Behavior behavior) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_main_frame, f);
+
+        switch (behavior) {
+            case ADD:
+                ft.addToBackStack(null);
+                break;
+        }
+
         ft.commit();
     }
 
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment destination = getFragmentForNavId(id);
         if (destination != null) {
-            loadFragment(destination);
+            navigateTo(destination, Behavior.RESET);
 
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
