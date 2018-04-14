@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+import java9.util.stream.StreamSupport;
 
 import static com.gatheringhallstudios.mhworlddatabase.TestUtils.getValue;
 import static org.junit.Assert.assertEquals;
@@ -49,7 +50,7 @@ public class ArmorDaoTest {
     @Test
     public void Can_Filter_ArmorList_Rarity() throws Exception {
         List<ArmorBasic> results = getValue(dao.loadList("en", 3, 3));
-        boolean allAre3 = results.stream().allMatch((a) -> a.rarity == 3);
+        boolean allAre3 = StreamSupport.stream(results).allMatch((a) -> a.rarity == 3);
         assertTrue("All armor should be rarity 3", allAre3);
     }
 
