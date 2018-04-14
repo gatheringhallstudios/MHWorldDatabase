@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Butterknife is already called, so onCreateView cannot be inherited.
  */
 
-public abstract class BaseHubFragment extends Fragment {
+public abstract class BasePagerFragment extends Fragment {
 
     @BindView(R.id.tab_layout) TabLayout tabLayout;
     @BindView(R.id.pager_list) ViewPager viewPager;

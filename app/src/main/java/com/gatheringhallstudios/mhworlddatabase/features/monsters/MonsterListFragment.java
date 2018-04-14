@@ -16,7 +16,6 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
 import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -45,7 +44,7 @@ public class MonsterListFragment extends Fragment {
         ButterKnife.bind(this, parent);
 
         // Setup Adapter
-        MonsterAdapterDelegate delegate = new MonsterAdapterDelegate(this::handleSelection);
+        MonsterAdapterDelegate delegate = new MonsterAdapterDelegate(this::handleMonsterSelection);
         adapter = new BasicListDelegationAdapter<>(delegate);
 
         // Setup RecyclerView
@@ -74,7 +73,7 @@ public class MonsterListFragment extends Fragment {
         }
     }
 
-    private void handleSelection(Monster monster) {
+    private void handleMonsterSelection(Monster monster) {
         Navigator nav = (Navigator)getActivity();
         nav.navigateTo(new ArmorListFragment());
     }

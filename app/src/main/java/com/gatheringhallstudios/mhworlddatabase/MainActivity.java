@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
 import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterHubFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterPagerFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Navigator {
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
     protected Fragment getFragmentForNavId(int navId) {
         switch (navId) {
             case R.id.nav_monsters:
-                return new MonsterHubFragment();
+                return new MonsterPagerFragment();
             case R.id.nav_armor:
                 return new ArmorListFragment();
             default:

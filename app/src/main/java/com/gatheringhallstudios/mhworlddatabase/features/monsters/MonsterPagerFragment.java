@@ -6,7 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.common.BaseHubFragment;
+import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -15,7 +15,7 @@ import butterknife.BindView;
  * Monster Hub
  */
 
-public class MonsterHubFragment extends BaseHubFragment {
+public class MonsterPagerFragment extends BasePagerFragment {
 
     private final String TAG = getClass().getSimpleName();
 
