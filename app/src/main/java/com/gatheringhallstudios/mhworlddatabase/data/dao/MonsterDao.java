@@ -26,4 +26,11 @@ public abstract class MonsterDao {
             "  AND m.size = :size " +
             "ORDER BY t.name ASC")
     public abstract LiveData<List<Monster>> loadList(String langId, MonsterSize size);
+
+    @Query( "SELECT m.*, t.name, t.description " +
+            "from monster m JOIN monster_text t USING (id) " +
+            "WHERE t.lang_id = :langId " +
+            "AND m.id = :id " +
+            "LIMIT 1")
+    public abstract LiveData<Monster> loadMonster(String langId, int id);
 }

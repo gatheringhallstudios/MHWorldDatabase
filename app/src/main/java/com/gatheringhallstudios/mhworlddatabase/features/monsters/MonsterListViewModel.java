@@ -24,8 +24,8 @@ public class MonsterListViewModel extends AndroidViewModel {
         SMALL
     }
 
-    Tab currentTab;
-    LiveData<List<Monster>> monsters;
+    private Tab currentTab;
+    private LiveData<List<Monster>> monsters;
 
     public MonsterListViewModel(@NonNull Application application) {
         // todo: perhaps inject the database directly?

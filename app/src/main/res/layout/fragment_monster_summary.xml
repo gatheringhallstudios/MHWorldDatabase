@@ -76,7 +76,7 @@
             app:layout_constraintTop_toBottomOf="@id/weakness_header">
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/fire_star_view"
+                android:id="@+id/fire_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -84,7 +84,7 @@
                 app:numStars="1" />
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/water_star_view"
+                android:id="@+id/water_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -92,7 +92,7 @@
                 app:numStars="1" />
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/lightning_star_view"
+                android:id="@+id/lightning_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -100,7 +100,7 @@
                 app:numStars="3" />
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/ice_star_view"
+                android:id="@+id/ice_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -108,7 +108,7 @@
                 app:numStars="2" />
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/dragon_star_view"
+                android:id="@+id/dragon_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -128,7 +128,7 @@
             app:layout_constraintTop_toBottomOf="@id/weakness_header">
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/poison_star_view"
+                android:id="@+id/poison_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -136,7 +136,7 @@
                 app:numStars="2" />
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/sleep_star_view"
+                android:id="@+id/sleep_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -144,7 +144,7 @@
                 app:numStars="2" />
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/paralysis_star_view"
+                android:id="@+id/paralysis_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -152,7 +152,7 @@
                 app:numStars="1" />
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/blast_star_view"
+                android:id="@+id/blast_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"
@@ -160,7 +160,7 @@
                 app:numStars="1" />
 
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
-                android:id="@+id/stun_star_view"
+                android:id="@+id/stun_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:iconSrc="@drawable/question_mark_grey"

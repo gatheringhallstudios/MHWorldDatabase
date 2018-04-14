@@ -13,7 +13,6 @@ import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasicListDelegationAdapter;
 import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
 import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
-import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import java.util.List;
@@ -52,7 +51,7 @@ public class MonsterListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext()));
         recyclerView.setAdapter(adapter);
 
-        MonsterListViewModel.Tab tab = MonsterListViewModel.Tab.LARGE;
+        MonsterListViewModel.Tab tab = MonsterListViewModel.Tab.LARGE; // default
         Bundle args = getArguments();
         if (args != null) {
             tab = (MonsterListViewModel.Tab) args.getSerializable(ARG_TAB);
@@ -75,6 +74,6 @@ public class MonsterListFragment extends Fragment {
 
     private void handleMonsterSelection(Monster monster) {
         Navigator nav = (Navigator)getActivity();
-        nav.navigateTo(new ArmorListFragment());
+        nav.navigateTo(MonsterDetailPagerFragment.getInstance(monster));
     }
 }
