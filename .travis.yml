@@ -24,12 +24,12 @@ env:
     # we test on 22 anyways as it doesn't have java 8, and we'd like to catch bugs on older apis
     - EMULATOR_API_LEVEL=22
 
-	- ADB_INSTALL_TIMEOUT=8 # minutes
+    - ADB_INSTALL_TIMEOUT=8 # minutes
 
 android:
   components:
     # this section is required for versions 24 and up (tools is required twice)
-	# https://docs.travis-ci.com/user/languages/android/#Installing-a-newer-SDK-Platform-Tools-revision
+    # https://docs.travis-ci.com/user/languages/android/#Installing-a-newer-SDK-Platform-Tools-revision
     - tools
     - platform-tools
     - tools
@@ -38,7 +38,7 @@ android:
     - android-$ANDROID_API_LEVEL
     - android-$EMULATOR_API_LEVEL
 
-	# downloads all extra components
+    # downloads all extra components
     - extra
 
     - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
@@ -54,4 +54,4 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-- ./gradlew clean build connectedCheck -PdisablePreDex --stacktrace
+  - ./gradlew clean build connectedCheck -PdisablePreDex --stacktrace

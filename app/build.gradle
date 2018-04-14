@@ -76,6 +76,9 @@ dependencies {
     // explicit export to resolve guava and espresso conflict
     implementation 'com.google.code.findbugs:jsr305:2.0.1'
 
+    // allow a replacement for streams for api level < 24
+    implementation 'net.sourceforge.streamsupport:android-retrostreams:1.6.1'
+
     // provisional basis. Keep if we use more of its features
     implementation 'com.google.guava:guava:24.1-android'
 }
