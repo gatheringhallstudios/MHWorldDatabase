@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterRewardFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterSummaryFragment;
 
 import butterknife.BindString;
@@ -29,6 +30,8 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
 
     @BindString(R.string.monsters_detail_tab_summary)
     String tabTitleSummary;
+    @BindString(R.string.monsters_detail_tab_rewards)
+    String tabTitleRewards;
 
     /*
      * TODO Add any scroll or pager state to a MonsterListPagerViewModel to better support rotation and backstack
@@ -48,9 +51,9 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
                 MonsterSummaryFragment.newInstance(monster.id)
         );
 
-//        tabs.addTab(tabTitleSmall, () ->
-//                MonsterListFragment.newInstance(MonsterListViewModel.Tab.SMALL)
-//        );
+        tabs.addTab(tabTitleRewards, () ->
+                MonsterRewardFragment.newInstance(monster.id)
+        );
     }
 
     @Override

@@ -48,8 +48,12 @@ public class RewardAdapterDelegate extends AdapterDelegate<List<Reward>> {
         RewardViewHolder vh = (RewardViewHolder) holder;
         // TODO Set monster image
         vh.rewardName.setText(reward.name);
-        vh.rewardStack.setText(reward.stackSize);
-        vh.rewardPercent.setText(reward.percentage); // TODO format as percent
+
+        String stack = "x " + Integer.toString(reward.stackSize);
+        vh.rewardStack.setText(stack);
+
+        String percent = Integer.toString(reward.percentage) + "%";
+        vh.rewardPercent.setText(percent);
 
         holder.itemView.setOnClickListener((View v) -> onSelected.accept(items.get(position)));
 

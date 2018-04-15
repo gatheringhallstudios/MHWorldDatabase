@@ -23,38 +23,25 @@ import butterknife.ButterKnife;
  */
 
 public class MonsterSummaryFragment extends Fragment {
+
     private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
     MonsterSummaryViewModel viewModel;
 
-    @BindView(R.id.monster_icon)
-    ImageView monsterIcon;
-    @BindView(R.id.monster_name)
-    TextView monsterName;
-    @BindView(R.id.monster_description)
-    TextView monsterDescription;
+    @BindView(R.id.monster_icon) ImageView monsterIcon;
+    @BindView(R.id.monster_name) TextView monsterName;
+    @BindView(R.id.monster_description) TextView monsterDescription;
 
-    @BindView(R.id.fire_star_cell)
-    IconStarCell fireStarCell;
-    @BindView(R.id.water_star_cell)
-    IconStarCell waterStarCell;
-    @BindView(R.id.lightning_star_cell)
-    IconStarCell lightningStarCell;
-    @BindView(R.id.ice_star_cell)
-    IconStarCell iceStarCell;
-    @BindView(R.id.dragon_star_cell)
-    IconStarCell dragonStarCell;
-    @BindView(R.id.poison_star_cell)
-    IconStarCell poisonStarCell;
-    @BindView(R.id.sleep_star_cell)
-    IconStarCell sleepStarCell;
-    @BindView(R.id.paralysis_star_cell)
-    IconStarCell paralysisStarCell;
-    @BindView(R.id.blast_star_cell)
-    IconStarCell blastStarCell;
-    @BindView(R.id.stun_star_cell)
-    IconStarCell stunStarCell;
-
+    @BindView(R.id.fire_star_cell) IconStarCell fireStarCell;
+    @BindView(R.id.water_star_cell) IconStarCell waterStarCell;
+    @BindView(R.id.lightning_star_cell) IconStarCell lightningStarCell;
+    @BindView(R.id.ice_star_cell) IconStarCell iceStarCell;
+    @BindView(R.id.dragon_star_cell) IconStarCell dragonStarCell;
+    @BindView(R.id.poison_star_cell) IconStarCell poisonStarCell;
+    @BindView(R.id.sleep_star_cell) IconStarCell sleepStarCell;
+    @BindView(R.id.paralysis_star_cell) IconStarCell paralysisStarCell;
+    @BindView(R.id.blast_star_cell) IconStarCell blastStarCell;
+    @BindView(R.id.stun_star_cell) IconStarCell stunStarCell;
 
     public static MonsterSummaryFragment newInstance(int monsterId) {
         MonsterSummaryFragment f = new MonsterSummaryFragment();

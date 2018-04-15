@@ -11,6 +11,7 @@
     <string name="monsters_list_tab_small">Small</string>
     <string name="monsters_list_tab_large">Large</string>
     <string name="monsters_detail_tab_summary">Summary</string>
+    <string name="monsters_detail_tab_rewards">Rewards</string>
 
     <!-- Armor -->
     <string name="armor_title">Armor</string>
