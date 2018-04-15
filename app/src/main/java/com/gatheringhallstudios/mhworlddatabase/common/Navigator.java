@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.common;
 
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 
 /**
@@ -8,11 +9,18 @@ import android.support.v4.app.Fragment;
  */
 
 public interface Navigator {
+
     /**
      * Defines the behavior to use when navigating
      */
     enum Behavior {
+        /*
+         * Add the current fragment to the backstack and load the new fragment.
+         */
         ADD,
+        /*
+         * Remove the current fragment, clear the backstack, and load the new fragment.
+         */
         RESET
     }
 
@@ -31,4 +39,11 @@ public interface Navigator {
      * @param behavior
      */
     void navigateTo(Fragment fragment, Behavior behavior);
+
+    /**
+     * Set a target content frame where fragments will be loaded. This must be set
+     * before performing any transactions.
+     * @param contentFrame the layout to perform transactions in
+     */
+    void setContentFrame(@IdRes int contentFrame);
 }
