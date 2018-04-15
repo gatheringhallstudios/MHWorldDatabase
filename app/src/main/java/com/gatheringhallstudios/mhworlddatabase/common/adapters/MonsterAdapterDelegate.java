@@ -1,7 +1,5 @@
-package com.gatheringhallstudios.mhworlddatabase.features.monsters;
+package com.gatheringhallstudios.mhworlddatabase.common.adapters;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

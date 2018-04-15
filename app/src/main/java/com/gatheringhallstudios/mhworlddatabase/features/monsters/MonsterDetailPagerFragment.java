@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterSummaryFragment;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -20,7 +21,6 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
 
     private final String TAG = getClass().getSimpleName();
 
-    private Monster monster;
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
@@ -29,6 +29,11 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
 
     @BindString(R.string.monsters_detail_tab_summary)
     String tabTitleSummary;
+
+    /*
+     * TODO Add any scroll or pager state to a MonsterListPagerViewModel to better support rotation and backstack
+     */
+    private Monster monster; // This need to come from a ViewModel otherwise there's a crash on rotate
 
     public static MonsterDetailPagerFragment getInstance(Monster monster){
         MonsterDetailPagerFragment fragment = new MonsterDetailPagerFragment();

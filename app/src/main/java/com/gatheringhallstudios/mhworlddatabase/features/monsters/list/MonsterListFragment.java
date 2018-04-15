@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.monsters;
+package com.gatheringhallstudios.mhworlddatabase.features.monsters.list;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.common.BasicListDelegationAdapter;
+import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter;
 import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
 import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.common.adapters.MonsterAdapterDelegate;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.monsters;
+package com.gatheringhallstudios.mhworlddatabase.features.monsters.list;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListViewModel;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -28,6 +30,10 @@ public class MonsterListPagerFragment extends BasePagerFragment {
     String tabTitleLarge;
     @BindString(R.string.monsters_list_tab_small)
     String tabTitleSmall;
+
+    /*
+     * TODO Add any scroll or pager state to a MonsterListPagerViewModel to better support rotation and backstack
+     */
 
     @Override
     public void onAddTabs(TabAdder tabs) {

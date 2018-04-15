@@ -1,9 +1,11 @@
-package com.gatheringhallstudios.mhworlddatabase.common;
+package com.gatheringhallstudios.mhworlddatabase.common.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
+
+import com.gatheringhallstudios.mhworlddatabase.common.PagerTab;
 
 import java.util.List;
 

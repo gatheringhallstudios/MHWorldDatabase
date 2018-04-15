@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.common.BasicListDelegationAdapter;
+import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter;
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
