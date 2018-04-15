@@ -6,14 +6,17 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="row_height_large">72dp</dimen>
+    <dimen name="row_height_medium">48dp</dimen>
+    <dimen name="row_height_small">32dp</dimen>
 
     <!-- Standard margins and padding -->
-    <dimen name="material_margin_small">4dp</dimen>
-    <dimen name="material_margin_medium">8dp</dimen>
-    <dimen name="material_margin_large">16dp</dimen>
-    <dimen name="material_padding_small">4dp</dimen>
-    <dimen name="material_padding_medium">8dp</dimen>
-    <dimen name="material_padding_large">16dp</dimen>
+    <!-- Use these before any others available -->
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
 
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>

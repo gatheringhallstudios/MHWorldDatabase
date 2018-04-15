@@ -61,7 +61,7 @@
     <style name="HorizontalDivider">
         <item name = "android:layout_width">match_parent</item>
         <item name = "android:layout_height">2dp</item>
-        <item name = "android:layout_margin">@dimen/material_margin_medium</item>
+        <item name = "android:layout_margin">@dimen/margin_medium</item>
         <item name = "android:background">@color/primaryLightColor</item>
     </style>
 

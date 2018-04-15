@@ -13,8 +13,8 @@
         <ImageView
             android:id="@+id/monster_icon"
             style="@style/ImageXLarge"
-            android:layout_marginStart="@dimen/material_margin_large"
-            android:layout_marginTop="@dimen/material_margin_large"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
             android:src="@drawable/question_mark_grey"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +60,7 @@
             android:id="@+id/weakness_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_margin_large"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/header_weakness"
             app:layout_constraintTop_toBottomOf="@id/placeholder1" />
 
@@ -68,7 +68,7 @@
             android:id="@+id/element_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -121,7 +121,7 @@
             android:id="@+id/status_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
             app:layout_constraintLeft_toRightOf="@id/element_layout"
             app:layout_constraintRight_toRightOf="parent"
@@ -173,7 +173,7 @@
             android:id="@+id/habitat_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_margin_medium"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/header_habitat"
             app:layout_constraintTop_toBottomOf="@id/element_layout" />
 

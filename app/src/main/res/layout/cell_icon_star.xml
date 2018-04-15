@@ -14,9 +14,9 @@
         style="@style/IconMedium"
         android:layout_gravity="center_vertical"
         android:src="@drawable/question_mark_grey"
-        android:layout_marginStart="@dimen/material_margin_large"
-        android:layout_marginTop="@dimen/material_margin_medium"
-        android:layout_marginBottom="@dimen/material_margin_medium"/>
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"/>
 
     <LinearLayout
         android:id="@+id/star_layout"
@@ -25,7 +25,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
-        android:layout_marginEnd="@dimen/material_margin_medium">
+        android:layout_marginEnd="@dimen/margin_medium">
 
         <!-- Stars will be added here programmatically -->
 
