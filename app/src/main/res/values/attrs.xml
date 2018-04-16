@@ -16,4 +16,8 @@
     <declare-styleable name="SectionHeaderCell">
         <attr name="labelText" />
     </declare-styleable>
+
+    <declare-styleable name="SubHeaderCell">
+        <attr name="labelText" />
+    </declare-styleable>
 </resources>
