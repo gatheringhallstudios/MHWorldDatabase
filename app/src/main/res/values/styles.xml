@@ -53,9 +53,16 @@
         <item name="android:textSize">@dimen/md_text_size_medium</item>
     </style>
 
-    <style name="Subhead" parent="TextAppearance.AppCompat.Subhead">
+    <style name="SectionHead" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/md_text_color_body_1_dark_theme</item>
         <item name="android:textSize">@dimen/md_text_subheading_regular</item>
+    </style>
+
+    <style name="SubHead" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorSubHead</item>
+        <item name="android:textStyle">bold</item>
+        <!-- Font style must be set programmatically to Roboto Medium 14sp -->
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="HorizontalDivider">

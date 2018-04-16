@@ -9,25 +9,25 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.Consumer;
-import com.gatheringhallstudios.mhworlddatabase.common.models.Header;
+import com.gatheringhallstudios.mhworlddatabase.common.models.SectionHeader;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 
 import java.util.List;
 
 /**
- * Adapter delegate to handle displaying Header objects inside RecyclerViews.
+ * Adapter delegate to handle displaying SectionHeader objects inside RecyclerViews.
  */
-public class HeaderAdapterDelegate extends AdapterDelegate<List<Object>> {
+public class SectionHeaderAdapterDelegate extends AdapterDelegate<List<Object>> {
 
     private Consumer<Object> onSelected;
 
-    public HeaderAdapterDelegate(Consumer<Object> onSelected) {
+    public SectionHeaderAdapterDelegate(Consumer<Object> onSelected) {
         this.onSelected = onSelected;
     }
 
     @Override
     protected boolean isForViewType(@NonNull List<Object> items, int position) {
-        return items.get(position) instanceof Header;
+        return items.get(position) instanceof SectionHeader;
     }
 
     @NonNull
@@ -44,11 +44,11 @@ public class HeaderAdapterDelegate extends AdapterDelegate<List<Object>> {
                                     int position,
                                     @NonNull RecyclerView.ViewHolder holder,
                                     @NonNull List<Object> payloads) {
-        Header header = (Header) items.get(position);
+        SectionHeader sectionHeader = (SectionHeader) items.get(position);
 
         HeaderViewHolder vh = (HeaderViewHolder) holder;
 
-        vh.labelText.setText(header.text);
+        vh.labelText.setText(sectionHeader.text);
 
         holder.itemView.setOnClickListener((View v) -> onSelected.accept(items.get(position)));
 

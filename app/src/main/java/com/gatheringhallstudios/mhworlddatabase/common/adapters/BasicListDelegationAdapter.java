@@ -10,6 +10,20 @@ import java.util.List;
  * populate with more specific {@link AdapterDelegate}s. Accepts multiple AdapterDelegates
  * and creates an Adapter capable of displaying the appropriate any object of type T into a
  * RecyclerView as long as the appropriate AdapterDelegate is given.
+ *
+ * Example:
+ * <pre>
+ * {@code
+ * // Setup Adapter to display Rewards, SectionHeaders, and SubHeaders.
+ *      RewardAdapterDelegate rewardDelegate =
+ *              new RewardAdapterDelegate(this::handleRewardSelection);
+ *      SectionHeaderAdapterDelegate sectionHeaderDelegate =
+ *              new SectionHeaderAdapterDelegate(this::handleSectionHeaderSelection);
+ *      SubHeaderAdapterDelegate subHeaderDelegate =
+ *              new SubHeaderAdapterDelegate(this::handleSubHeaderSelection);
+ *
+ *      adapter = new BasicListDelegationAdapter<>(rewardDelegate, sectionHeaderDelegate, subHeaderDelegate);
+ * } </pre>
  */
 public class BasicListDelegationAdapter<T> extends ListDelegationAdapter<List<T>> {
     public BasicListDelegationAdapter(AdapterDelegate<List<T>>... delegates) {

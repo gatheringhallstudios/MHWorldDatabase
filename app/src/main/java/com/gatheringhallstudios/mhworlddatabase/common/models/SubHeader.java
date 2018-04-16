@@ -1,13 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.common.models;
 
 /**
- * Model for a Header. Insert these in RecyclerView adapters datasets to display headers
+ * Model for a SectionHeader. Insert these in RecyclerView adapters datasets to display headers
  * within the RecyclerView.
  */
-public class Header {
+public class SubHeader {
     public String text;
 
-    public Header(String text) {
+    public SubHeader(String text) {
         this.text = text;
     }
 }

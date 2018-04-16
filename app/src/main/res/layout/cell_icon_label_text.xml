@@ -37,10 +37,11 @@
     <TextView
         android:id="@+id/value_text"
         style="@style/TextBody1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_large"
         android:gravity="end"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"

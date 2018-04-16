@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter;
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.HeaderAdapterDelegate;
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.RewardAdapterDelegate;
-import com.gatheringhallstudios.mhworlddatabase.common.models.Header;
+import com.gatheringhallstudios.mhworlddatabase.common.adapters.SectionHeaderAdapterDelegate;
+import com.gatheringhallstudios.mhworlddatabase.common.adapters.SubHeaderAdapterDelegate;
+import com.gatheringhallstudios.mhworlddatabase.common.models.SectionHeader;
+import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader;
 import com.gatheringhallstudios.mhworlddatabase.data.views.Reward;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
@@ -57,8 +59,9 @@ public class MonsterRewardFragment extends Fragment {
 
         // Setup Adapter to display rewards and headers
         RewardAdapterDelegate rewardDelegate = new RewardAdapterDelegate(this::handleRewardSelection);
-        HeaderAdapterDelegate headerDelegate = new HeaderAdapterDelegate(this::handleHeaderSelection);
-        adapter = new BasicListDelegationAdapter<>(rewardDelegate, headerDelegate);
+        SectionHeaderAdapterDelegate sectionHeaderDelegate = new SectionHeaderAdapterDelegate(this::handleSectionHeaderSelection);
+        SubHeaderAdapterDelegate subHeaderDelegate = new SubHeaderAdapterDelegate(this::handleSubHeaderSelection);
+        adapter = new BasicListDelegationAdapter<>(rewardDelegate, sectionHeaderDelegate, subHeaderDelegate);
 
         // Setup RecyclerView
         recyclerView = (RecyclerView) inflater.inflate(R.layout.list_generic, parent, false);
@@ -94,16 +97,33 @@ public class MonsterRewardFragment extends Fragment {
     public List<Object> populateHeaders(List<Reward> items) {
         ArrayList<Object> itemsWithHeaders = new ArrayList<>();
 
-        String headerText = items.get(0).condition;
-        itemsWithHeaders.add(new Header(headerText));
+        // Add initial section header
+        String headText = items.get(0).rank;
+        // TODO Replace with enum translation once ready
+        itemsWithHeaders.add(new SectionHeader("Low Rank"));
+
+        // Add initial condition header
+        String subHeadText = items.get(0).condition;
+        itemsWithHeaders.add(new SubHeader(subHeadText));
 
         for (int i = 1; i < items.size(); i++) {
             Reward reward = items.get(i);
 
-            // Insert a new header if we've reached a new section
-            if (!reward.condition.equals(headerText)) {
-                headerText = reward.condition;
-                itemsWithHeaders.add(new Header(headerText));
+            // Insert a new rank header if we've reached a new section
+            if (!reward.rank.equals(headText)) {
+                headText = reward.rank;
+                // TODO Replace with enum translation once ready
+                if ("lr".equals(headText)) {
+                    itemsWithHeaders.add(new SectionHeader("Low Rank"));
+                } else if ("hr".equals(headText)) {
+                    itemsWithHeaders.add(new SectionHeader("High Rank"));
+                }
+            }
+
+            // Insert a new condition header if we've reached a new section
+            if (!reward.condition.equals(subHeadText)) {
+                subHeadText = reward.condition;
+                itemsWithHeaders.add(new SubHeader(subHeadText));
             }
 
             itemsWithHeaders.add(reward);
@@ -125,12 +145,22 @@ public class MonsterRewardFragment extends Fragment {
     }
 
     /**
-     * Handle onClick of Headers.
-     * @param object Object is guaranteed to be a Header that was clicked
+     * Handle onClick of SectionHeaders.
+     * @param object Object is guaranteed to be a SectionHeader that was clicked
      */
-    private void handleHeaderSelection(Object object) {
+    private void handleSectionHeaderSelection(Object object) {
         // Do nothing for now. Stub for future support of expand/collapse upon header clicks
-//        Header header = (Header) object;
+//        SectionHeader header = (SectionHeader) object;
+//        Toast.makeText(getContext(), "Clicked " + header.text, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Handle onClick of SubHeaders.
+     * @param object Object is guaranteed to be a SubHeader that was clicked
+     */
+    private void handleSubHeaderSelection(Object object) {
+        // Do nothing for now. Stub for future support of expand/collapse upon header clicks
+//        SubHeader header = (SectionHeader) object;
 //        Toast.makeText(getContext(), "Clicked " + header.text, Toast.LENGTH_SHORT).show();
     }
 }
