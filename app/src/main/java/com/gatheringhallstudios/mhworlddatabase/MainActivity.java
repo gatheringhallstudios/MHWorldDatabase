@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity
         // Instantiate our MainViewModel
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
-        // Get reference to the content frame for fragments
-        this.setContentFrame(R.id.content_main_frame);
-
         // Load the initial fragment
         Fragment initial = getFragmentForNavId(R.id.nav_monsters);
         navigateTo(initial, Behavior.RESET);
@@ -108,6 +105,25 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Callback for when the user selects where to navigate to
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        Fragment destination = getFragmentForNavId(id);
+        if (destination != null) {
+            navigateTo(destination, Behavior.RESET);
+
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+
+        return true;
+    }
 
     /*
      *
@@ -117,7 +133,8 @@ public class MainActivity extends AppCompatActivity
      *
      */
 
-    @IdRes int contentFrame;
+    // should this move to a new class, this will need to be initialized at runtime
+    @IdRes int contentFrame = R.id.content_main_frame;
 
     /**
      * Navigate to a transaction using a FragmentTransaction.
@@ -128,12 +145,6 @@ public class MainActivity extends AppCompatActivity
      *                 for more details.
      */
     public void navigateTo(Fragment f, Navigator.Behavior behavior) {
-        if (contentFrame == 0) {
-            Log.e(TAG, "navigateTo: No content frame set! You must call " +
-                    "setContentFrame(FrameLayout layout) before performing navigation",
-                    new ExceptionInInitializerError());
-        }
-
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         switch (behavior) {
@@ -150,32 +161,5 @@ public class MainActivity extends AppCompatActivity
         // Display the new fragment and commit
         ft.replace(contentFrame, f);
         ft.commit();
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        if (contentFrame == 0) {
-            Log.e(TAG, "onNavigationItemSelected: No content frame set! You must call " +
-                            "setContentFrame(FrameLayout layout) before performing navigation",
-                    new ExceptionInInitializerError());
-        }
-
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Fragment destination = getFragmentForNavId(id);
-        if (destination != null) {
-            navigateTo(destination, Behavior.RESET);
-
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-        }
-
-        return true;
-    }
-
-    @Override
-    public void setContentFrame(@IdRes int contentFrame) {
-        this.contentFrame = contentFrame;
     }
 }

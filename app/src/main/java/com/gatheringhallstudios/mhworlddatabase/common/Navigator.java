@@ -39,11 +39,4 @@ public interface Navigator {
      * @param behavior
      */
     void navigateTo(Fragment fragment, Behavior behavior);
-
-    /**
-     * Set a target content frame where fragments will be loaded. This must be set
-     * before performing any transactions.
-     * @param contentFrame the layout to perform transactions in
-     */
-    void setContentFrame(@IdRes int contentFrame);
 }
