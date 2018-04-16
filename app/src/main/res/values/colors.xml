@@ -15,4 +15,5 @@
     <color name="secondaryTextColor">#000000</color>
 
     <color name="backgroundColor">#211F20</color>
+    <color name="backgroundColorHeader">#6c6c6c</color>
 </resources>

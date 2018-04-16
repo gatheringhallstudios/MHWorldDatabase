@@ -15,35 +15,34 @@ import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 
 import java.util.List;
 
-public class RewardAdapterDelegate extends AdapterDelegate<List<Reward>> {
+public class RewardAdapterDelegate extends AdapterDelegate<List<Object>> {
 
-    Consumer<Reward> onSelected;
+    private Consumer<Object> onSelected;
 
-    public RewardAdapterDelegate(Consumer<Reward> onSelected) {
+    public RewardAdapterDelegate(Consumer<Object> onSelected) {
         this.onSelected = onSelected;
     }
 
     @Override
-    protected boolean isForViewType(@NonNull List<Reward> items, int position) {
-        // TODO handle this better once we support headers in the same list
-        return true;
+    protected boolean isForViewType(@NonNull List<Object> items, int position) {
+        return items.get(position) instanceof Reward;
     }
 
     @NonNull
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.cell_reward, parent, false);
+        View v = inflater.inflate(R.layout.listitem_reward, parent, false);
 
         return new RewardViewHolder(v);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull List<Reward> items,
+    protected void onBindViewHolder(@NonNull List<Object> items,
                                     int position,
                                     @NonNull RecyclerView.ViewHolder holder,
                                     @NonNull List<Object> payloads) {
-        Reward reward = items.get(position);
+        Reward reward = (Reward) items.get(position);
 
         RewardViewHolder vh = (RewardViewHolder) holder;
         // TODO Set monster image

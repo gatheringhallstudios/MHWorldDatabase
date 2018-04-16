@@ -32,7 +32,7 @@ public class MonsterAdapterDelegate extends AdapterDelegate<List<Monster>> {
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.cell_monster, parent, false);
+        View v = inflater.inflate(R.layout.listitem_monster, parent, false);
 
         return new MonsterViewHolder(v);
     }

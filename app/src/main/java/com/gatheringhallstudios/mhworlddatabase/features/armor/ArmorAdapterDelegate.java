@@ -31,7 +31,7 @@ public class ArmorAdapterDelegate extends AdapterDelegate<List<ArmorBasic>> {
     @Override
     public ArmorViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.cell_monster, parent, false);
+        View v = inflater.inflate(R.layout.listitem_monster, parent, false);
         return new ArmorViewHolder(v);
     }
 
