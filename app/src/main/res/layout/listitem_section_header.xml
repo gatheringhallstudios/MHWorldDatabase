@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/row_height_medium"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/backgroundColorHeader"
+    android:background="@color/backgroundColorSectionHeader"
     android:gravity="center_vertical">
 
     <TextView

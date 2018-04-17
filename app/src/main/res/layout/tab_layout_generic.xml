@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primaryLightColor"
+    android:background="@color/primaryColor"
     android:theme="@style/AppTheme.AppBarOverlay"
     app:layout_constraintTop_toTopOf="parent"
     app:tabGravity="fill"
     app:tabMode="fixed"
+    app:elevation="@dimen/md_elevation_toolbar"
     app:tabSelectedTextColor="@color/colorAccent"/>
