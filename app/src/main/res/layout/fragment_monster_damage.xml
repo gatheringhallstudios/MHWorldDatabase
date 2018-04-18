@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell
+            android:id="@+id/physical_damage_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:labelText="@string/header_area"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Physical Damage Icons -->
+
+        <ImageView
+            android:id="@+id/icon_ko"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
+            app:layout_constraintRight_toRightOf="@id/physical_damage_header"
+            app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
+
+        <ImageView
+            android:id="@+id/icon_shot"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
+            app:layout_constraintRight_toLeftOf="@id/icon_ko"
+            app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
+
+        <ImageView
+            android:id="@+id/icon_impact"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
+            app:layout_constraintRight_toLeftOf="@id/icon_shot"
+            app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
+
+        <ImageView
+            android:id="@+id/icon_cut"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
+            app:layout_constraintRight_toLeftOf="@id/icon_impact"
+            app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
+
+        <LinearLayout
+            android:id="@+id/physical_damage_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/physical_damage_header">
+
+            <include layout="@layout/listitem_monster_damage" />
+
+            <include layout="@layout/listitem_monster_damage" />
+
+            <include layout="@layout/listitem_monster_damage" />
+
+        </LinearLayout>
+
+        <com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell
+            android:id="@+id/element_damage_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:labelText="@string/header_area"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/physical_damage_layout" />
+
+        <ImageView
+            android:id="@+id/icon_dragon"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintRight_toRightOf="@id/element_damage_header"
+            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+
+        <ImageView
+            android:id="@+id/icon_thunder"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintRight_toLeftOf="@id/icon_dragon"
+            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+
+        <ImageView
+            android:id="@+id/icon_ice"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintRight_toLeftOf="@id/icon_thunder"
+            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+
+        <ImageView
+            android:id="@+id/icon_water"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintRight_toLeftOf="@id/icon_impact"
+            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+
+        <ImageView
+            android:id="@+id/icon_fire"
+            style="@style/IconMedium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintRight_toLeftOf="@id/icon_water"
+            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+
+        <LinearLayout
+            android:id="@+id/element_damage_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/element_damage_header">
+
+            <include layout="@layout/listitem_monster_damage" />
+
+            <include layout="@layout/listitem_monster_damage" />
+
+            <include layout="@layout/listitem_monster_damage" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
