@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDamageFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterRewardFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterSummaryFragment;
 
@@ -30,6 +31,8 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
 
     @BindString(R.string.monsters_detail_tab_summary)
     String tabTitleSummary;
+    @BindString(R.string.monsters_detail_tab_damage)
+    String tabTitleDamage;
     @BindString(R.string.monsters_detail_tab_rewards)
     String tabTitleRewards;
 
@@ -49,6 +52,10 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
     public void onAddTabs(TabAdder tabs) {
         tabs.addTab(tabTitleSummary, () ->
                 MonsterSummaryFragment.newInstance(monster.id)
+        );
+
+        tabs.addTab(tabTitleDamage, () ->
+                MonsterDamageFragment.newInstance(monster.id)
         );
 
         tabs.addTab(tabTitleRewards, () ->

@@ -53,6 +53,16 @@
         <item name="android:textSize">@dimen/md_text_size_medium</item>
     </style>
 
+    <style name="TextBody0" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/md_text_color_body_1_dark_theme</item>
+        <item name="android:textSize">@dimen/md_text_size_small</item>
+    </style>
+
+    <style name="Caption" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/md_text_color_caption_dark_theme</item>
+        <item name="android:textSize">@dimen/md_text_size_small</item>
+    </style>
+
     <style name="SectionHead" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/md_text_color_body_1_dark_theme</item>
         <item name="android:textSize">@dimen/md_text_subheading_regular</item>
