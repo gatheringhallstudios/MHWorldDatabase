@@ -9,6 +9,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
@@ -26,6 +27,7 @@ public class MonsterDetailViewModel extends AndroidViewModel {
 
     boolean initialized = false;
     private LiveData<MonsterView> monster;
+    private LiveData<List<MonsterHabitatView>> habitats;
     private LiveData<List<MonsterRewardView>> monsterRewards;
     private LiveData<List<MonsterHitzoneView>> hitzones;
 
@@ -40,6 +42,7 @@ public class MonsterDetailViewModel extends AndroidViewModel {
         // Query monster by ID
         this.id = monsterId;
         monster = dao.loadMonster("en", monsterId);
+        habitats = dao.loadHabitats("en", monsterId);
         monsterRewards = dao.loadRewards("en", monsterId);
         hitzones = dao.loadHitzones("en", monsterId);
 
@@ -58,6 +61,11 @@ public class MonsterDetailViewModel extends AndroidViewModel {
     public LiveData<MonsterView> getData() {
         ensureInitialized();
         return monster;
+    }
+
+    public LiveData<List<MonsterHabitatView>> getHabitats() {
+        ensureInitialized();
+        return habitats;
     }
 
     public LiveData<List<MonsterRewardView>> getRewards() {

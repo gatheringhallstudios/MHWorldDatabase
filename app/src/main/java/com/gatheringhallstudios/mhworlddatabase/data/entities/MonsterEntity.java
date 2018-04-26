@@ -18,13 +18,15 @@ public class MonsterEntity {
     public int id;
     public MonsterSize size;
 
+    // public boolean has_weakness; // enable soon
+    public boolean has_alt_weakness;
+
     @Embedded(prefix = "weakness_")
     public WeaknessSummaryElemental weaknesses;
 
     @Embedded(prefix = "weakness_")
     public WeaknessSummaryStatus status_weaknesses;
 
-    public boolean has_alt_weakness;
 
     @Embedded(prefix = "alt_weakness_")
     public WeaknessSummaryElemental alt_weaknesses;

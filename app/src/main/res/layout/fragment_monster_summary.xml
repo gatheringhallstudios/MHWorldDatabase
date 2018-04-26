@@ -189,6 +189,8 @@
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconLabelTextCell
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:iconSrc="@drawable/question_mark_grey"
                 app:labelText="Ancient Forest"
                 app:valueText="12 > 1, 4, 2, 6 > 12" />
@@ -196,6 +198,8 @@
             <com.gatheringhallstudios.mhworlddatabase.common.components.IconLabelTextCell
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:iconSrc="@drawable/question_mark_grey"
                 app:labelText="Elders Recess"
                 app:valueText="8 > 13, 5, 2 > 7" />

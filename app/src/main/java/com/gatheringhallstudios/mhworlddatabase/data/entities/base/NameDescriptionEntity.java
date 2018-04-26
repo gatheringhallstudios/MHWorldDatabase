@@ -2,7 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.entities.base;
 
 import android.support.annotation.NonNull;
 
-public class NameDescriptionTable {
+public class NameDescriptionEntity {
     public int id;
 
     @NonNull

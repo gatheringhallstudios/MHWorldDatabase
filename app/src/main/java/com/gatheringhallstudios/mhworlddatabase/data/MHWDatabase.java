@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+import android.location.Location;
 
 // laziness, since we need to manually add all entities which is quite cumbersome
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
@@ -21,7 +22,9 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
     entities={
             ArmorEntity.class, ArmorText.class, ArmorSkill.class,
             ItemEntity.class, ItemText.class,
+            LocationEntity.class,
             MonsterEntity.class, MonsterText.class,
+            MonsterHabitatEntity.class,
             MonsterBreakEntity.class, MonsterHitzoneEntity.class, MonsterPartText.class,
             MonsterRewardEntity.class, MonsterRewardConditionText.class,
             SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
