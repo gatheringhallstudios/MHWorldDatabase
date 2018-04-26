@@ -14,5 +14,5 @@ public class ItemEntity {
     public int rarity;
     public int buy_price;
     public int sell_price;
-    public int carry_capacity;
+    public int carry_limit;
 }

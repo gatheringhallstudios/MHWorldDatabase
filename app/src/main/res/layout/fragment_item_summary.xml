@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_icon"
+            style="@style/ImageXLarge"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/question_mark_grey" />
+
+        <TextView
+            android:id="@+id/item_name"
+            style="@style/TextDisplay1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/item_icon"
+            app:layout_constraintTop_toBottomOf="@+id/item_icon"
+            tools:text="Godbug" />
+
+        <TextView
+            android:id="@+id/item_description"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/md_margin_content"
+            android:layout_marginTop="@dimen/default_padding_margin_small"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/item_name"
+            app:layout_constraintTop_toBottomOf="@+id/item_name"
+            tools:text="An insect said to live a millennium. Combine it with other items to add their properties to the powder."/>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

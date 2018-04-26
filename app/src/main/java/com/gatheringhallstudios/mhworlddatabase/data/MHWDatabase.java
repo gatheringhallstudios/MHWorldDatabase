@@ -10,6 +10,7 @@ import android.location.Location;
 
 // laziness, since we need to manually add all entities which is quite cumbersome
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*;
@@ -61,6 +62,8 @@ public abstract class MHWDatabase extends RoomDatabase {
         }
         return instance;
     }
+
+    public abstract ItemDao itemDao();
 
     public abstract MonsterDao monsterDao();
 
