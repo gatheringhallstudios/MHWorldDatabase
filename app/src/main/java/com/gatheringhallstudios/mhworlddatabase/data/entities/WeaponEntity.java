@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType;
  * Created by Carlos on 3/20/2018.
  */
 @Entity(tableName="weapon")
-public class WeaponRaw {
+public class WeaponEntity {
     @PrimaryKey
     public int id;
 

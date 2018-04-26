@@ -17,13 +17,18 @@ import com.gatheringhallstudios.mhworlddatabase.common.adapters.SectionHeaderAda
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.SubHeaderAdapterDelegate;
 import com.gatheringhallstudios.mhworlddatabase.common.models.SectionHeader;
 import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Reward;
-import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
+import java9.util.stream.Collectors;
+import java9.util.stream.StreamSupport;
 
 /**
  * Fragment for a list of monsters
@@ -34,28 +39,15 @@ public class MonsterRewardFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
     private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
-    MonsterRewardViewModel viewModel;
+    MonsterDetailViewModel viewModel;
     RecyclerView recyclerView;
 
     BasicListDelegationAdapter<Object> adapter;
-
-    public static MonsterRewardFragment newInstance(int monsterId) {
-        MonsterRewardFragment f = new MonsterRewardFragment();
-        f.setArguments(new BundleBuilder().putSerializable(ARG_MONSTER_ID, monsterId).build());
-        return f;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
         ButterKnife.bind(this, parent);
-
-        // Retrieve MonsterID from args
-        Bundle args = getArguments();
-        int monsterId = 0;
-        if (args != null) {
-            monsterId = args.getInt(ARG_MONSTER_ID, 0);
-        }
 
         // Setup Adapter to display rewards and headers
         RewardAdapterDelegate rewardDelegate = new RewardAdapterDelegate(this::handleRewardSelection);
@@ -68,9 +60,8 @@ public class MonsterRewardFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(parent.getContext()));
         recyclerView.setAdapter(adapter);
 
-        viewModel = ViewModelProviders.of(this).get(MonsterRewardViewModel.class);
-        viewModel.setMonsterId(monsterId);
-        viewModel.getData().observe(this, this::setItems);
+        viewModel = ViewModelProviders.of(getParentFragment()).get(MonsterDetailViewModel.class);
+        viewModel.getRewards().observe(this, this::setItems);
 
         return recyclerView;
     }
@@ -79,7 +70,7 @@ public class MonsterRewardFragment extends Fragment {
      * Set the rewards to be displayed in the fragment
      * @param rewards items be of type Reward.
      */
-    public void setItems(List<Reward> rewards) {
+    public void setItems(List<MonsterRewardView> rewards) {
         List<Object> rewardsWithHeaders = populateHeaders(rewards);
 
         if (adapter != null) {
@@ -94,39 +85,38 @@ public class MonsterRewardFragment extends Fragment {
      * @param items List of Rewards without any Headers inserted.
      * @return List of Objects (Rewards and Headers) in appropriate positions.
      */
-    public List<Object> populateHeaders(List<Reward> items) {
+    public List<Object> populateHeaders(List<MonsterRewardView> items) {
         ArrayList<Object> itemsWithHeaders = new ArrayList<>();
 
-        // Add initial section header
-        String headText = items.get(0).rank;
-        // TODO Replace with enum translation once ready
-        itemsWithHeaders.add(new SectionHeader("Low Rank"));
+        // group by rank
+        Map<Rank, List<MonsterRewardView>> grouped = StreamSupport.stream(items)
+                .collect(Collectors.groupingBy((i) -> i.rank,
+                        LinkedHashMap::new, // maintain order
+                        Collectors.toList()));
 
-        // Add initial condition header
-        String subHeadText = items.get(0).condition;
-        itemsWithHeaders.add(new SubHeader(subHeadText));
-
-        for (int i = 1; i < items.size(); i++) {
-            Reward reward = items.get(i);
-
-            // Insert a new rank header if we've reached a new section
-            if (!reward.rank.equals(headText)) {
-                headText = reward.rank;
-                // TODO Replace with enum translation once ready
-                if ("lr".equals(headText)) {
-                    itemsWithHeaders.add(new SectionHeader("Low Rank"));
-                } else if ("hr".equals(headText)) {
-                    itemsWithHeaders.add(new SectionHeader("High Rank"));
-                }
+        for (Map.Entry<Rank, List<MonsterRewardView>> rankEntry : grouped.entrySet()) {
+            // todo: more automated way to translate rank to text
+            Rank rank = rankEntry.getKey();
+            if (rank == Rank.LOW) {
+                itemsWithHeaders.add(new SectionHeader("Low Rank"));
+            } else if (rank == Rank.HIGH) {
+                itemsWithHeaders.add(new SectionHeader("High Rank"));
             }
 
-            // Insert a new condition header if we've reached a new section
-            if (!reward.condition.equals(subHeadText)) {
-                subHeadText = reward.condition;
-                itemsWithHeaders.add(new SubHeader(subHeadText));
-            }
+            // group again by condition
+            Map<String, List<MonsterRewardView>> conditionGroups =
+                    StreamSupport.stream(rankEntry.getValue())
+                        .collect(Collectors.groupingBy((i) -> i.condition,
+                                LinkedHashMap::new, // maintain order
+                                Collectors.toList()));
 
-            itemsWithHeaders.add(reward);
+            for (Map.Entry<String, List<MonsterRewardView>> entry : conditionGroups.entrySet()) {
+                String condition = entry.getKey();
+                itemsWithHeaders.add(new SubHeader(condition));
+
+                // Now add the reward items
+                itemsWithHeaders.addAll(entry.getValue());
+            }
         }
 
         return itemsWithHeaders;
@@ -137,8 +127,8 @@ public class MonsterRewardFragment extends Fragment {
      * @param object Object is guaranteed to be a Reward that was clicked
      */
     private void handleRewardSelection(Object object) {
-        Reward reward = (Reward) object;
-        Toast.makeText(getContext(), "Clicked " + reward.name, Toast.LENGTH_SHORT).show();
+        MonsterRewardView reward = (MonsterRewardView) object;
+        Toast.makeText(getContext(), "Clicked " + reward.item_name, Toast.LENGTH_SHORT).show();
         // TODO implement reward clicking to item details
 //        Navigator nav = (Navigator)getActivity();
 //        nav.navigateTo(MonsterDetailPagerFragment.getInstance(monster));

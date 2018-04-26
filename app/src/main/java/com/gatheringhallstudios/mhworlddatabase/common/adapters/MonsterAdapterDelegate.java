@@ -10,21 +10,21 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.Consumer;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 
 import java.util.List;
 
-public class MonsterAdapterDelegate extends AdapterDelegate<List<Monster>> {
+public class MonsterAdapterDelegate extends AdapterDelegate<List<MonsterView>> {
 
-    Consumer<Monster> onSelected;
+    Consumer<MonsterView> onSelected;
 
-    public MonsterAdapterDelegate(Consumer<Monster> onSelected) {
+    public MonsterAdapterDelegate(Consumer<MonsterView> onSelected) {
         this.onSelected = onSelected;
     }
 
     @Override
-    protected boolean isForViewType(@NonNull List<Monster> items, int position) {
+    protected boolean isForViewType(@NonNull List<MonsterView> items, int position) {
         return true;
     }
 
@@ -38,11 +38,11 @@ public class MonsterAdapterDelegate extends AdapterDelegate<List<Monster>> {
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull List<Monster> items,
+    protected void onBindViewHolder(@NonNull List<MonsterView> items,
                                     int position,
                                     @NonNull RecyclerView.ViewHolder holder,
                                     @NonNull List<Object> payloads) {
-        Monster monster = items.get(position);
+        MonsterView monster = items.get(position);
 
         MonsterViewHolder monVH = (MonsterViewHolder)holder;
         monVH.monsterName.setText(monster.name);

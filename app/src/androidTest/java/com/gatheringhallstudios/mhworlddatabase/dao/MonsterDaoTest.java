@@ -6,7 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -38,7 +38,7 @@ public class MonsterDaoTest {
 
     @Test
     public void Can_Query_MonsterList() throws Exception {
-        List<Monster> results = getValue(dao.loadList("en"));
+        List<MonsterView> results = getValue(dao.loadList("en"));
         assertFalse("expected results", results.isEmpty());
     }
 }

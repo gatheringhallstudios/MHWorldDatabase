@@ -10,12 +10,12 @@ import android.arch.persistence.room.ForeignKey;
         primaryKeys = {"armor_id", "skilltree_id"},
         foreignKeys = {
             @ForeignKey(
-                    entity=ArmorRaw.class,
+                    entity=ArmorEntity.class,
                     parentColumns = "id",
                     childColumns = "armor_id"
                     ),
             @ForeignKey(
-                    entity=SkillTreeRaw.class,
+                    entity=SkillTreeEntity.class,
                     parentColumns = "id",
                     childColumns = "skilltree_id"
             )})

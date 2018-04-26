@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType;
  * Created by Carlos on 3/5/2018.
  */
 @Entity(tableName = "armor")
-public class ArmorRaw {
+public class ArmorEntity {
     @PrimaryKey
     public int id;
 

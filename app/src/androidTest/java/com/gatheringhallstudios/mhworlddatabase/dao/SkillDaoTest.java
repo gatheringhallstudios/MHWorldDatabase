@@ -51,7 +51,7 @@ public class SkillDaoTest {
         // this is a hardcoded test, but we don't have any other way to test this...
         // this tests if the joining works
 
-        SkillTree result = getValue(dao.loadSkill("en", 5));
+        SkillTree result = getValue(dao.loadSkill("en", 7));
         assertEquals("name should match", "Attack Boost", result.name);
         assertEquals("levels should match", 7, result.skills.size());
 

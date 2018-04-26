@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter;
 import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.MonsterAdapterDelegate;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
@@ -31,7 +31,7 @@ public class MonsterListFragment extends Fragment {
     MonsterListViewModel viewModel;
     RecyclerView recyclerView;
 
-    BasicListDelegationAdapter<Monster> adapter;
+    BasicListDelegationAdapter<MonsterView> adapter;
 
     public static MonsterListFragment newInstance(MonsterListViewModel.Tab tab) {
         MonsterListFragment f = new MonsterListFragment();
@@ -67,15 +67,15 @@ public class MonsterListFragment extends Fragment {
         return recyclerView;
     }
 
-    public void setItems(List<Monster> monsters) {
+    public void setItems(List<MonsterView> monsters) {
         if (adapter != null) {
             adapter.setItems(monsters);
             adapter.notifyDataSetChanged();
         }
     }
 
-    private void handleMonsterSelection(Monster monster) {
+    private void handleMonsterSelection(MonsterView monster) {
         Navigator nav = (Navigator)getActivity();
-        nav.navigateTo(MonsterDetailPagerFragment.getInstance(monster));
+        nav.navigateTo(MonsterDetailPagerFragment.newInstance(monster));
     }
 }

@@ -2,7 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.views;
 
 import android.arch.persistence.room.Relation;
 
-import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillRaw;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
 
 import java.util.List;
 
@@ -15,6 +15,6 @@ public class SkillTree {
     public String name;
     public String description;
 
-    @Relation(entity= SkillRaw.class, parentColumn="id", entityColumn ="skilltree_id")
+    @Relation(entity= SkillEntity.class, parentColumn="id", entityColumn ="skilltree_id")
     public List<Skill> skills;
 }

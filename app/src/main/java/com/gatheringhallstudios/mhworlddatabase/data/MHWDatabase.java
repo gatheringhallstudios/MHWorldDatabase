@@ -19,10 +19,13 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
  */
 @Database(
     entities={
-        MonsterRaw.class, MonsterText.class,
-        SkillTreeRaw.class, SkillTreeText.class, SkillRaw.class,
-        ArmorRaw.class, ArmorText.class, ArmorSkill.class
-    }, version=2)
+            ArmorEntity.class, ArmorText.class, ArmorSkill.class,
+            ItemEntity.class, ItemText.class,
+            MonsterEntity.class, MonsterText.class,
+            MonsterBreakEntity.class, MonsterHitzoneEntity.class, MonsterPartText.class,
+            MonsterRewardEntity.class, MonsterRewardConditionText.class,
+            SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
+    }, version = 3)
 @TypeConverters({ Converters.class })
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;

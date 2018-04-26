@@ -6,7 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize;
 
@@ -25,7 +25,7 @@ public class MonsterListViewModel extends AndroidViewModel {
     }
 
     private Tab currentTab;
-    private LiveData<List<Monster>> monsters;
+    private LiveData<List<MonsterView>> monsters;
 
     public MonsterListViewModel(@NonNull Application application) {
         // todo: perhaps inject the database directly?
@@ -53,7 +53,7 @@ public class MonsterListViewModel extends AndroidViewModel {
         currentTab = tab;
     }
 
-    public LiveData<List<Monster>> getData() {
+    public LiveData<List<MonsterView>> getData() {
         if (monsters == null) {
             throw new IllegalStateException("ViewModel not initialized");
         }

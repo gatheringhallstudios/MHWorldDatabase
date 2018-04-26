@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import butterknife.BindView;
@@ -24,9 +24,7 @@ import butterknife.ButterKnife;
 
 public class MonsterSummaryFragment extends Fragment {
 
-    private static final String ARG_MONSTER_ID = "MONSTER_ID";
-
-    MonsterSummaryViewModel viewModel;
+    MonsterDetailViewModel viewModel;
 
     @BindView(R.id.monster_icon) ImageView monsterIcon;
     @BindView(R.id.monster_name) TextView monsterName;
@@ -43,12 +41,6 @@ public class MonsterSummaryFragment extends Fragment {
     @BindView(R.id.blast_star_cell) IconStarCell blastStarCell;
     @BindView(R.id.stun_star_cell) IconStarCell stunStarCell;
 
-    public static MonsterSummaryFragment newInstance(int monsterId) {
-        MonsterSummaryFragment f = new MonsterSummaryFragment();
-        f.setArguments(new BundleBuilder().putSerializable(ARG_MONSTER_ID, monsterId).build());
-        return f;
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
@@ -56,17 +48,9 @@ public class MonsterSummaryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_monster_summary, parent, false);
         ButterKnife.bind(this, view);
 
-        // Retrieve MonsterID from args
-        Bundle args = getArguments();
-        int monsterId = 0;
-        if (args != null) {
-            monsterId = args.getInt(ARG_MONSTER_ID, 0);
-        }
-
-        // Retrieve and set up our ViewModel
-        viewModel = ViewModelProviders.of(this).get(MonsterSummaryViewModel.class);
-        viewModel.setMonster(monsterId);
-        viewModel.getData().observe(this, (monster) -> populateMonster(monster));
+        // Retrieve the viewmodel from the parent fragment
+        viewModel = ViewModelProviders.of(getParentFragment()).get(MonsterDetailViewModel.class);
+        viewModel.getData().observe(this, this::populateMonster);
 
         return view;
     }
@@ -74,7 +58,7 @@ public class MonsterSummaryFragment extends Fragment {
     /**
      * Populate views with the monster data
      */
-    private void populateMonster(Monster monster) {
+    private void populateMonster(MonsterView monster) {
         // monsterIcon.setIcon(someIcon)
         monsterName.setText(monster.name);
         monsterDescription.setText(monster.description);

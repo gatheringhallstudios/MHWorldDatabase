@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
  * Created by Carlos on 3/5/2018.
  */
 @Entity(tableName = "skilltree")
-public class SkillTreeRaw {
+public class SkillTreeEntity {
     @PrimaryKey
     public int id;
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.Consumer;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Reward;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class RewardAdapterDelegate extends AdapterDelegate<List<Object>> {
 
     @Override
     protected boolean isForViewType(@NonNull List<Object> items, int position) {
-        return items.get(position) instanceof Reward;
+        return items.get(position) instanceof MonsterRewardView;
     }
 
     @NonNull
@@ -42,20 +42,19 @@ public class RewardAdapterDelegate extends AdapterDelegate<List<Object>> {
                                     int position,
                                     @NonNull RecyclerView.ViewHolder holder,
                                     @NonNull List<Object> payloads) {
-        Reward reward = (Reward) items.get(position);
+        MonsterRewardView reward = (MonsterRewardView) items.get(position);
 
         RewardViewHolder vh = (RewardViewHolder) holder;
         // TODO Set monster image
-        vh.rewardName.setText(reward.name);
+        vh.rewardName.setText(reward.item_name);
 
-        String stack = "x " + Integer.toString(reward.stackSize);
+        String stack = "x " + Integer.toString(reward.stack_size);
         vh.rewardStack.setText(stack);
 
         String percent = Integer.toString(reward.percentage) + "%";
         vh.rewardPercent.setText(percent);
 
         holder.itemView.setOnClickListener((View v) -> onSelected.accept(items.get(position)));
-
     }
 
     class RewardViewHolder extends RecyclerView.ViewHolder {

@@ -4,11 +4,6 @@ import android.arch.persistence.room.Entity;
 
 import com.gatheringhallstudios.mhworlddatabase.data.entities.base.NameEntity;
 
-/**
- * Translation data for armor
- * Created by Carlos on 3/5/2018.
- */
-@Entity(tableName = "armor_text",
-        primaryKeys = {"id", "lang_id"})
-public class ArmorText extends NameEntity {
+@Entity(tableName = "monster_part_text", primaryKeys = { "id", "lang_id" })
+public class MonsterPartText extends NameEntity {
 }

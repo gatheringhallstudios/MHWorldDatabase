@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -7,21 +8,24 @@ import android.support.v4.view.ViewPager;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Monster;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailViewModel;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterRewardFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterSummaryFragment;
+import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import butterknife.BindString;
 import butterknife.BindView;
 
 /**
- * Monster Hub
+ * Monster detail Hub. Displays information for a single monster.
+ * All data is displayed in separate tabs.
  */
 
 public class MonsterDetailPagerFragment extends BasePagerFragment {
 
     private final String TAG = getClass().getSimpleName();
-
+    private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
@@ -33,34 +37,36 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
     @BindString(R.string.monsters_detail_tab_rewards)
     String tabTitleRewards;
 
-    /*
-     * TODO Add any scroll or pager state to a MonsterListPagerViewModel to better support rotation and backstack
-     */
-    private Monster monster; // This need to come from a ViewModel otherwise there's a crash on rotate
-
-    public static MonsterDetailPagerFragment getInstance(Monster monster){
+    public static MonsterDetailPagerFragment newInstance(int monsterId) {
         MonsterDetailPagerFragment fragment = new MonsterDetailPagerFragment();
-        fragment.monster = monster;
-
+        fragment.setArguments(new BundleBuilder()
+                .putSerializable(ARG_MONSTER_ID, monsterId)
+                .build());
         return fragment;
+    }
+
+    public static MonsterDetailPagerFragment newInstance(MonsterView monster){
+        return newInstance(monster.id);
     }
 
     @Override
     public void onAddTabs(TabAdder tabs) {
-        tabs.addTab(tabTitleSummary, () ->
-                MonsterSummaryFragment.newInstance(monster.id)
-        );
+        // Retrieve MonsterID from args (required!)
+        Bundle args = getArguments();
+        int monsterId = args.getInt(ARG_MONSTER_ID);
 
-        tabs.addTab(tabTitleRewards, () ->
-                MonsterRewardFragment.newInstance(monster.id)
-        );
+        // Retrieve and set up our ViewModel
+        MonsterDetailViewModel viewModel = ViewModelProviders.of(this).get(MonsterDetailViewModel.class);
+        viewModel.setMonster(monsterId);
+
+        viewModel.getData().observe(this, this::setTitle);
+
+        // Now add our tabs
+        tabs.addTab(tabTitleSummary, () -> new MonsterSummaryFragment());
+        tabs.addTab(tabTitleRewards, () -> new MonsterRewardFragment());
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        if (getActivity() != null)
-            getActivity().setTitle(monster.name);
+    private void setTitle(MonsterView monster) {
+        getActivity().setTitle(monster.name);
     }
 }
