@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
 
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize;
@@ -46,4 +47,14 @@ public abstract class MonsterDao {
             "       AND it.lang_id = :langId " +
             "WHERE r.monster_id = :monsterId")
     public abstract LiveData<List<MonsterRewardView>> loadRewards(String langId, int monsterId);
+
+    @Query( "SELECT h.monster_id, pt.name body_part, h.cut, h.impact, h.shot, " +
+            "   h.fire, h.water, h.ice, h.thunder, h.dragon, h.ko " +
+            "FROM monster_hitzone h" +
+            "   JOIN monster_part_text pt " +
+            "       ON pt.id = h.part_id" +
+            "       AND pt.lang_id = :langId " +
+            "WHERE h.monster_id = :monsterId")
+    public abstract LiveData<List<MonsterHitzoneView>> loadHitzones(String langId, int monsterId);
+
 }

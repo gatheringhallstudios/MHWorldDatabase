@@ -66,9 +66,7 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
 
         // Now add our tabs
         tabs.addTab(tabTitleSummary, () -> new MonsterSummaryFragment());
-        tabs.addTab(tabTitleDamage, () ->
-            MonsterDamageFragment.newInstance(monsterId)
-        );
+        tabs.addTab(tabTitleDamage, () -> new MonsterDamageFragment());
         tabs.addTab(tabTitleRewards, () -> new MonsterRewardFragment());
     }
 

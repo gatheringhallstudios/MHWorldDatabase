@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.data.views.Hitzone;
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import java.util.List;
@@ -25,26 +25,18 @@ import butterknife.ButterKnife;
  */
 
 public class MonsterDamageFragment extends Fragment {
+    MonsterDetailViewModel viewModel;
 
     private final String TAG = getClass().getSimpleName();
-    private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
     @BindView(R.id.physical_damage_layout)
     LinearLayout physicalDamageLayout;
     @BindView(R.id.element_damage_layout)
     LinearLayout elementDamageLayout;
 
-    MonsterDamageViewModel viewModel;
-
     // Thresholds for BOLD numbers
     final int EFFECTIVE_PHYSICAL = 45;
     final int EFFECTIVE_ELEMENTAL = 20;
-
-    public static MonsterDamageFragment newInstance(int monsterId) {
-        MonsterDamageFragment f = new MonsterDamageFragment();
-        f.setArguments(new BundleBuilder().putSerializable(ARG_MONSTER_ID, monsterId).build());
-        return f;
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent,
@@ -53,17 +45,8 @@ public class MonsterDamageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_monster_damage, parent, false);
         ButterKnife.bind(this, view);
 
-        // Retrieve MonsterID from args
-        Bundle args = getArguments();
-        int monsterId = 0;
-        if (args != null) {
-            monsterId = args.getInt(ARG_MONSTER_ID, 0);
-        }
-
-        // Get and setup our ViewModel
-        viewModel = ViewModelProviders.of(this).get(MonsterDamageViewModel.class);
-        viewModel.setMonsterId(monsterId);
-        viewModel.getHitzoneData().observe(this, (hitzones) -> setHitzones(hitzones, inflater));
+        viewModel = ViewModelProviders.of(getParentFragment()).get(MonsterDetailViewModel.class);
+        viewModel.getHitzones().observe(this, this::setHitzones);
 
         return view;
     }
@@ -73,7 +56,7 @@ public class MonsterDamageFragment extends Fragment {
      *
      * @param hitzones items be of type Reward.
      */
-    public void setHitzones(List<Hitzone> hitzones, LayoutInflater inflater) {
+    public void setHitzones(List<MonsterHitzoneView> hitzones) {
         // Clear layouts
         if (physicalDamageLayout.getChildCount() != 0)
             physicalDamageLayout.removeAllViews();
@@ -81,8 +64,10 @@ public class MonsterDamageFragment extends Fragment {
         if (elementDamageLayout.getChildCount() != 0)
             elementDamageLayout.removeAllViews();
 
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+
         // Populate Physical Damage
-        for (Hitzone hitzone : hitzones) {
+        for (MonsterHitzoneView hitzone : hitzones) {
             View physical = inflater.inflate(R.layout.listitem_monster_hitzone, physicalDamageLayout, false);
 
             // Find target views manually since we can't run ButterKnife.bind more than once.
@@ -93,7 +78,7 @@ public class MonsterDamageFragment extends Fragment {
             TextView ko = physical.findViewById(R.id.dmg5);
 
             // Bind views
-            bodyPart.setText(hitzone.bodyPart);
+            bodyPart.setText(hitzone.body_part);
             // TODO Altered status names should be a different font. Ex: (Enraged)
             bindHitzone(cut, hitzone.cut, EFFECTIVE_PHYSICAL);
             bindHitzone(impact, hitzone.impact, EFFECTIVE_PHYSICAL);
@@ -104,7 +89,7 @@ public class MonsterDamageFragment extends Fragment {
         }
 
         // Populate Elemental Damage
-        for (Hitzone hitzone : hitzones) {
+        for (MonsterHitzoneView hitzone : hitzones) {
             View elemental = inflater.inflate(R.layout.listitem_monster_hitzone, elementDamageLayout, false);
 
             // Find target views manually since we can't run ButterKnife.bind more than once.
@@ -116,7 +101,7 @@ public class MonsterDamageFragment extends Fragment {
             TextView dragon = elemental.findViewById(R.id.dmg5);
 
             // Bind views
-            bodyPart.setText(hitzone.bodyPart);
+            bodyPart.setText(hitzone.body_part);
             // TODO Altered status names should be a different font. Ex: (Enraged)
             bindHitzone(fire, hitzone.fire, EFFECTIVE_ELEMENTAL);
             bindHitzone(water, hitzone.water, EFFECTIVE_ELEMENTAL);
