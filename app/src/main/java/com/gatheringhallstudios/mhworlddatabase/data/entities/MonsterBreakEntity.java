@@ -5,6 +5,8 @@ import android.arch.persistence.room.Entity;
 @Entity(tableName="monster_break",
         primaryKeys = {"monster_id", "part_id"})
 public class MonsterBreakEntity {
+    public int id;
+
     public int monster_id;
     public int part_id;
 

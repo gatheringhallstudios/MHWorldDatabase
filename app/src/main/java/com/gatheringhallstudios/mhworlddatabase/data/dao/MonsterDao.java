@@ -45,7 +45,8 @@ public abstract class MonsterDao {
             "   JOIN item_text it " +
             "       ON it.id = r.item_id" +
             "       AND it.lang_id = :langId " +
-            "WHERE r.monster_id = :monsterId")
+            "WHERE r.monster_id = :monsterId " +
+            "ORDER BY r.id")
     public abstract LiveData<List<MonsterRewardView>> loadRewards(String langId, int monsterId);
 
     @Query( "SELECT h.monster_id, pt.name body_part, h.cut, h.impact, h.shot, " +
@@ -54,7 +55,8 @@ public abstract class MonsterDao {
             "   JOIN monster_part_text pt " +
             "       ON pt.id = h.part_id" +
             "       AND pt.lang_id = :langId " +
-            "WHERE h.monster_id = :monsterId")
+            "WHERE h.monster_id = :monsterId " +
+            "ORDER BY h.id")
     public abstract LiveData<List<MonsterHitzoneView>> loadHitzones(String langId, int monsterId);
 
 }
