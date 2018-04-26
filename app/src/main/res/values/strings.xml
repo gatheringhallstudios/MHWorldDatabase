@@ -12,6 +12,7 @@
     <string name="monsters_list_tab_large">Large</string>
     <string name="monsters_detail_tab_summary">Summary</string>
     <string name="monsters_detail_tab_rewards">Rewards</string>
+    <string name="monsters_detail_tab_damage">Damage</string>
 
     <!-- Armor -->
     <string name="armor_title">Armor</string>
@@ -22,5 +23,6 @@
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>
     <string name="header_weakness">Weakness</string>
+    <string name="header_area">Area</string>
 
 </resources>

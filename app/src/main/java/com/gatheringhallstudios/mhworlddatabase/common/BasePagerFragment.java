@@ -33,7 +33,7 @@ public abstract class BasePagerFragment extends Fragment {
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate view
-        View root = inflater.inflate(R.layout.fragment_generic_hub, container, false);
+        View root = inflater.inflate(R.layout.fragment_generic_pager, container, false);
 
         // Bind ButterKnife
         ButterKnife.bind(this, root);

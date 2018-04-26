@@ -10,6 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailViewModel;
+import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDamageFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterRewardFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterSummaryFragment;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
@@ -34,6 +35,8 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
 
     @BindString(R.string.monsters_detail_tab_summary)
     String tabTitleSummary;
+    @BindString(R.string.monsters_detail_tab_damage)
+    String tabTitleDamage;
     @BindString(R.string.monsters_detail_tab_rewards)
     String tabTitleRewards;
 
@@ -63,6 +66,9 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
 
         // Now add our tabs
         tabs.addTab(tabTitleSummary, () -> new MonsterSummaryFragment());
+        tabs.addTab(tabTitleDamage, () ->
+            MonsterDamageFragment.newInstance(monsterId)
+        );
         tabs.addTab(tabTitleRewards, () -> new MonsterRewardFragment());
     }
 

@@ -5,7 +5,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="row_height_large">72dp</dimen>
+    <dimen name="row_height_xlarge">72dp</dimen>
+    <dimen name="row_height_large">56dp</dimen>
     <dimen name="row_height_medium">48dp</dimen>
     <dimen name="row_height_small">32dp</dimen>
 
@@ -26,4 +27,8 @@
     <dimen name="image_size_medium">32dp</dimen>
     <dimen name="image_size_large">48dp</dimen>
     <dimen name="image_size_xlarge">72dp</dimen>
+
+    <!-- Dimens for Monster Damage -->
+    <dimen name="width_damage_value">36dp</dimen>
+    <dimen name="margin_damage_value_right">14dp</dimen>
 </resources>

@@ -52,6 +52,7 @@ dependencies {
 
     /*
      * Material Design Values
+     * TODO Remove this library and define the values we need ourselves in dimens.xml
      */
     implementation ('com.github.thekhaeng:material-design-guideline:1.0.4') {
         exclude group: 'com.android.support', module: 'support-annotations'
