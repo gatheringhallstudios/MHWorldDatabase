@@ -51,9 +51,8 @@ public class MonsterRewardFragment extends Fragment {
 
         // Setup Adapter to display rewards and headers
         RewardAdapterDelegate rewardDelegate = new RewardAdapterDelegate(this::handleRewardSelection);
-        SectionHeaderAdapterDelegate sectionHeaderDelegate = new SectionHeaderAdapterDelegate(this::handleSectionHeaderSelection);
         SubHeaderAdapterDelegate subHeaderDelegate = new SubHeaderAdapterDelegate(this::handleSubHeaderSelection);
-        adapter = new BasicListDelegationAdapter<>(rewardDelegate, sectionHeaderDelegate, subHeaderDelegate);
+        adapter = new BasicListDelegationAdapter<>(rewardDelegate, subHeaderDelegate);
 
         // Setup RecyclerView
         recyclerView = (RecyclerView) inflater.inflate(R.layout.list_generic, parent, false);
