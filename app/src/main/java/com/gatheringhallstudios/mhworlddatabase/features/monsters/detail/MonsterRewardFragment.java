@@ -71,7 +71,8 @@ public class MonsterRewardFragment extends Fragment {
      * @param rewards items be of type Reward.
      */
     public void setItems(List<MonsterRewardView> rewards) {
-        List<Object> rewardsWithHeaders = populateHeaders(rewards);
+        Bundle bundle = this.getArguments();
+        List<Object> rewardsWithHeaders = populateHeaders(rewards, (Rank) bundle.getSerializable("rank"));
 
         if (adapter != null) {
             adapter.setItems(rewardsWithHeaders);
@@ -85,38 +86,28 @@ public class MonsterRewardFragment extends Fragment {
      * @param items List of Rewards without any Headers inserted.
      * @return List of Objects (Rewards and Headers) in appropriate positions.
      */
-    public List<Object> populateHeaders(List<MonsterRewardView> items) {
+    public List<Object> populateHeaders(List<MonsterRewardView> items, Rank rank) {
         ArrayList<Object> itemsWithHeaders = new ArrayList<>();
 
-        // group by rank
-        Map<Rank, List<MonsterRewardView>> grouped = StreamSupport.stream(items)
-                .collect(Collectors.groupingBy((i) -> i.rank,
-                        LinkedHashMap::new, // maintain order
-                        Collectors.toList()));
+        // select only the items that are of hte relevant rank
+        List<MonsterRewardView> grouped = StreamSupport.stream(items)
+                .filter(i -> i.rank.equals(rank))
+                .collect(Collectors.toList());
 
-        for (Map.Entry<Rank, List<MonsterRewardView>> rankEntry : grouped.entrySet()) {
-            // todo: more automated way to translate rank to text
-            Rank rank = rankEntry.getKey();
-            if (rank == Rank.LOW) {
-                itemsWithHeaders.add(new SectionHeader("Low Rank"));
-            } else if (rank == Rank.HIGH) {
-                itemsWithHeaders.add(new SectionHeader("High Rank"));
-            }
+        // todo: more automated way to translate rank to text
+        // group again by condition
+        Map<String, List<MonsterRewardView>> conditionGroups =
+                StreamSupport.stream(grouped)
+                    .collect(Collectors.groupingBy((i) -> i.condition,
+                            LinkedHashMap::new, // maintain order
+                            Collectors.toList()));
 
-            // group again by condition
-            Map<String, List<MonsterRewardView>> conditionGroups =
-                    StreamSupport.stream(rankEntry.getValue())
-                        .collect(Collectors.groupingBy((i) -> i.condition,
-                                LinkedHashMap::new, // maintain order
-                                Collectors.toList()));
+        for (Map.Entry<String, List<MonsterRewardView>> entry : conditionGroups.entrySet()) {
+            String condition = entry.getKey();
+            itemsWithHeaders.add(new SubHeader(condition));
 
-            for (Map.Entry<String, List<MonsterRewardView>> entry : conditionGroups.entrySet()) {
-                String condition = entry.getKey();
-                itemsWithHeaders.add(new SubHeader(condition));
-
-                // Now add the reward items
-                itemsWithHeaders.addAll(entry.getValue());
-            }
+            // Now add the reward items
+            itemsWithHeaders.addAll(entry.getValue());
         }
 
         return itemsWithHeaders;
