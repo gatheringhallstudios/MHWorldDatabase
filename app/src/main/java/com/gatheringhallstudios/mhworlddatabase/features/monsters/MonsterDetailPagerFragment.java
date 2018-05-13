@@ -69,26 +69,11 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
 
         viewModel.getData().observe(this, this::setTitle);
 
-        //Set parameters for MonsterRewardFragments
-        Bundle highRankRewardsArgs = new Bundle();
-        highRankRewardsArgs.putSerializable("rank", Rank.HIGH);
-
-        Bundle lowRankRewardsArgs = new Bundle();
-        lowRankRewardsArgs.putSerializable("rank", Rank.LOW);
-
         // Now add our tabs
         tabs.addTab(tabTitleSummary, () -> new MonsterSummaryFragment());
         tabs.addTab(tabTitleDamage, () -> new MonsterDamageFragment());
-        tabs.addTab(tabTitleRewardsHighRank, () -> {
-            Fragment reward = new MonsterRewardFragment();
-            reward.setArguments(highRankRewardsArgs);
-            return reward;
-        });
-        tabs.addTab(tabTitleRewardsLowRank, () -> {
-            Fragment reward = new MonsterRewardFragment();
-            reward.setArguments(lowRankRewardsArgs);
-            return reward;
-        });
+        tabs.addTab(tabTitleRewardsHighRank, () -> MonsterRewardFragment.newInstance(Rank.HIGH));
+        tabs.addTab(tabTitleRewardsLowRank, () -> MonsterRewardFragment.newInstance(Rank.LOW));
     }
 
     private void setTitle(MonsterView monster) {

@@ -20,6 +20,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView;
+import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -38,6 +39,7 @@ public class MonsterRewardFragment extends Fragment {
 
     private final String TAG = getClass().getSimpleName();
     private static final String ARG_MONSTER_ID = "MONSTER_ID";
+    private static final String ARG_RANK = "RANK";
 
     MonsterDetailViewModel viewModel;
     RecyclerView recyclerView;
@@ -65,13 +67,21 @@ public class MonsterRewardFragment extends Fragment {
         return recyclerView;
     }
 
+    public static MonsterRewardFragment newInstance(Rank rank) {
+        MonsterRewardFragment fragment = new MonsterRewardFragment();
+        fragment.setArguments(new BundleBuilder()
+                .putSerializable(ARG_RANK, rank)
+                .build());
+        return fragment;
+    }
+
     /**
      * Set the rewards to be displayed in the fragment
      * @param rewards items be of type Reward.
      */
     public void setItems(List<MonsterRewardView> rewards) {
-        Bundle bundle = this.getArguments();
-        List<Object> rewardsWithHeaders = populateHeaders(rewards, (Rank) bundle.getSerializable("rank"));
+
+        List<Object> rewardsWithHeaders = populateHeaders(rewards, (Rank) getArguments().getSerializable(ARG_RANK));
 
         if (adapter != null) {
             adapter.setItems(rewardsWithHeaders);
