@@ -61,7 +61,7 @@ public class MonsterSummaryFragment extends Fragment {
 
         // Retrieve the viewmodel from the parent fragment
         viewModel = ViewModelProviders.of(getParentFragment()).get(MonsterDetailViewModel.class);
-        viewModel.getData().observe(this, this::populateMonster);
+        viewModel.getMonster().observe(this, this::populateMonster);
         viewModel.getHabitats().observe(this, this::populateHabitats);
 
         return view;

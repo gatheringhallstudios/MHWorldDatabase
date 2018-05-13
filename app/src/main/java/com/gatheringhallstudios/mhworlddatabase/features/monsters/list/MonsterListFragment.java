@@ -62,7 +62,7 @@ public class MonsterListFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(MonsterListViewModel.class);
         viewModel.setTab(tab);
 
-        viewModel.getData().observe(this, this::setItems);
+        viewModel.getMonsters().observe(this, this::setItems);
 
         return recyclerView;
     }

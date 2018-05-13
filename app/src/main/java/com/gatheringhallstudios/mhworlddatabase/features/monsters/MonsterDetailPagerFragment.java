@@ -2,11 +2,8 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.Choreographer;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
@@ -67,7 +64,7 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
         MonsterDetailViewModel viewModel = ViewModelProviders.of(this).get(MonsterDetailViewModel.class);
         viewModel.setMonster(monsterId);
 
-        viewModel.getData().observe(this, this::setTitle);
+        viewModel.getMonster().observe(this, this::setTitle);
 
         // Now add our tabs
         tabs.addTab(tabTitleSummary, () -> new MonsterSummaryFragment());
