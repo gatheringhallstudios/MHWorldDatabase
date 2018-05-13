@@ -4,10 +4,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Choreographer;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailViewModel;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDamageFragment;
@@ -37,8 +40,10 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
     String tabTitleSummary;
     @BindString(R.string.monsters_detail_tab_damage)
     String tabTitleDamage;
-    @BindString(R.string.monsters_detail_tab_rewards)
-    String tabTitleRewards;
+    @BindString(R.string.monsters_detail_tab_rewards_high_rank)
+    String tabTitleRewardsHighRank;
+    @BindString(R.string.monsters_detail_tab_rewards_low_rank)
+    String tabTitleRewardsLowRank;
 
     public static MonsterDetailPagerFragment newInstance(int monsterId) {
         MonsterDetailPagerFragment fragment = new MonsterDetailPagerFragment();
@@ -67,7 +72,8 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
         // Now add our tabs
         tabs.addTab(tabTitleSummary, () -> new MonsterSummaryFragment());
         tabs.addTab(tabTitleDamage, () -> new MonsterDamageFragment());
-        tabs.addTab(tabTitleRewards, () -> new MonsterRewardFragment());
+        tabs.addTab(tabTitleRewardsHighRank, () -> MonsterRewardFragment.newInstance(Rank.HIGH));
+        tabs.addTab(tabTitleRewardsLowRank, () -> MonsterRewardFragment.newInstance(Rank.LOW));
     }
 
     private void setTitle(MonsterView monster) {
