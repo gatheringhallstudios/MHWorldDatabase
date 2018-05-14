@@ -34,7 +34,6 @@ class MonsterSummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Retrieve the viewmodel from the parent fragment
         viewModel.monster.observe(this, Observer(::populateMonster))
         viewModel.habitats.observe(this, Observer(::populateHabitats))
     }
@@ -52,8 +51,8 @@ class MonsterSummaryFragment : Fragment() {
         // monster_icon.setIcon(someIcon)
 
         // todo: remove weakness section if both are null
-
         // note: newer data versions have an 'has_weakness' field. Use that.
+
         if (elemWeakness != null) {
             fire_star_cell.setStars(elemWeakness.fire)
             water_star_cell.setStars(elemWeakness.water)
