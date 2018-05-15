@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/MonsterList">
+    <fragment
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListPagerFragment"
+        android:id="@+id/MonsterList"
+        android:label="Monster List"
+        tools:layout="@layout/fragment_generic_pager"/>
+    <fragment
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment"
+        android:id="@+id/MonsterDetail"
+        android:label="Monster Detail"
+        tools:layout="@layout/fragment_generic_pager"/>
+</navigation>

@@ -44,7 +44,7 @@ class FrameworkSQLiteProgram implements SupportSQLiteProgram {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         mDelegate.close();
     }
 }
