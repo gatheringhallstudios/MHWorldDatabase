@@ -8,6 +8,33 @@ import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatu
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
+
+/**
+ * Created by Carlos on 3/5/2018.
+ */
+@Entity(tableName = "item")
+class ItemEntity(
+        @PrimaryKey val id: Int,
+
+        val category: String,
+        val rarity: Int,
+        val buy_price: Int?,
+        val sell_price: Int,
+        val carry_limit: Int?
+)
+
+/** `
+ * Translation data for Item
+ * Created by Carlos on 3/5/2018.
+ */
+@Entity(tableName = "item_text", primaryKeys = ["id", "lang_id"])
+data class ItemText(
+        val id: Int,
+        val lang_id: String,
+        val name: String?,
+        val description: String?
+)
+
 /**
  * Entity for monster
  * Created by Carlos on 3/4/2018.

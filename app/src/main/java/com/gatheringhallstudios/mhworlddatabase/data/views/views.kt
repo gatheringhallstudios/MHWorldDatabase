@@ -1,11 +1,15 @@
 package com.gatheringhallstudios.mhworlddatabase.data.views
 
 import android.arch.persistence.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterEntity
-import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHabitatEntity
-import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHitzoneEntity
-import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardEntity
+import com.gatheringhallstudios.mhworlddatabase.data.entities.*
 
+data class ItemView(
+        @Embedded val data: ItemEntity,
+        val name: String?,
+        val description: String?
+) {
+    val id get() = data.id
+}
 
 data class MonsterView(
         @Embedded val data: MonsterEntity,
