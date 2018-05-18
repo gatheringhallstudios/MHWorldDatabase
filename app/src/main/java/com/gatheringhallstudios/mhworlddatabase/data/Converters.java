@@ -26,8 +26,8 @@ public class Converters {
         weaponMap = EnumHashBiMap.create(WeaponType.class);
         rankMap = EnumHashBiMap.create(Rank.class);
 
-        rankMap.put(Rank.LOW, "lr");
-        rankMap.put(Rank.HIGH, "hr");
+        rankMap.put(Rank.LOW, "LR");
+        rankMap.put(Rank.HIGH, "HR");
 
         monsterSizeMap.put(MonsterSize.SMALL, "small");
         monsterSizeMap.put(MonsterSize.LARGE, "large");

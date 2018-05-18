@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHitzoneEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
@@ -78,12 +79,14 @@ public class MonsterDamageFragment extends Fragment {
             TextView ko = physical.findViewById(R.id.dmg5);
 
             // Bind views
-            bodyPart.setText(hitzone.body_part);
+            bodyPart.setText(hitzone.getBody_part());
             // TODO Altered status names should be a different font. Ex: (Enraged)
-            bindHitzone(cut, hitzone.cut, EFFECTIVE_PHYSICAL);
-            bindHitzone(impact, hitzone.impact, EFFECTIVE_PHYSICAL);
-            bindHitzone(shot, hitzone.shot, EFFECTIVE_PHYSICAL);
-            bindHitzone(ko, hitzone.ko, EFFECTIVE_PHYSICAL);
+
+            MonsterHitzoneEntity data = hitzone.getData();
+            bindHitzone(cut, data.getCut(), EFFECTIVE_PHYSICAL);
+            bindHitzone(impact, data.getImpact(), EFFECTIVE_PHYSICAL);
+            bindHitzone(shot, data.getShot(), EFFECTIVE_PHYSICAL);
+            bindHitzone(ko, data.getKo(), EFFECTIVE_PHYSICAL);
 
             physicalDamageLayout.addView(physical);
         }
@@ -101,13 +104,15 @@ public class MonsterDamageFragment extends Fragment {
             TextView dragon = elemental.findViewById(R.id.dmg5);
 
             // Bind views
-            bodyPart.setText(hitzone.body_part);
+            bodyPart.setText(hitzone.getBody_part());
             // TODO Altered status names should be a different font. Ex: (Enraged)
-            bindHitzone(fire, hitzone.fire, EFFECTIVE_ELEMENTAL);
-            bindHitzone(water, hitzone.water, EFFECTIVE_ELEMENTAL);
-            bindHitzone(ice, hitzone.ice, EFFECTIVE_ELEMENTAL);
-            bindHitzone(thunder, hitzone.thunder, EFFECTIVE_ELEMENTAL);
-            bindHitzone(dragon, hitzone.dragon, EFFECTIVE_ELEMENTAL);
+
+            MonsterHitzoneEntity data = hitzone.getData();
+            bindHitzone(fire, data.getFire(), EFFECTIVE_ELEMENTAL);
+            bindHitzone(water, data.getWater(), EFFECTIVE_ELEMENTAL);
+            bindHitzone(ice, data.getIce(), EFFECTIVE_ELEMENTAL);
+            bindHitzone(thunder, data.getThunder(), EFFECTIVE_ELEMENTAL);
+            bindHitzone(dragon, data.getDragon(), EFFECTIVE_ELEMENTAL);
 
             elementDamageLayout.addView(elemental);
         }

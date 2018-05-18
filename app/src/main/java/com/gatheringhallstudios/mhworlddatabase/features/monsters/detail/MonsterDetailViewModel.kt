@@ -3,8 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.support.annotation.VisibleForTesting
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao
@@ -12,8 +10,6 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
-
-import java.util.ArrayList
 
 /**
  * A ViewModel for any monster summary fragment

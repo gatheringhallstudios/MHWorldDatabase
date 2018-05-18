@@ -17,19 +17,31 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.*;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
 /**
+ * DO NOT CONVERT TO KOTLIN YET.
+ * we don't really gain anything from the conversion,
+ * and the static methods become more complicated.
  * Created by Carlos on 3/4/2018.
  */
 @Database(
     entities={
-            ArmorEntity.class, ArmorText.class, ArmorSkill.class,
+            // Items
             ItemEntity.class, ItemText.class,
+
+            // Location classes (todo: add location item data)
             LocationEntity.class,
-            MonsterEntity.class, MonsterText.class,
-            MonsterHabitatEntity.class,
-            MonsterBreakEntity.class, MonsterHitzoneEntity.class, MonsterPartText.class,
+    
+            // monster classes
+            MonsterEntity.class, MonsterText.class, MonsterHabitatEntity.class,
+            MonsterBreakEntity.class, MonsterHitzoneEntity.class, MonsterHitzoneText.class,
             MonsterRewardEntity.class, MonsterRewardConditionText.class,
+    
+            // Skills
             SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
-    }, version = 3)
+    
+            // Armor classes
+            ArmorEntity.class, ArmorText.class, ArmorSkill.class
+
+    }, version = 4)
 @TypeConverters({ Converters.class })
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;

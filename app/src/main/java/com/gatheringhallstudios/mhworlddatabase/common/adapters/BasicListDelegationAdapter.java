@@ -15,8 +15,8 @@ import java.util.List;
  * <pre>
  * {@code
  * // Setup Adapter to display Rewards, SectionHeaders, and SubHeaders.
- *      RewardAdapterDelegate rewardDelegate =
- *              new RewardAdapterDelegate(this::handleRewardSelection);
+ *      MonsterRewardAdapterDelegate rewardDelegate =
+ *              new MonsterRewardAdapterDelegate(this::handleRewardSelection);
  *      SectionHeaderAdapterDelegate sectionHeaderDelegate =
  *              new SectionHeaderAdapterDelegate(this::handleSectionHeaderSelection);
  *      SubHeaderAdapterDelegate subHeaderDelegate =

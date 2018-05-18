@@ -5,9 +5,9 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
+import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 
 /**
  * A viewmodel for any monster list fragment

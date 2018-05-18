@@ -51,7 +51,7 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
     }
 
     public static MonsterDetailPagerFragment newInstance(MonsterView monster){
-        return newInstance(monster.id);
+        return newInstance(monster.getId());
     }
 
     @Override
@@ -74,6 +74,6 @@ public class MonsterDetailPagerFragment extends BasePagerFragment {
     }
 
     private void setTitle(MonsterView monster) {
-        getActivity().setTitle(monster.name);
+        getActivity().setTitle(monster.getName());
     }
 }

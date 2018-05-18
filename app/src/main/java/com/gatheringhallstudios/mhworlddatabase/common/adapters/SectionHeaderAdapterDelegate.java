@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.common.Consumer;
 import com.gatheringhallstudios.mhworlddatabase.common.models.SectionHeader;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 
@@ -18,11 +17,7 @@ import java.util.List;
  * Adapter delegate to handle displaying SectionHeader objects inside RecyclerViews.
  */
 public class SectionHeaderAdapterDelegate extends AdapterDelegate<List<Object>> {
-
-    private Consumer<Object> onSelected;
-
-    public SectionHeaderAdapterDelegate(Consumer<Object> onSelected) {
-        this.onSelected = onSelected;
+    public SectionHeaderAdapterDelegate() {
     }
 
     @Override
@@ -49,9 +44,6 @@ public class SectionHeaderAdapterDelegate extends AdapterDelegate<List<Object>> 
         HeaderViewHolder vh = (HeaderViewHolder) holder;
 
         vh.labelText.setText(sectionHeader.text);
-
-        holder.itemView.setOnClickListener((View v) -> onSelected.accept(items.get(position)));
-
     }
 
     class HeaderViewHolder extends RecyclerView.ViewHolder {

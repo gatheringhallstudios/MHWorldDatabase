@@ -43,8 +43,8 @@ class MonsterSummaryFragment : Fragment() {
     private fun populateMonster(monster: MonsterView?) {
         if (monster == null) return
 
-        val elemWeakness = monster.weaknesses
-        val statusWeakness = monster.status_weaknesses
+        val elemWeakness = monster.data.weaknesses
+        val statusWeakness = monster.data.status_weaknesses
 
         monster_name.text = monster.name
         monster_description.text = monster.description
@@ -52,6 +52,7 @@ class MonsterSummaryFragment : Fragment() {
 
         // todo: remove weakness section if both are null
         // note: newer data versions have an 'has_weakness' field. Use that.
+
 
         if (elemWeakness != null) {
             fire_star_cell.setStars(elemWeakness.fire)
@@ -84,17 +85,9 @@ class MonsterSummaryFragment : Fragment() {
             val view = IconLabelTextCell(context)
 
             val areas = StringBuilder()
-            if (habitat.start_area != null) {
-                areas.append(habitat.start_area)
-                areas.append(", ")
-            }
-            if (habitat.move_area != null) {
-                areas.append(habitat.move_area)
-                areas.append(", ")
-            }
-            if (habitat.rest_area != null) {
-                areas.append(habitat.rest_area)
-            }
+            habitat.data.start_area?.let { areas.append("$it, ")}
+            habitat.data.move_area?.let { areas.append("$it, ") }
+            habitat.data.rest_area?.let { areas.append("$it, ") }
 
             val icon = ContextCompat.getDrawable(context!!, R.drawable.question_mark_grey)
 
