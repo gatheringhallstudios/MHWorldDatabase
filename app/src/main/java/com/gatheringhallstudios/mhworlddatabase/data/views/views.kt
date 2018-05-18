@@ -11,6 +11,34 @@ data class ItemView(
     val id get() = data.id
 }
 
+/**
+ * Basic representation of a skill tree.
+ * This is returned when querying for all data.
+ * Created by Carlos on 3/6/2018.
+ */
+data class SkillTree(
+        val id: Int,
+        val name: String?,
+        val description: String?
+)
+
+/**
+ * A skill list with skill information included
+*/
+data class SkillTreeFull(
+        var id: Int,
+        val name: String?,
+        val description: String?,
+
+        val skills: List<Skill>
+)
+
+data class Skill(
+        val skilltree_id: Int,
+        val level: Int,
+        val description: String?
+)
+
 data class MonsterView(
         @Embedded val data: MonsterEntity,
         val name: String?,

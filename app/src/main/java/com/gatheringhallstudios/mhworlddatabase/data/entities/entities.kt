@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.entities
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
@@ -34,6 +35,47 @@ data class ItemText(
         val name: String?,
         val description: String?
 )
+
+@Entity(tableName = "skilltree")
+data class SkillTreeEntity(
+        @PrimaryKey val id: Int
+
+        // there is no more data, the rest requires joins
+        // if it stays this way, we may remove it and just query on the skilltree_text table instead...
+)
+
+/**
+ * Translation data for SkillTreeFull
+ * Created by Carlos on 3/5/2018.
+ */
+@Entity(tableName = "skilltree_text",
+        primaryKeys = ["id", "lang_id"])
+data class SkillTreeText(
+        val id: Int,
+        val lang_id: String,
+
+        val name: String?,
+        val description: String?
+)
+
+/**
+ * Created by Carlos on 3/5/2018.
+ */
+@Entity(tableName = "skill",
+        primaryKeys = ["skilltree_id", "lang_id", "level"],
+        foreignKeys = [
+                ForeignKey(
+                        entity = SkillTreeEntity::class,
+                        parentColumns = ["id"],
+                        childColumns = ["skilltree_id"])
+        ])
+data class SkillEntity(
+        var skilltree_id: Int,
+        var lang_id: Int,
+        var level: Int,
+        var description: String?
+)
+
 
 /**
  * Entity for monster
