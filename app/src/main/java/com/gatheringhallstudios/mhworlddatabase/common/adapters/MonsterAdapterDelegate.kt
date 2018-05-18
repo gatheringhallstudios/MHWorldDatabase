@@ -4,18 +4,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+import kotlinx.android.synthetic.main.listitem_monster.view.*
 
-class MonsterAdapterDelegate(onSelected: Consumer<MonsterView>) : AdapterDelegate<List<MonsterView>>() {
-
-    init {
-        this.onSelected = onSelected
-    }
+class MonsterAdapterDelegate(private val onSelected: (MonsterView) -> Unit) : AdapterDelegate<List<MonsterView>>() {
 
     override fun isForViewType(items: List<MonsterView>, position: Int): Boolean {
         return true
@@ -32,23 +27,18 @@ class MonsterAdapterDelegate(onSelected: Consumer<MonsterView>) : AdapterDelegat
                                   position: Int,
                                   holder: RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
-        val (_, name) = items[position]
+        val monster = items[position]
 
         val monVH = holder as MonsterViewHolder
-        monVH.monsterName.text = name
+        monVH.bind(monster)
 
-        holder.itemView.setOnClickListener { v: View -> onSelected.accept(items[position]) }
-
-        // TODO Set monster image
+        holder.itemView.setOnClickListener { onSelected(monster) }
     }
 
-    internal inner class MonsterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var monsterIcon: ImageView
-        var monsterName: TextView
-
-        init {
-            monsterIcon = itemView.findViewById(R.id.monster_icon)
-            monsterName = itemView.findViewById(R.id.monster_name)
+    internal inner class MonsterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(monster: MonsterView) {
+            // TODO Set monster image
+            view.monster_name.text = monster.name
         }
     }
 }

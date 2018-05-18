@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+import kotlinx.android.synthetic.main.listitem_sub_header.view.*
 
 /**
  * Adapter delegate to handle displaying SubHeader objects inside RecyclerViews.
@@ -33,16 +34,15 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
         val subHeader = items[position] as SubHeader
 
         val vh = holder as HeaderViewHolder
+        vh.setTitle(subHeader.text)
 
-        vh.labelText.text = subHeader.text
-        //vh.labelText.setTypeface(vh.labelText.getTypeface(), Typeface.BOLD);
+        // todo: allow collapsible header. Collapsible header via onSelected is not the proper way
     }
 
-    internal inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var labelText: TextView
-
-        init {
-            labelText = itemView.findViewById(R.id.label_text)
+    internal inner class HeaderViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        fun setTitle(title : String?) {
+            view.label_text.text = title
+            //vh.labelText.setTypeface(vh.labelText.getTypeface(), Typeface.BOLD);
         }
     }
 }
