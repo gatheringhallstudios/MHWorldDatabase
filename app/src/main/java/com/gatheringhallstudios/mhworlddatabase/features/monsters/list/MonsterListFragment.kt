@@ -18,7 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
-import butterknife.ButterKnife
+import kotlinx.android.synthetic.main.list_generic.*
 
 /**
  * Fragment for a list of monsters
@@ -40,24 +40,20 @@ class MonsterListFragment : Fragment() {
         ViewModelProviders.of(this).get(MonsterListViewModel::class.java)
     }
 
-    lateinit var adapter: BasicListDelegationAdapter<MonsterView>
+    // Setup adapter and navigation
+    private val adapter = BasicListDelegationAdapter(MonsterAdapterDelegate({
+        val nav = activity as Navigator
+        nav.navigateTo(MonsterDetailPagerFragment.newInstance(it))
+    }))
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-        // Setup Adapter
-        val delegate = MonsterAdapterDelegate(::handleMonsterSelection)
-        adapter = BasicListDelegationAdapter(delegate)
-
-        // Setup RecyclerView
-        val recyclerView = inflater.inflate(R.layout.list_generic, parent, false) as RecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(parent!!.context)
-        recyclerView.adapter = adapter
-
-        return recyclerView
+        return inflater.inflate(R.layout.list_generic, parent, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        recycler_view.adapter = adapter
+
         var tab: MonsterListViewModel.Tab = MonsterListViewModel.Tab.LARGE // default
         val args = arguments
         if (args != null) {
@@ -65,16 +61,10 @@ class MonsterListFragment : Fragment() {
         }
 
         viewModel.setTab(tab)
-        viewModel.monsters.observe(this, Observer<List<MonsterView>>(::setItems))
-    }
 
-    private fun setItems(monsters: List<MonsterView>?) {
-        adapter.items = monsters
-        adapter.notifyDataSetChanged()
-    }
-
-    private fun handleMonsterSelection(monster: MonsterView) {
-        val nav = activity as Navigator
-        nav.navigateTo(MonsterDetailPagerFragment.newInstance(monster))
+        viewModel.monsters.observe(this, Observer<List<MonsterView>>({
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+        }))
     }
 }

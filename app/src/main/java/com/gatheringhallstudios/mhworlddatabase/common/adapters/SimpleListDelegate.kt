@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlin.reflect.KClass
 
+/**
+ * The superclass for any AdapterDelegate for a uniform item type.
+ */
 abstract class SimpleListDelegate<T : Any>(val cls : KClass<T>): AdapterDelegate<List<Any>>() {
     abstract fun getLayoutId() : Int
-    abstract fun bindItem(v: View, item : T)
+    abstract fun bindListItem(v: View, item : T)
 
     // subclasses don't require the viewholder. KTX is our viewholder
     // however the superclasses still use viewholders, so make them anyways
@@ -27,6 +30,6 @@ abstract class SimpleListDelegate<T : Any>(val cls : KClass<T>): AdapterDelegate
 
     override fun onBindViewHolder(items: List<Any>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
         val item = items[position] as T
-        bindItem(holder.itemView, item)
+        bindListItem(holder.itemView, item)
     }
 }
