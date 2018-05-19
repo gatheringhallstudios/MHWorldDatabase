@@ -12,10 +12,10 @@ import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 public class ItemDetailPagerFragment extends BasePagerFragment {
     private static final String ARG_ITEM_ID = "ITEM_ID";
 
-    public static MonsterDetailPagerFragment newInstance(int monsterId) {
-        MonsterDetailPagerFragment fragment = new MonsterDetailPagerFragment();
+    public static ItemDetailPagerFragment newInstance(int itemId) {
+        ItemDetailPagerFragment fragment = new ItemDetailPagerFragment();
         fragment.setArguments(new BundleBuilder()
-                .putSerializable(ARG_ITEM_ID, monsterId)
+                .putSerializable(ARG_ITEM_ID, itemId)
                 .build());
         return fragment;
     }

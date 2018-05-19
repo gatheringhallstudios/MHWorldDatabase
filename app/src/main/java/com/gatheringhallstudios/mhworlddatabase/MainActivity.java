@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
 import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.items.ItemListFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListPagerFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity
         switch (navId) {
             case R.id.nav_monsters:
                 return new MonsterListPagerFragment();
+            case R.id.nav_items:
+                return new ItemListFragment();
             case R.id.nav_armor:
                 return new ArmorListFragment();
             default:
