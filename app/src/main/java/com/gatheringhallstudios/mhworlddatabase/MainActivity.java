@@ -20,6 +20,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
 import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.items.ItemListFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListPagerFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.skills.SkillListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Navigator {
@@ -100,6 +101,10 @@ public class MainActivity extends AppCompatActivity
                 return new MonsterListPagerFragment();
             case R.id.nav_items:
                 return new ItemListFragment();
+            case R.id.nav_locations:
+                return null;
+            case R.id.nav_skills:
+                return new SkillListFragment();
             case R.id.nav_armor:
                 return new ArmorListFragment();
             default:

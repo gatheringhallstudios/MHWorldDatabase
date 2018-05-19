@@ -16,7 +16,7 @@ data class ItemView(
  * This is returned when querying for all data.
  * Created by Carlos on 3/6/2018.
  */
-data class SkillTree(
+data class SkillTreeView(
         val id: Int,
         val name: String?,
         val description: String?

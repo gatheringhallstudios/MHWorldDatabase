@@ -13,6 +13,14 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Items" />
         <item
+            android:id="@+id/nav_locations"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Locations" />
+        <item
+            android:id="@+id/nav_skills"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Skills" />
+        <item
             android:id="@+id/nav_weapons"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Weapons" />

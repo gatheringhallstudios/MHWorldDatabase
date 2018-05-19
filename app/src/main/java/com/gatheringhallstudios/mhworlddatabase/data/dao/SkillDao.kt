@@ -1,15 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.views.Skill
 
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
-import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTree
+import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
 
 /**
  * Created by Carlos on 3/21/2018.
@@ -21,7 +19,7 @@ abstract class SkillDao {
         FROM skilltree s join skilltree_text st USING (id)
         WHERE lang_id = :langId
         ORDER BY id ASC""")
-    abstract fun loadSkillTrees(langId: String): LiveData<List<SkillTree>>
+    abstract fun loadSkillTrees(langId: String): LiveData<List<SkillTreeView>>
 
     /**
      * Performs a full load on a skill tree.
