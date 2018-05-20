@@ -10,6 +10,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
 
 /**
+ * A class used to retrieve data about skills centered from the skills point of view.
+ * For skills about a piece of Armor, look at the ArmorDao instead.
+ * Retrieve a copy of this class from MHWDatabase.skillDao().
  * Created by Carlos on 3/21/2018.
  */
 @Dao
@@ -18,7 +21,7 @@ abstract class SkillDao {
         SELECT id, name, description
         FROM skilltree s join skilltree_text st USING (id)
         WHERE lang_id = :langId
-        ORDER BY id ASC""")
+        ORDER BY name ASC""")
     abstract fun loadSkillTrees(langId: String): LiveData<List<SkillTreeView>>
 
     /**
