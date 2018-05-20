@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data;
 import android.arch.persistence.room.TypeConverter;
 
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType;
+import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory;
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize;
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank;
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType;
@@ -15,22 +16,29 @@ import com.google.common.collect.EnumHashBiMap;
  */
 
 public class Converters {
+    private static EnumHashBiMap<Rank, String> rankMap;
+    private static EnumHashBiMap<ItemCategory, String> categoryMap;
     private static EnumHashBiMap<MonsterSize, String> monsterSizeMap;
     private static EnumHashBiMap<ArmorType, String> armorMap;
     private static EnumHashBiMap<WeaponType, String> weaponMap;
-    private static EnumHashBiMap<Rank, String> rankMap;
 
     static {
+        rankMap = EnumHashBiMap.create(Rank.class);
+        categoryMap = EnumHashBiMap.create(ItemCategory.class);
         monsterSizeMap = EnumHashBiMap.create(MonsterSize.class);
         armorMap = EnumHashBiMap.create(ArmorType.class);
         weaponMap = EnumHashBiMap.create(WeaponType.class);
-        rankMap = EnumHashBiMap.create(Rank.class);
 
         rankMap.put(Rank.LOW, "LR");
         rankMap.put(Rank.HIGH, "HR");
 
         monsterSizeMap.put(MonsterSize.SMALL, "small");
         monsterSizeMap.put(MonsterSize.LARGE, "large");
+
+        categoryMap.put(ItemCategory.ITEM, "items"); // note: will change to singular in future update
+        categoryMap.put(ItemCategory.MATERIAL, "material");
+        categoryMap.put(ItemCategory.ACCOUNT, "account");
+        categoryMap.put(ItemCategory.AMMO, "ammo");
 
         armorMap.put(ArmorType.HEAD, "head");
         armorMap.put(ArmorType.CHEST, "chest");
@@ -66,6 +74,20 @@ public class Converters {
     @TypeConverter
     public String fromRank(Rank type) {
         return rankMap.get(type);
+    }
+
+    @TypeConverter
+    public ItemCategory categoryFromString(String value) {
+        try {
+            return categoryMap.inverse().get(value);
+        } catch (NullPointerException ex) {
+            throw new IllegalArgumentException("Unknown category " + value);
+        }
+    }
+
+    @TypeConverter
+    public String fromCategory(ItemCategory category) {
+        return categoryMap.get(category);
     }
 
     @TypeConverter
