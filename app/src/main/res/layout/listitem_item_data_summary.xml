@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/data_labels_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/buy_price_value"
+            style="@style/TextBody0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:textSize="16sp"
+            tools:text="50" />
+
+        <TextView
+            android:id="@+id/sell_price_value"
+            style="@style/TextBody0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:textSize="16sp"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/carry_capacity_value"
+            style="@style/TextBody0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:textSize="16sp"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/rarity_value"
+            style="@style/TextBody0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:textSize="16sp"
+            tools:text="20" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/data_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/buy_price_value2"
+            style="@style/TextBody0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/header_buy_price"
+            android:textAppearance="@android:style/TextAppearance.Material.Caption"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/sell_price_value2"
+            style="@style/TextBody0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/header_sell_price"
+            android:textAppearance="@android:style/TextAppearance.Material.Caption"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/carry_capacity_value2"
+            style="@style/TextBody0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/header_carry_capacity"
+            android:textAppearance="@android:style/TextAppearance.Material.Caption"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/rarity_value2"
+            style="@style/TextBody0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/header_rarity"
+            android:textAppearance="@android:style/TextAppearance.Material.Caption"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -75,7 +75,7 @@
         </LinearLayout>
 
         <com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell
-            android:id="@+id/element_damage_header"
+            android:id="@+id/item_data_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
@@ -89,45 +89,45 @@
             style="@style/IconMedium"
             android:layout_marginEnd="@dimen/margin_large"
             android:src="@drawable/question_mark_grey"
-            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
-            app:layout_constraintRight_toRightOf="@id/element_damage_header"
-            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
+            app:layout_constraintRight_toRightOf="@id/item_data_header"
+            app:layout_constraintTop_toTopOf="@id/item_data_header" />
 
         <ImageView
             android:id="@+id/icon_thunder"
             style="@style/IconMedium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/question_mark_grey"
-            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
             app:layout_constraintRight_toLeftOf="@id/icon_dragon"
-            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+            app:layout_constraintTop_toTopOf="@id/item_data_header" />
 
         <ImageView
             android:id="@+id/icon_ice"
             style="@style/IconMedium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/question_mark_grey"
-            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
             app:layout_constraintRight_toLeftOf="@id/icon_thunder"
-            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+            app:layout_constraintTop_toTopOf="@id/item_data_header" />
 
         <ImageView
             android:id="@+id/icon_water"
             style="@style/IconMedium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/question_mark_grey"
-            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
             app:layout_constraintRight_toLeftOf="@id/icon_impact"
-            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+            app:layout_constraintTop_toTopOf="@id/item_data_header" />
 
         <ImageView
             android:id="@+id/icon_fire"
             style="@style/IconMedium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/question_mark_grey"
-            app:layout_constraintBottom_toBottomOf="@id/element_damage_header"
+            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
             app:layout_constraintRight_toLeftOf="@id/icon_water"
-            app:layout_constraintTop_toTopOf="@id/element_damage_header" />
+            app:layout_constraintTop_toTopOf="@id/item_data_header" />
 
         <LinearLayout
             android:id="@+id/element_damage_layout"
@@ -136,7 +136,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/element_damage_header">
+            app:layout_constraintTop_toBottomOf="@+id/item_data_header">
 
             <include layout="@layout/listitem_monster_hitzone" />
 
