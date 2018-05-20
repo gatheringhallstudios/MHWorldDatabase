@@ -19,16 +19,23 @@
     <string name="armor_title">Armor</string>
 
     <!-- Skills -->
-    <string name="skills_title">Armor</string>
+    <string name="skills_title">Skills</string>
+
+    <!-- Items -->
+    <string name="items_title">Items</string>
+    <string name="items_buy_price">Buy price</string>
+    <string name="items_sell_price">Sell price</string>
+    <string name="items_carry_capacity">Carry capacity</string>
+    <string name="items_rarity">Rarity</string>
+
+    <string name="items_tab_item">Items</string>
+    <string name="items_tab_materials">Materials</string>
+    <string name="items_tab_account">Account items</string>
+    <string name="items_tab_ammo">Ammo</string>
 
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>
     <string name="header_weakness">Weakness</string>
     <string name="header_area">Area</string>
     <string name="header_item_data">Item Data</string>
-    <string name="header_buy_price">Buy price</string>
-    <string name="header_sell_price">Sell price</string>
-    <string name="header_carry_capacity">Carry capacity</string>
-    <string name="header_rarity">Rarity</string>
-
 </resources>

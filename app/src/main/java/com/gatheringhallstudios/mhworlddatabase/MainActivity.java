@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import com.gatheringhallstudios.mhworlddatabase.common.Navigator;
 import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.items.ItemListFragment;
+import com.gatheringhallstudios.mhworlddatabase.features.items.ItemsListPagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListPagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.skills.SkillListFragment;
 
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_monsters:
                 return new MonsterListPagerFragment();
             case R.id.nav_items:
-                return new ItemListFragment();
+                return new ItemsListPagerFragment();
             case R.id.nav_locations:
                 return null;
             case R.id.nav_skills:
