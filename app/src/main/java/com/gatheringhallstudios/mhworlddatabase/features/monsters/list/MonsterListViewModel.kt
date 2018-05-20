@@ -14,20 +14,14 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
  * Created by Carlos on 3/4/2018.
  */
 class MonsterListViewModel(application: Application) : AndroidViewModel(application) {
-    private val dao: MonsterDao
-    private var currentTab: Tab? = null
+    private val dao = MHWDatabase.getDatabase(application).monsterDao()
 
     enum class Tab {
         LARGE,
         SMALL
     }
 
-    init {
-        // todo: perhaps inject the database directly?
-        val db = MHWDatabase.getDatabase(application)
-        dao = db.monsterDao()
-    }
-
+    private var currentTab: Tab? = null
     lateinit var monsters: LiveData<List<MonsterView>>
 
     fun setTab(tab: Tab) {
