@@ -36,6 +36,23 @@ data class ItemText(
         val description: String?
 )
 
+@Entity(tableName = "location_text", primaryKeys = ["id", "lang_id"])
+data class LocationText(
+        val id: Int,
+        val lang_id: String,
+        val name: String?
+)
+
+@Entity(tableName = "location_item")
+data class LocationItemEntity(
+        @PrimaryKey val id : Int,
+        val location_id : Int,
+        val rank : Rank,
+        val item_id : Rank,
+        val stack : Int,
+        val percentage: Int
+)
+
 @Entity(tableName = "skilltree")
 data class SkillTreeEntity(
         @PrimaryKey val id: Int

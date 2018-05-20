@@ -11,6 +11,7 @@ import android.location.Location;
 // laziness, since we need to manually add all entities which is quite cumbersome
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*;
@@ -27,8 +28,8 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
             // Items
             ItemEntity.class, ItemText.class,
 
-            // Location classes (todo: add location item data)
-            LocationEntity.class,
+            // Location classes
+            LocationText.class, LocationItemEntity.class,
     
             // monster classes
             MonsterEntity.class, MonsterText.class, MonsterHabitatEntity.class,
@@ -76,6 +77,8 @@ public abstract class MHWDatabase extends RoomDatabase {
     }
 
     public abstract ItemDao itemDao();
+
+    public abstract LocationDao locationDao();
 
     public abstract MonsterDao monsterDao();
 

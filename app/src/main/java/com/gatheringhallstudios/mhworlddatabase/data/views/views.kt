@@ -11,6 +11,17 @@ data class ItemView(
     val id get() = data.id
 }
 
+data class LocationView(
+        val id: Int,
+        val name: String?
+)
+
+data class LocationItemView(
+        @Embedded val data : LocationItemEntity,
+        val location_name: String?,
+        val item_name: String?
+)
+
 /**
  * Basic representation of a skill tree.
  * This is returned when querying for all data.
