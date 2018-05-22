@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/header_buy_price"
+            android:text="@string/items_buy_price"
             android:textAppearance="@android:style/TextAppearance.Material.Caption"
             android:textColor="@android:color/darker_gray"
             android:textSize="10sp" />
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/header_sell_price"
+            android:text="@string/items_sell_price"
             android:textAppearance="@android:style/TextAppearance.Material.Caption"
             android:textColor="@android:color/darker_gray"
             android:textSize="10sp" />
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/header_carry_capacity"
+            android:text="@string/items_carry_capacity"
             android:textAppearance="@android:style/TextAppearance.Material.Caption"
             android:textColor="@android:color/darker_gray"
             android:textSize="10sp" />
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/header_rarity"
+            android:text="@string/items_rarity"
             android:textAppearance="@android:style/TextAppearance.Material.Caption"
             android:textColor="@android:color/darker_gray"
             android:textSize="10sp" />

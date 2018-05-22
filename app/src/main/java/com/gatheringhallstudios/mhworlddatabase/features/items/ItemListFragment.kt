@@ -7,8 +7,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +16,9 @@ import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegat
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao
+import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
+import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 import kotlinx.android.synthetic.main.list_generic.*
 import kotlinx.android.synthetic.main.listitem_monster.view.*
 
@@ -35,6 +35,17 @@ class ItemListDelegate(private val onSelect: (ItemView) -> Unit) : SimpleListDel
 }
 
 class ItemListFragment : Fragment() {
+    companion object {
+        private val ARG_CATEGORY = "CATEGORY"
+
+        @JvmStatic
+        fun newInstance(category: ItemCategory): ItemListFragment {
+            val f = ItemListFragment()
+            f.arguments = BundleBuilder().putSerializable(ARG_CATEGORY, category).build()
+            return f
+        }
+    }
+
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(ItemListFragment.ViewModel::class.java)
     }
@@ -51,8 +62,13 @@ class ItemListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler_view.adapter = adapter
+        var category: ItemCategory? = ItemCategory.MATERIAL
+        val args = arguments;
+        if(args != null) {
+            category = args.getSerializable(ARG_CATEGORY) as ItemCategory?
+        }
 
-        viewModel.init()
+        viewModel.init(category)
 
         viewModel.items.observe(this, Observer({
             adapter.items = it
@@ -65,8 +81,11 @@ class ItemListFragment : Fragment() {
         private val dao : ItemDao = MHWDatabase.getDatabase(application).itemDao()
         lateinit var items : LiveData<List<ItemView>> private set
 
-        fun init() {
-            items = dao.getItems("en")
+
+        fun init(category: ItemCategory?) {
+            if(!::items.isInitialized) {
+                items = dao.getItems("en", category)
+            }
         }
     }
 }
