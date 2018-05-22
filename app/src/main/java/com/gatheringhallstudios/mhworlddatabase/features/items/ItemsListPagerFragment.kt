@@ -19,20 +19,27 @@ import butterknife.BindView
 
 class ItemsListPagerFragment : BasePagerFragment() {
 
-    private val TAG = javaClass.simpleName
-
     override fun onAddTabs(tabs: BasePagerFragment.TabAdder) {
-        tabs.addTab(getString(R.string.items_tab_item)) { ItemListFragment.newInstance(ItemCategory.ITEM) }
+        tabs.addTab(getString(R.string.items_tab_item)) {
+            ItemListFragment.newInstance(ItemCategory.ITEM)
+        }
 
-        tabs.addTab(getString(R.string.items_tab_materials)) { ItemListFragment.newInstance(ItemCategory.MATERIAL) }
-        tabs.addTab(getString(R.string.items_tab_ammo)) { ItemListFragment.newInstance(ItemCategory.AMMO) }
+        tabs.addTab(getString(R.string.items_tab_materials)) {
+            ItemListFragment.newInstance(ItemCategory.MATERIAL)
+        }
 
-        tabs.addTab(getString(R.string.items_tab_account)) { ItemListFragment.newInstance(ItemCategory.ACCOUNT) }
+        tabs.addTab(getString(R.string.items_tab_ammo)) {
+            ItemListFragment.newInstance(ItemCategory.AMMO)
+        }
+
+        tabs.addTab(getString(R.string.items_tab_account)) {
+            ItemListFragment.newInstance(ItemCategory.ACCOUNT)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity!!.title = getString(R.string.items_title)
+        activity?.title = getString(R.string.items_title)
     }
 }
