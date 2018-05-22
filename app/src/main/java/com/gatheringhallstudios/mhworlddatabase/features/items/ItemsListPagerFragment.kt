@@ -21,31 +21,13 @@ class ItemsListPagerFragment : BasePagerFragment() {
 
     private val TAG = javaClass.simpleName
 
-    @BindView(R.id.tab_layout)
-    internal var tabLayout: TabLayout? = null
-    @BindView(R.id.pager_list)
-    internal var viewPager: ViewPager? = null
-
-    @BindString(R.string.items_tab_item)
-    internal var tabTitleItem: String? = null
-    @BindString(R.string.items_tab_materials)
-    internal var tabTitleMaterials: String? = null
-    @BindString(R.string.items_tab_ammo)
-    internal var tabTitleAmmo: String? = null
-    @BindString(R.string.items_tab_account)
-    internal var tabTitleAccount: String? = null
-
     override fun onAddTabs(tabs: BasePagerFragment.TabAdder) {
-        tabs.addTab(tabTitleItem
-        ) { ItemListFragment.newInstance(ItemCategory.ITEM) }
+        tabs.addTab(getString(R.string.items_tab_item)) { ItemListFragment.newInstance(ItemCategory.ITEM) }
 
-        tabs.addTab(tabTitleMaterials
-        ) { ItemListFragment.newInstance(ItemCategory.MATERIAL) }
-        tabs.addTab(tabTitleAmmo
-        ) { ItemListFragment.newInstance(ItemCategory.AMMO) }
+        tabs.addTab(getString(R.string.items_tab_materials)) { ItemListFragment.newInstance(ItemCategory.MATERIAL) }
+        tabs.addTab(getString(R.string.items_tab_ammo)) { ItemListFragment.newInstance(ItemCategory.AMMO) }
 
-        tabs.addTab(tabTitleAccount
-        ) { ItemListFragment.newInstance(ItemCategory.ACCOUNT) }
+        tabs.addTab(getString(R.string.items_tab_account)) { ItemListFragment.newInstance(ItemCategory.ACCOUNT) }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
