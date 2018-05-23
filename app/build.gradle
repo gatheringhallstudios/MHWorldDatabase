@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 // This handles both kotlin and java. Use kapt instead of annotationProcessor
 apply plugin: 'kotlin-kapt'
