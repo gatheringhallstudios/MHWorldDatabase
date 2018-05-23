@@ -5,29 +5,29 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_monsters"
+            android:id="@+id/monsterListDestination"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Monsters" />
+            android:title="@string/monsters_list_title" />
         <item
-            android:id="@+id/nav_items"
+            android:id="@+id/itemListDestination"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Items" />
+            android:title="@string/items_title" />
         <item
             android:id="@+id/nav_locations"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Locations" />
+            android:title="@string/locations_title" />
         <item
-            android:id="@+id/nav_skills"
+            android:id="@+id/skillListDestination"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Skills" />
+            android:title="@string/skills_title" />
         <item
             android:id="@+id/nav_weapons"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Weapons" />
+            android:title="@string/weapons_title" />
         <item
-            android:id="@+id/nav_armor"
+            android:id="@+id/armorListDestination"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Armor" />
+            android:title="@string/armor_title" />
     </group>
 
     <item android:title="Other">

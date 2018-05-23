@@ -20,10 +20,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
+    <fragment
         android:id="@+id/content_main_frame"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:defaultNavHost="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:navGraph="@navigation/nav_graph" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -47,6 +47,12 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:1.1.0"
 
     /*
+     * Android Kotlin Extensions
+     * TODO: I can't get this to build for some reason. :/
+     */
+    //implementation "androidx.core:core-ktx:1.0.0-alpha1"
+
+    /*
      * Android Architecture Components
      */
     def architecture_version = "1.1.1"
