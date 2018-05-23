@@ -6,11 +6,10 @@ import android.os.Bundle;
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailViewModel;
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemSummaryFragment;
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment;
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 public class ItemDetailPagerFragment extends BasePagerFragment {
-    private static final String ARG_ITEM_ID = "ITEM_ID";
+    public static final String ARG_ITEM_ID = "ITEM_ID";
 
     public static ItemDetailPagerFragment newInstance(int itemId) {
         ItemDetailPagerFragment fragment = new ItemDetailPagerFragment();

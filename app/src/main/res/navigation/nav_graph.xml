@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/monsterListDestination">
+    <fragment
+        android:id="@+id/monsterListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListPagerFragment"
+        android:label="@string/monsters_list_title"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/monsterDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment"
+        android:label="Monster Detail"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/itemListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.items.ItemsListPagerFragment"
+        android:label="Items"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/itemDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment"
+        android:label="Item Detail"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/skillListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillListFragment"
+        android:label="Skills"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/armorListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment"
+        android:label="Armor"
+        tools:layout="@layout/fragment_generic_pager" />
+</navigation>

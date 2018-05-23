@@ -10,8 +10,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.Navigator
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.adapters.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
@@ -52,8 +52,9 @@ class ItemListFragment : Fragment() {
 
     // Setup recycler list adapter and the on-selected
     private val adapter = BasicListDelegationAdapter(ItemListDelegate(onSelect={
-        val nav = activity as Navigator
-        nav.navigateTo(ItemDetailPagerFragment.newInstance(it.id))
+        findNavController().navigate(
+                R.id.itemDetailDestination,
+                BundleBuilder().putInt(ItemDetailPagerFragment.ARG_ITEM_ID, it.id).build())
     }))
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

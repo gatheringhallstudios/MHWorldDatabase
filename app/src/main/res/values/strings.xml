@@ -15,8 +15,8 @@
     <string name="monsters_detail_tab_rewards_low_rank">Low-Rank</string>
     <string name="monsters_detail_tab_damage">Damage</string>
 
-    <!-- Armor -->
-    <string name="armor_title">Armor</string>
+    <!-- Locations -->
+    <string name="locations_title">Locations</string>
 
     <!-- Skills -->
     <string name="skills_title">Skills</string>
@@ -32,6 +32,12 @@
     <string name="items_tab_materials">Materials</string>
     <string name="items_tab_ammo">Ammo</string>
     <string name="items_tab_account">Account</string>
+
+    <!-- Weapons -->
+    <string name="weapons_title">Weapons</string>
+
+    <!-- Armor -->
+    <string name="armor_title">Armor</string>
 
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>
