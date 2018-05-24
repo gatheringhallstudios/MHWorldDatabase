@@ -1,12 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
 
-    public MainViewModel mainViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupNavigation();
-
-        // Instantiate our MainViewModel
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     }
 
     private void setupNavigation() {
