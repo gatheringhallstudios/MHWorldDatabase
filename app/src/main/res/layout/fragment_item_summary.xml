@@ -41,7 +41,7 @@
             app:layout_constraintTop_toBottomOf="@+id/item_name"
             tools:text="An insect said to live a millennium. Combine it with other items to add their properties to the powder."/>
 
-        <com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/item_data_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_description" >
 
-        </com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell>
+        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
 
         <LinearLayout
             android:id="@+id/item_data_layout"

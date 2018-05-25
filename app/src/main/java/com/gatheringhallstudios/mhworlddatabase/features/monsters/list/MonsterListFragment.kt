@@ -9,8 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.MonsterAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
+import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.list_generic.*
  * Fragment for a list of monsters
  */
 
-class MonsterListFragment : Fragment() {
+class MonsterListFragment : RecyclerViewFragment() {
     companion object {
         private val ARG_TAB = "MONSTER_TAB"
 
@@ -43,13 +44,8 @@ class MonsterListFragment : Fragment() {
                 BundleBuilder().putInt(MonsterDetailPagerFragment.ARG_MONSTER_ID, it.id).build())
     }))
 
-    override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.list_generic, parent, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recycler_view.adapter = adapter
+        this.setAdapter(adapter)
 
         var tab: MonsterListViewModel.Tab = MonsterListViewModel.Tab.LARGE // default
         val args = arguments

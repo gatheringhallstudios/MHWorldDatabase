@@ -56,7 +56,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_1" />
 
-        <com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/weakness_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
             app:layout_constraintRight_toLeftOf="@id/status_layout"
             app:layout_constraintTop_toBottomOf="@id/weakness_header">
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/fire_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/water_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/lightning_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="3" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/ice_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/dragon_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/weakness_header">
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/poison_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/sleep_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/paralysis_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/blast_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/stun_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
 
         </LinearLayout>
 
-        <com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/habitat_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
 
             <!-- TODO Habitats will be populated here procedurally -->
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconLabelTextCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
@@ -195,7 +195,7 @@
                 app:labelText="Ancient Forest"
                 app:valueText="12 > 1, 4, 2, 6 > 12" />
 
-            <com.gatheringhallstudios.mhworlddatabase.common.components.IconLabelTextCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"

@@ -12,19 +12,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.MonsterRewardAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.SubHeaderAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
+import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterRewardAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.SubHeaderAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 import java.util.ArrayList
-import java.util.LinkedHashMap
 
-import java9.util.stream.Collectors
-import java9.util.stream.StreamSupport
 import kotlinx.android.synthetic.main.list_generic.*
 
 /**

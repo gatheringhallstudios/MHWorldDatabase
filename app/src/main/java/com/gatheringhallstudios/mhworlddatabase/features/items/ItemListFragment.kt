@@ -12,8 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
+import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
@@ -34,7 +35,7 @@ class ItemListDelegate(private val onSelect: (ItemView) -> Unit) : SimpleListDel
     }
 }
 
-class ItemListFragment : Fragment() {
+class ItemListFragment : RecyclerViewFragment() {
     companion object {
         private val ARG_CATEGORY = "CATEGORY"
 
@@ -57,12 +58,9 @@ class ItemListFragment : Fragment() {
                 BundleBuilder().putInt(ItemDetailPagerFragment.ARG_ITEM_ID, it.id).build())
     }))
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.list_generic, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recycler_view.adapter = adapter
+        setAdapter(adapter)
+
         var category: ItemCategory? = ItemCategory.MATERIAL
         val args = arguments;
         if(args != null) {

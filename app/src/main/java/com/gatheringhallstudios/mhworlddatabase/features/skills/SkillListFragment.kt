@@ -11,8 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.common.adapters.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
+import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
 import kotlinx.android.synthetic.main.list_generic.*
@@ -30,7 +31,7 @@ class SkillListDelegate(private val onSelect: (SkillTreeView) -> Unit) :
 /**
  * Created by Carlos on 3/22/2018.
  */
-class SkillListFragment : Fragment() {
+class SkillListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(SkillListFragment.ViewModel::class.java)
     }
@@ -39,13 +40,8 @@ class SkillListFragment : Fragment() {
         // todo: implement
     }))
 
-    override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.list_generic, parent, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recycler_view.adapter = adapter
+        setAdapter(adapter)
 
         viewModel.skills.observe(this, Observer({
             adapter.items = it

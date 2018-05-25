@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/physical_damage_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
 
         </LinearLayout>
 
-        <com.gatheringhallstudios.mhworlddatabase.common.components.SectionHeaderCell
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/item_data_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

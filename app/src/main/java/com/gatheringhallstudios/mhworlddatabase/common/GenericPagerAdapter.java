@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common.adapters;
+package com.gatheringhallstudios.mhworlddatabase.common;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

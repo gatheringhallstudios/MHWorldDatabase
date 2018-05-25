@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common.components;
+package com.gatheringhallstudios.mhworlddatabase.components;
 
 import android.content.Context;
 import android.content.res.TypedArray;

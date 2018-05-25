@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.components.IconLabelTextCell
+import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
