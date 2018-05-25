@@ -7,6 +7,7 @@ import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
+import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_monster.view.*
 
@@ -36,8 +37,12 @@ class MonsterAdapterDelegate(private val onSelected: (MonsterView) -> Unit) : Ad
     }
 
     internal inner class MonsterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
         fun bind(monster: MonsterView) {
-            // TODO Set monster image
+            val defaultIcon = R.drawable.question_mark_grey
+            val icon = view.context.getAssetDrawable(monster.data.icon, defaultIcon)
+            view.monster_icon.setImageDrawable(icon)
+
             view.monster_name.text = monster.name
         }
     }

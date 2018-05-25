@@ -113,7 +113,9 @@ data class MonsterEntity(
         val status_weaknesses: WeaknessSummaryStatus?,
 
         @Embedded(prefix = "alt_weakness_")
-        val alt_weaknesses: WeaknessSummaryElemental?
+        val alt_weaknesses: WeaknessSummaryElemental?,
+
+        val icon: String?
 )
 
 /**

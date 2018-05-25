@@ -42,7 +42,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
             // Armor classes
             ArmorEntity.class, ArmorText.class, ArmorSkill.class
 
-    }, version = 4)
+    }, version = 5)
 @TypeConverters({ Converters.class })
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;

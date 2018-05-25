@@ -13,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
+import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
 
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
 
@@ -46,9 +47,12 @@ class MonsterSummaryFragment : Fragment() {
         val elemWeakness = monster.data.weaknesses
         val statusWeakness = monster.data.status_weaknesses
 
+        val defaultIcon = R.drawable.question_mark_grey
+        val icon = context?.getAssetDrawable(monster.data.icon, defaultIcon)
+        monster_icon.setImageDrawable(icon)
+
         monster_name.text = monster.name
         monster_description.text = monster.description
-        // monster_icon.setIcon(someIcon)
 
         // todo: remove weakness section if both are null
         // note: newer data versions have an 'has_weakness' field. Use that.
