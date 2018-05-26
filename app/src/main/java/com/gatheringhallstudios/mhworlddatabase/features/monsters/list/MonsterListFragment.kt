@@ -3,10 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.list
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
@@ -15,7 +12,6 @@ import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
-import kotlinx.android.synthetic.main.list_generic.*
 
 /**
  * Fragment for a list of monsters

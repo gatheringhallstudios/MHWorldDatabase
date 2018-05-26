@@ -1,49 +1,47 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+
 import kotlinx.android.synthetic.main.listitem_monster.view.*
 
-class MonsterAdapterDelegate(private val onSelected: (MonsterView) -> Unit) : AdapterDelegate<List<MonsterView>>() {
-
-    override fun isForViewType(items: List<MonsterView>, position: Int): Boolean {
-        return true
+/**
+ * Creates a view object to represent a monster list item.
+ */
+class MonsterListItemView(ctx: Context) : LinearLayout(ctx) {
+    init {
+        val inflater = LayoutInflater.from(ctx)
+        inflater.inflate(R.layout.listitem_monster, this, true)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.listitem_monster, parent, false)
+    fun setMonster(monster : MonsterView) {
+        val defaultIcon = R.drawable.question_mark_grey
+        val icon = context.getAssetDrawable(monster.data.icon, defaultIcon)
+        monster_icon.setImageDrawable(icon)
+        monster_name.text = monster.name
+    }
+}
 
-        return MonsterViewHolder(v)
+class MonsterAdapterDelegate(private val onSelected: (MonsterView) -> Unit)
+    : SimpleListDelegate<MonsterView, MonsterListItemView>() {
+
+    override fun getDataClass() = MonsterView::class
+
+    override fun onCreateView(parent: ViewGroup): View {
+        return MonsterListItemView(parent.context)
     }
 
-    override fun onBindViewHolder(items: List<MonsterView>,
-                                  position: Int,
-                                  holder: RecyclerView.ViewHolder,
-                                  payloads: List<Any>) {
-        val monster = items[position]
-
-        val monVH = holder as MonsterViewHolder
-        monVH.bind(monster)
-
-        holder.itemView.setOnClickListener { onSelected(monster) }
-    }
-
-    internal inner class MonsterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-
-        fun bind(monster: MonsterView) {
-            val defaultIcon = R.drawable.question_mark_grey
-            val icon = view.context.getAssetDrawable(monster.data.icon, defaultIcon)
-            view.monster_icon.setImageDrawable(icon)
-
-            view.monster_name.text = monster.name
-        }
+    override fun bindView(view: MonsterListItemView, data: MonsterView) {
+        view.setMonster(data)
+        view.setOnClickListener { onSelected(data) }
     }
 }

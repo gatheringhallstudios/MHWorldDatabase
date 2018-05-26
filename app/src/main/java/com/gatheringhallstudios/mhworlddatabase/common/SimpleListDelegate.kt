@@ -1,35 +1,52 @@
 package com.gatheringhallstudios.mhworlddatabase.common
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlin.reflect.KClass
 
 /**
- * The superclass for any AdapterDelegate for a uniform item type.
+ * The superclass for any AdapterDelegate with a uniform type that does not require a ViewHolder.
+ * Subclasses of this type either use KTX for view binding (which caches findViewById lookups),
+ * or use a custom View implementation that doubles as a ViewHolder.
+ *
+ * Anything that requires more complicated logic should extend AdapterDelegate itself
  */
-abstract class SimpleListDelegate<T : Any>(val cls : KClass<T>): AdapterDelegate<List<Any>>() {
-    abstract fun getLayoutId() : Int
-    abstract fun bindListItem(v: View, item : T)
+abstract class SimpleListDelegate<T : Any, V: View>: AdapterDelegate<List<Any>>() {
 
-    // subclasses don't require the viewholder. KTX is our viewholder
-    // however the superclasses still use viewholders, so make them anyways
+    /**
+     * Returns the class that this delegate is for.
+     */
+    protected abstract fun getDataClass() : KClass<T>
+
+    /**
+     * Constructs a new view object and returns it.
+     * Similar to onCreateViewHolder, but returns only the view.
+     */
+    protected abstract fun onCreateView(parent: ViewGroup) : View
+
+    /**
+     * Binds an instance of data to the view. This view may or may not be recycled.
+     */
+    protected abstract fun bindView(view: V, data: T)
+
+    // Subclasses don't require a viewholder, but superclasses do
     class UselessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun isForViewType(items: List<Any>, position: Int): Boolean {
-        return items[position]::class == cls
+        return items[position]::class == getDataClass()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(getLayoutId(), parent, false)
+        val v = onCreateView(parent)
         return UselessViewHolder(v)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(items: List<Any>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
         val item = items[position] as T
-        bindListItem(holder.itemView, item)
+        val view = holder.itemView as V
+        bindView(view, item)
     }
 }

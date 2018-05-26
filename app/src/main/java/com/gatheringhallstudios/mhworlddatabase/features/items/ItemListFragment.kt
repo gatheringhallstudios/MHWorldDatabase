@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
+import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
@@ -22,18 +23,6 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 import kotlinx.android.synthetic.main.list_generic.*
 import kotlinx.android.synthetic.main.listitem_monster.view.*
-
-// move to adapters if more classes need to use it
-class ItemListDelegate(private val onSelect: (ItemView) -> Unit) : SimpleListDelegate<ItemView>(ItemView::class) {
-    // todo: create item listitem layout
-    override fun getLayoutId() = R.layout.listitem_monster
-
-    override fun bindListItem(v: View, item : ItemView) {
-        v.monster_name.text = item.name
-
-        v.setOnClickListener { onSelect(item) }
-    }
-}
 
 class ItemListFragment : RecyclerViewFragment() {
     companion object {
@@ -52,7 +41,7 @@ class ItemListFragment : RecyclerViewFragment() {
     }
 
     // Setup recycler list adapter and the on-selected
-    private val adapter = BasicListDelegationAdapter(ItemListDelegate(onSelect={
+    private val adapter = BasicListDelegationAdapter(ItemAdapterDelegate(onSelect={
         findNavController().navigate(
                 R.id.itemDetailDestination,
                 BundleBuilder().putInt(ItemDetailPagerFragment.ARG_ITEM_ID, it.id).build())
