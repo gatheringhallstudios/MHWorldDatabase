@@ -124,6 +124,7 @@ class MainActivity : AppCompatActivity() {
     private fun resetSearchListeners(callback : () -> Unit) {
         searchView?.setOnSearchClickListener(null)
         searchView?.setOnQueryTextListener(null)
+        searchView?.setOnCloseListener(null)
 
         callback()
 
@@ -136,6 +137,11 @@ class MainActivity : AppCompatActivity() {
 
             Navigation.findNavController(this, R.id.content_main_frame)
                     .navigate(R.id.searchDestination)
+        }
+
+        // disables closing
+        searchView?.setOnCloseListener {
+            true
         }
 
         searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
