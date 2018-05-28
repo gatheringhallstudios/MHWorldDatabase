@@ -33,4 +33,11 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorListFragment"
         android:label="Armor"
         tools:layout="@layout/fragment_generic_pager" />
+
+
+    <fragment
+        android:id="@+id/searchDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.search.UniversalSearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_generic_pager" />
 </navigation>
