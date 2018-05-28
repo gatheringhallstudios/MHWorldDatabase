@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
+import com.gatheringhallstudios.mhworlddatabase.common.StableMutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 
 class MainActivityViewModel(app : Application) : AndroidViewModel(app) {

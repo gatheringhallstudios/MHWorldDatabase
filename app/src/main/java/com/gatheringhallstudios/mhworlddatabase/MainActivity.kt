@@ -44,16 +44,27 @@ class MainActivity : AppCompatActivity() {
         viewModel.searchActive.observe(this, Observer {
             val active = it ?: false
             searchView?.let { searchView ->
-                // clear the searchView query.
-                // If we don't do this, closing the search view will fail
-                if (!active) {
-                    searchView.setQuery("", false)
+                val shouldIconify = !active
+
+                // if nothing changed, exit the "let"
+                if (searchView.isIconified == shouldIconify) {
+                    return@let
                 }
 
-                // update iconify state...if not equal
-                val shouldIconify = !active
-                if (searchView.isIconified != shouldIconify) {
+                // Update the search while listeners are disabled
+                // not doing this would create a cycle and create weird bugs
+                resetSearchListeners {
+                    // If we don't do this, iconify will fail
+                    if (!active) {
+                        searchView.setQuery("", false)
+                    }
+
                     searchView.isIconified = shouldIconify
+
+                    if (active) {
+                        searchView.setQuery(viewModel.filter.value, false)
+                        searchView.clearFocus()
+                    }
                 }
             }
         })
@@ -92,37 +103,7 @@ class MainActivity : AppCompatActivity() {
         searchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView?.setQuery(viewModel.filter.value, false)
 
-        searchView?.setOnSearchClickListener {
-            // this check is a hack but I don't see another way
-            // We only run the code below if the searchView was opened manually
-            // if search is active...it was opened programatically
-            val openedManually = viewModel.searchActive.value == false
-            if (openedManually) {
-                viewModel.startNewSearch()
-
-                Navigation.findNavController(this, R.id.content_main_frame)
-                        .navigate(R.id.searchDestination)
-            } else {
-                searchView?.setQuery(viewModel.filter.value, false)
-                searchView?.clearFocus()
-            }
-        }
-
-        searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (viewModel.searchActive.value == true) {
-                    viewModel.filter.value = query ?: ""
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (viewModel.searchActive.value == true) {
-                    viewModel.filter.value = newText ?: ""
-                }
-                return true
-            }
-        })
+        setSearchListeners()
 
         return true
     }
@@ -138,5 +119,35 @@ class MainActivity : AppCompatActivity() {
             true
         } else super.onOptionsItemSelected(item)
 
+    }
+
+    private fun resetSearchListeners(callback : () -> Unit) {
+        searchView?.setOnSearchClickListener(null)
+        searchView?.setOnQueryTextListener(null)
+
+        callback()
+
+        setSearchListeners()
+    }
+
+    private fun setSearchListeners() {
+        searchView?.setOnSearchClickListener {
+            viewModel.startNewSearch()
+
+            Navigation.findNavController(this, R.id.content_main_frame)
+                    .navigate(R.id.searchDestination)
+        }
+
+        searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.filter.value = query ?: ""
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.filter.value = newText ?: ""
+                return true
+            }
+        })
     }
 }

@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase;
+package com.gatheringhallstudios.mhworlddatabase.common;
 
 import android.arch.lifecycle.MutableLiveData;
 
