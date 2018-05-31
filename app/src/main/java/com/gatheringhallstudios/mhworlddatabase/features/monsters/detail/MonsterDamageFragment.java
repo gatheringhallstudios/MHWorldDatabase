@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHitzoneEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView;
-import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder;
 
 import java.util.List;
 
@@ -119,7 +119,10 @@ public class MonsterDamageFragment extends Fragment {
     }
 
     private void bindHitzone(TextView view, int value, int threshold) {
-        if (value >= threshold) view.setTypeface(null, Typeface.BOLD);
+        if (value >= threshold) {
+            view.setTypeface(null, Typeface.BOLD);
+            view.setTextColor(ContextCompat.getColor(getContext(), R.color.primaryTextColor));
+        }
         view.setText(Integer.toString(value));
     }
 

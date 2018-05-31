@@ -13,6 +13,7 @@
     <color name="secondaryDarkColor">#93bb00</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
+    <color name="primaryTextDisabledColor">#bfffffff</color>
 
     <color name="backgroundColor">#211F20</color>
     <color name="backgroundColorSectionHeader">#5f5b5b</color>

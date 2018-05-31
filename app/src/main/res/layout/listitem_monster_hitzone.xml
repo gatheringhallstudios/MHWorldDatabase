@@ -20,6 +20,7 @@
         android:layout_width="@dimen/width_damage_value"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/primaryTextDisabledColor"
         tools:text="20" />
 
     <TextView
@@ -28,6 +29,7 @@
         android:layout_width="@dimen/width_damage_value"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/primaryTextDisabledColor"
         tools:text="50" />
 
     <TextView
@@ -36,6 +38,7 @@
         android:layout_width="@dimen/width_damage_value"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/primaryTextDisabledColor"
         tools:text="20" />
 
     <TextView
@@ -44,6 +47,7 @@
         android:layout_width="@dimen/width_damage_value"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/primaryTextDisabledColor"
         tools:text="20" />
 
     <TextView
@@ -53,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_damage_value_right"
         android:gravity="center"
+        android:textColor="@color/primaryTextDisabledColor"
         tools:text="100" />
 
 </LinearLayout>
