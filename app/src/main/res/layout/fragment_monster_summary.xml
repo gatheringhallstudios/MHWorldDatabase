@@ -8,7 +8,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp">
 
         <ImageView
             android:id="@+id/monster_icon"
@@ -24,6 +25,7 @@
             style="@style/TextDisplay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
             app:layout_constraintLeft_toLeftOf="@id/monster_icon"
             app:layout_constraintTop_toBottomOf="@id/monster_icon"
             tools:text="Azure Rathalos" />
@@ -34,8 +36,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/md_margin_content"
-            android:layout_marginRight="@dimen/md_margin_content"
             android:layout_marginTop="@dimen/default_padding_margin_small"
+            android:layout_marginRight="@dimen/md_margin_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/monster_name"
@@ -51,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_large"
             android:text="Placeholder for some other stats"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_1" />
@@ -190,22 +192,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                tools:visibility="visible"
                 app:iconSrc="@drawable/question_mark_grey"
                 app:labelText="Ancient Forest"
-                app:valueText="12 > 1, 4, 2, 6 > 12" />
+                app:valueText="12 > 1, 4, 2, 6 > 12"
+                tools:visibility="visible" />
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                tools:visibility="visible"
                 app:iconSrc="@drawable/question_mark_grey"
                 app:labelText="Elders Recess"
-                app:valueText="8 > 13, 5, 2 > 7" />
+                app:valueText="8 > 13, 5, 2 > 7"
+                tools:visibility="visible" />
 
         </LinearLayout>
-
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

@@ -39,7 +39,7 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterRewardView) -
         fun bind(reward: MonsterRewardView) {
             // TODO Set item image
             view.reward_name.text = reward.item_name
-            view.reward_stack.text = "x${reward.data.stack}"
+            view.reward_stack.text = "x ${reward.data.stack}"
             view.reward_percent.text = "${reward.data.percentage}%"
         }
     }

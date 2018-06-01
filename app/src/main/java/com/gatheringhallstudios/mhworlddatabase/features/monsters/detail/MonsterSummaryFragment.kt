@@ -80,7 +80,10 @@ class MonsterSummaryFragment : Fragment() {
     private fun populateHabitats(habitats: List<MonsterHabitatView>?) {
         if (habitats == null) return
 
-        // todo: if habitats is empty, remove entire habitats section
+        if (habitats.isEmpty()) {
+            habitat_header.visibility = View.GONE
+            return
+        }
 
         if (habitats_layout.childCount > 0)
             habitats_layout.removeAllViews()
@@ -89,9 +92,9 @@ class MonsterSummaryFragment : Fragment() {
             val view = IconLabelTextCell(context)
 
             val areas = StringBuilder()
-            habitat.data.start_area?.let { areas.append("$it, ")}
-            habitat.data.move_area?.let { areas.append("$it, ") }
-            habitat.data.rest_area?.let { areas.append("$it, ") }
+            habitat.data.start_area?.let { areas.append("$it \u203A ")}
+            habitat.data.move_area?.let { areas.append("$it \u203A ") }
+            habitat.data.rest_area?.let { areas.append(it) }
 
             val icon = ContextCompat.getDrawable(context!!, R.drawable.question_mark_grey)
 
