@@ -8,6 +8,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryEleme
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
+import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
 
 
 /**
@@ -140,7 +141,7 @@ data class MonsterBreakEntity(
         val flinch: Int?,
         val wound: Int?,
         val sever: Int?,
-        val extract: String?
+        val extract: Extract
 )
 
 @Entity(tableName="monster_break_text",
