@@ -33,7 +33,8 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
     
             // monster classes
             MonsterEntity.class, MonsterText.class, MonsterHabitatEntity.class,
-            MonsterBreakEntity.class, MonsterHitzoneEntity.class, MonsterHitzoneText.class,
+            MonsterBreakEntity.class, MonsterBreakText.class,
+            MonsterHitzoneEntity.class, MonsterHitzoneText.class,
             MonsterRewardEntity.class, MonsterRewardConditionText.class,
     
             // Skills

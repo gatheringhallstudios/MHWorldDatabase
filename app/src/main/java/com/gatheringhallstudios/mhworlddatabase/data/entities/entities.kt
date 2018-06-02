@@ -131,18 +131,24 @@ data class MonsterText(
         var description: String?
 )
 
-@Entity(tableName = "monster_break",
-        primaryKeys = ["monster_id", "part_id"])
+@Entity(tableName = "monster_break")
 data class MonsterBreakEntity(
-        val id: Int,
+        @PrimaryKey val id: Int,
 
         val monster_id: Int,
-        val part_id: Int,
 
         val flinch: Int?,
         val wound: Int?,
         val sever: Int?,
         val extract: String?
+)
+
+@Entity(tableName="monster_break_text",
+        primaryKeys = ["id", "lang_id"])
+data class MonsterBreakText(
+        val id: Int,
+        val lang_id: String,
+        val part_name: String
 )
 
 @Entity(tableName = "monster_habitat")

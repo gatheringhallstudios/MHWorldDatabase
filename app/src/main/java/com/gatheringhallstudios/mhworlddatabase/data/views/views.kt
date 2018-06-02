@@ -71,6 +71,11 @@ data class MonsterHitzoneView(
         val body_part: String?
 )
 
+data class MonsterBreakView(
+        @Embedded val data: MonsterBreakEntity,
+        val part_name: String?
+)
+
 data class MonsterRewardView(
         @Embedded val data: MonsterRewardEntity,
         var condition_name: String?,

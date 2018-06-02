@@ -4,11 +4,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
+import com.gatheringhallstudios.mhworlddatabase.data.views.*
 
 /**
  * Created by Carlos on 3/21/2018.
@@ -56,6 +53,15 @@ abstract class MonsterDao {
         WHERE h.monster_id = :monsterId
         ORDER BY h.id""")
     abstract fun loadHitzones(langId: String, monsterId: Int): LiveData<List<MonsterHitzoneView>>
+
+    @Query("""
+        SELECT b.*, bt.part_name
+        FROM monster_break b JOIN monster_break_text bt
+            ON bt.id = b.id
+        WHERE b.monster_id = :monsterId
+            AND bt.lang_id = :langId
+        ORDER BY b.id""")
+    abstract fun loadBreaks(langId: String, monsterId: Int): LiveData<List<MonsterBreakView>>
 
     @Query("""
         SELECT r.*, ct.name condition_name, it.name item_name
