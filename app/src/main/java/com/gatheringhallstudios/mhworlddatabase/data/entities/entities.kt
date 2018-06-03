@@ -9,6 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatu
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
+import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 
 
 /**
@@ -18,14 +19,14 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
 class ItemEntity(
         @PrimaryKey val id: Int,
 
-        val category: String,
+        val category: ItemCategory,
         val rarity: Int,
         val buy_price: Int?,
         val sell_price: Int,
         val carry_limit: Int?
 )
 
-/** `
+/**
  * Translation data for Item
  * Created by Carlos on 3/5/2018.
  */
