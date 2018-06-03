@@ -33,8 +33,11 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorSetListFragment"
         android:label="Armor"
         tools:layout="@layout/fragment_generic_pager" />
-
-
+    <fragment
+        android:id="@+id/locationListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.list.LocationsListFragment"
+        android:label="@string/locations_title"
+        tools:layout="@layout/list_generic" />
     <fragment
         android:id="@+id/searchDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.search.UniversalSearchFragment"
