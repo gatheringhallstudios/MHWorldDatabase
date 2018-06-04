@@ -3,7 +3,7 @@
     <!-- Attributes that share the same name can only be defined once. Subsequent uses should not define 'format' again -->
 
     <declare-styleable name="IconStarCell">
-        <attr name="iconSrc" format="integer"/>
+        <attr name="iconSrc" format="integer" />
         <attr name="numStars" format="integer" />
     </declare-styleable>
 
@@ -13,11 +13,26 @@
         <attr name="valueText" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="CompactStatCell">
+        <attr name="iconSrc" />
+        <attr name="labelText" />
+    </declare-styleable>
+
     <declare-styleable name="SectionHeaderCell">
         <attr name="labelText" />
     </declare-styleable>
 
     <declare-styleable name="SubHeaderCell">
         <attr name="labelText" />
+    </declare-styleable>
+
+    <declare-styleable name="SharpnessView">
+        <attr name="red" format="integer" />
+        <attr name="orange" format="integer" />
+        <attr name="yellow" format="integer" />
+        <attr name="green" format="integer" />
+        <attr name="blue" format="integer" />
+        <attr name="white" format="integer" />
+        <attr name="purple" format="integer" />
     </declare-styleable>
 </resources>
