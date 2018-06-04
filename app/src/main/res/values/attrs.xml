@@ -25,4 +25,14 @@
     <declare-styleable name="SubHeaderCell">
         <attr name="labelText" />
     </declare-styleable>
+
+    <declare-styleable name="SharpnessView">
+        <attr name="red" format="integer" />
+        <attr name="orange" format="integer" />
+        <attr name="yellow" format="integer" />
+        <attr name="green" format="integer" />
+        <attr name="blue" format="integer" />
+        <attr name="white" format="integer" />
+        <attr name="purple" format="integer" />
+    </declare-styleable>
 </resources>
