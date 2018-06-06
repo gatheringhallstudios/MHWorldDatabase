@@ -6,10 +6,10 @@ import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
-import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
+import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
 
 /**
@@ -36,6 +36,18 @@ data class ItemText(
         val lang_id: String,
         val name: String?,
         val description: String?
+)
+
+/**
+ * Item combination data
+ */
+@Entity(tableName = "item_combination", primaryKeys = ["id"])
+data class ItemCombinationEntity(
+        @PrimaryKey val id: Int,
+        val result_id: Int,
+        val first_id: Int,
+        val second_id: Int?,
+        val quantity: Int
 )
 
 @Entity(tableName = "location_text", primaryKeys = ["id", "lang_id"])
