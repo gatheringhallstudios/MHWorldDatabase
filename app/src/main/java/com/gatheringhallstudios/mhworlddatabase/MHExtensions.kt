@@ -8,6 +8,7 @@ import android.util.Log
 import com.gatheringhallstudios.mhworlddatabase.common.ColorRegistry
 import com.gatheringhallstudios.mhworlddatabase.common.VectorRegistry
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
+import com.sdsmdg.harjot.vectormaster.models.PathModel
 
 
 val TAG = "MHWorldApplicationUtil"
@@ -52,7 +53,7 @@ val PATH_NAME = "base"
  * and returns a colored Drawable.
  * Returns a ic_question_mark on failure.
  */
-fun Context.getVectorDrawable(vector: String, color: String?): Drawable {
+fun Context.getVectorDrawable(vector: String, color: String = "rare1"): Drawable {
     // Get the drawable from the registry
     val drawable: VectorMasterDrawable
     if (VectorRegistry[vector] != null) {
@@ -63,10 +64,9 @@ fun Context.getVectorDrawable(vector: String, color: String?): Drawable {
     }
 
     // Color the drawable from the registry
-    if (ColorRegistry[color] != null) {
-        val path = drawable.getPathModelByName(PATH_NAME)
-        path.fillColor = ContextCompat.getColor(this, ColorRegistry[color]!!)
-    }
+    // TODO Update to support coloring multiple paths if necessary. i.e. base1, base2, base3
+    val path: PathModel? = drawable.getPathModelByName(PATH_NAME)
+    if (path != null) path.fillColor = ContextCompat.getColor(this, ColorRegistry[color]!!)
 
     return drawable
 }
