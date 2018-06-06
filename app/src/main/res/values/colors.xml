@@ -20,6 +20,16 @@
 
     <color name="textColorSubHead">#8CFFFFFF</color>
 
+    <!-- Asset Colors -->
+    <color name="rarity_1">#CAC8C6</color>
+    <color name="rarity_2">#CAC8C6</color>
+    <color name="rarity_3">#A9B978</color>
+    <color name="rarity_4">#6AAC85</color>
+    <color name="rarity_5">#7CC2B1</color>
+    <color name="rarity_6">#757DFF</color>
+    <color name="rarity_7">#7B61AE</color>
+    <color name="rarity_8">#B58377</color>
+
     <!-- Color percentages to Alpha
     https://stackoverflow.com/questions/15852122/hex-transparency-in-colors?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
         100% — FF
