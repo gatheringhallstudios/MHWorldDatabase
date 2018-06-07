@@ -13,11 +13,14 @@ import com.sdsmdg.harjot.vectormaster.models.PathModel
 
 val TAG = "MHWorldApplicationUtil"
 
+
 /**
- * Extension: Loads a drawable from the assets folder. Returns null on failure.
- * Supply an optional default argument
+ * Extension: Loads a drawable from the assets folder.
+ * Returns null on failure, or default resource if provided.
  */
-inline fun Context.getAssetDrawable(path: String?, default: () -> Drawable?): Drawable? {
+fun Context.getAssetDrawable(
+        path: String?,
+        @DrawableRes default: Int = R.drawable.question_mark_grey): Drawable? {
     return try {
         this.assets.open(path).use {
             Drawable.createFromStream(it, path)
@@ -29,44 +32,62 @@ inline fun Context.getAssetDrawable(path: String?, default: () -> Drawable?): Dr
             Log.e(TAG, "Failed to load asset file $path", ex)
         }
 
-        default()
+        return ContextCompat.getDrawable(this, default)
     }
-}
-
-inline fun Context.getAssetDrawable(path: String?): Drawable? {
-    return this.getAssetDrawable(path) { null }
 }
 
 /**
- * Extension: Loads a drawable from the assets folder.
- * Returns a drawable resource on failure.
+ * Extension: Loads a VectorDrawable and optional Color from the registry
+ * and returns the colored vector.
  */
-fun Context.getAssetDrawable(path: String?, @DrawableRes default: Int): Drawable? {
-    return this.getAssetDrawable(path) {
-        ContextCompat.getDrawable(this, default)
+fun Context.getVectorDrawable(
+        @DrawableRes vector: Int,
+        color: String? = null
+): Drawable {
+
+    val drawable = VectorMasterDrawable(this, vector)
+
+    if (color == null) {
+        return drawable
     }
+
+    val registryValue = ColorRegistry[color]
+    if (registryValue == null) {
+        Log.w(TAG, "Color registry value does not exist: $color")
+        return drawable
+    }
+
+    // TODO Update to support coloring multiple paths if necessary. i.e. base1, base2, base3
+    val path: PathModel? = drawable.getPathModelByName(PATH_NAME)
+    if (path == null) {
+        Log.w(TAG, "Could not find path $PATH_NAME in vector")
+    } else {
+        path.fillColor = ContextCompat.getColor(this, registryValue)
+    }
+
+    return drawable
 }
 
 val PATH_NAME = "base"
 /**
  * Extension: Loads a VectorDrawable and optional Color from the registry
  * and returns a colored Drawable.
- * Returns a ic_question_mark on failure.
+ * Returns the default resource on failure.
+ * @param A vector registry value
  */
-fun Context.getVectorDrawable(vector: String, color: String = "rare1"): Drawable {
-    // Get the drawable from the registry
-    val drawable: VectorMasterDrawable
-    if (VectorRegistry[vector] != null) {
-        drawable = VectorMasterDrawable(this, VectorRegistry[vector]!!)
+fun Context.getVectorDrawable(
+        vector: String,
+        color: String = "rare1",
+        @DrawableRes default: Int = R.drawable.question_mark_grey
+): Drawable? {
+
+    // Get the drawable from the registry. or return default
+    val resource = VectorRegistry[vector]
+
+    return if (resource != null) {
+        this.getVectorDrawable(resource, color)
     } else {
-        drawable = VectorMasterDrawable(this, R.drawable.question_mark_grey)
-        return drawable
+        Log.e(TAG, "Failed to load vector in the registry: $vector")
+        ContextCompat.getDrawable(this, default)
     }
-
-    // Color the drawable from the registry
-    // TODO Update to support coloring multiple paths if necessary. i.e. base1, base2, base3
-    val path: PathModel? = drawable.getPathModelByName(PATH_NAME)
-    if (path != null) path.fillColor = ContextCompat.getColor(this, ColorRegistry[color]!!)
-
-    return drawable
 }
