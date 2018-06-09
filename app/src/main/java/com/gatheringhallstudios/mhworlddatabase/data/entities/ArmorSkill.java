@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 
 /**
  * Created by Carlos on 3/6/2018.
@@ -18,7 +19,8 @@ import android.arch.persistence.room.ForeignKey;
                     entity=SkillTreeEntity.class,
                     parentColumns = "id",
                     childColumns = "skilltree_id"
-            )})
+            )},
+        indices = @Index("skilltree_id"))
 public class ArmorSkill {
     public int armor_id;
     public int skilltree_id;

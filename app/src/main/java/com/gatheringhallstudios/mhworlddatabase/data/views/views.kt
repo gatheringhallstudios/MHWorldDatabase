@@ -11,13 +11,20 @@ data class ItemView(
     val id get() = data.id
 }
 
+data class ItemCombinationView(
+        @Embedded val result: ItemView,
+        @Embedded val first: ItemView,
+        @Embedded val second: ItemView,
+        val quantity: Int
+)
+
 data class LocationView(
         val id: Int,
         val name: String?
 )
 
 data class LocationItemView(
-        @Embedded val data : LocationItemEntity,
+        @Embedded val data: LocationItemEntity,
         val location_name: String?,
         val item_name: String?
 )
@@ -35,7 +42,7 @@ data class SkillTreeView(
 
 /**
  * A skill list with skill information included
-*/
+ */
 data class SkillTreeFull(
         var id: Int,
         val name: String?,

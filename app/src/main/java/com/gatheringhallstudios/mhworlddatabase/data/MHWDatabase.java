@@ -43,32 +43,34 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
  * Created by Carlos on 3/4/2018.
  */
 @Database(
-    entities={
-            // Items
-            ItemEntity.class, ItemText.class, ItemCombinationEntity.class,
+        entities = {
+                // Items
+                ItemEntity.class, ItemText.class, ItemCombinationEntity.class,
 
-            // Location classes
-            LocationText.class, LocationItemEntity.class,
-    
-            // monster classes
-            MonsterEntity.class, MonsterText.class, MonsterHabitatEntity.class,
-            MonsterBreakEntity.class, MonsterBreakText.class,
-            MonsterHitzoneEntity.class, MonsterHitzoneText.class,
-            MonsterRewardEntity.class, MonsterRewardConditionText.class,
-    
-            // Skills
-            SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
-    
-            // Armor classes
-            ArmorEntity.class, ArmorText.class, ArmorSkill.class
+                // Location classes
+                LocationText.class, LocationItemEntity.class,
 
-    }, version = 5)
-@TypeConverters({ Converters.class })
+                // monster classes
+                MonsterEntity.class, MonsterText.class, MonsterHabitatEntity.class,
+                MonsterBreakEntity.class, MonsterBreakText.class,
+                MonsterHitzoneEntity.class, MonsterHitzoneText.class,
+                MonsterRewardEntity.class, MonsterRewardConditionText.class,
+
+                // Skills
+                SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
+
+                // Armor classes
+                ArmorEntity.class, ArmorText.class, ArmorSkill.class
+
+        }, version = 6,
+        exportSchema = false) //TODO investigate if this is something that would help us
+@TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;
 
     /**
      * Returns a singleton instance of the MHWDatabase object.
+     *
      * @param app
      * @return
      */
@@ -78,6 +80,7 @@ public abstract class MHWDatabase extends RoomDatabase {
 
     /**
      * Returns a singleton instance of the MHWDatabase object.
+     *
      * @param ctx
      * @return
      */

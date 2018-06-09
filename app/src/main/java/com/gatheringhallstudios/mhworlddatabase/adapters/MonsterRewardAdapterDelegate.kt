@@ -32,7 +32,7 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterRewardView) -
         val vh = holder as RewardViewHolder
         vh.bind(reward)
 
-        holder.view.setOnClickListener { v: View -> onSelected(reward) }
+        holder.view.setOnClickListener { _: View -> onSelected(reward) }
     }
 
     internal inner class RewardViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
