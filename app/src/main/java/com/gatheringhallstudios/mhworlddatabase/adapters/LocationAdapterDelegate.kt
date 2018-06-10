@@ -19,7 +19,11 @@ class LocationAdapterDelegate(private val onSelected: (LocationView) -> Unit)
 
     override fun onCreateView(parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)
+<<<<<<< HEAD
+        return inflater.inflate(R.layout.listitem_monster, parent, false)
+=======
         return inflater.inflate(R.layout.listitem_location, parent, false)
+>>>>>>> f15fac5fe64b64d0e4b5fc135c385f3ff0033509
     }
 
     override fun bindView(view: View, data: LocationView) {
@@ -30,8 +34,13 @@ class LocationAdapterDelegate(private val onSelected: (LocationView) -> Unit)
 
         val icon = ctx.getAssetDrawable(path, defaultIcon)
 
+<<<<<<< HEAD
+        view.monster_icon.setImageDrawable(icon)
+        view.monster_name.text = data.name
+=======
         view.location_icon.setImageDrawable(icon)
         view.location_name.text = data.name
+>>>>>>> f15fac5fe64b64d0e4b5fc135c385f3ff0033509
 
         view.setOnClickListener { onSelected(data) }
     }
