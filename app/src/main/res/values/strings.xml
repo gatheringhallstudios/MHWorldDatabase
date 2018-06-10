@@ -44,11 +44,9 @@
     <string name="header_weakness">Weakness</string>
     <string name="header_area">Area</string>
     <string name="header_item_data">Item Data</string>
-<<<<<<< HEAD
 
     <!-- Locations -->
     <string name="locations_detail_summary">Summary</string>
     <string name="locations_detail_gathering">Gathering</string>
-=======
->>>>>>> f15fac5fe64b64d0e4b5fc135c385f3ff0033509
+
 </resources>

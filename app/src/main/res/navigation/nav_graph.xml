@@ -43,12 +43,9 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.search.UniversalSearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_generic_pager" />
-<<<<<<< HEAD
     <fragment
         android:id="@+id/locationDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationDetailPagerFragment"
         android:label="Location Detail"
         tools:layout="@layout/fragment_generic_pager" />
-=======
->>>>>>> f15fac5fe64b64d0e4b5fc135c385f3ff0033509
 </navigation>
