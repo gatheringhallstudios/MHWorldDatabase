@@ -6,23 +6,33 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+<<<<<<< HEAD
+import android.view.View
+=======
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+>>>>>>> f15fac5fe64b64d0e4b5fc135c385f3ff0033509
 import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+<<<<<<< HEAD
+=======
 import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
+>>>>>>> f15fac5fe64b64d0e4b5fc135c385f3ff0033509
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
+<<<<<<< HEAD
+=======
 import kotlinx.android.synthetic.main.list_generic.*
 import kotlinx.android.synthetic.main.listitem_monster.view.*
+>>>>>>> f15fac5fe64b64d0e4b5fc135c385f3ff0033509
 
 class ItemListFragment : RecyclerViewFragment() {
     companion object {
