@@ -53,9 +53,9 @@ class Converters {
             extractMap[Extract.WHITE] = "white"
             extractMap[Extract.GREEN] = "green"
 
-            itemCategoryMap[ItemCategory.ITEM] = "items" // note: will change to singular in future update
+            itemCategoryMap[ItemCategory.ITEM] = "item"
             itemCategoryMap[ItemCategory.MATERIAL] = "material"
-            itemCategoryMap[ItemCategory.ACCOUNT] = "account"
+            itemCategoryMap[ItemCategory.MISC] = "misc"
             itemCategoryMap[ItemCategory.AMMO] = "ammo"
 
             armorMap[ArmorType.HEAD] = "head"

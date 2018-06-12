@@ -1,17 +1,10 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListFragment
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListViewModel
-
-import butterknife.BindString
-import butterknife.BindView
 
 /**
  * Monster Hub
@@ -32,8 +25,8 @@ class ItemsListPagerFragment : BasePagerFragment() {
             ItemListFragment.newInstance(ItemCategory.AMMO)
         }
 
-        tabs.addTab(getString(R.string.items_tab_account)) {
-            ItemListFragment.newInstance(ItemCategory.ACCOUNT)
+        tabs.addTab(getString(R.string.items_tab_misc)) {
+            ItemListFragment.newInstance(ItemCategory.MISC)
         }
     }
 

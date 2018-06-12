@@ -6,10 +6,10 @@ import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
-import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
+import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
 
 /**
@@ -38,6 +38,18 @@ data class ItemText(
         val description: String?
 )
 
+/**
+ * Item combination data
+ */
+@Entity(tableName = "item_combination", primaryKeys = ["id"])
+data class ItemCombinationEntity(
+        val id: Int,
+        val result_id: Int,
+        val first_id: Int,
+        val second_id: Int?,
+        val quantity: Int
+)
+
 @Entity(tableName = "location_text", primaryKeys = ["id", "lang_id"])
 data class LocationText(
         val id: Int,
@@ -47,11 +59,11 @@ data class LocationText(
 
 @Entity(tableName = "location_item")
 data class LocationItemEntity(
-        @PrimaryKey val id : Int,
-        val location_id : Int,
-        val rank : Rank,
-        val item_id : Rank,
-        val stack : Int,
+        @PrimaryKey val id: Int,
+        val location_id: Int,
+        val rank: Rank,
+        val item_id: Rank,
+        val stack: Int,
         val percentage: Int
 )
 
@@ -83,10 +95,10 @@ data class SkillTreeText(
 @Entity(tableName = "skill",
         primaryKeys = ["skilltree_id", "lang_id", "level"],
         foreignKeys = [
-                ForeignKey(
-                        entity = SkillTreeEntity::class,
-                        parentColumns = ["id"],
-                        childColumns = ["skilltree_id"])
+            ForeignKey(
+                    entity = SkillTreeEntity::class,
+                    parentColumns = ["id"],
+                    childColumns = ["skilltree_id"])
         ])
 data class SkillEntity(
         var skilltree_id: Int,
@@ -145,7 +157,7 @@ data class MonsterBreakEntity(
         val extract: Extract
 )
 
-@Entity(tableName="monster_break_text",
+@Entity(tableName = "monster_break_text",
         primaryKeys = ["id", "lang_id"])
 data class MonsterBreakText(
         val id: Int,

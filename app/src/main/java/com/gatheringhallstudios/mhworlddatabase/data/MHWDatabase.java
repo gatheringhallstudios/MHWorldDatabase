@@ -6,16 +6,35 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
-import android.location.Location;
 
-// laziness, since we need to manually add all entities which is quite cumbersome
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
-import com.gatheringhallstudios.mhworlddatabase.data.entities.*;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSkill;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemCombinationEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationItemEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterBreakEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterBreakText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHabitatEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHitzoneEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHitzoneText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardConditionText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
+
+// laziness, since we need to manually add all entities which is quite cumbersome
 
 /**
  * DO NOT CONVERT TO KOTLIN YET.
@@ -24,32 +43,34 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
  * Created by Carlos on 3/4/2018.
  */
 @Database(
-    entities={
-            // Items
-            ItemEntity.class, ItemText.class,
+        entities = {
+                // Items
+                ItemEntity.class, ItemText.class, ItemCombinationEntity.class,
 
-            // Location classes
-            LocationText.class, LocationItemEntity.class,
-    
-            // monster classes
-            MonsterEntity.class, MonsterText.class, MonsterHabitatEntity.class,
-            MonsterBreakEntity.class, MonsterBreakText.class,
-            MonsterHitzoneEntity.class, MonsterHitzoneText.class,
-            MonsterRewardEntity.class, MonsterRewardConditionText.class,
-    
-            // Skills
-            SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
-    
-            // Armor classes
-            ArmorEntity.class, ArmorText.class, ArmorSkill.class
+                // Location classes
+                LocationText.class, LocationItemEntity.class,
 
-    }, version = 5)
-@TypeConverters({ Converters.class })
+                // monster classes
+                MonsterEntity.class, MonsterText.class, MonsterHabitatEntity.class,
+                MonsterBreakEntity.class, MonsterBreakText.class,
+                MonsterHitzoneEntity.class, MonsterHitzoneText.class,
+                MonsterRewardEntity.class, MonsterRewardConditionText.class,
+
+                // Skills
+                SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
+
+                // Armor classes
+                ArmorEntity.class, ArmorText.class, ArmorSkill.class
+
+        }, version = 6,
+        exportSchema = false) //TODO investigate if this is something that would help us
+@TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;
 
     /**
      * Returns a singleton instance of the MHWDatabase object.
+     *
      * @param app
      * @return
      */
@@ -59,6 +80,7 @@ public abstract class MHWDatabase extends RoomDatabase {
 
     /**
      * Returns a singleton instance of the MHWDatabase object.
+     *
      * @param ctx
      * @return
      */

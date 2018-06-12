@@ -31,7 +31,7 @@
     <string name="items_tab_item">Items</string>
     <string name="items_tab_materials">Materials</string>
     <string name="items_tab_ammo">Ammo</string>
-    <string name="items_tab_account">Account</string>
+    <string name="items_tab_misc">Misc</string>
 
     <!-- Weapons -->
     <string name="weapons_title">Weapons</string>
