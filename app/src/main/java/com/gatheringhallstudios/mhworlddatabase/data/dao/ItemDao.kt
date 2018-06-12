@@ -3,7 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemCombinationEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
 
@@ -28,13 +27,13 @@ abstract class ItemDao {
         WHERE i.id = :itemId """)
     abstract fun getItem(langId: String, itemId: Int): LiveData<ItemView>
 
-    @Query("""
-        SELECT *
-        FROM item_combination
-        WHERE result_id = :itemId
-            OR first_id = :itemId
-            OR second_id = :itemId""")
-    abstract fun loadRawItemCombos(langId: String, itemId: Int): LiveData<ItemCombinationEntity>
+//    @Query("""
+//        SELECT *
+//        FROM item_combination
+//        WHERE result_id = :itemId
+//            OR first_id = :itemId
+//            OR second_id = :itemId""")
+//    abstract fun loadRawItemCombos(langId: String, itemId: Int): LiveData<ItemCombinationEntity>
 
 //    fun loadFullItemCombos(langId: String, itemId: Int): LiveData<ItemCombinationView> {
 //        val itemCombos = loadRawItemCombos(langId, itemId)

@@ -17,7 +17,7 @@ enum class Rank {
 enum class ItemCategory {
     ITEM,
     MATERIAL,
-    ACCOUNT,
+    MISC,
     AMMO
 }
 
