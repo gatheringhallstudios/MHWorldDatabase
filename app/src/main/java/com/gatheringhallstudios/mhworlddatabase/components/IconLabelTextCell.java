@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -72,6 +73,9 @@ public class IconLabelTextCell extends ConstraintLayout{
         setLeftIconDrawable(drawable);
         setLabelText(labelText);
         setValueText(valueText);
+
+        setLayoutParams(new ViewGroup.LayoutParams(
+                LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     /**
