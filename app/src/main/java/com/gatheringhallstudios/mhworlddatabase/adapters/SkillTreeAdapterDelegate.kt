@@ -5,7 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
+import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
 import kotlinx.android.synthetic.main.listitem_monster.view.*
 
 class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
@@ -14,12 +16,14 @@ class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
     override fun getDataClass() = SkillTreeView::class
 
     override fun onCreateView(parent: ViewGroup): View {
-
-        val inflater = LayoutInflater.from(parent.context)
-        return inflater.inflate(R.layout.listitem_monster, parent, false)
+        return IconLabelTextCell(parent.context)
     }
 
     override fun bindView(view: View, data: SkillTreeView) {
-        view.monster_name.text = data.name
+        val icon = view.context.getVectorDrawable(R.drawable.ic_armor_skill)
+        with (view as IconLabelTextCell) {
+            view.setLeftIconDrawable(icon)
+            view.setLabelText(data.name)
+        }
     }
 }
