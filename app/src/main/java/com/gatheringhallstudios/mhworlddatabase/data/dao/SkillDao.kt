@@ -18,10 +18,10 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
 @Dao
 abstract class SkillDao {
     @Query("""
-        SELECT id, name, description
+        SELECT id, name, description, icon_color
         FROM skilltree s join skilltree_text st USING (id)
         WHERE lang_id = :langId
-        ORDER BY name ASC""")
+        ORDER BY id ASC""")
     abstract fun loadSkillTrees(langId: String): LiveData<List<SkillTreeView>>
 
     /**
@@ -40,6 +40,7 @@ abstract class SkillDao {
                     id = firstItem.id,
                     name = firstItem.skilltree_name,
                     description = firstItem.skilltree_description,
+                    icon_color = firstItem.icon_color,
                     skills = skills
             )
         }
@@ -52,12 +53,14 @@ abstract class SkillDao {
             val skilltree_name: String?,
             val skilltree_description: String?,
             val level: Int,
-            val description: String?
+            val description: String?,
+            val icon_color: String?
     )
 
+    // internal query used by "loadSkillTree"
     @Query("""
         SELECT st.id, stt.name skilltree_name, stt.description skilltree_description,
-            s.level, s.description
+            s.level, s.description, st.icon_color
         FROM skilltree st
             JOIN skilltree_text stt
                 ON stt.id = st.id

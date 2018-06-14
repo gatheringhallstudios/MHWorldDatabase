@@ -34,22 +34,24 @@ data class LocationItemView(
  * This is returned when querying for all data.
  * Created by Carlos on 3/6/2018.
  */
-data class SkillTreeView(
+open class SkillTreeView(
         val id: Int,
         val name: String?,
-        val description: String?
+        val description: String?,
+        val icon_color: String?
 )
 
 /**
- * A skill list with skill information included
+ * A skill tree with skill information included.
  */
-data class SkillTreeFull(
-        var id: Int,
-        val name: String?,
-        val description: String?,
+class SkillTreeFull(
+        id: Int,
+        name: String?,
+        description: String?,
+        icon_color: String?,
 
         val skills: List<Skill>
-)
+) : SkillTreeView(id, name, description, icon_color)
 
 data class Skill(
         val skilltree_id: Int,

@@ -23,7 +23,9 @@ class ItemEntity(
         val rarity: Int,
         val buy_price: Int?,
         val sell_price: Int,
-        val carry_limit: Int?
+        val carry_limit: Int?,
+        val icon_name: String?,
+        val icon_color: String?
 )
 
 /**
@@ -41,9 +43,9 @@ data class ItemText(
 /**
  * Item combination data
  */
-@Entity(tableName = "item_combination", primaryKeys = ["id"])
+@Entity(tableName = "item_combination")
 data class ItemCombinationEntity(
-        val id: Int,
+        @PrimaryKey val id: Int,
         val result_id: Int,
         val first_id: Int,
         val second_id: Int?,
@@ -69,10 +71,8 @@ data class LocationItemEntity(
 
 @Entity(tableName = "skilltree")
 data class SkillTreeEntity(
-        @PrimaryKey val id: Int
-
-        // there is no more data, the rest requires joins
-        // if it stays this way, we may remove it and just query on the skilltree_text table instead...
+        @PrimaryKey val id: Int,
+        val icon_color: String?
 )
 
 /**

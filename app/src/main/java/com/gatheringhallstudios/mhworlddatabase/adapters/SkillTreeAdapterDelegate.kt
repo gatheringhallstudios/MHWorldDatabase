@@ -20,7 +20,8 @@ class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
     }
 
     override fun bindView(view: View, data: SkillTreeView) {
-        val icon = view.context.getVectorDrawable(R.drawable.ic_armor_skill)
+        val icon = view.context.getVectorDrawable(R.drawable.ic_armor_skill, data.icon_color)
+
         with (view as IconLabelTextCell) {
             view.setLeftIconDrawable(icon)
             view.setLabelText(data.name)
