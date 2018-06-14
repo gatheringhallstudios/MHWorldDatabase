@@ -5,9 +5,9 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ArmorViewModel extends AndroidViewModel {
         dao = MHWDatabase.getDatabase(application).armorDao();
     }
 
-    public LiveData<List<ArmorBasic>> getArmorList() {
+    public LiveData<List<ArmorBasicView>> getArmorList() {
         return dao.loadList("en");
     }
 }

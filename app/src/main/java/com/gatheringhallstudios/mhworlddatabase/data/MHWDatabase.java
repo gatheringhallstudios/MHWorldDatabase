@@ -13,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemCombinationEntity;
@@ -60,10 +61,11 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
 
                 // Armor classes
-                ArmorEntity.class, ArmorText.class, ArmorSkill.class
+                ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class
+        },
+        version = 7,
+        exportSchema = false) //TODO investigate if this is something that would help us
 
-        }, version = 7,
-        exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;

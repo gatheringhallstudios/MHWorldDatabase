@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_large">
+
+    <TextView
+        android:id="@+id/armor_set_name"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Kadachi α" />
+
+    <ImageView
+        android:id="@+id/head_icon"
+        style="@style/IconLarge"
+        android:layout_marginTop="@dimen/margin_small"
+        android:src="@drawable/question_mark_grey"
+        app:layout_constraintEnd_toStartOf="@+id/chest_icon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+
+    <ImageView
+        android:id="@+id/chest_icon"
+        style="@style/IconLarge"
+        android:layout_marginTop="@dimen/margin_small"
+        android:src="@drawable/question_mark_grey"
+        app:layout_constraintEnd_toStartOf="@+id/arms_icon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/head_icon"
+        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+
+    <ImageView
+        android:id="@+id/arms_icon"
+        style="@style/IconLarge"
+        android:layout_marginTop="@dimen/margin_small"
+        android:src="@drawable/question_mark_grey"
+        app:layout_constraintEnd_toStartOf="@+id/waist_icon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/chest_icon"
+        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+
+    <ImageView
+        android:id="@+id/waist_icon"
+        style="@style/IconLarge"
+        android:layout_marginTop="@dimen/margin_small"
+        android:src="@drawable/question_mark_grey"
+        app:layout_constraintEnd_toStartOf="@+id/legs_icon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/arms_icon"
+        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+
+    <ImageView
+        android:id="@+id/legs_icon"
+        style="@style/IconLarge"
+        android:layout_marginTop="@dimen/margin_small"
+        android:src="@drawable/question_mark_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/waist_icon"
+        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+
+</android.support.constraint.ConstraintLayout>

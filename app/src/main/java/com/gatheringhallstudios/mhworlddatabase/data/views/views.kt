@@ -2,6 +2,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.views
 
 import android.arch.persistence.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
 data class ItemView(
         @Embedded val data: ItemEntity,
@@ -16,6 +18,34 @@ data class ItemCombinationView(
         @Embedded val first: ItemView,
         @Embedded val second: ItemView,
         val quantity: Int
+)
+
+data class ArmorBasicView(
+        val id: Int,
+        val name: String?,
+        val rarity: Int,
+        val rank: Rank,
+        val armor_type: ArmorType,
+        val armorset_id: Int
+)
+
+/**
+ * Representation of a single armor set
+ */
+data class ArmorSetView(
+        val armorset_id: Int,
+        val armorset_name: String?,
+
+        @Embedded(prefix = "head_")
+        val head_armor: ArmorBasicView?,
+        @Embedded(prefix = "chest_")
+        val chest_armor: ArmorBasicView?,
+        @Embedded(prefix = "arms_")
+        val arms_armor: ArmorBasicView?,
+        @Embedded(prefix = "waist_")
+        val waist_armor: ArmorBasicView?,
+        @Embedded(prefix = "legs_")
+        val legs_armor: ArmorBasicView?
 )
 
 data class LocationView(

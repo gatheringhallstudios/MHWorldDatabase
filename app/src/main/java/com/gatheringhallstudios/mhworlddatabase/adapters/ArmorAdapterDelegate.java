@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.armor;
+package com.gatheringhallstudios.mhworlddatabase.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 
 import java.util.List;
@@ -21,9 +21,9 @@ import butterknife.ButterKnife;
  * Created by Carlos on 3/22/2018.
  */
 
-public class ArmorAdapterDelegate extends AdapterDelegate<List<ArmorBasic>> {
+public class ArmorAdapterDelegate extends AdapterDelegate<List<ArmorBasicView>> {
     @Override
-    protected boolean isForViewType(@NonNull List<ArmorBasic> items, int position) {
+    protected boolean isForViewType(@NonNull List<ArmorBasicView> items, int position) {
         return true;
     }
 
@@ -36,14 +36,14 @@ public class ArmorAdapterDelegate extends AdapterDelegate<List<ArmorBasic>> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull List<ArmorBasic> items,
+    public void onBindViewHolder(@NonNull List<ArmorBasicView> items,
                                  int position,
                                  @NonNull RecyclerView.ViewHolder holder,
                                  @NonNull List<Object> payloads) {
-        ArmorBasic item = items.get(position);
+        ArmorBasicView item = items.get(position);
 
         ArmorViewHolder vh = (ArmorViewHolder)holder;
-        vh.armorName.setText(item.name);
+        vh.armorName.setText(item.getName());
     }
 
     class ArmorViewHolder extends RecyclerView.ViewHolder {

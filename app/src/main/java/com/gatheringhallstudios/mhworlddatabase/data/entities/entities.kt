@@ -6,10 +6,7 @@ import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
-import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
-import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
-import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 
 
 /**
@@ -50,6 +47,39 @@ data class ItemCombinationEntity(
         val first_id: Int,
         val second_id: Int?,
         val quantity: Int
+)
+
+@Entity(tableName = "armor")
+data class ArmorEntity(
+        @PrimaryKey val id: Int,
+
+        val rarity: Int,
+        val rank: Rank,
+        val armor_type: ArmorType,
+        val armorset_id: Int,
+        val armorset_bonus_id: Int?,
+        val male: Boolean,
+        val female: Boolean,
+
+        val slot_1: Int,
+        val slot_2: Int,
+        val slot_3: Int,
+
+        val defense_base: Int,
+        val defense_max: Int,
+        val defense_augment_max: Int,
+        val fire: Int,
+        val water: Int,
+        val thunder: Int,
+        val ice: Int,
+        val dragon: Int
+)
+
+@Entity(tableName = "armorset_text")
+data class ArmorSetTextEntity(
+        @PrimaryKey val id: Int,
+        val lang_id: String,
+        val name: String?
 )
 
 @Entity(tableName = "location_text", primaryKeys = ["id", "lang_id"])

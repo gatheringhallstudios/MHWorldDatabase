@@ -4,17 +4,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
+import com.gatheringhallstudios.mhworlddatabase.adapters.ArmorAdapterDelegate;
 import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter;
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment;
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView;
 
 import java.util.List;
 
@@ -24,7 +20,7 @@ import java.util.List;
 
 public class ArmorListFragment extends RecyclerViewFragment {
     ArmorAdapterDelegate delegate = new ArmorAdapterDelegate();
-    BasicListDelegationAdapter<ArmorBasic> adapter
+    BasicListDelegationAdapter<ArmorBasicView> adapter
             = new BasicListDelegationAdapter<>(delegate);
 
     @Override
@@ -42,7 +38,7 @@ public class ArmorListFragment extends RecyclerViewFragment {
         getActivity().setTitle(getString(R.string.armor_title));
     }
 
-    public void setItems(List<ArmorBasic> armor) {
+    public void setItems(List<ArmorBasicView> armor) {
         adapter.setItems(armor);
         adapter.notifyDataSetChanged();
     }

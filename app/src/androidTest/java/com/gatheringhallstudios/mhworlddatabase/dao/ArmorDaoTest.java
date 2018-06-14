@@ -7,8 +7,10 @@ import android.support.test.runner.AndroidJUnit4;
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType;
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank;
 import com.gatheringhallstudios.mhworlddatabase.data.views.Armor;
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasic;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -16,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+
 import java9.util.stream.StreamSupport;
 
 import static com.gatheringhallstudios.mhworlddatabase.TestUtils.getValue;
@@ -43,14 +46,14 @@ public class ArmorDaoTest {
 
     @Test
     public void Can_Query_ArmorList() throws Exception {
-        List<ArmorBasic> results = getValue(dao.loadList("en"));
+        List<ArmorBasicView> results = getValue(dao.loadList("en"));
         assertFalse("expected results", results.isEmpty());
     }
 
     @Test
     public void Can_Filter_ArmorList_Rarity() throws Exception {
-        List<ArmorBasic> results = getValue(dao.loadList("en", 3, 3));
-        boolean allAre3 = StreamSupport.stream(results).allMatch((a) -> a.rarity == 3);
+        List<ArmorBasicView> results = getValue(dao.loadList("en", 3, 3));
+        boolean allAre3 = StreamSupport.stream(results).allMatch((a) -> a.getRarity() == 3);
         assertTrue("All armor should be rarity 3", allAre3);
     }
 
@@ -61,5 +64,23 @@ public class ArmorDaoTest {
 
         assertEquals("expect name match", "Zorah Hide Alpha", result.name);
         assertEquals("expected type to match", ArmorType.CHEST, result.armor_type);
+    }
+
+    @Test
+    public void Can_Query_Armor_Sets_List() throws Exception {
+        List<ArmorSetView> armorSets = getValue(dao.loadArmorSets("en", Rank.HIGH));
+
+        for(ArmorSetView armorSet : armorSets) {
+            boolean isAllEmpty = true;
+            if (armorSet.getHead_armor() != null) isAllEmpty = false;
+            if (armorSet.getChest_armor() != null) isAllEmpty = false;
+            if (armorSet.getArms_armor() != null) isAllEmpty = false;
+            if (armorSet.getWaist_armor() != null) isAllEmpty = false;
+            if (armorSet.getLegs_armor() != null) isAllEmpty = false;
+
+            assertFalse("expected non-empty armor", isAllEmpty);
+        }
+
+        assertFalse("expect list to be populated", armorSets.isEmpty());
     }
 }
