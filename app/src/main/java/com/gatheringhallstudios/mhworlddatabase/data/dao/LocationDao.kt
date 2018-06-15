@@ -29,15 +29,12 @@ abstract class LocationDao {
     abstract fun loadLocation(langId : String, locationId: Int) : LiveData<LocationView>
 
     @Query("""
-        SELECT li.*, lt.name location_name, it.name item_name
-        FROM location_text lt
-            JOIN location_item li
-                ON li.location_id = lt.id
+        SELECT li.*, it.name item_name
+        FROM location_item li
             JOIN item_text it
                 ON it.id = li.item_id
-                AND it.lang_id = lt.lang_id
-        WHERE lt.id = :locationId
-          AND lt.lang_id = :langId
+        WHERE li.location_id = :locationId
+          AND it.lang_id = :langId
         """)
     abstract fun loadLocationItems(langId: String, locationId : Int) : LiveData<List<LocationItemView>>
 }

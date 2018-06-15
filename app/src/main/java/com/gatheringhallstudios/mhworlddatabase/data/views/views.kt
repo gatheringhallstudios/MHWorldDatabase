@@ -20,6 +20,11 @@ data class ItemCombinationView(
         val quantity: Int
 )
 
+data class ItemLocationView(
+        @Embedded val data: LocationItemEntity,
+        val location_name: String
+)
+
 data class ArmorBasicView(
         val id: Int,
         val name: String?,
@@ -55,7 +60,6 @@ data class LocationView(
 
 data class LocationItemView(
         @Embedded val data: LocationItemEntity,
-        val location_name: String?,
         val item_name: String?
 )
 

@@ -37,4 +37,16 @@ class ItemDaoTest {
         val items = dao.loadItems("en").getResult()
         Assert.assertFalse("expected results", items.isEmpty())
     }
+
+    @Test
+    fun Can_Query_Item_Locations() {
+        val items = dao.loadItems("en").getResult()
+        val testItem = items.find { it.name == "Herb" }
+        Assert.assertNotNull("Expecting non-null test object", testItem)
+
+        val itemId = testItem!!.id
+        val itemLocations = dao.loadItemLocations("en", itemId).getResult()
+        Assert.assertTrue("expecting location results", itemLocations.isNotEmpty())
+
+    }
 }
