@@ -6,23 +6,17 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
-import kotlinx.android.synthetic.main.list_generic.*
-import kotlinx.android.synthetic.main.listitem_monster.view.*
 
 class ItemListFragment : RecyclerViewFragment() {
     companion object {
@@ -41,7 +35,7 @@ class ItemListFragment : RecyclerViewFragment() {
     }
 
     // Setup recycler list adapter and the on-selected
-    private val adapter = BasicListDelegationAdapter(ItemAdapterDelegate(onSelect={
+    private val adapter = BasicListDelegationAdapter(ItemAdapterDelegate(onSelect = {
         findNavController().navigate(
                 R.id.itemDetailDestination,
                 BundleBuilder().putInt(ItemDetailPagerFragment.ARG_ITEM_ID, it.id).build())
@@ -52,7 +46,7 @@ class ItemListFragment : RecyclerViewFragment() {
 
         var category: ItemCategory? = ItemCategory.MATERIAL
         val args = arguments;
-        if(args != null) {
+        if (args != null) {
             category = args.getSerializable(ARG_CATEGORY) as ItemCategory?
         }
 
@@ -65,13 +59,13 @@ class ItemListFragment : RecyclerViewFragment() {
     }
 
     // ViewModel class used by this Fragment
-    class ViewModel(application : Application) : AndroidViewModel(application) {
-        private val dao : ItemDao = MHWDatabase.getDatabase(application).itemDao()
-        lateinit var items : LiveData<List<ItemView>> private set
+    class ViewModel(application: Application) : AndroidViewModel(application) {
+        private val dao: ItemDao = MHWDatabase.getDatabase(application).itemDao()
+        lateinit var items: LiveData<List<ItemView>> private set
 
 
         fun init(category: ItemCategory?) {
-            if(!::items.isInitialized) {
+            if (!::items.isInitialized) {
                 items = dao.getItems("en", category)
             }
         }

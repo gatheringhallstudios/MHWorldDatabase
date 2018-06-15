@@ -7,7 +7,8 @@ import android.support.annotation.NonNull;
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView;
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank;
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView;
 
 import java.util.List;
 
@@ -15,16 +16,16 @@ import java.util.List;
  * Created by Carlos on 3/22/2018.
  */
 
-public class ArmorViewModel extends AndroidViewModel {
+public class ArmorSetListViewModel extends AndroidViewModel {
     private ArmorDao dao;
 
-    public ArmorViewModel(@NonNull Application application) {
+    public ArmorSetListViewModel(@NonNull Application application) {
         super(application);
 
         dao = MHWDatabase.getDatabase(application).armorDao();
     }
 
-    public LiveData<List<ArmorBasicView>> getArmorList() {
-        return dao.loadList("en");
+    public LiveData<List<ArmorSetView>> getArmorSetList(Rank rank) {
+        return dao.loadArmorSets("en", rank);
     }
 }

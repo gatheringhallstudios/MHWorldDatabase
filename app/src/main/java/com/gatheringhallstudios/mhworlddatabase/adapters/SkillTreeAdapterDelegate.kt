@@ -1,6 +1,5 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -8,7 +7,6 @@ import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
 import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
-import kotlinx.android.synthetic.main.listitem_monster.view.*
 
 class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
     : SimpleListDelegate<SkillTreeView, View>() {
