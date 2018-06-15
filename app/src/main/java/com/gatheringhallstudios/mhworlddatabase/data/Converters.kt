@@ -20,8 +20,11 @@ fun <T : Enum<T>> EnumHashBiMap<T, String>.toEnum(value : String) : T {
 }
 
 // internal helper to get a string from the lookup map, and throw an error on failure
-fun <T: Enum<T>> EnumHashBiMap<T, String>.toString(value : T): String {
-   return this[value] ?:
+fun <T: Enum<T>> EnumHashBiMap<T, String>.toString(value : T?): String? {
+    if (value == null) {
+        return null
+    }
+    return this[value] ?:
         throw NoSuchFieldException("Value $value was not registered in the converter")
 }
 
@@ -57,6 +60,7 @@ class Converters {
             itemCategoryMap[ItemCategory.MATERIAL] = "material"
             itemCategoryMap[ItemCategory.MISC] = "misc"
             itemCategoryMap[ItemCategory.AMMO] = "ammo"
+            itemCategoryMap[ItemCategory.HIDDEN] = "hidden"
 
             armorMap[ArmorType.HEAD] = "head"
             armorMap[ArmorType.CHEST] = "chest"
@@ -82,20 +86,20 @@ class Converters {
     }
 
     @TypeConverter fun rankFromString(value: String) = rankMap.toEnum(value)
-    @TypeConverter fun fromRank(type: Rank) = rankMap.toString(type)
+    @TypeConverter fun fromRank(type: Rank?) = rankMap.toString(type)
 
     @TypeConverter fun itemCategoryFromString(value: String) = itemCategoryMap.toEnum(value)
-    @TypeConverter fun fromItemCategory(category: ItemCategory) = itemCategoryMap.toString(category)
+    @TypeConverter fun fromItemCategory(category: ItemCategory?) = itemCategoryMap.toString(category)
 
     @TypeConverter fun monsterSizefromString(value: String) = monsterSizeMap.toEnum(value)
-    @TypeConverter fun fromMonsterSize(type: MonsterSize) = monsterSizeMap.toString(type)
+    @TypeConverter fun fromMonsterSize(type: MonsterSize?) = monsterSizeMap.toString(type)
 
     @TypeConverter fun extractFromString(value: String) = extractMap.toEnum(value)
-    @TypeConverter fun fromExtract(type: Extract) = extractMap.toString(type)
+    @TypeConverter fun fromExtract(type: Extract?) = extractMap.toString(type)
 
     @TypeConverter fun armorTypefromString(value: String) = armorMap.toEnum(value)
-    @TypeConverter fun fromArmorType(type: ArmorType) = armorMap.toString(type)
+    @TypeConverter fun fromArmorType(type: ArmorType?) = armorMap.toString(type)
 
     @TypeConverter fun weaponTypeFromString(value: String) = weaponMap.toEnum(value)
-    @TypeConverter fun fromWeaponType(type: WeaponType) = weaponMap.toString(type)
+    @TypeConverter fun fromWeaponType(type: WeaponType?) = weaponMap.toString(type)
 }

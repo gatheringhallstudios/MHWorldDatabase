@@ -6,13 +6,13 @@ import android.support.test.runner.AndroidJUnit4
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao
 
+import org.junit.Assert
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import com.gatheringhallstudios.mhworlddatabase.getResult
-import junit.framework.Assert
 
 @RunWith(AndroidJUnit4::class)
 class SkillDaoTest {
@@ -45,7 +45,7 @@ class SkillDaoTest {
         // this is a hardcoded test, but we don't have any other way to test this...
         // this tests if the joining works
 
-        val skillTree = dao.loadSkillTree("en", 7).getResult()
+        val skillTree = dao.loadSkillTree("en", 15).getResult()
         Assert.assertEquals("name should match", "Attack Boost", skillTree.name)
         Assert.assertEquals("levels should match", 7, skillTree.skills.size)
 

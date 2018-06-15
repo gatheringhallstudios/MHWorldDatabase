@@ -17,8 +17,11 @@ enum class Rank {
 enum class ItemCategory {
     ITEM,
     MATERIAL,
+    AMMO,
     MISC,
-    AMMO
+
+    /** Cannot be queried in the item list, only directly. **/
+    HIDDEN
 }
 
 /**

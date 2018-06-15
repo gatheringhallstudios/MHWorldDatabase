@@ -4,9 +4,8 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao
-import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao
 import com.gatheringhallstudios.mhworlddatabase.getResult
-import junit.framework.Assert
+import org.junit.Assert
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test

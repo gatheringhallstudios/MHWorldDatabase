@@ -14,9 +14,9 @@ abstract class ItemDao {
             JOIN item_text it
                 ON it.id = i.id
                 AND it.lang_id = :langId
-        WHERE :category IS NULL OR i.category = :category
+        WHERE (:category IS NULL AND i.category != 'hidden') OR i.category = :category
         ORDER BY i.id""")
-    abstract fun getItems(langId: String, category: ItemCategory? = null): LiveData<List<ItemView>>
+    abstract fun loadItems(langId: String, category: ItemCategory? = null): LiveData<List<ItemView>>
 
     @Query("""
         SELECT i.*, it.name, it.description
@@ -25,7 +25,7 @@ abstract class ItemDao {
             ON it.id = i.id
             AND it.lang_id = :langId
         WHERE i.id = :itemId """)
-    abstract fun getItem(langId: String, itemId: Int): LiveData<ItemView>
+    abstract fun loadItem(langId: String, itemId: Int): LiveData<ItemView>
 
 //    @Query("""
 //        SELECT *
@@ -39,10 +39,10 @@ abstract class ItemDao {
 //        val itemCombos = loadRawItemCombos(langId, itemId)
 //
 //        return Transformations.map(itemCombos) { data ->
-//            val result = getItem(langId, data.result_id).value
-//            val first = getItem(langId, data.first_id).value
+//            val result = loadItem(langId, data.result_id).value
+//            val first = loadItem(langId, data.first_id).value
 //            val second = if (data.second_id != null) {
-//                getItem(langId, data.second_id).value
+//                loadItem(langId, data.second_id).value
 //            } else null
 //
 //            ItemCombinationView(

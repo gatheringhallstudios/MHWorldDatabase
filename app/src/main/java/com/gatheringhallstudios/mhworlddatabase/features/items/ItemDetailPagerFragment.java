@@ -26,7 +26,7 @@ public class ItemDetailPagerFragment extends BasePagerFragment {
         int itemId = args.getInt(ARG_ITEM_ID);
 
         ItemDetailViewModel viewModel = ViewModelProviders.of(this).get(ItemDetailViewModel.class);
-        viewModel.setItem(itemId);
+        viewModel.loadItem(itemId);
 
         tabs.addTab("Summary", ItemSummaryFragment::new);
     }

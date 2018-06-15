@@ -66,7 +66,7 @@ class ItemListFragment : RecyclerViewFragment() {
 
         fun init(category: ItemCategory?) {
             if (!::items.isInitialized) {
-                items = dao.getItems("en", category)
+                items = dao.loadItems("en", category)
             }
         }
     }

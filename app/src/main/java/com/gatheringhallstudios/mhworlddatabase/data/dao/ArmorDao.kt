@@ -21,10 +21,10 @@ abstract class ArmorDao {
             WHERE at.lang_id = :langId
                AND a.rarity BETWEEN :minRarity AND :maxRarity
             ORDER BY a.id ASC""")
-    abstract fun loadList(langId: String, minRarity: Int, maxRarity: Int): LiveData<List<ArmorBasicView>>
+    abstract fun loadArmorList(langId: String, minRarity: Int, maxRarity: Int): LiveData<List<ArmorBasicView>>
 
-    fun loadList(langId: String): LiveData<List<ArmorBasicView>> {
-        return loadList(langId, 0, 999)
+    fun loadArmorList(langId: String): LiveData<List<ArmorBasicView>> {
+        return loadArmorList(langId, 0, 999)
     }
 
     @Query("""
