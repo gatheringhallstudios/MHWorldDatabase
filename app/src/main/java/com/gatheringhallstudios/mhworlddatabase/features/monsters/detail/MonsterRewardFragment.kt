@@ -15,6 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterRewardAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.SubHeaderAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView
@@ -28,7 +29,7 @@ import kotlinx.android.synthetic.main.list_generic.*
  * Fragment for a list of monsters
  */
 
-class MonsterRewardFragment : Fragment() {
+class MonsterRewardFragment : RecyclerViewFragment() {
     companion object {
         private val ARG_MONSTER_ID = "MONSTER_ID"
         private val ARG_RANK = "RANK"
@@ -51,23 +52,16 @@ class MonsterRewardFragment : Fragment() {
     private lateinit var rank : Rank
     private lateinit var adapter: BasicListDelegationAdapter<Any>
 
-    override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.list_generic, parent, false) as RecyclerView
-        v.layoutManager = LinearLayoutManager(parent!!.context)
-        return v
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Setup Adapter to display rewards and headers
         val rewardDelegate = MonsterRewardAdapterDelegate(::handleRewardSelection)
         val subHeaderDelegate = SubHeaderAdapterDelegate()
         adapter = BasicListDelegationAdapter(rewardDelegate, subHeaderDelegate)
-        recycler_view.adapter = adapter
+        this.setAdapter(adapter)
 
         // Load data
         rank = arguments!!.getSerializable(ARG_RANK) as Rank
-        viewModel.rewards.observe(this, Observer<List<MonsterRewardView>>(::setItems))
+        viewModel.rewards.observe(this, Observer(::setItems))
     }
 
     /**
