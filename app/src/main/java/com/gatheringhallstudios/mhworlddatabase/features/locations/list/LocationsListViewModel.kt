@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 
 /**
- * A viewmodel for any monster list fragment
+ * A viewmodel for any locations list fragment
  * Created by Carlos on 3/4/2018.
  */
 class LocationsListViewModel(application: Application) : AndroidViewModel(application) {

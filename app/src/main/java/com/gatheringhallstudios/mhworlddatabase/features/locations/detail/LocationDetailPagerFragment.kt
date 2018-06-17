@@ -7,7 +7,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
 
 /**
- * Location detail hub. Displays information for a single monster
+ * Location detail hub. Displays information for a single location
  * The information is split between a number of tabs
  **/
 
