@@ -15,10 +15,6 @@
     <string name="monsters_detail_tab_rewards_low_rank">Low-Rank</string>
     <string name="monsters_detail_tab_damage">Damage</string>
 
-    <!-- Locations -->
-    <string name="locations_title">Locations</string>
-    <string name="location_area">Area %1$d</string>
-
     <!-- Skills -->
     <string name="skills_title">Skills</string>
 
@@ -48,4 +44,11 @@
     <string name="header_weakness">Weakness</string>
     <string name="header_area">Area</string>
     <string name="header_item_data">Item Data</string>
+
+    <!-- Locations -->
+    <string name="locations_title">Locations</string>
+    <string name="location_area">Area %1$d</string>
+    <string name="locations_detail_summary">Summary</string>
+    <string name="locations_detail_gathering">Gathering</string>
+
 </resources>
