@@ -1,12 +1,12 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.SimpleListDelegate
-import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
-import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
+import kotlinx.android.synthetic.main.listitem_large.view.*
 
 class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
     : SimpleListDelegate<SkillTreeView, View>() {
@@ -14,15 +14,12 @@ class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
     override fun getDataClass() = SkillTreeView::class
 
     override fun onCreateView(parent: ViewGroup): View {
-        return IconLabelTextCell(parent.context)
+
+        val inflater = LayoutInflater.from(parent.context)
+        return inflater.inflate(R.layout.listitem_large, parent, false)
     }
 
     override fun bindView(view: View, data: SkillTreeView) {
-        val icon = view.context.getVectorDrawable(R.drawable.ic_armor_skill, data.icon_color)
-
-        with (view as IconLabelTextCell) {
-            view.setLeftIconDrawable(icon)
-            view.setLabelText(data.name)
-        }
+        view.item_name.text = data.name
     }
 }

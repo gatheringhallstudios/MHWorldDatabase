@@ -47,10 +47,11 @@ class MonsterSummaryFragment : Fragment() {
         val elemWeakness = monster.data.weaknesses
         val statusWeakness = monster.data.status_weaknesses
 
-        val icon = context?.getAssetDrawable(monster.data.icon)
-        monster_icon.setImageDrawable(icon)
+        val defaultIcon = R.drawable.question_mark_grey
+        val icon = context?.getAssetDrawable(monster.data.icon, defaultIcon)
+        item_icon.setImageDrawable(icon)
 
-        monster_name.text = monster.name
+        item_name.text = monster.name
         monster_description.text = monster.description
 
         // todo: remove weakness section if both are null
