@@ -14,12 +14,12 @@ import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.Locati
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 /**
- * Fragment for a list of monsters
+ * Fragment for a list of locations
  */
 
 class LocationsListFragment : RecyclerViewFragment() {
     companion object {
-        private val ARG_TAB = "MONSTER_TAB"
+        private val ARG_TAB = "LOC_TAB"
 
         @JvmStatic
         fun newInstance(): LocationsListFragment {

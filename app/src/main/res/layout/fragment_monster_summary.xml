@@ -12,7 +12,7 @@
         android:paddingBottom="100dp">
 
         <ImageView
-            android:id="@+id/monster_icon"
+            android:id="@+id/item_icon"
             style="@style/ImageXLarge"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
@@ -21,13 +21,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/monster_name"
+            android:id="@+id/item_name"
             style="@style/TextDisplay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
-            app:layout_constraintLeft_toLeftOf="@id/monster_icon"
-            app:layout_constraintTop_toBottomOf="@id/monster_icon"
+            app:layout_constraintLeft_toLeftOf="@id/item_icon"
+            app:layout_constraintTop_toBottomOf="@id/item_icon"
             tools:text="Azure Rathalos" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_marginRight="@dimen/md_margin_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/monster_name"
+            app:layout_constraintTop_toBottomOf="@id/item_name"
             tools:text="An azure-colored subspecies of Rathalos. More mobile than their standard cousins, they locate prey from the air and quickly swoop in for the kill." />
 
         <FrameLayout

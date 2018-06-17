@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
 import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
 import kotlinx.android.synthetic.main.listitem_location.view.*
 
-import kotlinx.android.synthetic.main.listitem_monster.view.*
+import kotlinx.android.synthetic.main.listitem_large.view.*
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 
 class LocationItemsAdapterDelegate(private val onSelected: (LocationItemView) -> Unit)
