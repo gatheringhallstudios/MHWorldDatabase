@@ -33,11 +33,19 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorSetListFragment"
         android:label="Armor"
         tools:layout="@layout/fragment_generic_pager" />
-
-
+    <fragment
+        android:id="@+id/locationListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.list.LocationsListFragment"
+        android:label="Locations"
+        tools:layout="@layout/list_generic" />
     <fragment
         android:id="@+id/searchDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.search.UniversalSearchFragment"
         android:label="Search"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/locationDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationDetailPagerFragment"
+        android:label="Location Detail"
         tools:layout="@layout/fragment_generic_pager" />
 </navigation>

@@ -6,7 +6,7 @@
     android:layout_height="@dimen/material_list_item_height">
 
     <ImageView
-        android:id="@+id/monster_icon"
+        android:id="@+id/item_icon"
         style="@style/IconLarge"
         android:layout_marginStart="@dimen/margin_large"
         android:src="@drawable/question_mark_grey"
@@ -15,14 +15,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/monster_name"
+        android:id="@+id/item_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginStart="@dimen/margin_large"
         android:textAppearance="?android:textAppearanceLarge"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/monster_icon"
+        app:layout_constraintLeft_toRightOf="@id/item_icon"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Kushala Daora" />
 

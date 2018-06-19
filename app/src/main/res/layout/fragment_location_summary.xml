@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/location_icon"
+            style="@style/ImageXLarge"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:src="@drawable/question_mark_grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/question_mark_grey" />
+
+        <TextView
+            android:id="@+id/location_name"
+            style="@style/TextDisplay1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/location_icon"
+            app:layout_constraintTop_toBottomOf="@+id/location_icon"
+            tools:text="Elder's Recess" />
+
+        <TextView
+            android:id="@+id/location_description"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_padding_margin_small"
+            app:layout_constraintStart_toStartOf="@+id/location_name"
+            app:layout_constraintTop_toBottomOf="@+id/location_name"
+            tools:text="Elder's recess is a pretty cool place with lots of elder dragons" />
+
+        <FrameLayout
+            android:id="@+id/divider_1"
+            style="@style/HorizontalDivider"
+            app:layout_constraintTop_toBottomOf="@+id/location_description"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
