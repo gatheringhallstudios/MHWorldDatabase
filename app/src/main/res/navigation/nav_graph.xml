@@ -35,7 +35,7 @@
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
         android:id="@+id/locationListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.list.LocationsListFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.list.LocationListFragment"
         android:label="Locations"
         tools:layout="@layout/list_generic" />
     <fragment

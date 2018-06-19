@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemLocationView
@@ -29,7 +30,8 @@ class ItemDetailViewModel(app: Application) : AndroidViewModel(app) {
 
         this.itemId = itemId
 
-        item = dao.loadItem("en", itemId)
-        itemLocations = dao.loadItemLocations("en", itemId)
+        val lang = AppSettings.dataLocale
+        item = dao.loadItem(lang, itemId)
+        itemLocations = dao.loadItemLocations(lang, itemId)
     }
 }

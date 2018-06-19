@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(this.toolbar)
         setupNavigation()
 
+        // Initialize application settings
+        // todo: if there are issues, create an Application subclass and bind there
+        AppSettings.bindApplication(this.application)
+
         // bind the searchbox to the filter
         viewModel.filter.observe(this, Observer { filterValue ->
             searchView?.let { searchView ->

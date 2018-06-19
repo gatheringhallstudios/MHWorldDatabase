@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.list
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao
@@ -25,16 +26,17 @@ class MonsterListViewModel(application: Application) : AndroidViewModel(applicat
     lateinit var monsters: LiveData<List<MonsterView>>
 
     fun setTab(tab: Tab) {
-        if (::monsters.isInitialized && currentTab == tab) {
+        if (currentTab == tab) {
             return
         }
+
+        currentTab = tab
 
         val monsterSize = when (tab) {
             MonsterListViewModel.Tab.LARGE -> MonsterSize.LARGE
             MonsterListViewModel.Tab.SMALL -> MonsterSize.SMALL
         }
 
-        monsters = dao.loadList("en", monsterSize)
-        currentTab = tab
+        monsters = dao.loadList(AppSettings.dataLocale, monsterSize)
     }
 }

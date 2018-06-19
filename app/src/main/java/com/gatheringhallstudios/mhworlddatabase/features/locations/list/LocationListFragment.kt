@@ -17,17 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
  * Fragment for a list of locations
  */
 
-class LocationsListFragment : RecyclerViewFragment() {
-    companion object {
-        private val ARG_TAB = "LOC_TAB"
-
-        @JvmStatic
-        fun newInstance(): LocationsListFragment {
-            val f = LocationsListFragment()
-            return f
-        }
-    }
-
+class LocationListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(LocationsListViewModel::class.java)
     }
@@ -42,9 +32,6 @@ class LocationsListFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
-        viewModel.getLocations()
-
-
         viewModel.locations.observe(this, Observer<List<LocationView>>({
             adapter.items = it
             adapter.notifyDataSetChanged()

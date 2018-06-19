@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
@@ -46,6 +47,6 @@ class SkillListFragment : RecyclerViewFragment() {
 
     class ViewModel(application: Application) : AndroidViewModel(application) {
         private val dao = MHWDatabase.getDatabase(application).skillDao()
-        val skills = dao.loadSkillTrees("en")
+        val skills = dao.loadSkillTrees(AppSettings.dataLocale)
     }
 }

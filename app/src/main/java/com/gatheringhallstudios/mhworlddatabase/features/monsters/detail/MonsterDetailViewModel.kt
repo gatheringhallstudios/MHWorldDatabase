@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao
@@ -30,10 +31,12 @@ class MonsterDetailViewModel(application: Application) : AndroidViewModel(applic
 
         // Query monster by ID
         this.id = monsterId
-        monster = dao.loadMonster("en", monsterId)
-        habitats = dao.loadHabitats("en", monsterId)
-        rewards = dao.loadRewards("en", monsterId)
-        hitzones = dao.loadHitzones("en", monsterId)
-        breaks = dao.loadBreaks("en", monsterId)
+
+        val lang = AppSettings.dataLocale
+        monster = dao.loadMonster(lang, monsterId)
+        habitats = dao.loadHabitats(lang, monsterId)
+        rewards = dao.loadRewards(lang, monsterId)
+        hitzones = dao.loadHitzones(lang, monsterId)
+        breaks = dao.loadBreaks(lang, monsterId)
     }
 }
