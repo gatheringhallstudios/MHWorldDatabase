@@ -26,20 +26,6 @@ class MainActivityViewModel(app : Application) : AndroidViewModel(app) {
         this.searchActive.value = false
     }
 
-    // the below is a temporary search implementation
-    // we may or may not move the implementation of searching to the UniversalSearchFragment
-
-    // the data loaded by this is temporary for testing reasons
-    // eventually we'll make a search dao
-    val dao = MHWDatabase.getDatabase(app).monsterDao()
-
-    /**
-     * Observe to retrieve search results
-     */
-    val searchResults : LiveData<List<Any>> = Transformations.switchMap(filter) {
-        getNewDataFor(it ?: "")
-    }
-
     /**
      * Function that updates internal state to match a "new search".
      */
@@ -48,17 +34,5 @@ class MainActivityViewModel(app : Application) : AndroidViewModel(app) {
 
         filter.value = ""
         searchActive.value = true
-    }
-
-    // temporary implementation
-    private fun getNewDataFor(search : String) : LiveData<List<Any>>? {
-        // return empty results if search is empty
-        if (search.trim() == "") {
-            val emptyData = MutableLiveData<List<Any>>()
-            emptyData.value = ArrayList()
-            return emptyData
-        }
-
-        return dao.loadList("en") as LiveData<List<Any>>
     }
 }

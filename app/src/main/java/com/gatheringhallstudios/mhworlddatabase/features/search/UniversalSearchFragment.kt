@@ -35,6 +35,10 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
     }
 
+    val searchViewModel by lazy {
+        ViewModelProviders.of(this).get(UniversalSearchViewModel::class.java)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
 
@@ -42,7 +46,11 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         // If the user hit back and returned to this page, we need to open it again
         activityViewModel.searchActive.value = true
 
-        activityViewModel.searchResults.observe(this, Observer {
+        activityViewModel.filter.observe(this, Observer {
+            searchViewModel.searchData(it)
+        })
+
+        searchViewModel.searchResults.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })

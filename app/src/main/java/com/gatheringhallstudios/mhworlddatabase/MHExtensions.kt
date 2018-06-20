@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase
 
+import android.arch.lifecycle.LiveData
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
@@ -9,6 +10,9 @@ import com.gatheringhallstudios.mhworlddatabase.common.ColorRegistry
 import com.gatheringhallstudios.mhworlddatabase.common.VectorRegistry
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
 import com.sdsmdg.harjot.vectormaster.models.PathModel
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicReference
 
 
 val TAG = "MHWorldApplicationUtil"
@@ -90,4 +94,20 @@ fun Context.getVectorDrawable(
         Log.e(TAG, "Failed to load vector in the registry: $vector")
         ContextCompat.getDrawable(this, default)
     }
+}
+
+/**
+ * Returns the data contained in the livedata, waiting up to 2 seconds to retrieve it
+ */
+fun <T> LiveData<T>.getResult(): T {
+    // contains the result, since lambdas can't assign to variables
+    val value = AtomicReference<T>()
+
+    val latch = CountDownLatch(1)
+    this.observeForever { result ->
+        value.set(result)
+        latch.countDown()
+    }
+    latch.await(2, TimeUnit.SECONDS)
+    return value.get()
 }
