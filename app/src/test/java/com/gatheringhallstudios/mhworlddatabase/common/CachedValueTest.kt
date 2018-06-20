@@ -27,6 +27,7 @@ class CachedValueTest {
         assertEquals("expected cached value", firstValue, lastValue)
     }
 
+
     @Test
     fun ValueResetsIfExpired() {
         var currentIdx = 0
@@ -37,5 +38,23 @@ class CachedValueTest {
         val lastValue = value.get()
 
         assertNotEquals(lastValue, firstValue)
+    }
+
+    @Test
+    fun GetExtendsTimeout() {
+        var currentIdx = 0
+        val value = CachedValue(50) { currentIdx++ }
+
+        val firstValue = value.get()
+        Thread.sleep(20) // sleep for less than cached
+        value.get()
+        Thread.sleep(20) // sleep for less than cached
+        value.get()
+        Thread.sleep(20) // sleep for less than cached
+        value.get()
+        Thread.sleep(20) // sleep for less than cached
+        val lastValue = value.get()
+
+        assertEquals(firstValue, lastValue)
     }
 }

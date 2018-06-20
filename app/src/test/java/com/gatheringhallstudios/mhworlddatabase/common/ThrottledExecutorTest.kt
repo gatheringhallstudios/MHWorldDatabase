@@ -1,14 +1,11 @@
 package com.gatheringhallstudios.mhworlddatabase.common
 
-import android.support.test.runner.AndroidJUnit4
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.util.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import org.junit.Assert.assertEquals
 
-@RunWith(AndroidJUnit4::class)
 class ThrottledExecutorTest {
     @Test
     fun Runs_Sequentially() {
