@@ -35,16 +35,6 @@ class MainActivity : AppCompatActivity() {
         // todo: if there are issues, create an Application subclass and bind there
         AppSettings.bindApplication(this.application)
 
-        // bind the searchbox to the filter
-        viewModel.filter.observe(this, Observer { filterValue ->
-            searchView?.let { searchView ->
-                // update the searchbox query if open and the value differs
-                if (!searchView.isIconified && searchView.query != filterValue) {
-                    searchView.setQuery(filterValue, false);
-                }
-            }
-        })
-
         viewModel.searchActive.observe(this, Observer {
             val active = it ?: false
             searchView?.let { searchView ->
@@ -72,6 +62,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    /**
+     * Requests the search view to contain a new value directly.
+     * This will indirectly update the viewmodel's filter property
+     */
+    fun updateSearchView(filterValue: String) {
+        searchView?.let { searchView ->
+            // update the searchbox query if open and the value differs
+            if (!searchView.isIconified && searchView.query != filterValue) {
+                searchView.setQuery(filterValue, false)
+            }
+        }
     }
 
     private fun setupNavigation() {
@@ -150,12 +153,12 @@ class MainActivity : AppCompatActivity() {
 
         searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.filter.value = query ?: ""
+                viewModel.handleSearchUpdate(query ?: "")
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.filter.value = newText ?: ""
+                viewModel.handleSearchUpdate(newText ?: "")
                 return true
             }
         })

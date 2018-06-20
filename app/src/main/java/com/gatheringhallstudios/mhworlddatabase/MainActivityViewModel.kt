@@ -10,8 +10,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 
 class MainActivityViewModel(app : Application) : AndroidViewModel(app) {
     /**
-     * Livedata that contains the current searchview field value.
-     * Update to propogate that data
+     * Livedata that contains the current accepted search view field value.
+     * Updated whenever the searchview itself is updated.
      */
     val filter = StableMutableLiveData<String>()
 
@@ -34,5 +34,13 @@ class MainActivityViewModel(app : Application) : AndroidViewModel(app) {
 
         filter.value = ""
         searchActive.value = true
+    }
+
+    /**
+     * Call this method when the search value has updated.
+     * Recommended to be used by the owner of the search view
+     */
+    fun handleSearchUpdate(filterValue: String) {
+        filter.value = filterValue
     }
 }
