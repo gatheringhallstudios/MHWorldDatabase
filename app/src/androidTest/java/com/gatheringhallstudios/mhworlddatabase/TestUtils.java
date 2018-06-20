@@ -14,7 +14,7 @@ public class TestUtils {
         CountDownLatch latch = new CountDownLatch(1);
         data.observeForever((result) -> {
             value.set(result);
-
+            latch.countDown();
         });
         latch.await(2, TimeUnit.SECONDS);
         return value.get();
