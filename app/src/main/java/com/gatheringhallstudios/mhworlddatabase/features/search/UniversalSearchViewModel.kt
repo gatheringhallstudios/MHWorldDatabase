@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.common.ThrottledExecutor
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.getResult
 
@@ -37,19 +38,22 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     private val monsterDao = db.monsterDao()
     private val itemDao = db.itemDao()
 
+    // this prevents search from being overwhelmed and makes everything orderly
+    private val executor = ThrottledExecutor()
+
     val searchResults = MutableLiveData<List<Any>>()
 
     fun searchData(filterString: String?) {
-        val trimmedString = filterString?.trim()
-        if (trimmedString == null || trimmedString == "") {
-            searchResults.value = null
-            return
-        }
-
+        val trimmedString = filterString?.trim() ?: ""
         val filter = makeSearchFilter(trimmedString)
         val lang = AppSettings.dataLocale
 
-        Thread {
+        executor.execute {
+            if (trimmedString == "") {
+                searchResults.postValue(listOf())
+                return@execute
+            }
+
             val results = mutableListOf<Any>()
 
             val monsterData = monsterDao.loadList(lang)
@@ -59,6 +63,6 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
             results.addAll(itemData.getResult().filter { filter(it.name) })
 
             searchResults.postValue(results)
-        }.start()
+        }
     }
 }
