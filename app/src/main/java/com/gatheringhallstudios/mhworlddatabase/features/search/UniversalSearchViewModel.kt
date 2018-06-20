@@ -15,19 +15,24 @@ fun normalize(str: String): String {
     return result
 }
 
-fun makeSearchFilter(filter: String) : (String?) -> Boolean {
-    val words = normalize(filter).split(',')
-    return fun(test : String?) : Boolean {
+class SearchFilter(private val filterString: String) {
+    private val words = normalize(filterString).split(' ')
+
+    fun matches(test: String?): Boolean {
+        test ?: return false
+        return matchesNormalized(normalize(test))
+    }
+
+    fun matchesNormalized(test: String?): Boolean {
         test ?: return false
 
-        val testStr = normalize(test)
         for (word in words) {
-            if (testStr.contains(word)) {
-                return true
+            if (!test.contains(word)) {
+                return false
             }
         }
 
-        return false
+        return true
     }
 }
 
@@ -43,12 +48,13 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
 
     val searchResults = MutableLiveData<List<Any>>()
 
+    val lang = AppSettings.dataLocale
+
     fun searchData(filterString: String?) {
-        val trimmedString = filterString?.trim() ?: ""
-        val filter = makeSearchFilter(trimmedString)
-        val lang = AppSettings.dataLocale
 
         executor.execute {
+            val trimmedString = filterString?.trim() ?: ""
+
             if (trimmedString == "") {
                 searchResults.postValue(listOf())
                 return@execute
@@ -56,11 +62,12 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
 
             val results = mutableListOf<Any>()
 
-            val monsterData = monsterDao.loadList(lang)
-            val itemData = itemDao.loadItems(lang)
+            val monsterData = monsterDao.loadList(lang).getResult()
+            val itemData = itemDao.loadItems(lang).getResult()
 
-            results.addAll(monsterData.getResult().filter { filter(it.name) })
-            results.addAll(itemData.getResult().filter { filter(it.name) })
+            val filter = SearchFilter(trimmedString)
+            results.addAll(monsterData.filter { filter.matches(it.name) })
+            results.addAll(itemData.filter { filter.matches(it.name) })
 
             searchResults.postValue(results)
         }
