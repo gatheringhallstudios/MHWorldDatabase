@@ -4,6 +4,7 @@ import android.arch.lifecycle.*
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import com.gatheringhallstudios.mhworlddatabase.MainActivity
 import com.gatheringhallstudios.mhworlddatabase.MainActivityViewModel
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
@@ -45,6 +46,7 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         // open up the search menu (if not open) if we're on this page
         // If the user hit back and returned to this page, we need to open it again
         activityViewModel.searchActive.value = true
+        (activity as MainActivity).updateSearchView(searchViewModel.lastSearchFilter)
 
         activityViewModel.filter.observe(this, Observer {
             searchViewModel.searchData(it)

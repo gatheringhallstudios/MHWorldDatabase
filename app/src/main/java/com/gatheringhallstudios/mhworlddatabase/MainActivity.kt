@@ -71,9 +71,7 @@ class MainActivity : AppCompatActivity() {
     fun updateSearchView(filterValue: String) {
         searchView?.let { searchView ->
             // update the searchbox query if open and the value differs
-            if (!searchView.isIconified && searchView.query != filterValue) {
-                searchView.setQuery(filterValue, false)
-            }
+            searchView.setQuery(filterValue, false)
         }
     }
 

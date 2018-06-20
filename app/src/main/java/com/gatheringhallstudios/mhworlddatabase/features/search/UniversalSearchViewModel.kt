@@ -50,6 +50,7 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     // this prevents search from being overwhelmed and makes everything orderly
     private val executor = ThrottledExecutor()
 
+    var lastSearchFilter: String = ""
     val searchResults = MutableLiveData<List<Any>>()
 
     val monsterData = CachedValue(timeout) {
@@ -63,9 +64,14 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun searchData(filterString: String?) {
-        executor.execute {
-            val trimmedString = filterString?.trim() ?: ""
+        val trimmedString = filterString?.trim() ?: ""
+        if (trimmedString == lastSearchFilter) {
+            return
+        }
 
+        lastSearchFilter = trimmedString
+
+        executor.execute {
             if (trimmedString == "") {
                 searchResults.postValue(listOf())
                 return@execute
