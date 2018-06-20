@@ -1,24 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.features.locations.detail
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.LocationItemsAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterRewardAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationItemView
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
-import com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment
-import com.gatheringhallstudios.mhworlddatabase.features.items.ItemListFragment
-import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
-import kotlinx.android.synthetic.main.list_generic.*
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 
 
 class LocationGatheringListFragment : Fragment() {

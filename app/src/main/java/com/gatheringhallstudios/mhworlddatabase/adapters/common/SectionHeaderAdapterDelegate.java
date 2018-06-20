@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.adapters;
+package com.gatheringhallstudios.mhworlddatabase.adapters.common;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.common.models.SectionHeader;
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 
 import java.util.List;

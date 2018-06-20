@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common.models;
+package com.gatheringhallstudios.mhworlddatabase.adapters.common;
 
 /**
  * Model for a SectionHeader. Insert these in RecyclerView adapters datasets to display headers

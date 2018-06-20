@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.adapters
+package com.gatheringhallstudios.mhworlddatabase.adapters.common
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_sub_header.view.*
 

@@ -3,27 +3,19 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 
-import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.BasicListDelegationAdapter
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterRewardAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.SubHeaderAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SubHeaderAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SubHeader
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 import java.util.ArrayList
-
-import kotlinx.android.synthetic.main.list_generic.*
 
 /**
  * Fragment for a list of monsters

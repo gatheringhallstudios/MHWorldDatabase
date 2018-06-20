@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase.adapters.common
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

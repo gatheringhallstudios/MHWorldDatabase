@@ -1,9 +1,7 @@
-package com.gatheringhallstudios.mhworlddatabase.adapters
+package com.gatheringhallstudios.mhworlddatabase.adapters.common
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.gatheringhallstudios.mhworlddatabase.common.models.SectionHeader
-import com.gatheringhallstudios.mhworlddatabase.common.models.SubHeader
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
 

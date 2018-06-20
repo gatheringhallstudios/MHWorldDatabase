@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.adapters;
+package com.gatheringhallstudios.mhworlddatabase.adapters.common;
 
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter;
