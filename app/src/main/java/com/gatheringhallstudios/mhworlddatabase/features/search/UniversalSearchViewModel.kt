@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.common.CachedValue
 import com.gatheringhallstudios.mhworlddatabase.common.ThrottledExecutor
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.getResult
@@ -36,6 +37,9 @@ class SearchFilter(private val filterString: String) {
     }
 }
 
+// values are cached for 30 seconds
+val timeout: Long = 30 * 1000
+
 class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     private val db = MHWDatabase.getDatabase(app)
 
@@ -48,10 +52,17 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
 
     val searchResults = MutableLiveData<List<Any>>()
 
-    val lang = AppSettings.dataLocale
+    val monsterData = CachedValue(timeout) {
+        val lang = AppSettings.dataLocale
+        monsterDao.loadList(lang).getResult()
+    }
+
+    val itemData = CachedValue(timeout) {
+        val lang = AppSettings.dataLocale
+        itemDao.loadItems(lang).getResult()
+    }
 
     fun searchData(filterString: String?) {
-
         executor.execute {
             val trimmedString = filterString?.trim() ?: ""
 
@@ -62,12 +73,9 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
 
             val results = mutableListOf<Any>()
 
-            val monsterData = monsterDao.loadList(lang).getResult()
-            val itemData = itemDao.loadItems(lang).getResult()
-
             val filter = SearchFilter(trimmedString)
-            results.addAll(monsterData.asSequence().filter { filter.matches(it.name) })
-            results.addAll(itemData.asSequence().filter { filter.matches(it.name) })
+            results.addAll(monsterData.get().asSequence().filter { filter.matches(it.name) })
+            results.addAll(itemData.get().asSequence().filter { filter.matches(it.name) })
 
             searchResults.postValue(results)
         }
