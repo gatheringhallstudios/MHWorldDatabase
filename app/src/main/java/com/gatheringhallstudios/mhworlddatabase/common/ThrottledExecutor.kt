@@ -1,40 +1,41 @@
 package com.gatheringhallstudios.mhworlddatabase.common
 
 import java.util.concurrent.Executor
-import kotlin.concurrent.thread
+import java.util.concurrent.atomic.AtomicReference
+import java.util.concurrent.locks.ReentrantReadWriteLock
+import kotlin.concurrent.read
+import kotlin.concurrent.write
 
 class ThrottledExecutor : Executor {
-    // note: java locks are re-entrant
-    private val lock = Object()
+    private val lock = ReentrantReadWriteLock()
 
     private var activeRunnable: Runnable? = null
-    private var nextRunnable: Runnable? = null
+    private var nextRunnable = AtomicReference<Runnable?>()
 
     override fun execute(command: Runnable?) {
-        synchronized(lock) {
-            // always update the "next" runnable
-            nextRunnable = Runnable {
-                try {
-                    command?.run()
-                } finally {
-                    // clears active runnable (we're done)
+        nextRunnable.set(Runnable {
+            try {
+                command?.run()
+            } finally {
+                // clear active runnable (we're done)
+                lock.write {
                     activeRunnable = null
-
                     scheduleNext()
                 }
             }
+        })
 
-            scheduleNext()
-        }
+        scheduleNext()
     }
 
     private fun scheduleNext() {
-        synchronized(lock) {
+        lock.read {
             if (activeRunnable == null) {
-                activeRunnable = nextRunnable
-                nextRunnable = null
+                lock.write {
+                    activeRunnable = nextRunnable.getAndSet(null)
 
-                Thread(activeRunnable).start()
+                    Thread(activeRunnable).start()
+                }
             }
         }
     }
