@@ -66,8 +66,8 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
             val itemData = itemDao.loadItems(lang).getResult()
 
             val filter = SearchFilter(trimmedString)
-            results.addAll(monsterData.filter { filter.matches(it.name) })
-            results.addAll(itemData.filter { filter.matches(it.name) })
+            results.addAll(monsterData.asSequence().filter { filter.matches(it.name) })
+            results.addAll(itemData.asSequence().filter { filter.matches(it.name) })
 
             searchResults.postValue(results)
         }
