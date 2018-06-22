@@ -9,6 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.MainActivityViewModel
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment
@@ -21,6 +22,9 @@ class UniversalSearchFragment : RecyclerViewFragment() {
     // Universal Search results handle many types of data.
     // Create an adapter that handles all of them
     val adapter = BasicListDelegationAdapter<Any>(
+            LocationAdapterDelegate({
+                getRouter().navigateLocationDetail(it.id)
+            }),
             MonsterAdapterDelegate({
                 getRouter().navigateMonsterDetail(it.id)
             }),

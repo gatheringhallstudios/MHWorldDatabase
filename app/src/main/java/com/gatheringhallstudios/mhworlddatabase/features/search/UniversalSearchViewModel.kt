@@ -44,6 +44,7 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     private val db = MHWDatabase.getDatabase(app)
 
     // todo: if we ever need a more efficient search mechanism, implement a robust search dao or repo
+    private val locationDao = db.locationDao()
     private val monsterDao = db.monsterDao()
     private val itemDao = db.itemDao()
 
@@ -52,6 +53,11 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
 
     var lastSearchFilter: String = ""
     val searchResults = MutableLiveData<List<Any>>()
+
+    val locationData = CachedValue(timeout) {
+        val lang = AppSettings.dataLocale
+        locationDao.loadLocations(lang).getResult()
+    }
 
     val monsterData = CachedValue(timeout) {
         val lang = AppSettings.dataLocale
@@ -80,6 +86,7 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
             val results = mutableListOf<Any>()
 
             val filter = SearchFilter(trimmedString)
+            results.addAll(locationData.get().asSequence().filter { filter.matches(it.name) })
             results.addAll(monsterData.get().asSequence().filter { filter.matches(it.name) })
             results.addAll(itemData.get().asSequence().filter { filter.matches(it.name) })
 
