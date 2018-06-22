@@ -4,8 +4,10 @@ import android.arch.lifecycle.LiveData
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.common.ColorRegistry
 import com.gatheringhallstudios.mhworlddatabase.common.VectorRegistry
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
@@ -110,4 +112,11 @@ fun <T> LiveData<T>.getResult(): T {
     }
     latch.await(2, TimeUnit.SECONDS)
     return value.get()
+}
+
+/**
+ * Returns the router object that can be used to navigate between pages
+ */
+fun Fragment.getRouter() : Router {
+    return Router(this.findNavController())
 }

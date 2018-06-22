@@ -13,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 class UniversalSearchFragment : RecyclerViewFragment() {
@@ -21,14 +22,10 @@ class UniversalSearchFragment : RecyclerViewFragment() {
     // Create an adapter that handles all of them
     val adapter = BasicListDelegationAdapter<Any>(
             MonsterAdapterDelegate({
-                findNavController().navigate(
-                        R.id.monsterDetailDestination,
-                        BundleBuilder().putInt(MonsterDetailPagerFragment.ARG_MONSTER_ID, it.id).build())
+                getRouter().navigateMonsterDetail(it.id)
             }),
             ItemAdapterDelegate({
-                findNavController().navigate(
-                        R.id.itemDetailDestination,
-                        BundleBuilder().putInt(ItemDetailPagerFragment.ARG_ITEM_ID, it.id).build())
+                getRouter().navigateItemDetail(it.id)
             })
     )
 

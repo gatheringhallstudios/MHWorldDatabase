@@ -16,6 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 class ItemListFragment : RecyclerViewFragment() {
@@ -36,19 +37,13 @@ class ItemListFragment : RecyclerViewFragment() {
 
     // Setup recycler list adapter and the on-selected
     private val adapter = BasicListDelegationAdapter(ItemAdapterDelegate(onSelect = {
-        findNavController().navigate(
-                R.id.itemDetailDestination,
-                BundleBuilder().putInt(ItemDetailPagerFragment.ARG_ITEM_ID, it.id).build())
+        getRouter().navigateItemDetail(it.id)
     }))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
 
-        var category: ItemCategory? = ItemCategory.MATERIAL
-        val args = arguments;
-        if (args != null) {
-            category = args.getSerializable(ARG_CATEGORY) as ItemCategory?
-        }
+        val category = arguments?.getSerializable(ARG_CATEGORY) as ItemCategory?
 
         viewModel.init(category)
 

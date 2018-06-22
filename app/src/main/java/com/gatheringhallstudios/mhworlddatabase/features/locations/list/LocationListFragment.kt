@@ -11,6 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 /**
@@ -24,10 +25,7 @@ class LocationListFragment : RecyclerViewFragment() {
 
     // Setup adapter and navigation
     private val adapter = BasicListDelegationAdapter(LocationAdapterDelegate({
-        findNavController().navigate(
-                R.id.locationDetailDestination,
-                BundleBuilder().putInt(LocationDetailPagerFragment.ARG_LOCATION_ID, it.id).build()
-        )
+        getRouter().navigateLocationDetail(it.id)
     }))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
