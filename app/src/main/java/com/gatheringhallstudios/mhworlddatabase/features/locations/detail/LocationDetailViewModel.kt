@@ -3,18 +3,14 @@ package com.gatheringhallstudios.mhworlddatabase.features.locations.detail
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao
 import com.gatheringhallstudios.mhworlddatabase.data.views.LocationItemView
 import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
 
 class LocationDetailViewModel(application: Application) :  AndroidViewModel(application) {
-    private val dao : LocationDao
-
-    init{
-        val db = MHWDatabase.getDatabase(application)
-        dao = db.locationDao()
-    }
+    private val dao : LocationDao = MHWDatabase.getDatabase(application).locationDao()
 
     private var id: Int = 0
     private var initialized = false
@@ -27,8 +23,8 @@ class LocationDetailViewModel(application: Application) :  AndroidViewModel(appl
         }
 
         this.id = locationid
-        location = dao.loadLocation("en", locationid)
-        locationItems = dao.loadLocationItems("en", locationid)
+        location = dao.loadLocation(AppSettings.dataLocale, locationid)
+        locationItems = dao.loadLocationItems(AppSettings.dataLocale, locationid)
         initialized = true
     }
 }
