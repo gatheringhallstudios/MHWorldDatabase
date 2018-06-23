@@ -1,45 +1,44 @@
 package com.gatheringhallstudios.mhworlddatabase.features.locations.detail
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
+import com.gatheringhallstudios.mhworlddatabase.adapters.LocationItemsAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
+import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.data.views.LocationItemView
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 
-class LocationGatheringListFragment : Fragment() {
-
-    companion object {
-        private val ARG_LOCATION_ID = "LOCATION_ID"
-
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstance: Bundle?): View? {
-        return inflater.inflate(R.layout.list_generic, parent, false)
-    }
-
+class LocationGatheringListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(LocationDetailViewModel::class.java)
     }
 
-    private lateinit var adapter: BasicListDelegationAdapter<Any>
+    private val adapter = CategoryAdapter(LocationItemsAdapterDelegate({
+        getRouter().navigateItemDetail(it.data.item_id)
+    }))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        this.setAdapter(adapter)
+        viewModel.locationItems.observe(this, Observer(::setItems))
+    }
 
-//        var locationItemsAdapterDelegate = LocationItemsAdapterDelegate(onSelected={
-//            findNavController().navigate(
-//                    R.id.itemDetailDestination,
-//                    BundleBuilder().putInt(ItemDetailPagerFragment.ARG_ITEM_ID, it.data.location_id).build())
-//        })
-//
-//        adapter = BasicListDelegationAdapter(locationItemsAdapterDelegate)
-//        //adapter.items = viewModel.locationItems.value
-//
-//        recycler_view.adapter = adapter
+    private fun setItems(locationItems: List<LocationItemView>?) {
+        adapter.clear()
+        if(locationItems.orEmpty().isEmpty()) {
+            return;
+        }
+        else {
+            val grouped = locationItems!!.asSequence()
+                    .groupBy {it.data.area}
 
+            for((area, items) in grouped) {
+                adapter.addSection("Area $area", items)
+            }
 
+            adapter.notifyDataSetChanged()
+        }
     }
 }

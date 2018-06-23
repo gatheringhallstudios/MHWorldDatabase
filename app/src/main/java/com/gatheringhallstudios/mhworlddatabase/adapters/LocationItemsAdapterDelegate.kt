@@ -25,8 +25,9 @@ class LocationItemsAdapterDelegate(private val onSelected: (LocationItemView) ->
         val defaultIcon = R.drawable.question_mark_grey
 
         view.reward_name.text = data.item_name
-        view.reward_stack.text = data.data.stack.toString()
-        view.reward_percent.text = data.data.stack.toString()
+        view.reward_stack.text =  "x ${data.data.stack}"
+        view.reward_percent.text = "${data.data.percentage}%"
+
         view.setOnClickListener { onSelected(data) }
     }
 }

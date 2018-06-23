@@ -4,15 +4,11 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
-import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
-import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 /**
  * Fragment for a list of locations
