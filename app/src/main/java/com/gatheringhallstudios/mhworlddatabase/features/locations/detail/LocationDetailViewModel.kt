@@ -13,18 +13,16 @@ class LocationDetailViewModel(application: Application) :  AndroidViewModel(appl
     private val dao : LocationDao = MHWDatabase.getDatabase(application).locationDao()
 
     private var id: Int = 0
-    private var initialized = false
     lateinit var locationItems : LiveData<List<LocationItemView>>
     lateinit var location : LiveData<LocationView>
 
-    fun setLocation(locationid: Int) {
-        if(initialized) {
+    fun setLocation(locationId: Int) {
+        if (this.id == locationId) {
             return
         }
 
-        this.id = locationid
-        location = dao.loadLocation(AppSettings.dataLocale, locationid)
-        locationItems = dao.loadLocationItems(AppSettings.dataLocale, locationid)
-        initialized = true
+        this.id = locationId
+        location = dao.loadLocation(AppSettings.dataLocale, locationId)
+        locationItems = dao.loadLocationItems(AppSettings.dataLocale, locationId)
     }
 }

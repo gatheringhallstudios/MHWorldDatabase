@@ -10,7 +10,9 @@ import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.views.LocationItemView
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
-
+/**
+ * A sub-fragment that contains the list of items available to gather at a location.
+ */
 class LocationGatheringListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(LocationDetailViewModel::class.java)
@@ -27,18 +29,17 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
 
     private fun setItems(locationItems: List<LocationItemView>?) {
         adapter.clear()
-        if(locationItems.orEmpty().isEmpty()) {
-            return;
+        if (locationItems.orEmpty().isEmpty()) {
+            return
         }
-        else {
-            val grouped = locationItems!!.asSequence()
-                    .groupBy {it.data.area}
 
-            for((area, items) in grouped) {
-                adapter.addSection("Area $area", items)
-            }
+        val grouped = locationItems!!.asSequence()
+                .groupBy {it.data.area}
 
-            adapter.notifyDataSetChanged()
+        for ((area, items) in grouped) {
+            adapter.addSection("Area $area", items)
         }
+
+        adapter.notifyDataSetChanged()
     }
 }
