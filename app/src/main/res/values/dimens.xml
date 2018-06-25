@@ -24,7 +24,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="image_size_small">24dp</dimen>
-    <dimen name="image_size_medium">32dp</dimen>
+    <dimen name="image_size_medium">40dp</dimen>
     <dimen name="image_size_large">48dp</dimen>
     <dimen name="image_size_xlarge">72dp</dimen>
 
