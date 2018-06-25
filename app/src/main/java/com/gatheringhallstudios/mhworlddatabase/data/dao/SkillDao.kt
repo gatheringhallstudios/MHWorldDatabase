@@ -1,9 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import androidx.room.Dao
+import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.views.Skill
 
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull

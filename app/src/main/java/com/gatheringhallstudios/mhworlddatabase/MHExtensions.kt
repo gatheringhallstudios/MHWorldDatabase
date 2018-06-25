@@ -1,13 +1,12 @@
 package com.gatheringhallstudios.mhworlddatabase
 
-import android.arch.lifecycle.LiveData
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.support.annotation.DrawableRes
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.util.Log
-import androidx.navigation.fragment.findNavController
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.common.ColorRegistry
 import com.gatheringhallstudios.mhworlddatabase.common.VectorRegistry
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
@@ -117,6 +116,6 @@ fun <T> LiveData<T>.getResult(): T {
 /**
  * Returns the router object that can be used to navigate between pages
  */
-fun Fragment.getRouter() : Router {
-    return Router(this.findNavController())
+fun androidx.fragment.app.Fragment.getRouter() : Router {
+    return Router(findNavController(this))
 }

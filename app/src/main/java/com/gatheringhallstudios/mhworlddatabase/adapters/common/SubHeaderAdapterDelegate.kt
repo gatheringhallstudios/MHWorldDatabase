@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters.common
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
         return items[position] is SubHeader
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.listitem_sub_header, parent, false)
 
@@ -27,7 +27,7 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
 
     override fun onBindViewHolder(items: List<Any>,
                                   position: Int,
-                                  holder: RecyclerView.ViewHolder,
+                                  holder: androidx.recyclerview.widget.RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
         val subHeader = items[position] as SubHeader
 
@@ -37,7 +37,7 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
         // todo: allow collapsible header. Collapsible header via onSelected is not the proper way
     }
 
-    internal inner class HeaderViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    internal inner class HeaderViewHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         fun setTitle(title : String?) {
             view.label_text.text = title
             //vh.labelText.setTypeface(vh.labelText.getTypeface(), Typeface.BOLD);

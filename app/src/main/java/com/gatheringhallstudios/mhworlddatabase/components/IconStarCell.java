@@ -3,9 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.components;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -14,8 +11,9 @@ import android.widget.LinearLayout;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 /**
  * This view is a custom cell with an icon on the left followed by some stars.
@@ -26,8 +24,8 @@ public class IconStarCell extends LinearLayout {
 
     private final String TAG = getClass().getSimpleName();
 
-    @BindView(R.id.generic_icon) ImageView imageView;
-    @BindView(R.id.star_layout) LinearLayout starLayout;
+    ImageView imageView;
+    LinearLayout starLayout;
 
     public IconStarCell(Context context, @DrawableRes int imgSrc, int numStars) {
         super(context);
@@ -66,7 +64,9 @@ public class IconStarCell extends LinearLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cell_icon_star, this, true);
 
-        ButterKnife.bind(this);
+        // Bind views
+        imageView = this.findViewById(R.id.generic_icon);
+        starLayout = this.findViewById(R.id.star_layout);
 
         setLeftIconDrawable(drawable);
         setStars(numStars);
@@ -102,6 +102,7 @@ public class IconStarCell extends LinearLayout {
 
     /**
      * Set custom drawable for the left icon
+     *
      * @param drawable
      */
     public void setLeftIconDrawable(Drawable drawable) {

@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters.common
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
@@ -9,7 +9,7 @@ import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
  * Defines an adapter that can be used to add sectioned data.
  * SubHeaderAdapterDelegate and SectionHeaderAdapterDelegate are already added
  */
-class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
     private val delegatesManager = AdapterDelegatesManager<List<Any>>()
 
     private val items = ArrayList<Any>()
@@ -51,7 +51,7 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
         return delegatesManager.getItemViewType(items, position)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return delegatesManager.onCreateViewHolder(parent, viewType)
     }
 
@@ -59,7 +59,7 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
         return items.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         return delegatesManager.onBindViewHolder(items, position, holder)
     }
 }

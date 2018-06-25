@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.entities;
 
-import android.arch.persistence.room.Entity;
+import androidx.room.Entity;
 
 import com.gatheringhallstudios.mhworlddatabase.data.entities.base.NameEntity;
 

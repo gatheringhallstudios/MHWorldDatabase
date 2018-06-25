@@ -5,8 +5,10 @@ import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
- * This is a general {@link android.support.v7.widget.RecyclerView} adapter that you
+ * This is a general {@link RecyclerView} adapter that you
  * populate with more specific {@link AdapterDelegate}s. Accepts multiple AdapterDelegates
  * and creates an Adapter capable of displaying the appropriate any object of type T into a
  * RecyclerView as long as the appropriate AdapterDelegate is given.

@@ -1,10 +1,10 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_monster_summary.*
 /**
  * Fragment for displaying Monster Summary
  */
-class MonsterSummaryFragment : Fragment() {
+class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
 
     private val viewModel by lazy {
         // this fragment is a "child", so get the parent fragment's

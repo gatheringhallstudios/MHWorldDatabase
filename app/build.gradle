@@ -6,14 +6,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.gatheringhallstudios.mhworlddatabase"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -37,35 +37,35 @@ dependencies {
     /*
      * Google Support Libraries
      */
-    def google_version = "27.1.1"
-    implementation "com.android.support:appcompat-v7:${google_version}"
-    implementation "com.android.support:design:${google_version}"
-    implementation "com.android.support:cardview-v7:${google_version}"
-    implementation "com.android.support:gridlayout-v7:${google_version}"
-    implementation "com.android.support:recyclerview-v7:${google_version}"
-    implementation "com.android.support.constraint:constraint-layout:1.1.0"
+    def androidx_version = "1.0.0-alpha3"
+    implementation "androidx.appcompat:appcompat:$androidx_version"
+    implementation "com.google.android.material:material:$androidx_version"
+    implementation "androidx.cardview:cardview:$androidx_version"
+    implementation "androidx.gridlayout:gridlayout:$androidx_version"
+    implementation "androidx.recyclerview:recyclerview:$androidx_version"
+    kapt "androidx.annotation:annotation:$androidx_version"
+    implementation "androidx.constraintlayout:constraintlayout:1.1.2"
 
     /*
      * Android Kotlin Extensions
-     * TODO: I can't get this to build for some reason. :/
      */
-    //implementation "androidx.core:core-ktx:1.0.0-alpha1"
+    implementation "androidx.core:core-ktx:1.0.0-alpha3"
 
     /*
      * Android Architecture Components
      */
     def architecture_version = "1.1.1"
-    implementation "android.arch.lifecycle:extensions:${architecture_version}"
-    kapt "android.arch.lifecycle:compiler:${architecture_version}"
-    implementation "android.arch.persistence.room:runtime:1.1.0"
-    kapt "android.arch.persistence.room:compiler:1.1.0"
-    testImplementation "android.arch.core:core-testing:${architecture_version}"
-    testImplementation "android.arch.persistence.room:testing:1.1.0"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0-alpha1'
+    implementation "androidx.room:room-runtime:2.0.0-alpha1"
+    kapt "androidx.room:room-compiler:2.0.0-alpha1"
+    testImplementation 'androidx.arch.core:core-testing:2.0.0-alpha1'
+    testImplementation "androidx.room:room-testing:2.0.0-alpha1"
 
     /*
      * Android Navigation Component
      */
-    def nav_version = "1.0.0-alpha01"
+    def nav_version = "1.0.0-alpha02"
     implementation "android.arch.navigation:navigation-fragment:$nav_version"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui:$nav_version"
@@ -84,12 +84,6 @@ dependencies {
     }
 
     /*
-     * Butterknife
-     */
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
-
-    /*
      * Adapter Delegates
      * https://github.com/sockeqwe/AdapterDelegates
      */
@@ -105,9 +99,9 @@ dependencies {
      * Testing
      */
     testImplementation "junit:junit:4.12"
-    androidTestImplementation "com.android.support.test:runner:1.0.2"
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+    androidTestImplementation "androidx.test:runner:1.1.0-alpha3"
+    androidTestImplementation 'androidx.test:rules:1.1.0-alpha3'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0-alpha3"
 
     // explicit export to resolve guava and espresso conflict
     implementation 'com.google.code.findbugs:jsr305:3.0.1'

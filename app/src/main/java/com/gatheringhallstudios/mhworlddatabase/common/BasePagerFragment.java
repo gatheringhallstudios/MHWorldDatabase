@@ -1,32 +1,29 @@
 package com.gatheringhallstudios.mhworlddatabase.common;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Abstract Base Fragment for implementing Hubs with multiple detail tabs.
  * Hub Fragments can subclass this and call addTab() to set up hub pages.
- * Butterknife is already called, so onCreateView cannot be inherited.
  */
 
 public abstract class BasePagerFragment extends Fragment {
 
-    @BindView(R.id.tab_layout) TabLayout tabLayout;
-    @BindView(R.id.pager_list) ViewPager viewPager;
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
     @Nullable
     @Override
@@ -34,8 +31,9 @@ public abstract class BasePagerFragment extends Fragment {
         // Inflate view
         View root = inflater.inflate(R.layout.fragment_generic_pager, container, false);
 
-        // Bind ButterKnife
-        ButterKnife.bind(this, root);
+        // Bind Views
+        TabLayout tabLayout = root.findViewById(R.id.tab_layout);
+        ViewPager viewPager = root.findViewById(R.id.pager_list);
 
         // Setup tabs
         ArrayList<PagerTab> tabs = new ArrayList<>();
@@ -49,8 +47,7 @@ public abstract class BasePagerFragment extends Fragment {
     }
 
     /**
-     * Called when the fragment wants the tabs, but after Butterknife
-     * has binded the view
+     * Called when the fragment wants the tabs
      * @param tabs
      */
     public abstract void onAddTabs(TabAdder tabs);

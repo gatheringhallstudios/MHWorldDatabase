@@ -1,11 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +14,10 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Fragment for a list of monsters
@@ -30,9 +28,7 @@ public class MonsterDamageFragment extends Fragment {
 
     private final String TAG = getClass().getSimpleName();
 
-    @BindView(R.id.physical_damage_layout)
     LinearLayout physicalDamageLayout;
-    @BindView(R.id.element_damage_layout)
     LinearLayout elementDamageLayout;
 
     // Thresholds for BOLD numbers
@@ -44,7 +40,10 @@ public class MonsterDamageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate and bind our layout
         View view = inflater.inflate(R.layout.fragment_monster_damage, parent, false);
-        ButterKnife.bind(this, view);
+
+        // Bind views
+        physicalDamageLayout = view.findViewById(R.id.physical_damage_layout);
+        elementDamageLayout = view.findViewById(R.id.element_damage_layout);
 
         viewModel = ViewModelProviders.of(getParentFragment()).get(MonsterDetailViewModel.class);
         viewModel.getHitzones().observe(this, this::setHitzones);
@@ -71,7 +70,6 @@ public class MonsterDamageFragment extends Fragment {
         for (MonsterHitzoneView hitzone : hitzones) {
             View physical = inflater.inflate(R.layout.listitem_monster_hitzone, physicalDamageLayout, false);
 
-            // Find target views manually since we can't run ButterKnife.bind more than once.
             TextView bodyPart = physical.findViewById(R.id.body_part);
             TextView cut = physical.findViewById(R.id.dmg2);
             TextView impact = physical.findViewById(R.id.dmg3);
@@ -95,7 +93,6 @@ public class MonsterDamageFragment extends Fragment {
         for (MonsterHitzoneView hitzone : hitzones) {
             View elemental = inflater.inflate(R.layout.listitem_monster_hitzone, elementDamageLayout, false);
 
-            // Find target views manually since we can't run ButterKnife.bind more than once.
             TextView bodyPart = elemental.findViewById(R.id.body_part);
             TextView fire = elemental.findViewById(R.id.dmg1);
             TextView water = elemental.findViewById(R.id.dmg2);

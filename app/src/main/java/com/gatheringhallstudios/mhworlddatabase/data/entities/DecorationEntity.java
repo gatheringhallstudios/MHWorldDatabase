@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.entities;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 /**
  * Created by Carlos on 4/3/2018.

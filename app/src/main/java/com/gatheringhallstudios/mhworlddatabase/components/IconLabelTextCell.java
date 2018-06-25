@@ -3,10 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.components;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -15,8 +11,10 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 /**
  * This is a full height, full width cell that displays an icon, label, and value. Used to generate
@@ -27,9 +25,9 @@ public class IconLabelTextCell extends ConstraintLayout{
 
     private final String TAG = getClass().getSimpleName();
 
-    @BindView(R.id.generic_icon) ImageView imageView;
-    @BindView(R.id.label_text) TextView labelView;
-    @BindView(R.id.value_text) TextView valueView;
+    ImageView imageView;
+    TextView labelView;
+    TextView valueView;
 
     public IconLabelTextCell (Context context, @DrawableRes int imgSrc, String labelText, String valueText) {
         super(context);
@@ -68,7 +66,10 @@ public class IconLabelTextCell extends ConstraintLayout{
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cell_icon_label_text, this, true);
 
-        ButterKnife.bind(this);
+        // Bind views
+        imageView = this.findViewById(R.id.generic_icon);
+        labelView = this.findViewById(R.id.label_text);
+        valueView = this.findViewById(R.id.value_text);
 
         setLeftIconDrawable(drawable);
         setLabelText(labelText);

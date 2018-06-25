@@ -1,9 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase.features.skills
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings

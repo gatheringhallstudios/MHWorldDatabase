@@ -1,8 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.features.search
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.common.CachedValue
 import com.gatheringhallstudios.mhworlddatabase.common.ThrottledExecutor

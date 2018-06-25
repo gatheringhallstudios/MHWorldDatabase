@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 
 import com.google.common.collect.EnumHashBiMap

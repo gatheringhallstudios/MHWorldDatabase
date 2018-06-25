@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.views
 
-import android.arch.persistence.room.Embedded
+import androidx.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
