@@ -16,6 +16,11 @@ import kotlinx.android.synthetic.main.list_generic.*
  */
 open class RecyclerViewFragment : Fragment() {
     /**
+     * Returns the recyclerview owned by this fragment to use directly
+     */
+    val recyclerView get() = recycler_view!!
+
+    /**
      * Overrides onCreateView to return a list_generic.
      * Instead of overriding this, override "onViewCreated".
      */

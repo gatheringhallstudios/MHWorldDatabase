@@ -10,6 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.RecyclerViewDivider
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 
 /**
@@ -24,6 +25,7 @@ class ItemCraftingFragment : RecyclerViewFragment() {
     private val adapter = BasicListDelegationAdapter(ItemCraftingAdapterDelegate())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        recyclerView.addItemDecoration(RecyclerViewDivider(recyclerView))
         setAdapter(adapter)
 
         viewModel.combinationListData.observe(this, Observer {
