@@ -13,10 +13,18 @@ data class ItemView(
     val id get() = data.id
 }
 
+data class ItemBasicView(
+        val id: Int,
+        val name: String,
+        val icon_name: String?,
+        val icon_color: String?
+)
+
 data class ItemCombinationView(
-        @Embedded val result: ItemView,
-        @Embedded val first: ItemView,
-        @Embedded val second: ItemView,
+        val id: Int,
+        @Embedded(prefix = "result_") val result: ItemBasicView,
+        @Embedded(prefix = "first_") val first: ItemBasicView,
+        @Embedded(prefix = "second_") val second: ItemBasicView?,
         val quantity: Int
 )
 

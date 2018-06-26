@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/items_title" />
         <item
+            android:id="@+id/itemCraftingDestination"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/item_crafting_title" />
+        <item
             android:id="@+id/locationListDestination"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/locations_title" />

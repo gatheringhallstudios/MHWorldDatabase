@@ -7,6 +7,8 @@ import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.view.View
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.common.ColorRegistry
 import com.gatheringhallstudios.mhworlddatabase.common.VectorRegistry
@@ -118,5 +120,12 @@ fun <T> LiveData<T>.getResult(): T {
  * Returns the router object that can be used to navigate between pages
  */
 fun Fragment.getRouter() : Router {
+    return Router(this.findNavController())
+}
+
+/**
+ * Returns the router object that can be used to navigate between pages
+ */
+fun View.getRouter() : Router {
     return Router(this.findNavController())
 }

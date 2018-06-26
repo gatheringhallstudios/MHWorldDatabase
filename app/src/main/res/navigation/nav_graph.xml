@@ -24,6 +24,11 @@
         android:label="Item Detail"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
+        android:id="@+id/itemCraftingDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.itemcrafting.ItemCraftingFragment"
+        android:label="Item Crafting"
+        tools:layout="@layout/list_generic" />
+    <fragment
         android:id="@+id/skillListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillListFragment"
         android:label="Skills"

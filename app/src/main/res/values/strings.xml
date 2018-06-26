@@ -33,6 +33,9 @@
     <string name="item_tab_summary">Summary</string>
     <string name="item_tab_locations">Locations</string>
 
+    <string name="item_crafting_title">Item Crafting</string>
+    <string name="item_crafting_yield">Yields %1$d</string>
+
     <!-- Weapons -->
     <string name="weapons_title">Weapons</string>
 
