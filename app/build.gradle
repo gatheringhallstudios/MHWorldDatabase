@@ -54,13 +54,13 @@ dependencies {
     /*
      * Android Architecture Components
      */
-    def architecture_version = "1.1.1"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0-alpha1'
-    implementation "androidx.room:room-runtime:2.0.0-alpha1"
-    kapt "androidx.room:room-compiler:2.0.0-alpha1"
-    testImplementation 'androidx.arch.core:core-testing:2.0.0-alpha1'
-    testImplementation "androidx.room:room-testing:2.0.0-alpha1"
+    def architecture_version = "2.0.0-alpha1"
+    implementation "androidx.lifecycle:lifecycle-extensions:$architecture_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$architecture_version"
+    implementation "androidx.room:room-runtime:$architecture_version"
+    kapt "androidx.room:room-compiler:$architecture_version"
+    testImplementation "androidx.arch.core:core-testing:$architecture_version"
+    testImplementation "androidx.room:room-testing:$architecture_version"
 
     /*
      * Android Navigation Component
@@ -105,9 +105,6 @@ dependencies {
 
     // explicit export to resolve guava and espresso conflict
     implementation 'com.google.code.findbugs:jsr305:3.0.1'
-
-    // allow a replacement for streams for api level < 24
-    implementation 'net.sourceforge.streamsupport:android-retrostreams:1.6.1'
 
     // provisional basis. Keep if we use more of its features
     implementation 'com.google.guava:guava:24.1-jre'

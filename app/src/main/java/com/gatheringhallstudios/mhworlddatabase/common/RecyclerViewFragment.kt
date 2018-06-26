@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.common
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import kotlinx.android.synthetic.main.list_generic.*
  * Creates a fragment that contains a recyclerview.
  * This handles most of the setup and handles a potential memory leak case.
  */
-open class RecyclerViewFragment : androidx.fragment.app.Fragment() {
+open class RecyclerViewFragment : Fragment() {
     /**
      * Overrides onCreateView to return a list_generic.
      * Instead of overriding this, override "onViewCreated".

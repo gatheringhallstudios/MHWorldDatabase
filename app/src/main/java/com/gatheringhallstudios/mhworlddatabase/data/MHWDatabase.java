@@ -35,8 +35,6 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
-// laziness, since we need to manually add all entities which is quite cumbersome
-
 /**
  * DO NOT CONVERT TO KOTLIN YET.
  * we don't really gain anything from the conversion,
