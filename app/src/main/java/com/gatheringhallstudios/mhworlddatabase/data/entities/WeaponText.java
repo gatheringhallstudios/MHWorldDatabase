@@ -4,8 +4,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.entities;
  * Created by Carlos on 3/21/2018.
  */
 
-import androidx.room.Entity;
-import androidx.annotation.NonNull;
+import android.arch.persistence.room.Entity;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "weapon_text",
         primaryKeys = {"id", "lang_id"})

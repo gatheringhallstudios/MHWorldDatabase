@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase
 
-import androidx.lifecycle.LiveData
+import android.arch.lifecycle.LiveData
 
 /**
  * Extension: Synchronously waits for live data to produce a result, and then returns it.

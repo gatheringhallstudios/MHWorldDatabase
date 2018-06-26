@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.components;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -9,7 +10,8 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 
-import androidx.annotation.Nullable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * This is a full height, full width cell that displays a section header. Used to generate
@@ -20,7 +22,7 @@ public class SectionHeaderCell extends LinearLayout {
 
     private final String TAG = getClass().getSimpleName();
 
-    TextView labelView;
+    @BindView(R.id.label_text) TextView labelView;
 
     public SectionHeaderCell(Context context, String labelText) {
         super(context);
@@ -54,8 +56,7 @@ public class SectionHeaderCell extends LinearLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cell_section_header, this, true);
 
-        // Bind views
-        labelView = this.findViewById(R.id.label_text);
+        ButterKnife.bind(this);
 
         setLabelText(labelText);
     }

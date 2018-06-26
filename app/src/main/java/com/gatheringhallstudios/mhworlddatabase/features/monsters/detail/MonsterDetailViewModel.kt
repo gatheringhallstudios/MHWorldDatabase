@@ -1,8 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase

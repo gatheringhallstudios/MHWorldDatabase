@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.search
 
-import androidx.lifecycle.*
+import android.arch.lifecycle.*
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController

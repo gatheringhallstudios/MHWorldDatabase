@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items
 
-import androidx.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 
 import com.gatheringhallstudios.mhworlddatabase.R

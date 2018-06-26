@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.entities.base;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 public class NameEntity {
     public int id;
