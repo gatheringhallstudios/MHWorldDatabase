@@ -44,28 +44,28 @@
     <!-- Text Styles -->
     <!-- https://material.io/guidelines/style/typography.html#typography-other-typographic-guidelines -->
     <style name="TextDisplay1" parent="TextAppearance.AppCompat.Display1">
-        <item name="android:textColor">@color/md_text_color_display_1_dark_theme</item>
-        <item name="android:textSize">@dimen/md_text_size_display_1_regular</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">34sp</item>
     </style>
 
     <style name="TextBody1" parent="TextAppearance.AppCompat.Body1">
-        <item name="android:textColor">@color/md_text_color_body_1_dark_theme</item>
-        <item name="android:textSize">@dimen/md_text_size_medium</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextBody0" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">@color/md_text_color_body_1_dark_theme</item>
-        <item name="android:textSize">@dimen/md_text_size_small</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Caption" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">@color/md_text_color_caption_dark_theme</item>
-        <item name="android:textSize">@dimen/md_text_size_small</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="SectionHead" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textColor">@color/md_text_color_body_1_dark_theme</item>
-        <item name="android:textSize">@dimen/md_text_subheading_regular</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="SubHead" parent="TextAppearance.AppCompat.Subhead">

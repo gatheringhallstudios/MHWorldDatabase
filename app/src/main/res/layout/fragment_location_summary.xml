@@ -33,7 +33,7 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_padding_margin_small"
+            android:layout_marginTop="@dimen/margin_small"
             app:layout_constraintStart_toStartOf="@+id/location_name"
             app:layout_constraintTop_toBottomOf="@+id/location_name"
             tools:text="Elder's recess is a pretty cool place with lots of elder dragons" />

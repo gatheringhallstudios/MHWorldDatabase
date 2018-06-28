@@ -12,7 +12,7 @@
     <color name="secondaryLightColor">#feff6a</color>
     <color name="secondaryDarkColor">#93bb00</color>
     <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#b3ffffff</color>
     <color name="primaryTextDisabledColor">#bfffffff</color>
 
     <color name="backgroundColor">#211F20</color>

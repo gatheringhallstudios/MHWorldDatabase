@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="@dimen/md_elevation_toolbar">
+        app:elevation="@dimen/elevation_toolbar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"

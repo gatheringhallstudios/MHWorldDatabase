@@ -8,5 +8,5 @@
     app:layout_constraintTop_toTopOf="parent"
     app:tabGravity="fill"
     app:tabMode="fixed"
-    app:elevation="@dimen/md_elevation_toolbar"
+    app:elevation="@dimen/elevation_toolbar"
     app:tabSelectedTextColor="@color/colorAccent"/>
