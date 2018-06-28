@@ -11,20 +11,20 @@ import com.gatheringhallstudios.mhworlddatabase.R
 typealias AdderFun<T, K> = (name: T, resId: K) -> Unit
 private fun <T, K> createRegistry(initLambda: (AdderFun<T, K>) -> Unit): Map<T, K> {
     val mutableRegistry = HashMap<T, K>()
-    initLambda({ name: T, resId: K ->
+    initLambda { name: T, resId: K ->
         mutableRegistry[name] = resId
-    })
+    }
     return mutableRegistry
 }
 
 val VectorRegistry = createRegistry<String, Int>{ register ->
     // Armor
-    register("armor", R.drawable.ic_armor)
-    register("head", R.drawable.question_mark_grey)
-    register("chest", R.drawable.question_mark_grey)
-    register("arms", R.drawable.question_mark_grey)
-    register("waist", R.drawable.question_mark_grey)
-    register("leg", R.drawable.question_mark_grey)
+    register("armor", R.drawable.ic_armor) // TODO This icon is unused and should eventually be replaced with armorset icon
+    register("head", R.drawable.ic_head)
+    register("chest", R.drawable.ic_chest)
+    register("arms", R.drawable.ic_arm)
+    register("waist", R.drawable.ic_waist)
+    register("leg", R.drawable.ic_leg)
 
     // Weapons
     register("greatsword", R.drawable.question_mark_grey)
