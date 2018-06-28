@@ -18,13 +18,18 @@ private fun <T, K> createRegistry(initLambda: (AdderFun<T, K>) -> Unit): Map<T, 
 }
 
 val VectorRegistry = createRegistry<String, Int>{ register ->
+    // Armor
     register("armor", R.drawable.ic_armor)
     register("head", R.drawable.question_mark_grey)
     register("chest", R.drawable.question_mark_grey)
     register("arms", R.drawable.question_mark_grey)
     register("waist", R.drawable.question_mark_grey)
     register("leg", R.drawable.question_mark_grey)
+
+    // Weapons
     register("greatsword", R.drawable.question_mark_grey)
+
+    // Items
 }
 
 val ColorRegistry = createRegistry<String, Int>{ register ->
