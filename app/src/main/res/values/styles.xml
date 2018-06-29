@@ -43,36 +43,36 @@
 
     <!-- Text Styles -->
     <!-- https://material.io/guidelines/style/typography.html#typography-other-typographic-guidelines -->
-    <style name="TextDisplay1" parent="TextAppearance.AppCompat.Display1">
+    <style name="TextHeaderHigh" parent="TextAppearance.AppCompat.Display1">
         <item name="android:textColor">@color/textColorHigh</item>
-        <item name="android:textSize">34sp</item>
     </style>
 
-    <style name="TextBody1" parent="TextAppearance.AppCompat.Body1">
+    <style name="TextBodyHigh" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/textColorHigh</item>
-        <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="TextBody0" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">@color/textColorHigh</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="Caption" parent="TextAppearance.AppCompat.Caption">
+    <style name="TextBodyMedium" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/textColorMedium</item>
-        <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="SectionHead" parent="TextAppearance.AppCompat.Subhead">
+    <style name="TextBodyLow" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/textColorLow</item>
+    </style>
+
+    <style name="TextCaptionHigh" parent="TextAppearance.AppCompat.Caption">
         <item name="android:textColor">@color/textColorHigh</item>
-        <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="SubHead" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textColor">@color/textColorSubHead</item>
-        <item name="android:textStyle">bold</item>
-        <!-- Font style must be set programmatically to Roboto Medium 14sp -->
-        <item name="android:textSize">14sp</item>
+    <style name="TextCaptionMedium" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/textColorMedium</item>
+    </style>
+
+    <style name="TextSubHeadHigh" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorHigh</item>
+    </style>
+
+    <style name="TextSubHeadMedium" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorMedium</item>
     </style>
 
     <style name="HorizontalDivider">

@@ -14,8 +14,7 @@
     <!-- Text Colors -->
     <color name="textColorHigh">#ffffff</color> <!-- High Emphasis -->
     <color name="textColorMedium">#99ffffff</color> <!-- Medium Emphasis -->
-    <color name="textColorDisabled">#59ffffff</color>
-    <color name="textColorSubHead">@color/textColorMedium</color>
+    <color name="textColorLow">#59ffffff</color>
 
     <!-- Background Colors -->
     <color name="backgroundColor">#212121</color>

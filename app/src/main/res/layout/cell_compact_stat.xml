@@ -22,7 +22,7 @@ the class that inflates it. Use parentTag is used to preview the layout in the e
 
 <TextView
     android:id="@+id/label_text"
-    style="@style/TextBody1"
+    style="@style/TextBodyHigh"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_small"

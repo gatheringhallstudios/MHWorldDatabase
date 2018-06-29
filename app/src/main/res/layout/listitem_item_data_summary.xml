@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/buy_price_value"
-            style="@style/TextBody0"
+            style="@style/TextBodyHigh"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/sell_price_value"
-            style="@style/TextBody0"
+            style="@style/TextBodyHigh"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/carry_capacity_value"
-            style="@style/TextBody0"
+            style="@style/TextBodyHigh"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
@@ -46,7 +46,7 @@
 
         <TextView
             android:id="@+id/rarity_value"
-            style="@style/TextBody0"
+            style="@style/TextBodyHigh"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
@@ -67,7 +67,7 @@
 
         <TextView
             android:id="@+id/buy_price_value2"
-            style="@style/TextBody0"
+            style="@style/TextBodyHigh"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,7 +79,7 @@
 
         <TextView
             android:id="@+id/sell_price_value2"
-            style="@style/TextBody0"
+            style="@style/TextBodyHigh"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -91,7 +91,7 @@
 
         <TextView
             android:id="@+id/carry_capacity_value2"
-            style="@style/TextBody0"
+            style="@style/TextBodyHigh"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -103,7 +103,7 @@
 
         <TextView
             android:id="@+id/rarity_value2"
-            style="@style/TextBody0"
+            style="@style/TextBodyHigh"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

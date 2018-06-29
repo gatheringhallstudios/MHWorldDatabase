@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/item_name"
-            style="@style/TextDisplay1"
+            style="@style/TextHeaderHigh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/item_description"
-            style="@style/TextAppearance.AppCompat.Subhead"
+            style="@style/TextBodyMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_large"
