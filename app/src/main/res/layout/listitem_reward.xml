@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginStart="@dimen/margin_medium"
-        android:textColor="@color/primaryTextDisabledColor"
+        android:textColor="@color/textColorDisabled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@id/reward_name"

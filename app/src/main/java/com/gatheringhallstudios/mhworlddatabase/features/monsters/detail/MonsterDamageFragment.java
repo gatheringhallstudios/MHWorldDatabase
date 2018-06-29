@@ -121,7 +121,7 @@ public class MonsterDamageFragment extends Fragment {
     private void bindHitzone(TextView view, int value, int threshold) {
         if (value >= threshold) {
             view.setTypeface(null, Typeface.BOLD);
-            view.setTextColor(ContextCompat.getColor(getContext(), R.color.primaryTextColor));
+            view.setTextColor(ContextCompat.getColor(getContext(), R.color.textColorHigh));
         }
         view.setText(Integer.toString(value));
     }

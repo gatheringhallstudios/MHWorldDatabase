@@ -7,8 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/backgroundColor</item>
-        <item name="android:textColorPrimary">@color/primaryTextColor</item>
-        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+        <item name="android:textColorPrimary">@color/textColorHigh</item>
+        <item name="android:textColorSecondary">@color/textColorMedium</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -44,27 +44,27 @@
     <!-- Text Styles -->
     <!-- https://material.io/guidelines/style/typography.html#typography-other-typographic-guidelines -->
     <style name="TextDisplay1" parent="TextAppearance.AppCompat.Display1">
-        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/textColorHigh</item>
         <item name="android:textSize">34sp</item>
     </style>
 
     <style name="TextBody1" parent="TextAppearance.AppCompat.Body1">
-        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/textColorHigh</item>
         <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextBody0" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/textColorHigh</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Caption" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textColor">@color/textColorMedium</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="SectionHead" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/textColorHigh</item>
         <item name="android:textSize">16sp</item>
     </style>
 

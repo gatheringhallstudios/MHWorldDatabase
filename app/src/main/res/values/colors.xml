@@ -4,21 +4,22 @@
     <color name="colorPrimaryDark">@color/primaryDarkColor</color>
     <color name="colorAccent">@color/secondaryColor</color>
 
-    <!-- Generated from https://material.io/color/#!/?view.left=0&view.right=1&primary.color=212121&secondary.color=C8EE31 -->
-    <color name="primaryColor">#353232</color>
-    <color name="primaryLightColor">#5f5b5b</color>
-    <color name="primaryDarkColor">#0f0a0a</color>
-    <color name="secondaryColor">#c8ee31</color>
-    <color name="secondaryLightColor">#feff6a</color>
-    <color name="secondaryDarkColor">#93bb00</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#b3ffffff</color>
-    <color name="primaryTextDisabledColor">#bfffffff</color>
+    <color name="primaryColor">#263238</color>
+    <color name="primaryLightColor">#455a64</color>
+    <color name="primaryDarkColor">#000000</color>
+    <color name="secondaryColor">#fdd835</color>
+    <color name="secondaryLightColor">#feec65</color>
+    <color name="secondaryDarkColor">#f7a738</color>
 
-    <color name="backgroundColor">#211F20</color>
-    <color name="backgroundColorSectionHeader">#5f5b5b</color>
+    <!-- Text Colors -->
+    <color name="textColorHigh">#ffffff</color> <!-- High Emphasis -->
+    <color name="textColorMedium">#99ffffff</color> <!-- Medium Emphasis -->
+    <color name="textColorDisabled">#59ffffff</color>
+    <color name="textColorSubHead">@color/textColorMedium</color>
 
-    <color name="textColorSubHead">#8CFFFFFF</color>
+    <!-- Background Colors -->
+    <color name="backgroundColor">#212121</color>
+    <color name="backgroundColorSectionHeader">@color/primaryLightColor</color>
 
     <!-- Asset Colors for ColorRegistry -->
     <color name="rarity_1">#D9D9D9</color>
