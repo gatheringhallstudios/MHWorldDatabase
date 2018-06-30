@@ -34,6 +34,8 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
         val vh = holder as HeaderViewHolder
         vh.setTitle(subHeader.text)
 
+        if (position != 0) vh.addMarginTop()
+
         // todo: allow collapsible header. Collapsible header via onSelected is not the proper way
     }
 
@@ -41,6 +43,11 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
         fun setTitle(title : String?) {
             view.label_text.text = title
             //vh.labelText.setTypeface(vh.labelText.getTypeface(), Typeface.BOLD);
+        }
+
+        fun addMarginTop() {
+            var marginLayoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
+            marginLayoutParams.topMargin = view.resources.getDimensionPixelSize(R.dimen.margin_medium)
         }
     }
 }

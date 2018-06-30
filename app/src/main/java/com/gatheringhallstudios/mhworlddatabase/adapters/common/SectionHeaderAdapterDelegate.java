@@ -43,6 +43,8 @@ public class SectionHeaderAdapterDelegate extends AdapterDelegate<List<Object>> 
         HeaderViewHolder vh = (HeaderViewHolder) holder;
 
         vh.labelText.setText(sectionHeader.text);
+
+        if (position != 0) vh.addMarginTop();
     }
 
     class HeaderViewHolder extends RecyclerView.ViewHolder {
@@ -51,6 +53,13 @@ public class SectionHeaderAdapterDelegate extends AdapterDelegate<List<Object>> 
         HeaderViewHolder(View itemView) {
             super(itemView);
             labelText = itemView.findViewById(R.id.label_text);
+        }
+
+        void addMarginTop() {
+            ViewGroup.MarginLayoutParams marginLayoutParams =
+                    (ViewGroup.MarginLayoutParams) itemView.getLayoutParams();
+            marginLayoutParams.topMargin =
+                    itemView.getResources().getDimensionPixelSize(R.dimen.margin_medium);
         }
     }
 }
