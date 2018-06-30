@@ -23,7 +23,7 @@ class MHExtensionsTest {
 
     @Test
     fun getAssetDrawable_returnsOnSuccess() {
-        val default = R.drawable.question_mark_grey
+        val default = R.drawable.ic_question_mark
         val defaultImage = ContextCompat.getDrawable(context, default)
 
         val result = context.getAssetDrawable("monster-large/anjanath.png", default)
@@ -33,7 +33,7 @@ class MHExtensionsTest {
 
     @Test
     fun getAssetDrawable_defaultOnFailure() {
-        val default = R.drawable.question_mark_grey
+        val default = R.drawable.ic_question_mark
         val questionMark = ContextCompat.getDrawable(context, default)
 
         val result = context.getAssetDrawable("fake", default)
@@ -43,7 +43,7 @@ class MHExtensionsTest {
 
     @Test
     fun getVectorDrawable_returnsOnSuccess() {
-        val default = R.drawable.question_mark_grey
+        val default = R.drawable.ic_question_mark
         val questionMark = ContextCompat.getDrawable(context, default)
 
         val result = context.getVectorDrawable(R.drawable.ic_head)
@@ -54,7 +54,7 @@ class MHExtensionsTest {
 
     @Test
     fun getVectorDrawable_defaultOnFailure() {
-        val default = R.drawable.question_mark_grey
+        val default = R.drawable.ic_question_mark
         val questionMark = ContextCompat.getDrawable(context, default)
 
         val result = context.getVectorDrawable("fake", "rare1", default)

@@ -90,7 +90,7 @@ public class IconStarCell extends LinearLayout {
             star.setPadding(0, padding, padding, padding);
 
             // TODO Set to star drawable once available
-            star.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.question_mark_grey));
+            star.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_question_mark));
 
             star.setLayoutParams(lp);
             starLayout.addView(star);

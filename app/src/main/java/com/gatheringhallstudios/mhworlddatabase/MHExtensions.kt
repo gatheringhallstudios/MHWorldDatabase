@@ -28,7 +28,7 @@ val TAG = "MHWorldApplicationUtil"
  */
 fun Context.getAssetDrawable(
         path: String?,
-        @DrawableRes default: Int = R.drawable.question_mark_grey): Drawable? {
+        @DrawableRes default: Int = R.drawable.ic_question_mark): Drawable? {
     return try {
         this.assets.open(path).use {
             Drawable.createFromStream(it, path)
@@ -86,7 +86,7 @@ val PATH_NAME = "base"
 fun Context.getVectorDrawable(
         vector: String,
         color: String = "rare1",
-        @DrawableRes default: Int = R.drawable.question_mark_grey
+        @DrawableRes default: Int = R.drawable.ic_question_mark
 ): Drawable? {
 
     // Get the drawable from the registry. or return default

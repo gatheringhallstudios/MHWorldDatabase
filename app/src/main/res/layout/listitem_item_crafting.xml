@@ -25,8 +25,8 @@
 
         <ImageView
             android:id="@+id/result_icon"
-            style="@style/IconMedium"
-            tools:src="@drawable/question_mark_grey"/>
+            style="@style/IconMedium.Decorated"
+            tools:src="@drawable/ic_question_mark"/>
 
         <TextView
             android:id="@+id/result_name"
@@ -69,9 +69,9 @@
 
         <ImageView
             android:id="@+id/item1_icon"
-            style="@style/IconSmall"
+            style="@style/IconSmall.Decorated"
             android:layout_marginStart="8dp"
-            tools:src="@drawable/question_mark_grey"/>
+            tools:src="@drawable/ic_question_mark"/>
 
     </LinearLayout>
 
@@ -95,9 +95,9 @@
 
         <ImageView
             android:id="@+id/item2_icon"
-            style="@style/IconSmall"
+            style="@style/IconSmall.Decorated"
             android:layout_marginStart="8dp"
-            tools:src="@drawable/question_mark_grey"/>
+            tools:src="@drawable/ic_question_mark"/>
 
     </LinearLayout>
 

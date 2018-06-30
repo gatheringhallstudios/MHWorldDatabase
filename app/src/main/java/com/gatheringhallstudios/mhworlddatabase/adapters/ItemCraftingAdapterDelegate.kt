@@ -21,16 +21,16 @@ class ItemCraftingAdapterDelegate : SimpleListDelegate<ItemCombinationView, View
     }
 
     override fun bindView(view: View, data: ItemCombinationView) {
-        view.result_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.question_mark_grey))
+        view.result_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_question_mark))
         view.result_name.text = data.result.name
 
-        view.item1_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.question_mark_grey))
+        view.item1_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_question_mark))
         view.item1_name.text = data.first.name
 
         view.item2_view.visibility = View.GONE
         if (data.second != null) {
             view.item2_view.visibility = View.VISIBLE
-            view.item2_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.question_mark_grey))
+            view.item2_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_question_mark))
             view.item2_name.text = data.second.name
         }
 

@@ -35,7 +35,7 @@ class LocationSummaryFragment : Fragment() {
         if(location == null) return
 
         val ctx = view?.context
-        val defaultIcon = R.drawable.question_mark_grey
+        val defaultIcon = R.drawable.ic_question_mark
         //Because the location screenshot is not available in the database
         val path : String = "locations/" + location.name?.replace(" ", "-")?.toLowerCase() + ".jpg";
         val icon = ctx?.getAssetDrawable(path, defaultIcon)

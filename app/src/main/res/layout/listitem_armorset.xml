@@ -15,7 +15,7 @@
 
     <ImageView
         android:id="@+id/head_icon"
-        style="@style/IconLarge"
+        style="@style/IconLarge.Decorated"
         android:layout_marginTop="@dimen/margin_small"
         android:src="@drawable/ic_head"
         app:layout_constraintEnd_toStartOf="@+id/chest_icon"
@@ -26,7 +26,7 @@
 
     <ImageView
         android:id="@+id/chest_icon"
-        style="@style/IconLarge"
+        style="@style/IconLarge.Decorated"
         android:layout_marginTop="@dimen/margin_small"
         android:src="@drawable/ic_chest"
         app:layout_constraintEnd_toStartOf="@+id/arms_icon"
@@ -36,7 +36,7 @@
 
     <ImageView
         android:id="@+id/arms_icon"
-        style="@style/IconLarge"
+        style="@style/IconLarge.Decorated"
         android:layout_marginTop="@dimen/margin_small"
         android:src="@drawable/ic_arm"
         app:layout_constraintEnd_toStartOf="@+id/waist_icon"
@@ -46,7 +46,7 @@
 
     <ImageView
         android:id="@+id/waist_icon"
-        style="@style/IconLarge"
+        style="@style/IconLarge.Decorated"
         android:layout_marginTop="@dimen/margin_small"
         android:src="@drawable/ic_waist"
         app:layout_constraintEnd_toStartOf="@+id/legs_icon"
@@ -56,7 +56,7 @@
 
     <ImageView
         android:id="@+id/legs_icon"
-        style="@style/IconLarge"
+        style="@style/IconLarge.Decorated"
         android:layout_marginTop="@dimen/margin_small"
         android:src="@drawable/ic_leg"
         app:layout_constraintEnd_toEndOf="parent"

@@ -27,7 +27,7 @@ val VectorRegistry = createRegistry<String, Int>{ register ->
     register("leg", R.drawable.ic_leg)
 
     // Weapons
-    register("greatsword", R.drawable.question_mark_grey)
+    register("greatsword", R.drawable.ic_question_mark)
 
     // Items
 }

@@ -36,9 +36,29 @@
         <item name="android:layout_height">@dimen/image_size_large</item>
     </style>
 
-    <style name="ImageXLarge">
+    <style name="IconXLarge">
         <item name="android:layout_width">@dimen/image_size_xlarge</item>
         <item name="android:layout_height">@dimen/image_size_xlarge</item>
+    </style>
+
+    <style name="IconSmall.Decorated">
+        <item name="android:padding">3dp</item>
+        <item name="android:background">@drawable/bg_icon_decorator</item>
+    </style>
+
+    <style name="IconMedium.Decorated">
+        <item name="android:padding">4dp</item>
+        <item name="android:background">@drawable/bg_icon_decorator</item>
+    </style>
+
+    <style name="IconLarge.Decorated">
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/bg_icon_decorator</item>
+    </style>
+
+    <style name="IconXLarge.Decorated">
+        <item name="android:padding">6dp</item>
+        <item name="android:background">@drawable/bg_icon_decorator</item>
     </style>
 
     <!-- Text Styles -->

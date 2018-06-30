@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/reward_icon"
-        style="@style/IconMedium"
+        style="@style/IconMedium.Decorated"
         android:layout_marginStart="@dimen/margin_large"
-        android:src="@drawable/question_mark_grey"
+        android:src="@drawable/ic_question_mark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

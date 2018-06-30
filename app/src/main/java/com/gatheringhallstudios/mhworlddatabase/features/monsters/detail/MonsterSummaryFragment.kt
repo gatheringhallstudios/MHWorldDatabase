@@ -95,7 +95,7 @@ class MonsterSummaryFragment : Fragment() {
             habitat.data.move_area?.let { areas.append("$it \u203A ") }
             habitat.data.rest_area?.let { areas.append(it) }
 
-            val icon = ContextCompat.getDrawable(context!!, R.drawable.question_mark_grey)
+            val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
 
             view.setLeftIconDrawable(icon)
             view.setLabelText(habitat.location_name)

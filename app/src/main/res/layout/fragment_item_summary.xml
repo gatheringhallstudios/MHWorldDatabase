@@ -11,13 +11,13 @@
 
         <ImageView
             android:id="@+id/item_icon"
-            style="@style/ImageXLarge"
+            style="@style/IconXLarge.Decorated"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
-            android:src="@drawable/question_mark_grey"
+            android:src="@drawable/ic_question_mark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/question_mark_grey" />
+            app:srcCompat="@drawable/ic_question_mark" />
 
         <TextView
             android:id="@+id/item_name"

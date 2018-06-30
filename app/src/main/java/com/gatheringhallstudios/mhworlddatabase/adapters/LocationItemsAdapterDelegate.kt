@@ -22,7 +22,7 @@ class LocationItemsAdapterDelegate(private val onSelected: (LocationItemView) ->
 
     override fun bindView(view: View, data: LocationItemView) {
         val ctx = view.context
-        val defaultIcon = R.drawable.question_mark_grey
+        val defaultIcon = R.drawable.ic_question_mark
 
         view.reward_name.text = data.item_name
         view.reward_stack.text =  "x ${data.data.stack}"
