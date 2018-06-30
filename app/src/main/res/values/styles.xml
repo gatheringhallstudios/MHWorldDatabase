@@ -67,6 +67,10 @@
         <item name="android:textColor">@color/textColorMedium</item>
     </style>
 
+    <style name="TextCaptionLow" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/textColorLow</item>
+    </style>
+
     <style name="TextSubHeadHigh" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/textColorHigh</item>
     </style>
@@ -75,6 +79,11 @@
         <item name="android:textColor">@color/textColorMedium</item>
     </style>
 
+    <style name="TextSubHeadLow" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorLow</item>
+    </style>
+
+    <!-- TODO Move this to a cell type -->
     <style name="HorizontalDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">2dp</item>
