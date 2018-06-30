@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_large">
+    android:paddingStart="@dimen/padding_large"
+    android:paddingTop="@dimen/padding_medium"
+    android:paddingEnd="@dimen/padding_large"
+    android:paddingBottom="@dimen/padding_medium">
 
     <TextView
         android:id="@+id/armor_set_name"
-        style="@style/TextAppearance.AppCompat.Headline"
+        style="@style/TextHeadlineHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Kadachi α" />
@@ -16,52 +19,45 @@
     <ImageView
         android:id="@+id/head_icon"
         style="@style/IconLarge.Decorated"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_head"
-        app:layout_constraintEnd_toStartOf="@+id/chest_icon"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+        app:layout_constraintStart_toStartOf="@+id/armor_set_name"
+        app:layout_constraintTop_toBottomOf="@+id/armor_set_name" />
 
     <ImageView
         android:id="@+id/chest_icon"
         style="@style/IconLarge.Decorated"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_large"
         android:src="@drawable/ic_chest"
-        app:layout_constraintEnd_toStartOf="@+id/arms_icon"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/head_icon"
         app:layout_constraintStart_toEndOf="@+id/head_icon"
-        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+        app:layout_constraintTop_toTopOf="@+id/head_icon" />
 
     <ImageView
         android:id="@+id/arms_icon"
         style="@style/IconLarge.Decorated"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_large"
         android:src="@drawable/ic_arm"
-        app:layout_constraintEnd_toStartOf="@+id/waist_icon"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/chest_icon"
         app:layout_constraintStart_toEndOf="@+id/chest_icon"
-        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+        app:layout_constraintTop_toTopOf="@+id/chest_icon" />
 
     <ImageView
         android:id="@+id/waist_icon"
         style="@style/IconLarge.Decorated"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_large"
         android:src="@drawable/ic_waist"
-        app:layout_constraintEnd_toStartOf="@+id/legs_icon"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/arms_icon"
         app:layout_constraintStart_toEndOf="@+id/arms_icon"
-        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+        app:layout_constraintTop_toTopOf="@+id/arms_icon" />
 
     <ImageView
         android:id="@+id/legs_icon"
         style="@style/IconLarge.Decorated"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_large"
         android:src="@drawable/ic_leg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/waist_icon"
         app:layout_constraintStart_toEndOf="@+id/waist_icon"
-        app:layout_constraintTop_toBottomOf="@id/armor_set_name" />
+        app:layout_constraintTop_toTopOf="@+id/waist_icon" />
 
 </android.support.constraint.ConstraintLayout>

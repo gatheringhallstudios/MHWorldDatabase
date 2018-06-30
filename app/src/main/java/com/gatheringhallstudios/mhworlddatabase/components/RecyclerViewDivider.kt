@@ -12,6 +12,10 @@ import com.gatheringhallstudios.mhworlddatabase.R
  * Accepts a recycler view with a linear layout manager as an argument,
  * and loads the default drawable.
  * Add to a recycler view using addItemDecoration().
+ *
+ * TODO UNUSED. Remove unless this can be repurposed elsewhere.
+ * Replaced by
+ * DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
  */
 class RecyclerViewDivider(ctx : Context, orientation: Int) : DividerItemDecoration(ctx, orientation) {
     init {

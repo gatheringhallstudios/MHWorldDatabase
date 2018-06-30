@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/location_name"
-            style="@style/TextHeaderHigh"
+            style="@style/TextDisplayHigh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/location_icon"
