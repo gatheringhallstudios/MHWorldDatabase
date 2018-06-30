@@ -23,6 +23,7 @@ class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
         with (view as IconLabelTextCell) {
             view.setLeftIconDrawable(icon)
             view.setLabelText(data.name)
+            view.removeDecorator()
         }
     }
 }

@@ -95,4 +95,13 @@ public class IconLabelTextCell extends ConstraintLayout{
     public void setValueText(String valueText) {
         valueView.setText(valueText);
     }
+
+    /**
+     * Removes the decorator around the icon.
+     * TODO Make this an instantiation flag if necessary
+     */
+    public void removeDecorator() {
+        imageView.setBackground(null);
+        imageView.setPadding(0, 0, 0, 0);
+    }
 }
