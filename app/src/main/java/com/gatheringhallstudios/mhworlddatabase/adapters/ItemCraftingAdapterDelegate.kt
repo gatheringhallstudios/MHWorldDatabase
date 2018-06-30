@@ -36,8 +36,7 @@ class ItemCraftingAdapterDelegate : SimpleListDelegate<ItemCombinationView, View
 
         view.yield_label.text = view.resources.getString(R.string.item_crafting_yield, data.quantity)
 
-
-        view.result_view.setOnClickListener {
+        view.setOnClickListener {
             view.getRouter().navigateItemDetail(data.result.id)
         }
 
