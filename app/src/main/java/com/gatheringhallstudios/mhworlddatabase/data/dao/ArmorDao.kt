@@ -94,4 +94,18 @@ abstract class ArmorDao {
             val rank: Rank,
             val armor_type: ArmorType
     )
+
+    @Query("""
+        SELECT a.*, at.name
+            FROM armor a
+            JOIN armor_text at USING (id)
+            JOIN armor_skill askill ON (armor_id = id)
+            WHERE at.lang_id = :langId
+               AND askill.skilltree_id = :skillTreeId
+            ORDER BY a.id ASC""")
+    abstract fun loadArmorWithSkil(langId: String, skillTreeId: Int): LiveData<List<ArmorBasicView>>
+
+    fun loadArmorWithSkill(langId: String, skillTreeId: Int) {
+        return loadArmorWithSkill(langId, skillTreeId)
+    }
 }

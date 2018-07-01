@@ -53,4 +53,9 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationDetailPagerFragment"
         android:label="Location Detail"
         tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/skillDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillDetailFragment"
+        android:label="Skill Detail"
+        tools:layout="@layout/fragment_skill_summary" />
 </navigation>
