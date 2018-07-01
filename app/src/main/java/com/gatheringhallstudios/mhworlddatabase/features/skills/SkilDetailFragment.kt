@@ -2,12 +2,19 @@ package com.gatheringhallstudios.mhworlddatabase.features.skills
 
 import android.arch.lifecycle.ViewModelProviders
 import android.arch.lifecycle.Observer
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
 import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
@@ -33,6 +40,7 @@ class SkillDetailFragment : Fragment() {
 
         viewModel.setSkill(skillTreeId)
         viewModel.skillTreeFull.observe(this, Observer<SkillTreeFull>(::populateSkill))
+        viewModel.armorPieces.observe(this, Observer<List<ArmorSkillView>>(::populateArmor))
     }
 
     private fun populateSkill(skillTreeFull : SkillTreeFull?) {
@@ -52,6 +60,34 @@ class SkillDetailFragment : Fragment() {
                 3 -> lvl4_description.text = description
                 4 -> lvl5_description.text = description
             }
+        }
+    }
+
+    private fun populateArmor(armorSkillViews: List<ArmorSkillView>?) {
+        if(armorSkillViews == null) return
+
+        if(armor_layout.childCount > 0)
+            armor_layout.removeAllViews()
+
+        for(armorSkillView in armorSkillViews) {
+            val view = IconLabelTextCell(context)
+
+            val icon : Drawable?
+            when(armorSkillView.data.armor_type) {
+                ArmorType.HEAD -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_head)
+                ArmorType.ARMS -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_arm)
+                ArmorType.CHEST -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_chest)
+                ArmorType.LEGS -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_leg)
+                ArmorType.WAIST -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_waist)
+            }
+
+            val levels = "+${armorSkillView.skillLevel} ${getString(R.string.skills_level)}"
+
+            view.setLeftIconDrawable(icon)
+            view.setLabelText(armorSkillView.name)
+            view.setValueText(levels)
+
+            armor_layout.addView(view)
         }
     }
 }

@@ -17,6 +17,15 @@
 
     <!-- Skills -->
     <string name="skills_title">Skills</string>
+    <string name="skills_level1">Lvl 1</string>
+    <string name="skills_level2">Lvl 2</string>
+    <string name="skills_level3">Lvl 3</string>
+    <string name="skills_level4">Lvl 4</string>
+    <string name="skills_level5">Lvl 5</string>
+    <string name="skills_level">level(s)</string>
+    <string name="skills_armor_header">Armor with skill</string>
+    <string name="skills_charm_header">Charms with skill</string>
+
 
     <!-- Items -->
     <string name="items_title">Items</string>

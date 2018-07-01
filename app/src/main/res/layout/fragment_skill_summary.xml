@@ -23,7 +23,6 @@
             <ImageView
                 android:id="@+id/skill_icon"
                 style="@style/IconXLarge.Decorated"
-                android:contentDescription="Skill Icon"
                 android:src="@drawable/ic_question_mark"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Lvl 1"
+                    android:text="@string/skills_level1"
                     android:textColor="@color/icon_blue" />
 
                 <TextView
@@ -70,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:text="Slightly reduces the effects of weak monster roars." />
+                    tools:text="Slightly reduces the effects of weak monster roars." />
 
             </TableRow>
 
@@ -83,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Lvl 2"
+                    android:text="@string/skills_level2"
                     android:textColor="@color/icon_blue" />
 
                 <TextView
@@ -92,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:text="Reduces the effects of weak monster roars." />
+                    tools:text="Reduces the effects of weak monster roars." />
             </TableRow>
 
             <TableRow
@@ -104,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Lvl 3"
+                    android:text="@string/skills_level3"
                     android:textColor="@color/icon_blue" />
 
                 <TextView
@@ -113,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:text="Nullifies weak monster roars." />
+                    tools:text="Nullifies weak monster roars." />
             </TableRow>
 
             <TableRow
@@ -125,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Lvl 4"
+                    android:text="@string/skills_level4"
                     android:textColor="@color/icon_blue" />
 
                 <TextView
@@ -134,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:text="Nullifies weak monster roars and reduces the effects of strong monster roars." />
+                    tools:text="Nullifies weak monster roars and reduces the effects of strong monster roars." />
             </TableRow>
 
             <TableRow
@@ -146,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Lvl 5"
+                    android:text="@string/skills_level5"
                     android:textColor="@color/icon_blue" />
 
                 <TextView
@@ -155,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:text="Nullifies weak and strong monster roars." />
+                    tools:text="Nullifies weak and strong monster roars." />
             </TableRow>
         </TableLayout>
 
@@ -174,8 +173,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:labelText="Armor with skill"
-            app:layout_constraintTop_toBottomOf="@+id/divider_1"></com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+            app:labelText="@string/skills_armor_header"
+            app:layout_constraintTop_toBottomOf="@+id/divider_1"
+            tools:labelText="Armor with skill"></com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
 
         <LinearLayout
             android:id="@+id/armor_layout"
@@ -208,9 +208,8 @@
             android:id="@+id/charm_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:labelText="Charms with skill"
-            app:layout_constraintTop_toBottomOf="@id/armor_layout"
-            tools:layout_editor_absoluteY="317dp" />
+            app:labelText="@string/skills_charm_header"
+            app:layout_constraintTop_toBottomOf="@id/armor_layout" />
 
         <LinearLayout
             android:id="@+id/charm_layout"

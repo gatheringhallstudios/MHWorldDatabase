@@ -9,6 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.views.Armor
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 
 /**
  * Created by Carlos on 3/21/2018.
@@ -96,16 +97,15 @@ abstract class ArmorDao {
     )
 
     @Query("""
-        SELECT a.*, at.name
+        SELECT a.*, at.name, askill.level skillLevel
             FROM armor a
             JOIN armor_text at USING (id)
             JOIN armor_skill askill ON (armor_id = id)
             WHERE at.lang_id = :langId
                AND askill.skilltree_id = :skillTreeId
             ORDER BY a.id ASC""")
-    abstract fun loadArmorWithSkil(langId: String, skillTreeId: Int): LiveData<List<ArmorBasicView>>
+    abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkillView>>
 
-    fun loadArmorWithSkill(langId: String, skillTreeId: Int) {
-        return loadArmorWithSkill(langId, skillTreeId)
-    }
+//    fun loadArmorWithSkill
+
 }

@@ -42,6 +42,12 @@ data class ArmorBasicView(
         val armorset_id: Int
 )
 
+data class ArmorSkillView(
+        @Embedded val data: ArmorEntity,
+        val name: String?,
+        val skillLevel: Int
+)
+
 /**
  * Representation of a single armor set
  */

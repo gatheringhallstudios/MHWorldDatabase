@@ -7,7 +7,7 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
 
 class SkillDetailViewModel(application: Application) :  AndroidViewModel(application) {
@@ -17,7 +17,7 @@ class SkillDetailViewModel(application: Application) :  AndroidViewModel(applica
 
     private var id: Int = 0
     lateinit var skillTreeFull: LiveData<SkillTreeFull>
-    lateinit var armorPieces: LiveData<List<ArmorBasicView>>
+    lateinit var armorPieces: LiveData<List<ArmorSkillView>>
 
     fun setSkill(skillTreeId : Int) {
         if(this.id == skillTreeId) {
@@ -26,6 +26,6 @@ class SkillDetailViewModel(application: Application) :  AndroidViewModel(applica
 
         this.id = skillTreeId
         skillTreeFull = skillDao.loadSkillTree(AppSettings.dataLocale, skillTreeId)
-        armorPieces = armorDao.loadArmorWithSkil(AppSettings.dataLocale, skillTreeId)
+        armorPieces = armorDao.loadArmorWithSkill(AppSettings.dataLocale, skillTreeId)
     }
 }
