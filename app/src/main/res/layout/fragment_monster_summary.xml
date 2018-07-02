@@ -9,7 +9,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="100dp">
+        android:paddingBottom="@dimen/padding_bottom">
 
         <ImageView
             android:id="@+id/item_icon"

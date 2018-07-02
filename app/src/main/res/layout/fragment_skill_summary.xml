@@ -9,14 +9,14 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="100dp">
+        android:paddingBottom="@dimen/padding_bottom">
 
         <LinearLayout
             android:id="@+id/skill_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,24 +48,24 @@
             android:id="@+id/skill_descriptions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@+id/skill_label"
             app:layout_constraintStart_toStartOf="@+id/skill_label"
             app:layout_constraintTop_toBottomOf="@+id/skill_label">
 
             <include
-                layout="@layout/list_skill_descriptions"
+                layout="@layout/listitem_skill_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <include
-                layout="@layout/list_skill_descriptions"
+                layout="@layout/listitem_skill_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <include
-                layout="@layout/list_skill_descriptions"
+                layout="@layout/listitem_skill_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -86,10 +86,9 @@
             android:id="@+id/armor_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/skills_armor_header"
-            app:layout_constraintTop_toBottomOf="@+id/divider_1"
-            tools:labelText="Armor with skill"></com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+            app:layout_constraintTop_toBottomOf="@+id/divider_1"/>
 
         <LinearLayout
             android:id="@+id/armor_layout"
@@ -122,6 +121,7 @@
             android:id="@+id/charm_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/skills_charm_header"
             app:layout_constraintTop_toBottomOf="@id/armor_layout" />
 

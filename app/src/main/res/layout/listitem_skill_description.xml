@@ -10,10 +10,8 @@
         android:id="@+id/level_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_medium"
         android:gravity="center_vertical"
-        android:text="TextView"
         android:textColor="@color/secondaryColor"
         tools:text="Level 1" />
 
@@ -21,9 +19,8 @@
         android:id="@+id/level_description"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
         android:layout_weight="1"
         android:gravity="center_vertical"
         tools:text="While active, grants attack +16 and increases" />

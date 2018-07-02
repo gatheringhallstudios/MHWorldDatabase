@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.skills
 
 import android.arch.lifecycle.ViewModelProviders
 import android.arch.lifecycle.Observer
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -11,17 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.ArmorRegistry
-import com.gatheringhallstudios.mhworlddatabase.common.ColorRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 import com.gatheringhallstudios.mhworlddatabase.data.views.CharmSkillView
 import com.gatheringhallstudios.mhworlddatabase.data.views.Skill
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
-import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
-import kotlinx.android.synthetic.main.list_skill_descriptions.view.*
+import kotlinx.android.synthetic.main.listitem_skill_description.view.*
 
 
 class SkillDetailFragment : Fragment() {
@@ -88,7 +84,7 @@ class SkillDetailFragment : Fragment() {
             skill_descriptions.removeAllViews()
 
         for(i in 0..4) {
-            val view = layoutInflater.inflate(R.layout.list_skill_descriptions, null)
+            val view = layoutInflater.inflate(R.layout.listitem_skill_description, null)
             val description : String? = skills.getOrNull(i)?.description
 
             if(description.isNullOrBlank()) return
