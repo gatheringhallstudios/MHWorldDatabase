@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.skills
 
 import android.arch.lifecycle.ViewModelProviders
 import android.arch.lifecycle.Observer
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,11 +12,12 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
+import com.gatheringhallstudios.mhworlddatabase.data.views.Skill
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
 import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
+import kotlinx.android.synthetic.main.list_skill_descriptions.view.*
 
 
 class SkillDetailFragment : Fragment() {
@@ -50,17 +50,8 @@ class SkillDetailFragment : Fragment() {
         skill_icon.setImageDrawable(icon)
         skill_name.text = skillTreeFull.name
 
-        for(i in 0..4) {
-            val description : String = skillTreeFull.skills.getOrNull(i)?.description ?: "-"
+        constructArguments(skillTreeFull.skills)
 
-            when(i) {
-                0 -> lvl1_description.text = description
-                1 -> lvl2_description.text = description
-                2 -> lvl3_description.text = description
-                3 -> lvl4_description.text = description
-                4 -> lvl5_description.text = description
-            }
-        }
     }
 
     private fun populateArmor(armorSkillViews: List<ArmorSkillView>?) {
@@ -88,6 +79,22 @@ class SkillDetailFragment : Fragment() {
             view.setValueText(levels)
 
             armor_layout.addView(view)
+        }
+    }
+
+    private fun constructArguments(skills : List<Skill>) {
+        if(skill_descriptions.childCount > 0)
+            skill_descriptions.removeAllViews()
+
+        for(i in 0..4) {
+            val view = layoutInflater.inflate(R.layout.list_skill_descriptions, null)
+            val description : String? = skills.getOrNull(i)?.description
+
+            if(description.isNullOrBlank()) return
+            view.level_text.text = "${getString(R.string.skills_level_title)} ${i + 1}"
+            view.level_description.text = description
+
+            skill_descriptions.addView(view)
         }
     }
 }

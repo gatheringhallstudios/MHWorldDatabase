@@ -42,133 +42,45 @@
                 tools:text="Earplugs" />
         </LinearLayout>
 
-        <TableLayout
+
+        <LinearLayout
             android:id="@+id/skill_descriptions"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/skill_label"
-            app:layout_constraintTop_toBottomOf="@+id/skill_label">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/skill_label"
+            tools:layout_editor_absoluteX="0dp">
 
-            <TableRow
+            <include
+                layout="@layout/list_skill_descriptions"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/lvl1_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/skills_level1"
-                    android:textColor="@color/icon_blue" />
-
-                <TextView
-                    android:id="@+id/lvl1_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    tools:text="Slightly reduces the effects of weak monster roars." />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="@style/HorizontalDivider"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/lvl2_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/skills_level2"
-                    android:textColor="@color/icon_blue" />
-
-                <TextView
-                    android:id="@+id/lvl2_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    tools:text="Reduces the effects of weak monster roars." />
-            </TableRow>
-
-            <TableRow
+            <include
+                layout="@layout/list_skill_descriptions"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/lvl3_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/skills_level3"
-                    android:textColor="@color/icon_blue" />
-
-                <TextView
-                    android:id="@+id/lvl3_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    tools:text="Nullifies weak monster roars." />
-            </TableRow>
-
-            <TableRow
+            <include
+                layout="@layout/list_skill_descriptions"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/lvl4_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/skills_level4"
-                    android:textColor="@color/icon_blue" />
-
-                <TextView
-                    android:id="@+id/lvl4_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    tools:text="Nullifies weak monster roars and reduces the effects of strong monster roars." />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/lvl5_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/skills_level5"
-                    android:textColor="@color/icon_blue" />
-
-                <TextView
-                    android:id="@+id/lvl5_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    tools:text="Nullifies weak and strong monster roars." />
-            </TableRow>
-        </TableLayout>
-
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/divider_1"
             style="@style/HorizontalDivider"
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            app:layout_constraintEnd_toEndOf="@+id/skill_descriptions"
-            app:layout_constraintStart_toStartOf="@+id/skill_descriptions"
-            app:layout_constraintTop_toBottomOf="@id/skill_descriptions" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/skill_descriptions" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/armor_header"
