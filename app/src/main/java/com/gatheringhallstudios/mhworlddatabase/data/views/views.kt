@@ -42,6 +42,12 @@ data class ArmorBasicView(
         val armorset_id: Int
 )
 
+data class ArmorSkillView(
+        @Embedded val data: ArmorEntity,
+        val name: String?,
+        val skillLevel: Int
+)
+
 /**
  * Representation of a single armor set
  */
@@ -131,4 +137,10 @@ data class MonsterRewardView(
         @Embedded val data: MonsterRewardEntity,
         var condition_name: String?,
         var item_name: String?
+)
+
+data class CharmSkillView(
+        @Embedded val data: CharmEntity,
+        val name: String?,
+        val skillLevel: Int
 )

@@ -13,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegat
 import com.gatheringhallstudios.mhworlddatabase.adapters.SkillTreeAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
  * Created by Carlos on 3/22/2018.
@@ -23,7 +24,7 @@ class SkillListFragment : RecyclerViewFragment() {
     }
 
     val adapter = BasicListDelegationAdapter(SkillTreeAdapterDelegate({
-        // todo: implement
+        getRouter().navigateSkillDetail(it.id)
     }))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
