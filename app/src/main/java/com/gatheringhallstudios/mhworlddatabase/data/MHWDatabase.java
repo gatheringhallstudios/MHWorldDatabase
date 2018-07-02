@@ -8,6 +8,7 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.CharmDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
@@ -16,6 +17,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmSkill;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemCombinationEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemText;
@@ -59,6 +63,9 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
 
                 // Skills
                 SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
+
+                // Charms
+                CharmEntity.class, CharmSkill.class, CharmText.class,
 
                 // Armor classes
                 ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class
@@ -110,4 +117,6 @@ public abstract class MHWDatabase extends RoomDatabase {
     public abstract SkillDao skillDao();
 
     public abstract ArmorDao armorDao();
+
+    public abstract CharmDao charmDao();
 }

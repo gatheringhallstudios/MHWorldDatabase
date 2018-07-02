@@ -138,3 +138,9 @@ data class MonsterRewardView(
         var condition_name: String?,
         var item_name: String?
 )
+
+data class CharmSkillView(
+        @Embedded val data: CharmEntity,
+        val name: String?,
+        val skillLevel: Int
+)

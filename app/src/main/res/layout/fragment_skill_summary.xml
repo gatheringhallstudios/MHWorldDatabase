@@ -33,9 +33,10 @@
                 android:id="@+id/skill_name"
                 style="@style/TextDisplayHigh"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
                 app:layout_constraintLeft_toLeftOf="@id/skill_icon"
                 app:layout_constraintStart_toEndOf="@+id/skill_icon"
                 app:layout_constraintTop_toTopOf="@+id/skill_icon"
@@ -45,14 +46,13 @@
 
         <LinearLayout
             android:id="@+id/skill_descriptions"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/skill_label"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintEnd_toEndOf="@+id/skill_label"
+            app:layout_constraintStart_toStartOf="@+id/skill_label"
+            app:layout_constraintTop_toBottomOf="@+id/skill_label">
 
             <include
                 layout="@layout/list_skill_descriptions"

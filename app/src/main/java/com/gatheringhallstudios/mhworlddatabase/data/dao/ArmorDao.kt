@@ -105,7 +105,4 @@ abstract class ArmorDao {
                AND askill.skilltree_id = :skillTreeId
             ORDER BY a.id ASC""")
     abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkillView>>
-
-//    fun loadArmorWithSkill
-
 }

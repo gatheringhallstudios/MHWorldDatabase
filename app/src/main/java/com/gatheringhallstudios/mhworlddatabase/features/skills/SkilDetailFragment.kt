@@ -13,8 +13,10 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
+import com.gatheringhallstudios.mhworlddatabase.data.views.CharmSkillView
 import com.gatheringhallstudios.mhworlddatabase.data.views.Skill
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
 import kotlinx.android.synthetic.main.list_skill_descriptions.view.*
@@ -41,6 +43,7 @@ class SkillDetailFragment : Fragment() {
         viewModel.setSkill(skillTreeId)
         viewModel.skillTreeFull.observe(this, Observer<SkillTreeFull>(::populateSkill))
         viewModel.armorPieces.observe(this, Observer<List<ArmorSkillView>>(::populateArmor))
+        viewModel.charms.observe(this, Observer<List<CharmSkillView>>(::populateCharms))
     }
 
     private fun populateSkill(skillTreeFull : SkillTreeFull?) {
@@ -50,8 +53,7 @@ class SkillDetailFragment : Fragment() {
         skill_icon.setImageDrawable(icon)
         skill_name.text = skillTreeFull.name
 
-        constructArguments(skillTreeFull.skills)
-
+        populateDescriptions(skillTreeFull.skills)
     }
 
     private fun populateArmor(armorSkillViews: List<ArmorSkillView>?) {
@@ -72,17 +74,19 @@ class SkillDetailFragment : Fragment() {
                 ArmorType.WAIST -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_waist)
             }
 
-            val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel, armorSkillView)}"
+            val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel)}"
 
             view.setLeftIconDrawable(icon)
             view.setLabelText(armorSkillView.name)
             view.setValueText(levels)
+            //TODO: link up on click listener to armor detail page once done
+            //view.setOnClickListener {v -> getRouter().navigateArmorDetail()}
 
             armor_layout.addView(view)
         }
     }
 
-    private fun constructArguments(skills : List<Skill>) {
+    private fun populateDescriptions(skills : List<Skill>) {
         if(skill_descriptions.childCount > 0)
             skill_descriptions.removeAllViews()
 
@@ -95,6 +99,28 @@ class SkillDetailFragment : Fragment() {
             view.level_description.text = description
 
             skill_descriptions.addView(view)
+        }
+    }
+
+    private fun populateCharms(charmSkillViews: List<CharmSkillView>?) {
+        if(charmSkillViews == null) return
+
+        if(charm_layout.childCount > 0)
+            charm_layout.removeAllViews()
+
+        for(charmSkillView in charmSkillViews) {
+            val view = IconLabelTextCell(context)
+
+            val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
+            val levels = "+${charmSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, charmSkillView.skillLevel)}"
+
+            view.setLeftIconDrawable(icon)
+            view.setLabelText(charmSkillView.name)
+            view.setValueText(levels)
+            //TODO: link up on click listener to charm detail page once done
+            //view.setOnClickListener {v -> getRouter().navigateCharmDetail()}
+
+            charm_layout.addView(view)
         }
     }
 }
