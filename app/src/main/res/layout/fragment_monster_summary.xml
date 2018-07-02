@@ -81,7 +81,7 @@
                 android:id="@+id/fire_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_element_fire"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
@@ -89,7 +89,7 @@
                 android:id="@+id/water_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_element_water"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
@@ -97,7 +97,7 @@
                 android:id="@+id/lightning_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_element_thunder"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="3" />
 
@@ -105,7 +105,7 @@
                 android:id="@+id/ice_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_element_ice"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
 
@@ -113,7 +113,7 @@
                 android:id="@+id/dragon_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_element_dragon"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
 
@@ -133,7 +133,7 @@
                 android:id="@+id/poison_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_status_poison"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
 
@@ -141,7 +141,7 @@
                 android:id="@+id/sleep_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_status_sleep"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
 
@@ -149,7 +149,7 @@
                 android:id="@+id/paralysis_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_status_paralysis"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
@@ -157,7 +157,7 @@
                 android:id="@+id/blast_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_status_blast"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
@@ -165,7 +165,7 @@
                 android:id="@+id/stun_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_question_mark"
+                app:iconSrc="@drawable/ic_status_stun"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 

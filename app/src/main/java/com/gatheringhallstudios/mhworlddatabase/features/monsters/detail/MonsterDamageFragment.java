@@ -99,8 +99,8 @@ public class MonsterDamageFragment extends Fragment {
             TextView bodyPart = elemental.findViewById(R.id.body_part);
             TextView fire = elemental.findViewById(R.id.dmg1);
             TextView water = elemental.findViewById(R.id.dmg2);
-            TextView ice = elemental.findViewById(R.id.dmg3);
-            TextView thunder = elemental.findViewById(R.id.dmg4);
+            TextView thunder = elemental.findViewById(R.id.dmg3);
+            TextView ice = elemental.findViewById(R.id.dmg4);
             TextView dragon = elemental.findViewById(R.id.dmg5);
 
             // Bind views
@@ -110,8 +110,8 @@ public class MonsterDamageFragment extends Fragment {
             MonsterHitzoneEntity data = hitzone.getData();
             bindHitzone(fire, data.getFire(), EFFECTIVE_ELEMENTAL);
             bindHitzone(water, data.getWater(), EFFECTIVE_ELEMENTAL);
-            bindHitzone(ice, data.getIce(), EFFECTIVE_ELEMENTAL);
             bindHitzone(thunder, data.getThunder(), EFFECTIVE_ELEMENTAL);
+            bindHitzone(ice, data.getIce(), EFFECTIVE_ELEMENTAL);
             bindHitzone(dragon, data.getDragon(), EFFECTIVE_ELEMENTAL);
 
             elementDamageLayout.addView(elemental);
