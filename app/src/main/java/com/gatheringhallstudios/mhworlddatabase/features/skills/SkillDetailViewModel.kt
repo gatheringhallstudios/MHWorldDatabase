@@ -14,9 +14,6 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
 
 class SkillDetailViewModel(application: Application) :  AndroidViewModel(application) {
     private val skillDao : SkillDao = MHWDatabase.getDatabase(application).skillDao()
-    private val armorDao : ArmorDao = MHWDatabase.getDatabase(application).armorDao()
-    private val charmDao: CharmDao = MHWDatabase.getDatabase(application).charmDao()
-
 
     private var id: Int = 0
     lateinit var skillTreeFull: LiveData<SkillTreeFull>
@@ -30,7 +27,7 @@ class SkillDetailViewModel(application: Application) :  AndroidViewModel(applica
 
         this.id = skillTreeId
         skillTreeFull = skillDao.loadSkillTree(AppSettings.dataLocale, skillTreeId)
-        armorPieces = armorDao.loadArmorWithSkill(AppSettings.dataLocale, skillTreeId)
-        charms = charmDao.loadCharms(AppSettings.dataLocale, skillTreeId)
+        armorPieces = skillDao.loadArmorWithSkill(AppSettings.dataLocale, skillTreeId)
+        charms = skillDao.loadCharmsWithSkill(AppSettings.dataLocale, skillTreeId)
     }
 }

@@ -4,10 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.views.Skill
-
-import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
-import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
+import com.gatheringhallstudios.mhworlddatabase.data.views.*
 
 /**
  * A class used to retrieve data about skills centered from the skills point of view.
@@ -70,4 +67,27 @@ abstract class SkillDao {
                 AND s.lang_id = :langId
         WHERE st.id = :skillTreeId """)
     protected abstract fun loadSkills(langId: String, skillTreeId: Int): LiveData<List<SkillWithSkillTree>>
+
+
+    @Query("""
+        SELECT c.*, ct.name, cs.level skillLevel
+            FROM charm c
+             JOIN charm_text ct USING (id)
+             JOIN charm_skill cs ON (id = charm_id)
+         WHERE ct.lang_id = :langId
+            AND cs.skilltree_id = :skillTreeId
+
+    """)
+    abstract fun loadCharmsWithSkill(langId: String, skillTreeId: Int) : LiveData<List<CharmSkillView>>
+
+
+    @Query("""
+        SELECT a.*, at.name, askill.level skillLevel
+            FROM armor a
+            JOIN armor_text at USING (id)
+            JOIN armor_skill askill ON (armor_id = id)
+            WHERE at.lang_id = :langId
+               AND askill.skilltree_id = :skillTreeId
+            ORDER BY a.id ASC""")
+    abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkillView>>
 }
