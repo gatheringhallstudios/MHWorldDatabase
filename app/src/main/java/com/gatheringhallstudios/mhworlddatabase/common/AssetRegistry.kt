@@ -1,6 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.common
 
+import android.util.Log
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 
 /**
  * The AssetRegistry is used to create key-value maps between any specified types
@@ -9,13 +11,39 @@ import com.gatheringhallstudios.mhworlddatabase.R
  */
 
 typealias AdderFun<T, K> = (name: T, resId: K) -> Unit
-private fun <T, K> createRegistry(initLambda: (AdderFun<T, K>) -> Unit): Map<T, K> {
+
+class Registry<T, K>(val source: Map<T, K>) {
+    operator fun get(key: T): K? {
+        if (!source.containsKey(key)) {
+            Log.w("AssetRegistry", "Value $key not found in registry")
+        }
+        return source[key]
+    }
+
+    fun get(key: T, default: K): K {
+        return get(key) ?: default
+    }
+}
+
+private fun <T, K> createRegistry(initLambda: (AdderFun<T, K>) -> Unit): Registry<T, K> {
     val mutableRegistry = HashMap<T, K>()
     initLambda { name: T, resId: K ->
         mutableRegistry[name] = resId
     }
-    return mutableRegistry
+    return Registry(mutableRegistry)
 }
+
+private fun <T, K> createRegistry(vararg items: Pair<T, K>): Registry<T, K> {
+    return Registry(mapOf(*items))
+}
+
+val ArmorRegistry = createRegistry(
+        ArmorType.HEAD to R.drawable.ic_head,
+        ArmorType.CHEST to R.drawable.ic_chest,
+        ArmorType.ARMS to R.drawable.ic_arm,
+        ArmorType.WAIST to R.drawable.ic_waist,
+        ArmorType.LEGS to R.drawable.ic_leg
+)
 
 val VectorRegistry = createRegistry<String, Int>{ register ->
     // Armor

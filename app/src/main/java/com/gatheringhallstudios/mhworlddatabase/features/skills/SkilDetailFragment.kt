@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.common.ArmorRegistry
+import com.gatheringhallstudios.mhworlddatabase.common.ColorRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
@@ -65,14 +67,9 @@ class SkillDetailFragment : Fragment() {
         for(armorSkillView in armorSkillViews) {
             val view = IconLabelTextCell(context)
 
-            val icon : Drawable?
-            when(armorSkillView.data.armor_type) {
-                ArmorType.HEAD -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_head)
-                ArmorType.ARMS -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_arm)
-                ArmorType.CHEST -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_chest)
-                ArmorType.LEGS -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_leg)
-                ArmorType.WAIST -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_waist)
-            }
+            val iconId = ArmorRegistry[armorSkillView.data.armor_type] ?: R.drawable.ic_question_mark
+            val rareColor = "rare${armorSkillView.data.rarity}"
+            val icon = context?.getVectorDrawable(iconId, rareColor)
 
             val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel)}"
 
