@@ -62,5 +62,5 @@ class ItemLocationsFragment : RecyclerViewFragment() {
         }
 
         adapter.notifyDataSetChanged()
-    }
+ ""   }
 }

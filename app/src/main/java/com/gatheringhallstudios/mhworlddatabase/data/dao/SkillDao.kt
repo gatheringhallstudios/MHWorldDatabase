@@ -21,7 +21,7 @@ abstract class SkillDao {
         SELECT id, name, description, icon_color
         FROM skilltree s join skilltree_text st USING (id)
         WHERE lang_id = :langId
-        ORDER BY icon_color DESC, name """)
+        ORDER BY name """)
     abstract fun loadSkillTrees(langId: String): LiveData<List<SkillTreeView>>
 
     /**

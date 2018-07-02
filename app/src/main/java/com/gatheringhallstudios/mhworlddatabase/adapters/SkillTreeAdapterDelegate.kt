@@ -26,6 +26,6 @@ class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
             view.removeDecorator()
         }
 
-        view.setOnClickListener { (onSelected(data)) }
+        view.setOnClickListener { onSelected(data) }
     }
 }

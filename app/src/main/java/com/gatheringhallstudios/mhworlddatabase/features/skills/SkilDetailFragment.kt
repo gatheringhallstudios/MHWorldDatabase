@@ -81,7 +81,7 @@ class SkillDetailFragment : Fragment() {
                 ArmorType.WAIST -> icon = ContextCompat.getDrawable(context!!, R.drawable.ic_waist)
             }
 
-            val levels = "+${armorSkillView.skillLevel} ${getString(R.string.skills_level)}"
+            val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel, armorSkillView)}"
 
             view.setLeftIconDrawable(icon)
             view.setLabelText(armorSkillView.name)
