@@ -1,19 +1,16 @@
 package com.gatheringhallstudios.mhworlddatabase.dao
 
-import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import com.gatheringhallstudios.mhworlddatabase.TestUtils.getValue
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.getResult
 import org.junit.Assert.assertFalse
@@ -41,13 +38,13 @@ class MonsterDaoTest {
 
     @Test
     fun Can_Query_MonsterList() {
-        val results = dao.loadList("en").getResult()
+        val results = dao.loadMonsters("en").getResult()
         assertFalse("expected results", results.isEmpty())
     }
 
     @Test
     fun Can_Query_MonsterBreaks() {
-        val largeMonsters = dao.loadList("en", MonsterSize.LARGE).getResult()
+        val largeMonsters = dao.loadMonsters("en", MonsterSize.LARGE).getResult()
         val firstMonster = largeMonsters.first()
 
         val breaks = dao.loadBreaks("en", firstMonster.id).getResult()

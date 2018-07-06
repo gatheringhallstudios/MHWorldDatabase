@@ -21,7 +21,7 @@ class MonsterAdapterDelegate(private val onSelected: (MonsterView) -> Unit)
 
     override fun bindView(view: View, data: MonsterView) {
         val ctx = view.context
-        val icon = ctx.getAssetDrawable(data.data.icon)
+        val icon = ctx.getAssetDrawable("monsters/${data.id}.png")
 
         view.item_icon.setImageDrawable(icon)
         view.item_name.text = data.name

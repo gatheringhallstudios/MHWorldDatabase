@@ -85,6 +85,7 @@ data class ArmorSetTextEntity(
 @Entity(tableName = "location_text", primaryKeys = ["id", "lang_id"])
 data class LocationText(
         val id: Int,
+        val order_id: Int,
         val lang_id: String,
         val name: String?
 )
@@ -146,6 +147,7 @@ data class SkillEntity(
 @Entity(tableName = "monster")
 data class MonsterEntity(
         @PrimaryKey val id: Int,
+        val order_id: Int,
 
         val size: MonsterSize,
 
@@ -158,9 +160,7 @@ data class MonsterEntity(
         val status_weaknesses: WeaknessSummaryStatus?,
 
         @Embedded(prefix = "alt_weakness_")
-        val alt_weaknesses: WeaknessSummaryElemental?,
-
-        val icon: String?
+        val alt_weaknesses: WeaknessSummaryElemental?
 )
 
 /**
@@ -170,10 +170,11 @@ data class MonsterEntity(
 @Entity(tableName = "monster_text",
         primaryKeys = ["id", "lang_id"])
 data class MonsterText(
-        var id: Int,
-        var lang_id: String,
-        var name: String?,
-        var description: String?
+        val id: Int,
+        val lang_id: String,
+        val name: String?,
+        val ecology: String?,
+        val description: String?
 )
 
 @Entity(tableName = "monster_break")

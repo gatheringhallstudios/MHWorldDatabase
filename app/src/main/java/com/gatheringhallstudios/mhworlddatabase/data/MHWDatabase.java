@@ -71,7 +71,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 // Armor classes
                 ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class
         },
-        version = 7,
+        version = 8,
         exportSchema = false) //TODO investigate if this is something that would help us
 
 @TypeConverters({Converters.class})

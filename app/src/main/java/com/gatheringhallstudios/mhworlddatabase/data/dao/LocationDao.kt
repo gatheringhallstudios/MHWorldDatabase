@@ -17,7 +17,7 @@ abstract class LocationDao {
         SELECT id, name
         FROM location_text t
         WHERE t.lang_id = :langId
-        ORDER BY id ASC
+        ORDER BY order_id ASC
         """)
     abstract fun loadLocations(langId: String) : LiveData<List<LocationView>>
 

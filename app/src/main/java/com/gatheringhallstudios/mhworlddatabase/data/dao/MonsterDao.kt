@@ -16,16 +16,9 @@ abstract class MonsterDao {
         SELECT m.*, t.name, t.description
         from monster m JOIN monster_text t USING (id)
         WHERE t.lang_id = :langId
+          AND (m.size = :size OR :size IS NULL)
         ORDER BY t.name ASC""")
-    abstract fun loadList(langId: String): LiveData<List<MonsterView>>
-
-    @Query("""
-        SELECT m.*, t.name, t.description
-        from monster m JOIN monster_text t USING (id)
-        WHERE t.lang_id = :langId
-          AND m.size = :size
-        ORDER BY t.name ASC""")
-    abstract fun loadList(langId: String, size: MonsterSize): LiveData<List<MonsterView>>
+    abstract fun loadMonsters(langId: String, size: MonsterSize? = null): LiveData<List<MonsterView>>
 
     @Query("""
         SELECT m.*, t.name, t.description

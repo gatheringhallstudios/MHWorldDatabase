@@ -47,7 +47,7 @@ class MonsterSummaryFragment : Fragment() {
         val elemWeakness = monster.data.weaknesses
         val statusWeakness = monster.data.status_weaknesses
 
-        val icon = context?.getAssetDrawable(monster.data.icon)
+        val icon = context?.getAssetDrawable("monsters/${monster.id}.png")
         item_icon.setImageDrawable(icon)
 
         item_name.text = monster.name

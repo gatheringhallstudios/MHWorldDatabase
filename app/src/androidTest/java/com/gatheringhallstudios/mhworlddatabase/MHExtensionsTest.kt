@@ -26,7 +26,7 @@ class MHExtensionsTest {
         val default = R.drawable.ic_question_mark
         val defaultImage = ContextCompat.getDrawable(context, default)
 
-        val result = context.getAssetDrawable("monster-large/anjanath.png", default)
+        val result = context.getAssetDrawable("monsters/30.png", default)
         assertNotNull("Expected image", result)
         assertNotEquals("Should not be default", defaultImage?.constantState, result?.constantState)
     }
@@ -49,7 +49,6 @@ class MHExtensionsTest {
         val result = context.getVectorDrawable(R.drawable.ic_head)
         assertNotNull("Expected default non-null result", result)
         assertNotEquals("Should not be default", questionMark?.constantState, result?.constantState)
-
     }
 
     @Test

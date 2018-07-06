@@ -23,11 +23,9 @@ class LocationAdapterDelegate(private val onSelected: (LocationView) -> Unit)
 
     override fun bindView(view: View, data: LocationView) {
         val ctx = view.context
-        val defaultIcon = R.drawable.ic_question_mark
-        //Because the location screenshot is not available in the database
-        val path : String = "locations/" + data.name?.replace(" ", "-")?.toLowerCase() + ".jpg";
+        val path = "locations/${data.id}.jpg"
 
-        val icon = ctx.getAssetDrawable(path, defaultIcon)
+        val icon = ctx.getAssetDrawable(path)
         view.item_icon.setImageDrawable(icon)
         view.item_name.text = data.name
         view.setOnClickListener { onSelected(data) }

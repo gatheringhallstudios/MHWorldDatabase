@@ -6,7 +6,6 @@ import android.arch.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 
@@ -37,6 +36,6 @@ class MonsterListViewModel(application: Application) : AndroidViewModel(applicat
             MonsterListViewModel.Tab.SMALL -> MonsterSize.SMALL
         }
 
-        monsters = dao.loadList(AppSettings.dataLocale, monsterSize)
+        monsters = dao.loadMonsters(AppSettings.dataLocale, monsterSize)
     }
 }
