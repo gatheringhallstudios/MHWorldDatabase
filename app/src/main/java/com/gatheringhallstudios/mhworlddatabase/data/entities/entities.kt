@@ -17,6 +17,7 @@ class ItemEntity(
         @PrimaryKey val id: Int,
 
         val category: ItemCategory,
+        val subcategory: ItemSubcategory,
         val rarity: Int,
         val buy_price: Int?,
         val sell_price: Int,
@@ -98,7 +99,8 @@ data class LocationItemEntity(
         val area: Int,
         val item_id: Int,
         val stack: Int,
-        val percentage: Int
+        val percentage: Int,
+        val nodes: Int
 )
 
 @Entity(tableName = "skilltree")

@@ -111,6 +111,7 @@ data class Skill(
 data class MonsterView(
         @Embedded val data: MonsterEntity,
         val name: String?,
+        val ecology: String?,
         val description: String?
 ) {
     val id get() = data.id

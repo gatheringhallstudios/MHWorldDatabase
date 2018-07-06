@@ -11,7 +11,7 @@ inline fun <reified T : Enum<T>> createLookupMap(): EnumHashBiMap<T, String> {
 }
 
 // internal helper to get an enum from a lookup map, and throw an error on failure
-fun <T : Enum<T>> EnumHashBiMap<T, String>.toEnum(value : String) : T {
+fun <T : Enum<T>> EnumHashBiMap<T, String>.toEnum(value : String?) : T {
     try {
         return this.inverse()[value]!!
     } catch (ex: NullPointerException) {
@@ -39,6 +39,7 @@ class Converters {
     companion object {
         private var rankMap = createLookupMap<Rank>()
         private var itemCategoryMap = createLookupMap<ItemCategory>()
+        private var itemSubcategoryMap = createLookupMap<ItemSubcategory>()
         private var monsterSizeMap = createLookupMap<MonsterSize>()
         private var extractMap = createLookupMap<Extract>()
         private var armorMap = createLookupMap<ArmorType>()
@@ -63,6 +64,11 @@ class Converters {
             itemCategoryMap[ItemCategory.MISC] = "misc"
             itemCategoryMap[ItemCategory.AMMO] = "ammo"
             itemCategoryMap[ItemCategory.HIDDEN] = "hidden"
+
+            itemSubcategoryMap[ItemSubcategory.NONE] = null
+            itemSubcategoryMap[ItemSubcategory.APPRAISAL] = "appraisal"
+            itemSubcategoryMap[ItemSubcategory.ACCOUNT] = "account"
+            itemSubcategoryMap[ItemSubcategory.SUPPLY] = "supply"
 
             armorMap[ArmorType.HEAD] = "head"
             armorMap[ArmorType.CHEST] = "chest"
@@ -101,6 +107,9 @@ class Converters {
 
     @TypeConverter fun itemCategoryFromString(value: String) = itemCategoryMap.toEnum(value)
     @TypeConverter fun fromItemCategory(category: ItemCategory?) = itemCategoryMap.toString(category)
+
+    @TypeConverter fun itemSubcategoryFromString(value: String?) = itemSubcategoryMap.toEnum(value)
+    @TypeConverter fun fromItemSubcategory(subcategory: ItemSubcategory?) = itemSubcategoryMap.toString(subcategory)
 
     @TypeConverter fun monsterSizefromString(value: String) = monsterSizeMap.toEnum(value)
     @TypeConverter fun fromMonsterSize(type: MonsterSize?) = monsterSizeMap.toString(type)

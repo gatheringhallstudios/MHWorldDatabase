@@ -24,6 +24,13 @@ enum class ItemCategory {
     HIDDEN
 }
 
+enum class ItemSubcategory {
+    NONE,
+    APPRAISAL,
+    ACCOUNT,
+    SUPPLY
+}
+
 /**
  * An enumeration used to represent a monster's size.
  * Created by Carlos on 3/21/2018.

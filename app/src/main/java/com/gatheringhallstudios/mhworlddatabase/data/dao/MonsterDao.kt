@@ -13,7 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.*
 @Dao
 abstract class MonsterDao {
     @Query("""
-        SELECT m.*, t.name, t.description
+        SELECT m.*, t.name, t.ecology, t.description
         from monster m JOIN monster_text t USING (id)
         WHERE t.lang_id = :langId
           AND (m.size = :size OR :size IS NULL)
@@ -21,7 +21,7 @@ abstract class MonsterDao {
     abstract fun loadMonsters(langId: String, size: MonsterSize? = null): LiveData<List<MonsterView>>
 
     @Query("""
-        SELECT m.*, t.name, t.description
+        SELECT m.*, t.name, t.ecology, t.description
         from monster m JOIN monster_text t USING (id)
         WHERE t.lang_id = :langId AND m.id = :id
         LIMIT 1""")
