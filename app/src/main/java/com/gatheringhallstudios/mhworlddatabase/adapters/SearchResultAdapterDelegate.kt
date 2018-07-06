@@ -6,7 +6,9 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.views.SearchResult
+import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
 import kotlin.reflect.KClass
 
 class SearchResultAdapterDelegate : SimpleListDelegate<SearchResult, IconLabelTextCell>() {
@@ -19,6 +21,14 @@ class SearchResultAdapterDelegate : SimpleListDelegate<SearchResult, IconLabelTe
     }
 
     override fun bindView(view: IconLabelTextCell, data: SearchResult) {
+        val ctx = view.context
+        val icon = when(data.data_type) {
+            DataType.LOCATION -> ctx.getAssetDrawable("locations/${data.id}.jpg")
+            DataType.MONSTER -> ctx.getAssetDrawable("monsters/${data.id}.png")
+            else -> ctx.getVectorDrawable(data.icon_name ?: "", data.icon_color)
+        }
+
+        view.setLeftIconDrawable(icon)
         view.setLabelText(data.name)
 
         view.setOnClickListener {

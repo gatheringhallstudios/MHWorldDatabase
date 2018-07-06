@@ -85,7 +85,7 @@ val PATH_NAME = "base"
  */
 fun Context.getVectorDrawable(
         vector: String,
-        color: String = "rare1",
+        color: String?,
         @DrawableRes default: Int = R.drawable.ic_question_mark
 ): Drawable? {
 
