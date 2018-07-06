@@ -12,6 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.CharmDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.SearchDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetTextEntity;
@@ -119,4 +120,6 @@ public abstract class MHWDatabase extends RoomDatabase {
     public abstract ArmorDao armorDao();
 
     public abstract CharmDao charmDao();
+
+    public abstract SearchDao searchDao();
 }

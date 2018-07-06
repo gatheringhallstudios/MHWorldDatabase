@@ -44,6 +44,8 @@ class Converters {
         private var armorMap = createLookupMap<ArmorType>()
         private var weaponMap = createLookupMap<WeaponType>()
 
+        private var dataTypeMap = createLookupMap<DataType>()
+
         init {
             rankMap[Rank.LOW] = "LR"
             rankMap[Rank.HIGH] = "HR"
@@ -82,6 +84,15 @@ class Converters {
             weaponMap[WeaponType.BOW] = "bow"
             weaponMap[WeaponType.LIGHT_BOWGUN] = "light-bowgun"
             weaponMap[WeaponType.HEAVY_BOWGUN] = "heavy-bowgun"
+
+            dataTypeMap[DataType.LOCATION] = "location"
+            dataTypeMap[DataType.ITEM] = "item"
+            dataTypeMap[DataType.MONSTER] = "monster"
+            dataTypeMap[DataType.SKILL] = "skill"
+            dataTypeMap[DataType.DECORATION] = "decoration"
+            dataTypeMap[DataType.CHARM] = "charm"
+            dataTypeMap[DataType.ARMOR] = "armor"
+            dataTypeMap[DataType.WEAPON] = "weapon"
         }
     }
 
@@ -102,4 +113,7 @@ class Converters {
 
     @TypeConverter fun weaponTypeFromString(value: String) = weaponMap.toEnum(value)
     @TypeConverter fun fromWeaponType(type: WeaponType?) = weaponMap.toString(type)
+
+    @TypeConverter fun dataTypeFromString(value: String) = dataTypeMap.toEnum(value)
+    @TypeConverter fun fromDataType(type: DataType?) = dataTypeMap.toString(type)
 }

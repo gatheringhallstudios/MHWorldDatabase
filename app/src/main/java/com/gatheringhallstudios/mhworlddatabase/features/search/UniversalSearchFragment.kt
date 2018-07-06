@@ -11,7 +11,9 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegat
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.SearchResultAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.data.views.SearchResult
 import com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -21,23 +23,13 @@ class UniversalSearchFragment : RecyclerViewFragment() {
 
     // Universal Search results handle many types of data.
     // Create an adapter that handles all of them
-    val adapter = BasicListDelegationAdapter<Any>(
-            LocationAdapterDelegate({
-                getRouter().navigateLocationDetail(it.id)
-            }),
-            MonsterAdapterDelegate({
-                getRouter().navigateMonsterDetail(it.id)
-            }),
-            ItemAdapterDelegate({
-                getRouter().navigateItemDetail(it.id)
-            })
-    )
+    val adapter = BasicListDelegationAdapter<Any>(SearchResultAdapterDelegate())
 
-    val activityViewModel by lazy {
+    private val activityViewModel by lazy {
         ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
     }
 
-    val searchViewModel by lazy {
+    private val searchViewModel by lazy {
         ViewModelProviders.of(this).get(UniversalSearchViewModel::class.java)
     }
 

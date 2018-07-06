@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.views
 import android.arch.persistence.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
 data class ItemView(
@@ -143,4 +144,12 @@ data class CharmSkillView(
         @Embedded val data: CharmEntity,
         val name: String?,
         val skillLevel: Int
+)
+
+data class SearchResult(
+        val data_type: DataType,
+        val id: Int,
+        val name: String,
+        val icon_name: String?,
+        val icon_color: String?
 )

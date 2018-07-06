@@ -4,11 +4,8 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.gatheringhallstudios.mhworlddatabase.AppSettings
-import com.gatheringhallstudios.mhworlddatabase.common.CachedValue
 import com.gatheringhallstudios.mhworlddatabase.common.ThrottledExecutor
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.getResult
 import kotlin.system.measureTimeMillis
 
 // values are cached for 30 seconds
@@ -18,11 +15,7 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     private val TAG = javaClass.simpleName
 
     private val db = MHWDatabase.getDatabase(app)
-
-    // todo: if we ever need a more efficient search mechanism, implement a robust search dao or repo
-    private val locationDao = db.locationDao()
-    private val monsterDao = db.monsterDao()
-    private val itemDao = db.itemDao()
+    private val dao = db.searchDao()
 
     // this prevents search from being overwhelmed and makes everything orderly
     private val executor = ThrottledExecutor()
@@ -30,20 +23,6 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     var lastSearchFilter: String = ""
     val searchResults = MutableLiveData<List<Any>>()
 
-    val locationData = CachedValue(timeout) {
-        val lang = AppSettings.dataLocale
-        locationDao.loadLocations(lang).getResult()
-    }
-
-    val monsterData = CachedValue(timeout) {
-        val lang = AppSettings.dataLocale
-        monsterDao.loadList(lang).getResult()
-    }
-
-    val itemData = CachedValue(timeout) {
-        val lang = AppSettings.dataLocale
-        itemDao.loadItems(lang).getResult()
-    }
 
     fun searchData(filterString: String?) {
         val trimmedString = filterString?.trim() ?: ""
@@ -67,12 +46,16 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private fun handleSearch(filterStr: String) {
+        if (filterStr == "") {
+            searchResults.postValue(emptyList())
+            return
+        }
+
         val results = mutableListOf<Any>()
 
-        val filter = SearchFilter(filterStr)
-        results.addAll(locationData.get().asSequence().filter { filter.matches(it.name) })
-        results.addAll(monsterData.get().asSequence().filter { filter.matches(it.name) })
-        results.addAll(itemData.get().asSequence().filter { filter.matches(it.name) })
+        results.addAll(dao.searchLocations(filterStr))
+        results.addAll(dao.searchMonsters(filterStr))
+        results.addAll(dao.searchItems(filterStr))
 
         searchResults.postValue(results)
     }

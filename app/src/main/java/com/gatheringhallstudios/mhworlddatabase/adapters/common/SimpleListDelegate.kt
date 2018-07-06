@@ -13,12 +13,12 @@ import kotlin.reflect.KClass
  *
  * Anything that requires more complicated logic should extend AdapterDelegate itself
  */
-abstract class SimpleListDelegate<T : Any, V: View>: AdapterDelegate<List<Any>>() {
+abstract class SimpleListDelegate<IClass : Any, VClass: View>: AdapterDelegate<List<Any>>() {
 
     /**
      * Returns the class that this delegate is for.
      */
-    protected abstract fun getDataClass() : KClass<T>
+    protected abstract fun getDataClass() : KClass<IClass>
 
     /**
      * Constructs a new view object and returns it.
@@ -29,7 +29,7 @@ abstract class SimpleListDelegate<T : Any, V: View>: AdapterDelegate<List<Any>>(
     /**
      * Binds an instance of data to the view. This view may or may not be recycled.
      */
-    protected abstract fun bindView(view: V, data: T)
+    protected abstract fun bindView(view: VClass, data: IClass)
 
     // Subclasses don't require a viewholder, but superclasses do
     class UselessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -45,8 +45,8 @@ abstract class SimpleListDelegate<T : Any, V: View>: AdapterDelegate<List<Any>>(
 
     @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(items: List<Any>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
-        val item = items[position] as T
-        val view = holder.itemView as V
+        val item = items[position] as IClass
+        val view = holder.itemView as VClass
         bindView(view, item)
     }
 }

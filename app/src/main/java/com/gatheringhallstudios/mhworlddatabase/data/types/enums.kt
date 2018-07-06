@@ -72,3 +72,18 @@ enum class WeaponType {
     LIGHT_BOWGUN,
     HEAVY_BOWGUN
 }
+
+/**
+ * Represents an object type.
+ * Currently only used by search results for identification reasons.
+ */
+enum class DataType {
+    LOCATION,
+    ITEM,
+    MONSTER,
+    SKILL,
+    DECORATION,
+    CHARM,
+    ARMOR,
+    WEAPON
+}
