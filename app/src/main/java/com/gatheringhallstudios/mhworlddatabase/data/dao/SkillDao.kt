@@ -90,4 +90,14 @@ abstract class SkillDao {
                AND askill.skilltree_id = :skillTreeId
             ORDER BY a.id ASC""")
     abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkillView>>
+
+    @Query("""
+        SELECT d.id, dt.name
+        FROM decoration d
+            JOIN decoration_text dt
+                ON dt.id = d.id
+                AND dt.lang_id = :langId
+        WHERE d.skilltree_id = :skillTreeId
+        ORDER BY dt.name""")
+    abstract fun loadDecorationsWithSkill(langId: String, skillTreeId: Int): LiveData<List<DecorationView>>
 }

@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import androidx.navigation.NavController
+import com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment
@@ -35,5 +36,11 @@ class Router(private val navController: NavController) {
         navController.navigate(
                 R.id.skillDetailDestination,
                 BundleBuilder().putInt(SkillDetailFragment.ARG_SKILLTREE_ID, skillTreeId).build())
+    }
+
+    fun navigateDecorationDetail(decorationId: Int) {
+        navController.navigate(
+                R.id.decorationDetailDestination,
+                BundleBuilder().putInt(DecorationDetailFragment.ARG_DECORATION_ID, decorationId).build())
     }
 }

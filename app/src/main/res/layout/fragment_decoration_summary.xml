@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_bottom">
+
+        <ImageView
+            android:id="@+id/decoration_icon"
+            style="@style/IconXLarge.Decorated"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:src="@drawable/ic_question_mark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_question_mark" />
+
+        <TextView
+            android:id="@+id/decoration_name"
+            style="@style/TextDisplayHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/decoration_icon"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_icon"
+            tools:text="Hungerless Jewel 1" />
+
+        <TextView
+            android:id="@+id/decoration_description"
+            style="@style/TextBodyMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textColor="@color/colorAccent"
+            android:textColorLink="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="@+id/decoration_name"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_name"
+            tools:text="Rarity 5" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/decoration_drop_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:labelText="@string/decorations_drop_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_description">
+
+        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/decoration_icon"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_drop_header">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/mysterious_feystone_chance_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/decorations_mysterious_feystone_chance"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mysterious_feystone_chance_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/secondaryDarkColor"
+                    tools:text="0.5%" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/gleaming_feystone_chance_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/decorations_gleaming_feystone_chance"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/gleaming_feystone_chance_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/secondaryDarkColor"
+                    tools:text="1.5%" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/worn_feystone_chance_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/decorations_worn_feystone_chance"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/worn_feystone_chance_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/secondaryDarkColor"
+                    tools:text="30.0%" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/warped_feystone_chance_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/decorations_warped_feystone_chance"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/warped_feystone_chance_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/secondaryDarkColor"
+                    tools:text="50.0%" />
+            </TableRow>
+
+        </TableLayout>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/decoration_skill_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:labelText="@string/decorations_skill_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout">
+
+        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+
+        <LinearLayout
+            android:id="@+id/decoration_skill_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@id/decoration_skill_header"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_skill_header">
+
+            <include
+                layout="@layout/cell_icon_label_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

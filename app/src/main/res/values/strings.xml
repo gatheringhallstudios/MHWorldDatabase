@@ -25,7 +25,7 @@
 
     <string name="skills_armor_header">Armor with skill</string>
     <string name="skills_charm_header">Charms with skill</string>
-
+    <string name="skills_decoration_header">Decorations with skill</string>
 
     <!-- Items -->
     <string name="items_title">Items</string>
@@ -62,5 +62,15 @@
     <string name="location_area">Area %1$d</string>
     <string name="locations_detail_summary">Summary</string>
     <string name="locations_detail_gathering">Gathering</string>
+
+    <!-- Decorations -->
+    <string name="decorations_title">Decorations</string>
+    <string name="decorations_skill_information">Skill Information</string>
+    <string name="decorations_drop_information">Drop Chance</string>
+    <string name="decorations_mysterious_feystone_chance">Mysterious Feystone Chance</string>
+    <string name="decorations_gleaming_feystone_chance">Gleaming Feystone Chance</string>
+    <string name="decorations_worn_feystone_chance">Worn Feystone Chance</string>
+    <string name="decorations_warped_feystone_chance">Warped Feystone Chance</string>
+
 
 </resources>

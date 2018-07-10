@@ -154,3 +154,13 @@ data class SearchResult(
         val icon_name: String?,
         val icon_color: String?
 )
+
+data class DecorationView(
+    val id: Int,
+    val name: String?
+)
+
+data class DecorationFullView(
+        @Embedded val data: DecorationEntity,
+        val name: String?
+)

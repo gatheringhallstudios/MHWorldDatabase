@@ -152,6 +152,49 @@
 
         </LinearLayout>
 
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/decoration_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:labelText="@string/skills_decoration_header"
+            app:layout_constraintTop_toBottomOf="@+id/charm_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+
+        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+
+        <LinearLayout
+            android:id="@+id/decoration_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="411dp">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:iconSrc="@drawable/ic_question_mark"
+                app:labelText="Ancient Forest"
+                app:valueText="12 > 1, 4, 2, 6 > 12"
+                tools:visibility="visible" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:iconSrc="@drawable/ic_question_mark"
+                app:labelText="Elders Recess"
+                app:valueText="8 > 13, 5, 2 > 7"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>
