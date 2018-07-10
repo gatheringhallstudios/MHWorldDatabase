@@ -58,4 +58,14 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillDetailFragment"
         android:label="Skill Detail"
         tools:layout="@layout/fragment_skill_summary" />
+    <fragment
+        android:id="@+id/decorationListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationListFragment"
+        android:label="Decorations List"
+        tools:layout="@layout/list_generic" />
+    <fragment
+        android:id="@+id/decorationDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationDetailFragment"
+        android:label="Decoration Detail"
+        tools:layout="@layout/fragment_decoration_summary" />
 </navigation>

@@ -63,4 +63,8 @@
     <string name="locations_detail_summary">Summary</string>
     <string name="locations_detail_gathering">Gathering</string>
 
+    <!-- Deocrations -->
+    <string name="decorations_title">Decorations</string>
+    <string name="decorations_skill_information">Skill Information</string>
+
 </resources>

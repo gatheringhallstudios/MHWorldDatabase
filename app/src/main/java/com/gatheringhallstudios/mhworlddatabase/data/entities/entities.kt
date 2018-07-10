@@ -264,3 +264,25 @@ data class MonsterRewardConditionText(
         val lang_id: String,
         val name: String?
 )
+
+@Entity(tableName = "decoration",
+        primaryKeys = ["id"],
+        foreignKeys = [
+            ForeignKey(
+                    entity = SkillTreeEntity::class,
+                    parentColumns = ["id"],
+                    childColumns = ["skilltree_id"])
+        ])
+data class DecorationEntity (
+    val id: Int,
+
+    val rarity: Int,
+    var skilltree_id: Int,
+    var slot: Int,
+
+    // the below may be moved out to some sort of feystone table and require a join to get the chances?
+    val mysterious_feystone_chance: Double,
+    val glowing_feystone_chance: Double,
+    val worn_feystone_chance: Double,
+    val warped_feystone_chance: Double
+)
