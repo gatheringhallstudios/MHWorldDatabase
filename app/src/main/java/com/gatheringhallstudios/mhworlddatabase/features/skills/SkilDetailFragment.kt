@@ -11,10 +11,8 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.ArmorRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
-import com.gatheringhallstudios.mhworlddatabase.data.views.CharmSkillView
-import com.gatheringhallstudios.mhworlddatabase.data.views.Skill
-import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
+import com.gatheringhallstudios.mhworlddatabase.data.views.*
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.*
@@ -42,6 +40,7 @@ class SkillDetailFragment : Fragment() {
         viewModel.skillTreeFull.observe(this, Observer<SkillTreeFull>(::populateSkill))
         viewModel.armorPieces.observe(this, Observer<List<ArmorSkillView>>(::populateArmor))
         viewModel.charms.observe(this, Observer<List<CharmSkillView>>(::populateCharms))
+        viewModel.decorations.observe(this, Observer<List<DecorationView>>(::populateDecorations))
     }
 
     private fun populateSkill(skillTreeFull : SkillTreeFull?) {
@@ -114,6 +113,29 @@ class SkillDetailFragment : Fragment() {
             //view.setOnClickListener {v -> getRouter().navigateCharmDetail()}
 
             charm_layout.addView(view)
+        }
+    }
+
+    private fun populateDecorations(decorationViews: List<DecorationView>?) {
+        if(decorationViews == null) return
+
+        if(decoration_layout.childCount > 0) {
+            decoration_layout.removeAllViews()
+        }
+
+        for(decorationView in decorationViews) {
+            val view = IconLabelTextCell(context)
+
+            val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_armor)
+            //Decorations are only ever +1 point
+            val levels = "+1 ${resources.getQuantityString(R.plurals.skills_level, 1)}"
+
+            view.setLeftIconDrawable(icon)
+            view.setLabelText(decorationView.name)
+            view.setValueText(levels)
+
+            view.setOnClickListener({v -> getRouter().navigateDecorationDetail(decorationView.id)})
+            decoration_layout.addView(view)
         }
     }
 }

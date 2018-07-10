@@ -25,7 +25,7 @@
 
     <string name="skills_armor_header">Armor with skill</string>
     <string name="skills_charm_header">Charms with skill</string>
-
+    <string name="skills_decoration_header">Decorations with skill</string>
 
     <!-- Items -->
     <string name="items_title">Items</string>
@@ -63,7 +63,7 @@
     <string name="locations_detail_summary">Summary</string>
     <string name="locations_detail_gathering">Gathering</string>
 
-    <!-- Deocrations -->
+    <!-- Decorations -->
     <string name="decorations_title">Decorations</string>
     <string name="decorations_skill_information">Skill Information</string>
     <string name="decorations_drop_information">Drop Chance</string>
