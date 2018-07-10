@@ -62,6 +62,10 @@ class DecorationDetailFragment : Fragment() {
         val icon = view!!.context.getVectorDrawable(R.drawable.ic_armor)
         decoration_name.text = decorationFullView.name
         decoration_description.text = "${getString(R.string.items_rarity)} ${decorationFullView.data.rarity}"
+        mysterious_feystone_chance_value.text = "${decorationFullView.data.mysterious_feystone_chance}%"
+        gleaming_feystone_chance_value.text = "${decorationFullView.data.glowing_feystone_chance}%"
+        worn_feystone_chance_value.text = "${decorationFullView.data.worn_feystone_chance}%"
+        warped_feystone_chance_value.text = "${decorationFullView.data.warped_feystone_chance}%"
         decoration_icon.setImageDrawable(icon)
         removeDecorator()
     }
