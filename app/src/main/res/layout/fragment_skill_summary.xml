@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/skill_icon"
-                style="@style/IconXLarge.Decorated"
-                android:src="@drawable/ic_question_mark"
+                style="@style/IconXLarge"
+                tools:src="@drawable/ic_ui_armor_skill_base"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

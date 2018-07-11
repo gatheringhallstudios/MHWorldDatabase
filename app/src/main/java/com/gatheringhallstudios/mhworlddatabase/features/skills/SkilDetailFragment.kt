@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.skills
 
-import android.arch.lifecycle.ViewModelProviders
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -46,7 +46,7 @@ class SkillDetailFragment : Fragment() {
     private fun populateSkill(skillTreeFull : SkillTreeFull?) {
         if(skillTreeFull == null) return
 
-        val icon = view!!.context.getVectorDrawable(R.drawable.ic_armor_skill, skillTreeFull.icon_color)
+        val icon = view!!.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, skillTreeFull.icon_color)
         skill_icon.setImageDrawable(icon)
         skill_name.text = skillTreeFull.name
 
@@ -126,7 +126,7 @@ class SkillDetailFragment : Fragment() {
         for(decorationView in decorationViews) {
             val view = IconLabelTextCell(context)
 
-            val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_armor)
+            val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_ui_armor_skill_base) // TODO Replace with decoration icon when available
             //Decorations are only ever +1 point
             val levels = "+1 ${resources.getQuantityString(R.plurals.skills_level, 1)}"
 

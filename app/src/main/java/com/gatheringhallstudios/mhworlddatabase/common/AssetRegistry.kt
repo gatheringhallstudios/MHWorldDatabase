@@ -38,21 +38,21 @@ private fun <T, K> createRegistry(vararg items: Pair<T, K>): Registry<T, K> {
 }
 
 val ArmorRegistry = createRegistry(
-        ArmorType.HEAD to R.drawable.ic_head,
-        ArmorType.CHEST to R.drawable.ic_chest,
-        ArmorType.ARMS to R.drawable.ic_arm,
-        ArmorType.WAIST to R.drawable.ic_waist,
-        ArmorType.LEGS to R.drawable.ic_leg
+        ArmorType.HEAD to R.drawable.ic_equipment_head_base,
+        ArmorType.CHEST to R.drawable.ic_equipment_chest_base,
+        ArmorType.ARMS to R.drawable.ic_equipment_arm_base,
+        ArmorType.WAIST to R.drawable.ic_equipment_waist_base,
+        ArmorType.LEGS to R.drawable.ic_equipment_leg_base
 )
 
 val VectorRegistry = createRegistry<String, Int>{ register ->
     // Armor
-    register("armor", R.drawable.ic_armor) // TODO This icon is unused and should eventually be replaced with armorset icon
-    register("head", R.drawable.ic_head)
-    register("chest", R.drawable.ic_chest)
-    register("arms", R.drawable.ic_arm)
-    register("waist", R.drawable.ic_waist)
-    register("leg", R.drawable.ic_leg)
+    register("armor", R.drawable.ic_equipment_chest_base) // TODO This icon is unused and should eventually be replaced with armorset icon
+    register("head", R.drawable.ic_equipment_head_base)
+    register("chest", R.drawable.ic_equipment_chest_base)
+    register("arms", R.drawable.ic_equipment_arm_base)
+    register("waist", R.drawable.ic_equipment_waist_base)
+    register("leg", R.drawable.ic_equipment_leg_base)
 
     // Weapons
     register("greatsword", R.drawable.ic_question_mark)

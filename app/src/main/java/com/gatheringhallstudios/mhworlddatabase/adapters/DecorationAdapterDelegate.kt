@@ -6,7 +6,6 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.DecorationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
 import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
 
 class DecorationAdapterDelegate(private val onSelected: (DecorationView) -> Unit)
@@ -22,7 +21,7 @@ class DecorationAdapterDelegate(private val onSelected: (DecorationView) -> Unit
 
     override fun bindView(view: View, data: DecorationView) {
         //TODO: update the icon with the actual decoration icon once that's added
-        val icon = view.context.getVectorDrawable(R.drawable.ic_armor)
+        val icon = view.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base)
 
         with(view as IconLabelTextCell) {
             view.setLeftIconDrawable(icon)

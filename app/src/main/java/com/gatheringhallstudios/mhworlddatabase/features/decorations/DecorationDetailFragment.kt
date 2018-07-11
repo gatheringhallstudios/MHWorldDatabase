@@ -47,7 +47,7 @@ class DecorationDetailFragment : Fragment() {
 
         val view = IconLabelTextCell(context)
 
-        val icon = view!!.context.getVectorDrawable(R.drawable.ic_armor_skill, skillTreeFull.icon_color)
+        val icon = view!!.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, skillTreeFull.icon_color)
         view.setLeftIconDrawable(icon)
         view.setLabelText(skillTreeFull.name)
         view.removeDecorator()
@@ -59,7 +59,7 @@ class DecorationDetailFragment : Fragment() {
     private fun populateDecoration(decorationFullView: DecorationFullView?) {
         if (decorationFullView == null) return
 
-        val icon = view!!.context.getVectorDrawable(R.drawable.ic_armor)
+        val icon = view!!.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base) // TODO Replace with decoration when available
         decoration_name.text = decorationFullView.name
         decoration_description.text = "${getString(R.string.items_rarity)} ${decorationFullView.data.rarity}"
         mysterious_feystone_chance_value.text = "${decorationFullView.data.mysterious_feystone_chance}%"
