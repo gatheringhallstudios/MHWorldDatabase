@@ -13,7 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
-import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
 

@@ -6,9 +6,9 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.views.SearchResult
-import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import kotlin.reflect.KClass
 
 class SearchResultAdapterDelegate : SimpleListDelegate<SearchResult, IconLabelTextCell>() {

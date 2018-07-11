@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
-import com.gatheringhallstudios.mhworlddatabase.getAssetDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import kotlinx.android.synthetic.main.listitem_large.view.*
 
 class MonsterAdapterDelegate(private val onSelected: (MonsterView) -> Unit)

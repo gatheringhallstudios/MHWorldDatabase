@@ -1,6 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.features.armor
 
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
 import com.xwray.groupie.ExpandableGroup
@@ -24,6 +26,9 @@ class ArmorSetHeaderItem(val armorSet: ArmorSetView) : Item(), ExpandableItem {
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
+        val loader = AssetLoader(viewHolder.itemView.context)
+        val icon = loader.loadArmorIcon(ArmorType.CHEST, armorSet.armor.first().rarity)
+        viewHolder.set_icon.setImageDrawable(icon)
         viewHolder.armor_set_name.text = armorSet.armorset_name
 
         viewHolder.itemView.setOnClickListener {
@@ -41,5 +46,9 @@ class ArmorSetDetailItem(val armor: ArmorBasicView): Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.armor_name.text = armor.name
+
+        val loader = AssetLoader(viewHolder.itemView.context)
+        val icon = loader.loadArmorIcon(armor.armor_type, armor.rarity)
+        viewHolder.armor_icon.setImageDrawable(icon)
     }
 }

@@ -6,7 +6,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeView
-import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 
 class SkillTreeAdapterDelegate(private val onSelected: (SkillTreeView) -> Unit)
     : SimpleListDelegate<SkillTreeView, View>() {

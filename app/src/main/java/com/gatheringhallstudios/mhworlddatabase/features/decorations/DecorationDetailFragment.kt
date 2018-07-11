@@ -12,7 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.DecorationFullView
 import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import kotlinx.android.synthetic.main.fragment_decoration_summary.*
 
 

@@ -6,7 +6,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.DecorationView
-import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 
 class DecorationAdapterDelegate(private val onSelected: (DecorationView) -> Unit)
     : SimpleListDelegate<DecorationView, View>() {

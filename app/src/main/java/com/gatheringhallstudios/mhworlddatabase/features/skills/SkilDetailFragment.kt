@@ -9,11 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.ArmorRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.VectorArmorRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.getVectorDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.*
 
@@ -61,14 +62,11 @@ class SkillDetailFragment : Fragment() {
 
         for(armorSkillView in armorSkillViews) {
             val view = IconLabelTextCell(context)
-
-            val iconId = ArmorRegistry[armorSkillView.data.armor_type] ?: R.drawable.ic_question_mark
-            val rareColor = "rare${armorSkillView.data.rarity}"
-            val icon = context?.getVectorDrawable(iconId, rareColor)
-
             val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel)}"
 
+            val icon = AssetLoader(context!!).loadArmorIcon(armorSkillView.data)
             view.setLeftIconDrawable(icon)
+
             view.setLabelText(armorSkillView.name)
             view.setValueText(levels)
             //TODO: link up on click listener to armor detail page once done
