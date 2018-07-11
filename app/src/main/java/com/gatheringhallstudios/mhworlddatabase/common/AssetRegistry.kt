@@ -61,17 +61,18 @@ val VectorRegistry = createRegistry<String, Int>{ register ->
 }
 
 val ColorRegistry = createRegistry<String, Int>{ register ->
-    register("rare1", R.color.rarity_1)
-    register("rare2", R.color.rarity_2)
+    register("rare1", R.color.icon_gray)
+    register("rare2", R.color.icon_white)
     register("rare3", R.color.rarity_3)
-    register("rare4", R.color.rarity_4)
+    register("rare4", R.color.icon_green)
     register("rare5", R.color.rarity_5)
-    register("rare6", R.color.rarity_6)
-    register("rare7", R.color.rarity_7)
+    register("rare6", R.color.icon_blue)
+    register("rare7", R.color.icon_violet)
     register("rare8", R.color.rarity_8)
 
     register("White", R.color.icon_white)
     register("Gray", R.color.icon_gray)
+    register("Pink", R.color.icon_pink)
     register("Red", R.color.icon_red)
     register("DarkRed", R.color.icon_dark_red)
     register("Orange", R.color.icon_orange)

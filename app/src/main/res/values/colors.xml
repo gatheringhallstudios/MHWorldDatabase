@@ -21,26 +21,23 @@
     <color name="backgroundColorSectionHeader">@color/primaryLightColor</color>
 
     <!-- Asset Colors for ColorRegistry -->
-    <color name="rarity_1">#D9D9D9</color>
-    <color name="rarity_2">#F3F3F3</color>
+    <color name="icon_gray">#D9D5D7</color>
+    <color name="icon_white">#F3F3F3</color>
     <color name="rarity_3">#A9B978</color>
-    <color name="rarity_4">#6AAC85</color>
+    <color name="icon_green">#6AAC85</color>
     <color name="rarity_5">#7CC2B1</color>
-    <color name="rarity_6">#757DFF</color>
-    <color name="rarity_7">#7B61AE</color>
+    <color name="icon_blue">#757DFF</color>
+    <color name="icon_violet">#7B61AE</color>
     <color name="rarity_8">#B58377</color>
-    <color name="icon_white">#CCCCCC</color>
-    <color name="icon_gray">#929090</color>
+
+    <color name="icon_pink">#F399A6</color>
     <color name="icon_red">#9A3548</color>
     <color name="icon_dark_red">#781D38</color> <!-- tentative -->
     <color name="icon_orange">#AE5D40</color> <!-- tentative -->
     <color name="icon_khaki">#8B7E69</color>
-    <color name="icon_gold">#C4AB80</color>
     <color name="icon_yellow">#AFBB11</color> <!-- tentative -->
-    <color name="icon_violet">#757DFF</color> <!-- tentative -->
-    <color name="icon_blue">#3f63a5</color>
+    <color name="icon_gold">#C4AB80</color>
     <color name="icon_cyan">#48A0B3</color> <!-- tentative -->
-    <color name="icon_green">#6AAC85</color>
     <color name="icon_dark_green">#324C27</color> <!-- tentative -->
 
 
