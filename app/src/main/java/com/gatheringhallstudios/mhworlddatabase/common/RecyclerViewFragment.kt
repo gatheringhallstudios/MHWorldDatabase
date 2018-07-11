@@ -34,7 +34,7 @@ open class RecyclerViewFragment : Fragment() {
      * This function has to be called everytime the view is recreated
      * by overriding onViewCreated().
      */
-    fun setAdapter(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {
+    fun setAdapter(adapter: RecyclerView.Adapter<*>) {
         recycler_view.adapter = adapter
     }
 

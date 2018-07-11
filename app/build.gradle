@@ -30,6 +30,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -86,6 +90,14 @@ dependencies {
      * https://github.com/sockeqwe/AdapterDelegates
      */
     implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
+
+    /*
+     * Groupie
+     * https://github.com/lisawray/groupie
+     */
+    implementation 'com.xwray:groupie:2.1.0'
+    implementation 'com.xwray:groupie:2.1.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.1.0'
 
     /*
      * VectorMaster

@@ -66,7 +66,17 @@ data class ArmorSetView(
         val waist_armor: ArmorBasicView?,
         @Embedded(prefix = "legs_")
         val legs_armor: ArmorBasicView?
-)
+) {
+    val armor: List<ArmorBasicView> get() {
+        val results = mutableListOf<ArmorBasicView>()
+        head_armor?.let { results.add(head_armor) }
+        chest_armor?.let { results.add(chest_armor) }
+        arms_armor?.let { results.add(arms_armor) }
+        waist_armor?.let { results.add(waist_armor) }
+        legs_armor?.let { results.add(legs_armor) }
+        return results
+    }
+}
 
 data class LocationView(
         val id: Int,
