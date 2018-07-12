@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
@@ -41,7 +41,7 @@ class ArmorSetHeaderItem(val armorSet: ArmorSetView) : Item(), ExpandableItem {
  * Body item for collapsible armor sets.
  * Each one represents a single armor in an armor set.
  */
-class ArmorSetDetailItem(val armor: ArmorBasicView): Item() {
+class ArmorSetDetailItem(val armor: ArmorView): Item() {
     override fun getLayout() = R.layout.listitem_armorset_armor
 
     override fun bind(viewHolder: ViewHolder, position: Int) {

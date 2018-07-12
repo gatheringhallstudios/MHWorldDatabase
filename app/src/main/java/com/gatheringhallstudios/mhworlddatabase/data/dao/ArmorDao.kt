@@ -3,13 +3,14 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Query
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.views.Armor
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorBasicView
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 
 /**
  * Created by Carlos on 3/21/2018.
@@ -17,82 +18,51 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 @Dao
 abstract class ArmorDao {
     @Query("""
-        SELECT a.*, at.name
-            FROM armor a JOIN armor_text at USING (id)
-            WHERE at.lang_id = :langId
-               AND a.rarity BETWEEN :minRarity AND :maxRarity
-            ORDER BY a.id ASC""")
-    abstract fun loadArmorList(langId: String, minRarity: Int, maxRarity: Int): LiveData<List<ArmorBasicView>>
-
-    fun loadArmorList(langId: String): LiveData<List<ArmorBasicView>> {
-        return loadArmorList(langId, 0, 999)
-    }
+        SELECT a.*, at.name, ast.name armorset_name
+        FROM armor a
+            JOIN armor_text at USING (id)
+            JOIN armorset_text ast
+                ON ast.id = a.armorset_id
+                AND ast.lang_id = at.lang_id
+        WHERE at.lang_id = :langId
+          AND (:rank IS NULL OR a.rank = :rank)
+    """)
+    abstract fun loadArmorList(langId: String, rank: Rank?): LiveData<List<ArmorView>>
 
     @Query("""
-        SELECT a.*, at.name
-            FROM armor a JOIN armor_text at USING (id)
-            WHERE at.lang_id = :langId
-            AND a.id = :armorId""")
+        SELECT a.*, at.name, ast.name armorset_name
+        FROM armor a
+            JOIN armor_text at USING (id)
+            JOIN armorset_text ast
+                ON ast.id = a.armorset_id
+                AND ast.lang_id = at.lang_id
+        WHERE at.lang_id = :langId
+        AND a.id = :armorId""")
     abstract fun loadArmor(langId: String, armorId: Int): LiveData<Armor>
 
     /**
-     * Generates a list of ArmorSets with embedded ArmorBasicViews
+     * Generates a list of ArmorSets with embedded ArmorViews
+     * Equivalent to loadArmorList and then grouping
      */
     fun loadArmorSets(langId: String, rank: Rank): LiveData<List<ArmorSetView>> {
         // Load raw view of Armor with Armor Set info
-        val armorSets = loadArmorWithArmorSets(langId, rank)
+        val armorSets = loadArmorList(langId, rank)
 
         return Transformations.map(armorSets) { data ->
-            // Create a map of armorset_id -> ArmorBasicView
+            // Create a map of armorset_id -> ArmorView
             val setToArmorMap = data.groupBy { it.armorset_id }
 
             val armorSetList = mutableListOf<ArmorSetView>()
 
-            for (armor in setToArmorMap) {
-                val armorSetId = armor.value.first().armorset_id
-                val armorSetName = armor.value.first().armorset_name
-                val typeToArmorMap = armor.value.associateBy(
-                        { it.armor_type },
-                        { ArmorBasicView(it.armor_id, it.armor_name, it.rarity, it.rank, it.armor_type, it.armorset_id) })
+            for (armorGroup in setToArmorMap) {
+                val armorSetId = armorGroup.value.first().armorset_id
+                val armorSetName = armorGroup.value.first().armorset_name
+                val armorList = armorGroup.value
 
-                armorSetList.add(
-                        ArmorSetView(
-                                armorSetId,
-                                armorSetName,
-                                typeToArmorMap[ArmorType.HEAD],
-                                typeToArmorMap[ArmorType.CHEST],
-                                typeToArmorMap[ArmorType.ARMS],
-                                typeToArmorMap[ArmorType.WAIST],
-                                typeToArmorMap[ArmorType.LEGS])
-                )
+                armorSetList.add(ArmorSetView(armorSetId, armorSetName, armorList))
             }
 
             armorSetList
         }
     }
-
-    /**
-     * Loads a denormalized list of Armors with ArmorSet data attached
-     */
-    @Query("""
-        SELECT ast.id armorset_id, ast.name armorset_name,
-                a.id armor_id, at.name armor_name, a.rarity, a.rank, a.armor_type
-         FROM armor a
-         JOIN armor_text at USING (id)
-         JOIN armorset_text ast ON ast.id = a.armorset_id
-         WHERE at.lang_id = :langId AND a.rank = :rank
-         ORDER BY a.armorset_id ASC, a.id ASC
-    """)
-    abstract fun loadArmorWithArmorSets(langId: String, rank: Rank): LiveData<List<ArmorSetWithArmor>>
-
-    // Denormalized class used by loadArmorSets
-    data class ArmorSetWithArmor(
-            val armorset_id: Int,
-            val armorset_name: String?,
-            val armor_id: Int,
-            val armor_name: String?,
-            val rarity: Int,
-            val rank: Rank,
-            val armor_type: ArmorType
-    )
 }

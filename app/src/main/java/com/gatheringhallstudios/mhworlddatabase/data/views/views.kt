@@ -34,14 +34,17 @@ data class ItemLocationView(
         val location_name: String
 )
 
-data class ArmorBasicView(
-        val id: Int,
+data class ArmorView(
+        @Embedded val data: ArmorEntity,
         val name: String?,
-        val rarity: Int,
-        val rank: Rank,
-        val armor_type: ArmorType,
-        val armorset_id: Int
-)
+        val armorset_name: String?
+) {
+    val id get() = data.id
+    val armorset_id get() = data.armorset_id
+    val armor_type get() = data.armor_type
+    val rarity get() = data.rarity
+    val rank get() = data.rank
+}
 
 data class ArmorSkillView(
         @Embedded val data: ArmorEntity,
@@ -55,28 +58,8 @@ data class ArmorSkillView(
 data class ArmorSetView(
         val armorset_id: Int,
         val armorset_name: String?,
-
-        @Embedded(prefix = "head_")
-        val head_armor: ArmorBasicView?,
-        @Embedded(prefix = "chest_")
-        val chest_armor: ArmorBasicView?,
-        @Embedded(prefix = "arms_")
-        val arms_armor: ArmorBasicView?,
-        @Embedded(prefix = "waist_")
-        val waist_armor: ArmorBasicView?,
-        @Embedded(prefix = "legs_")
-        val legs_armor: ArmorBasicView?
-) {
-    val armor: List<ArmorBasicView> get() {
-        val results = mutableListOf<ArmorBasicView>()
-        head_armor?.let { results.add(head_armor) }
-        chest_armor?.let { results.add(chest_armor) }
-        arms_armor?.let { results.add(arms_armor) }
-        waist_armor?.let { results.add(waist_armor) }
-        legs_armor?.let { results.add(legs_armor) }
-        return results
-    }
-}
+        val armor: List<ArmorView>
+)
 
 data class LocationView(
         val id: Int,
