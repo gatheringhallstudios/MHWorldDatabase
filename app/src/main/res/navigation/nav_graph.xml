@@ -35,7 +35,7 @@
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
         android:id="@+id/armorListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorSetListFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorSetListPagerFragment"
         android:label="Armor"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment

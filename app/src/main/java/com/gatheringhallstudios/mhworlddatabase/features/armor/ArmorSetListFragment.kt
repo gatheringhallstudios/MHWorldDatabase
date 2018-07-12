@@ -12,6 +12,7 @@ import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import android.support.v4.content.ContextCompat
+import com.gatheringhallstudios.mhworlddatabase.applyArguments
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDecorator
 
 
@@ -20,6 +21,16 @@ import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDecorator
  */
 
 class ArmorSetListFragment : RecyclerViewFragment() {
+    companion object {
+        const val ARG_RANK = "ARMORLIST_RANK"
+
+        @JvmStatic fun newInstance(rank: Rank): ArmorSetListFragment {
+            return ArmorSetListFragment().applyArguments {
+                putSerializable(ARG_RANK, rank)
+            }
+        }
+    }
+
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(ArmorSetListViewModel::class.java)
     }
@@ -29,8 +40,9 @@ class ArmorSetListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
 
-        // TODO Add switching for High and Low rank Armor Set List Fragments
-        viewModel.getArmorSetList(Rank.HIGH).observe(this, Observer<List<ArmorSetView>> {
+        val rank = arguments?.getSerializable(ARG_RANK) as? Rank
+
+        viewModel.getArmorSetList(rank).observe(this, Observer<List<ArmorSetView>> {
             val items = it?.map {
                 val headerItem = ArmorSetHeaderItem(it)
                 val bodyItems = it.armor.map { ArmorSetDetailItem(it) }

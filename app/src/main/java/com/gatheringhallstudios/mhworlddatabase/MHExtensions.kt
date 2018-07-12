@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import android.arch.lifecycle.LiveData
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
 import androidx.navigation.findNavController
@@ -39,4 +40,11 @@ fun Fragment.getRouter() : Router {
  */
 fun View.getRouter() : Router {
     return Router(this.findNavController())
+}
+
+fun <T: Fragment> T.applyArguments(block: Bundle.() -> Unit): T {
+    val bundle = Bundle()
+    bundle.block()
+    this.arguments = bundle
+    return this
 }
