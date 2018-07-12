@@ -9,6 +9,7 @@
         <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="android:textColorPrimary">@color/textColorHigh</item>
         <item name="android:textColorSecondary">@color/textColorMedium</item>
+        <item name="android:listDivider">@drawable/listitem_divider</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
