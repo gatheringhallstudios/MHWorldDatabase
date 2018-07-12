@@ -76,6 +76,13 @@ data class ArmorEntity(
         val dragon: Int
 )
 
+@Entity(tableName = "armorset")
+data class ArmorSet(
+        @PrimaryKey val id: Int,
+        val rank: Rank,
+        val armorset_bonus_id: Int?
+)
+
 @Entity(tableName = "armorset_text")
 data class ArmorSetTextEntity(
         @PrimaryKey val id: Int,

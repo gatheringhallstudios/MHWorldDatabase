@@ -62,6 +62,11 @@
         <item name="android:background">@drawable/bg_icon_decorator</item>
     </style>
 
+    <style name="IconLarge.Zembellished">
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/ic_decorator_zembelish</item>
+    </style>
+
     <!-- Text Styles -->
     <!-- https://material.io/guidelines/style/typography.html#typography-other-typographic-guidelines -->
     <style name="TextDisplayHigh" parent="TextAppearance.AppCompat.Display1">

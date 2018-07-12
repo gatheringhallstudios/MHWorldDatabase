@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/row_height_large">
+    android:minHeight="@dimen/row_height_xlarge">
 
     <ImageView
         android:id="@+id/armor_icon"
-        style="@style/IconMedium.Decorated"
+        style="@style/IconLarge.Zembellished"
         android:layout_marginStart="@dimen/margin_large"
         android:src="@drawable/ic_equipment_head_base"
         app:layout_constraintBottom_toBottomOf="parent"
