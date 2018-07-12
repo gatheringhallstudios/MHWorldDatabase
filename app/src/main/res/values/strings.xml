@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_search">Settings</string>
+    <string name="rare_label">Rare %1$d</string>
 
     <!-- Monsters -->
     <string name="monsters_list_title">Monsters</string>
@@ -50,6 +51,7 @@
 
     <!-- Armor -->
     <string name="armor_title">Armor</string>
+    <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
 
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>

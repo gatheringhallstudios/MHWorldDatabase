@@ -1,24 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minHeight="@dimen/row_height_large">
 
     <ImageView
         android:id="@+id/armor_icon"
         style="@style/IconMedium.Decorated"
         android:layout_marginStart="@dimen/margin_large"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_equipment_head_base"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_equipment_head_base" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Main Label -->
 
     <TextView
         android:id="@+id/armor_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temp text"
+        android:layout_marginStart="@dimen/margin_medium"
+        app:layout_constraintBottom_toTopOf="@+id/rarity_string"
+        app:layout_constraintStart_toEndOf="@id/armor_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/armor_icon"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Temp text" />
+
+    <TextView
+        android:id="@+id/rarity_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/armor_icon"
+        app:layout_constraintTop_toBottomOf="@+id/armor_name"
+        tools:text="Rare 8" />
+
+    <!-- Right Side -->
+
+    <ImageView
+        android:id="@+id/icon_defense"
+        style="@style/IconSmall"
+        android:src="@drawable/ic_ui_defense"
+        android:layout_marginEnd="@dimen/margin_medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/icon_slots"
+        app:layout_constraintEnd_toStartOf="@id/barrier_values"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <ImageView
+        android:id="@+id/icon_slots"
+        style="@style/IconSmall"
+        android:src="@drawable/ic_ui_slots"
+        android:layout_marginEnd="@dimen/margin_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_defense"
+        app:layout_constraintEnd_toStartOf="@id/barrier_values"
+        />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier_values"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="defense_value"/>
+
+    <TextView
+        android:id="@+id/defense_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon_defense"
+        app:layout_constraintBottom_toBottomOf="@id/icon_defense"
+        tools:text="68~120" />
+
 </android.support.constraint.ConstraintLayout>
