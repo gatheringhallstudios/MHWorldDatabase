@@ -53,7 +53,7 @@ fun Context.getVectorDrawable(
         return drawable
     }
 
-    val registryValue = ColorRegistry[color]
+    val registryValue = ColorRegistry(color)
     if (registryValue == null) {
         Log.w(TAG, "Color registry value does not exist: $color")
         return drawable
@@ -71,7 +71,7 @@ fun Context.getVectorDrawable(
 }
 
 /**
- * Extension: Loads a VectorDrawable and optional Color from the registry
+ * Extension: Loads a VectorDrawable and optional Color from the normal registry
  * and returns a colored Drawable.
  * Returns the default resource on failure.
  * @param A vector registry value
@@ -83,7 +83,7 @@ fun Context.getVectorDrawable(
 ): Drawable? {
 
     // Get the drawable from the registry. or return default
-    val resource = VectorRegistry[vector]
+    val resource = VectorRegistry(vector)
 
     return if (resource != null) {
         this.getVectorDrawable(resource, color)
