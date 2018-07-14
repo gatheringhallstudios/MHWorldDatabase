@@ -8,13 +8,11 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView
 import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
-import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
-
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
 
 /**
@@ -55,7 +53,6 @@ class MonsterSummaryFragment : Fragment() {
 
         // todo: remove weakness section if both are null
         // note: newer data versions have an 'has_weakness' field. Use that.
-
 
         if (elemWeakness != null) {
             fire_star_cell.setStars(elemWeakness.fire)

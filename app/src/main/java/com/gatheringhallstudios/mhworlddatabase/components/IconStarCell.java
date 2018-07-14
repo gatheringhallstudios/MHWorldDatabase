@@ -81,13 +81,12 @@ public class IconStarCell extends LinearLayout {
             ImageView star = new ImageView(getContext());
 
             LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            int height = getResources().getDimensionPixelSize(R.dimen.image_size_medium);
-            int width = getResources().getDimensionPixelSize(R.dimen.image_size_medium);
+            int height = getResources().getDimensionPixelSize(R.dimen.image_size_small);
+            int width = getResources().getDimensionPixelSize(R.dimen.image_size_small);
             int padding = getResources().getDimensionPixelSize(R.dimen.padding_small);
 
             lp.height = height;
             lp.width = width;
-            star.setPadding(0, padding, 0, padding); // TODO Fix spacing
 
             // TODO Set to star drawable once available
             star.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_ui_effective_star));

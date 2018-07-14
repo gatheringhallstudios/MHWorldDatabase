@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 import com.xwray.groupie.ExpandableGroup
@@ -28,8 +28,9 @@ class ArmorSetHeaderItem(val armorSet: ArmorSetView) : Item(), ExpandableItem {
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        val loader = AssetLoader(viewHolder.itemView.context)
-        val icon = loader.loadArmorIcon(ArmorType.CHEST, armorSet.armor.first().rarity)
+        val icon = viewHolder.itemView.context.getVectorDrawable(
+                R.drawable.ic_equipment_armor_set,
+                "rare${armorSet.armor.first().rarity}")
         viewHolder.set_icon.setImageDrawable(icon)
         viewHolder.armor_set_name.text = armorSet.armorset_name
         bindCurrentState(viewHolder)
