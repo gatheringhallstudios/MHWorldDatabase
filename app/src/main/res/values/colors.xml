@@ -42,10 +42,6 @@
     <color name="icon_dark_green">#324C27</color>
     <color name="icon_dark_purple">#554CAF</color> <!-- tentative -->
 
-    <!-- Rarity colors -->
-    <color name="rarity_1"></color>
-
-
     <!-- Color percentages to Alpha
     https://stackoverflow.com/questions/15852122/hex-transparency-in-colors?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
         100% — FF

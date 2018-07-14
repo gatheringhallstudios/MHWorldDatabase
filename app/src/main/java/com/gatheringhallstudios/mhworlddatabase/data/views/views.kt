@@ -62,6 +62,26 @@ data class ArmorSetView(
         val armor: List<ArmorView>
 )
 
+/**
+ * Basic representation of a single armor set bonus
+ */
+data class ArmorSetBonusView(
+        val setbonus_id: Int,
+        val name:  String?,
+        val required: Int,
+        val skilltree_id: Int,
+        val skillName: String?,
+        val description: String?,
+        val icon_color: String?
+)
+
+data class ArmorComponentView(
+        val armor_id: Int,
+        val item_id: Int,
+        val quantity: Int,
+        val item_name: String?
+)
+
 data class LocationView(
         val id: Int,
         val name: String?

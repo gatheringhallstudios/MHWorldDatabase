@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import com.gatheringhallstudios.mhworlddatabase.AppSettings;
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank;
@@ -26,6 +27,6 @@ public class ArmorSetListViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<ArmorSetView>> getArmorSetList(Rank rank) {
-        return dao.loadArmorSets("en", rank);
+        return dao.loadArmorSets(AppSettings.getDataLocale(), rank);
     }
 }

@@ -16,6 +16,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SearchDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorRecipeEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetBonusEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetBonusTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorText;
@@ -75,7 +78,8 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 DecorationEntity.class, DecorationText.class,
 
                 // Armor classes
-                ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class
+                ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class,
+                ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class
         },
         version = 8,
         exportSchema = false) //TODO investigate if this is something that would help us

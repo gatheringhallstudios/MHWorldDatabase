@@ -32,10 +32,11 @@
             <TextView
                 android:id="@+id/armor_detail_name"
                 style="@style/TextDisplayHigh"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/armor_icon"
                 app:layout_constraintStart_toEndOf="@+id/armor_icon"
                 tools:text="Diablos Helm Alpha" />
@@ -64,17 +65,17 @@
 
         <LinearLayout
             android:id="@+id/armor_data_layout"
-            android:layout_width="0dp"
-            app:layout_constraintWidth_percent=".5"
+            android:layout_width="208dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/status_layout"
-            app:layout_constraintTop_toBottomOf="@+id/divider_1">
+            app:layout_constraintTop_toBottomOf="@+id/divider_1"
+            app:layout_constraintWidth_percent=".5">
 
-            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/defense_cell"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -82,7 +83,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
-            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/fire_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,7 +91,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
-            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/ice_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +99,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
 
-            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/dragon_star_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,7 +119,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider_1">
 
-            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/slots_cell"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -126,7 +127,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
-            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/water_star_cell"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -134,7 +135,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
 
-            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/lightning_star_cell"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -145,10 +146,11 @@
         </LinearLayout>
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/armor_set_skill_header"
+            android:id="@+id/armor_set_bonus_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:labelText="@string/decorations_skill_information"
+            android:layout_marginTop="8dp"
+            app:labelText="@string/armor_detail_set_bonus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -157,18 +159,13 @@
         </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
 
         <LinearLayout
-            android:id="@+id/armor_set_skill_layout"
+            android:id="@+id/armor_set_bonus_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/armor_set_skill_header">
-
-            <include
-                layout="@layout/cell_icon_label_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            app:layout_constraintTop_toBottomOf="@+id/armor_set_bonus_header">
 
         </LinearLayout>
 
@@ -181,7 +178,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/armor_set_skill_layout">
+            app:layout_constraintTop_toBottomOf="@+id/armor_set_bonus_layout">
 
         </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
 

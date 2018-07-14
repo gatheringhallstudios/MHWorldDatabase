@@ -98,6 +98,21 @@ data class ArmorSetTextEntity(
         val name: String?
 )
 
+@Entity(tableName = "armorset_bonus_skill")
+data class ArmorSetBonusEntity(
+        @PrimaryKey val setbonus_id: Int,
+        val skilltree_id: Int,
+        val required: Int
+)
+
+@Entity(tableName = "armorset_bonus_text")
+data class ArmorSetBonusTextEntity(
+        @PrimaryKey val id: Int,
+        val lang_id: String,
+        val name: String?,
+        val description: String?
+)
+
 @Entity(tableName = "location_text", primaryKeys = ["id", "lang_id"])
 data class LocationText(
         val id: Int,
@@ -179,7 +194,6 @@ data class MonsterEntity(
         @Embedded(prefix = "alt_weakness_")
         val alt_weaknesses: WeaknessSummaryElemental?
 )
-
 /**
  * Entity for Monster translation data
  * Created by Carlos on 3/4/2018.
@@ -300,4 +314,11 @@ data class DecorationEntity (
     val glowing_feystone_chance: Double,
     val worn_feystone_chance: Double,
     val warped_feystone_chance: Double
+)
+
+@Entity(tableName = "armor_recipe")
+data class ArmorRecipeEntity (
+    val armor_id: Int,
+    val item_id: Int,
+    val quantity: Int
 )
