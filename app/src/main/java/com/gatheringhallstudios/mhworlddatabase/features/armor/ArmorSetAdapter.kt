@@ -5,8 +5,8 @@ import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.kotlinandroidextensions.Item
