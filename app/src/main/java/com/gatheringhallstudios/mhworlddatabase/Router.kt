@@ -16,31 +16,31 @@ import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 class Router(private val navController: NavController) {
     fun navigateItemDetail(itemId: Int) {
         navController.navigate(
-                R.id.itemDetailDestination,
+                R.id.openItemDetailAction,
                 BundleBuilder().putInt(ItemDetailPagerFragment.ARG_ITEM_ID, itemId).build())
     }
 
     fun navigateLocationDetail(locationId: Int) {
         navController.navigate(
-                R.id.locationDetailDestination,
+                R.id.openLocationDetailAction,
                 BundleBuilder().putInt(LocationDetailPagerFragment.ARG_LOCATION_ID, locationId).build())
     }
 
     fun navigateMonsterDetail(monsterId: Int) {
         navController.navigate(
-                R.id.monsterDetailDestination,
+                R.id.openMonsterDetailAction,
                 BundleBuilder().putInt(MonsterDetailPagerFragment.ARG_MONSTER_ID, monsterId).build())
     }
 
     fun navigateSkillDetail(skillTreeId: Int) {
         navController.navigate(
-                R.id.skillDetailDestination,
+                R.id.openSkillDetailAction,
                 BundleBuilder().putInt(SkillDetailFragment.ARG_SKILLTREE_ID, skillTreeId).build())
     }
 
     fun navigateDecorationDetail(decorationId: Int) {
         navController.navigate(
-                R.id.decorationDetailDestination,
+                R.id.openDecorationDetailAction,
                 BundleBuilder().putInt(DecorationDetailFragment.ARG_DECORATION_ID, decorationId).build())
     }
 }

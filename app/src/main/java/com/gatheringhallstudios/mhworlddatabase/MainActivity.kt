@@ -11,7 +11,6 @@ import android.widget.SearchView
 
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.gatheringhallstudios.mhworlddatabase.common.MultiStartNavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
 
@@ -157,7 +156,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.startNewSearch()
 
             Navigation.findNavController(this, R.id.content_main_frame)
-                    .navigate(R.id.searchDestination)
+                    .navigate(R.id.openSearchAction)
         }
 
         // disables closing

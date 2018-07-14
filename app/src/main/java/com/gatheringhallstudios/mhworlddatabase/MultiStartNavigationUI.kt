@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
