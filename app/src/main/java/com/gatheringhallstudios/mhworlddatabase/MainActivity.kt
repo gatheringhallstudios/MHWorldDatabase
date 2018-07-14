@@ -96,10 +96,14 @@ class MainActivity : AppCompatActivity() {
         multiStartNavigationUi.setupActionBarWithNavController(this,
                 Navigation.findNavController(this, R.id.content_main_frame),
                 this.drawer_layout)
+
         // Hook up navigation drawer items to NavController
         NavigationUI.setupWithNavController(
                 this.nav_view,
                 Navigation.findNavController(this, R.id.content_main_frame))
+
+        // Remove icon tint from navigation drawer
+        this.nav_view.itemIconTintList = null
     }
 
     override fun onBackPressed() {

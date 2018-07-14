@@ -4,4 +4,12 @@
     <solid android:color="@color/itemDividerColor" />
     <size android:width="1dp"
         android:height="1dp"/>
+    <!--
+        <solid android:color="@color/itemDividerColor" />
+    <stroke
+        android:color="#4DFFFFFF"
+        android:dashWidth="8dp"
+        android:dashGap="5dp"
+        android:width="1dp"/>
+        -->
 </shape>

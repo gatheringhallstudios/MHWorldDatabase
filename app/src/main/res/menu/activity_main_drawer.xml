@@ -6,27 +6,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/monsterListDestination"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_ui_hunter_notes_base"
             android:title="@string/monsters_list_title" />
         <item
             android:id="@+id/itemListDestination"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_ui_item_box_greyscale"
             android:title="@string/items_title" />
         <item
             android:id="@+id/itemCraftingDestination"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_ui_crafting_base"
             android:title="@string/item_crafting_title" />
         <item
             android:id="@+id/armorListDestination"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_equipment_armor_set"
             android:title="@string/armor_title" />
         <item
             android:id="@+id/skillListDestination"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_ui_armor_skill_base"
             android:title="@string/skills_title" />
         <item
             android:id="@+id/decorationListDestination"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_ui_slots_greyscale"
             android:title="@string/decorations_title" />
         <item
             android:id="@+id/locationListDestination"
