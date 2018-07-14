@@ -11,6 +11,7 @@ import android.widget.SearchView
 
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.gatheringhallstudios.mhworlddatabase.common.MultiStartNavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
 
@@ -19,6 +20,21 @@ class MainActivity : AppCompatActivity() {
     private val TAG = javaClass.simpleName
 
     private var searchView : SearchView? = null
+
+    /*
+     * List of Start Destination IDs. These destinations
+     * will show the menu button instead of back button in the
+     * toolbar.
+     */
+    private val multiStartNavigationUi = MultiStartNavigationUI(listOf(
+            R.id.monsterListDestination,
+            R.id.itemListDestination,
+            R.id.itemCraftingDestination,
+            R.id.armorListDestination,
+            R.id.skillListDestination,
+            R.id.decorationListDestination,
+            R.id.locationListDestination
+    ))
 
     val viewModel by lazy {
         ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
@@ -76,9 +92,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        // Hook up action bar and drawer open button to NavController
-        NavigationUI.setupActionBarWithNavController(
-                this,
+        // Replace NavigationUI.setupActionBarWithNavController with the
+        // multiple start destination one
+        multiStartNavigationUi.setupActionBarWithNavController(this,
                 Navigation.findNavController(this, R.id.content_main_frame),
                 this.drawer_layout)
         // Hook up navigation drawer items to NavController

@@ -3,15 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/monsterListDestination">
+
+    <!--
+       START DESTINATIONS
+       These destination IDs must be listed at the top of MainActivity
+       in order for them to display the menu instead of back button
+    -->
+
     <fragment
         android:id="@+id/monsterListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListPagerFragment"
         android:label="@string/monsters_list_title"
-        tools:layout="@layout/fragment_generic_pager" />
-    <fragment
-        android:id="@+id/monsterDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment"
-        android:label="Monster Detail"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
         android:id="@+id/itemListDestination"
@@ -19,34 +21,48 @@
         android:label="Items"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
-        android:id="@+id/itemDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment"
-        android:label="Item Detail"
-        tools:layout="@layout/fragment_generic_pager" />
-    <fragment
         android:id="@+id/itemCraftingDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.itemcrafting.ItemCraftingFragment"
         android:label="Item Crafting"
         tools:layout="@layout/list_generic" />
-    <fragment
-        android:id="@+id/skillListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillListFragment"
-        android:label="Skills"
-        tools:layout="@layout/fragment_generic_pager" />
     <fragment
         android:id="@+id/armorListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorSetListPagerFragment"
         android:label="Armor"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
+        android:id="@+id/skillListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillListFragment"
+        android:label="Skills"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/decorationListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationListFragment"
+        android:label="Decorations List"
+        tools:layout="@layout/list_generic" />
+    <fragment
         android:id="@+id/locationListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.list.LocationListFragment"
         android:label="Locations"
         tools:layout="@layout/list_generic" />
+
+
+    <!-- REGULAR DESTINATIONS -->
+
     <fragment
         android:id="@+id/searchDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.search.UniversalSearchFragment"
         android:label="Search"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/monsterDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment"
+        android:label="Monster Detail"
+        tools:layout="@layout/fragment_generic_pager" />
+    <fragment
+        android:id="@+id/itemDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment"
+        android:label="Item Detail"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
         android:id="@+id/locationDetailDestination"
@@ -58,11 +74,6 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillDetailFragment"
         android:label="Skill Detail"
         tools:layout="@layout/fragment_skill_summary" />
-    <fragment
-        android:id="@+id/decorationListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationListFragment"
-        android:label="Decorations List"
-        tools:layout="@layout/list_generic" />
     <fragment
         android:id="@+id/decorationDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationDetailFragment"
