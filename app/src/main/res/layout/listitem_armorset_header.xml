@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/set_icon"
         style="@style/IconLarge.Decorated"
-        android:src="@drawable/ic_equipment_chest_base"
+        android:src="@drawable/ic_equipment_armor_set"
         android:layout_marginStart="@dimen/margin_large"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
