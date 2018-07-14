@@ -7,31 +7,31 @@
     <group>
         <path
             android:fillColor="#000000"
-            android:pathData="M55 224.04h402.06V456H55z"/>
+            android:pathData="M55 223.18h400v230.77H55z"/>
         <path
             android:fillColor="#A15737"
             android:fillType="evenOdd"
-            android:pathData="M302.42 242.6v194.84h-96.9V242.6h96.9zm16.5 0H438.5v194.84H318.9V242.6zm-129.9 0v194.84H73.56V242.6h115.46zm-58.25 141.24l-41.75 38.14h83.5l-41.75-38.14zm249.49 0l-41.75 38.14H422l-41.75-38.14zm-124.74 0l-41.76 38.14h83.5l-41.74-38.14z"/>
+            android:pathData="M301.15 241.64V435.5h-96.4V241.64h96.4zm16.41 0h118.98V435.5H317.56V241.64zm-129.23 0V435.5H73.46V241.64h114.87zm-57.95 140.51L88.85 420.1h83.07l-41.54-37.95zm248.21 0l-41.54 37.95h83.08l-41.54-37.95zm-124.1 0l-41.54 37.95h83.08l-41.54-37.95z"/>
         <path
             android:fillColor="#000000"
             android:fillType="evenOdd"
-            android:pathData="M57.06 299.3H455v65.98H57.06z"/>
+            android:pathData="M57.05 298.05h395.9v65.64H57.05z"/>
         <path
             android:fillColor="#E06F3C"
             android:fillType="evenOdd"
-            android:pathData="M73.56 315.79v32.99h364.95v-32.99z"/>
+            android:pathData="M73.46 314.46v32.82h363.08v-32.82z"/>
         <path
             android:fillColor="#000000"
-            android:pathData="M55 188.01V56h402.06v132.01z"/>
+            android:pathData="M55 187.33V56h400v131.33z"/>
         <path
             android:fillColor="#A15737"
             android:fillType="evenOdd"
-            android:pathData="M73.56 74.56v94.89h364.95V74.56z"/>
+            android:pathData="M73.46 74.46v94.41h363.08V74.46z"/>
         <path
             android:fillColor="#E06F3C"
             android:strokeColor="#000000"
             android:strokeWidth="18"
             android:fillType="evenOdd"
-            android:pathData="M118.16 65.56h54.08v136.56h-54.08zM339.81 65.56h54.08v136.56h-54.08z"/>
+            android:pathData="M117.79 65.46h53.9v135.95h-53.9zM338.31 65.46h53.9v135.95h-53.9z"/>
     </group>
 </vector>
