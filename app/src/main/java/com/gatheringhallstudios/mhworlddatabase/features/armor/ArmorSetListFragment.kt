@@ -14,6 +14,7 @@ import com.xwray.groupie.ViewHolder
 import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.applyArguments
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDecorator
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 
 /**

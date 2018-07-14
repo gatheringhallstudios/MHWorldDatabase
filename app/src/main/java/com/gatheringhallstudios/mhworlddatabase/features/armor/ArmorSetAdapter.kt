@@ -4,13 +4,17 @@ import android.content.Context
 import android.graphics.Color
 import android.support.v4.content.ContextCompat
 import android.widget.ImageView
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.Router
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -89,7 +93,7 @@ class ArmorSetDetailItem(val armor: ArmorView): Item() {
         viewHolder.armor_icon.setImageDrawable(icon)
 
         view.setOnClickListener {
-            // navigate
+            Router(Navigation.findNavController(view)).navigateArmorDetail(armor.id)
         }
     }
 }

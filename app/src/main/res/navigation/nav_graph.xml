@@ -120,4 +120,9 @@
         app:destination="@id/decorationDetailDestination"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim" />
+    <fragment
+        android:id="@+id/armorDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorDetailPagerFragment"
+        android:label="Armor Detail"
+        tools:layout="@layout/fragment_armor_summary" />
 </navigation>

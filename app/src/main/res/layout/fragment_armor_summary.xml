@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_bottom">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/armor_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/armor_icon"
+                style="@style/IconXLarge"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_equipment_chest_base" />
+
+            <TextView
+                android:id="@+id/armor_detail_name"
+                style="@style/TextDisplayHigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="@id/armor_icon"
+                app:layout_constraintStart_toEndOf="@+id/armor_icon"
+                tools:text="Diablos Helm Alpha" />
+
+            <TextView
+                android:id="@+id/armor_detail_rarity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/armor_icon"
+                app:layout_constraintTop_toBottomOf="@+id/armor_detail_name"
+                tools:text="Rarity 6" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <FrameLayout
+            android:id="@+id/divider_1"
+            style="@style/HorizontalDivider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/armor_label" />
+
+        <LinearLayout
+            android:id="@+id/armor_data_layout"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent=".5"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/status_layout"
+            app:layout_constraintTop_toBottomOf="@+id/divider_1">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                android:id="@+id/defense_cell"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iconSrc="@drawable/ic_ui_defense"
+                app:layout_constraintRight_toRightOf="parent"
+                app:numStars="1" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                android:id="@+id/fire_star_cell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:iconSrc="@drawable/ic_element_fire"
+                app:layout_constraintRight_toRightOf="parent"
+                app:numStars="1" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                android:id="@+id/ice_star_cell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:iconSrc="@drawable/ic_element_ice"
+                app:layout_constraintRight_toRightOf="parent"
+                app:numStars="2" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                android:id="@+id/dragon_star_cell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:iconSrc="@drawable/ic_element_dragon"
+                app:layout_constraintRight_toRightOf="parent"
+                app:numStars="2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/armor_data_layout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toRightOf="@id/armor_data_layout"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider_1">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                android:id="@+id/slots_cell"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iconSrc="@drawable/ic_ui_slots"
+                app:layout_constraintRight_toRightOf="parent"
+                app:numStars="1" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                android:id="@+id/water_star_cell"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iconSrc="@drawable/ic_element_water"
+                app:layout_constraintRight_toRightOf="parent"
+                app:numStars="1" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                android:id="@+id/lightning_star_cell"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iconSrc="@drawable/ic_element_thunder"
+                app:layout_constraintRight_toRightOf="parent"
+                app:numStars="3" />
+
+        </LinearLayout>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/armor_set_skill_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:labelText="@string/decorations_skill_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/armor_data_layout">
+
+        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+
+        <LinearLayout
+            android:id="@+id/armor_set_skill_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/armor_set_skill_header">
+
+            <include
+                layout="@layout/cell_icon_label_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/armor_skill_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:labelText="@string/decorations_skill_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/armor_set_skill_layout">
+
+        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+
+        <LinearLayout
+            android:id="@+id/armor_skill_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/armor_skill_header">
+
+            <include
+                layout="@layout/cell_icon_label_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
