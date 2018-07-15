@@ -82,10 +82,11 @@ abstract class SkillDao {
 
 
     @Query("""
-        SELECT a.*, at.name, askill.level skillLevel
+        SELECT a.*, at.name, askill.skilltree_id, askill.level skillLevel, stt.icon_color
             FROM armor a
-            JOIN armor_text at USING (id)
-            JOIN armor_skill askill ON (armor_id = id)
+            JOIN armor_text at ON a.id = at.id
+            JOIN armor_skill askill ON a.id = askill.armor_id
+            JOIN skilltree stt ON askill.skilltree_id = stt.id
             WHERE at.lang_id = :langId
                AND askill.skilltree_id = :skillTreeId
             ORDER BY a.id ASC""")

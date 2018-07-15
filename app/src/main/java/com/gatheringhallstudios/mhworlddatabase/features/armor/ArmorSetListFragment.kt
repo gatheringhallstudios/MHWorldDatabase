@@ -3,17 +3,17 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.applyArguments
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDecorator
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
-import android.support.v4.content.ContextCompat
-import com.gatheringhallstudios.mhworlddatabase.applyArguments
-import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDecorator
 
 
 /**
@@ -24,7 +24,8 @@ class ArmorSetListFragment : RecyclerViewFragment() {
     companion object {
         const val ARG_RANK = "ARMORLIST_RANK"
 
-        @JvmStatic fun newInstance(rank: Rank): ArmorSetListFragment {
+        @JvmStatic
+        fun newInstance(rank: Rank): ArmorSetListFragment {
             return ArmorSetListFragment().applyArguments {
                 putSerializable(ARG_RANK, rank)
             }

@@ -58,6 +58,17 @@
     <!-- Armor -->
     <string name="armor_title">Armor</string>
     <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
+    <string name="armor_detail_tab_summary">Summary</string>
+    <string name="armor_detail_rarity">Rarity %1$d</string>
+    <string name="armor_detail_set_bonus">Set Bonuses</string>
+    <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string>
+    <string name="armor_detail_tab_components">Required Materials</string>
+    <string name="armor_detail_vs_fire">Vs. Fire</string>
+    <string name="armor_detail_vs_water">Vs. Water</string>
+    <string name="armor_detail_vs_thunder">Vs. Thunder</string>
+    <string name="armor_detail_vs_ice">Vs. Ice</string>
+    <string name="armor_detail_vs_dragon">Vs. Dragon</string>
+
 
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>

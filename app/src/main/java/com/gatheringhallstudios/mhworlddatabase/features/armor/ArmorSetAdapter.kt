@@ -1,10 +1,10 @@
 package com.gatheringhallstudios.mhworlddatabase.features.armor
 
-import android.content.Context
 import android.graphics.Color
 import android.support.v4.content.ContextCompat
-import android.widget.ImageView
+import androidx.navigation.Navigation
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.Router
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.getDrawableCompat
@@ -50,7 +50,7 @@ class ArmorSetHeaderItem(val armorSet: ArmorSetView) : Item(), ExpandableItem {
      */
     private fun bindCurrentState(viewHolder: ViewHolder) {
         val view = viewHolder.itemView
-        view.setBackgroundColor(when(group.isExpanded) {
+        view.setBackgroundColor(when (group.isExpanded) {
             true -> ContextCompat.getColor(view.context, R.color.backgroundColorSectionHeader)
             false -> Color.TRANSPARENT
         })
@@ -61,7 +61,7 @@ class ArmorSetHeaderItem(val armorSet: ArmorSetView) : Item(), ExpandableItem {
  * Body item for collapsible armor sets.
  * Each one represents a single armor in an armor set.
  */
-class ArmorSetDetailItem(val armor: ArmorView): Item() {
+class ArmorSetDetailItem(val armor: ArmorView) : Item() {
     override fun getLayout() = R.layout.listitem_armorset_armor
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -89,7 +89,7 @@ class ArmorSetDetailItem(val armor: ArmorView): Item() {
         viewHolder.armor_icon.setImageDrawable(icon)
 
         view.setOnClickListener {
-            // navigate
+            Router(Navigation.findNavController(view)).navigateArmorDetail(armor.id)
         }
     }
 }

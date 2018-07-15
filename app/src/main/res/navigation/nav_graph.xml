@@ -108,16 +108,25 @@
         app:destination="@id/skillDetailDestination"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim" />
-
     <fragment
         android:id="@+id/decorationDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationDetailFragment"
         android:label="Decoration Detail"
         tools:layout="@layout/fragment_decoration_summary" >
     </fragment>
+    <fragment
+        android:id="@+id/armorDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorDetailPagerFragment"
+        android:label="Armor Detail"
+        tools:layout="@layout/fragment_armor_summary" />
     <action
         android:id="@+id/openDecorationDetailAction"
         app:destination="@id/decorationDetailDestination"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim" />
+    <fragment
+        android:id="@+id/armorDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorDetailPagerFragment"
+        android:label="Armor Detail"
+        tools:layout="@layout/fragment_armor_summary" />
 </navigation>
