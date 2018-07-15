@@ -13,7 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 
 class ArmorDetailViewModel(application: Application) : AndroidViewModel(application) {
-    private var armorId : Int = -1
+    private var armorId: Int = -1
     private var armorSetBonusId: Int = -1
     private val dao = MHWDatabase.getDatabase(application).armorDao()
 
@@ -23,7 +23,7 @@ class ArmorDetailViewModel(application: Application) : AndroidViewModel(applicat
     lateinit var armorSkill: LiveData<List<ArmorSkillView>>
 
     fun loadArmor(armorId: Int) {
-        if(this.armorId == armorId) return
+        if (this.armorId == armorId) return
 
         armor = dao.loadArmor(AppSettings.dataLocale, armorId)
         armorSetSkill = Transformations.switchMap(armor, ::loadArmorSetBonus)
@@ -31,8 +31,8 @@ class ArmorDetailViewModel(application: Application) : AndroidViewModel(applicat
         armorSkill = dao.loadArmorSkills(AppSettings.dataLocale, armorId)
     }
 
-    fun loadArmorSetBonus(armorView: ArmorView) : LiveData<List<ArmorSetBonusView>>? {
-        if(armorView.data.armorset_bonus_id == null) return null
+    fun loadArmorSetBonus(armorView: ArmorView): LiveData<List<ArmorSetBonusView>>? {
+        if (armorView.data.armorset_bonus_id == null) return null
 
         this.armorSetBonusId = armorView.data.armorset_bonus_id
         return dao.loadArmorSetBonus(AppSettings.dataLocale, armorSetBonusId)

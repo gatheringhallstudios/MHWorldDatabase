@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorComponentView
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
-class ArmorComponentListFragment: RecyclerViewFragment() {
+class ArmorComponentListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(ArmorDetailViewModel::class.java)
     }
@@ -25,7 +25,7 @@ class ArmorComponentListFragment: RecyclerViewFragment() {
         viewModel.armorComponents.observe(this, Observer(::populateComponents))
     }
 
-    private fun populateComponents(components : List<ArmorComponentView>?) {
+    private fun populateComponents(components: List<ArmorComponentView>?) {
         if (components == null) {
             adapter.notifyDataSetChanged()
             return

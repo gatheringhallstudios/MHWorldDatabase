@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.listitem_large.view.*
 
 class ArmorSummaryFragment : Fragment() {
 
-    private val viewModel : ArmorDetailViewModel by lazy {
+    private val viewModel: ArmorDetailViewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(ArmorDetailViewModel::class.java)
     }
 
@@ -39,8 +39,8 @@ class ArmorSummaryFragment : Fragment() {
     }
 
     private fun populateArmor(armor: ArmorView?) {
-        if(armor == null) return
-        val loader  = AssetLoader(context!!)
+        if (armor == null) return
+        val loader = AssetLoader(context!!)
 
         armor_detail_name.text = armor.name
         armor_detail_rarity.setTextColor(loader.loadRarityColor(armor.rarity))
@@ -68,13 +68,13 @@ class ArmorSummaryFragment : Fragment() {
     }
 
     private fun populateSetBonuses(armorSetBonusViews: List<ArmorSetBonusView>?) {
-        if(armorSetBonusViews.orEmpty().isEmpty()) {
+        if (armorSetBonusViews.orEmpty().isEmpty()) {
             return
         }
 
         showSetBonuses()
 
-        if(armor_set_bonus_layout.childCount > 0) {
+        if (armor_set_bonus_layout.childCount > 0) {
             armor_set_bonus_layout.removeAllViews()
         }
 
@@ -85,7 +85,7 @@ class ArmorSummaryFragment : Fragment() {
         armor_set_bonus_layout.addView(view)
 
         //Now to set the actual skills
-        for(armorSetBonusView in armorSetBonusViews) {
+        for (armorSetBonusView in armorSetBonusViews) {
             val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
 
             val icon = view.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, armorSetBonusView.icon_color)
@@ -102,21 +102,21 @@ class ArmorSummaryFragment : Fragment() {
         }
     }
 
-    private fun showSetBonuses(){
+    private fun showSetBonuses() {
         armor_set_bonus_header.visibility = View.VISIBLE
         armor_set_bonus_layout.visibility = View.VISIBLE
     }
 
-    private fun populateSkills(skills : List<ArmorSkillView>?) {
-        if(skills.orEmpty().isEmpty()) {
+    private fun populateSkills(skills: List<ArmorSkillView>?) {
+        if (skills.orEmpty().isEmpty()) {
             return
         }
 
-        if(armor_skill_layout.childCount > 0) {
+        if (armor_skill_layout.childCount > 0) {
             armor_skill_layout.removeAllViews()
         }
 
-        for(skill in skills!!) {
+        for (skill in skills!!) {
             //Set the label for the Set name
             val view = IconLabelTextCell(context)
             val icon = view.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, skill.icon_color)
