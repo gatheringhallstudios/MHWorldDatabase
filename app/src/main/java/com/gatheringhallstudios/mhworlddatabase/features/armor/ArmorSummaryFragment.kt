@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetBonusView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import kotlinx.android.synthetic.main.cell_icon_label_text.view.*
 import kotlinx.android.synthetic.main.fragment_armor_summary.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_large.view.*
@@ -83,7 +85,7 @@ class ArmorSummaryFragment : Fragment() {
         armor_set_bonus_layout.addView(view)
 
         //Now to set the actual skills
-        for(armorSetBonusView in armorSetBonusViews!!) {
+        for(armorSetBonusView in armorSetBonusViews) {
             val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
 
             val icon = view.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, armorSetBonusView.icon_color)
@@ -123,6 +125,9 @@ class ArmorSummaryFragment : Fragment() {
             view.setLeftIconDrawable(icon)
             view.setLabelText(skill.name)
             view.setValueText(levels)
+            view.setOnClickListener({
+                getRouter().navigateSkillDetail(skill.skilltree_id)
+            })
             view.removeDecorator()
 
             armor_skill_layout.addView(view)
@@ -139,22 +144,27 @@ class ArmorSummaryFragment : Fragment() {
 
         fire_star_cell.setLabelText(getString(R.string.armor_detail_vs_fire))
         fire_star_cell.setValueText("${armor.data.fire}")
+        fire_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
         fire_star_cell.removeDecorator()
 
         water_star_cell.setLabelText(getString(R.string.armor_detail_vs_water))
         water_star_cell.setValueText("${armor.data.water}")
+        water_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
         water_star_cell.removeDecorator()
 
         ice_star_cell.setLabelText(getString(R.string.armor_detail_vs_ice))
         ice_star_cell.setValueText("${armor.data.ice}")
+        ice_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
         ice_star_cell.removeDecorator()
 
         lightning_star_cell.setLabelText(getString(R.string.armor_detail_vs_thunder))
         lightning_star_cell.setValueText("${armor.data.thunder}")
+        lightning_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
         lightning_star_cell.removeDecorator()
 
         dragon_star_cell.setLabelText(getString(R.string.armor_detail_vs_dragon))
         dragon_star_cell.setValueText("${armor.data.dragon}")
+        dragon_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
         dragon_star_cell.removeDecorator()
     }
 }

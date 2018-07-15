@@ -93,7 +93,7 @@ abstract class ArmorDao {
     abstract fun loadArmorComponentViews(langId: String, armorId: Int) : LiveData<List<ArmorComponentView>>
 
     @Query("""
-        SELECT askill.*, a.*, askill.level AS skillLevel, s.icon_color, stt.name
+        SELECT askill.*, a.*, askill.skilltree_id, askill.level AS skillLevel, s.icon_color, stt.name
         FROM armor_skill askill
             JOIN armor a
                 ON askill.armor_id = a.id

@@ -49,6 +49,7 @@ data class ArmorView(
 
 data class ArmorSkillView(
         @Embedded val data: ArmorEntity,
+        val skilltree_id: Int,
         val name: String?,
         val skillLevel: Int,
         val icon_color: String?
