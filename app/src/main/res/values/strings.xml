@@ -62,6 +62,7 @@
     <string name="armor_detail_rarity">Rarity %1$d</string>
     <string name="armor_detail_set_bonus">Set Bonuses</string>
     <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string>
+    <string name="armor_detail_tab_components">Required Materials</string>
 
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>

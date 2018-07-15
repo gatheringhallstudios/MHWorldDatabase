@@ -318,7 +318,7 @@ data class DecorationEntity (
 
 @Entity(tableName = "armor_recipe")
 data class ArmorRecipeEntity (
-    val armor_id: Int,
-    val item_id: Int,
-    val quantity: Int
+        @PrimaryKey val armor_id: Int,
+        val item_id: Int,
+        val quantity: Int
 )

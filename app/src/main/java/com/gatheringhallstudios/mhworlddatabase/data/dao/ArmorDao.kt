@@ -79,21 +79,26 @@ abstract class ArmorDao {
     abstract fun loadArmorSetBonus(langId: String, setBonusId: Int) : LiveData<List<ArmorSetBonusView>>
 
     @Query("""
-        SELECT a.*, it.name
-        FROM armor_recipe a
+        SELECT a.armor_id, a.quantity, i.*, it.name, it.description, i.category
+         FROM armor_recipe a
+            JOIN item i
+                ON a.item_id = i.id
             JOIN item_text it
-                ON a.item_id = it.name
+                ON it.id = i.id
+                AND it.lang_id = :langId
         WHERE it.lang_id = :langId
-        AND a.armor_id= :armorId""")
+        AND a.armor_id= :armorId
+        ORDER BY i.id
+""")
     abstract fun loadArmorComponentViews(langId: String, armorId: Int) : LiveData<List<ArmorComponentView>>
 
-    @Query("""
-        SELECT a.*, askill.level skillLevel
-            FROM armor a
-            JOIN armor_skill askill ON (armor_id = id)
-            JOIN skilltree_text
-            WHERE at.lang_id = :langId
-               AND askill.skilltree_id = :skillTreeId
-            ORDER BY a.id ASC""")
-    abstract fun loadArmorSkills(langId: String, setBonusId: Int) : LiveData<List<ArmorSkillView>>
+//    @Query("""
+//        SELECT a.*, askill.level skillLevel
+//            FROM armor a
+//            JOIN armor_skill askill ON (armor_id = id)
+//            JOIN skilltree_text
+//            WHERE at.lang_id = :langId
+//               AND askill.skilltree_id = :skillTreeId
+//            ORDER BY a.id ASC""")
+//    abstract fun loadArmorSkills(langId: String, setBonusId: Int) : LiveData<List<ArmorSkillView>>
 }

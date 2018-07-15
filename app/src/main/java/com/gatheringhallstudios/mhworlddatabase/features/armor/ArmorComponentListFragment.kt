@@ -3,10 +3,8 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.view.menu.MenuView
 import android.view.View
-import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.ArmorComponentAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorComponentView
@@ -17,8 +15,8 @@ class ArmorComponentListFragment: RecyclerViewFragment() {
         ViewModelProviders.of(parentFragment!!).get(ArmorDetailViewModel::class.java)
     }
 
-    val adapter = BasicListDelegationAdapter(ItemAdapterDelegate({
-        getRouter().navigateItemDetail(it.id)
+    val adapter = BasicListDelegationAdapter(ArmorComponentAdapterDelegate({
+        getRouter().navigateItemDetail(it.result.id)
     }))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,15 +30,7 @@ class ArmorComponentListFragment: RecyclerViewFragment() {
             adapter.notifyDataSetChanged()
             return
         }
-
-        val groups = locations.groupBy {
-            "${it.data.rank} ${it.location_name}"
-        }
-
-        for (group in groups) {
-            adapter.addSubSection(group.key, group.value)
-        }
-
+        adapter.items = components
         adapter.notifyDataSetChanged()
     }
 }

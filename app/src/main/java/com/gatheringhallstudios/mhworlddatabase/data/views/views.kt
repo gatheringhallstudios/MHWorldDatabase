@@ -67,7 +67,7 @@ data class ArmorSetView(
  */
 data class ArmorSetBonusView(
         val setbonus_id: Int,
-        val name:  String?,
+        val name: String?,
         val required: Int,
         val skilltree_id: Int,
         val skillName: String?,
@@ -77,9 +77,8 @@ data class ArmorSetBonusView(
 
 data class ArmorComponentView(
         val armor_id: Int,
-        val item_id: Int,
-        val quantity: Int,
-        val item_name: String?
+        @Embedded val result: ItemView,
+        val quantity: Int
 )
 
 data class LocationView(
@@ -170,8 +169,8 @@ data class SearchResult(
 )
 
 data class DecorationView(
-    val id: Int,
-    val name: String?
+        val id: Int,
+        val name: String?
 )
 
 data class DecorationFullView(

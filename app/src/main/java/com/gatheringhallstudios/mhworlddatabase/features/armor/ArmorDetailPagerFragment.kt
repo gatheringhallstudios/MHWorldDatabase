@@ -18,6 +18,6 @@ class ArmorDetailPagerFragment : BasePagerFragment() {
         viewModel.loadArmor(armorId)
 
         tabs.addTab(getString(R.string.armor_detail_tab_summary)) { ArmorSummaryFragment() }
-        tabs.addTab(getString(R.string.item_tab_locations)) { ArmorComponentListFragment() }
+        tabs.addTab(getString(R.string.armor_detail_tab_components)) { ArmorComponentListFragment() }
     }
 }

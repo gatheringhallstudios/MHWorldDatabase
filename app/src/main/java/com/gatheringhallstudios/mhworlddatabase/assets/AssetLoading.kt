@@ -8,6 +8,7 @@ import android.util.Log
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorComponentView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
 
 /**

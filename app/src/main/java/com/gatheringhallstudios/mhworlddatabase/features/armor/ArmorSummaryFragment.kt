@@ -61,9 +61,10 @@ class ArmorSummaryFragment : Fragment() {
 
     private fun populateSetBonuses(armorSetBonusViews: List<ArmorSetBonusView>?) {
         if(armorSetBonusViews == null) {
-            hideSetBonuses()
             return
         }
+
+        showSetBonuses()
 
         if(armor_set_bonus_layout.childCount > 0) {
             armor_set_bonus_layout.removeAllViews()
@@ -93,9 +94,9 @@ class ArmorSummaryFragment : Fragment() {
         }
     }
 
-    private fun hideSetBonuses(){
-        armor_set_bonus_header.visibility = View.GONE
-        armor_set_bonus_layout.visibility = View.GONE
+    private fun showSetBonuses(){
+        armor_set_bonus_header.visibility = View.VISIBLE
+        armor_set_bonus_layout.visibility = View.VISIBLE
     }
 
     private fun populateSkills() {
