@@ -50,7 +50,8 @@ data class ArmorView(
 data class ArmorSkillView(
         @Embedded val data: ArmorEntity,
         val name: String?,
-        val skillLevel: Int
+        val skillLevel: Int,
+        val icon_color: String?
 )
 
 /**

@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetBonusView
+import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.fragment_armor_summary.*
@@ -31,6 +33,7 @@ class ArmorSummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.armor.observe(this, Observer(::populateArmor))
         viewModel.armorSetSkill.observe(this, Observer(::populateSetBonuses))
+        viewModel.armorSkill.observe(this, Observer(::populateSkills))
     }
 
     private fun populateArmor(armor: ArmorView?) {
@@ -44,23 +47,26 @@ class ArmorSummaryFragment : Fragment() {
                 armor.rarity)
         armor_icon.setImageDrawable(loader.loadArmorIcon(armor.armor_type, armor.rarity))
 
-        //Armor defense
-        defense_cell.setLabelText(getString(
-                R.string.armor_defense_value,
-                armor.data.defense_base,
-                armor.data.defense_max,
-                armor.data.defense_augment_max))
-        defense_cell.removeDecorator()
-
-        populateSlots(armor.data.slot_1, armor.data.slot_2, armor.data.slot_3)
+        populateDefense(armor)
+        populateSlots(armor)
     }
 
-    private fun populateSlots(slot_1 : Int, slot_2 : Int, slot_3: Int) {
-        slots_cell.removeDecorator()
+    private fun populateSlots(armor: ArmorView) {
+        slots_icon.setBackground(null)
+        slots_icon.setPadding(0, 0, 0, 0)
+
+        val slotImages = armor.slots.map {
+            view?.context?.getDrawable(SlotEmptyRegistry(it))
+        }
+
+        slot1.setImageDrawable(slotImages[0])
+        slot2.setImageDrawable(slotImages[1])
+        slot3.setImageDrawable(slotImages[2])
+
     }
 
     private fun populateSetBonuses(armorSetBonusViews: List<ArmorSetBonusView>?) {
-        if(armorSetBonusViews == null) {
+        if(armorSetBonusViews.orEmpty().isEmpty()) {
             return
         }
 
@@ -72,12 +78,12 @@ class ArmorSummaryFragment : Fragment() {
 
         //Set the label for the Set name
         val view = layoutInflater.inflate(R.layout.listitem_large, null)
-        view.item_name.text = armorSetBonusViews.first().name
+        view.item_name.text = armorSetBonusViews!!.first().name
         view.item_icon.visibility = View.GONE
         armor_set_bonus_layout.addView(view)
 
         //Now to set the actual skills
-        for(armorSetBonusView in armorSetBonusViews) {
+        for(armorSetBonusView in armorSetBonusViews!!) {
             val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
 
             val icon = view.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, armorSetBonusView.icon_color)
@@ -99,7 +105,56 @@ class ArmorSummaryFragment : Fragment() {
         armor_set_bonus_layout.visibility = View.VISIBLE
     }
 
-    private fun populateSkills() {
+    private fun populateSkills(skills : List<ArmorSkillView>?) {
+        if(skills.orEmpty().isEmpty()) {
+            return
+        }
 
+        if(armor_skill_layout.childCount > 0) {
+            armor_skill_layout.removeAllViews()
+        }
+
+        for(skill in skills!!) {
+            //Set the label for the Set name
+            val view = IconLabelTextCell(context)
+            val icon = view.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, skill.icon_color)
+            val levels = "+${skill.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, skill.skillLevel)}"
+
+            view.setLeftIconDrawable(icon)
+            view.setLabelText(skill.name)
+            view.setValueText(levels)
+            view.removeDecorator()
+
+            armor_skill_layout.addView(view)
+        }
+    }
+
+    private fun populateDefense(armor: ArmorView) {
+        defense_cell.setLabelText(getString(
+                R.string.armor_defense_value,
+                armor.data.defense_base,
+                armor.data.defense_max,
+                armor.data.defense_augment_max))
+        defense_cell.removeDecorator()
+
+        fire_star_cell.setLabelText(getString(R.string.armor_detail_vs_fire))
+        fire_star_cell.setValueText("${armor.data.fire}")
+        fire_star_cell.removeDecorator()
+
+        water_star_cell.setLabelText(getString(R.string.armor_detail_vs_water))
+        water_star_cell.setValueText("${armor.data.water}")
+        water_star_cell.removeDecorator()
+
+        ice_star_cell.setLabelText(getString(R.string.armor_detail_vs_ice))
+        ice_star_cell.setValueText("${armor.data.ice}")
+        ice_star_cell.removeDecorator()
+
+        lightning_star_cell.setLabelText(getString(R.string.armor_detail_vs_thunder))
+        lightning_star_cell.setValueText("${armor.data.thunder}")
+        lightning_star_cell.removeDecorator()
+
+        dragon_star_cell.setLabelText(getString(R.string.armor_detail_vs_dragon))
+        dragon_star_cell.setValueText("${armor.data.dragon}")
+        dragon_star_cell.removeDecorator()
     }
 }

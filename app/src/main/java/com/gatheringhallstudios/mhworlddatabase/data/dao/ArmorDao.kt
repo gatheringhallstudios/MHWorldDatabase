@@ -92,13 +92,17 @@ abstract class ArmorDao {
 """)
     abstract fun loadArmorComponentViews(langId: String, armorId: Int) : LiveData<List<ArmorComponentView>>
 
-//    @Query("""
-//        SELECT a.*, askill.level skillLevel
-//            FROM armor a
-//            JOIN armor_skill askill ON (armor_id = id)
-//            JOIN skilltree_text
-//            WHERE at.lang_id = :langId
-//               AND askill.skilltree_id = :skillTreeId
-//            ORDER BY a.id ASC""")
-//    abstract fun loadArmorSkills(langId: String, setBonusId: Int) : LiveData<List<ArmorSkillView>>
+    @Query("""
+        SELECT askill.*, a.*, askill.level AS skillLevel, s.icon_color, stt.name
+        FROM armor_skill askill
+            JOIN armor a
+                ON askill.armor_id = a.id
+            JOIN skilltree s
+                ON askill.skilltree_id = s.id
+            JOIN skilltree_text stt
+                ON askill.skilltree_id = stt.id
+            WHERE stt.lang_id = :langId
+               AND askill.armor_id = :armorId
+            ORDER BY askill.skilltree_id ASC""")
+    abstract fun loadArmorSkills(langId: String, armorId: Int) : LiveData<List<ArmorSkillView>>
 }
