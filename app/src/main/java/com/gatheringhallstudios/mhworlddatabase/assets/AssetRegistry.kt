@@ -48,12 +48,15 @@ val ColorRegistry = createRegistry(
         "Red" to R.color.icon_red,
         "DarkRed" to R.color.icon_dark_red,
         "Orange" to R.color.icon_orange,
+        "LightBeige" to R.color.icon_light_beige,
         "Beige" to R.color.icon_beige,
+        "DarkBeige" to R.color.icon_dark_beige,
         "Gold" to R.color.icon_gold,
         "Yellow" to R.color.icon_yellow,
         "Violet" to R.color.icon_violet,
         "Blue" to R.color.icon_blue,
         "Cyan" to R.color.icon_cyan,
         "Green" to R.color.icon_green,
-        "DarkGreen" to R.color.icon_dark_green
+        "DarkGreen" to R.color.icon_dark_green,
+        "DarkPurple" to R.color.icon_dark_purple
 )
