@@ -1,9 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.features.armor
 
+import android.content.Context
 import android.graphics.Color
 import android.support.v4.content.ContextCompat
+import android.widget.ImageView
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
@@ -70,6 +74,15 @@ class ArmorSetDetailItem(val armor: ArmorView): Item() {
                 armor.data.defense_base,
                 armor.data.defense_max,
                 armor.data.defense_augment_max)
+
+        // load all images that represent the slots into an array first
+        val slotImages = armor.slots.map {
+            view.context.getDrawableCompat(SlotEmptyRegistry(it))
+        }
+
+        viewHolder.slot1.setImageDrawable(slotImages[0])
+        viewHolder.slot2.setImageDrawable(slotImages[1])
+        viewHolder.slot3.setImageDrawable(slotImages[2])
 
         val loader = AssetLoader(viewHolder.itemView.context)
         val icon = loader.loadArmorIcon(armor.armor_type, armor.rarity)

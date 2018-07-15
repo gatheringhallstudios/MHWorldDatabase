@@ -44,6 +44,7 @@ data class ArmorView(
     val armor_type get() = data.armor_type
     val rarity get() = data.rarity
     val rank get() = data.rank
+    val slots get() = data.slots
 }
 
 data class ArmorSkillView(

@@ -13,6 +13,16 @@ import com.sdsmdg.harjot.vectormaster.models.PathModel
 val TAG = "MHWorldAssetUtil"
 val PATH_NAME = "base"
 
+
+/**
+ * Extension: Retrieves a drawable associated with a resource id
+ * via ContextCompat using the called context.
+ */
+@Suppress("NOTHING_TO_INLINE")
+inline fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
+    return ContextCompat.getDrawable(this, id)
+}
+
 /**
  * Extension: Loads a drawable from the assets folder.
  * Returns null on failure, or default resource if provided.

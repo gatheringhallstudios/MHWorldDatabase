@@ -25,6 +25,13 @@ val VectorRegistry = createRegistry(
         "Slinger" to R.drawable.ic_items_slinger_base
 )
 
+val SlotEmptyRegistry = fun(slot: Int) = when(slot) {
+    1 -> R.drawable.ic_ui_slot_1_empty
+    2 -> R.drawable.ic_ui_slot_2_empty
+    3 -> R.drawable.ic_ui_slot_3_empty
+    else -> R.drawable.ic_ui_slot_none
+}
+
 val ColorRegistry = createRegistry(
         "rare1" to R.color.icon_gray,
         "rare2" to R.color.icon_white,

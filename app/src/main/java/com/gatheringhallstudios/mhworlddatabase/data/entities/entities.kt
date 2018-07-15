@@ -7,6 +7,7 @@ import android.arch.persistence.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import kotlin.coroutines.experimental.buildSequence
 
 
 /**
@@ -74,7 +75,14 @@ data class ArmorEntity(
         val thunder: Int,
         val ice: Int,
         val dragon: Int
-)
+) {
+    /**
+     * Generates a list containing all slot values,
+     * where each value is the "level" of the slot.
+     * 0 means that the slot doesn't exist.
+     */
+    val slots get() = listOf(slot_1, slot_2, slot_3)
+}
 
 @Entity(tableName = "armorset")
 data class ArmorSet(
