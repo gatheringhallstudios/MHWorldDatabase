@@ -1,11 +1,16 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.util.LruCache
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
@@ -62,6 +67,11 @@ fun Context.getAssetDrawable(
     }
 }
 
+// Contains all instances of vector/color combinations
+// The actual draws of this go into an LruCache, but if this causes a leak:
+//  1) Create wrapper that change the color just before a draw (so we only store base vectors)
+private val vectorCache = mutableMapOf<Pair<String, String>, Drawable>()
+
 /**
  * Extension: Loads a VectorDrawable and optional Color from the normal registry
  * and returns a colored Drawable.
@@ -73,6 +83,7 @@ fun Context.getVectorDrawable(
         color: String?,
         @DrawableRes default: Int = R.drawable.ic_question_mark
 ): Drawable? {
+    val key = Pair(vector, color ?: "")
 
     // Get the drawable from the registry. or return default
     val resource = VectorRegistry(vector)
@@ -81,25 +92,27 @@ fun Context.getVectorDrawable(
         return this.getDrawableCompat(default)
     }
 
-    val drawable = VectorMasterDrawable(this, resource)
+    return vectorCache.getOrPut(key) {
+        val drawable = VectorMasterDrawable(this, resource)
 
-    if (color == null) {
-        return drawable
+        if (color == null) {
+            return@getOrPut CachedDrawable(drawable)
+        }
+
+        val registryValue = ColorRegistry(color)
+        if (registryValue == null) {
+            Log.w(TAG, "Color registry value does not exist: $color")
+            return@getOrPut CachedDrawable(drawable)
+        }
+
+        // TODO Update to support coloring multiple paths if necessary. i.e. base1, base2, base3
+        val path: PathModel? = drawable.getPathModelByName(PATH_NAME)
+        if (path == null) {
+            Log.w(TAG, "Could not find path $PATH_NAME in vector")
+        } else {
+            path.fillColor = ContextCompat.getColor(this, registryValue)
+        }
+
+        CachedDrawable(drawable)
     }
-
-    val registryValue = ColorRegistry(color)
-    if (registryValue == null) {
-        Log.w(TAG, "Color registry value does not exist: $color")
-        return drawable
-    }
-
-    // TODO Update to support coloring multiple paths if necessary. i.e. base1, base2, base3
-    val path: PathModel? = drawable.getPathModelByName(PATH_NAME)
-    if (path == null) {
-        Log.w(TAG, "Could not find path $PATH_NAME in vector")
-    } else {
-        path.fillColor = ContextCompat.getColor(this, registryValue)
-    }
-
-    return drawable
 }
