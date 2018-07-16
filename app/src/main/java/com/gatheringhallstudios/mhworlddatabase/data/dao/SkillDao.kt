@@ -93,7 +93,7 @@ abstract class SkillDao {
     abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkillView>>
 
     @Query("""
-        SELECT d.id, dt.name
+        SELECT d.*, dt.name
         FROM decoration d
             JOIN decoration_text dt
                 ON dt.id = d.id

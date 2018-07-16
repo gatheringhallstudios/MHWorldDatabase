@@ -8,15 +8,26 @@ private fun <T, K> createRegistry(vararg pairs: Pair<T, K>): (T) -> K? {
     return { registry[it] }
 }
 
-val VectorArmorRegistry = fun(type: ArmorType) = when (type) {
-    ArmorType.HEAD -> R.drawable.ic_equipment_head_base
-    ArmorType.CHEST -> R.drawable.ic_equipment_chest_base
-    ArmorType.ARMS -> R.drawable.ic_equipment_arm_base
-    ArmorType.WAIST -> R.drawable.ic_equipment_waist_base
-    ArmorType.LEGS -> R.drawable.ic_equipment_leg_base
-}
-
+/**
+ * Contains all mappings from icon name to a recolorable vector.
+ * Do not create any additional registries, if anything, create mappings
+ * from enums to entries in this registry.
+ * This may or may not become automated 
+ */
 val VectorRegistry = createRegistry(
+        "Skill" to R.drawable.ic_ui_armor_skill_base,
+
+        "ArmorSet" to R.drawable.ic_equipment_armor_set,
+        "ArmorHead" to R.drawable.ic_equipment_head_base,
+        "ArmorChest" to R.drawable.ic_equipment_chest_base,
+        "ArmorArms" to R.drawable.ic_equipment_arm_base,
+        "ArmorWaist" to R.drawable.ic_equipment_waist_base,
+        "ArmorLegs" to R.drawable.ic_equipment_leg_base,
+
+        "Decoration1" to R.drawable.ic_ui_decoration_1_base,
+        "Decoration2" to R.drawable.ic_ui_decoration_2_base,
+        "Decoration3" to R.drawable.ic_ui_decoration_3_base,
+
         "Ammo" to R.drawable.ic_items_ammo_base,
         "Carapace" to R.drawable.ic_items_carapace_base,
         "Meat" to R.drawable.ic_items_meat_base,

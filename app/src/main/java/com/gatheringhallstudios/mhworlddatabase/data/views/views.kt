@@ -62,7 +62,9 @@ data class ArmorSetView(
         val armorset_id: Int,
         val armorset_name: String?,
         val armor: List<ArmorView>
-)
+) {
+    val rarity get() = armor.first().rarity
+}
 
 /**
  * Basic representation of a single armor set bonus
@@ -162,20 +164,17 @@ data class CharmSkillView(
         val skillLevel: Int
 )
 
+data class DecorationView(
+        @Embedded val data: DecorationEntity,
+        val name: String?
+) {
+    val id get() = data.id
+}
+
 data class SearchResult(
         val data_type: DataType,
         val id: Int,
         val name: String,
         val icon_name: String?,
         val icon_color: String?
-)
-
-data class DecorationView(
-        val id: Int,
-        val name: String?
-)
-
-data class DecorationFullView(
-        @Embedded val data: DecorationEntity,
-        val name: String?
 )

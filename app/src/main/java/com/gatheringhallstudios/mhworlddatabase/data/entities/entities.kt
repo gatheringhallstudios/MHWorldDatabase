@@ -303,17 +303,18 @@ data class MonsterRewardConditionText(
                     childColumns = ["skilltree_id"])
         ])
 data class DecorationEntity (
-    val id: Int,
+        val id: Int,
 
-    val rarity: Int,
-    var skilltree_id: Int,
-    var slot: Int,
+        val rarity: Int,
+        val skilltree_id: Int,
+        val slot: Int,
+        val icon_color: String?,
 
-    // the below may be moved out to some sort of feystone table and require a join to get the chances?
-    val mysterious_feystone_chance: Double,
-    val glowing_feystone_chance: Double,
-    val worn_feystone_chance: Double,
-    val warped_feystone_chance: Double
+        // the below may be moved out to some sort of feystone table and require a join to get the chances?
+        val mysterious_feystone_chance: Double,
+        val glowing_feystone_chance: Double,
+        val worn_feystone_chance: Double,
+        val warped_feystone_chance: Double
 )
 
 @Entity(tableName = "armor_recipe")

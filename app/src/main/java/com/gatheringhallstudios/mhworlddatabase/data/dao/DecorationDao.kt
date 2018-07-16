@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.*
 @Dao
 abstract class DecorationDao {
     @Query("""
-        SELECT d.id, dt.name
+        SELECT d.*, dt.name
         FROM decoration d
             JOIN decoration_text dt
                 ON dt.id = d.id
@@ -24,5 +24,5 @@ abstract class DecorationDao {
                 ON dt.id = d.id
                 AND dt.lang_id = :langId
         WHERE d.id = :decorationId""")
-    abstract fun loadDecoration(langId: String, decorationId: Int): LiveData<DecorationFullView>
+    abstract fun loadDecoration(langId: String, decorationId: Int): LiveData<DecorationView>
 }

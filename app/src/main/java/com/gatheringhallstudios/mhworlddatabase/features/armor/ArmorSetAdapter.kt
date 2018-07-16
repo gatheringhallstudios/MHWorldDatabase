@@ -32,9 +32,8 @@ class ArmorSetHeaderItem(val armorSet: ArmorSetView) : Item(), ExpandableItem {
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        val icon = viewHolder.itemView.context.getVectorDrawable(
-                R.drawable.ic_equipment_armor_set,
-                "rare${armorSet.armor.first().rarity}")
+        val icon = AssetLoader(viewHolder.itemView.context).loadArmorSetIcon(armorSet)
+
         viewHolder.set_icon.setImageDrawable(icon)
         viewHolder.armor_set_name.text = armorSet.armorset_name
         bindCurrentState(viewHolder)

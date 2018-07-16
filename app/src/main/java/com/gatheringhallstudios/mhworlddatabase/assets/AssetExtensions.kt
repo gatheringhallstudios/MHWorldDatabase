@@ -3,8 +3,10 @@ package com.gatheringhallstudios.mhworlddatabase.assets
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
 import com.sdsmdg.harjot.vectormaster.models.PathModel
@@ -22,6 +24,16 @@ val PATH_NAME = "base"
 inline fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
     return ContextCompat.getDrawable(this, id)
 }
+
+/**
+ * Extension: Receives an asset loader for a fragment
+ */
+val Fragment.assetLoader get() = AssetLoader(context!!)
+
+/**
+ * Extension: Receives an asset loader for a view
+ */
+val View.assetLoader get() = AssetLoader(context!!)
 
 /**
  * Extension: Loads a drawable from the assets folder.
@@ -46,18 +58,25 @@ fun Context.getAssetDrawable(
 }
 
 /**
- * Extension: Loads a VectorDrawable and optional Color from the registry
- * and returns the colored vector.
+ * Extension: Loads a VectorDrawable and optional Color from the normal registry
+ * and returns a colored Drawable.
+ * Returns the default resource on failure.
+ * @param A vector registry value
  */
 fun Context.getVectorDrawable(
-        @DrawableRes vector: Int?,
-        color: String? = null
+        vector: String,
+        color: String?,
+        @DrawableRes default: Int = R.drawable.ic_question_mark
 ): Drawable? {
-    if (vector == null) {
-        return null
+
+    // Get the drawable from the registry. or return default
+    val resource = VectorRegistry(vector)
+    if (resource == null) {
+        Log.e(TAG, "Failed to load vector in the registry: $vector")
+        return this.getDrawableCompat(default)
     }
 
-    val drawable = VectorMasterDrawable(this, vector)
+    val drawable = VectorMasterDrawable(this, resource)
 
     if (color == null) {
         return drawable
@@ -78,27 +97,4 @@ fun Context.getVectorDrawable(
     }
 
     return drawable
-}
-
-/**
- * Extension: Loads a VectorDrawable and optional Color from the normal registry
- * and returns a colored Drawable.
- * Returns the default resource on failure.
- * @param A vector registry value
- */
-fun Context.getVectorDrawable(
-        vector: String,
-        color: String?,
-        @DrawableRes default: Int = R.drawable.ic_question_mark
-): Drawable? {
-
-    // Get the drawable from the registry. or return default
-    val resource = VectorRegistry(vector)
-
-    return if (resource != null) {
-        this.getVectorDrawable(resource, color)
-    } else {
-        Log.e(TAG, "Failed to load vector in the registry: $vector")
-        ContextCompat.getDrawable(this, default)
-    }
 }

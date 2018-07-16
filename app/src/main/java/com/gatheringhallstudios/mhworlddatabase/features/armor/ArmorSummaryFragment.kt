@@ -9,9 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
-import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.*
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetBonusView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
@@ -54,11 +52,11 @@ class ArmorSummaryFragment : Fragment() {
     }
 
     private fun populateSlots(armor: ArmorView) {
-        slots_icon.setBackground(null)
+        slots_icon.background = null
         slots_icon.setPadding(0, 0, 0, 0)
 
         val slotImages = armor.slots.map {
-            view?.context?.getDrawable(SlotEmptyRegistry(it))
+            context?.getDrawableCompat(SlotEmptyRegistry(it))
         }
 
         slot1.setImageDrawable(slotImages[0])
@@ -72,7 +70,9 @@ class ArmorSummaryFragment : Fragment() {
             return
         }
 
-        showSetBonuses()
+        // show set bonus section
+        armor_set_bonus_header.visibility = View.VISIBLE
+        armor_set_bonus_layout.visibility = View.VISIBLE
 
         if (armor_set_bonus_layout.childCount > 0) {
             armor_set_bonus_layout.removeAllViews()
@@ -88,23 +88,19 @@ class ArmorSummaryFragment : Fragment() {
         for (armorSetBonusView in armorSetBonusViews) {
             val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
 
-            val icon = view.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, armorSetBonusView.icon_color)
+            // todo: replace with correct icon
+            val icon = assetLoader.loadSkillIcon(armorSetBonusView.icon_color)
 
             listItem.skill_icon.setImageDrawable(icon)
             listItem.piece_bonus_text.text = getString(R.string.armor_detail_piece_bonus,
                     armorSetBonusView.required)
             listItem.skill_name.text = armorSetBonusView.skillName
-            listItem.setOnClickListener({
+            listItem.setOnClickListener {
                 getRouter().navigateSkillDetail(armorSetBonusView.skilltree_id)
-            })
+            }
 
             armor_set_bonus_layout.addView(listItem)
         }
-    }
-
-    private fun showSetBonuses() {
-        armor_set_bonus_header.visibility = View.VISIBLE
-        armor_set_bonus_layout.visibility = View.VISIBLE
     }
 
     private fun populateSkills(skills: List<ArmorSkillView>?) {
@@ -119,7 +115,7 @@ class ArmorSummaryFragment : Fragment() {
         for (skill in skills!!) {
             //Set the label for the Set name
             val view = IconLabelTextCell(context)
-            val icon = view.context.getVectorDrawable(R.drawable.ic_ui_armor_skill_base, skill.icon_color)
+            val icon = assetLoader.loadSkillIcon(skill.icon_color)
             val levels = "+${skill.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, skill.skillLevel)}"
 
             view.setLeftIconDrawable(icon)
