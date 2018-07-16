@@ -6,6 +6,7 @@
     android:viewportHeight="512">
     <group>
         <path
+            android:name="base"
             android:fillColor="#FFFFFF"
             android:fillType="evenOdd"
             android:pathData="M256 56.2l199.16 99.9v199.8L256 455.8 56.84 355.9V156.1z"/>
