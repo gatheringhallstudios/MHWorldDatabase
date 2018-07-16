@@ -69,6 +69,7 @@ class Converters {
             itemSubcategoryMap[ItemSubcategory.APPRAISAL] = "appraisal"
             itemSubcategoryMap[ItemSubcategory.ACCOUNT] = "account"
             itemSubcategoryMap[ItemSubcategory.SUPPLY] = "supply"
+            itemSubcategoryMap[ItemSubcategory.TRADE] = "trade"
 
             armorMap[ArmorType.HEAD] = "head"
             armorMap[ArmorType.CHEST] = "chest"

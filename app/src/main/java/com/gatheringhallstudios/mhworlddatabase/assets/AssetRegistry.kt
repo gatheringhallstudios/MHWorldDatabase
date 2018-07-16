@@ -12,7 +12,7 @@ private fun <T, K> createRegistry(vararg pairs: Pair<T, K>): (T) -> K? {
  * Contains all mappings from icon name to a recolorable vector.
  * Do not create any additional registries, if anything, create mappings
  * from enums to entries in this registry.
- * This may or may not become automated 
+ * This may or may not become automated
  */
 val VectorRegistry = createRegistry(
         "Skill" to R.drawable.ic_ui_armor_skill_base,

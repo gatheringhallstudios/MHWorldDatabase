@@ -28,7 +28,8 @@ enum class ItemSubcategory {
     NONE,
     APPRAISAL,
     ACCOUNT,
-    SUPPLY
+    SUPPLY,
+    TRADE
 }
 
 /**
