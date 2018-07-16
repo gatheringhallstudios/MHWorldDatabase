@@ -10,6 +10,7 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
 import com.sdsmdg.harjot.vectormaster.models.PathModel
+import java.io.FileNotFoundException
 
 
 val TAG = "MHWorldAssetUtil"
@@ -50,7 +51,11 @@ fun Context.getAssetDrawable(
         // Show a log error if we were expecting to get something.
         // If path is null or empty we weren't expecting anything
         if (path != null && path != "") {
-            Log.e(TAG, "Failed to load asset file $path", ex)
+            if (ex is FileNotFoundException) {
+                Log.e(TAG, "Failed to load asset file $path: Does not exist")
+            } else {
+                Log.e(TAG, "Failed to load asset file $path", ex)
+            }
         }
 
         return ContextCompat.getDrawable(this, default)
