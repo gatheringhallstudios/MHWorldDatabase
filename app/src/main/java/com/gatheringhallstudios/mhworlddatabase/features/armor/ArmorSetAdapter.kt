@@ -8,7 +8,6 @@ import com.gatheringhallstudios.mhworlddatabase.Router
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.getDrawableCompat
-import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
 import com.xwray.groupie.ExpandableGroup
@@ -67,7 +66,7 @@ class ArmorSetDetailItem(val armor: ArmorView) : Item() {
         val view = viewHolder.itemView
 
         viewHolder.armor_name.text = armor.name
-        viewHolder.rarity_string.text = view.resources.getString(R.string.rare_label, armor.rarity)
+        viewHolder.rarity_string.text = view.resources.getString(R.string.rarity_string, armor.rarity)
         viewHolder.defense_value.text = view.resources.getString(
                 R.string.armor_defense_value,
                 armor.data.defense_base,
@@ -86,6 +85,7 @@ class ArmorSetDetailItem(val armor: ArmorView) : Item() {
         val loader = AssetLoader(viewHolder.itemView.context)
         val icon = loader.loadArmorIcon(armor.armor_type, armor.rarity)
         viewHolder.armor_icon.setImageDrawable(icon)
+        viewHolder.rarity_string.setTextColor(loader.loadRarityColor(armor.rarity))
 
         view.setOnClickListener {
             Router(Navigation.findNavController(view)).navigateArmorDetail(armor.id)
