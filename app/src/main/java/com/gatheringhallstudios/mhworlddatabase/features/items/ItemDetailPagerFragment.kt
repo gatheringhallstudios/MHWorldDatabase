@@ -1,13 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items
 
 import android.arch.lifecycle.ViewModelProviders
-import android.os.Bundle
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailViewModel
-import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemLocationsFragment
+import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemAcquisitionFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemSummaryFragment
+import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemUsageFragment
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 /**
@@ -24,7 +24,8 @@ class ItemDetailPagerFragment : BasePagerFragment() {
         viewModel.loadItem(itemId)
 
         tabs.addTab(getString(R.string.item_tab_summary)) { ItemSummaryFragment() }
-        tabs.addTab(getString(R.string.item_tab_locations)) { ItemLocationsFragment() }
+        tabs.addTab(getString(R.string.item_tab_usage)) { ItemUsageFragment() }
+        tabs.addTab(getString(R.string.item_tab_acquisition)) { ItemAcquisitionFragment() }
     }
 
     companion object {

@@ -38,6 +38,15 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
     }
 
     /**
+     * Adds a group headed by a regular SectionHeader,
+     * with sub-groups headed by regular subheaders
+     */
+    fun addSection(name: String, subSections: Map<String, Collection<Any>>) {
+        this.items.add(SectionHeader(name))
+        this.addSubSections(subSections)
+    }
+
+    /**
      * Adds a group headed by a regular SubHeader
      * @param name the title of the sub header
      * @param items the items under that section header
@@ -45,6 +54,12 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
     fun addSubSection(name: String, items: Collection<Any>) {
         this.items.add(SubHeader(name))
         this.items.addAll(items)
+    }
+
+    fun addSubSections(sections: Map<String, Collection<Any>>) {
+        for ((key, value) in sections) {
+            addSubSection(key, value)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {

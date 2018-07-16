@@ -8,6 +8,15 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.ItemCombinationView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemLocationView
 import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
 
+// columns for a combination result set
+private const val combinationColumns = """
+     c.id,
+        r.id result_id, rt.name result_name, r.icon_name result_icon_name, r.icon_color result_icon_color,
+        f.id first_id, ft.name first_name, f.icon_name first_icon_name, f.icon_color first_icon_color,
+        s.id second_id, st.name second_name, s.icon_name second_icon_name, s.icon_color second_icon_color,
+        c.quantity quantity
+"""
+
 @Dao
 abstract class ItemDao {
     @Query("""
@@ -40,11 +49,7 @@ abstract class ItemDao {
     abstract fun loadItemLocations(langId: String, itemId : Int) : LiveData<List<ItemLocationView>>
 
     @Query("""
-        SELECT c.id,
-            r.id result_id, rt.name result_name, r.icon_name result_icon_name, r.icon_color result_icon_color,
-            f.id first_id, ft.name first_name, f.icon_name first_icon_name, f.icon_color first_icon_color,
-            s.id second_id, st.name second_name, s.icon_name second_icon_name, s.icon_color second_icon_color,
-            c.quantity quantity
+        SELECT $combinationColumns
         FROM item_combination c
             JOIN item r
                 ON r.id = c.result_id
@@ -63,4 +68,28 @@ abstract class ItemDao {
                 AND st.lang_id = :langId
                 """)
     abstract fun loadItemCombinations(langId: String) : LiveData<List<ItemCombinationView>>
+
+    @Query("""
+        SELECT $combinationColumns
+        FROM item_combination c
+            JOIN item r
+                ON r.id = c.result_id
+            JOIN item_text rt
+                ON rt.id = r.id
+                AND rt.lang_id = :langId
+            JOIN item f
+                ON f.id = c.first_id
+            JOIN item_text ft
+                ON ft.id = f.id
+                AND ft.lang_id = :langId
+            LEFT JOIN item s
+                ON s.id = c.second_id
+            LEFT JOIN item_text st
+                ON st.id = s.id
+                AND st.lang_id = :langId
+        WHERE c.result_id = :itemId
+          OR c.first_id = :itemId
+          OR c.second_id = :itemId
+                """)
+    abstract fun loadItemCombinationsFor(langId: String, itemId: Int) : LiveData<List<ItemCombinationView>>
 }

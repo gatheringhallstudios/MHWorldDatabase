@@ -46,7 +46,12 @@
     <string name="items_tab_misc">Misc</string>
 
     <string name="item_tab_summary">Summary</string>
-    <string name="item_tab_locations">Locations</string>
+    <string name="item_tab_usage">Usage</string>
+    <string name="item_tab_acquisition">Obtain</string>
+
+    <string name="item_header_crafting">Crafting</string>
+    <string name="item_header_gathering">Gathering</string>
+    <string name="item_header_monsters">Monsters</string>
 
     <string name="item_crafting_title">Item Crafting</string>
     <string name="item_crafting_yield">\x %1$d</string>

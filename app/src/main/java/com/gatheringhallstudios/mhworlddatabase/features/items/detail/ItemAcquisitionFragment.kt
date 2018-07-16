@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
@@ -32,33 +33,36 @@ private class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocationView,
     }
 }
 
-class ItemLocationsFragment : RecyclerViewFragment() {
+class ItemAcquisitionFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(ItemDetailViewModel::class.java)
     }
 
-    val adapter = CategoryAdapter(ItemLocationAdapterDelegate())
+    val adapter = CategoryAdapter(ItemLocationAdapterDelegate(), ItemCraftingAdapterDelegate())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
 
-        viewModel.itemLocations.observe(this, Observer(::populateLocations))
+        viewModel.acquisitionData.observe(this, Observer(::populateData))
     }
 
-    private fun populateLocations(locations : List<ItemLocationView>?) {
+    private fun populateData(data: AcquisitionData?) {
         adapter.clear()
-
-        if (locations == null) {
+        if (data == null) {
             adapter.notifyDataSetChanged()
             return
         }
 
-        val groups = locations.groupBy {
-            "${it.data.rank} ${it.location_name}"
+        if (data.craftRecipes.isNotEmpty()) {
+            adapter.addSection(getString(R.string.item_header_crafting), data.craftRecipes)
         }
 
-        for (group in groups) {
-            adapter.addSubSection(group.key, group.value)
+        if (data.locations.isNotEmpty()) {
+            val groups = data.locations.groupBy {
+                "${it.data.rank} ${it.location_name}"
+            }
+
+            adapter.addSection(getString(R.string.item_header_gathering), groups)
         }
 
         adapter.notifyDataSetChanged()
