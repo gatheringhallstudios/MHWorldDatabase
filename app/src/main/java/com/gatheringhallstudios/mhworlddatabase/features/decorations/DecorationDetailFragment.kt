@@ -61,7 +61,8 @@ class DecorationDetailFragment : Fragment() {
 
         val icon = assetLoader.loadDecorationIcon(decoration)
         decoration_name.text = decoration.name
-        decoration_description.text = getString(R.string.rare_label, decoration.data.rarity)
+        decoration_description.text = getString(R.string.rarity_string, decoration.data.rarity)
+        decoration_description.setTextColor(assetLoader.loadRarityColor(decoration.data.rarity))
         mysterious_feystone_chance_value.text = "${decoration.data.mysterious_feystone_chance}%"
         gleaming_feystone_chance_value.text = "${decoration.data.glowing_feystone_chance}%"
         worn_feystone_chance_value.text = "${decoration.data.worn_feystone_chance}%"

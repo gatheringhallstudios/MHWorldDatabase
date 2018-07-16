@@ -5,13 +5,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_search">Settings</string>
-    <string name="rare_label">Rare %1$d</string>
-
 
     <string name="low_rank">Low</string>
     <string name="high_rank">High</string>
     <string name="low_rank_full">Low Rank</string>
     <string name="high_rank_full">High Rank</string>
+    <string name="rarity_string">Rarity %1$d</string>
 
     <!-- Monsters -->
     <string name="monsters_list_title">Monsters</string>
@@ -59,7 +58,6 @@
     <string name="armor_title">Armor</string>
     <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
     <string name="armor_detail_tab_summary">Summary</string>
-    <string name="armor_detail_rarity">Rarity %1$d</string>
     <string name="armor_detail_set_bonus">Set Bonuses</string>
     <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string>
     <string name="armor_detail_tab_components">Required Materials</string>

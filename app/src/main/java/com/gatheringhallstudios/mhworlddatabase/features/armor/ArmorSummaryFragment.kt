@@ -43,7 +43,7 @@ class ArmorSummaryFragment : Fragment() {
         armor_detail_name.text = armor.name
         armor_detail_rarity.setTextColor(loader.loadRarityColor(armor.rarity))
         armor_detail_rarity.text = getString(
-                R.string.armor_detail_rarity,
+                R.string.rarity_string,
                 armor.rarity)
         armor_icon.setImageDrawable(loader.loadArmorIcon(armor.armor_type, armor.rarity))
 
