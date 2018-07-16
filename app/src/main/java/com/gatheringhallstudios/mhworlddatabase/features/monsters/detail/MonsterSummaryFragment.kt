@@ -48,6 +48,7 @@ class MonsterSummaryFragment : Fragment() {
         val icon = context?.getAssetDrawable("monsters/${monster.id}.png")
         item_icon.setImageDrawable(icon)
 
+        monster_ecology.text = monster.ecology
         item_name.text = monster.name
         monster_description.text = monster.description
 
