@@ -32,14 +32,7 @@ class SearchResultAdapterDelegate : SimpleListDelegate<SearchResult, IconLabelTe
         view.setLabelText(data.name)
 
         view.setOnClickListener {
-            val router = view.getRouter()
-            when (data.data_type) {
-                DataType.LOCATION -> router.navigateLocationDetail(data.id)
-                DataType.ITEM -> router.navigateItemDetail(data.id)
-                DataType.MONSTER -> router.navigateMonsterDetail(data.id)
-                DataType.SKILL -> router.navigateSkillDetail(data.id)
-                else -> throw UnsupportedOperationException("Non existing endpoint")
-            }
+            view.getRouter().navigateObject(data.data_type, data.id)
         }
     }
 }

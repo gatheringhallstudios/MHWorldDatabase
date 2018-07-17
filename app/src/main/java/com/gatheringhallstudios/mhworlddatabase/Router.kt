@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import androidx.navigation.NavController
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment
@@ -15,6 +16,17 @@ import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
  * you need to navigate.
  */
 class Router(private val navController: NavController) {
+    fun navigateObject(type: DataType, id: Int) = when(type) {
+        DataType.ITEM -> navigateItemDetail(id)
+        DataType.LOCATION -> navigateLocationDetail(id)
+        DataType.MONSTER -> navigateMonsterDetail(id)
+        DataType.SKILL -> navigateSkillDetail(id)
+        DataType.ARMOR -> navigateArmorDetail(id)
+        DataType.CHARM -> {}
+        DataType.DECORATION -> navigateDecorationDetail(id)
+        DataType.WEAPON -> {}
+    }
+
     fun navigateItemDetail(itemId: Int) {
         navController.navigate(
                 R.id.openItemDetailAction,
