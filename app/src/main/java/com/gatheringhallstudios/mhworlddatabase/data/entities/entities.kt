@@ -1,14 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.data.entities
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import kotlin.coroutines.experimental.buildSequence
 
+
+// todo: decide if we should split this file. Could be split by subsystem?
 
 /**
  * Created by Carlos on 3/5/2018.
@@ -51,68 +50,6 @@ data class ItemCombinationEntity(
         val quantity: Int
 )
 
-@Entity(tableName = "armor")
-data class ArmorEntity(
-        @PrimaryKey val id: Int,
-
-        val rarity: Int,
-        val rank: Rank,
-        val armor_type: ArmorType,
-        val armorset_id: Int,
-        val armorset_bonus_id: Int?,
-        val male: Boolean,
-        val female: Boolean,
-
-        val slot_1: Int,
-        val slot_2: Int,
-        val slot_3: Int,
-
-        val defense_base: Int,
-        val defense_max: Int,
-        val defense_augment_max: Int,
-        val fire: Int,
-        val water: Int,
-        val thunder: Int,
-        val ice: Int,
-        val dragon: Int
-) {
-    /**
-     * Generates a list containing all slot values,
-     * where each value is the "level" of the slot.
-     * 0 means that the slot doesn't exist.
-     */
-    val slots get() = listOf(slot_1, slot_2, slot_3)
-}
-
-@Entity(tableName = "armorset")
-data class ArmorSet(
-        @PrimaryKey val id: Int,
-        val rank: Rank,
-        val armorset_bonus_id: Int?
-)
-
-@Entity(tableName = "armorset_text")
-data class ArmorSetTextEntity(
-        @PrimaryKey val id: Int,
-        val lang_id: String,
-        val name: String?
-)
-
-@Entity(tableName = "armorset_bonus_skill")
-data class ArmorSetBonusEntity(
-        @PrimaryKey val setbonus_id: Int,
-        val skilltree_id: Int,
-        val required: Int
-)
-
-@Entity(tableName = "armorset_bonus_text")
-data class ArmorSetBonusTextEntity(
-        @PrimaryKey val id: Int,
-        val lang_id: String,
-        val name: String?,
-        val description: String?
-)
-
 @Entity(tableName = "location_text", primaryKeys = ["id", "lang_id"])
 data class LocationText(
         val id: Int,
@@ -131,44 +68,6 @@ data class LocationItemEntity(
         val stack: Int,
         val percentage: Int,
         val nodes: Int
-)
-
-@Entity(tableName = "skilltree")
-data class SkillTreeEntity(
-        @PrimaryKey val id: Int,
-        val icon_color: String?
-)
-
-/**
- * Translation data for SkillTreeFull
- * Created by Carlos on 3/5/2018.
- */
-@Entity(tableName = "skilltree_text",
-        primaryKeys = ["id", "lang_id"])
-data class SkillTreeText(
-        val id: Int,
-        val lang_id: String,
-
-        val name: String?,
-        val description: String?
-)
-
-/**
- * Created by Carlos on 3/5/2018.
- */
-@Entity(tableName = "skill",
-        primaryKeys = ["skilltree_id", "lang_id", "level"],
-        foreignKeys = [
-            ForeignKey(
-                    entity = SkillTreeEntity::class,
-                    parentColumns = ["id"],
-                    childColumns = ["skilltree_id"])
-        ])
-data class SkillEntity(
-        var skilltree_id: Int,
-        var lang_id: Int,
-        var level: Int,
-        var description: String?
 )
 
 
@@ -294,6 +193,44 @@ data class MonsterRewardConditionText(
         val name: String?
 )
 
+@Entity(tableName = "skilltree")
+data class SkillTreeEntity(
+        @PrimaryKey val id: Int,
+        val icon_color: String?
+)
+
+/**
+ * Translation data for SkillTreeFull
+ * Created by Carlos on 3/5/2018.
+ */
+@Entity(tableName = "skilltree_text",
+        primaryKeys = ["id", "lang_id"])
+data class SkillTreeText(
+        val id: Int,
+        val lang_id: String,
+
+        val name: String?,
+        val description: String?
+)
+
+/**
+ * Created by Carlos on 3/5/2018.
+ */
+@Entity(tableName = "skill",
+        primaryKeys = ["skilltree_id", "lang_id", "level"],
+        foreignKeys = [
+            ForeignKey(
+                    entity = SkillTreeEntity::class,
+                    parentColumns = ["id"],
+                    childColumns = ["skilltree_id"])
+        ])
+data class SkillEntity(
+        val skilltree_id: Int,
+        val lang_id: Int,
+        val level: Int,
+        val description: String?
+)
+
 @Entity(tableName = "decoration",
         primaryKeys = ["id"],
         foreignKeys = [
@@ -317,9 +254,175 @@ data class DecorationEntity (
         val warped_feystone_chance: Double
 )
 
+@Entity(tableName = "decoration_text",
+        primaryKeys = ["id", "lang_id"],
+        foreignKeys = [
+            ForeignKey(childColumns = ["id"],
+                    parentColumns = ["id"],
+                    entity = DecorationEntity::class)
+        ])
+data class DecorationText(
+    val id: Int = 0,
+    val lang_id: String,
+    val name: String? = null
+)
+
+@Entity(tableName = "armor")
+data class ArmorEntity(
+        @PrimaryKey val id: Int,
+
+        val rarity: Int,
+        val rank: Rank,
+        val armor_type: ArmorType,
+        val armorset_id: Int,
+        val armorset_bonus_id: Int?,
+        val male: Boolean,
+        val female: Boolean,
+
+        val slot_1: Int,
+        val slot_2: Int,
+        val slot_3: Int,
+
+        val defense_base: Int,
+        val defense_max: Int,
+        val defense_augment_max: Int,
+        val fire: Int,
+        val water: Int,
+        val thunder: Int,
+        val ice: Int,
+        val dragon: Int
+) {
+    /**
+     * Generates a list containing all slot values,
+     * where each value is the "level" of the slot.
+     * 0 means that the slot doesn't exist.
+     */
+    val slots get() = listOf(slot_1, slot_2, slot_3)
+}
+
+@Entity(tableName = "armor_text",
+        primaryKeys = ["id", "lang_id"],
+        foreignKeys = [
+            ForeignKey(childColumns = ["id"],
+                    parentColumns = ["id"],
+                    entity = ArmorEntity::class)
+        ])
+data class ArmorText(
+        val id: Int,
+        val lang_id: String,
+        val name: String?
+)
+
+@Entity(tableName = "armorset")
+data class ArmorSet(
+        @PrimaryKey val id: Int,
+        val rank: Rank,
+        val armorset_bonus_id: Int?
+)
+
+@Entity(tableName = "armorset_text")
+data class ArmorSetTextEntity(
+        @PrimaryKey val id: Int,
+        val lang_id: String,
+        val name: String?
+)
+
+@Entity(tableName = "armorset_bonus_skill")
+data class ArmorSetBonusEntity(
+        @PrimaryKey val setbonus_id: Int,
+        val skilltree_id: Int,
+        val required: Int
+)
+
+@Entity(tableName = "armorset_bonus_text")
+data class ArmorSetBonusTextEntity(
+        @PrimaryKey val id: Int,
+        val lang_id: String,
+        val name: String?,
+        val description: String?
+)
+
+/**
+ * Created by Carlos on 3/6/2018.
+ */
+@Entity(tableName = "armor_skill",
+        primaryKeys = ["armor_id", "skilltree_id"],
+        foreignKeys = [
+            ForeignKey(entity = ArmorEntity::class,
+                    parentColumns = ["id"],
+                    childColumns = ["armor_id"]),
+            ForeignKey(entity = SkillTreeEntity::class,
+                    parentColumns = ["id"],
+                    childColumns = ["skilltree_id"])
+        ])
+data class ArmorSkill(
+        val armor_id: Int,
+        val skilltree_id: Int,
+        val level: Int
+)
+
 @Entity(tableName = "armor_recipe")
-data class ArmorRecipeEntity (
+data class ArmorRecipeEntity(
         @PrimaryKey val armor_id: Int,
         val item_id: Int,
         val quantity: Int
 )
+
+@Entity(tableName = "charm")
+data class CharmEntity(
+        @PrimaryKey val id: Int
+        // todo: icon color
+)
+
+@Entity(tableName = "charm_text",
+        primaryKeys = ["id", "lang_id"],
+        foreignKeys = [
+            ForeignKey(
+                    childColumns = ["id"],
+                    parentColumns = ["id"],
+                    entity = CharmEntity::class)
+        ])
+data class CharmText(
+        val id: Int,
+        val lang_id: String,
+        val name: String?,
+        val description: String?
+)
+
+@Entity(tableName = "charm_skill",
+        primaryKeys = ["charm_id", "skilltree_id"],
+        foreignKeys = [
+            ForeignKey(entity = CharmEntity::class,
+                    parentColumns = ["id"],
+                    childColumns = ["charm_id"]),
+            ForeignKey(entity = SkillTreeEntity::class,
+                    parentColumns = ["id"],
+                    childColumns = ["skilltree_id"])
+        ])
+data class CharmSkill(
+        val charm_id: Int,
+        val skilltree_id: Int,
+        val level: Int
+)
+
+@Entity(tableName = "weapon")
+data class WeaponEntity(
+        @PrimaryKey val id: Int,
+    
+        val weapon_type: WeaponType,
+        val rarity: Int,
+        val attack: Int,
+    
+        val slot_1: Int,
+        val slot_2: Int,
+        val slot_3: Int
+)
+
+@Entity(tableName = "weapon_text", primaryKeys = ["id", "lang_id"])
+data class WeaponText(
+        val id: Int,
+        val lang_id: String,
+
+        val name: String?
+)
+
