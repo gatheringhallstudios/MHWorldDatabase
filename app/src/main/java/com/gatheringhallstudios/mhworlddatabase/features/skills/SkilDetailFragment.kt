@@ -8,13 +8,13 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.views.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.*
 
@@ -24,7 +24,7 @@ class SkillDetailFragment : Fragment() {
         const val ARG_SKILLTREE_ID = "SKILL"
     }
 
-    private val viewModel : SkillDetailViewModel by lazy {
+    private val viewModel: SkillDetailViewModel by lazy {
         ViewModelProviders.of(this).get(SkillDetailViewModel::class.java)
     }
 
@@ -44,23 +44,28 @@ class SkillDetailFragment : Fragment() {
         viewModel.decorations.observe(this, Observer<List<DecorationView>>(::populateDecorations))
     }
 
-    private fun populateSkill(skillTreeFull : SkillTreeFull?) {
-        if(skillTreeFull == null) return
+    private fun populateSkill(skillTreeFull: SkillTreeFull?) {
+        if (skillTreeFull == null) return
 
         val icon = assetLoader.loadSkillIcon(skillTreeFull.icon_color)
         skill_icon.setImageDrawable(icon)
         skill_name.text = skillTreeFull.name
+        skill_description.text = skillTreeFull.description
 
         populateDescriptions(skillTreeFull.skills)
     }
 
     private fun populateArmor(armorSkillViews: List<ArmorSkillView>?) {
-        if (armorSkillViews == null) return
-
         if (armor_layout.childCount > 0)
             armor_layout.removeAllViews()
 
-        for (armorSkillView in armorSkillViews) {
+        if(armorSkillViews.orEmpty().isEmpty()) {
+            insertEmptyState(armor_layout)
+            return
+        }
+
+
+        for (armorSkillView in armorSkillViews!!) {
             val view = IconLabelTextCell(context)
             val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel)}"
 
@@ -69,36 +74,43 @@ class SkillDetailFragment : Fragment() {
 
             view.setLabelText(armorSkillView.name)
             view.setValueText(levels)
-            //TODO: link up on click listener to armor detail page once done
-            //view.setOnClickListener {v -> getRouter().navigateArmorDetail()}
+            view.setOnClickListener { v -> getRouter().navigateArmorDetail(armorSkillView.data.id) }
 
             armor_layout.addView(view)
         }
     }
 
-    private fun populateDescriptions(skills : List<Skill>) {
-        if (skill_descriptions.childCount > 0)
-            skill_descriptions.removeAllViews()
+    private fun populateDescriptions(skills: List<Skill>) {
+        if (skill_level_descriptions.childCount > 0)
+            skill_level_descriptions.removeAllViews()
+
+        if(skills.isEmpty()) {
+            insertEmptyState(skill_level_descriptions)
+            return
+        }
 
         for (i in 0..4) {
             val view = layoutInflater.inflate(R.layout.listitem_skill_description, null)
-            val description : String? = skills.getOrNull(i)?.description
+            val description: String? = skills.getOrNull(i)?.description
 
-            if(description.isNullOrBlank()) return
+            if (description.isNullOrBlank()) return
             view.level_text.text = "${getString(R.string.skills_level_title)} ${i + 1}"
             view.level_description.text = description
 
-            skill_descriptions.addView(view)
+            skill_level_descriptions.addView(view)
         }
     }
 
     private fun populateCharms(charmSkillViews: List<CharmSkillView>?) {
-        if (charmSkillViews == null) return
-
         if (charm_layout.childCount > 0)
             charm_layout.removeAllViews()
 
-        for (charmSkillView in charmSkillViews) {
+        if(charmSkillViews.orEmpty().isEmpty()) {
+            insertEmptyState(charm_layout)
+            return
+        }
+
+        for (charmSkillView in charmSkillViews!!) {
             val view = IconLabelTextCell(context)
 
             val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
@@ -115,16 +127,19 @@ class SkillDetailFragment : Fragment() {
     }
 
     private fun populateDecorations(decorationViews: List<DecorationView>?) {
-        if (decorationViews == null) return
-
         if (decoration_layout.childCount > 0) {
             decoration_layout.removeAllViews()
         }
 
-        for (decorationView in decorationViews) {
+        if(decorationViews.orEmpty().isEmpty()) {
+            insertEmptyState(decoration_layout)
+            return
+        }
+
+        for (decorationView in decorationViews!!) {
             val view = IconLabelTextCell(context)
 
-            val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_ui_armor_skill_base) // TODO Replace with decoration icon when available
+            val icon = assetLoader.loadDecorationIcon(decorationView) // TODO Replace with decoration icon when available
             //Decorations are only ever +1 point
             val levels = "+1 ${resources.getQuantityString(R.plurals.skills_level, 1)}"
 
@@ -138,5 +153,14 @@ class SkillDetailFragment : Fragment() {
 
             decoration_layout.addView(view)
         }
+    }
+
+    private fun insertEmptyState(layout: LinearLayout) {
+        val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
+        val view = IconLabelTextCell(context)
+        view.setLeftIconDrawable(icon)
+        view.setLabelText(getString(R.string.none))
+
+        layout.addView(view)
     }
 }

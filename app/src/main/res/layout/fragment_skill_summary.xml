@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/padding_bottom">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/skill_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,31 +25,44 @@
             <ImageView
                 android:id="@+id/skill_icon"
                 style="@style/IconXLarge"
-                tools:src="@drawable/ic_ui_armor_skill_base"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_ui_armor_skill_base" />
 
             <TextView
                 android:id="@+id/skill_name"
                 style="@style/TextDisplayHigh"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="0dp"
                 android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/skill_icon"
                 app:layout_constraintStart_toEndOf="@+id/skill_icon"
-                app:layout_constraintTop_toTopOf="@+id/skill_icon"
-                tools:text="Earplugs" />
-        </LinearLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Poison Resistance" />
+
+            <TextView
+                android:id="@+id/skill_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextBodyLow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/skill_name"
+                app:layout_constraintTop_toBottomOf="@+id/skill_name"
+                tools:text="Increases the rate of sleep buildup. (Elemental buildup has a maximum limit.)" />
+        </android.support.constraint.ConstraintLayout>
 
 
         <LinearLayout
-            android:id="@+id/skill_descriptions"
+            android:id="@+id/skill_level_descriptions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/armor_header"
             app:layout_constraintEnd_toEndOf="@+id/skill_label"
             app:layout_constraintStart_toStartOf="@+id/skill_label"
             app:layout_constraintTop_toBottomOf="@+id/skill_label">
@@ -71,30 +84,20 @@
 
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/divider_1"
-            style="@style/HorizontalDivider"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/skill_descriptions" />
-
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/armor_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginTop="16dp"
             app:labelText="@string/skills_armor_header"
-            app:layout_constraintTop_toBottomOf="@+id/divider_1"/>
+            app:layout_constraintTop_toBottomOf="@+id/skill_level_descriptions" />
 
         <LinearLayout
             android:id="@+id/armor_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/charm_header"
             app:layout_constraintTop_toBottomOf="@id/armor_header">
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
@@ -121,7 +124,7 @@
             android:id="@+id/charm_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginTop="8dp"
             app:labelText="@string/skills_charm_header"
             app:layout_constraintTop_toBottomOf="@id/armor_layout" />
 
@@ -156,12 +159,11 @@
             android:id="@+id/decoration_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             app:labelText="@string/skills_decoration_header"
-            app:layout_constraintTop_toBottomOf="@+id/charm_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintTop_toBottomOf="@+id/charm_layout">
 
         </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
 

@@ -11,6 +11,7 @@
     <string name="low_rank_full">Low Rank</string>
     <string name="high_rank_full">High Rank</string>
     <string name="rarity_string">Rarity %1$d</string>
+    <string name="none">None</string>
 
     <!-- Monsters -->
     <string name="monsters_list_title">Monsters</string>
