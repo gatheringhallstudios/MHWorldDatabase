@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 
 private fun <T, K> createRegistry(vararg pairs: Pair<T, K>): (T) -> K? {
     val registry = mapOf(*pairs)
@@ -33,7 +32,13 @@ val VectorRegistry = createRegistry(
         "Meat" to R.drawable.ic_items_meat_base,
         "Jaw" to R.drawable.ic_items_monster_jaw_base,
         "Pellets" to R.drawable.ic_items_pellets_base,
-        "Slinger" to R.drawable.ic_items_slinger_base
+        "Slinger" to R.drawable.ic_items_slinger_base,
+        "Scale" to R.drawable.ic_items_scale_base,
+        "Claw" to R.drawable.ic_items_claw_base,
+        "Body" to R.drawable.ic_items_body_base,
+        "Hide" to R.drawable.ic_items_hide_base,
+        "Sac" to R.drawable.ic_icons_sac_base
+
 )
 
 val SlotEmptyRegistry = fun(slot: Int) = when(slot) {
