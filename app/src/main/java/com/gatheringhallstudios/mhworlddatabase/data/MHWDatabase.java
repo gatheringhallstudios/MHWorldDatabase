@@ -81,9 +81,8 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class,
                 ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class
         },
-        version = 9,
-        exportSchema = false) //TODO investigate if this is something that would help us
-
+        version = 10,
+        exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;

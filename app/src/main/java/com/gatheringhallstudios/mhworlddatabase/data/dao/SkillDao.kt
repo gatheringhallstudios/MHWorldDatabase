@@ -70,7 +70,7 @@ abstract class SkillDao {
 
 
     @Query("""
-        SELECT c.*, ct.name, cs.level skillLevel
+        SELECT c.*, ct.name, c.previous_id, c.rarity, cs.level skillLevel
             FROM charm c
              JOIN charm_text ct USING (id)
              JOIN charm_skill cs ON (id = charm_id)

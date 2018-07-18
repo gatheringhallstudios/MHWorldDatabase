@@ -2,9 +2,17 @@ package com.gatheringhallstudios.mhworlddatabase.data.views
 
 import android.arch.persistence.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+
+/*
+todo: refactor. The current version has problems. Details below:
+The current system has several problems:
+1) Inconsistently nested sub-data that ends up loading a full query
+2) Multiple versions of the same "object". Leads to trouble with icon loading.
+
+It will also need a split like how entities are split.
+ */
 
 data class ItemView(
         @Embedded val data: ItemEntity,
@@ -158,6 +166,12 @@ data class MonsterRewardView(
         var item_name: String?
 )
 
+data class CharmView(
+        val id: Int,
+        val name: String?,
+        val rarity: Int
+)
+
 data class CharmSkillView(
         @Embedded val data: CharmEntity,
         val name: String?,
@@ -170,6 +184,25 @@ data class DecorationView(
 ) {
     val id get() = data.id
 }
+
+
+/**
+ * A view for basic weapon information.
+ * TODO: Replace
+ */
+data class WeaponBasic(
+        var id: Int,
+        var name: String?,
+
+        var weapon_type: WeaponType?,
+        var rarity: Int,
+        var attack: Int,
+
+        var slot_1: Int,
+        var slot_2: Int,
+        var slot_3: Int
+)
+
 
 data class SearchResult(
         val data_type: DataType,

@@ -7,8 +7,9 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "charm")
 data class CharmEntity(
-        @PrimaryKey val id: Int
-        // todo: icon color
+        @PrimaryKey val id: Int,
+        val previous_id: Int?,
+        val rarity: Int
 )
 
 @Entity(tableName = "charm_text",

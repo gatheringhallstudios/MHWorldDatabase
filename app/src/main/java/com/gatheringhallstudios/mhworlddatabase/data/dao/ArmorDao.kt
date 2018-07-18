@@ -89,7 +89,7 @@ abstract class ArmorDao {
         WHERE it.lang_id = :langId
         AND a.armor_id= :armorId
         ORDER BY i.id
-""")
+    """)
     abstract fun loadArmorComponentViews(langId: String, armorId: Int) : LiveData<List<ArmorComponentView>>
 
     @Query("""
