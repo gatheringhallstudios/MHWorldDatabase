@@ -28,13 +28,20 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
     }
 
     /**
+     * Adds a group of items to the adapter without a header
+     */
+    fun addAll(items: Collection<Any>) {
+        this.items.addAll(items)
+    }
+
+    /**
      * Adds a group headed by a regular SectionHeader
      * @param name the title of the section header
      * @param items the items under that section header
      */
     fun addSection(name: String, items: Collection<Any>) {
         this.items.add(SectionHeader(name))
-        this.items.addAll(items)
+        this.addAll(items)
     }
 
     /**
@@ -53,7 +60,7 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
      */
     fun addSubSection(name: String, items: Collection<Any>) {
         this.items.add(SubHeader(name))
-        this.items.addAll(items)
+        this.addAll(items)
     }
 
     fun addSubSections(sections: Map<String, Collection<Any>>) {
