@@ -5,19 +5,18 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorComponentView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorComponent
 
-class ArmorComponentAdapterDelegate(private val onSelect: (ArmorComponentView) -> Unit)
-    : SimpleListDelegate<ArmorComponentView, View>() {
+class ArmorComponentAdapterDelegate(private val onSelect: (ArmorComponent) -> Unit)
+    : SimpleListDelegate<ArmorComponent, View>() {
 
-    override fun getDataClass() = ArmorComponentView::class
+    override fun getDataClass() = ArmorComponent::class
 
     override fun onCreateView(parent: ViewGroup): View {
         return IconLabelTextCell(parent.context)
     }
 
-    override fun bindView(view: View, data: ArmorComponentView) {
+    override fun bindView(view: View, data: ArmorComponent) {
         with (view as IconLabelTextCell) {
             val icon = AssetLoader(view.context).loadItemIcon(data.result)
             setLeftIconDrawable(icon)

@@ -6,21 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemCombinationView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemCombination
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.listitem_item_crafting.view.*
 
 /**
  * Defines an adapter delegate for a list of item combinations
  */
-class ItemCraftingAdapterDelegate : SimpleListDelegate<ItemCombinationView, View>() {
-    override fun getDataClass() = ItemCombinationView::class
+class ItemCraftingAdapterDelegate : SimpleListDelegate<ItemCombination, View>() {
+    override fun getDataClass() = ItemCombination::class
 
     override fun onCreateView(parent: ViewGroup): View {
         return LayoutInflater.from(parent.context).inflate(R.layout.listitem_item_crafting, parent, false)
     }
 
-    override fun bindView(view: View, data: ItemCombinationView) {
+    override fun bindView(view: View, data: ItemCombination) {
         view.result_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_question_mark))
         view.result_name.text = data.result.name
 

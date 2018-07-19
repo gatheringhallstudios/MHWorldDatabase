@@ -4,7 +4,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.common.CachedValue
-import com.gatheringhallstudios.mhworlddatabase.data.views.SearchResult
+import com.gatheringhallstudios.mhworlddatabase.data.models.SearchResult
 import com.gatheringhallstudios.mhworlddatabase.features.search.SearchFilter
 import com.gatheringhallstudios.mhworlddatabase.features.search.timeout
 

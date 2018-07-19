@@ -8,8 +8,8 @@ import com.gatheringhallstudios.mhworlddatabase.Router
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.getDrawableCompat
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.listitem_armorset_header.*
 /**
  * Header item for collapsible armor sets
  */
-class ArmorSetHeaderItem(val armorSet: ArmorSetView) : Item(), ExpandableItem {
+class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
     private lateinit var group: ExpandableGroup
 
     override fun getLayout() = R.layout.listitem_armorset_header

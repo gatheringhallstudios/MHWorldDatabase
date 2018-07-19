@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.data.views
+package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
@@ -14,7 +14,7 @@ The current system has several problems:
 It will also need a split like how entities are split.
  */
 
-data class ItemView(
+data class Item(
         @Embedded val data: ItemEntity,
         val name: String?,
         val description: String?
@@ -22,22 +22,22 @@ data class ItemView(
     val id get() = data.id
 }
 
-data class ItemBasicView(
+data class ItemBasic(
         val id: Int,
         val name: String,
         val icon_name: String?,
         val icon_color: String?
 )
 
-data class ItemCombinationView(
+data class ItemCombination(
         val id: Int,
-        @Embedded(prefix = "result_") val result: ItemBasicView,
-        @Embedded(prefix = "first_") val first: ItemBasicView,
-        @Embedded(prefix = "second_") val second: ItemBasicView?,
+        @Embedded(prefix = "result_") val result: ItemBasic,
+        @Embedded(prefix = "first_") val first: ItemBasic,
+        @Embedded(prefix = "second_") val second: ItemBasic?,
         val quantity: Int
 )
 
-data class ItemLocationView(
+data class ItemLocation(
         @Embedded val data: LocationItemEntity,
         val location_name: String
 )
@@ -55,7 +55,7 @@ data class ArmorView(
     val slots get() = data.slots
 }
 
-data class ArmorSkillView(
+data class ArmorSkill(
         @Embedded val data: ArmorEntity,
         val skilltree_id: Int,
         val name: String?,
@@ -66,7 +66,7 @@ data class ArmorSkillView(
 /**
  * Representation of a single armor set
  */
-data class ArmorSetView(
+data class ArmorSet(
         val armorset_id: Int,
         val armorset_name: String?,
         val armor: List<ArmorView>
@@ -77,7 +77,7 @@ data class ArmorSetView(
 /**
  * Basic representation of a single armor set bonus
  */
-data class ArmorSetBonusView(
+data class ArmorSetBonus(
         val setbonus_id: Int,
         val name: String?,
         val required: Int,
@@ -87,18 +87,18 @@ data class ArmorSetBonusView(
         val icon_color: String?
 )
 
-data class ArmorComponentView(
+data class ArmorComponent(
         val armor_id: Int,
-        @Embedded val result: ItemView,
+        @Embedded val result: Item,
         val quantity: Int
 )
 
-data class LocationView(
+data class Location(
         val id: Int,
         val name: String?
 )
 
-data class LocationItemView(
+data class LocationItem(
         @Embedded val data: LocationItemEntity,
         val item_name: String?
 )
@@ -108,7 +108,7 @@ data class LocationItemView(
  * This is returned when querying for all data.
  * Created by Carlos on 3/6/2018.
  */
-open class SkillTreeView(
+open class SkillTree(
         val id: Int,
         val name: String?,
         val description: String?,
@@ -125,7 +125,7 @@ class SkillTreeFull(
         icon_color: String?,
 
         val skills: List<Skill>
-) : SkillTreeView(id, name, description, icon_color)
+) : SkillTree(id, name, description, icon_color)
 
 data class Skill(
         val skilltree_id: Int,
@@ -133,7 +133,7 @@ data class Skill(
         val description: String?
 )
 
-data class MonsterView(
+data class Monster(
         @Embedded val data: MonsterEntity,
         val name: String?,
         val ecology: String?,
@@ -142,7 +142,7 @@ data class MonsterView(
     val id get() = data.id
 }
 
-data class MonsterHabitatView(
+data class MonsterHabitat(
         @Embedded val data: MonsterHabitatEntity,
         val location_name: String?
 )
@@ -150,35 +150,35 @@ data class MonsterHabitatView(
 /**
  * Represents information for a single reward
  */
-data class MonsterHitzoneView(
+data class MonsterHitzone(
         @Embedded val data: MonsterHitzoneEntity,
         val body_part: String?
 )
 
-data class MonsterBreakView(
+data class MonsterBreak(
         @Embedded val data: MonsterBreakEntity,
         val part_name: String?
 )
 
-data class MonsterRewardView(
+data class MonsterReward(
         @Embedded val data: MonsterRewardEntity,
         var condition_name: String?,
         var item_name: String?
 )
 
-data class CharmView(
+data class Charm(
         val id: Int,
         val name: String?,
         val rarity: Int
 )
 
-data class CharmSkillView(
+data class CharmSkill(
         @Embedded val data: CharmEntity,
         val name: String?,
         val skillLevel: Int
 )
 
-data class DecorationView(
+data class Decoration(
         @Embedded val data: DecorationEntity,
         val name: String?
 ) {

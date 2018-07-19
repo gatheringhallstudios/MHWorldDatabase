@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.data.views.DecorationView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import kotlinx.android.synthetic.main.fragment_decoration_summary.*
 
 
@@ -35,7 +35,7 @@ class DecorationDetailFragment : Fragment() {
         val decorationId = args!!.getInt(ARG_DECORATION_ID)
 
         viewModel.setDecoration(decorationId)
-        viewModel.decorationData.observe(this, Observer<DecorationView>(::populateDecoration))
+        viewModel.decorationData.observe(this, Observer<Decoration>(::populateDecoration))
         viewModel.skillTreeData.observe(this, Observer<SkillTreeFull>(::populateSkill))
     }
 
@@ -56,7 +56,7 @@ class DecorationDetailFragment : Fragment() {
         decoration_skill_layout.addView(view)
     }
 
-    private fun populateDecoration(decoration: DecorationView?) {
+    private fun populateDecoration(decoration: Decoration?) {
         if (decoration == null) return
 
         val icon = assetLoader.loadDecorationIcon(decoration)

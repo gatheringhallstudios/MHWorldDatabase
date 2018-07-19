@@ -3,21 +3,11 @@ package com.gatheringhallstudios.mhworlddatabase.features.search
 import android.arch.lifecycle.*
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import com.gatheringhallstudios.mhworlddatabase.MainActivity
 import com.gatheringhallstudios.mhworlddatabase.MainActivityViewModel
-import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.SearchResultAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.data.views.SearchResult
-import com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment
-import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 class UniversalSearchFragment : RecyclerViewFragment() {
 

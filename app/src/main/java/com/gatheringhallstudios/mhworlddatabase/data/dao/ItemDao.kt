@@ -4,9 +4,9 @@ import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemCombinationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemLocationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemCombination
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
+import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 
 // columns for a combination result set
 private const val combinationColumns = """
@@ -27,7 +27,7 @@ abstract class ItemDao {
                 AND it.lang_id = :langId
         WHERE (:category IS NULL AND i.category != 'hidden') OR i.category = :category
         ORDER BY i.id""")
-    abstract fun loadItems(langId: String, category: ItemCategory? = null): LiveData<List<ItemView>>
+    abstract fun loadItems(langId: String, category: ItemCategory? = null): LiveData<List<Item>>
 
     @Query("""
         SELECT i.*, it.name, it.description
@@ -36,7 +36,7 @@ abstract class ItemDao {
             ON it.id = i.id
             AND it.lang_id = :langId
         WHERE i.id = :itemId """)
-    abstract fun loadItem(langId: String, itemId: Int): LiveData<ItemView>
+    abstract fun loadItem(langId: String, itemId: Int): LiveData<Item>
 
     @Query("""
         SELECT li.*, lt.name location_name
@@ -46,7 +46,7 @@ abstract class ItemDao {
         WHERE li.item_id = :itemId
           AND lt.lang_id = :langId
         """)
-    abstract fun loadItemLocations(langId: String, itemId : Int) : LiveData<List<ItemLocationView>>
+    abstract fun loadItemLocations(langId: String, itemId : Int) : LiveData<List<ItemLocation>>
 
     @Query("""
         SELECT $combinationColumns
@@ -67,7 +67,7 @@ abstract class ItemDao {
                 ON st.id = s.id
                 AND st.lang_id = :langId
                 """)
-    abstract fun loadItemCombinations(langId: String) : LiveData<List<ItemCombinationView>>
+    abstract fun loadItemCombinations(langId: String) : LiveData<List<ItemCombination>>
 
     @Query("""
         SELECT $combinationColumns
@@ -91,5 +91,5 @@ abstract class ItemDao {
           OR c.first_id = :itemId
           OR c.second_id = :itemId
                 """)
-    abstract fun loadItemCombinationsFor(langId: String, itemId: Int) : LiveData<List<ItemCombinationView>>
+    abstract fun loadItemCombinationsFor(langId: String, itemId: Int) : LiveData<List<ItemCombination>>
 }

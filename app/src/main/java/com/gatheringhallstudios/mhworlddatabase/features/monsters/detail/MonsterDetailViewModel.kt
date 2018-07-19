@@ -6,8 +6,7 @@ import android.arch.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao
-import com.gatheringhallstudios.mhworlddatabase.data.views.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 
 /**
  * A ViewModel for any monster summary fragment
@@ -18,11 +17,11 @@ class MonsterDetailViewModel(application: Application) : AndroidViewModel(applic
 
     private var id: Int = -1
 
-    lateinit var monster: LiveData<MonsterView>
-    lateinit var habitats: LiveData<List<MonsterHabitatView>>
-    lateinit var rewards: LiveData<List<MonsterRewardView>>
-    lateinit var hitzones: LiveData<List<MonsterHitzoneView>>
-    lateinit var breaks: LiveData<List<MonsterBreakView>>
+    lateinit var monster: LiveData<Monster>
+    lateinit var habitats: LiveData<List<MonsterHabitat>>
+    lateinit var rewards: LiveData<List<MonsterReward>>
+    lateinit var hitzones: LiveData<List<MonsterHitzone>>
+    lateinit var breaks: LiveData<List<MonsterBreak>>
 
     fun setMonster(monsterId: Int) {
         if (id == monsterId) {

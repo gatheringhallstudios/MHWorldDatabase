@@ -4,13 +4,10 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
-import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
@@ -50,7 +47,7 @@ class MonsterListFragment : RecyclerViewFragment() {
 
         viewModel.setTab(tab)
 
-        viewModel.monsters.observe(this, Observer<List<MonsterView>>({
+        viewModel.monsters.observe(this, Observer<List<Monster>>({
             adapter.items = it
             adapter.notifyDataSetChanged()
         }))

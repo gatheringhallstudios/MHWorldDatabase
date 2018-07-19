@@ -7,7 +7,7 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 
 /**
  * A viewmodel for any monster list fragment
@@ -22,7 +22,7 @@ class MonsterListViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private var currentTab: Tab? = null
-    lateinit var monsters: LiveData<List<MonsterView>>
+    lateinit var monsters: LiveData<List<Monster>>
 
     fun setTab(tab: Tab) {
         if (currentTab == tab) {

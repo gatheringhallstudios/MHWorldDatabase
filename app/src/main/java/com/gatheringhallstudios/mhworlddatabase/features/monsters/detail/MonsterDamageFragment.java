@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHitzoneEntity;
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHitzoneView;
+import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHitzone;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class MonsterDamageFragment extends Fragment {
      *
      * @param hitzones items be of type Reward.
      */
-    public void setHitzones(List<MonsterHitzoneView> hitzones) {
+    public void setHitzones(List<MonsterHitzone> hitzones) {
         // Clear layouts
         if (physicalDamageLayout.getChildCount() != 0)
             physicalDamageLayout.removeAllViews();
@@ -68,7 +68,7 @@ public class MonsterDamageFragment extends Fragment {
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
         // Populate Physical Damage
-        for (MonsterHitzoneView hitzone : hitzones) {
+        for (MonsterHitzone hitzone : hitzones) {
             View physical = inflater.inflate(R.layout.listitem_monster_hitzone, physicalDamageLayout, false);
 
             // Find target views manually since we can't run ButterKnife.bind more than once.
@@ -92,7 +92,7 @@ public class MonsterDamageFragment extends Fragment {
         }
 
         // Populate Elemental Damage
-        for (MonsterHitzoneView hitzone : hitzones) {
+        for (MonsterHitzone hitzone : hitzones) {
             View elemental = inflater.inflate(R.layout.listitem_monster_hitzone, elementDamageLayout, false);
 
             // Find target views manually since we can't run ButterKnife.bind more than once.

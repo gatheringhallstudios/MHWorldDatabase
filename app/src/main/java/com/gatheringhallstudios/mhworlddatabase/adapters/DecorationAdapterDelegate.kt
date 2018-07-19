@@ -4,20 +4,20 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.views.DecorationView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 
-class DecorationAdapterDelegate(private val onSelected: (DecorationView) -> Unit)
-    : SimpleListDelegate<DecorationView, IconLabelTextCell>() {
+class DecorationAdapterDelegate(private val onSelected: (Decoration) -> Unit)
+    : SimpleListDelegate<Decoration, IconLabelTextCell>() {
 
     val TAG = this.javaClass.simpleName
 
-    override fun getDataClass() = DecorationView::class
+    override fun getDataClass() = Decoration::class
 
     override fun onCreateView(parent: ViewGroup): IconLabelTextCell {
         return IconLabelTextCell(parent.context)
     }
 
-    override fun bindView(view: IconLabelTextCell, data: DecorationView) {
+    override fun bindView(view: IconLabelTextCell, data: Decoration) {
         val icon = AssetLoader(view.context).loadDecorationIcon(data)
 
         view.setLeftIconDrawable(icon)

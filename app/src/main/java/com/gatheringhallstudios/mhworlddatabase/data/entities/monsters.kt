@@ -107,7 +107,7 @@ data class MonsterHitzoneText(
 )
 
 /**
- * MonsterView reward entity. Note that because rewards can have duplicate
+ * Monster reward entity. Note that because rewards can have duplicate
  * entries, the monster/condition is not the primary key.
  */
 @Entity(tableName = "monster_reward")

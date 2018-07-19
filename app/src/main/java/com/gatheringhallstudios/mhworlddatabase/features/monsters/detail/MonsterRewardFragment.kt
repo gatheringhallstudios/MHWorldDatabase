@@ -4,20 +4,14 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterRewardAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.SubHeaderAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.SubHeader
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView
+import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterReward
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
-
-import java.util.ArrayList
 
 /**
  * Fragment for a list of monster rewards
@@ -66,7 +60,7 @@ class MonsterRewardFragment : RecyclerViewFragment() {
      * Set the rewards to be displayed in the fragment
      * @param rewards items be of type Reward.
      */
-    fun setItems(rewards: List<MonsterRewardView>?) {
+    fun setItems(rewards: List<MonsterReward>?) {
         adapter.clear()
         if (rewards == null) return
 

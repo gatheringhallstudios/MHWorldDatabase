@@ -7,7 +7,7 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.ArmorComponentAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorComponentView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorComponent
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 class ArmorComponentListFragment : RecyclerViewFragment() {
@@ -25,7 +25,7 @@ class ArmorComponentListFragment : RecyclerViewFragment() {
         viewModel.armorComponents.observe(this, Observer(::populateComponents))
     }
 
-    private fun populateComponents(components: List<ArmorComponentView>?) {
+    private fun populateComponents(components: List<ArmorComponent>?) {
         if (components == null) {
             adapter.notifyDataSetChanged()
             return

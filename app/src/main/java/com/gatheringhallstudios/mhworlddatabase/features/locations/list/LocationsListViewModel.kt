@@ -2,13 +2,9 @@ package com.gatheringhallstudios.mhworlddatabase.features.locations.list
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
 
 /**
  * A viewmodel for any locations list fragment

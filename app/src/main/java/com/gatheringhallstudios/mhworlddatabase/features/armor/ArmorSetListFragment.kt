@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.applyArguments
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDecorator
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -43,7 +43,7 @@ class ArmorSetListFragment : RecyclerViewFragment() {
 
         val rank = arguments?.getSerializable(ARG_RANK) as? Rank
 
-        viewModel.getArmorSetList(rank).observe(this, Observer<List<ArmorSetView>> {
+        viewModel.getArmorSetList(rank).observe(this, Observer<List<ArmorSet>> {
             val items = it?.map {
                 val headerItem = ArmorSetHeaderItem(it)
                 val bodyItems = it.armor.map { ArmorSetDetailItem(it) }

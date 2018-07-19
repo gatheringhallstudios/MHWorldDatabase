@@ -7,12 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView;
+import com.gatheringhallstudios.mhworlddatabase.data.models.Item;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +42,7 @@ public class ItemSummaryFragment extends Fragment {
         return view;
     }
 
-    private void populateItem(ItemView item) {
+    private void populateItem(Item item) {
 
         //Set the summary information
         //itemIcon.setIcon(setsomeicon);

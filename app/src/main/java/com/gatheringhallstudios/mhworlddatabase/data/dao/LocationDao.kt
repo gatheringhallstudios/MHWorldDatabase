@@ -3,9 +3,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationItemView
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView
+import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
+import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 
 /**
  * A class used to retrieve data centered around Habitats, including item availability data and monsters available.
@@ -19,14 +18,14 @@ abstract class LocationDao {
         WHERE t.lang_id = :langId
         ORDER BY order_id ASC
         """)
-    abstract fun loadLocations(langId: String) : LiveData<List<LocationView>>
+    abstract fun loadLocations(langId: String) : LiveData<List<Location>>
 
     @Query("""
         SELECT id, name
         FROM location_text t
         WHERE t.lang_id = :langId
           AND t.id = :locationId""")
-    abstract fun loadLocation(langId : String, locationId: Int) : LiveData<LocationView>
+    abstract fun loadLocation(langId : String, locationId: Int) : LiveData<Location>
 
     @Query("""
         SELECT li.*, it.name item_name
@@ -36,5 +35,5 @@ abstract class LocationDao {
         WHERE li.location_id = :locationId
           AND it.lang_id = :langId
         """)
-    abstract fun loadLocationItems(langId: String, locationId : Int) : LiveData<List<LocationItemView>>
+    abstract fun loadLocationItems(langId: String, locationId : Int) : LiveData<List<LocationItem>>
 }

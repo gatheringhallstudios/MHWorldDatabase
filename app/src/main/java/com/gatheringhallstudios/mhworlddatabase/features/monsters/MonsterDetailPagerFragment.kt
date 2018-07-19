@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDamageFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailViewModel
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterRewardFragment
@@ -32,7 +32,7 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
         val viewModel = ViewModelProviders.of(this).get(MonsterDetailViewModel::class.java)
         viewModel.setMonster(monsterId)
 
-        viewModel.monster.observe(this, Observer<MonsterView> { this.setTitle(it?.name) })
+        viewModel.monster.observe(this, Observer<Monster> { this.setTitle(it?.name) })
 
         // Now add our tabs
         tabs.addTab(getString(R.string.monsters_detail_tab_summary)) {

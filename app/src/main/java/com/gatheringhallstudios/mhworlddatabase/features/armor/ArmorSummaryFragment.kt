@@ -11,14 +11,15 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.*
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetBonusView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSkillView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkill
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorView
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.cell_icon_label_text.view.*
 import kotlinx.android.synthetic.main.fragment_armor_summary.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_large.view.*
+
+import kotlinx.android.synthetic.main.cell_icon_label_text.view.*
 
 class ArmorSummaryFragment : Fragment() {
 
@@ -65,7 +66,7 @@ class ArmorSummaryFragment : Fragment() {
 
     }
 
-    private fun populateSetBonuses(armorSetBonusViews: List<ArmorSetBonusView>?) {
+    private fun populateSetBonuses(armorSetBonusViews: List<ArmorSetBonus>?) {
         if (armorSetBonusViews.orEmpty().isEmpty()) {
             return
         }
@@ -103,7 +104,7 @@ class ArmorSummaryFragment : Fragment() {
         }
     }
 
-    private fun populateSkills(skills: List<ArmorSkillView>?) {
+    private fun populateSkills(skills: List<ArmorSkill>?) {
         if (skills.orEmpty().isEmpty()) {
             return
         }
@@ -121,9 +122,9 @@ class ArmorSummaryFragment : Fragment() {
             view.setLeftIconDrawable(icon)
             view.setLabelText(skill.name)
             view.setValueText(levels)
-            view.setOnClickListener({
+            view.setOnClickListener {
                 getRouter().navigateSkillDetail(skill.skilltree_id)
-            })
+            }
             view.removeDecorator()
 
             armor_skill_layout.addView(view)

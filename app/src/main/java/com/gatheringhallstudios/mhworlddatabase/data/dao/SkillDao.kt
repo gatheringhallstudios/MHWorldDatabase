@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.views.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 
 /**
  * A class used to retrieve data about skills centered from the skills point of view.
@@ -19,7 +19,7 @@ abstract class SkillDao {
         FROM skilltree s join skilltree_text st USING (id)
         WHERE lang_id = :langId
         ORDER BY name """)
-    abstract fun loadSkillTrees(langId: String): LiveData<List<SkillTreeView>>
+    abstract fun loadSkillTrees(langId: String): LiveData<List<SkillTree>>
 
     /**
      * Performs a full load on a skill tree.
@@ -78,7 +78,7 @@ abstract class SkillDao {
             AND cs.skilltree_id = :skillTreeId
 
     """)
-    abstract fun loadCharmsWithSkill(langId: String, skillTreeId: Int) : LiveData<List<CharmSkillView>>
+    abstract fun loadCharmsWithSkill(langId: String, skillTreeId: Int) : LiveData<List<CharmSkill>>
 
 
     @Query("""
@@ -90,7 +90,7 @@ abstract class SkillDao {
             WHERE at.lang_id = :langId
                AND askill.skilltree_id = :skillTreeId
             ORDER BY a.id ASC""")
-    abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkillView>>
+    abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkill>>
 
     @Query("""
         SELECT d.*, dt.name
@@ -100,5 +100,5 @@ abstract class SkillDao {
                 AND dt.lang_id = :langId
         WHERE d.skilltree_id = :skillTreeId
         ORDER BY dt.name""")
-    abstract fun loadDecorationsWithSkill(langId: String, skillTreeId: Int): LiveData<List<DecorationView>>
+    abstract fun loadDecorationsWithSkill(langId: String, skillTreeId: Int): LiveData<List<Decoration>>
 }

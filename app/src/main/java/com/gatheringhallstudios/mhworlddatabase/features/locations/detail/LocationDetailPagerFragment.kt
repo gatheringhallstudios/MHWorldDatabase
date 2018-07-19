@@ -4,7 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 
 /**
  * Location detail hub. Displays information for a single location
@@ -25,7 +25,7 @@ class LocationDetailPagerFragment : BasePagerFragment() {
         val viewModel = ViewModelProviders.of(this).get(LocationDetailViewModel::class.java)
         viewModel.setLocation(locationId)
 
-        viewModel.location.observe(this, Observer<LocationView> { this.setTitle(it?.name) })
+        viewModel.location.observe(this, Observer<Location> { this.setTitle(it?.name) })
 
         tabs.addTab(getString(R.string.locations_detail_summary)) {
             LocationSummaryFragment()

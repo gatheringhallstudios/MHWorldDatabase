@@ -7,15 +7,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
-import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
@@ -56,7 +54,7 @@ class ItemListFragment : RecyclerViewFragment() {
     // ViewModel class used by this Fragment
     class ViewModel(application: Application) : AndroidViewModel(application) {
         private val dao: ItemDao = MHWDatabase.getDatabase(application).itemDao()
-        lateinit var items: LiveData<List<ItemView>> private set
+        lateinit var items: LiveData<List<Item>> private set
 
 
         fun init(category: ItemCategory?) {

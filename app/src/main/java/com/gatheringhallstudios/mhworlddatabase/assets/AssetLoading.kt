@@ -1,18 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
-import android.util.Log
-import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity
-import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSet
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorComponentView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView
-import com.gatheringhallstudios.mhworlddatabase.data.views.DecorationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
+import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
+import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 
 /**
  * A class used to load assets for the data objects.
@@ -22,7 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
 class AssetLoader(context: Context) {
     val ctx: Context = context.applicationContext
 
-    fun loadItemIcon(item: ItemView): Drawable? {
+    fun loadItemIcon(item: Item): Drawable? {
         return ctx.getVectorDrawable(item.data.icon_name ?: "", item.data.icon_color)
     }
 
@@ -42,7 +37,7 @@ class AssetLoader(context: Context) {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
-    fun loadArmorSetIcon(armorSet: ArmorSetView): Drawable? {
+    fun loadArmorSetIcon(armorSet: ArmorSet): Drawable? {
         return ctx.getVectorDrawable("ArmorSet", "rare${armorSet.rarity}")
     }
 
@@ -50,7 +45,7 @@ class AssetLoader(context: Context) {
         return loadArmorIcon(entity.armor_type, entity.rarity)
     }
 
-    fun loadDecorationIcon(decoration: DecorationView): Drawable? {
+    fun loadDecorationIcon(decoration: Decoration): Drawable? {
         val assetName = "Decoration${decoration.data.slot}"
         return ctx.getVectorDrawable(assetName, decoration.data.icon_color)
     }

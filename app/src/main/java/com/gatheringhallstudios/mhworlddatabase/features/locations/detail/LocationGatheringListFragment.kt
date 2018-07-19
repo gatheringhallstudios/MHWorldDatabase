@@ -7,7 +7,7 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.LocationItemsAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationItemView
+import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
@@ -27,7 +27,7 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
         viewModel.locationItems.observe(this, Observer(::setItems))
     }
 
-    private fun setItems(locationItems: List<LocationItemView>?) {
+    private fun setItems(locationItems: List<LocationItem>?) {
         adapter.clear()
         if (locationItems.orEmpty().isEmpty()) {
             return

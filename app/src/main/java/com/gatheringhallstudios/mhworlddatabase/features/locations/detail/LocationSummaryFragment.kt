@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import kotlinx.android.synthetic.main.fragment_location_summary.*
 
@@ -31,7 +31,7 @@ class LocationSummaryFragment : Fragment() {
         viewModel.location.observe(this, Observer(::populateLocation))
     }
 
-    private fun populateLocation(location: LocationView?) {
+    private fun populateLocation(location: Location?) {
         if(location == null) return
 
         val ctx = view?.context

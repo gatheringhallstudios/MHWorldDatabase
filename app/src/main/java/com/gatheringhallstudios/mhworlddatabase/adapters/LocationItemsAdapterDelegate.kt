@@ -6,21 +6,20 @@ import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
-import com.gatheringhallstudios.mhworlddatabase.data.views.LocationItemView
-
+import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 
-class LocationItemsAdapterDelegate(private val onSelected: (LocationItemView) -> Unit)
-    : SimpleListDelegate<LocationItemView, View>() {
+class LocationItemsAdapterDelegate(private val onSelected: (LocationItem) -> Unit)
+    : SimpleListDelegate<LocationItem, View>() {
 
-    override fun getDataClass() = LocationItemView::class
+    override fun getDataClass() = LocationItem::class
 
     override fun onCreateView(parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)
         return inflater.inflate(R.layout.listitem_reward, parent, false)
     }
 
-    override fun bindView(view: View, data: LocationItemView) {
+    override fun bindView(view: View, data: LocationItem) {
         val ctx = view.context
         val defaultIcon = R.drawable.ic_question_mark
 

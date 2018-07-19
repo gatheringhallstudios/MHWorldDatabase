@@ -3,24 +3,22 @@ package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemCombinationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemLocationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemCombination
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
+import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 import com.gatheringhallstudios.mhworlddatabase.mergeLiveData
 
 data class UsageData(
-        val craftRecipes: List<ItemCombinationView>
+        val craftRecipes: List<ItemCombination>
 )
 
 data class AcquisitionData(
-        val craftRecipes: List<ItemCombinationView>,
-        val locations: List<ItemLocationView>
+        val craftRecipes: List<ItemCombination>,
+        val locations: List<ItemLocation>
 )
 
 /**
@@ -34,7 +32,7 @@ class ItemDetailViewModel(app: Application) : AndroidViewModel(app) {
     var itemId = -1
         private set
 
-    lateinit var item: LiveData<ItemView>
+    lateinit var item: LiveData<Item>
 
     lateinit var usageData: LiveData<UsageData>
     lateinit var acquisitionData: LiveData<AcquisitionData>

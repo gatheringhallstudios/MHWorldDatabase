@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterHabitatView
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterView
+import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
+import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
 
 /**
@@ -39,7 +39,7 @@ class MonsterSummaryFragment : Fragment() {
     /**
      * Populate views with the monster data
      */
-    private fun populateMonster(monster: MonsterView?) {
+    private fun populateMonster(monster: Monster?) {
         if (monster == null) return
 
         val elemWeakness = monster.data.weaknesses
@@ -74,7 +74,7 @@ class MonsterSummaryFragment : Fragment() {
         // todo: support alt weaknessess states
     }
 
-    private fun populateHabitats(habitats: List<MonsterHabitatView>?) {
+    private fun populateHabitats(habitats: List<MonsterHabitat>?) {
         if (habitats == null) return
 
         if (habitats.isEmpty()) {

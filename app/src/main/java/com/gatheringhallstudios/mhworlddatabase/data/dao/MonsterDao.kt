@@ -5,7 +5,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
-import com.gatheringhallstudios.mhworlddatabase.data.views.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 
 /**
  * Created by Carlos on 3/21/2018.
@@ -18,14 +18,14 @@ abstract class MonsterDao {
         WHERE t.lang_id = :langId
           AND (m.size = :size OR :size IS NULL)
         ORDER BY t.name ASC""")
-    abstract fun loadMonsters(langId: String, size: MonsterSize? = null): LiveData<List<MonsterView>>
+    abstract fun loadMonsters(langId: String, size: MonsterSize? = null): LiveData<List<Monster>>
 
     @Query("""
         SELECT m.*, t.name, t.ecology, t.description
         from monster m JOIN monster_text t USING (id)
         WHERE t.lang_id = :langId AND m.id = :id
         LIMIT 1""")
-    abstract fun loadMonster(langId: String, id: Int): LiveData<MonsterView>
+    abstract fun loadMonster(langId: String, id: Int): LiveData<Monster>
 
     @Query("""
         SELECT h.*, lt.name location_name
@@ -35,7 +35,7 @@ abstract class MonsterDao {
             AND lt.lang_id = :langId
         WHERE h.monster_id = :monsterId
         ORDER BY h.id""")
-    abstract fun loadHabitats(langId: String, monsterId: Int): LiveData<List<MonsterHabitatView>>
+    abstract fun loadHabitats(langId: String, monsterId: Int): LiveData<List<MonsterHabitat>>
 
     @Query("""
         SELECT h.*, pt.name body_part
@@ -45,7 +45,7 @@ abstract class MonsterDao {
                 AND pt.lang_id = :langId
         WHERE h.monster_id = :monsterId
         ORDER BY h.id""")
-    abstract fun loadHitzones(langId: String, monsterId: Int): LiveData<List<MonsterHitzoneView>>
+    abstract fun loadHitzones(langId: String, monsterId: Int): LiveData<List<MonsterHitzone>>
 
     @Query("""
         SELECT b.*, bt.part_name
@@ -54,7 +54,7 @@ abstract class MonsterDao {
         WHERE b.monster_id = :monsterId
             AND bt.lang_id = :langId
         ORDER BY b.id""")
-    abstract fun loadBreaks(langId: String, monsterId: Int): LiveData<List<MonsterBreakView>>
+    abstract fun loadBreaks(langId: String, monsterId: Int): LiveData<List<MonsterBreak>>
 
     @Query("""
         SELECT r.*, ct.name condition_name, it.name item_name
@@ -66,5 +66,5 @@ abstract class MonsterDao {
                 ON it.id = r.item_id
                 AND it.lang_id = :langId
         WHERE r.monster_id = :monsterId ORDER BY r.id""")
-    abstract fun loadRewards(langId: String, monsterId: Int): LiveData<List<MonsterRewardView>>
+    abstract fun loadRewards(langId: String, monsterId: Int): LiveData<List<MonsterReward>>
 }

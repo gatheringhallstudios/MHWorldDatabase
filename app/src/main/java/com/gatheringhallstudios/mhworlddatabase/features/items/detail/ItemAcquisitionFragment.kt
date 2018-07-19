@@ -11,14 +11,14 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDele
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
-import com.gatheringhallstudios.mhworlddatabase.data.views.ItemLocationView
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 
 /**
  * Renders list items for item location information
  */
-private class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocationView, View>() {
-    override fun getDataClass() = ItemLocationView::class
+private class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation, View>() {
+    override fun getDataClass() = ItemLocation::class
 
     override fun onCreateView(parent: ViewGroup): View {
         // todo: refactor listitem_reward into a general view
@@ -26,7 +26,7 @@ private class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocationView,
         return inflater.inflate(R.layout.listitem_reward, parent, false)
     }
 
-    override fun bindView(view: View, data: ItemLocationView) {
+    override fun bindView(view: View, data: ItemLocation) {
         view.reward_name.text = view.resources.getString(R.string.location_area, data.data.area)
         view.reward_stack.text = "x ${data.data.stack}"
         view.reward_percent.text = "${data.data.percentage}%"

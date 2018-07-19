@@ -8,8 +8,8 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.DecorationDao
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao
-import com.gatheringhallstudios.mhworlddatabase.data.views.DecorationView
-import com.gatheringhallstudios.mhworlddatabase.data.views.SkillTreeFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
 
 class DecorationDetailViewModel(application: Application) : AndroidViewModel(application) {
     private val decorationDao: DecorationDao = MHWDatabase.getDatabase(application).decorationDao()
@@ -17,7 +17,7 @@ class DecorationDetailViewModel(application: Application) : AndroidViewModel(app
 
     private var id: Int = -1
     private var skillTreeId: Int = -1
-    lateinit var decorationData: LiveData<DecorationView>
+    lateinit var decorationData: LiveData<Decoration>
     lateinit var skillTreeData : LiveData<SkillTreeFull>
 
     fun setDecoration(decorationId: Int) {
@@ -30,12 +30,12 @@ class DecorationDetailViewModel(application: Application) : AndroidViewModel(app
         skillTreeData = Transformations.switchMap(decorationData, ::setSkill)
     }
 
-    private fun setSkill(decorationFullView: DecorationView): LiveData<SkillTreeFull>? {
-        if (this.skillTreeId == decorationFullView.data.skilltree_id) {
+    private fun setSkill(decorationFull: Decoration): LiveData<SkillTreeFull>? {
+        if (this.skillTreeId == decorationFull.data.skilltree_id) {
             return null
         }
 
-        this.skillTreeId = decorationFullView.data.skilltree_id
+        this.skillTreeId = decorationFull.data.skilltree_id
         return skillDao.loadSkillTree(AppSettings.dataLocale, skillTreeId)
     }
 }

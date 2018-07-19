@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings;
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank;
-import com.gatheringhallstudios.mhworlddatabase.data.views.ArmorSetView;
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class ArmorSetListViewModel extends AndroidViewModel {
         dao = MHWDatabase.getDatabase(application).armorDao();
     }
 
-    public LiveData<List<ArmorSetView>> getArmorSetList(Rank rank) {
+    public LiveData<List<ArmorSet>> getArmorSetList(Rank rank) {
         return dao.loadArmorSets(AppSettings.getDataLocale(), rank);
     }
 }

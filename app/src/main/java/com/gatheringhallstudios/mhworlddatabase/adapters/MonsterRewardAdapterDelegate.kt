@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.data.views.MonsterRewardView
+import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterReward
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 
-class MonsterRewardAdapterDelegate(private val onSelected: (MonsterRewardView) -> Unit) : AdapterDelegate<List<Any>>() {
+class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Unit) : AdapterDelegate<List<Any>>() {
 
     override fun isForViewType(items: List<Any>, position: Int): Boolean {
-        return items[position] is MonsterRewardView
+        return items[position] is MonsterReward
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -27,16 +27,16 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterRewardView) -
                                   position: Int,
                                   holder: RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
-        val reward = items[position] as MonsterRewardView
+        val reward = items[position] as MonsterReward
 
         val vh = holder as RewardViewHolder
         vh.bind(reward)
 
-        holder.view.setOnClickListener { _: View -> onSelected(reward) }
+        holder.view.setOnClickListener { onSelected(reward) }
     }
 
     internal inner class RewardViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(reward: MonsterRewardView) {
+        fun bind(reward: MonsterReward) {
             // TODO Set item image
             view.reward_name.text = reward.item_name
             view.reward_stack.text = "x ${reward.data.stack}"
