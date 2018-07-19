@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -118,11 +117,18 @@ public class MonsterDamageFragment extends Fragment {
         }
     }
 
+    /**
+     * Apply styles to hitzones
+     */
     private void bindHitzone(TextView view, int value, int threshold) {
-        if (value >= threshold) {
-            view.setTypeface(null, Typeface.BOLD);
+        if (value == 0){
+            // do nothing
+        } else if (value > 0 && value < threshold) {
+            view.setTextColor(ContextCompat.getColor(getContext(), R.color.textColorMedium));
+        } else if (value >= threshold) {
             view.setTextColor(ContextCompat.getColor(getContext(), R.color.textColorHigh));
         }
+
         view.setText(Integer.toString(value));
     }
 
