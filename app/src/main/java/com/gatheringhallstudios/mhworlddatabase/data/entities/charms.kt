@@ -42,3 +42,11 @@ data class CharmSkill(
         val skilltree_id: Int,
         val level: Int
 )
+
+@Entity(tableName = "charm_recipe",
+        primaryKeys = ["charm_id", "item_id"])
+data class CharmRecipe(
+        val charm_id: Int,
+        val item_id: Int,
+        val quantity: Int
+)

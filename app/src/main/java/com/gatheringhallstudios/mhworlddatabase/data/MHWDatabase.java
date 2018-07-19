@@ -23,6 +23,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetTextEntity
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmRecipe;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.DecorationEntity;
@@ -72,7 +73,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
 
                 // Charms
-                CharmEntity.class, CharmSkill.class, CharmText.class,
+                CharmEntity.class, CharmSkill.class, CharmText.class, CharmRecipe.class,
 
                 //Decorations
                 DecorationEntity.class, DecorationText.class,

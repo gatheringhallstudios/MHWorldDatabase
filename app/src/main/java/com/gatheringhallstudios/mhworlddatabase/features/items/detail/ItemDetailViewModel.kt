@@ -7,19 +7,10 @@ import android.arch.lifecycle.Transformations
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.ItemCombination
-import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
-import com.gatheringhallstudios.mhworlddatabase.data.models.Item
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.mergeLiveData
 
-data class UsageData(
-        val craftRecipes: List<ItemCombination>
-)
 
-data class AcquisitionData(
-        val craftRecipes: List<ItemCombination>,
-        val locations: List<ItemLocation>
-)
 
 /**
  * A viewmodel that contains information for a single item.
@@ -34,8 +25,8 @@ class ItemDetailViewModel(app: Application) : AndroidViewModel(app) {
 
     lateinit var item: LiveData<Item>
 
-    lateinit var usageData: LiveData<UsageData>
-    lateinit var acquisitionData: LiveData<AcquisitionData>
+    lateinit var usageData: LiveData<ItemUsages>
+    lateinit var acquisitionData: LiveData<ItemSources>
 
     fun loadItem(itemId: Int) {
         if (this.itemId == itemId) {
@@ -46,24 +37,7 @@ class ItemDetailViewModel(app: Application) : AndroidViewModel(app) {
 
         val lang = AppSettings.dataLocale
         item = dao.loadItem(lang, itemId)
-
-        // Load item crafting, and split into "create" and "use"
-        val craftingBase = dao.loadItemCombinationsFor(lang, itemId)
-        val createRecipes = Transformations.map(craftingBase) {
-            it.filter { it.result.id == itemId }
-        }
-        val useRecipes = Transformations.map(craftingBase) {
-            it.filter { it.first.id == itemId || it.second?.id == itemId }
-        }
-
-        // todo: add more (merge instead)
-        usageData = Transformations.map(useRecipes) { UsageData(it) }
-
-        val itemLocations = dao.loadItemLocations(lang, itemId)
-        acquisitionData = mergeLiveData(
-                createRecipes,
-                itemLocations) {
-            AcquisitionData(it.first, it.second)
-        }
+        usageData = dao.loadItemUsagesFor(lang, itemId)
+        acquisitionData = dao.loadItemSourcesFor(lang, itemId)
     }
 }

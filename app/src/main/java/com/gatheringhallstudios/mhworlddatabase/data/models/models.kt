@@ -87,17 +87,7 @@ data class MonsterReward(
         var item_name: String?
 )
 
-data class Charm(
-        val id: Int,
-        val name: String?,
-        val rarity: Int
-)
 
-data class CharmSkill(
-        @Embedded val data: CharmEntity,
-        val name: String?,
-        val skillLevel: Int
-)
 
 data class Decoration(
         @Embedded val data: DecorationEntity,

@@ -45,3 +45,17 @@ class ItemLocation(
         @Embedded val data: LocationItemEntity,
         val location_name: String
 )
+
+/**
+ * Represents all potential usages for an item
+ */
+class ItemUsages(
+        val craftRecipes: List<ItemCombination>,
+        val charms: List<Charm>,
+        val armor: List<ArmorBase>
+)
+
+class ItemSources(
+        val craftRecipes: List<ItemCombination>,
+        val locations: List<ItemLocation>
+)

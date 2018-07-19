@@ -8,6 +8,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsages
 
 class ItemUsageFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
@@ -24,16 +25,17 @@ class ItemUsageFragment : RecyclerViewFragment() {
         viewModel.usageData.observe(this, Observer(::populateData))
     }
 
-    private fun populateData(data: UsageData?) {
+    private fun populateData(data: ItemUsages?) {
         adapter.clear()
         if (data == null) {
             adapter.notifyDataSetChanged()
             return
         }
 
-        if (data.craftRecipes.isNotEmpty()) {
-            adapter.addSection(getString(R.string.item_header_crafting), data.craftRecipes)
-        }
+        // todo: add once the adapter can handle them
+        adapter.addAll(data.craftRecipes)
+        //adapter.addAll(data.charms)
+        //adapter.addAll(data.armor)
 
         adapter.notifyDataSetChanged()
     }

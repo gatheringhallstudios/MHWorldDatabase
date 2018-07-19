@@ -12,6 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemSources
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 
 /**
@@ -46,7 +47,7 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
         viewModel.acquisitionData.observe(this, Observer(::populateData))
     }
 
-    private fun populateData(data: AcquisitionData?) {
+    private fun populateData(data: ItemSources?) {
         adapter.clear()
         if (data == null) {
             adapter.notifyDataSetChanged()
