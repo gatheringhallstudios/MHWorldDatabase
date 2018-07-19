@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
+import java.util.*
 
 /**
  * Fragment for displaying Monster Summary
@@ -46,11 +47,11 @@ class MonsterSummaryFragment : Fragment() {
         val statusWeakness = monster.data.status_weaknesses
 
         val icon = context?.getAssetDrawable("monsters/${monster.id}.png")
-        item_icon.setImageDrawable(icon)
 
-        monster_ecology.text = monster.ecology
-        item_name.text = monster.name
-        monster_description.text = monster.description
+        monster_header.setIconDrawable(icon)
+        monster_header.setTitleText(monster.name)
+        monster_header.setSubtitleText(monster.ecology)
+        monster_header.setDescriptionText(monster.description)
 
         // todo: remove weakness section if both are null
         // note: newer data versions have an 'has_weakness' field. Use that.
@@ -90,7 +91,17 @@ class MonsterSummaryFragment : Fragment() {
 
             val areas = StringBuilder()
             habitat.data.start_area?.let { areas.append("$it \u203A ")}
-            habitat.data.move_area?.let { areas.append("$it \u203A ") }
+            habitat.data.move_area?.let {
+                val tokenizer = StringTokenizer(it, ",")
+                for (token in tokenizer) {
+                    areas.append("$token, ")
+                }
+
+                // Remove the last ', '
+                areas.delete(areas.length-2, areas.length)
+
+                areas.append(" \u203A ")
+            }
             habitat.data.rest_area?.let { areas.append(it) }
 
             val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)

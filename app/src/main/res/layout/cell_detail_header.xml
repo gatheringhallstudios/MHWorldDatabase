@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="android.support.constraint.ConstraintLayout">
+    <!-- This layout uses the merge tag so its actual layout is dependent on
+    the class that inflates it. Use parentTag is used to preview the layout in the editor -->
+
+    <TextView
+        android:id="@+id/header_title"
+        style="@style/TextHeadlineHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Azure Rathalos" />
+
+    <TextView
+        android:id="@+id/header_subtitle"
+        style="@style/TextSubHeadMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_title"
+        tools:visibility="visible"
+        tools:text="Flying Wyvern" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/detail_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="header_title,header_subtitle" />
+
+    <ImageView
+        android:id="@+id/header_icon"
+        style="@style/IconXLarge.Decorated"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:src="@drawable/ic_question_mark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_barrier" />
+
+    <TextView
+        android:id="@+id/header_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:textAppearance="@style/TextBodyHigh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/header_icon"
+        app:layout_constraintTop_toTopOf="@id/header_icon"
+        tools:text="An azure-colored subspecies of Rathalos. More mobile than their standard cousins, they locate prey from the air and quickly swoop in for the kill." />
+
+</merge>

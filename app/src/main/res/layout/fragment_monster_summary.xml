@@ -11,84 +11,28 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/padding_bottom">
 
-        <TextView
-            android:id="@+id/item_name"
-            style="@style/TextHeadlineHigh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Azure Rathalos" />
-
-        <TextView
-            android:id="@+id/monster_ecology"
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Placeholder for some other stats"
-            app:layout_constraintBottom_toTopOf="@+id/monster_label"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_name"
-            tools:text="Brute wyern" />
-
-        <LinearLayout
-            android:id="@+id/monster_label"
+        <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+            android:id="@+id/monster_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/weakness_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/monster_ecology">
-
-            <ImageView
-                android:id="@+id/item_icon"
-                style="@style/IconXLarge.Decorated"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="0dp"
-                android:src="@drawable/ic_question_mark"
-                app:layout_constraintTop_toBottomOf="@+id/monster_ecology" />
-
-            <TextView
-                android:id="@+id/monster_description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:textAppearance="@style/TextBodyLow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/item_icon"
-                app:layout_constraintTop_toBottomOf="@+id/monster_ecology"
-                tools:text="An azure-colored subspecies of Rathalos. More mobile than their standard cousins, they locate prey from the air and quickly swoop in for the kill." />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            tools:iconSrc="@drawable/ic_question_mark"
+            tools:titleText="Azure Rathalos"
+            tools:descriptionText="An azure-colored subspecies of Rathalos. More mobile than their standard cousins, they locate prey from the air and quickly swoop in for the kill."
+            />
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/weakness_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_large"
+            android:paddingBottom="@dimen/padding_medium"
             app:labelText="@string/header_weakness"
-            app:layout_constraintTop_toBottomOf="@+id/monster_label" />
+            app:layout_constraintTop_toBottomOf="@+id/monster_header" />
 
         <LinearLayout
             android:id="@+id/element_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -141,7 +85,6 @@
             android:id="@+id/status_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
             app:layout_constraintLeft_toRightOf="@id/element_layout"
             app:layout_constraintRight_toRightOf="parent"
@@ -186,7 +129,6 @@
                 app:iconSrc="@drawable/ic_status_stun"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
-
         </LinearLayout>
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
@@ -194,6 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
+            android:paddingBottom="@dimen/padding_medium"
             app:labelText="@string/header_habitat"
             app:layout_constraintTop_toBottomOf="@id/element_layout" />
 

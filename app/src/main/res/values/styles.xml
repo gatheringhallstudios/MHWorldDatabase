@@ -23,8 +23,8 @@
 
     <!-- Image Styles -->
     <style name="IconSmall">
-        <item name="android:layout_width">@dimen/image_size_small</item>
-        <item name="android:layout_height">@dimen/image_size_small</item>
+        <item name="android:layout_width">@dimen/image_size_xsmall</item>
+        <item name="android:layout_height">@dimen/image_size_xsmall</item>
     </style>
 
     <style name="IconMedium">
