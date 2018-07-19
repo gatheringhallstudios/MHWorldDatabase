@@ -3,11 +3,8 @@ package com.gatheringhallstudios.mhworlddatabase.assets
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorBase
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
-import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
-import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 
 /**
  * A class used to load assets for the data objects.
@@ -17,8 +14,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 class AssetLoader(context: Context) {
     val ctx: Context = context.applicationContext
 
-    fun loadItemIcon(item: Item): Drawable? {
-        return ctx.getVectorDrawable(item.data.icon_name ?: "", item.data.icon_color)
+    fun loadItemIcon(item: ItemBase): Drawable? {
+        return ctx.getVectorDrawable(item.icon_name ?: "", item.icon_color)
     }
 
     fun loadSkillIcon(color: String?): Drawable? {

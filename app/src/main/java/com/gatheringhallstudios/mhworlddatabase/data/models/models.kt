@@ -14,34 +14,6 @@ The current system has several problems:
 It will also need a split like how entities are split.
  */
 
-data class Item(
-        @Embedded val data: ItemEntity,
-        val name: String?,
-        val description: String?
-) {
-    val id get() = data.id
-}
-
-data class ItemBasic(
-        val id: Int,
-        val name: String,
-        val icon_name: String?,
-        val icon_color: String?
-)
-
-data class ItemCombination(
-        val id: Int,
-        @Embedded(prefix = "result_") val result: ItemBasic,
-        @Embedded(prefix = "first_") val first: ItemBasic,
-        @Embedded(prefix = "second_") val second: ItemBasic?,
-        val quantity: Int
-)
-
-data class ItemLocation(
-        @Embedded val data: LocationItemEntity,
-        val location_name: String
-)
-
 data class Location(
         val id: Int,
         val name: String?
