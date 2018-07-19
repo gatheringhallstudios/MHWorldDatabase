@@ -1,18 +1,14 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.VectorDrawable
 import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.util.LruCache
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
 import com.sdsmdg.harjot.vectormaster.models.PathModel
 import java.io.FileNotFoundException
@@ -21,15 +17,6 @@ import java.io.FileNotFoundException
 val TAG = "MHWorldAssetUtil"
 val PATH_NAME = "base"
 
-
-/**
- * Extension: Retrieves a drawable associated with a resource id
- * via ContextCompat using the called context.
- */
-@Suppress("NOTHING_TO_INLINE")
-inline fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
-    return ContextCompat.getDrawable(this, id)
-}
 
 /**
  * Extension: Receives an asset loader for a fragment

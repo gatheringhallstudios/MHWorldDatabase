@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.applyArguments
+import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDecorator
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
