@@ -105,16 +105,24 @@
         <item name="android:textColor">@color/textColorLow</item>
     </style>
 
-    <style name="TextSubHeadHigh" parent="TextAppearance.AppCompat.Subhead">
+    <style name="TextSubHead" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">@color/textColorHigh</item>
     </style>
 
-    <style name="TextSubHeadMedium" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textColor">@color/textColorMedium</item>
+    <style name="TextSubHead.Teal" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorTeal</item>
     </style>
 
-    <style name="TextSubHeadLow" parent="TextAppearance.AppCompat.Subhead">
-        <item name="android:textColor">@color/textColorLow</item>
+    <style name="TextSubHead.Orange" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorOrangeYellow</item>
+    </style>
+
+    <style name="TextSubHead.Yellow" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorYellowOrange</item>
+    </style>
+
+    <style name="TextSubHead.YellowLight" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/textColorYellowPastel</item>
     </style>
 
     <!-- TODO Move this to a cell type -->

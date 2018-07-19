@@ -16,6 +16,11 @@
     <color name="textColorHigh">#ffffff</color> <!-- High Emphasis -->
     <color name="textColorMedium">#99ffffff</color> <!-- Medium Emphasis -->
     <color name="textColorLow">#59ffffff</color>
+    <color name="textColorTeal">#5EA8AE</color>
+    <color name="textColorYellowOrange">#E09E3C</color>
+    <color name="textColorOrangeYellow">#D97719</color>
+    <color name="textColorYellowPastel">#F8F8C5</color>
+    <color name="textColorSelected">@color/colorAccent</color>
 
     <!-- Background Colors -->
     <color name="backgroundColor">#212121</color>
