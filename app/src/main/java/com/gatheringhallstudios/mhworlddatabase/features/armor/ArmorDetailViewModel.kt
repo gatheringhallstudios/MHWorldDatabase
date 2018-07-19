@@ -10,14 +10,13 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorComponent
 
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkill
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
 
 class ArmorDetailViewModel(application: Application) : AndroidViewModel(application) {
     private var armorId: Int = -1
-    private var armorSetBonusId: Int = -1
     private val dao = MHWDatabase.getDatabase(application).armorDao()
 
-    lateinit var armor: LiveData<ArmorView>
+    lateinit var armor: LiveData<Armor>
     lateinit var armorSetSkill: LiveData<List<ArmorSetBonus>>
     lateinit var armorComponents: LiveData<List<ArmorComponent>>
     lateinit var armorSkill: LiveData<List<ArmorSkill>>
@@ -31,10 +30,9 @@ class ArmorDetailViewModel(application: Application) : AndroidViewModel(applicat
         armorSkill = dao.loadArmorSkills(AppSettings.dataLocale, armorId)
     }
 
-    fun loadArmorSetBonus(armorView: ArmorView): LiveData<List<ArmorSetBonus>>? {
-        if (armorView.data.armorset_bonus_id == null) return null
-
-        this.armorSetBonusId = armorView.data.armorset_bonus_id
-        return dao.loadArmorSetBonus(AppSettings.dataLocale, armorSetBonusId)
+    fun loadArmorSetBonus(armorView: Armor): LiveData<List<ArmorSetBonus>>? {
+        return armorView.armorset_bonus_id?.let {
+            return dao.loadArmorSetBonus(AppSettings.dataLocale, it)
+        }
     }
 }

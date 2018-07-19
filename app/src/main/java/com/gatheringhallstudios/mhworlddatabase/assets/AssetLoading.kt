@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.assets
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
-import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorBase
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
@@ -41,7 +41,7 @@ class AssetLoader(context: Context) {
         return ctx.getVectorDrawable("ArmorSet", "rare${armorSet.rarity}")
     }
 
-    fun loadArmorIcon(entity: ArmorEntity): Drawable? {
+    fun loadArmorIcon(entity: ArmorBase): Drawable? {
         return loadArmorIcon(entity.armor_type, entity.rarity)
     }
 

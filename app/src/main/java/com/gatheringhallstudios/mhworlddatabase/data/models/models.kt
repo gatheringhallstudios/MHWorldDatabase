@@ -42,57 +42,6 @@ data class ItemLocation(
         val location_name: String
 )
 
-data class ArmorView(
-        @Embedded val data: ArmorEntity,
-        val name: String?,
-        val armorset_name: String?
-) {
-    val id get() = data.id
-    val armorset_id get() = data.armorset_id
-    val armor_type get() = data.armor_type
-    val rarity get() = data.rarity
-    val rank get() = data.rank
-    val slots get() = data.slots
-}
-
-data class ArmorSkill(
-        @Embedded val data: ArmorEntity,
-        val skilltree_id: Int,
-        val name: String?,
-        val skillLevel: Int,
-        val icon_color: String?
-)
-
-/**
- * Representation of a single armor set
- */
-data class ArmorSet(
-        val armorset_id: Int,
-        val armorset_name: String?,
-        val armor: List<ArmorView>
-) {
-    val rarity get() = armor.first().rarity
-}
-
-/**
- * Basic representation of a single armor set bonus
- */
-data class ArmorSetBonus(
-        val setbonus_id: Int,
-        val name: String?,
-        val required: Int,
-        val skilltree_id: Int,
-        val skillName: String?,
-        val description: String?,
-        val icon_color: String?
-)
-
-data class ArmorComponent(
-        val armor_id: Int,
-        @Embedded val result: Item,
-        val quantity: Int
-)
-
 data class Location(
         val id: Int,
         val name: String?

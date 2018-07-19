@@ -69,12 +69,12 @@ class SkillDetailFragment : Fragment() {
             val view = IconLabelTextCell(context)
             val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel)}"
 
-            val icon = AssetLoader(context!!).loadArmorIcon(armorSkillView.data)
+            val icon = AssetLoader(context!!).loadArmorIcon(armorSkillView.armor)
             view.setLeftIconDrawable(icon)
 
-            view.setLabelText(armorSkillView.name)
+            view.setLabelText(armorSkillView.armor.name)
             view.setValueText(levels)
-            view.setOnClickListener { v -> getRouter().navigateArmorDetail(armorSkillView.data.id) }
+            view.setOnClickListener { getRouter().navigateArmorDetail(armorSkillView.armor.id) }
 
             armor_layout.addView(view)
         }

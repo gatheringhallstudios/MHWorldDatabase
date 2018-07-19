@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorView
+import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -59,7 +59,7 @@ class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
  * Body item for collapsible armor sets.
  * Each one represents a single armor in an armor set.
  */
-class ArmorSetDetailItem(val armor: ArmorView) : Item() {
+class ArmorSetDetailItem(val armor: Armor) : Item() {
     override fun getLayout() = R.layout.listitem_armorset_armor
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -69,9 +69,9 @@ class ArmorSetDetailItem(val armor: ArmorView) : Item() {
         viewHolder.rarity_string.text = view.resources.getString(R.string.rarity_string, armor.rarity)
         viewHolder.defense_value.text = view.resources.getString(
                 R.string.armor_defense_value,
-                armor.data.defense_base,
-                armor.data.defense_max,
-                armor.data.defense_augment_max)
+                armor.defense_base,
+                armor.defense_max,
+                armor.defense_augment_max)
 
         // load all images that represent the slots into an array first
         val slotImages = armor.slots.map {
