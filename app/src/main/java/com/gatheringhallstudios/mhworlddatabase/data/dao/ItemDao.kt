@@ -40,7 +40,27 @@ abstract class ItemDao {
         WHERE li.item_id = :itemId
           AND lt.lang_id = :langId
         """)
-    abstract fun loadItemLocationsSync(langId: String, itemId : Int) : List<ItemLocation>
+    abstract fun loadItemLocationsSync(langId: String, itemId : Int): List<ItemLocation>
+
+    /**
+     * Synchronously load all ways to get items from monsters
+     */
+    @Query("""
+        SELECT r.monster_id, mtext.name monster_name, m.size monster_size,
+            rtext.name condition_name, r.rank, r.stack, r.percentage
+        FROM monster_reward r
+            JOIN monster_reward_condition_text rtext
+                ON rtext.id = r.condition_id
+            JOIN monster m
+                ON m.id = r.monster_id
+            JOIN monster_text mtext
+                ON mtext.id = m.id
+                AND mtext.lang_id = rtext.lang_id
+        WHERE r.item_id = :itemId
+          AND rtext.lang_id = :langId
+        ORDER BY m.id ASC, r.percentage DESC
+    """)
+    abstract fun loadItemRewardsSync(langId: String, itemId: Int): List<ItemReward>
 
     /**
      * Loads all possible gathering locations for an item asynchronously
@@ -132,7 +152,8 @@ abstract class ItemDao {
 
         return@createLiveData ItemSources(
                 craftRecipes = itemCombos.filter { it.result.id == itemId },
-                locations = loadItemLocationsSync(langId, itemId)
+                locations = loadItemLocationsSync(langId, itemId),
+                rewards = loadItemRewardsSync(langId, itemId)
         )
     }
 }

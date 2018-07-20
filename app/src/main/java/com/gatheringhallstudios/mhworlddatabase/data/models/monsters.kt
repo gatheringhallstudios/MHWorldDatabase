@@ -54,7 +54,7 @@ data class MonsterBreak(
  * for hunting a monster.
  */
 data class MonsterReward(
-        val rank: Rank?,
+        val rank: Rank,
         var condition_name: String?,
         val stack: Int,
         val percentage: Int,

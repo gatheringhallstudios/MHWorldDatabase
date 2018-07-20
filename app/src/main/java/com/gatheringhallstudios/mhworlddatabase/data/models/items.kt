@@ -4,6 +4,7 @@ import android.arch.persistence.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationItemEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemSubcategory
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
 /**
  * The base model for an item containing the basic identifying information
@@ -46,6 +47,14 @@ class ItemLocation(
         val location_name: String
 )
 
+class ItemReward(
+        @Embedded(prefix="monster_") val monster: MonsterBase,
+        val rank: Rank,
+        val condition_name: String?,
+        val stack: Int,
+        val percentage: Int
+)
+
 /**
  * Represents all potential usages for an item
  */
@@ -57,5 +66,6 @@ class ItemUsages(
 
 class ItemSources(
         val craftRecipes: List<ItemCombination>,
-        val locations: List<ItemLocation>
+        val locations: List<ItemLocation>,
+        val rewards: List<ItemReward>
 )

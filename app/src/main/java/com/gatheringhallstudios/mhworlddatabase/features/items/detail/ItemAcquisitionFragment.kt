@@ -16,30 +16,17 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ItemSources
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 
 /**
- * Renders list items for item location information
+ * A sub-fragment that displays the means of acquiring an item
  */
-private class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation, View>() {
-    override fun getDataClass() = ItemLocation::class
-
-    override fun onCreateView(parent: ViewGroup): View {
-        // todo: refactor listitem_reward into a general view
-        val inflater = LayoutInflater.from(parent.context)
-        return inflater.inflate(R.layout.listitem_reward, parent, false)
-    }
-
-    override fun bindView(view: View, data: ItemLocation) {
-        view.reward_name.text = view.resources.getString(R.string.location_area, data.data.area)
-        view.reward_stack.text = "x ${data.data.stack}"
-        view.reward_percent.text = "${data.data.percentage}%"
-    }
-}
-
 class ItemAcquisitionFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(ItemDetailViewModel::class.java)
     }
 
-    val adapter = CategoryAdapter(ItemLocationAdapterDelegate(), ItemCraftingAdapterDelegate())
+    val adapter = CategoryAdapter(
+            ItemCraftingAdapterDelegate(),
+            ItemLocationAdapterDelegate(),
+            MonsterRewardSourceAdapterDelegate())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
@@ -64,6 +51,10 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
             }
 
             adapter.addSection(getString(R.string.item_header_gathering), groups)
+        }
+
+        if (data.rewards.isNotEmpty()) {
+            adapter.addSection(getString(R.string.item_header_rewards), data.rewards)
         }
 
         adapter.notifyDataSetChanged()

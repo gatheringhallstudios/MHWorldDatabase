@@ -7,12 +7,16 @@
 
     <string name="action_search">Settings</string>
 
+    <string name="low_rank_short">LR</string>
+    <string name="high_rank_short">HR</string>
     <string name="low_rank">Low</string>
     <string name="high_rank">High</string>
     <string name="low_rank_full">Low Rank</string>
     <string name="high_rank_full">High Rank</string>
     <string name="rarity_string">Rarity %1$d</string>
     <string name="none">None</string>
+    <string name="quantity">x %1$d</string>
+    <string name="percentage">%1$d%%</string>
 
     <!-- Monsters -->
     <string name="monsters_list_title">Monsters</string>
@@ -53,10 +57,11 @@
 
     <string name="item_header_crafting">Crafting</string>
     <string name="item_header_gathering">Gathering</string>
-    <string name="item_header_monsters">Monsters</string>
+    <string name="item_header_rewards">Rewards</string>
 
     <string name="item_crafting_title">Item Crafting</string>
     <string name="item_crafting_yield">\x %1$d</string>
+    <string name="item_source_reward_condition">%1$s %2$s</string>
 
     <!-- Weapons -->
     <string name="weapons_title">Weapons</string>
