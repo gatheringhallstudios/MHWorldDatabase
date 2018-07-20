@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemCombination
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.listitem_item_crafting.view.*
@@ -21,16 +22,16 @@ class ItemCraftingAdapterDelegate : SimpleListDelegate<ItemCombination, View>() 
     }
 
     override fun bindView(view: View, data: ItemCombination) {
-        view.result_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_question_mark))
+        view.result_icon.setImageDrawable(view.assetLoader.loadIconFor(data.result))
         view.result_name.text = data.result.name
 
-        view.item1_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_question_mark))
+        view.item1_icon.setImageDrawable(view.assetLoader.loadIconFor(data.first))
         view.item1_name.text = data.first.name
 
         view.item2_view.visibility = View.GONE
         if (data.second != null) {
             view.item2_view.visibility = View.VISIBLE
-            view.item2_icon.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_question_mark))
+            view.item2_icon.setImageDrawable(view.assetLoader.loadIconFor(data.second))
             view.item2_name.text = data.second.name
         }
 
