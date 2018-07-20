@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -138,11 +137,8 @@ class SkillDetailFragment : Fragment() {
         for (decorationView in decorations!!) {
             val view = IconLabelTextCell(context)
 
-<<<<<<< HEAD
             val icon = assetLoader.loadIconFor(decorationView) // TODO Replace with decoration icon when available
-=======
-            val icon = assetLoader.loadDecorationIcon(decorationView)
->>>>>>> Fix comments from PR.
+
             //Decorations are only ever +1 point
             val levels = "+1 ${resources.getQuantityString(R.plurals.skills_level, 1)}"
 
