@@ -13,12 +13,12 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 @Dao
 abstract class MonsterDao {
     @Query("""
-        SELECT m.*, t.name, t.ecology, t.description
+        SELECT m.id, m.size, t.name
         from monster m JOIN monster_text t USING (id)
         WHERE t.lang_id = :langId
           AND (m.size = :size OR :size IS NULL)
         ORDER BY t.name ASC""")
-    abstract fun loadMonsters(langId: String, size: MonsterSize? = null): LiveData<List<Monster>>
+    abstract fun loadMonsters(langId: String, size: MonsterSize? = null): LiveData<List<MonsterBase>>
 
     @Query("""
         SELECT m.*, t.name, t.ecology, t.description

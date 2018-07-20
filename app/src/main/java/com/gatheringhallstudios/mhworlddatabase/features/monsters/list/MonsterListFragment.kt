@@ -32,9 +32,9 @@ class MonsterListFragment : RecyclerViewFragment() {
     }
 
     // Setup adapter and navigation
-    private val adapter = BasicListDelegationAdapter(MonsterAdapterDelegate({
+    private val adapter = BasicListDelegationAdapter(MonsterAdapterDelegate {
         getRouter().navigateMonsterDetail(it.id)
-    }))
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
@@ -47,9 +47,9 @@ class MonsterListFragment : RecyclerViewFragment() {
 
         viewModel.setTab(tab)
 
-        viewModel.monsters.observe(this, Observer<List<Monster>>({
+        viewModel.monsters.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
-        }))
+        })
     }
 }

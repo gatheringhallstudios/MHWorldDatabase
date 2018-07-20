@@ -43,8 +43,8 @@ class MonsterSummaryFragment : Fragment() {
     private fun populateMonster(monster: Monster?) {
         if (monster == null) return
 
-        val elemWeakness = monster.data.weaknesses
-        val statusWeakness = monster.data.status_weaknesses
+        val elemWeakness = monster.weaknesses
+        val statusWeakness = monster.status_weaknesses
 
         val icon = context?.getAssetDrawable("monsters/${monster.id}.png")
 

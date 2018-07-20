@@ -22,7 +22,7 @@ class AssetLoader(context: Context) {
         return ctx.getAssetDrawable("locations/${location.id}.jpg")
     }
 
-    fun loadIconFor(monster: Monster): Drawable? {
+    fun loadIconFor(monster: MonsterBase): Drawable? {
         return ctx.getAssetDrawable("monsters/${monster.id}.png")
     }
 
