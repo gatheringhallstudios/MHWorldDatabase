@@ -43,9 +43,10 @@ class MonsterRewardFragment : RecyclerViewFragment() {
     private var rank : Rank? = null
 
     private val adapter = CategoryAdapter(
-            MonsterRewardAdapterDelegate({
-                getRouter().navigateItemDetail(it.data.item_id)
-            }))
+            MonsterRewardAdapterDelegate {
+                getRouter().navigateItemDetail(it.item.id)
+            }
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Setup Adapter to display rewards and headers
@@ -65,7 +66,7 @@ class MonsterRewardFragment : RecyclerViewFragment() {
         if (rewards == null) return
 
         val grouped = rewards.asSequence()
-                .filter { it.data.rank == rank || rank == null }
+                .filter { it.rank == rank || rank == null }
                 .groupBy { it.condition_name }
 
         for ((condition, value) in grouped) {

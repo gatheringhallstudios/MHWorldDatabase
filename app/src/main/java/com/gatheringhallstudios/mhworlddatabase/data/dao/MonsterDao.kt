@@ -57,13 +57,16 @@ abstract class MonsterDao {
     abstract fun loadBreaks(langId: String, monsterId: Int): LiveData<List<MonsterBreak>>
 
     @Query("""
-        SELECT r.*, ct.name condition_name, it.name item_name
+        SELECT r.rank, ct.name condition_name, r.stack, r.percentage,
+            i.id item_id, it.name item_name, i.icon_name item_icon_name, i.icon_color item_icon_color
         FROM monster_reward r
             JOIN monster_reward_condition_text ct
                 ON ct.id = r.condition_id
                 AND ct.lang_id = :langId
+            JOIN item i
+                ON i.id = r.item_id
             JOIN item_text it
-                ON it.id = r.item_id
+                ON it.id = i.id
                 AND it.lang_id = :langId
         WHERE r.monster_id = :monsterId ORDER BY r.id""")
     abstract fun loadRewards(langId: String, monsterId: Int): LiveData<List<MonsterReward>>

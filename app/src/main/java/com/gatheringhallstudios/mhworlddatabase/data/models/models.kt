@@ -54,40 +54,6 @@ data class Skill(
         val description: String?
 )
 
-data class Monster(
-        @Embedded val data: MonsterEntity,
-        val name: String?,
-        val ecology: String?,
-        val description: String?
-) {
-    val id get() = data.id
-}
-
-data class MonsterHabitat(
-        @Embedded val data: MonsterHabitatEntity,
-        val location_name: String?
-)
-
-/**
- * Represents information for a single reward
- */
-data class MonsterHitzone(
-        @Embedded val data: MonsterHitzoneEntity,
-        val body_part: String?
-)
-
-data class MonsterBreak(
-        @Embedded val data: MonsterBreakEntity,
-        val part_name: String?
-)
-
-data class MonsterReward(
-        @Embedded val data: MonsterRewardEntity,
-        var condition_name: String?,
-        var item_name: String?
-)
-
-
 
 data class Decoration(
         @Embedded val data: DecorationEntity,

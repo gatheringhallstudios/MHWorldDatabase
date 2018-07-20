@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterReward
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_reward.view.*
@@ -37,10 +38,11 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Un
 
     internal inner class RewardViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(reward: MonsterReward) {
-            // TODO Set item image
-            view.reward_name.text = reward.item_name
-            view.reward_stack.text = "x ${reward.data.stack}"
-            view.reward_percent.text = "${reward.data.percentage}%"
+            val icon = view.assetLoader.loadIconFor(reward.item)
+            view.reward_icon.setImageDrawable(icon)
+            view.reward_name.text = reward.item.name
+            view.reward_stack.text = "x ${reward.stack}"
+            view.reward_percent.text = "${reward.percentage}%"
         }
     }
 }
