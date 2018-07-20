@@ -14,30 +14,30 @@ private fun <T, K> createRegistry(vararg pairs: Pair<T, K>): (T) -> K? {
  * This may or may not become automated
  */
 val VectorRegistry = createRegistry(
-        "Skill" to R.drawable.ic_ui_armor_skill_base,
+        "Skill" to R.xml.ic_ui_armor_skill_base,
 
-        "ArmorSet" to R.drawable.ic_equipment_armor_set,
-        "ArmorHead" to R.drawable.ic_equipment_head_base,
-        "ArmorChest" to R.drawable.ic_equipment_chest_base,
-        "ArmorArms" to R.drawable.ic_equipment_arm_base,
-        "ArmorWaist" to R.drawable.ic_equipment_waist_base,
-        "ArmorLegs" to R.drawable.ic_equipment_leg_base,
+        "ArmorSet" to R.xml.ic_equipment_armor_set_base,
+        "ArmorHead" to R.xml.ic_equipment_head_base,
+        "ArmorChest" to R.xml.ic_equipment_chest_base,
+        "ArmorArms" to R.xml.ic_equipment_arm_base,
+        "ArmorWaist" to R.xml.ic_equipment_waist_base,
+        "ArmorLegs" to R.xml.ic_equipment_leg_base,
 
-        "Decoration1" to R.drawable.ic_ui_decoration_1_base,
-        "Decoration2" to R.drawable.ic_ui_decoration_2_base,
-        "Decoration3" to R.drawable.ic_ui_decoration_3_base,
+        "Decoration1" to R.xml.ic_ui_decoration_1_base,
+        "Decoration2" to R.xml.ic_ui_decoration_2_base,
+        "Decoration3" to R.xml.ic_ui_decoration_3_base,
 
-        "Ammo" to R.drawable.ic_items_ammo_base,
-        "Carapace" to R.drawable.ic_items_carapace_base,
-        "Meat" to R.drawable.ic_items_meat_base,
-        "Jaw" to R.drawable.ic_items_monster_jaw_base,
-        "Pellets" to R.drawable.ic_items_pellets_base,
-        "Slinger" to R.drawable.ic_items_slinger_base,
-        "Scale" to R.drawable.ic_items_scale_base,
-        "Claw" to R.drawable.ic_items_claw_base,
-        "Body" to R.drawable.ic_items_body_base,
-        "Hide" to R.drawable.ic_items_hide_base,
-        "Sac" to R.drawable.ic_icons_sac_base
+        "Ammo" to R.xml.ic_items_ammo_base,
+        "Carapace" to R.xml.ic_items_carapace_base,
+        "Meat" to R.xml.ic_items_meat_base,
+        "Jaw" to R.xml.ic_items_monster_jaw_base,
+        "Pellets" to R.xml.ic_items_pellets_base,
+        "Slinger" to R.xml.ic_items_slinger_base,
+        "Scale" to R.xml.ic_items_scale_base,
+        "Claw" to R.xml.ic_items_claw_base,
+        "Body" to R.xml.ic_items_body_base,
+        "Hide" to R.xml.ic_items_hide_base,
+        "Sac" to R.xml.ic_icons_sac_base
 
 )
 
