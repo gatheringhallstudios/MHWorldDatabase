@@ -59,17 +59,16 @@ class SkillDetailFragment : Fragment() {
         if (armor_layout.childCount > 0)
             armor_layout.removeAllViews()
 
-        if(armorSkills.orEmpty().isEmpty()) {
+        if (armorSkills.orEmpty().isEmpty()) {
             insertEmptyState(armor_layout)
             return
         }
-
 
         for (armorSkillView in armorSkills!!) {
             val view = IconLabelTextCell(context)
             val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel)}"
 
-            val icon = AssetLoader(context!!).loadArmorIcon(armorSkillView.armor)
+            val icon = assetLoader.loadIconFor(armorSkillView.armor)
             view.setLeftIconDrawable(icon)
 
             view.setLabelText(armorSkillView.armor.name)
@@ -84,7 +83,7 @@ class SkillDetailFragment : Fragment() {
         if (skill_level_descriptions.childCount > 0)
             skill_level_descriptions.removeAllViews()
 
-        if(skills.isEmpty()) {
+        if (skills.isEmpty()) {
             insertEmptyState(skill_level_descriptions)
             return
         }
@@ -105,7 +104,7 @@ class SkillDetailFragment : Fragment() {
         if (charm_layout.childCount > 0)
             charm_layout.removeAllViews()
 
-        if(charmSkills.orEmpty().isEmpty()) {
+        if (charmSkills.orEmpty().isEmpty()) {
             insertEmptyState(charm_layout)
             return
         }
@@ -139,7 +138,7 @@ class SkillDetailFragment : Fragment() {
         for (decorationView in decorations!!) {
             val view = IconLabelTextCell(context)
 
-            val icon = assetLoader.loadDecorationIcon(decorationView) // TODO Replace with decoration icon when available
+            val icon = assetLoader.loadIconFor(decorationView) // TODO Replace with decoration icon when available
             //Decorations are only ever +1 point
             val levels = "+1 ${resources.getQuantityString(R.plurals.skills_level, 1)}"
 

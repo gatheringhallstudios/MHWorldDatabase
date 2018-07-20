@@ -6,6 +6,7 @@ import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import kotlinx.android.synthetic.main.listitem_large.view.*
@@ -21,10 +22,7 @@ class LocationAdapterDelegate(private val onSelected: (Location) -> Unit)
     }
 
     override fun bindView(view: View, data: Location) {
-        val ctx = view.context
-        val path = "locations/${data.id}.jpg"
-
-        val icon = ctx.getAssetDrawable(path)
+        val icon = view.assetLoader.loadIconFor(data)
         view.item_icon.setImageDrawable(icon)
         view.item_name.text = data.name
         view.setOnClickListener { onSelected(data) }

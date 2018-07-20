@@ -14,8 +14,29 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 class AssetLoader(context: Context) {
     val ctx: Context = context.applicationContext
 
-    fun loadItemIcon(item: ItemBase): Drawable? {
+    fun loadIconFor(item: ItemBase): Drawable? {
         return ctx.getVectorDrawable(item.icon_name ?: "", item.icon_color)
+    }
+
+    fun loadIconFor(location: Location): Drawable? {
+        return ctx.getAssetDrawable("locations/${location.id}.jpg")
+    }
+
+    fun loadIconFor(monster: Monster): Drawable? {
+        return ctx.getAssetDrawable("monsters/${monster.id}.png")
+    }
+
+    fun loadIconFor(armorSet: ArmorSet): Drawable? {
+        return ctx.getVectorDrawable("ArmorSet", "rare${armorSet.rarity}")
+    }
+    
+    fun loadIconFor(entity: ArmorBase): Drawable? {
+        return loadArmorIcon(entity.armor_type, entity.rarity)
+    }
+
+    fun loadIconFor(decoration: Decoration): Drawable? {
+        val assetName = "Decoration${decoration.data.slot}"
+        return ctx.getVectorDrawable(assetName, decoration.data.icon_color)
     }
 
     fun loadSkillIcon(color: String?): Drawable? {
@@ -34,18 +55,6 @@ class AssetLoader(context: Context) {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
-    fun loadArmorSetIcon(armorSet: ArmorSet): Drawable? {
-        return ctx.getVectorDrawable("ArmorSet", "rare${armorSet.rarity}")
-    }
-
-    fun loadArmorIcon(entity: ArmorBase): Drawable? {
-        return loadArmorIcon(entity.armor_type, entity.rarity)
-    }
-
-    fun loadDecorationIcon(decoration: Decoration): Drawable? {
-        val assetName = "Decoration${decoration.data.slot}"
-        return ctx.getVectorDrawable(assetName, decoration.data.icon_color)
-    }
 
     fun loadRarityColor(rarity: Int) : Int {
         val colorId = ColorRegistry("rare$rarity") ?: ColorRegistry("rare1")

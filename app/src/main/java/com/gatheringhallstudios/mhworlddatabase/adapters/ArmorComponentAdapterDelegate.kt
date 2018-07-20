@@ -18,7 +18,7 @@ class ArmorComponentAdapterDelegate(private val onSelect: (ArmorComponent) -> Un
 
     override fun bindView(view: View, data: ArmorComponent) {
         with (view as IconLabelTextCell) {
-            val icon = AssetLoader(view.context).loadItemIcon(data.result)
+            val icon = AssetLoader(view.context).loadIconFor(data.result)
             setLeftIconDrawable(icon)
             setLabelText(data.result.name)
             setValueText("x${data.quantity}")

@@ -59,7 +59,7 @@ class DecorationDetailFragment : Fragment() {
     private fun populateDecoration(decoration: Decoration?) {
         if (decoration == null) return
 
-        val icon = assetLoader.loadDecorationIcon(decoration)
+        val icon = assetLoader.loadIconFor(decoration)
         decoration_name.text = decoration.name
         decoration_description.text = getString(R.string.rarity_string, decoration.data.rarity)
         decoration_description.setTextColor(assetLoader.loadRarityColor(decoration.data.rarity))

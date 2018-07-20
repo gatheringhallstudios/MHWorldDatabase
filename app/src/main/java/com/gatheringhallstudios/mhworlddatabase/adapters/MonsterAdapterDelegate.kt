@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import kotlinx.android.synthetic.main.listitem_large.view.*
@@ -20,8 +21,7 @@ class MonsterAdapterDelegate(private val onSelected: (Monster) -> Unit)
     }
 
     override fun bindView(view: View, data: Monster) {
-        val ctx = view.context
-        val icon = ctx.getAssetDrawable("monsters/${data.id}.png")
+        val icon = view.assetLoader.loadIconFor(data)
 
         view.item_icon.setImageDrawable(icon)
         view.item_name.text = data.name

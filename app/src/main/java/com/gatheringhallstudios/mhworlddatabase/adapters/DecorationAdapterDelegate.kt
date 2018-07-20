@@ -18,7 +18,7 @@ class DecorationAdapterDelegate(private val onSelected: (Decoration) -> Unit)
     }
 
     override fun bindView(view: IconLabelTextCell, data: Decoration) {
-        val icon = AssetLoader(view.context).loadDecorationIcon(data)
+        val icon = AssetLoader(view.context).loadIconFor(data)
 
         view.setLeftIconDrawable(icon)
         view.setLabelText(data.name)

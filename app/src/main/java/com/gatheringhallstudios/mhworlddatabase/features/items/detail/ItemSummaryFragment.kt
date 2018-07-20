@@ -39,7 +39,7 @@ class ItemSummaryFragment : Fragment() {
         if (item == null) return
 
         //Set the summary information
-        item_icon.setImageDrawable(assetLoader.loadItemIcon(item))
+        item_icon.setImageDrawable(assetLoader.loadIconFor(item))
         item_name.text = item.name
         item_description.text = item.description
 

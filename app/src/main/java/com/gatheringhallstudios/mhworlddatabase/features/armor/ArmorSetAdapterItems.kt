@@ -31,7 +31,7 @@ class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        val icon = AssetLoader(viewHolder.itemView.context).loadArmorSetIcon(armorSet)
+        val icon = AssetLoader(viewHolder.itemView.context).loadIconFor(armorSet)
 
         viewHolder.set_icon.setImageDrawable(icon)
         viewHolder.armor_set_name.text = armorSet.armorset_name

@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.adapters
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
-import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 
@@ -18,7 +18,7 @@ class ItemAdapterDelegate(private val onSelect: (Item) -> Unit)
 
     override fun bindView(view: View, data: Item) {
         with (view as IconLabelTextCell) {
-            val icon = AssetLoader(view.context).loadItemIcon(data)
+            val icon = view.assetLoader.loadIconFor(data)
             setLeftIconDrawable(icon)
             setLabelText(data.name)
         }
