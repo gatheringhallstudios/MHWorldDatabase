@@ -36,7 +36,7 @@
             android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
             android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_items_ammo_base"
+            android:src="@drawable/ic_items_ammo_white"
             app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
             app:layout_constraintRight_toLeftOf="@id/icon_ko"
             app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
@@ -46,7 +46,7 @@
             android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
             android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_equipment_hammer_base"
+            android:src="@drawable/ic_equipment_hammer_white"
             app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
             app:layout_constraintRight_toLeftOf="@id/icon_shot"
             app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
@@ -56,7 +56,7 @@
             android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
             android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_equipment_greatsword_base"
+            android:src="@drawable/ic_equipment_greatsword_white"
             app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
             app:layout_constraintRight_toLeftOf="@id/icon_impact"
             app:layout_constraintTop_toTopOf="@id/physical_damage_header" />

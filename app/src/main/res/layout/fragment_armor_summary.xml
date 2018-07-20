@@ -27,7 +27,7 @@
                 style="@style/IconXLarge"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_equipment_chest_base" />
+                tools:src="@raw/ic_equipment_chest_base" />
 
             <TextView
                 android:id="@+id/armor_detail_name"

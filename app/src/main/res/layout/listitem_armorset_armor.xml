@@ -10,10 +10,10 @@
         android:id="@+id/armor_icon"
         style="@style/IconLarge.Zembellished"
         android:layout_marginStart="@dimen/margin_large"
-        android:src="@drawable/ic_equipment_head_base"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@raw/ic_equipment_head_base"/>
 
     <!-- Main Label -->
 
