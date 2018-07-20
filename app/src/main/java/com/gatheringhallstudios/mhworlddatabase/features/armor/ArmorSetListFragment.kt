@@ -41,20 +41,22 @@ class ArmorSetListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
 
-        val rank = arguments?.getSerializable(ARG_RANK) as? Rank
+        if (adapter.itemCount == 0) {
+            val rank = arguments?.getSerializable(ARG_RANK) as? Rank
 
-        viewModel.getArmorSetList(rank).observe(this, Observer<List<ArmorSet>> {
-            val items = it?.map {
-                val headerItem = ArmorSetHeaderItem(it)
-                val bodyItems = it.armor.map { ArmorSetDetailItem(it) }
+            viewModel.getArmorSetList(rank).observe(this, Observer<List<ArmorSet>> {
+                val items = it?.map {
+                    val headerItem = ArmorSetHeaderItem(it)
+                    val bodyItems = it.armor.map { ArmorSetDetailItem(it) }
 
-                return@map ExpandableGroup(headerItem, false).apply {
-                    addAll(bodyItems)
+                    return@map ExpandableGroup(headerItem, false).apply {
+                        addAll(bodyItems)
+                    }
                 }
-            }
 
-            adapter.update(items ?: emptyList())
-        })
+                adapter.update(items ?: emptyList())
+            })
+        }
 
         // Add dividers between items
         val dividerDrawable = ContextCompat.getDrawable(context!!, R.drawable.listitem_divider)

@@ -39,7 +39,7 @@ abstract class ArmorDao {
      * Generates a list of ArmorSets with embedded ArmorViews
      * Equivalent to loadArmorList and then grouping
      */
-    fun loadArmorSets(langId: String, rank: Rank): LiveData<List<ArmorSet>> {
+    fun loadArmorSets(langId: String, rank: Rank?): LiveData<List<ArmorSet>> {
         // Load raw view of Armor with Armor Set info
         val armorSets = loadArmorList(langId, rank)
 

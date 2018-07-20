@@ -13,12 +13,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@raw/ic_equipment_head_base"/>
+        tools:src="@drawable/ic_ui_armor_skill_white"/>
 
     <!-- Main Label -->
 
     <TextView
         android:id="@+id/armor_name"
+        style="@style/TextBodyHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
