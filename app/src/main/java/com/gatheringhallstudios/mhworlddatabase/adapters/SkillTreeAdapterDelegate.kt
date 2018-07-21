@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTree
 class SkillTreeAdapterDelegate(private val onSelected: (SkillTree) -> Unit)
     : SimpleListDelegate<SkillTree, IconLabelTextCell>() {
 
-    override fun getDataClass() = SkillTree::class
+    override fun isForViewType(obj: Any) = obj is SkillTree
 
     override fun onCreateView(parent: ViewGroup): IconLabelTextCell {
         return IconLabelTextCell(parent.context)

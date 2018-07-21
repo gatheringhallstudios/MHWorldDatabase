@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.listitem_reward.view.*
 class LocationItemsAdapterDelegate(private val onSelected: (LocationItem) -> Unit)
     : SimpleListDelegate<LocationItem, View>() {
 
-    override fun getDataClass() = LocationItem::class
+    override fun isForViewType(obj: Any) = obj is LocationItem
 
     override fun onCreateView(parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)

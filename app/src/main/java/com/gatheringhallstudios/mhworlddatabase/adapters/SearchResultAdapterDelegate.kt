@@ -12,9 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import kotlin.reflect.KClass
 
 class SearchResultAdapterDelegate : SimpleListDelegate<SearchResult, IconLabelTextCell>() {
-    override fun getDataClass(): KClass<SearchResult> {
-        return SearchResult::class
-    }
+    override fun isForViewType(obj: Any) = obj is SearchResult
 
     override fun onCreateView(parent: ViewGroup): View {
         return IconLabelTextCell(parent.context)

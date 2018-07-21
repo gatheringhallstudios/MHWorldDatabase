@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.listitem_large.view.*
 class LocationAdapterDelegate(private val onSelected: (Location) -> Unit)
     : SimpleListDelegate<Location, View>() {
 
-    override fun getDataClass() = Location::class
+    override fun isForViewType(obj: Any) = obj is Location
 
     override fun onCreateView(parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)

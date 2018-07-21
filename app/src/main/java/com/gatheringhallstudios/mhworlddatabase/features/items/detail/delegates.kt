@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.listitem_reward.view.*
  * Renders list items for item location information
  */
 class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation, View>() {
-    override fun getDataClass() = ItemLocation::class
+    override fun isForViewType(obj: Any) = obj is ItemLocation
 
     override fun onCreateView(parent: ViewGroup): View {
         // todo: refactor listitem_reward into a general view
@@ -37,7 +37,7 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation, View>() {
  * This is the "reverse" of MonsterRewardAdapterDelegate
  */
 class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward, View>() {
-    override fun getDataClass() = ItemReward::class
+    override fun isForViewType(obj: Any) = obj is ItemReward
 
     override fun onCreateView(parent: ViewGroup): View {
         // todo: decide if we want to make this into a standalone view class or not

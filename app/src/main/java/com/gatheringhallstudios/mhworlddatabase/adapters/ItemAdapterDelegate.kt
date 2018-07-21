@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 class ItemAdapterDelegate(private val onSelect: (Item) -> Unit)
     : SimpleListDelegate<Item, View>() {
 
-    override fun getDataClass() = Item::class
+    override fun isForViewType(obj: Any) = obj is Item
 
     override fun onCreateView(parent: ViewGroup): View {
         return IconLabelTextCell(parent.context)

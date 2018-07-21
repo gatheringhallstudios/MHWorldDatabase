@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.listitem_item_crafting.view.*
  * Defines an adapter delegate for a list of item combinations
  */
 class ItemCraftingAdapterDelegate : SimpleListDelegate<ItemCombination, View>() {
-    override fun getDataClass() = ItemCombination::class
+    override fun isForViewType(obj: Any) = obj is ItemCombination
 
     override fun onCreateView(parent: ViewGroup): View {
         return LayoutInflater.from(parent.context).inflate(R.layout.listitem_item_crafting, parent, false)

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.listitem_large.view.*
 class MonsterAdapterDelegate(private val onSelected: (MonsterBase) -> Unit)
     : SimpleListDelegate<MonsterBase, View>() {
 
-    override fun getDataClass() = MonsterBase::class
+    override fun isForViewType(obj: Any) = obj is MonsterBase
 
     override fun onCreateView(parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)

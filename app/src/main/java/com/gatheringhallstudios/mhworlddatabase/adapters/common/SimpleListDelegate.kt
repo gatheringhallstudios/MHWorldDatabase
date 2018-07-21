@@ -18,7 +18,7 @@ abstract class SimpleListDelegate<IClass : Any, VClass: View>: AdapterDelegate<L
     /**
      * Returns the class that this delegate is for.
      */
-    protected abstract fun getDataClass() : KClass<IClass>
+    protected abstract fun isForViewType(obj: Any): Boolean
 
     /**
      * Constructs a new view object and returns it.
@@ -35,7 +35,7 @@ abstract class SimpleListDelegate<IClass : Any, VClass: View>: AdapterDelegate<L
     class UselessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun isForViewType(items: List<Any>, position: Int): Boolean {
-        return items[position]::class == getDataClass()
+        return isForViewType(items[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {

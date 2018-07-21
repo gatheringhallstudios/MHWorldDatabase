@@ -11,7 +11,7 @@ class DecorationAdapterDelegate(private val onSelected: (Decoration) -> Unit)
 
     val TAG = this.javaClass.simpleName
 
-    override fun getDataClass() = Decoration::class
+    override fun isForViewType(obj: Any) = obj is Decoration
 
     override fun onCreateView(parent: ViewGroup): IconLabelTextCell {
         return IconLabelTextCell(parent.context)

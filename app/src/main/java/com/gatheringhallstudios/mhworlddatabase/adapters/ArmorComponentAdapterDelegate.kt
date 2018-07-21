@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorComponent
 class ArmorComponentAdapterDelegate(private val onSelect: (ArmorComponent) -> Unit)
     : SimpleListDelegate<ArmorComponent, View>() {
 
-    override fun getDataClass() = ArmorComponent::class
+    override fun isForViewType(obj: Any) = obj is ArmorComponent
 
     override fun onCreateView(parent: ViewGroup): View {
         return IconLabelTextCell(parent.context)
