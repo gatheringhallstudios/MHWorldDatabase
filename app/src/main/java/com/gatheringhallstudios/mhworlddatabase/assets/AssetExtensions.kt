@@ -29,6 +29,11 @@ val Fragment.assetLoader get() = AssetLoader(context!!)
 val View.assetLoader get() = AssetLoader(context!!)
 
 /**
+ * Extension: Receives an asset loader for this context.
+ */
+val Context.assetLoader get() = AssetLoader(this)
+
+/**
  * Extension: Loads a drawable from the assets folder.
  * Returns null on failure, or default resource if provided.
  */

@@ -23,6 +23,8 @@ val VectorRegistry = createRegistry(
         "ArmorWaist" to R.xml.ic_equipment_waist_base,
         "ArmorLegs" to R.xml.ic_equipment_leg_base,
 
+        "Charm" to R.xml.ic_equipment_charm_base,
+
         "Decoration1" to R.xml.ic_ui_decoration_1_base,
         "Decoration2" to R.xml.ic_ui_decoration_2_base,
         "Decoration3" to R.xml.ic_ui_decoration_3_base,

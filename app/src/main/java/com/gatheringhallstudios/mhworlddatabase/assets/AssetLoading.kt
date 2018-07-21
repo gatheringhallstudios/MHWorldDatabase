@@ -34,6 +34,10 @@ class AssetLoader(context: Context) {
         return loadArmorIcon(entity.armor_type, entity.rarity)
     }
 
+    fun loadIconFor(charm: Charm): Drawable? {
+        return ctx.getVectorDrawable("Charm", "rare${charm.rarity}")
+    }
+
     fun loadIconFor(decoration: Decoration): Drawable? {
         val assetName = "Decoration${decoration.data.slot}"
         return ctx.getVectorDrawable(assetName, decoration.data.icon_color)
