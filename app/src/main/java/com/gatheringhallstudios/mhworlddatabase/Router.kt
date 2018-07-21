@@ -22,9 +22,9 @@ class Router(private val navController: NavController) {
         DataType.MONSTER -> navigateMonsterDetail(id)
         DataType.SKILL -> navigateSkillDetail(id)
         DataType.ARMOR -> navigateArmorDetail(id)
-        DataType.CHARM -> {}
+        DataType.CHARM -> navigateCharmDetail(id)
         DataType.DECORATION -> navigateDecorationDetail(id)
-        DataType.WEAPON -> {}
+        DataType.WEAPON -> navigateWeaponDetail(id)
     }
 
     fun navigateItemDetail(itemId: Int) {
@@ -62,5 +62,13 @@ class Router(private val navController: NavController) {
                 R.id.armorDetailDestination,
                 BundleBuilder().putInt(ArmorDetailPagerFragment.ARG_ARMOR_ID, armorId).build()
         )
+    }
+
+    fun navigateCharmDetail(charmId: Int) {
+        // todo: implement
+    }
+
+    fun navigateWeaponDetail(weaponId: Int) {
+        // todo: implement
     }
 }

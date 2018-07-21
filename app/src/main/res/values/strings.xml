@@ -7,6 +7,12 @@
 
     <string name="action_search">Settings</string>
 
+    <!-- Simple descriptor for data types -->
+    <string name="type_monster">Monster</string>
+    <string name="type_charm">Charm</string>
+    <string name="type_armor">Armor</string>
+    <string name="type_weapon">Weapon</string>
+
     <string name="low_rank_short">LR</string>
     <string name="high_rank_short">HR</string>
     <string name="low_rank">Low</string>

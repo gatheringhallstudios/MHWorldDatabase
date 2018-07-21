@@ -7,16 +7,42 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
+import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorBase
+import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsages
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 
+fun bindCharmCraft(charm: Charm) = createCraftBinder { ctx ->
+    CraftResult(
+            name = charm.name,
+            value = ctx.getString(R.string.type_charm),
+            icon = ctx.assetLoader.loadIconFor(charm),
+            clickFn = { }
+    )
+}
+
+fun bindArmorCraft(armor: ArmorBase) = createCraftBinder { ctx ->
+    CraftResult(
+            name = armor.name,
+            value = ctx.getString(R.string.type_armor),
+            icon = ctx.assetLoader.loadIconFor(armor),
+            clickFn = { v -> v.getRouter().navigateArmorDetail(armor.id) }
+    )
+}
+
+/**
+ * A sub-fragment used to display the ways an item can be used.
+ */
 class ItemUsageFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(ItemDetailViewModel::class.java)
     }
 
     val adapter = CategoryAdapter(
-            ItemCraftingAdapterDelegate()
+            ItemCraftingAdapterDelegate(),
+            ItemCraftResultAdapterDelegate()
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,10 +58,9 @@ class ItemUsageFragment : RecyclerViewFragment() {
             return
         }
 
-        // todo: add once the adapter can handle them
         adapter.addAll(data.craftRecipes)
-        //adapter.addAll(data.charms)
-        //adapter.addAll(data.armor)
+        adapter.addAll(data.charms.map(::bindCharmCraft))
+        adapter.addAll(data.armor.map(::bindArmorCraft))
 
         adapter.notifyDataSetChanged()
     }

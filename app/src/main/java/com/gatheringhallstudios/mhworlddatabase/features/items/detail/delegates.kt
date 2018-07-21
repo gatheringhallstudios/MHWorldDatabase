@@ -1,16 +1,21 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemReward
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.*
 import kotlinx.android.synthetic.main.listitem_reward.view.*
+import kotlin.reflect.KClass
+import kotlin.reflect.KFunction
 
 
 /**
@@ -63,4 +68,44 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward, View>()
         view.value_text.text = view.resources.getString(R.string.percentage, data.percentage)
         view.subvalue_text.text = view.resources.getString(R.string.quantity, data.stack)
     }
+}
+
+class CraftResult(
+        val name: String?,
+        val value: String?,
+        val icon: Drawable?,
+        val clickFn: (v: View) -> Unit
+)
+
+interface CraftResultBinder {
+    fun build(ctx: Context): CraftResult
+}
+
+fun createCraftBinder(fn: (Context) -> CraftResult): CraftResultBinder {
+    return object: CraftResultBinder {
+        override fun build(ctx: Context) = fn(ctx)
+    }
+}
+
+/**
+ * An adapter delegate that renders for any simple craft result object.
+ * The objects rendered must be CraftResultBinders, which provide callback functions
+ * to general certain pieces of information.
+ */
+class ItemCraftResultAdapterDelegate: SimpleListDelegate<CraftResultBinder, IconLabelTextCell>() {
+    override fun isForViewType(obj: Any) = obj is CraftResultBinder
+
+    override fun onCreateView(parent: ViewGroup): View {
+        return IconLabelTextCell(parent.context)
+    }
+
+    override fun bindView(view: IconLabelTextCell, data: CraftResultBinder) {
+        val result = data.build(view.context)
+        view.setLeftIconDrawable(result.icon)
+        view.setLabelText(result.name)
+        view.setValueText(result.value)
+
+        view.setOnClickListener { result.clickFn(view) }
+    }
+
 }
