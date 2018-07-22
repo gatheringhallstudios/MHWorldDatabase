@@ -28,7 +28,8 @@ abstract class MonsterDao {
     abstract fun loadMonster(langId: String, id: Int): LiveData<Monster>
 
     @Query("""
-        SELECT h.*, lt.name location_name
+        SELECT h.start_area, h.move_area, h.rest_area,
+            lt.id location_id, lt.name location_name
         FROM monster_habitat h
             JOIN location_text lt
             ON lt.id = h.location_id

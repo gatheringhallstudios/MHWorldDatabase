@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
+import android.arch.persistence.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
@@ -34,10 +35,18 @@ class Monster(
         val alt_weaknesses: WeaknessSummaryElemental?
 ): MonsterBase(id, name, size)
 
-data class MonsterHabitat(
-        @Embedded val data: MonsterHabitatEntity,
-        val location_name: String?
-)
+class MonsterHabitat(
+        @Embedded(prefix = "location_") val location: Location,
+        val start_area: String?,
+        val move_area: String?,
+        val rest_area: String?
+) {
+    /**
+     * A list of all areas a monster moves inbetween
+     */
+    @Ignore
+    val moveAreas = move_area?.split(",")?.map { it.trim() }
+}
 
 data class MonsterHitzone(
         @Embedded val data: MonsterHitzoneEntity,

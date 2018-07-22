@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
@@ -90,24 +91,16 @@ class MonsterSummaryFragment : Fragment() {
             val view = IconLabelTextCell(context)
 
             val areas = StringBuilder()
-            habitat.data.start_area?.let { areas.append("$it \u203A ")}
-            habitat.data.move_area?.let {
-                val tokenizer = StringTokenizer(it, ",")
-                for (token in tokenizer) {
-                    areas.append("$token, ")
-                }
-
-                // Remove the last ', '
-                areas.delete(areas.length-2, areas.length)
-
+            habitat.start_area?.let { areas.append("$it \u203A ")}
+            habitat.moveAreas?.let {
+                areas.append(it.joinToString(", "))
                 areas.append(" \u203A ")
             }
-            habitat.data.rest_area?.let { areas.append(it) }
+            habitat.rest_area?.let { areas.append(it) }
 
-            val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
-
+            val icon = assetLoader.loadIconFor(habitat.location)
             view.setLeftIconDrawable(icon)
-            view.setLabelText(habitat.location_name)
+            view.setLabelText(habitat.location.name)
             view.setValueText(areas.toString())
 
             habitats_layout.addView(view)
