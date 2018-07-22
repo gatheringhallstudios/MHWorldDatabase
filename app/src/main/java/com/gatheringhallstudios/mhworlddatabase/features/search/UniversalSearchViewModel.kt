@@ -20,10 +20,20 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     // this prevents search from being overwhelmed and makes everything orderly
     private val executor = ThrottledExecutor()
 
+    // prevent double searching by storing the last search attempt
+    // also used to check if the search should auto-open
     var lastSearchFilter: String = ""
+
+    /**
+     * Publicly exposed livedata containing the search results.
+     * It is not recommended to update this directly, and instead observe.
+     */
     val searchResults = MutableLiveData<List<Any>>()
 
-
+    /**
+     * Updates the search filter and begins searching.
+     * SearchResults are populated when the search finishes.
+     */
     fun searchData(filterString: String?) {
         val trimmedString = filterString?.trim() ?: ""
         if (trimmedString == lastSearchFilter) {
@@ -35,7 +45,8 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
         executor.execute {
             try {
                 val time = measureTimeMillis {
-                    handleSearch(trimmedString)
+                    val results = getResultsSync(trimmedString)
+                    searchResults.postValue(results)
                 }
 
                 Log.d(TAG, "Search performed in $time milliseconds")
@@ -45,10 +56,13 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    private fun handleSearch(filterStr: String) {
+    /**
+     * Internal helper that retrieves search results synchronously.
+     * Run this on a background thread.
+     */
+    private fun getResultsSync(filterStr: String): List<Any> {
         if (filterStr == "") {
-            searchResults.postValue(emptyList())
-            return
+            return emptyList()
         }
 
         val results = mutableListOf<Any>()
@@ -57,6 +71,6 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
         results.addAll(dao.searchMonsters(filterStr))
         results.addAll(dao.searchItems(filterStr))
 
-        searchResults.postValue(results)
+        return results
     }
 }
