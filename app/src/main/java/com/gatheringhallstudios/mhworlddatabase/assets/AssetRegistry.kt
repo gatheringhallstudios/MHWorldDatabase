@@ -36,7 +36,7 @@ val VectorRegistry = createRegistry(
         "Pellets" to R.xml.ic_items_pellets_base,
         "Slinger" to R.xml.ic_items_slinger_base,
         "Scale" to R.xml.ic_items_scale_base,
-        "Claw" to R.xml.ic_items_claw_base,
+        "Fang" to R.xml.ic_items_fang_base,
         "Body" to R.xml.ic_items_body_base,
         "Hide" to R.xml.ic_items_hide_base,
         "Sac" to R.xml.ic_icons_sac_base
