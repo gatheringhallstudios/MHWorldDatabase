@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val controller = Navigation.findNavController(this, R.id.content_main_frame)
-        return NavigationUI.navigateUp(this.drawer_layout, controller)
+        return multiStartNavigationUi.navigateUp(this.drawer_layout, controller)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
