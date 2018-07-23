@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.assets
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.support.v4.util.LruCache
+import com.gatheringhallstudios.mhworlddatabase.util.DrawableWrapper
 import java.util.*
 
 data class CacheKey(
@@ -38,7 +39,7 @@ inline fun <K, V> LruCache<K, V>.getOrPut(key: K, build: () -> V): V {
  * A wrapper over a drawable that caches the draw result to a bitmap,
  * and reuses the bitmap so long as it remains in the cache.
  */
-class CachedDrawable(private val innerDrawable: Drawable) : Drawable() {
+class CachedDrawable(innerDrawable: Drawable) : DrawableWrapper(innerDrawable) {
     private val cacheId = UUID.randomUUID().toString()
 
     override fun draw(canvas: Canvas?) {
@@ -52,31 +53,12 @@ class CachedDrawable(private val innerDrawable: Drawable) : Drawable() {
         val cachedBitmap = cache.getOrPut(key) {
             val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val subCanvas = Canvas(bitmap)
-            innerDrawable.setBounds(0, 0, bitmap.width, bitmap.height)
-            innerDrawable.draw(subCanvas)
+            wrappedDrawable.setBounds(0, 0, bitmap.width, bitmap.height)
+            wrappedDrawable.draw(subCanvas)
 
             bitmap
         }
 
         canvas.drawBitmap(cachedBitmap, null, canvas.clipBounds, null)
-    }
-
-    override fun setAlpha(alpha: Int) {
-        innerDrawable.alpha = alpha
-    }
-
-    override fun setColorFilter(colorFilter: ColorFilter?) {
-        innerDrawable.colorFilter = colorFilter
-    }
-
-    override fun getMinimumWidth() = innerDrawable.minimumWidth
-    override fun getMinimumHeight() = innerDrawable.minimumHeight
-    override fun getOpacity() =innerDrawable.opacity
-    override fun getAlpha() = innerDrawable.alpha
-    override fun getIntrinsicWidth() = innerDrawable.intrinsicWidth
-    override fun getIntrinsicHeight() = innerDrawable.intrinsicHeight
-
-    override fun onBoundsChange(bounds: Rect?) {
-        innerDrawable.bounds = bounds
     }
 }
