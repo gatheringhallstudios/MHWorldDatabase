@@ -72,17 +72,21 @@ class ArmorSet(
  * Basic representation of a single armor set bonus
  */
 class ArmorSetBonus(
-        val setbonus_id: Int,
+        @Embedded(prefix="skilltree_") val skillTree: SkillTree,
+        val id: Int,
         val name: String?,
         val required: Int,
-        val skilltree_id: Int,
-        val skillName: String?,
-        val description: String?,
-        val icon_color: String?
+        val description: String?
 )
 
-class ArmorComponent(
-        val armor_id: Int,
-        @Embedded val result: Item,
-        val quantity: Int
+/**
+ * The result of fully loading a piece of armor.
+ * Loads the data you'd find in an armor screen ingame.
+ * Armor set bonuses are contained in the object as they're also scoped to armor ingame.
+ */
+class ArmorFull(
+        val armor: Armor,
+        val setBonuses: List<ArmorSetBonus>,
+        val recipe: List<ItemQuantity>,
+        val skills: List<SkillQuantity>
 )

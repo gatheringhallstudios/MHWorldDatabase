@@ -27,7 +27,7 @@
                 style="@style/IconXLarge"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@raw/ic_equipment_chest_base" />
+                tools:src="@drawable/ic_ui_armor_skill_white" />
 
             <TextView
                 android:id="@+id/armor_detail_name"
@@ -130,17 +130,14 @@
 
                 <ImageView
                     android:id="@+id/slots_icon"
-                    style="@style/IconMedium.Decorated"
+                    style="@style/IconMedium"
                     android:layout_width="40dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:layout_marginStart="@dimen/margin_large"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:src="@drawable/ic_ui_slots"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:src="@drawable/ic_ui_slots"/>
 
                 <ImageView
                     android:id="@+id/slot1"
@@ -185,61 +182,74 @@
 
         </LinearLayout>
 
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/armor_skill_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:labelText="@string/decorations_skill_information"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/armor_data_layout">
-
-        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
-
         <LinearLayout
-            android:id="@+id/armor_skill_layout"
+            android:id="@+id/armor_skill_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="top"
             android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/armor_skill_header">
+            app:layout_constraintTop_toBottomOf="@+id/armor_data_layout"
+            >
 
-            <include
-                layout="@layout/cell_icon_label_text"
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/armor_skill_header"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:labelText="@string/decorations_skill_information"/>
 
+            <LinearLayout
+                android:id="@+id/armor_skill_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
         </LinearLayout>
 
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/armor_set_bonus_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
-            app:labelText="@string/armor_detail_set_bonus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/armor_skill_layout">
-
-        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
-
         <LinearLayout
-            android:id="@+id/armor_set_bonus_layout"
+            android:id="@+id/armor_set_bonus_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:orientation="vertical"
-            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/armor_set_bonus_header">
+            app:layout_constraintTop_toBottomOf="@+id/armor_skill_section">
 
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/armor_set_bonus_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/armor_detail_set_bonus"
+                />
+
+            <LinearLayout
+                android:id="@+id/armor_set_bonus_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/armor_components_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/armor_set_bonus_section">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/armor_detail_tab_components"
+                />
+
+            <LinearLayout
+                android:id="@+id/armor_components_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

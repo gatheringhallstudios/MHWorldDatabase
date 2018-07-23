@@ -6,6 +6,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 /**
  * Created by Carlos on 3/21/2018.
@@ -33,7 +34,12 @@ abstract class ArmorDao {
                 AND ast.lang_id = at.lang_id
         WHERE at.lang_id = :langId
         AND a.id = :armorId""")
-    abstract fun loadArmor(langId: String, armorId: Int): LiveData<Armor>
+    abstract fun loadArmorSync(langId: String, armorId: Int): Armor
+
+
+    fun loadArmor(langId: String, armorId: Int) = createLiveData {
+        loadArmorSync(langId, armorId)
+    }
 
     /**
      * Generates a list of ArmorSets with embedded ArmorViews
@@ -61,8 +67,25 @@ abstract class ArmorDao {
         }
     }
 
+    /**
+     * Loads full information for a piece of armor as a composite object
+     */
+    fun loadArmorFull(langId: String, armorId: Int) = createLiveData {
+        val armor = loadArmorSync(langId, armorId)
+        ArmorFull(
+                armor = armor,
+                recipe = loadArmorComponentsSync(langId, armorId),
+                skills = loadArmorSkillsSync(langId, armorId),
+                setBonuses = when (armor.armorset_bonus_id) {
+                    null -> emptyList()
+                    else -> loadArmorSetBonusSync(langId, armor.armorset_bonus_id)
+                })
+    }
+
     @Query("""
-        SELECT abs.*, abt.name, st.*, stt.name AS skillName
+        SELECT st.id as skilltree_id, stt.name as skilltree_name,
+            stt.description as skilltree_description, st.icon_color as skilltree_icon_color,
+            abs.setbonus_id as id, abt.name, abs.required
         FROM armorset_bonus_skill abs
             JOIN armorset_bonus_text abt
                 ON abt.id = abs.setbonus_id
@@ -73,10 +96,10 @@ abstract class ArmorDao {
                 AND abt.lang_id = stt.lang_id
         WHERE abt.lang_id = :langId
         AND abs.setbonus_id= :setBonusId""")
-    abstract fun loadArmorSetBonus(langId: String, setBonusId: Int) : LiveData<List<ArmorSetBonus>>
+    abstract fun loadArmorSetBonusSync(langId: String, setBonusId: Int) : List<ArmorSetBonus>
 
     @Query("""
-        SELECT a.armor_id, a.quantity, i.*, it.name, it.description, i.category
+        SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name, i.icon_color item_icon_color, a.quantity
          FROM armor_recipe a
             JOIN item i
                 ON a.item_id = i.id
@@ -87,10 +110,10 @@ abstract class ArmorDao {
         AND a.armor_id= :armorId
         ORDER BY i.id
     """)
-    abstract fun loadArmorComponentViews(langId: String, armorId: Int) : LiveData<List<ArmorComponent>>
+    abstract fun loadArmorComponentsSync(langId: String, armorId: Int) : List<ItemQuantity>
 
     @Query("""
-        SELECT askill.*, a.*, askill.skilltree_id, askill.level AS skillLevel, s.icon_color, stt.name
+        SELECT s.id skill_id, stt.name skill_name, s.icon_color skill_color, askill.level quantity
         FROM armor_skill askill
             JOIN armor a
                 ON askill.armor_id = a.id
@@ -101,5 +124,5 @@ abstract class ArmorDao {
             WHERE stt.lang_id = :langId
                AND askill.armor_id = :armorId
             ORDER BY askill.skilltree_id ASC""")
-    abstract fun loadArmorSkills(langId: String, armorId: Int) : LiveData<List<ArmorSkill>>
+    abstract fun loadArmorSkillsSync(langId: String, armorId: Int) : List<SkillQuantity>
 }

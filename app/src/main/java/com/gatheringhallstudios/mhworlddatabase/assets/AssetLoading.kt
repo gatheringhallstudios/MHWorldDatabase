@@ -26,6 +26,10 @@ class AssetLoader(context: Context) {
         return ctx.getAssetDrawable("monsters/${monster.id}.png")
     }
 
+    fun loadIconFor(skill: SkillTreeBase): Drawable? {
+        return loadSkillIcon(skill.icon_color)
+    }
+
     fun loadIconFor(armorSet: ArmorSet): Drawable? {
         return ctx.getVectorDrawable("ArmorSet", "rare${armorSet.rarity}")
     }

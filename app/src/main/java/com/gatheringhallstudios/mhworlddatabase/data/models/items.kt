@@ -69,3 +69,11 @@ class ItemSources(
         val locations: List<ItemLocation>,
         val rewards: List<ItemReward>
 )
+
+/**
+ * The quantity of an item. Usually used for things like recipes
+ */
+class ItemQuantity(
+        @Embedded(prefix = "item_") val item: ItemBase,
+        val quantity: Int
+)

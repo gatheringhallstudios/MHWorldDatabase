@@ -24,36 +24,6 @@ data class LocationItem(
         val item_name: String?
 )
 
-/**
- * Basic representation of a skill tree.
- * This is returned when querying for all data.
- * Created by Carlos on 3/6/2018.
- */
-open class SkillTree(
-        val id: Int,
-        val name: String?,
-        val description: String?,
-        val icon_color: String?
-)
-
-/**
- * A skill tree with skill information included.
- */
-class SkillTreeFull(
-        id: Int,
-        name: String?,
-        description: String?,
-        icon_color: String?,
-
-        val skills: List<Skill>
-) : SkillTree(id, name, description, icon_color)
-
-data class Skill(
-        val skilltree_id: Int,
-        val level: Int,
-        val description: String?
-)
-
 
 data class Decoration(
         @Embedded val data: DecorationEntity,
