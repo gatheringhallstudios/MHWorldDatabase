@@ -17,9 +17,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsages
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
-fun bindCharmCraft(charm: Charm) = createSimpleUniversalBinder { ctx ->
+fun bindCharmCraft(charmBase: CharmBase) = createSimpleUniversalBinder { ctx ->
     SimpleUniversalBinding(
-            label = charm.name,
+            label = charmBase.name,
             value = ctx.getString(R.string.type_charm),
             icon = ctx.assetLoader.loadIconFor(charm),
             clickFn = { }
