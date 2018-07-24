@@ -18,7 +18,7 @@ abstract class CharmDao {
     abstract fun loadCharms(langId: String): LiveData<List<CharmBase>>
 
     @Query("""
-        SELECT c.*, ct.name, cr.quantity AS component_quantity, cs.level AS skillLevel, cs.skilltree_id, i.id AS component_id, it.name AS component_name, s.icon_color AS skillIconColor, st.name AS skillName
+        SELECT c.*, ct.name, cr.quantity AS component_quantity, cs.level AS skillLevel, cs.skilltree_id, i.id AS component_id, i.category AS component_category ,it.name AS component_name, s.icon_color AS skillIconColor, st.name AS skillName
         FROM charm c
             JOIN charm_text ct
                 ON ct.id = c.id
