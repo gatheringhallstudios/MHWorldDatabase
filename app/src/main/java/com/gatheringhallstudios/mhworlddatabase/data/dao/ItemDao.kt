@@ -116,7 +116,7 @@ abstract class ItemDao {
         WHERE cr.item_id = :itemId
           AND ctext.lang_id = :langId
     """)
-    abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<Charm>
+    abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<CharmBase>
 
     @Query("""
         SELECT armor_id id, name, armor_type, rarity
@@ -140,7 +140,7 @@ abstract class ItemDao {
                 craftRecipes = itemCombos.filter {
                     it.first.id == itemId || it.second?.id == itemId
                 },
-                charms = loadCharmUsageForSync(langId, itemId),
+                charmBases = loadCharmUsageForSync(langId, itemId),
                 armor = loadArmorUsageForSync(langId, itemId)
         )
     }

@@ -117,5 +117,9 @@
     <string name="decorations_worn_feystone_chance">Worn Feystone Chance</string>
     <string name="decorations_warped_feystone_chance">Warped Feystone Chance</string>
 
-
+    <!-- Charms -->
+    <string name="charms_title">Charms</string>
+    <string name="upgrade_from_title">Upgrades from:</string>
+    <string name="charms_skill_information">Skill Information</string>
+    <string name="charms_components_information">Components</string>
 </resources>

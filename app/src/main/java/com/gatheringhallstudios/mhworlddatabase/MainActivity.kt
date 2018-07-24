@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
             R.id.armorListDestination,
             R.id.skillListDestination,
             R.id.decorationListDestination,
-            R.id.locationListDestination
+            R.id.locationListDestination,
+            R.id.charmListDestination
     ))
 
     val viewModel by lazy {
