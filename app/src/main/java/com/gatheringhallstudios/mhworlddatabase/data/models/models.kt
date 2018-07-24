@@ -49,12 +49,3 @@ data class WeaponBasic(
         var slot_2: Int,
         var slot_3: Int
 )
-
-
-data class SearchResult(
-        val data_type: DataType,
-        val id: Int,
-        val name: String,
-        val icon_name: String?,
-        val icon_color: String?
-)

@@ -6,14 +6,14 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.MainActivity
 import com.gatheringhallstudios.mhworlddatabase.MainActivityViewModel
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.adapters.SearchResultAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinderAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 
 class UniversalSearchFragment : RecyclerViewFragment() {
 
     // Universal Search results handle many types of data.
     // Create an adapter that handles all of them
-    val adapter = BasicListDelegationAdapter<Any>(SearchResultAdapterDelegate())
+    val adapter = BasicListDelegationAdapter<Any>(SimpleUniversalBinderAdapterDelegate())
 
     private val activityViewModel by lazy {
         ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)

@@ -13,7 +13,8 @@ open class ItemBase(
         val id: Int,
         val name: String,
         val icon_name: String?,
-        val icon_color: String?
+        val icon_color: String?,
+        val category: ItemCategory
 )
 
 /**
@@ -24,15 +25,15 @@ class Item(
         name: String,
         icon_name: String?,
         icon_color: String?,
+        category: ItemCategory,
 
         val description: String?,
-        val category: ItemCategory,
         val subcategory: ItemSubcategory,
         val rarity: Int,
         val buy_price: Int?,
         val sell_price: Int,
         val carry_limit: Int?
-): ItemBase(id, name, icon_name, icon_color)
+): ItemBase(id, name, icon_name, icon_color, category)
 
 class ItemCombination(
         val id: Int,

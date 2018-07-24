@@ -99,7 +99,8 @@ abstract class ArmorDao {
     abstract fun loadArmorSetBonusSync(langId: String, setBonusId: Int) : List<ArmorSetBonus>
 
     @Query("""
-        SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name, i.icon_color item_icon_color, a.quantity
+        SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
+            i.category item_category, i.icon_color item_icon_color, a.quantity
          FROM armor_recipe a
             JOIN item i
                 ON a.item_id = i.id

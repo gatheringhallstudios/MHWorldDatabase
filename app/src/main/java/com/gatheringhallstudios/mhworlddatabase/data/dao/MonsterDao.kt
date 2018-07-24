@@ -59,7 +59,8 @@ abstract class MonsterDao {
 
     @Query("""
         SELECT r.rank, ct.name condition_name, r.stack, r.percentage,
-            i.id item_id, it.name item_name, i.icon_name item_icon_name, i.icon_color item_icon_color
+            i.id item_id, it.name item_name, i.icon_name item_icon_name, i.category item_category,
+            i.icon_color item_icon_color
         FROM monster_reward r
             JOIN monster_reward_condition_text ct
                 ON ct.id = r.condition_id

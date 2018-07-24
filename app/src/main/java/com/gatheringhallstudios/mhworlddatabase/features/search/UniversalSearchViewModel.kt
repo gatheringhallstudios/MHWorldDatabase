@@ -4,12 +4,10 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
+import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.common.ThrottledExecutor
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import kotlin.system.measureTimeMillis
-
-// values are cached for 30 seconds
-val timeout: Long = 30 * 1000
 
 class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     private val TAG = javaClass.simpleName
@@ -24,11 +22,14 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     // also used to check if the search should auto-open
     var lastSearchFilter: String = ""
 
+    // todo: Perhaps creating binders in the viewmodel isn't a good idea?
+    // decide if we wanna do that, return a "search results" composite object, or some sort of typed data stream
+
     /**
      * Publicly exposed livedata containing the search results.
      * It is not recommended to update this directly, and instead observe.
      */
-    val searchResults = MutableLiveData<List<Any>>()
+    val searchResults = MutableLiveData<List<SimpleUniversalBinder>>()
 
     /**
      * Updates the search filter and begins searching.
@@ -60,16 +61,16 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
      * Internal helper that retrieves search results synchronously.
      * Run this on a background thread.
      */
-    private fun getResultsSync(filterStr: String): List<Any> {
+    private fun getResultsSync(filterStr: String): List<SimpleUniversalBinder> {
         if (filterStr == "") {
             return emptyList()
         }
 
-        val results = mutableListOf<Any>()
+        val results = mutableListOf<SimpleUniversalBinder>()
 
-        results.addAll(dao.searchLocations(filterStr))
-        results.addAll(dao.searchMonsters(filterStr))
-        results.addAll(dao.searchItems(filterStr))
+        results.addAll(dao.searchLocations(filterStr).map(::createLocationBinder))
+        results.addAll(dao.searchMonsters(filterStr).map(::createMonsterBinder))
+        results.addAll(dao.searchItems(filterStr).map(::createItemBinder))
 
         return results
     }

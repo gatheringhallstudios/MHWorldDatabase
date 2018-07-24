@@ -71,9 +71,9 @@ abstract class ItemDao {
 
     @Query("""
         SELECT c.id,
-        r.id result_id, rt.name result_name, r.icon_name result_icon_name, r.icon_color result_icon_color,
-        f.id first_id, ft.name first_name, f.icon_name first_icon_name, f.icon_color first_icon_color,
-        s.id second_id, st.name second_name, s.icon_name second_icon_name, s.icon_color second_icon_color,
+        r.id result_id, rt.name result_name, r.icon_name result_icon_name, r.icon_color result_icon_color, r.category result_category,
+        f.id first_id, ft.name first_name, f.icon_name first_icon_name, f.icon_color first_icon_color, f.category first_category,
+        s.id second_id, st.name second_name, s.icon_name second_icon_name, s.icon_color second_icon_color, s.category second_category,
         c.quantity quantity
         FROM item_combination c
             JOIN item r

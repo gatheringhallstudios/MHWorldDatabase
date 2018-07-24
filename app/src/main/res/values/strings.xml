@@ -7,11 +7,19 @@
 
     <string name="action_search">Settings</string>
 
-    <!-- Simple descriptor for data types -->
+    <!-- Simple descriptor for data types (including modified descriptors -->
+    <string name="type_location">Location</string>
     <string name="type_monster">Monster</string>
+    <string name="type_monster_small">Monster (Small)</string>
+    <string name="type_monster_large">Monster (Large)</string>
     <string name="type_charm">Charm</string>
     <string name="type_armor">Armor</string>
     <string name="type_weapon">Weapon</string>
+    <string name="type_item">Item</string>
+    <string name="type_item_basic">Item</string>
+    <string name="type_item_material">Material</string>
+    <string name="type_item_ammo">Ammo</string>
+    <string name="type_item_misc">Misc Item</string>
 
     <string name="low_rank_short">LR</string>
     <string name="high_rank_short">HR</string>
