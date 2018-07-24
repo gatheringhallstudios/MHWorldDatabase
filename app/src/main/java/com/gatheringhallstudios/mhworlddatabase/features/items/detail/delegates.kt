@@ -39,7 +39,7 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation, View>() {
 
 /**
  * Used to display the monsters that a particular item can come from.
- * This is the "reverse" of MonsterRewardAdapterDelegate
+ * This is the "reverse" of MonsterRewardAdapterDelegate.
  */
 class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward, View>() {
     override fun isForViewType(obj: Any) = obj is ItemReward
@@ -68,44 +68,4 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward, View>()
         view.value_text.text = view.resources.getString(R.string.percentage, data.percentage)
         view.subvalue_text.text = view.resources.getString(R.string.quantity, data.stack)
     }
-}
-
-class CraftResult(
-        val name: String?,
-        val value: String?,
-        val icon: Drawable?,
-        val clickFn: (v: View) -> Unit
-)
-
-interface CraftResultBinder {
-    fun build(ctx: Context): CraftResult
-}
-
-fun createCraftBinder(fn: (Context) -> CraftResult): CraftResultBinder {
-    return object: CraftResultBinder {
-        override fun build(ctx: Context) = fn(ctx)
-    }
-}
-
-/**
- * An adapter delegate that renders for any simple craft result object.
- * The objects rendered must be CraftResultBinders, which provide callback functions
- * to general certain pieces of information.
- */
-class ItemCraftResultAdapterDelegate: SimpleListDelegate<CraftResultBinder, IconLabelTextCell>() {
-    override fun isForViewType(obj: Any) = obj is CraftResultBinder
-
-    override fun onCreateView(parent: ViewGroup): View {
-        return IconLabelTextCell(parent.context)
-    }
-
-    override fun bindView(view: IconLabelTextCell, data: CraftResultBinder) {
-        val result = data.build(view.context)
-        view.setLeftIconDrawable(result.icon)
-        view.setLabelText(result.name)
-        view.setValueText(result.value)
-
-        view.setOnClickListener { result.clickFn(view) }
-    }
-
 }
