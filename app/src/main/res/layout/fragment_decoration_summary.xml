@@ -12,7 +12,7 @@
 
         <ImageView
             android:id="@+id/decoration_icon"
-            style="@style/IconXLarge.Decorated"
+            style="@style/IconXLarge"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
             android:src="@drawable/ic_question_mark"

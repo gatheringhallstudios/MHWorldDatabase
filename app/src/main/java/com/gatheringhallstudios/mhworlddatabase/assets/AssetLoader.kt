@@ -42,9 +42,9 @@ class AssetLoader(context: Context) {
         return ctx.getVectorDrawable("Charm", "rare${charm.rarity}")
     }
 
-    fun loadIconFor(decoration: Decoration): Drawable? {
-        val assetName = "Decoration${decoration.data.slot}"
-        return ctx.getVectorDrawable(assetName, decoration.data.icon_color)
+    fun loadIconFor(decoration: DecorationBase): Drawable? {
+        val assetName = "Decoration${decoration.slot}"
+        return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 
     fun loadSkillIcon(color: String?): Drawable? {

@@ -25,12 +25,26 @@ data class LocationItem(
 )
 
 
-data class Decoration(
-        @Embedded val data: DecorationEntity,
-        val name: String?
-) {
-    val id get() = data.id
-}
+open class DecorationBase(
+        val id: Int,
+        val name: String?,
+        val slot: Int,
+        val icon_color: String?
+)
+
+class Decoration(
+        id: Int,
+        name: String?,
+        slot: Int,
+        icon_color: String?,
+
+        val rarity: Int,
+        @Embedded(prefix = "skill_") val skillTree: SkillTreeBase,
+        val mysterious_feystone_chance: Double,
+        val glowing_feystone_chance: Double,
+        val worn_feystone_chance: Double,
+        val warped_feystone_chance: Double
+): DecorationBase(id, name, slot, icon_color)
 
 
 /**

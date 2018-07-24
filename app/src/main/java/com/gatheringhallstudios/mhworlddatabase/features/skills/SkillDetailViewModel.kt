@@ -6,10 +6,7 @@ import android.arch.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkill
-import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkill
-import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
-import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 
 class SkillDetailViewModel(application: Application) :  AndroidViewModel(application) {
     private val skillDao : SkillDao = MHWDatabase.getDatabase(application).skillDao()
@@ -18,7 +15,7 @@ class SkillDetailViewModel(application: Application) :  AndroidViewModel(applica
     lateinit var skillTreeFull: LiveData<SkillTreeFull>
     lateinit var armorPieces: LiveData<List<ArmorSkill>>
     lateinit var charms: LiveData<List<CharmSkill>>
-    lateinit var decorations: LiveData<List<Decoration>>
+    lateinit var decorations: LiveData<List<DecorationBase>>
 
     fun setSkill(skillTreeId : Int) {
         if(this.id == skillTreeId) {

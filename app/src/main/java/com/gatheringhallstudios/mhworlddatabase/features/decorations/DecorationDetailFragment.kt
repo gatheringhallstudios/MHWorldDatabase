@@ -13,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
 import kotlinx.android.synthetic.main.fragment_decoration_summary.*
 
 
@@ -36,10 +37,26 @@ class DecorationDetailFragment : Fragment() {
 
         viewModel.setDecoration(decorationId)
         viewModel.decorationData.observe(this, Observer<Decoration>(::populateDecoration))
-        viewModel.skillTreeData.observe(this, Observer<SkillTreeFull>(::populateSkill))
     }
 
-    private fun populateSkill(skillTreeFull: SkillTreeFull?) {
+    private fun populateDecoration(decoration: Decoration?) {
+        if (decoration == null) return
+
+        val icon = assetLoader.loadIconFor(decoration)
+        decoration_icon.setImageDrawable(icon)
+        decoration_name.text = decoration.name
+        decoration_description.text = getString(R.string.rarity_string, decoration.rarity)
+        decoration_description.setTextColor(assetLoader.loadRarityColor(decoration.rarity))
+
+        mysterious_feystone_chance_value.text = getString(R.string.percentage, decoration.mysterious_feystone_chance)
+        gleaming_feystone_chance_value.text = getString(R.string.percentage, decoration.glowing_feystone_chance)
+        worn_feystone_chance_value.text = getString(R.string.percentage, decoration.worn_feystone_chance)
+        warped_feystone_chance_value.text = getString(R.string.percentage, decoration.warped_feystone_chance)
+
+        populateSkill(decoration.skillTree)
+    }
+
+    private fun populateSkill(skillTreeFull: SkillTreeBase?) {
         if(skillTreeFull == null) return
 
         if (decoration_skill_layout.childCount > 0)
@@ -51,28 +68,8 @@ class DecorationDetailFragment : Fragment() {
         view.setLeftIconDrawable(icon)
         view.setLabelText(skillTreeFull.name)
         view.removeDecorator()
-        view.setOnClickListener { v -> getRouter().navigateSkillDetail(skillTreeFull.id) }
+        view.setOnClickListener { getRouter().navigateSkillDetail(skillTreeFull.id) }
 
         decoration_skill_layout.addView(view)
-    }
-
-    private fun populateDecoration(decoration: Decoration?) {
-        if (decoration == null) return
-
-        val icon = assetLoader.loadIconFor(decoration)
-        decoration_name.text = decoration.name
-        decoration_description.text = getString(R.string.rarity_string, decoration.data.rarity)
-        decoration_description.setTextColor(assetLoader.loadRarityColor(decoration.data.rarity))
-        mysterious_feystone_chance_value.text = "${decoration.data.mysterious_feystone_chance}%"
-        gleaming_feystone_chance_value.text = "${decoration.data.glowing_feystone_chance}%"
-        worn_feystone_chance_value.text = "${decoration.data.worn_feystone_chance}%"
-        warped_feystone_chance_value.text = "${decoration.data.warped_feystone_chance}%"
-        decoration_icon.setImageDrawable(icon)
-        removeDecorator()
-    }
-
-    private fun removeDecorator() {
-        decoration_icon.background = null
-        decoration_icon.setPadding(0, 0, 0, 0)
     }
 }

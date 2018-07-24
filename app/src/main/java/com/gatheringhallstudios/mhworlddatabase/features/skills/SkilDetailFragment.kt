@@ -37,10 +37,10 @@ class SkillDetailFragment : Fragment() {
         val skillTreeId = args!!.getInt(ARG_SKILLTREE_ID)
 
         viewModel.setSkill(skillTreeId)
-        viewModel.skillTreeFull.observe(this, Observer<SkillTreeFull>(::populateSkill))
-        viewModel.armorPieces.observe(this, Observer<List<ArmorSkill>>(::populateArmor))
-        viewModel.charms.observe(this, Observer<List<CharmSkill>>(::populateCharms))
-        viewModel.decorations.observe(this, Observer<List<Decoration>>(::populateDecorations))
+        viewModel.skillTreeFull.observe(this, Observer(::populateSkill))
+        viewModel.armorPieces.observe(this, Observer(::populateArmor))
+        viewModel.charms.observe(this, Observer(::populateCharms))
+        viewModel.decorations.observe(this, Observer(::populateDecorations))
     }
 
     private fun populateSkill(skillTreeFull: SkillTreeFull?) {
@@ -124,7 +124,7 @@ class SkillDetailFragment : Fragment() {
         }
     }
 
-    private fun populateDecorations(decorations: List<Decoration>?) {
+    private fun populateDecorations(decorations: List<DecorationBase>?) {
         if (decoration_layout.childCount > 0) {
             decoration_layout.removeAllViews()
         }

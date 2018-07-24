@@ -93,12 +93,12 @@ abstract class SkillDao {
     abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkill>>
 
     @Query("""
-        SELECT d.*, dt.name
+        SELECT d.id, dt.name, d.slot, d.icon_color
         FROM decoration d
             JOIN decoration_text dt
                 ON dt.id = d.id
                 AND dt.lang_id = :langId
         WHERE d.skilltree_id = :skillTreeId
-        ORDER BY dt.name""")
-    abstract fun loadDecorationsWithSkill(langId: String, skillTreeId: Int): LiveData<List<Decoration>>
+        ORDER BY dt.name ASC""")
+    abstract fun loadDecorationsWithSkill(langId: String, skillTreeId: Int): LiveData<List<DecorationBase>>
 }

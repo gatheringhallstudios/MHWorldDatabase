@@ -20,7 +20,6 @@ data class DecorationEntity(
         val slot: Int,
         val icon_color: String?,
 
-        // the below may be moved out to some sort of feystone table and require a join to get the chances?
         val mysterious_feystone_chance: Double,
         val glowing_feystone_chance: Double,
         val worn_feystone_chance: Double,

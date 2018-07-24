@@ -8,20 +8,25 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 @Dao
 abstract class DecorationDao {
     @Query("""
-        SELECT d.*, dt.name
+        SELECT d.id, dt.name, d.slot, d.icon_color
         FROM decoration d
             JOIN decoration_text dt
                 ON dt.id = d.id
                 AND dt.lang_id = :langId
         ORDER BY dt.name""")
-    abstract fun loadDecorations(langId: String): LiveData<List<Decoration>>
+    abstract fun loadDecorations(langId: String): LiveData<List<DecorationBase>>
 
     @Query("""
-        SELECT d.*, dt.name
+        SELECT d.*, dtext.name, s.id skill_id, stext.name skill_name, s.icon_color skill_icon_color
         FROM decoration d
-            JOIN decoration_text dt
-                ON dt.id = d.id
-                AND dt.lang_id = :langId
-        WHERE d.id = :decorationId""")
+            JOIN decoration_text dtext
+                ON dtext.id = d.id
+            JOIN skilltree s
+                ON s.id = d.skilltree_id
+            JOIN skilltree_text stext
+                ON stext.id = s.id
+                AND stext.lang_id = dtext.lang_id
+        WHERE d.id = :decorationId
+          AND dtext.lang_id = :langId""")
     abstract fun loadDecoration(langId: String, decorationId: Int): LiveData<Decoration>
 }
