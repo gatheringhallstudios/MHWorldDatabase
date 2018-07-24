@@ -13,20 +13,27 @@ val timeout: Long = 30 * 1000
 @Dao
 abstract class SearchDao {
 
-    val locationDataCache = CachedValue(timeout) {
+    private val locationDataCache = CachedValue(timeout) {
         loadAllLocationsSync(AppSettings.dataLocale)
     }
 
-
-    val monsterDataCache = CachedValue(timeout) {
+    private val monsterDataCache = CachedValue(timeout) {
         loadAllMonstersSync(AppSettings.dataLocale)
     }
 
-    val skillTreeDataCache = CachedValue(timeout) {
+    private val skillTreeDataCache = CachedValue(timeout) {
         loadAllSkilltreesSync(AppSettings.dataLocale)
     }
 
-    val itemDataCache = CachedValue(timeout) {
+    private val decorationDataCache = CachedValue(timeout) {
+        loadAllDecorationsSync(AppSettings.dataLocale)
+    }
+
+    private val armorDataCache = CachedValue(timeout) {
+        loadAllArmorSync(AppSettings.dataLocale)
+    }
+
+    private val itemDataCache = CachedValue(timeout) {
         loadAllItemsSync(AppSettings.dataLocale)
     }
 
@@ -39,6 +46,21 @@ abstract class SearchDao {
     fun searchMonsters(searchFilter: String): List<MonsterBase> {
         val filter = SearchFilter(searchFilter)
         return monsterDataCache.get().filter { filter.matches(it.name) }
+    }
+
+    fun searchSkillTrees(searchFilter: String): List<SkillTreeBase> {
+        val filter = SearchFilter(searchFilter)
+        return skillTreeDataCache.get().filter { filter.matches(it.name) }
+    }
+
+    fun searchDecorations(searchFilter: String): List<DecorationBase> {
+        val filter = SearchFilter(searchFilter)
+        return decorationDataCache.get().filter { filter.matches(it.name) }
+    }
+
+    fun searchArmor(searchFilter: String): List<ArmorBase> {
+        val filter = SearchFilter(searchFilter)
+        return armorDataCache.get().filter { filter.matches(it.name) }
     }
 
     fun searchItems(searchFilter: String): List<ItemBase> {
@@ -74,16 +96,26 @@ abstract class SearchDao {
         ORDER BY st.name ASC
     """)
     protected abstract fun loadAllSkilltreesSync(langId: String): List<SkillTreeBase>
-//
-//    @Query("""
-//        SELECT *
-//        FROM decoration
-//    """)
-//    protected abstract fun loadAllDecorationsSync(langId: String): List<Decoration>
+
+    @Query("""
+        SELECT d.id, dt.name, d.slot, d.icon_color
+        FROM decoration d
+            JOIN decoration_text dt USING (id)
+        WHERE dt.lang_id = :langId
+        ORDER BY dt.name ASC
+    """)
+    protected abstract fun loadAllDecorationsSync(langId: String): List<DecorationBase>
 //
 //    protected abstract fun loadAllCharmsSync(langId: String): List<Charm>
-//
-//    protected abstract fun loadAllArmorSync(langId: String): List<ArmorBase>
+
+    @Query("""
+        SELECT a.id, at.name, a.rarity, a.armor_type
+        FROM armor a
+            JOIN armor_text at USING (id)
+        WHERE at.lang_id = :langId
+        ORDER BY at.name ASC
+    """)
+    protected abstract fun loadAllArmorSync(langId: String): List<ArmorBase>
 
     @Query("""
         SELECT i.id, itext.name, i.icon_name, i.category, i.icon_color

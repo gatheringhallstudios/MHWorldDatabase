@@ -4,9 +4,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinding
 import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
-import com.gatheringhallstudios.mhworlddatabase.data.models.ItemBase
-import com.gatheringhallstudios.mhworlddatabase.data.models.Location
-import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterBase
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -29,6 +27,30 @@ fun createMonsterBinder(monster: MonsterBase) = createSimpleUniversalBinder { ct
     })
     SimpleUniversalBinding(monster.name, sizeString, icon) {
         it.getRouter().navigateMonsterDetail(monster.id)
+    }
+}
+
+fun createSkillTreeBinder(skillTree: SkillTreeBase) = createSimpleUniversalBinder { ctx ->
+    val icon = ctx.assetLoader.loadIconFor(skillTree)
+    val typeString = ctx.getString(R.string.type_skilltree)
+    SimpleUniversalBinding(skillTree.name, typeString, icon) {
+        it.getRouter().navigateSkillDetail(skillTree.id)
+    }
+}
+
+fun createDecorationBinder(decoration: DecorationBase) = createSimpleUniversalBinder { ctx ->
+    val icon = ctx.assetLoader.loadIconFor(decoration)
+    val typeString = ctx.getString(R.string.type_decoration)
+    SimpleUniversalBinding(decoration.name, typeString, icon) {
+        it.getRouter().navigateDecorationDetail(decoration.id)
+    }
+}
+
+fun createArmorBinder(armor: ArmorBase) = createSimpleUniversalBinder { ctx ->
+    val icon = ctx.assetLoader.loadIconFor(armor)
+    val typeString = ctx.getString(R.string.type_armor)
+    SimpleUniversalBinding(armor.name, typeString, icon) {
+        it.getRouter().navigateArmorDetail(armor.id)
     }
 }
 
