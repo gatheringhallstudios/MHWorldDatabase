@@ -32,6 +32,10 @@
             android:id="@+id/locationListDestination"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/locations_title" />
+        <item
+            android:id="@+id/charmListDestination"
+            android:icon="@xml/ic_equipment_charm_base"
+            android:title="@string/charms_title" />
     </group>
 
     <item android:title="Other">
