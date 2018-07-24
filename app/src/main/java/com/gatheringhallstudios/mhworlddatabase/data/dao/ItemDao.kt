@@ -33,7 +33,8 @@ abstract class ItemDao {
      * Loads all possible gathering locations for an item synchronously
      */
     @Query("""
-        SELECT li.*, lt.name location_name
+        SELECT li.location_id, lt.name location_name,
+            li.rank, li.area, li.stack, li.percentage, li.nodes
         FROM location_item li
             JOIN location_text lt
                 ON lt.id = li.location_id

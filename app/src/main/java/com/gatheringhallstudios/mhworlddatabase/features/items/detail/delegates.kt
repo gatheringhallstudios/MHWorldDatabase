@@ -1,21 +1,17 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 
-import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
-import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemReward
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.*
 import kotlinx.android.synthetic.main.listitem_reward.view.*
-import kotlin.reflect.KClass
-import kotlin.reflect.KFunction
 
 
 /**
@@ -31,9 +27,16 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation, View>() {
     }
 
     override fun bindView(view: View, data: ItemLocation) {
-        view.reward_name.text = view.resources.getString(R.string.location_area, data.data.area)
-        view.reward_stack.text = "x ${data.data.stack}"
-        view.reward_percent.text = "${data.data.percentage}%"
+        val ctx = view.context
+
+        view.reward_icon.setImageDrawable(ctx.assetLoader.loadIconFor(data.location))
+        view.reward_name.text = ctx.getString(R.string.location_area, data.area)
+        view.reward_stack.text = ctx.getString(R.string.quantity, data.stack)
+        view.reward_percent.text = ctx.getString(R.string.percentage, data.percentage)
+
+        view.setOnClickListener {
+            it.getRouter().navigateLocationDetail(data.location.id)
+        }
     }
 }
 
@@ -67,5 +70,9 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward, View>()
         view.sublabel_text.text = source
         view.value_text.text = view.resources.getString(R.string.percentage, data.percentage)
         view.subvalue_text.text = view.resources.getString(R.string.quantity, data.stack)
+
+        view.setOnClickListener {
+            it.getRouter().navigateMonsterDetail(data.monster.id)
+        }
     }
 }

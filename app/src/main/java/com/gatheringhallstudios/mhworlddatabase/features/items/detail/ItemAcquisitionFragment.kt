@@ -46,8 +46,9 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
         }
 
         if (data.locations.isNotEmpty()) {
+            // todo: localize
             val groups = data.locations.groupBy {
-                "${it.data.rank} ${it.location_name}"
+                "${it.rank} ${it.location.name}"
             }
 
             adapter.addSection(getString(R.string.item_header_gathering), groups)

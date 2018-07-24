@@ -44,8 +44,12 @@ class ItemCombination(
 )
 
 class ItemLocation(
-        @Embedded val data: LocationItemEntity,
-        val location_name: String
+        @Embedded(prefix = "location_") val location: Location,
+        val rank: Rank,
+        val area: Int,
+        val stack: Int,
+        val percentage: Int,
+        val nodes: Int
 )
 
 class ItemReward(
