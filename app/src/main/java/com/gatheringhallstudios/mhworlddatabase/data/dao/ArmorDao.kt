@@ -114,7 +114,7 @@ abstract class ArmorDao {
     abstract fun loadArmorComponentsSync(langId: String, armorId: Int) : List<ItemQuantity>
 
     @Query("""
-        SELECT s.id skill_id, stt.name skill_name, s.icon_color skill_color, askill.level quantity
+        SELECT s.id skill_id, stt.name skill_name, s.icon_color skill_color, askill.level level
         FROM armor_skill askill
             JOIN armor a
                 ON askill.armor_id = a.id
@@ -125,5 +125,5 @@ abstract class ArmorDao {
             WHERE stt.lang_id = :langId
                AND askill.armor_id = :armorId
             ORDER BY askill.skilltree_id ASC""")
-    abstract fun loadArmorSkillsSync(langId: String, armorId: Int) : List<SkillQuantity>
+    abstract fun loadArmorSkillsSync(langId: String, armorId: Int) : List<SkillLevel>
 }

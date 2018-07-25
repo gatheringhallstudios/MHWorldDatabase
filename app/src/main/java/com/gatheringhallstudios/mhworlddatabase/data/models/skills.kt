@@ -39,7 +39,29 @@ data class Skill(
         val description: String?
 )
 
-class SkillQuantity(
+
+
+class SkillLevel(
         @Embedded(prefix = "skill_") val skillTree: SkillTreeBase,
-        val quantity: Int
+        val level: Int
+)
+
+/**
+ * Represents an armor and its skill level. Used as part of a composite result.
+ * When you load this, it is assumed that you already know what the skill is.
+ */
+class ArmorSkillLevel(
+        @Embedded val armor: ArmorBase,
+        val level: Int
+)
+
+
+/**
+ * Represents a charm and its skill level. Used as part of a composite result.
+ * When you load this, it is assumed that you already know what the skill is.
+ */
+class CharmSkill(
+        @Embedded(prefix = "skill_") val skill: SkillTreeBase?, // todo: remove
+        @Embedded(prefix = "charm_") val data: CharmBase?,
+        val level: Int
 )

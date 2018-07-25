@@ -54,7 +54,7 @@ class SkillDetailFragment : Fragment() {
         populateDescriptions(skillTreeFull.skills)
     }
 
-    private fun populateArmor(armorSkills: List<ArmorSkill>?) {
+    private fun populateArmor(armorSkills: List<ArmorSkillLevel>?) {
         if (armor_layout.childCount > 0)
             armor_layout.removeAllViews()
 
@@ -65,7 +65,7 @@ class SkillDetailFragment : Fragment() {
 
         for (armorSkillView in armorSkills!!) {
             val view = IconLabelTextCell(context)
-            val levels = "+${armorSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.skillLevel)}"
+            val levels = "+${armorSkillView.level} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.level)}"
 
             val icon = assetLoader.loadIconFor(armorSkillView.armor)
             view.setLeftIconDrawable(icon)
@@ -112,7 +112,7 @@ class SkillDetailFragment : Fragment() {
             val view = IconLabelTextCell(context)
 
             val icon = assetLoader.loadIconFor(charmSkillView.data!!)
-            val levels = "+${charmSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, charmSkillView.skillLevel)}"
+            val levels = "+${charmSkillView.level} ${resources.getQuantityString(R.plurals.skills_level, charmSkillView.level)}"
 
             view.setLeftIconDrawable(icon)
             view.setLabelText(charmSkillView.data.name)

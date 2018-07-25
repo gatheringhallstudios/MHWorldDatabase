@@ -70,7 +70,7 @@ abstract class SkillDao {
 
 
     @Query("""
-        SELECT c.id AS charm_id, c.previous_id AS charm_previous_id, c.rarity AS charm_rarity, ct.name AS charm_name, cs.level skillLevel
+        SELECT c.id AS charm_id, c.previous_id AS charm_previous_id, c.rarity AS charm_rarity, ct.name AS charm_name, cs.level level
             FROM charm c
              JOIN charm_text ct USING (id)
              JOIN charm_skill cs ON (id = charm_id)
@@ -82,7 +82,7 @@ abstract class SkillDao {
 
 
     @Query("""
-        SELECT a.*, at.name, askill.skilltree_id, askill.level skillLevel, stt.icon_color
+        SELECT a.*, at.name, askill.skilltree_id, askill.level level, stt.icon_color
             FROM armor a
             JOIN armor_text at ON a.id = at.id
             JOIN armor_skill askill ON a.id = askill.armor_id
@@ -90,7 +90,7 @@ abstract class SkillDao {
             WHERE at.lang_id = :langId
                AND askill.skilltree_id = :skillTreeId
             ORDER BY a.id ASC""")
-    abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkill>>
+    abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkillLevel>>
 
     @Query("""
         SELECT d.id, dt.name, d.slot, d.icon_color

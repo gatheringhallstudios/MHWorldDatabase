@@ -46,7 +46,7 @@ abstract class CharmDao {
         return Transformations.map(charm) { data ->
             val skills = data.groupBy { it.skillName }.values.map {
                 val buffer = it.first()
-                CharmSkill(skillLevel = buffer.skillLevel,
+                CharmSkill(level = buffer.skillLevel,
                         skill = SkillTreeBase(id = buffer.skilltree_id, name = buffer.skillName, icon_color = buffer.skillIconColor),
                         data = null)
             }

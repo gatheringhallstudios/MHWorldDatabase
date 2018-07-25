@@ -123,7 +123,7 @@ class CharmDetailFragment : Fragment() {
             val icon = assetLoader.loadSkillIcon(it.skill!!.icon_color)
             view.setLeftIconDrawable(icon)
             view.setLabelText(it.skill.name)
-            view.setValueText("+${it.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, it.skillLevel)}")
+            view.setValueText("+${it.level} ${resources.getQuantityString(R.plurals.skills_level, it.level)}")
             view.removeDecorator()
             view.setOnClickListener { v -> getRouter().navigateSkillDetail(it.skill.id) }
 

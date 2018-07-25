@@ -133,7 +133,7 @@ class ArmorDetailFragment : Fragment() {
         }
     }
 
-    private fun populateSkills(skills: List<SkillQuantity>) {
+    private fun populateSkills(skills: List<SkillLevel>) {
         if (skills.isEmpty()) {
             armor_skill_section.visibility = View.GONE
             return
@@ -146,7 +146,7 @@ class ArmorDetailFragment : Fragment() {
             //Set the label for the Set name
             val view = IconLabelTextCell(context)
             val icon = assetLoader.loadIconFor(skill.skillTree)
-            val levels = "+${skill.quantity} ${resources.getQuantityString(R.plurals.skills_level, skill.quantity)}"
+            val levels = "+${skill.level} ${resources.getQuantityString(R.plurals.skills_level, skill.level)}"
 
             view.removeDecorator()
             view.setLeftIconDrawable(icon)
