@@ -7,14 +7,10 @@ import android.arch.lifecycle.Transformations
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.CharmDao
-import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkill
-import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
 
 class CharmDetailViewModel(application: Application) : AndroidViewModel(application) {
     private val charmDao: CharmDao = MHWDatabase.getDatabase(application).charmDao()
-    private val skillDao: SkillDao = MHWDatabase.getDatabase(application).skillDao()
 
     private var id: Int = -1
     private var previousId: Int? = -1

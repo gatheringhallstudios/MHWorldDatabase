@@ -111,14 +111,14 @@ class SkillDetailFragment : Fragment() {
         for (charmSkillView in charmSkills!!) {
             val view = IconLabelTextCell(context)
 
-            val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
+            val icon = assetLoader.loadIconFor(charmSkillView.data!!)
             val levels = "+${charmSkillView.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, charmSkillView.skillLevel)}"
 
             view.setLeftIconDrawable(icon)
-            view.setLabelText(charmSkillView.name)
+            view.setLabelText(charmSkillView.data.name)
             view.setValueText(levels)
             //TODO: link up on click listener to charm detail page once done
-            //view.setOnClickListener {v -> getRouter().navigateCharmDetail()}
+            view.setOnClickListener {v -> getRouter().navigateCharmDetail(charmSkillView.data.id)}
 
             charm_layout.addView(view)
         }

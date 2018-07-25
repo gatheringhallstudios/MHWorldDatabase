@@ -45,7 +45,7 @@ class CharmDetailFragment : Fragment() {
     fun populateCharm(charmFull: CharmFull?) {
         if (charmFull == null) return
 
-        charm_name.text = charmFull.name
+        charm_name.text = charmFull.data.name
         charm_rarity.text = getString(R.string.rarity_string, charmFull.data.rarity)
         charm_rarity.setTextColor(assetLoader.loadRarityColor(charmFull.data.rarity))
         val icon = assetLoader.loadIconFor(charmFull)
@@ -68,7 +68,7 @@ class CharmDetailFragment : Fragment() {
         val view = IconLabelTextCell(context)
         val icon = AssetLoader(view.context).loadIconFor(charmFull)
         view.setLeftIconDrawable(icon)
-        view.setLabelText(charmFull.name)
+        view.setLabelText(charmFull.data.name)
 
         view.setOnClickListener { getRouter().navigateCharmDetail(charmFull.data.id) }
 
@@ -109,15 +109,22 @@ class CharmDetailFragment : Fragment() {
         if (charm_skill_layout.childCount > 0)
             charm_skill_layout.removeAllViews()
 
-        val view = IconLabelTextCell(context)
+        if (charmFull.skills.isEmpty()) {
+            insertEmptyState(charm_skill_layout)
+            return
+        }
 
-        val icon = assetLoader.loadSkillIcon(charmFull.skillIconColor)
-        view.setLeftIconDrawable(icon)
-        view.setLabelText(charmFull.skillName)
-        view.setValueText("+${charmFull.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, charmFull.skillLevel)}")
-        view.removeDecorator()
-        view.setOnClickListener { v -> getRouter().navigateSkillDetail(charmFull.skilltree_id) }
+        charmFull.skills.map {
+            val view = IconLabelTextCell(context)
 
-        charm_skill_layout.addView(view)
+            val icon = assetLoader.loadSkillIcon(it.skill!!.icon_color)
+            view.setLeftIconDrawable(icon)
+            view.setLabelText(it.skill.name)
+            view.setValueText("+${it.skillLevel} ${resources.getQuantityString(R.plurals.skills_level, it.skillLevel)}")
+            view.removeDecorator()
+            view.setOnClickListener { v -> getRouter().navigateSkillDetail(it.skill.id) }
+
+            charm_skill_layout.addView(view)
+        }
     }
 }

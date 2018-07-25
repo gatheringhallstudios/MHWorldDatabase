@@ -19,12 +19,12 @@ abstract class CharmDao {
 
     @Query("""
         SELECT c.*, ct.name, cr.quantity AS component_quantity, cs.level AS skillLevel, cs.skilltree_id, i.id AS component_id, i.category AS component_category ,it.name AS component_name, s.icon_color AS skillIconColor, st.name AS skillName
-        FROM charm c
+        FROM charm_recipe cr
+            JOIN charm c
+                ON c.id = cr.charm_id
             JOIN charm_text ct
                 ON ct.id = c.id
                 AND ct.lang_id = :langId
-            JOIN charm_recipe cr
-                ON c.id = cr.charm_id
             JOIN charm_skill cs
                 ON c.id = cs.charm_id
             JOIN item i
@@ -41,23 +41,26 @@ abstract class CharmDao {
     abstract fun loadCharm(langId: String, charmId: Int): LiveData<List<Charm>>
 
     fun loadCharmFull(langId: String, charmId: Int): LiveData<CharmFull> {
-        val charmFull = loadCharm(langId, charmId)
+        val charm = loadCharm(langId, charmId)
 
-        return Transformations.map(charmFull) { data ->
-            val firstItem = data.first()
-            val components = data.map {
-                CharmComponent(result = it.component.result, quantity = it.component.quantity)
+        return Transformations.map(charm) { data ->
+            val skills = data.groupBy { it.skillName }.values.map {
+                val buffer = it.first()
+                CharmSkill(skillLevel = buffer.skillLevel,
+                        skill = SkillTreeBase(id = buffer.skilltree_id, name = buffer.skillName, icon_color = buffer.skillIconColor),
+                        data = null)
             }
 
+            val components = data.groupBy {it.component.result.name}.values.map {
+                val buffer = it.first()
+                buffer.component
+            }
+
+            val firstItem = data.first()
             CharmFull(
                     components = components,
-                    data = firstItem.data,
-                    name = firstItem.name,
-                    description = firstItem.description,
-                    skillLevel = firstItem.skillLevel,
-                    skilltree_id = firstItem.skilltree_id,
-                    skillName = firstItem.skillName,
-                    skillIconColor = firstItem.skillIconColor
+                    skills = skills,
+                    data = CharmBase(id = firstItem.id, rarity = firstItem.rarity, previous_id = firstItem.previous_id, name = firstItem.skillName)
             )
         }
     }
