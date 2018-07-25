@@ -107,7 +107,7 @@ abstract class ItemDao {
     }
 
     @Query("""
-        SELECT *
+        SELECT c.id, c.rarity, c.previous_id, ctext.name
         FROM charm_recipe cr
             JOIN charm c
                 ON c.id = cr.charm_id
@@ -116,7 +116,7 @@ abstract class ItemDao {
         WHERE cr.item_id = :itemId
           AND ctext.lang_id = :langId
     """)
-    abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<CharmBase>
+    abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<Charm>
 
     @Query("""
         SELECT armor_id id, name, armor_type, rarity

@@ -1,10 +1,10 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 @Dao
 abstract class CharmDao {
@@ -15,53 +15,50 @@ abstract class CharmDao {
                 ON ct.id = c.id
                 AND ct.lang_id = :langId
         ORDER BY ct.name""")
-    abstract fun loadCharms(langId: String): LiveData<List<CharmBase>>
+    abstract fun loadCharms(langId: String): LiveData<List<Charm>>
+
+    /**
+     * Loads full data for a charm asynchronously.
+     * Full data includes all join tables like items and skills
+     */
+    fun loadCharmFull(langId: String, charmId: Int) = createLiveData {
+        CharmFull(
+                charm = loadCharmSync(langId, charmId),
+                skills = loadCharmSkillsSync(langId, charmId),
+                components = loadCharmComponentsSync(langId, charmId)
+        )
+    }
 
     @Query("""
-        SELECT c.*, ct.name, cr.quantity AS component_quantity, cs.level AS skillLevel, cs.skilltree_id, i.id AS component_id, i.category AS component_category ,it.name AS component_name, s.icon_color AS skillIconColor, st.name AS skillName
+        SELECT c.*, ct.name
+        FROM charm c JOIN charm_text ct USING (id)
+        WHERE ct.lang_id = :langId
+          AND c.id = :charmId
+    """)
+    protected abstract fun loadCharmSync(langId: String, charmId: Int): Charm
+
+    @Query("""
+        SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
+            i.category item_category, i.icon_color item_icon_color, cr.quantity
         FROM charm_recipe cr
-            JOIN charm c
-                ON c.id = cr.charm_id
-            JOIN charm_text ct
-                ON ct.id = c.id
-                AND ct.lang_id = :langId
-            JOIN charm_skill cs
-                ON c.id = cs.charm_id
             JOIN item i
-                ON cr.item_id = i.id
+                ON i.id = cr.item_id
             JOIN item_text it
-                ON cr.item_id = it.id
-                AND  it.lang_id = :langId
+                ON it.id = i.id
+        WHERE it.lang_id = :langId
+          AND cr.charm_id = :charmId
+    """)
+    protected abstract fun loadCharmComponentsSync(langId: String, charmId: Int): List<ItemQuantity>
+
+    @Query("""
+        SELECT s.id skill_id, stt.name skill_name, s.icon_color skill_icon_color, cs.level level
+        FROM charm_skill cs
             JOIN skilltree s
                 ON cs.skilltree_id = s.id
-            JOIN skilltree_text st
-                ON cs.skilltree_id = st.id
-                AND st.lang_id = :langId
-        WHERE c.id = :charmId""")
-    abstract fun loadCharm(langId: String, charmId: Int): LiveData<List<Charm>>
-
-    fun loadCharmFull(langId: String, charmId: Int): LiveData<CharmFull> {
-        val charm = loadCharm(langId, charmId)
-
-        return Transformations.map(charm) { data ->
-            val skills = data.groupBy { it.skillName }.values.map {
-                val buffer = it.first()
-                CharmSkill(level = buffer.skillLevel,
-                        skill = SkillTreeBase(id = buffer.skilltree_id, name = buffer.skillName, icon_color = buffer.skillIconColor),
-                        data = null)
-            }
-
-            val components = data.groupBy {it.component.result.name}.values.map {
-                val buffer = it.first()
-                buffer.component
-            }
-
-            val firstItem = data.first()
-            CharmFull(
-                    components = components,
-                    skills = skills,
-                    data = CharmBase(id = firstItem.id, rarity = firstItem.rarity, previous_id = firstItem.previous_id, name = firstItem.name)
-            )
-        }
-    }
+            JOIN skilltree_text stt
+                ON stt.id = s.id
+        WHERE stt.lang_id = :langId
+          AND cs.charm_id = :charmId
+    """)
+    protected abstract fun loadCharmSkillsSync(langId: String, charmId: Int): List<SkillLevel>
 }

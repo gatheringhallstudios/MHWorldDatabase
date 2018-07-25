@@ -13,8 +13,9 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.models.CharmComponent
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.fragment_charm_summary.*
 
@@ -42,43 +43,46 @@ class CharmDetailFragment : Fragment() {
         viewModel.previousCharm.observe(this, Observer<CharmFull>(::populatePreviousItem))
     }
 
-    fun populateCharm(charmFull: CharmFull?) {
-        if (charmFull == null) return
+    private fun populateCharm(charmData: CharmFull?) {
+        if (charmData == null) return
 
-        charm_name.text = charmFull.data.name
-        charm_rarity.text = getString(R.string.rarity_string, charmFull.data.rarity)
-        charm_rarity.setTextColor(assetLoader.loadRarityColor(charmFull.data.rarity))
-        val icon = assetLoader.loadIconFor(charmFull)
+        val charm = charmData.charm
+
+        charm_name.text = charm.name
+        charm_rarity.text = getString(R.string.rarity_string, charm.rarity)
+        charm_rarity.setTextColor(assetLoader.loadRarityColor(charm.rarity))
+
+        val icon = assetLoader.loadIconFor(charm)
         charm_icon.setImageDrawable(icon)
 
         previous_item_layout.removeAllViews()
         insertEmptyState(previous_item_layout)
 
-        populateComponents(charmFull.components)
-        populateSkill(charmFull)
+        populateComponents(charmData.components)
+        populateSkills(charmData.skills)
     }
 
-    private fun populatePreviousItem(charmFull: CharmFull?) {
+    private fun populatePreviousItem(charmData: CharmFull?) {
         if (previous_item_layout.childCount > 0) {
             previous_item_layout.removeAllViews()
         }
 
-        if (charmFull == null) {
+        if (charmData == null) {
             insertEmptyState(previous_item_layout)
             return
         }
 
         val view = IconLabelTextCell(context)
-        val icon = AssetLoader(view.context).loadIconFor(charmFull)
+        val icon = AssetLoader(view.context).loadIconFor(charmData.charm)
         view.setLeftIconDrawable(icon)
-        view.setLabelText(charmFull.data.name)
+        view.setLabelText(charmData.charm.name)
 
-        view.setOnClickListener { getRouter().navigateCharmDetail(charmFull.data.id) }
+        view.setOnClickListener { getRouter().navigateCharmDetail(charmData.charm.id) }
 
         previous_item_layout.addView(view)
     }
 
-    private fun populateComponents(components: List<CharmComponent>) {
+    private fun populateComponents(components: List<ItemQuantity>) {
         if (charm_components_layout.childCount > 0) {
             charm_components_layout.removeAllViews()
         }
@@ -88,12 +92,12 @@ class CharmDetailFragment : Fragment() {
             return
         }
 
-        components.map {
+        for (component in components) {
             val view = IconLabelTextCell(context)
-            view.setLeftIconDrawable(assetLoader.loadIconFor(it.result))
-            view.setLabelText(it.result.name)
-            view.setValueText("x${it.quantity}")
-            view.setOnClickListener({ _ -> getRouter().navigateItemDetail(it.result.id) })
+            view.setLeftIconDrawable(assetLoader.loadIconFor(component.item))
+            view.setLabelText(component.item.name)
+            view.setValueText("x${component.quantity}")
+            view.setOnClickListener { getRouter().navigateItemDetail(component.item.id) }
             charm_components_layout.addView(view)
         }
     }
@@ -107,25 +111,26 @@ class CharmDetailFragment : Fragment() {
         layout.addView(view)
     }
 
-    private fun populateSkill(charmFull: CharmFull) {
-
+    private fun populateSkills(skills: List<SkillLevel>) {
         if (charm_skill_layout.childCount > 0)
             charm_skill_layout.removeAllViews()
 
-        if (charmFull.skills.isEmpty()) {
+        if (skills.isEmpty()) {
             insertEmptyState(charm_skill_layout)
             return
         }
 
-        charmFull.skills.map {
+        for (skillLevel in skills) {
             val view = IconLabelTextCell(context)
 
-            val icon = assetLoader.loadSkillIcon(it.skill!!.icon_color)
+            val skillTree = skillLevel.skillTree
+
+            val icon = assetLoader.loadIconFor(skillTree)
             view.setLeftIconDrawable(icon)
-            view.setLabelText(it.skill.name)
-            view.setValueText("+${it.level} ${resources.getQuantityString(R.plurals.skills_level, it.level)}")
+            view.setLabelText(skillTree.name)
+            view.setValueText("+${skillLevel.level} ${resources.getQuantityString(R.plurals.skills_level, skillLevel.level)}")
             view.removeDecorator()
-            view.setOnClickListener { v -> getRouter().navigateSkillDetail(it.skill.id) }
+            view.setOnClickListener { getRouter().navigateSkillDetail(skillTree.id) }
 
             charm_skill_layout.addView(view)
         }

@@ -23,8 +23,7 @@ data class CharmEntity(
 data class CharmText(
         val id: Int,
         val lang_id: String,
-        val name: String?,
-        val description: String?
+        val name: String?
 )
 
 @Entity(tableName = "charm_skill",
