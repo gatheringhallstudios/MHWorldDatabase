@@ -70,7 +70,7 @@ abstract class SkillDao {
 
 
     @Query("""
-        SELECT c.*, ct.name, c.previous_id, c.rarity, cs.level skillLevel
+        SELECT c.id AS charm_id, c.previous_id AS charm_previous_id, c.rarity AS charm_rarity, ct.name AS charm_name, cs.level skillLevel
             FROM charm c
              JOIN charm_text ct USING (id)
              JOIN charm_skill cs ON (id = charm_id)
@@ -78,7 +78,7 @@ abstract class SkillDao {
             AND cs.skilltree_id = :skillTreeId
 
     """)
-    abstract fun loadCharmsWithSkill(langId: String, skillTreeId: Int) : LiveData<List<CharmSkill>>
+    abstract fun loadCharmsWithSkill(langId: String, skillTreeId: Int): LiveData<List<CharmSkill>>
 
 
     @Query("""
