@@ -2,35 +2,23 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 
-open class CharmBase(
+/**
+ * The base charm class.
+ * As charms don't have any special data outside of providing an object to join to,
+ * the base is the same as the normal load.
+ */
+open class Charm(
         val id: Int,
         val name: String?,
         val rarity: Int,
         val previous_id: Int?
 )
 
-class Charm(
-        id: Int,
-        name: String?,
-        rarity: Int,
-        previous_id: Int?,
-
-        @Embedded(prefix = "component_") val component: CharmComponent,
-
-        val skillLevel: Int,
-        val description: String?,
-        val skilltree_id: Int,
-        val skillName: String,
-        val skillIconColor: String?
-) : CharmBase(id, name, rarity, previous_id)
-
+/**
+ * Contains the charm and any additional join data related to the charm
+ */
 class CharmFull(
-        @Embedded val data: CharmBase,
-        val skills: List<CharmSkill>,
-        val components: List<CharmComponent>
-)
-
-class CharmComponent(
-        @Embedded val result: ItemBase,
-        val quantity: Int
+        val charm: Charm,
+        val skills: List<SkillLevel>,
+        val components: List<ItemQuantity>
 )

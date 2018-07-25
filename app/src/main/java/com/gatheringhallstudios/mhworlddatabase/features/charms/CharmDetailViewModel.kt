@@ -28,11 +28,12 @@ class CharmDetailViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private fun setPreviousItem(charmFullData: CharmFull): LiveData<CharmFull>? {
-        if (charmFullData.data.previous_id == null || this.previousId == charmFullData.data.previous_id) {
+        val previousId = charmFullData.charm.previous_id
+        if (previousId == null || this.previousId == previousId) {
             return null
         }
 
-        this.previousId = charmFullData.data.previous_id
-        return charmDao.loadCharmFull(AppSettings.dataLocale, previousId!!)
+        this.previousId = previousId
+        return charmDao.loadCharmFull(AppSettings.dataLocale, previousId)
     }
 }

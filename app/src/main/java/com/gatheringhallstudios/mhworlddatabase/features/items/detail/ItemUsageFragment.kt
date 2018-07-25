@@ -13,11 +13,11 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBi
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorBase
-import com.gatheringhallstudios.mhworlddatabase.data.models.CharmBase
+import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsages
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
-fun bindCharmCraft(charmBase: CharmBase) = createSimpleUniversalBinder { ctx ->
+fun bindCharmCraft(charmBase: Charm) = createSimpleUniversalBinder { ctx ->
     SimpleUniversalBinding(
             label = charmBase.name,
             value = ctx.getString(R.string.type_charm),

@@ -65,7 +65,7 @@ class ItemReward(
  */
 class ItemUsages(
         val craftRecipes: List<ItemCombination>,
-        val charmBases: List<CharmBase>,
+        val charmBases: List<Charm>,
         val armor: List<ArmorBase>
 )
 
