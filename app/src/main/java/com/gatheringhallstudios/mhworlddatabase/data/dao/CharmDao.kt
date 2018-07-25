@@ -60,7 +60,7 @@ abstract class CharmDao {
             CharmFull(
                     components = components,
                     skills = skills,
-                    data = CharmBase(id = firstItem.id, rarity = firstItem.rarity, previous_id = firstItem.previous_id, name = firstItem.skillName)
+                    data = CharmBase(id = firstItem.id, rarity = firstItem.rarity, previous_id = firstItem.previous_id, name = firstItem.name)
             )
         }
     }

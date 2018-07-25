@@ -59,6 +59,10 @@ class CharmDetailFragment : Fragment() {
     }
 
     private fun populatePreviousItem(charmFull: CharmFull?) {
+        if (previous_item_layout.childCount > 0) {
+            previous_item_layout.removeAllViews()
+        }
+
         if (charmFull == null) {
             insertEmptyState(previous_item_layout)
             return
@@ -89,7 +93,7 @@ class CharmDetailFragment : Fragment() {
             view.setLeftIconDrawable(assetLoader.loadIconFor(it.result))
             view.setLabelText(it.result.name)
             view.setValueText("x${it.quantity}")
-            view.setOnClickListener({ v -> getRouter().navigateItemDetail(it.result.id) })
+            view.setOnClickListener({ _ -> getRouter().navigateItemDetail(it.result.id) })
             charm_components_layout.addView(view)
         }
     }

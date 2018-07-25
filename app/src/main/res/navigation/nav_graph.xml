@@ -45,6 +45,11 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.list.LocationListFragment"
         android:label="Locations"
         tools:layout="@layout/list_generic" />
+    <fragment
+        android:id="@+id/charmListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.charms.CharmListFragment"
+        android:label="Charms"
+        tools:layout="@layout/list_generic" />
 
 
     <!-- REGULAR DESTINATIONS -->
@@ -126,5 +131,21 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorDetailFragment"
         android:label="Armor Detail"
         tools:layout="@layout/fragment_armor_summary" />
+    <action
+        android:id="@+id/openArmorDetailAction"
+        app:destination="@id/armorDetailDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim" />
+
+    <fragment
+        android:id="@+id/charmDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.charms.CharmDetailFragment"
+        android:label="Charm Detail"
+        tools:layout="@layout/fragment_charm_summary" />
+    <action
+        android:id="@+id/openCharmDetailAction"
+        app:destination="@id/charmDetailDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim" />
 
 </navigation>
