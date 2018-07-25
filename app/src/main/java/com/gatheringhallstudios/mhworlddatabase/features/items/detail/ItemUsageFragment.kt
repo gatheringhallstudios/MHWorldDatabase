@@ -13,7 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBi
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorBase
-import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
+import com.gatheringhallstudios.mhworlddatabase.data.models.CharmBase
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsages
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
@@ -21,7 +21,7 @@ fun bindCharmCraft(charmBase: CharmBase) = createSimpleUniversalBinder { ctx ->
     SimpleUniversalBinding(
             label = charmBase.name,
             value = ctx.getString(R.string.type_charm),
-            icon = ctx.assetLoader.loadIconFor(charm),
+            icon = ctx.assetLoader.loadIconFor(charmBase),
             clickFn = { }
     )
 }
@@ -62,7 +62,7 @@ class ItemUsageFragment : RecyclerViewFragment() {
         }
 
         adapter.addAll(data.craftRecipes)
-        adapter.addAll(data.charms.map(::bindCharmCraft))
+        adapter.addAll(data.charmBases.map(::bindCharmCraft))
         adapter.addAll(data.armor.map(::bindArmorCraft))
 
         adapter.notifyDataSetChanged()

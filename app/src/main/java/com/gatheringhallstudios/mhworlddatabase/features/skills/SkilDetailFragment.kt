@@ -118,7 +118,7 @@ class SkillDetailFragment : Fragment() {
             view.setLabelText(charmSkillView.data.name)
             view.setValueText(levels)
             //TODO: link up on click listener to charm detail page once done
-            view.setOnClickListener {v -> getRouter().navigateCharmDetail(charmSkillView.data.id)}
+            view.setOnClickListener {_ -> getRouter().navigateCharmDetail(charmSkillView.data.id)}
 
             charm_layout.addView(view)
         }

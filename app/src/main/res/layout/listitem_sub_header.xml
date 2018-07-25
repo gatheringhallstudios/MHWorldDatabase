@@ -9,10 +9,10 @@
     <TextView
         android:id="@+id/label_text"
         style="@style/TextSubHead.Teal"
-        tools:text="Some Label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
+        android:text="@string/upgrade_from_title"
         android:textAlignment="textStart" />
 
 </LinearLayout>
