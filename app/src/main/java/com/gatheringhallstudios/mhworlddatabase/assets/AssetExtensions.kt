@@ -85,21 +85,18 @@ fun Context.getVectorDrawable(
         VectorMasterDrawable(this, resource)
     }
 
-    val colorRegistryValue = when (color) {
-        null -> null
-        else -> ColorRegistry(color)
+    // If color is null, render white. If color is invalid, warn and set to "undefined".
+    // Setting the default in params will not make it white if null is explicitly passed.
+    // If a color is undefined, it'll use a cached value randomly. This is an error scenario.
+    val colorRegistryValue = ColorRegistry(color ?: "White")
+    if (colorRegistryValue == null) {
+        Log.w(TAG, "Color registry value does not exist: $color")
     }
 
     // Color the vector (if applicable)
-    val modifiedVector = when {
-        // if no color, do nothing
-        color == null -> baseVector
-
-        // if invalid color, log and do nothing
-        colorRegistryValue == null -> {
-            Log.w(TAG, "Color registry value does not exist: $color")
-            baseVector
-        }
+    val modifiedVector = when (colorRegistryValue) {
+        // if no color, do nothing (undefined color)
+        null -> baseVector
 
         else -> {
             val colorValue = ContextCompat.getColor(this, colorRegistryValue)
