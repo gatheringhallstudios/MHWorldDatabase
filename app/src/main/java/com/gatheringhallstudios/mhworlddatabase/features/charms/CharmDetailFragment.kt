@@ -51,15 +51,14 @@ class CharmDetailFragment : Fragment() {
         val icon = assetLoader.loadIconFor(charmFull)
         charm_icon.setImageDrawable(icon)
 
+        previous_item_layout.removeAllViews()
+        insertEmptyState(previous_item_layout)
+
         populateComponents(charmFull.components)
         populateSkill(charmFull)
     }
 
     private fun populatePreviousItem(charmFull: CharmFull?) {
-        if (previous_item_layout.childCount > 0) {
-            previous_item_layout.removeAllViews()
-        }
-
         if (charmFull == null) {
             insertEmptyState(previous_item_layout)
             return
