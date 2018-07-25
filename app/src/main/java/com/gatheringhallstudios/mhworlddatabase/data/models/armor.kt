@@ -50,13 +50,6 @@ class Armor(
     val slots get() = listOf(slot_1, slot_2, slot_3)
 }
 
-class ArmorSkill(
-        @Embedded val armor: ArmorBase,
-        val skilltree_id: Int,
-        val skillLevel: Int,
-        val icon_color: String?
-)
-
 /**
  * Representation of a single armor set
  */
@@ -88,5 +81,5 @@ class ArmorFull(
         val armor: Armor,
         val setBonuses: List<ArmorSetBonus>,
         val recipe: List<ItemQuantity>,
-        val skills: List<SkillQuantity>
+        val skills: List<SkillLevel>
 )

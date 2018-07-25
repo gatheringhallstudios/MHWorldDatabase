@@ -30,14 +30,7 @@ class CharmFull(
         val components: List<CharmComponent>
 )
 
-class CharmSkill(
-        @Embedded(prefix = "charm_") val data: CharmBase?,
-        @Embedded(prefix = "skill_") val skill: SkillTreeBase?,
-        val skillLevel: Int
-)
-
 class CharmComponent(
         @Embedded val result: ItemBase,
         val quantity: Int
 )
-
