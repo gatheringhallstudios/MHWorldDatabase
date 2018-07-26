@@ -12,7 +12,7 @@
 
         <ImageView
             android:id="@+id/decoration_icon"
-            style="@style/IconXLarge"
+            style="@style/IconXLarge.Decorated"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
             android:src="@drawable/ic_question_mark"
@@ -45,7 +45,7 @@
             android:id="@+id/decoration_drop_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/decorations_drop_information"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -58,7 +58,8 @@
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/decoration_icon"
             app:layout_constraintTop_toBottomOf="@+id/decoration_drop_header">
@@ -153,7 +154,7 @@
             android:id="@+id/decoration_skill_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/decorations_skill_information"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

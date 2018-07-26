@@ -22,7 +22,6 @@ class DecorationAdapterDelegate(private val onSelected: (DecorationBase) -> Unit
 
         view.setLeftIconDrawable(icon)
         view.setLabelText(data.name)
-        view.removeDecorator()
 
         view.setOnClickListener { onSelected(data) }
     }

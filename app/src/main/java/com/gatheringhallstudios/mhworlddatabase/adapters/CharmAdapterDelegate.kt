@@ -22,7 +22,6 @@ class CharmAdapterDelegate(private val onSelected: (Charm) -> Unit)
 
         view.setLeftIconDrawable(icon)
         view.setLabelText(data.name)
-        view.removeDecorator()
 
         view.setOnClickListener { onSelected(data) }
     }

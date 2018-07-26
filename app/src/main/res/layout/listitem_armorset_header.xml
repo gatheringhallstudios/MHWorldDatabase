@@ -6,7 +6,7 @@
     android:id="@+id/section_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/row_height_xlarge">
+    android:minHeight="@dimen/row_height_large">
 
     <ImageView
         android:id="@+id/set_icon"

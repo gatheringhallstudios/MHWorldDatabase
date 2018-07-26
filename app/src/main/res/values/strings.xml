@@ -34,6 +34,16 @@
     <string name="quantity">x %1$d</string>
     <string name="percentage">%1$s%%</string>
 
+    <!-- Headers -->
+    <string name="header_habitat">Habitat</string>
+    <string name="header_weakness">Weakness</string>
+    <string name="header_area">Area</string>
+    <string name="header_item_data">Item Data</string>
+
+    <!-- ############ -->
+    <!-- # FEATURES # -->
+    <!-- ############ -->
+
     <!-- Monsters -->
     <string name="monsters_list_title">Monsters</string>
     <string name="monsters_list_tab_small">Small</string>
@@ -42,18 +52,6 @@
     <string name="monsters_detail_tab_rewards_high_rank">High-Rank</string>
     <string name="monsters_detail_tab_rewards_low_rank">Low-Rank</string>
     <string name="monsters_detail_tab_damage">Damage</string>
-
-    <!-- Skills -->
-    <string name="skills_title">Skills</string>
-    <string name="skills_level_title">Level</string>
-    <plurals name="skills_level">
-        <item quantity="one">level</item>
-        <item quantity="other">levels</item>
-    </plurals>
-
-    <string name="skills_armor_header">Armor with skill</string>
-    <string name="skills_charm_header">Charms with skill</string>
-    <string name="skills_decoration_header">Decorations with skill</string>
 
     <!-- Items -->
     <string name="items_title">Items</string>
@@ -69,7 +67,7 @@
 
     <string name="item_tab_summary">Summary</string>
     <string name="item_tab_usage">Usage</string>
-    <string name="item_tab_acquisition">Obtain</string>
+    <string name="item_tab_acquisition">Obtaining</string>
 
     <string name="item_header_crafting">Crafting</string>
     <string name="item_header_gathering">Gathering</string>
@@ -95,18 +93,16 @@
     <string name="armor_detail_vs_ice">Vs. Ice</string>
     <string name="armor_detail_vs_dragon">Vs. Dragon</string>
 
-
-    <!-- Headers -->
-    <string name="header_habitat">Habitat</string>
-    <string name="header_weakness">Weakness</string>
-    <string name="header_area">Area</string>
-    <string name="header_item_data">Item Data</string>
-
-    <!-- Locations -->
-    <string name="locations_title">Locations</string>
-    <string name="location_area">Area %1$d</string>
-    <string name="locations_detail_summary">Summary</string>
-    <string name="locations_detail_gathering">Gathering</string>
+    <!-- Skills -->
+    <string name="skills_title">Skills</string>
+    <string name="skills_level_title">Level</string>
+    <plurals name="skills_level">
+        <item quantity="one">level</item>
+        <item quantity="other">levels</item>
+    </plurals>
+    <string name="skills_armor_header">Armor</string>
+    <string name="skills_charm_header">Charms</string>
+    <string name="skills_decoration_header">Decorations</string>
 
     <!-- Decorations -->
     <string name="decorations_title">Decorations</string>
@@ -120,6 +116,13 @@
     <!-- Charms -->
     <string name="charms_title">Charms</string>
     <string name="upgrade_from_title">Upgrades from:</string>
-    <string name="charms_skill_information">Skill Information</string>
+    <string name="charms_skill_information">Skills</string>
     <string name="charms_components_information">Components</string>
+
+    <!-- Locations -->
+    <string name="locations_title">Locations</string>
+    <string name="location_area">Area %1$d</string>
+    <string name="locations_detail_summary">Summary</string>
+    <string name="locations_detail_gathering">Gathering</string>
+
 </resources>

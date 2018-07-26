@@ -15,16 +15,16 @@
             android:id="@+id/charm_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_large"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/margin_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/charm_icon"
-                style="@style/IconXLarge"
+                style="@style/IconXLarge.Decorated"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -70,14 +70,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@+id/charm_label"
-            app:layout_constraintStart_toStartOf="@+id/charm_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/upgrade_label">
-
-            <include
-                layout="@layout/cell_icon_label_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -85,10 +80,9 @@
             android:id="@+id/charm_skill_header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/charms_skill_information"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/previous_item_layout">
 
@@ -98,15 +92,9 @@
             android:id="@+id/charm_skill_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@id/charm_skill_header"
             app:layout_constraintTop_toBottomOf="@+id/charm_skill_header">
-
-            <include
-                layout="@layout/cell_icon_label_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -114,10 +102,9 @@
             android:id="@+id/charm_components_header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/charms_components_information"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/charm_skill_layout">
 
@@ -127,15 +114,10 @@
             android:id="@+id/charm_components_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="@id/charm_components_header"
             app:layout_constraintTop_toBottomOf="@+id/charm_components_header">
-
-            <include
-                layout="@layout/cell_icon_label_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

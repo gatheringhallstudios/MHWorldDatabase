@@ -96,7 +96,7 @@ class CharmDetailFragment : Fragment() {
             val view = IconLabelTextCell(context)
             view.setLeftIconDrawable(assetLoader.loadIconFor(component.item))
             view.setLabelText(component.item.name)
-            view.setValueText("x${component.quantity}")
+            view.setValueText("${component.quantity}")
             view.setOnClickListener { getRouter().navigateItemDetail(component.item.id) }
             charm_components_layout.addView(view)
         }

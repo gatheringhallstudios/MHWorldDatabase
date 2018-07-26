@@ -15,9 +15,9 @@
             android:id="@+id/skill_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_large"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/margin_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -88,7 +88,7 @@
             android:id="@+id/armor_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/skills_armor_header"
             app:layout_constraintTop_toBottomOf="@+id/skill_level_descriptions" />
 
@@ -96,6 +96,7 @@
             android:id="@+id/armor_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/charm_header"
             app:layout_constraintTop_toBottomOf="@id/armor_header">
@@ -124,7 +125,7 @@
             android:id="@+id/charm_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/skills_charm_header"
             app:layout_constraintTop_toBottomOf="@id/armor_layout" />
 
@@ -132,6 +133,7 @@
             android:id="@+id/charm_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/charm_header">
 
@@ -159,7 +161,7 @@
             android:id="@+id/decoration_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/skills_decoration_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -171,10 +173,11 @@
             android:id="@+id/decoration_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/decoration_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_header"
             tools:layout_editor_absoluteX="411dp">
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell

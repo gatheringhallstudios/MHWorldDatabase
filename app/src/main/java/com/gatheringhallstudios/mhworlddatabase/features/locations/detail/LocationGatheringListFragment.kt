@@ -18,9 +18,9 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
         ViewModelProviders.of(parentFragment!!).get(LocationDetailViewModel::class.java)
     }
 
-    private val adapter = CategoryAdapter(LocationItemsAdapterDelegate({
+    private val adapter = CategoryAdapter(LocationItemsAdapterDelegate {
         getRouter().navigateItemDetail(it.data.item_id)
-    }))
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
@@ -37,7 +37,7 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
                 .groupBy {it.data.area}
 
         for ((area, items) in grouped) {
-            adapter.addSection("Area $area", items)
+            adapter.addSection("Are a $area", items)
         }
 
         adapter.notifyDataSetChanged()
