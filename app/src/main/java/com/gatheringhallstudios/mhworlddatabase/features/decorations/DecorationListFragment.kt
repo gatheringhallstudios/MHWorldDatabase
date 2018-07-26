@@ -20,17 +20,17 @@ class DecorationListFragment : RecyclerViewFragment() {
         ViewModelProviders.of(this).get(DecorationListFragment.ViewModel::class.java)
     }
 
-    val adapter = BasicListDelegationAdapter(DecorationAdapterDelegate({
+    val adapter = BasicListDelegationAdapter(DecorationAdapterDelegate {
         getRouter().navigateDecorationDetail(it.id)
-    }))
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
 
-        viewModel.decorations.observe(this, Observer({
+        viewModel.decorations.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
-        }))
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

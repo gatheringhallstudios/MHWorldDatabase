@@ -6,11 +6,12 @@ import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
-import kotlinx.android.synthetic.main.listitem_reward.view.*
+import kotlinx.android.synthetic.main.listitem_reward.*
 
-class LocationItemsAdapterDelegate(private val onSelected: (LocationItem) -> Unit)
-    : SimpleListDelegate<LocationItem, View>() {
+// todo: update after location item refactor
+class LocationItemsAdapterDelegate(private val onSelected: (LocationItem) -> Unit) : SimpleListDelegate<LocationItem>() {
 
     override fun isForViewType(obj: Any) = obj is LocationItem
 
@@ -19,14 +20,12 @@ class LocationItemsAdapterDelegate(private val onSelected: (LocationItem) -> Uni
         return inflater.inflate(R.layout.listitem_reward, parent, false)
     }
 
-    override fun bindView(view: View, data: LocationItem) {
-        val ctx = view.context
-        val defaultIcon = R.drawable.ic_question_mark
+    override fun bindView(viewHolder: SimpleViewHolder, data: LocationItem) {
+        // todo: set icon
+        viewHolder.reward_name.text = data.item_name
+        viewHolder.reward_stack.text =  viewHolder.resources.getString(R.string.quantity, data.data.stack)
+        viewHolder.reward_percent.text = viewHolder.resources.getString(R.string.percentage, data.data.percentage)
 
-        view.reward_name.text = data.item_name
-        view.reward_stack.text =  "x ${data.data.stack}"
-        view.reward_percent.text = "${data.data.percentage}%"
-
-        view.setOnClickListener { onSelected(data) }
+        viewHolder.itemView.setOnClickListener { onSelected(data) }
     }
 }

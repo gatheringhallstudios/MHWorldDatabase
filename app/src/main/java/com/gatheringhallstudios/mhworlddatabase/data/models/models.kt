@@ -19,6 +19,7 @@ data class Location(
         val name: String?
 )
 
+// todo: refactor
 data class LocationItem(
         @Embedded val data: LocationItemEntity,
         val item_name: String?

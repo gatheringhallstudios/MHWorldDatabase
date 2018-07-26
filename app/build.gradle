@@ -31,6 +31,7 @@ android {
 }
 
 androidExtensions {
+    // Enables KTX viewbinding to work on viewholders as well
     experimental = true
 }
 

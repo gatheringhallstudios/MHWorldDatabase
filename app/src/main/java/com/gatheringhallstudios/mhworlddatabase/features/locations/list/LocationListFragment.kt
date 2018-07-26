@@ -20,15 +20,15 @@ class LocationListFragment : RecyclerViewFragment() {
     }
 
     // Setup adapter and navigation
-    private val adapter = BasicListDelegationAdapter(LocationAdapterDelegate({
+    private val adapter = BasicListDelegationAdapter(LocationAdapterDelegate {
         getRouter().navigateLocationDetail(it.id)
-    }))
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
-        viewModel.locations.observe(this, Observer<List<Location>>({
+        viewModel.locations.observe(this, Observer<List<Location>> {
             adapter.items = it
             adapter.notifyDataSetChanged()
-        }))
+        })
     }
 }

@@ -2,12 +2,13 @@ package com.gatheringhallstudios.mhworlddatabase.adapters
 
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 
-class CharmAdapterDelegate(private val onSelected: (Charm) -> Unit)
-    : SimpleListDelegate<Charm, IconLabelTextCell>() {
+class CharmAdapterDelegate(private val onSelected: (Charm) -> Unit): SimpleListDelegate<Charm>() {
 
     val TAG = this.javaClass.simpleName
 
@@ -17,12 +18,13 @@ class CharmAdapterDelegate(private val onSelected: (Charm) -> Unit)
         return IconLabelTextCell(parent.context)
     }
 
-    override fun bindView(view: IconLabelTextCell, data: Charm) {
-        val icon = AssetLoader(view.context).loadIconFor(data)
+    override fun bindView(viewHolder: SimpleViewHolder, data: Charm) {
+        with(viewHolder.itemView as IconLabelTextCell) {
+            val icon = assetLoader.loadIconFor(data)
+            setLeftIconDrawable(icon)
+            setLabelText(data.name)
+        }
 
-        view.setLeftIconDrawable(icon)
-        view.setLabelText(data.name)
-
-        view.setOnClickListener { onSelected(data) }
+        viewHolder.itemView.setOnClickListener { onSelected(data) }
     }
 }

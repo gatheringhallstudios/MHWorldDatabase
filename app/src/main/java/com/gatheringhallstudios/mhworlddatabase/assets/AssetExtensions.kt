@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -31,6 +32,11 @@ val View.assetLoader get() = AssetLoader(context!!)
  * Extension: Receives an asset loader for this context.
  */
 val Context.assetLoader get() = AssetLoader(this)
+
+/**
+ * Extension: Receives an asset loader for the context inside of the viewholder
+ */
+val RecyclerView.ViewHolder.assetLoader get() = AssetLoader(this.itemView.context)
 
 /**
  * Extension: Loads a drawable from the assets folder.

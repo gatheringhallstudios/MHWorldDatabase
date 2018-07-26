@@ -2,12 +2,13 @@ package com.gatheringhallstudios.mhworlddatabase.adapters
 
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTree
 
 class SkillTreeAdapterDelegate(private val onSelected: (SkillTree) -> Unit)
-    : SimpleListDelegate<SkillTree, IconLabelTextCell>() {
+    : SimpleListDelegate<SkillTree>() {
 
     override fun isForViewType(obj: Any) = obj is SkillTree
 
@@ -15,13 +16,15 @@ class SkillTreeAdapterDelegate(private val onSelected: (SkillTree) -> Unit)
         return IconLabelTextCell(parent.context)
     }
 
-    override fun bindView(view: IconLabelTextCell, data: SkillTree) {
-        val icon = view.assetLoader.loadSkillIcon(data.icon_color)
+    override fun bindView(viewHolder: SimpleViewHolder, data: SkillTree) {
+        val icon = viewHolder.itemView.assetLoader.loadSkillIcon(data.icon_color)
 
-        view.setLeftIconDrawable(icon)
-        view.setLabelText(data.name)
-        view.removeDecorator()
+        with(viewHolder.itemView as IconLabelTextCell) {
+            setLeftIconDrawable(icon)
+            setLabelText(data.name)
+            removeDecorator()
+        }
 
-        view.setOnClickListener { onSelected(data) }
+        viewHolder.itemView.setOnClickListener { onSelected(data) }
     }
 }

@@ -6,13 +6,17 @@ import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
+import kotlinx.android.synthetic.main.listitem_large.*
 import kotlinx.android.synthetic.main.listitem_large.view.*
 
-class LocationAdapterDelegate(private val onSelected: (Location) -> Unit)
-    : SimpleListDelegate<Location, View>() {
+/**
+ * An adapter delegate used to display a list of locations
+ */
+class LocationAdapterDelegate(private val onSelected: (Location) -> Unit): SimpleListDelegate<Location>() {
 
     override fun isForViewType(obj: Any) = obj is Location
 
@@ -21,10 +25,10 @@ class LocationAdapterDelegate(private val onSelected: (Location) -> Unit)
         return inflater.inflate(R.layout.listitem_large, parent, false)
     }
 
-    override fun bindView(view: View, data: Location) {
-        val icon = view.assetLoader.loadIconFor(data)
-        view.item_icon.setImageDrawable(icon)
-        view.item_name.text = data.name
-        view.setOnClickListener { onSelected(data) }
+    override fun bindView(viewHolder: SimpleViewHolder, data: Location) {
+        val icon = viewHolder.assetLoader.loadIconFor(data)
+        viewHolder.item_icon.setImageDrawable(icon)
+        viewHolder.item_name.text = data.name
+        viewHolder.itemView.setOnClickListener { onSelected(data) }
     }
 }

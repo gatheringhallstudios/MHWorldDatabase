@@ -34,9 +34,9 @@ class ItemListFragment : RecyclerViewFragment() {
     }
 
     // Setup recycler list adapter and the on-selected
-    private val adapter = BasicListDelegationAdapter(ItemAdapterDelegate(onSelect = {
+    private val adapter = BasicListDelegationAdapter(ItemAdapterDelegate {
         getRouter().navigateItemDetail(it.id)
-    }))
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
@@ -45,10 +45,10 @@ class ItemListFragment : RecyclerViewFragment() {
 
         viewModel.init(category)
 
-        viewModel.items.observe(this, Observer({
+        viewModel.items.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
-        }))
+        })
     }
 
     // ViewModel class used by this Fragment

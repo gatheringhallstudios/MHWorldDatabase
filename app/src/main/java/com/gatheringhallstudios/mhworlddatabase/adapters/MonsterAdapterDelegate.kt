@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterBase
-import kotlinx.android.synthetic.main.listitem_large.view.*
+import kotlinx.android.synthetic.main.listitem_large.*
 
 class MonsterAdapterDelegate(private val onSelected: (MonsterBase) -> Unit)
-    : SimpleListDelegate<MonsterBase, View>() {
+    : SimpleListDelegate<MonsterBase>() {
 
     override fun isForViewType(obj: Any) = obj is MonsterBase
 
@@ -19,12 +20,12 @@ class MonsterAdapterDelegate(private val onSelected: (MonsterBase) -> Unit)
         return inflater.inflate(R.layout.listitem_large, parent, false)
     }
 
-    override fun bindView(view: View, data: MonsterBase) {
-        val icon = view.assetLoader.loadIconFor(data)
+    override fun bindView(viewHolder: SimpleViewHolder, data: MonsterBase) {
+        val icon = viewHolder.assetLoader.loadIconFor(data)
 
-        view.item_icon.setImageDrawable(icon)
-        view.item_name.text = data.name
+        viewHolder.item_icon.setImageDrawable(icon)
+        viewHolder.item_name.text = data.name
 
-        view.setOnClickListener { onSelected(data) }
+        viewHolder.itemView.setOnClickListener { onSelected(data) }
     }
 }

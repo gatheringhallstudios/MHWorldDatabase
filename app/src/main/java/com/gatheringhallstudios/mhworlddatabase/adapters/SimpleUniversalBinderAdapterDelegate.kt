@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
-import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import kotlinx.android.synthetic.main.listitem_universal_simple.view.*
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
+import kotlinx.android.synthetic.main.listitem_universal_simple.*
 
 /**
  * An object that represents a binding for a simple result.
@@ -42,7 +42,7 @@ fun createSimpleUniversalBinder(fn: (Context) -> SimpleUniversalBinding): Simple
  * The views are homogenized, but require the use of special interim objects (called binders)
  * that return a data result (called bindings)
  */
-class SimpleUniversalBinderAdapterDelegate: SimpleListDelegate<SimpleUniversalBinder, View>() {
+class SimpleUniversalBinderAdapterDelegate: SimpleListDelegate<SimpleUniversalBinder>() {
     override fun isForViewType(obj: Any) = obj is SimpleUniversalBinder
 
     override fun onCreateView(parent: ViewGroup): View {
@@ -50,13 +50,13 @@ class SimpleUniversalBinderAdapterDelegate: SimpleListDelegate<SimpleUniversalBi
         return inflater.inflate(R.layout.listitem_universal_simple, parent, false)
     }
 
-    override fun bindView(view: View, data: SimpleUniversalBinder) {
-        val result = data.build(view.context)
-        view.icon.setImageDrawable(result.icon)
-        view.label_text.text = result.label
-        view.value_text.text = result.value
+    override fun bindView(viewHolder: SimpleViewHolder, data: SimpleUniversalBinder) {
+        val result = data.build(viewHolder.context)
+        viewHolder.icon.setImageDrawable(result.icon)
+        viewHolder.label_text.text = result.label
+        viewHolder.value_text.text = result.value
 
-        view.setOnClickListener { result.clickFn(view) }
+        viewHolder.itemView.setOnClickListener { result.clickFn(viewHolder.itemView) }
     }
 
 }

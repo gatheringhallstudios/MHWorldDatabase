@@ -19,17 +19,17 @@ class CharmListFragment : RecyclerViewFragment() {
         ViewModelProviders.of(this).get(CharmListFragment.ViewModel::class.java)
     }
 
-    val adapter = BasicListDelegationAdapter(CharmAdapterDelegate({
+    val adapter = BasicListDelegationAdapter(CharmAdapterDelegate {
         getRouter().navigateCharmDetail(it.id)
-    }))
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
 
-        viewModel.charms.observe(this, Observer({
+        viewModel.charms.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
-        }))
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
