@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -76,6 +77,11 @@ public class IconLabelTextCell extends ConstraintLayout{
 
         setLayoutParams(new ViewGroup.LayoutParams(
                 LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        // makes this cell have touch feedback...since the xml is a merge tag, we can't do this in xml
+        TypedValue highlightBackground = new TypedValue();
+        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, highlightBackground, true);
+        setBackgroundResource(highlightBackground.resourceId);
     }
 
     /**
