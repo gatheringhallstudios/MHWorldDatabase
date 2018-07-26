@@ -19,7 +19,7 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
     }
 
     private val adapter = CategoryAdapter(LocationItemsAdapterDelegate {
-        getRouter().navigateItemDetail(it.data.item_id)
+        getRouter().navigateItemDetail(it.item.id)
     })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,11 +33,10 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
             return
         }
 
-        val grouped = locationItems!!.asSequence()
-                .groupBy {it.data.area}
+        val grouped = locationItems!!.asSequence().groupBy { it.area }
 
         for ((area, items) in grouped) {
-            adapter.addSection("Are a $area", items)
+            adapter.addSection("Area $area", items)
         }
 
         adapter.notifyDataSetChanged()

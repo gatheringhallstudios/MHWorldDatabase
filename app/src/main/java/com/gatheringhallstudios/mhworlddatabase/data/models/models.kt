@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 import android.arch.persistence.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 /*
@@ -19,10 +20,17 @@ data class Location(
         val name: String?
 )
 
-// todo: refactor
+/**
+ * Represents an item at a location.
+ * It is expected that the location is already known.
+ */
 data class LocationItem(
-        @Embedded val data: LocationItemEntity,
-        val item_name: String?
+        @Embedded(prefix = "item_") val item: ItemBase,
+        val rank: Rank,
+        val area: Int,
+        val stack: Int,
+        val percentage: Int,
+        val nodes: Int
 )
 
 

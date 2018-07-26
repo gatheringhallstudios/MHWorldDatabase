@@ -28,10 +28,13 @@ abstract class LocationDao {
     abstract fun loadLocation(langId : String, locationId: Int) : LiveData<Location>
 
     @Query("""
-        SELECT li.*, it.name item_name
+        SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name, i.icon_color item_icon_color, i.category item_category,
+            li.rank, li.area, li.stack, li.percentage, li.nodes
         FROM location_item li
+            JOIN item i
+                ON i.id = li.item_id
             JOIN item_text it
-                ON it.id = li.item_id
+                ON it.id = i.id
         WHERE li.location_id = :locationId
           AND it.lang_id = :langId
         """)
