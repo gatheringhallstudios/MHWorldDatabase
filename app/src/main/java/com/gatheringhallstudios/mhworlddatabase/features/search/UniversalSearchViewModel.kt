@@ -71,6 +71,7 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
         results.addAll(dao.searchLocations(filterStr).map(::createLocationBinder))
         results.addAll(dao.searchMonsters(filterStr).map(::createMonsterBinder))
         results.addAll(dao.searchSkillTrees(filterStr).map(::createSkillTreeBinder))
+        results.addAll(dao.searchCharms(filterStr).map(::createCharmBinder))
         results.addAll(dao.searchDecorations(filterStr).map(::createDecorationBinder))
         results.addAll(dao.searchArmor(filterStr).map(::createArmorBinder))
         results.addAll(dao.searchItems(filterStr).map(::createItemBinder))

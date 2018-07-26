@@ -38,6 +38,14 @@ fun createSkillTreeBinder(skillTree: SkillTreeBase) = createSimpleUniversalBinde
     }
 }
 
+fun createCharmBinder(charm: Charm) = createSimpleUniversalBinder { ctx ->
+    val icon = ctx.assetLoader.loadIconFor(charm)
+    val typeString = ctx.getString(R.string.type_charm)
+    SimpleUniversalBinding(charm.name, typeString, icon) {
+        it.getRouter().navigateCharmDetail(charm.id)
+    }
+}
+
 fun createDecorationBinder(decoration: DecorationBase) = createSimpleUniversalBinder { ctx ->
     val icon = ctx.assetLoader.loadIconFor(decoration)
     val typeString = ctx.getString(R.string.type_decoration)

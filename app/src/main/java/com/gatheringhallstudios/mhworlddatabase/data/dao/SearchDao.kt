@@ -25,6 +25,10 @@ abstract class SearchDao {
         loadAllSkilltreesSync(AppSettings.dataLocale)
     }
 
+    private val charmDataCache = CachedValue(timeout) {
+        loadAllCharmsSync(AppSettings.dataLocale)
+    }
+
     private val decorationDataCache = CachedValue(timeout) {
         loadAllDecorationsSync(AppSettings.dataLocale)
     }
@@ -51,6 +55,11 @@ abstract class SearchDao {
     fun searchSkillTrees(searchFilter: String): List<SkillTreeBase> {
         val filter = SearchFilter(searchFilter)
         return skillTreeDataCache.get().filter { filter.matches(it.name) }
+    }
+
+    fun searchCharms(searchFilter: String): List<Charm> {
+        val filter = SearchFilter(searchFilter)
+        return charmDataCache.get().filter { filter.matches(it.name) }
     }
 
     fun searchDecorations(searchFilter: String): List<DecorationBase> {
@@ -105,8 +114,15 @@ abstract class SearchDao {
         ORDER BY dt.name ASC
     """)
     protected abstract fun loadAllDecorationsSync(langId: String): List<DecorationBase>
-//
-//    protected abstract fun loadAllCharmsSync(langId: String): List<Charm>
+
+    @Query("""
+        SELECT c.id, c.previous_id, c.rarity, ct.name
+        FROM charm c
+            JOIN charm_text ct USING (id)
+        WHERE ct.lang_id = :langId
+        ORDER BY ct.name ASC
+    """)
+    protected abstract fun loadAllCharmsSync(langId: String): List<Charm>
 
     @Query("""
         SELECT a.id, at.name, a.rarity, a.armor_type
