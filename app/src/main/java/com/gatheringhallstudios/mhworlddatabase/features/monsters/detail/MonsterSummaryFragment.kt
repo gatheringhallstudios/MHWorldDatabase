@@ -13,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
 
 /**
@@ -100,6 +101,8 @@ class MonsterSummaryFragment : Fragment() {
             view.setLeftIconDrawable(icon)
             view.setLabelText(habitat.location.name)
             view.setValueText(areas.toString())
+
+            view.setOnClickListener { getRouter().navigateLocationDetail(habitat.location.id) }
 
             habitats_layout.addView(view)
         }
