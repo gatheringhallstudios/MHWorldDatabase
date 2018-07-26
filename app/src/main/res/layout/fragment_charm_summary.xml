@@ -9,7 +9,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/padding_bottom">
+        android:paddingBottom="@dimen/padding_footer_space">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/charm_label"

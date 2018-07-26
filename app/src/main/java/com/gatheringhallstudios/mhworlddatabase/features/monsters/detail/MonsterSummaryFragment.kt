@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,9 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
+import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
-import java.util.*
 
 /**
  * Fragment for displaying Monster Summary
@@ -51,7 +49,7 @@ class MonsterSummaryFragment : Fragment() {
 
         monster_header.setIconDrawable(icon)
         monster_header.setTitleText(monster.name)
-        monster_header.setSubtitleText(monster.ecology)
+        if (monster.ecology != null) monster_header.setSubtitleText(monster.ecology)
         monster_header.setDescriptionText(monster.description)
 
         // todo: remove weakness section if both are null

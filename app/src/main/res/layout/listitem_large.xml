@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/row_height_xlarge">
+    android:layout_height="@dimen/row_height_xxlarge">
 
     <ImageView
         android:id="@+id/item_icon"
-        style="@style/IconLarge.Decorated"
+        style="@style/IconXLarge.Decorated"
         android:layout_marginStart="@dimen/margin_large"
         android:src="@drawable/ic_question_mark"
         app:layout_constraintBottom_toBottomOf="parent"

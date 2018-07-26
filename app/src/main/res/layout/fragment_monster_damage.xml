@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -23,8 +22,8 @@
 
         <ImageView
             android:id="@+id/icon_ko"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_large"
             android:src="@drawable/ic_status_stun"
             app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
@@ -33,8 +32,8 @@
 
         <ImageView
             android:id="@+id/icon_shot"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/ic_items_ammo_white"
             app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
@@ -43,8 +42,8 @@
 
         <ImageView
             android:id="@+id/icon_impact"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/ic_equipment_hammer_white"
             app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
@@ -53,8 +52,8 @@
 
         <ImageView
             android:id="@+id/icon_cut"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/ic_equipment_greatsword_white"
             app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
@@ -90,8 +89,8 @@
 
         <ImageView
             android:id="@+id/icon_dragon"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_large"
             android:src="@drawable/ic_element_dragon"
             app:layout_constraintBottom_toBottomOf="@id/item_data_header"
@@ -100,8 +99,8 @@
 
         <ImageView
             android:id="@+id/icon_ice"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/ic_element_ice"
             app:layout_constraintBottom_toBottomOf="@id/item_data_header"
@@ -110,8 +109,8 @@
 
         <ImageView
             android:id="@+id/icon_thunder"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/ic_element_thunder"
             app:layout_constraintBottom_toBottomOf="@id/item_data_header"
@@ -120,8 +119,8 @@
 
         <ImageView
             android:id="@+id/icon_water"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/ic_element_water"
             app:layout_constraintBottom_toBottomOf="@id/item_data_header"
@@ -130,8 +129,8 @@
 
         <ImageView
             android:id="@+id/icon_fire"
-            android:layout_height="@dimen/image_size_medium"
             android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_small"
             android:src="@drawable/ic_element_fire"
             app:layout_constraintBottom_toBottomOf="@id/item_data_header"
@@ -143,6 +142,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_footer_space"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_data_header">
