@@ -31,7 +31,7 @@ class SkillTreeFull(
         icon_color: String?,
 
         val skills: List<Skill>
-) : SkillTree(id, name, description, icon_color)
+) : SkillTree(id, name, icon_color, description)
 
 data class Skill(
         val skilltree_id: Int,

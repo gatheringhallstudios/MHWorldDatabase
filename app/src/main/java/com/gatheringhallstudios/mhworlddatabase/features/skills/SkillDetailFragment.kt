@@ -46,7 +46,7 @@ class SkillDetailFragment : Fragment() {
     private fun populateSkill(skillTreeFull: SkillTreeFull?) {
         if (skillTreeFull == null) return
 
-        val icon = assetLoader.loadSkillIcon(skillTreeFull.icon_color)
+        val icon = assetLoader.loadIconFor(skillTreeFull)
         skill_icon.setImageDrawable(icon)
         skill_name.text = skillTreeFull.name
         skill_description.text = skillTreeFull.description
@@ -88,7 +88,7 @@ class SkillDetailFragment : Fragment() {
         }
 
         for (i in 0..4) {
-            val view = layoutInflater.inflate(R.layout.listitem_skill_description, null)
+            val view = layoutInflater.inflate(R.layout.listitem_skill_description, skill_level_descriptions, false)
             val description: String? = skills.getOrNull(i)?.description
 
             if (description.isNullOrBlank()) return
