@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/row_height_large"
     android:clickable="false"
-    android:paddingLeft="@dimen/padding_large"
-    android:paddingTop="@dimen/padding_large"
-    android:paddingRight="@dimen/padding_large">
+    android:background="?android:attr/selectableItemBackground">
     <!-- Note: padding/margin above are separated as an implementation detail.
         The padding can be set to zero by code, the margin cannot.-->
 
     <ImageView
         android:id="@+id/result_icon"
         style="@style/IconLarge.Decorated"
+        android:layout_marginStart="@dimen/margin_large"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_question_mark" />
@@ -25,7 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         android:gravity="center_vertical"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/yield_label"
         app:layout_constraintStart_toEndOf="@id/result_icon"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Potion" />
 
     <TextView
@@ -34,78 +37,75 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:layout_marginStart="@dimen/margin_small"
-        tools:text="x 1"
-        app:layout_constraintStart_toEndOf="@id/result_name" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/result_name"
+        app:layout_constraintTop_toBottomOf="@+id/result_name"
+        tools:text="x 1" />
 
 
     <LinearLayout
         android:id="@+id/item1_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:gravity="end"
+        android:gravity="start"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_medium"
-        android:paddingTop="@dimen/padding_medium"
-        android:paddingBottom="@dimen/padding_medium"
-        app:layout_constraintEnd_toStartOf="@+id/item2_view"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/result_icon"
-        app:layout_constraintTop_toBottomOf="@id/result_name">
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingStart="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_large"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/item2_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_chainStyle="packed">
 
-        <ImageView
-            android:id="@+id/item1_icon"
-            style="@style/IconMedium.Decorated"
-            tools:src="@drawable/ic_question_mark" />
 
         <TextView
             android:id="@+id/item1_name"
             style="@style/TextCaptionMedium"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center|start"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:lines="2"
-            tools:text="Dragonbone Artifact" />
+            tools:text="Honey" />
 
-
+        <ImageView
+            android:id="@+id/item1_icon"
+            style="@style/IconSmall.Decorated"
+            tools:src="@drawable/ic_question_mark"
+            android:layout_marginStart="@dimen/margin_medium" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/item2_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="start"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_medium"
-        android:paddingTop="@dimen/padding_medium"
-        android:paddingBottom="@dimen/padding_medium"
-        app:layout_constraintBottom_toBottomOf="@id/item1_view"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingStart="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_large"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_small"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/item1_view"
-        app:layout_constraintTop_toTopOf="@id/item1_view">
-
-        <ImageView
-            android:id="@+id/item2_icon"
-            style="@style/IconMedium.Decorated"
-            tools:src="@drawable/ic_question_mark" />
+        app:layout_constraintTop_toBottomOf="@+id/item1_view">
 
         <TextView
             android:id="@+id/item2_name"
             style="@style/TextCaptionMedium"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_weight="1"
             android:gravity="center_vertical"
-            tools:text="Dragonbone Artifact" />
+            tools:text="Great Gunpowderfish Scale" />
 
-
+        <ImageView
+            android:id="@+id/item2_icon"
+            style="@style/IconSmall.Decorated"
+            tools:src="@drawable/ic_question_mark"
+            android:layout_marginStart="@dimen/margin_medium" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
