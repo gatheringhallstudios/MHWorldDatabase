@@ -11,8 +11,8 @@
         <item name="android:textColorSecondary">@color/textColorMedium</item>
         <item name="android:listDivider">@drawable/listitem_divider</item>
 
-        <!-- changes ripple accent color -->
-        <item name="colorControlHighlight">@color/colorAccent</item>
+        <!-- changes ripple accent color..and selected item background color. -->
+        <!-- <item name="colorControlHighlight">@color/colorAccent</item> -->
     </style>
 
     <style name="AppTheme.NoActionBar">
