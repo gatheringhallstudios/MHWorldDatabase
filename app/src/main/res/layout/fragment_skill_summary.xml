@@ -96,8 +96,9 @@
             android:id="@+id/armor_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
+            android:divider="?android:attr/listDivider"
+            android:showDividers="middle"
             app:layout_constraintBottom_toTopOf="@+id/charm_header"
             app:layout_constraintTop_toBottomOf="@id/armor_header">
 
@@ -125,7 +126,6 @@
             android:id="@+id/charm_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/skills_charm_header"
             app:layout_constraintTop_toBottomOf="@id/armor_layout" />
 
@@ -133,8 +133,9 @@
             android:id="@+id/charm_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
+            android:divider="?android:attr/listDivider"
+            android:showDividers="middle"
             app:layout_constraintTop_toBottomOf="@id/charm_header">
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
@@ -161,7 +162,6 @@
             android:id="@+id/decoration_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/skills_decoration_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -173,8 +173,9 @@
             android:id="@+id/decoration_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
+            android:divider="?android:attr/listDivider"
+            android:showDividers="middle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/decoration_header"
