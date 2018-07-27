@@ -48,17 +48,17 @@
     </style>
 
     <style name="IconMedium.Decorated">
-        <item name="android:padding">3dp</item>
+        <item name="android:padding">4dp</item>
         <item name="android:background">@drawable/bg_icon_decorator</item>
     </style>
 
     <style name="IconLarge.Decorated">
-        <item name="android:padding">3dp</item>
+        <item name="android:padding">4dp</item>
         <item name="android:background">@drawable/bg_icon_decorator</item>
     </style>
 
     <style name="IconXLarge.Decorated">
-        <item name="android:padding">3dp</item>
+        <item name="android:padding">1dp</item>
         <item name="android:background">@drawable/bg_icon_decorator</item>
     </style>
 
