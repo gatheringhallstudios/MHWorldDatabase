@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,8 @@ class SkillDetailFragment : Fragment() {
 
     private fun populateSkill(skillTreeFull: SkillTreeFull?) {
         if (skillTreeFull == null) return
+
+        (activity as AppCompatActivity).supportActionBar!!.title = skillTreeFull.name
 
         val icon = assetLoader.loadIconFor(skillTreeFull)
         skill_icon.setImageDrawable(icon)
