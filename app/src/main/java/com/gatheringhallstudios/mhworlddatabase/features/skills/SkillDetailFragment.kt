@@ -47,10 +47,10 @@ class SkillDetailFragment : Fragment() {
         if (skillTreeFull == null) return
 
         val icon = assetLoader.loadIconFor(skillTreeFull)
-        skill_icon.setImageDrawable(icon)
-        skill_name.text = skillTreeFull.name
-        skill_description.text = skillTreeFull.description
-
+        skill_label.setIconDrawable(icon)
+        skill_label.setTitleText(skillTreeFull.name)
+        skill_label.setDescriptionText(skillTreeFull.description)
+        skill_label.removeDecorator()
         populateDescriptions(skillTreeFull.skills)
     }
 
