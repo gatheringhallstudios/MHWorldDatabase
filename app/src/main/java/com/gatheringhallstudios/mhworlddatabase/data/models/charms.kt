@@ -1,6 +1,10 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
-import android.arch.persistence.room.Embedded
+open class CharmBase(
+        val id: Int,
+        val name: String?,
+        val rarity: Int
+)
 
 /**
  * The base charm class.
@@ -8,11 +12,11 @@ import android.arch.persistence.room.Embedded
  * the base is the same as the normal load.
  */
 open class Charm(
-        val id: Int,
-        val name: String?,
-        val rarity: Int,
+        id: Int,
+        name: String?,
+        rarity: Int,
         val previous_id: Int?
-)
+): CharmBase(id, name, rarity)
 
 /**
  * Contains the charm and any additional join data related to the charm

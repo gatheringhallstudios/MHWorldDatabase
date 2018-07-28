@@ -38,8 +38,8 @@ class AssetLoader(context: Context) {
         return loadArmorIcon(entity.armor_type, entity.rarity)
     }
 
-    fun loadIconFor(charmBase: Charm): Drawable? {
-        return ctx.getVectorDrawable("Charm", "rare${charmBase.rarity}")
+    fun loadIconFor(charm: CharmBase): Drawable? {
+        return ctx.getVectorDrawable("Charm", "rare${charm.rarity}")
     }
 
     fun loadIconFor(decoration: DecorationBase): Drawable? {
