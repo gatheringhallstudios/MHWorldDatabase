@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
 import kotlinx.android.synthetic.main.listitem_reward.*
 
@@ -22,7 +22,7 @@ class LocationItemsAdapterDelegate(private val onSelected: (LocationItem) -> Uni
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: LocationItem) {
-        viewHolder.reward_icon.setImageDrawable(viewHolder.assetLoader.loadIconFor(data.item))
+        viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.item))
         viewHolder.reward_name.text = data.item.name
         viewHolder.reward_stack.text =  viewHolder.resources.getString(R.string.quantity, data.stack)
         viewHolder.reward_percent.text = viewHolder.resources.getString(R.string.percentage, data.percentage)

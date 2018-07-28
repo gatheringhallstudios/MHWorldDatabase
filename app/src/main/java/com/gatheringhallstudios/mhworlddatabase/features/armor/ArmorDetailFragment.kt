@@ -67,11 +67,11 @@ class ArmorDetailFragment : Fragment() {
 
     private fun populateArmorBasic(armor: Armor) {
         armor_detail_name.text = armor.name
-        armor_detail_rarity.setTextColor(assetLoader.loadRarityColor(armor.rarity))
+        armor_detail_rarity.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
         armor_detail_rarity.text = getString(
                 R.string.rarity_string,
                 armor.rarity)
-        armor_icon.setImageDrawable(assetLoader.loadIconFor(armor))
+        armor_icon.setImageDrawable(AssetLoader.loadIconFor(armor))
 
         // set defense label
         defense_cell.setLabelText(getString(
@@ -120,7 +120,7 @@ class ArmorDetailFragment : Fragment() {
         //Now to set the actual skills
         for (setBonus in armorSetBonuses) {
             val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
-            val icon = assetLoader.loadIconFor(setBonus.skillTree)
+            val icon = AssetLoader.loadIconFor(setBonus.skillTree)
 
             listItem.skill_icon.setImageDrawable(icon)
             listItem.piece_bonus_text.text = getString(R.string.armor_detail_piece_bonus, setBonus.required)
@@ -145,7 +145,7 @@ class ArmorDetailFragment : Fragment() {
         for (skill in skills) {
             //Set the label for the Set name
             val view = IconLabelTextCell(context)
-            val icon = assetLoader.loadIconFor(skill.skillTree)
+            val icon = AssetLoader.loadIconFor(skill.skillTree)
             val levels = "+${skill.level} ${resources.getQuantityString(R.plurals.skills_level, skill.level)}"
 
             view.removeDecorator()
@@ -171,7 +171,7 @@ class ArmorDetailFragment : Fragment() {
 
         for (itemQuantity in components) {
             val view = IconLabelTextCell(context)
-            val icon = assetLoader.loadIconFor(itemQuantity.item)
+            val icon = AssetLoader.loadIconFor(itemQuantity.item)
 
             view.setLeftIconDrawable(icon)
             view.setLabelText(itemQuantity.item.name)

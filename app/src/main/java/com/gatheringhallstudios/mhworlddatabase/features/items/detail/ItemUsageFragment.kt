@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinderAd
 import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinding
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBinder
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorBase
@@ -22,7 +22,7 @@ fun bindCharmCraft(charmBase: Charm) = createSimpleUniversalBinder { ctx ->
     SimpleUniversalBinding(
             label = charmBase.name,
             value = ctx.getString(R.string.type_charm),
-            icon = ctx.assetLoader.loadIconFor(charmBase),
+            icon = AssetLoader.loadIconFor(charmBase),
             iconType = IconType.EMBELLISHED,
             clickFn = { }
     )
@@ -32,7 +32,7 @@ fun bindArmorCraft(armor: ArmorBase) = createSimpleUniversalBinder { ctx ->
     SimpleUniversalBinding(
             label = armor.name,
             value = ctx.getString(R.string.type_armor),
-            icon = ctx.assetLoader.loadIconFor(armor),
+            icon = AssetLoader.loadIconFor(armor),
             iconType = IconType.ZEMBELLISHED,
             clickFn = { v -> v.getRouter().navigateArmorDetail(armor.id) }
     )

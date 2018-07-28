@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 
@@ -20,7 +19,7 @@ class CharmAdapterDelegate(private val onSelected: (Charm) -> Unit): SimpleListD
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Charm) {
         with(viewHolder.itemView as IconLabelTextCell) {
-            val icon = assetLoader.loadIconFor(data)
+            val icon = AssetLoader.loadIconFor(data)
             setLeftIconDrawable(icon)
             setLabelText(data.name)
         }

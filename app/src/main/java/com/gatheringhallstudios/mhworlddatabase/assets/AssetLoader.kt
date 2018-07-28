@@ -1,18 +1,26 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
+import android.annotation.SuppressLint
+import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 
+// we are storing an application context, so its fine
+@SuppressLint("StaticFieldLeak")
 /**
  * A class used to load assets for the data objects.
  * This class wraps around a context and uses it to load an asset.
  * Accessible via extension functions on fragments and views.
  */
-class AssetLoader(context: Context) {
-    val ctx: Context = context.applicationContext
+object AssetLoader {
+    lateinit private var ctx: Context
+
+    fun bindApplication(app: Application) {
+        this.ctx = app.applicationContext
+    }
 
     fun loadIconFor(item: ItemBase): Drawable? {
         return ctx.getVectorDrawable(item.icon_name ?: "", item.icon_color)

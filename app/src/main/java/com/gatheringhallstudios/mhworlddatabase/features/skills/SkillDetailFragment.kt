@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -46,7 +46,7 @@ class SkillDetailFragment : Fragment() {
     private fun populateSkill(skillTreeFull: SkillTreeFull?) {
         if (skillTreeFull == null) return
 
-        val icon = assetLoader.loadIconFor(skillTreeFull)
+        val icon = AssetLoader.loadIconFor(skillTreeFull)
         skill_label.setIconDrawable(icon)
         skill_label.setTitleText(skillTreeFull.name)
         skill_label.setDescriptionText(skillTreeFull.description)
@@ -67,7 +67,7 @@ class SkillDetailFragment : Fragment() {
             val view = IconLabelTextCell(context)
             val levels = "+${armorSkillView.level} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.level)}"
 
-            val icon = assetLoader.loadIconFor(armorSkillView.armor)
+            val icon = AssetLoader.loadIconFor(armorSkillView.armor)
             view.setLeftIconDrawable(icon)
 
             view.setLabelText(armorSkillView.armor.name)
@@ -111,7 +111,7 @@ class SkillDetailFragment : Fragment() {
         for (charmSkillView in charmSkills!!) {
             val view = IconLabelTextCell(context)
 
-            val icon = assetLoader.loadIconFor(charmSkillView.charm!!)
+            val icon = AssetLoader.loadIconFor(charmSkillView.charm!!)
             val levels = "+${charmSkillView.level} ${resources.getQuantityString(R.plurals.skills_level, charmSkillView.level)}"
 
             view.setLeftIconDrawable(icon)
@@ -136,7 +136,7 @@ class SkillDetailFragment : Fragment() {
         for (decorationView in decorations!!) {
             val view = IconLabelTextCell(context)
 
-            val icon = assetLoader.loadIconFor(decorationView)
+            val icon = AssetLoader.loadIconFor(decorationView)
 
             //Decorations are only ever +1 point
             val levels = "+1 ${resources.getQuantityString(R.plurals.skills_level, 1)}"

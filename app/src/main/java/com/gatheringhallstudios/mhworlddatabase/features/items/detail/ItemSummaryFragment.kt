@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 
 import kotlinx.android.synthetic.main.fragment_item_summary.*
@@ -39,7 +39,7 @@ class ItemSummaryFragment : Fragment() {
         if (item == null) return
 
         //Set the summary information
-        item_icon.setImageDrawable(assetLoader.loadIconFor(item))
+        item_icon.setImageDrawable(AssetLoader.loadIconFor(item))
         item_name.text = item.name
         item_description.text = item.description
 

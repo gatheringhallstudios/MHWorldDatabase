@@ -8,8 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
-import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
@@ -46,7 +45,7 @@ class MonsterSummaryFragment : Fragment() {
         val elemWeakness = monster.weaknesses
         val statusWeakness = monster.status_weaknesses
 
-        val icon = context?.getAssetDrawable("monsters/${monster.id}.png")
+        val icon = AssetLoader.loadIconFor(monster)
 
         monster_header.setIconDrawable(icon)
         monster_header.setTitleText(monster.name)
@@ -97,7 +96,7 @@ class MonsterSummaryFragment : Fragment() {
             }
             habitat.rest_area?.let { areas.append(it) }
 
-            val icon = assetLoader.loadIconFor(habitat.location)
+            val icon = AssetLoader.loadIconFor(habitat.location)
             view.setLeftIconDrawable(icon)
             view.setLabelText(habitat.location.name)
             view.setValueText(areas.toString())

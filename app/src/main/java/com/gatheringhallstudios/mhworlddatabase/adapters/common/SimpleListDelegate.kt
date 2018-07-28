@@ -14,7 +14,6 @@ import kotlin.reflect.KClass
 class SimpleViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {
     val context get() = itemView.context
     val resources get() = itemView.resources
-
 }
 
 /**

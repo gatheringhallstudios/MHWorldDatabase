@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
-import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import kotlinx.android.synthetic.main.listitem_large.*
-import kotlinx.android.synthetic.main.listitem_large.view.*
 
 /**
  * An adapter delegate used to display a list of locations
@@ -26,7 +24,7 @@ class LocationAdapterDelegate(private val onSelected: (Location) -> Unit): Simpl
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Location) {
-        val icon = viewHolder.assetLoader.loadIconFor(data)
+        val icon = AssetLoader.loadIconFor(data)
         viewHolder.item_icon.setImageDrawable(icon)
         viewHolder.item_name.text = data.name
         viewHolder.itemView.setOnClickListener { onSelected(data) }

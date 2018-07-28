@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
@@ -50,9 +49,9 @@ class CharmDetailFragment : Fragment() {
 
         charm_name.text = charm.name
         charm_rarity.text = getString(R.string.rarity_string, charm.rarity)
-        charm_rarity.setTextColor(assetLoader.loadRarityColor(charm.rarity))
+        charm_rarity.setTextColor(AssetLoader.loadRarityColor(charm.rarity))
 
-        val icon = assetLoader.loadIconFor(charm)
+        val icon = AssetLoader.loadIconFor(charm)
         charm_icon.setImageDrawable(icon)
 
         previous_item_layout.removeAllViews()
@@ -73,7 +72,7 @@ class CharmDetailFragment : Fragment() {
         }
 
         val view = IconLabelTextCell(context)
-        val icon = AssetLoader(view.context).loadIconFor(charmData.charm)
+        val icon = AssetLoader.loadIconFor(charmData.charm)
         view.setLeftIconDrawable(icon)
         view.setLabelText(charmData.charm.name)
 
@@ -94,7 +93,7 @@ class CharmDetailFragment : Fragment() {
 
         for (component in components) {
             val view = IconLabelTextCell(context)
-            view.setLeftIconDrawable(assetLoader.loadIconFor(component.item))
+            view.setLeftIconDrawable(AssetLoader.loadIconFor(component.item))
             view.setLabelText(component.item.name)
             view.setValueText("${component.quantity}")
             view.setOnClickListener { getRouter().navigateItemDetail(component.item.id) }
@@ -125,7 +124,7 @@ class CharmDetailFragment : Fragment() {
 
             val skillTree = skillLevel.skillTree
 
-            val icon = assetLoader.loadIconFor(skillTree)
+            val icon = AssetLoader.loadIconFor(skillTree)
             view.setLeftIconDrawable(icon)
             view.setLabelText(skillTree.name)
             view.setValueText("+${skillLevel.level} ${resources.getQuantityString(R.plurals.skills_level, skillLevel.level)}")

@@ -11,6 +11,7 @@ import android.widget.SearchView
 
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
 
@@ -44,12 +45,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(this.toolbar)
-        setupNavigation()
-
         // Initialize application settings
         // todo: if there are issues, create an Application subclass and bind there
         AppSettings.bindApplication(this.application)
+        AssetLoader.bindApplication(this.application)
+
+        setSupportActionBar(this.toolbar)
+        setupNavigation()
 
         viewModel.searchActive.observe(this, Observer {
             val active = it ?: false

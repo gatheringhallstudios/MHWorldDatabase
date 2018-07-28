@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemReward
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
@@ -31,7 +31,7 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation>() {
     override fun bindView(viewHolder: SimpleViewHolder, data: ItemLocation) {
         val ctx = viewHolder.context
 
-        viewHolder.reward_icon.setImageDrawable(ctx.assetLoader.loadIconFor(data.location))
+        viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.location))
         viewHolder.reward_name.text = ctx.getString(R.string.location_area, data.area)
         viewHolder.reward_stack.text = ctx.getString(R.string.quantity, data.stack)
         viewHolder.reward_percent.text = ctx.getString(R.string.percentage, data.percentage)
@@ -67,7 +67,7 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward>() {
         val source = viewHolder.resources.getString(
                 R.string.item_source_reward_condition, rankStr, data.condition_name)
 
-        viewHolder.icon.setImageDrawable(viewHolder.itemView.assetLoader.loadIconFor(data.monster))
+        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.monster))
         viewHolder.label_text.text = data.monster.name
         viewHolder.sublabel_text.text = source
         viewHolder.value_text.text = viewHolder.resources.getString(R.string.percentage, data.percentage)

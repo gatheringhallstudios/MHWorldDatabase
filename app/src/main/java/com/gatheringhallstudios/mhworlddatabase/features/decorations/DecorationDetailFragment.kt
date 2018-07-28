@@ -8,9 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
@@ -42,11 +41,11 @@ class DecorationDetailFragment : Fragment() {
     private fun populateDecoration(decoration: Decoration?) {
         if (decoration == null) return
 
-        val icon = assetLoader.loadIconFor(decoration)
+        val icon = AssetLoader.loadIconFor(decoration)
         decoration_icon.setImageDrawable(icon)
         decoration_name.text = decoration.name
         decoration_description.text = getString(R.string.rarity_string, decoration.rarity)
-        decoration_description.setTextColor(assetLoader.loadRarityColor(decoration.rarity))
+        decoration_description.setTextColor(AssetLoader.loadRarityColor(decoration.rarity))
 
         mysterious_feystone_chance_value.text = getString(R.string.percentage, decoration.mysterious_feystone_chance)
         gleaming_feystone_chance_value.text = getString(R.string.percentage, decoration.glowing_feystone_chance)
@@ -64,7 +63,7 @@ class DecorationDetailFragment : Fragment() {
 
         val view = IconLabelTextCell(context)
 
-        val icon = assetLoader.loadSkillIcon(skillTreeFull.icon_color)
+        val icon = AssetLoader.loadSkillIcon(skillTreeFull.icon_color)
         view.setLeftIconDrawable(icon)
         view.setLabelText(skillTreeFull.name)
         view.removeDecorator()
