@@ -119,7 +119,7 @@ abstract class ItemDao {
     abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<Charm>
 
     @Query("""
-        SELECT armor_id id, name, armor_type, rarity
+        SELECT armor_id id, name, armor_type, rarity, slot_1, slot_2, slot_3
         FROM armor_recipe ar
             JOIN armor a
                 ON ar.armor_id = a.id

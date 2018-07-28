@@ -83,7 +83,7 @@ abstract class SkillDao {
 
     @Query("""
         SELECT a.id armor_id, at.name armor_name, a.rarity armor_rarity, a.armor_type armor_armor_type,
-            askill.level level
+            askill.level level, a.slot_1 armor_slot_1, a.slot_2 armor_slot_2, a.slot_3 armor_slot_3
         FROM armor a
             JOIN armor_text at ON a.id = at.id
             JOIN armor_skill askill ON a.id = askill.armor_id

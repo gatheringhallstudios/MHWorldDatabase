@@ -4,6 +4,20 @@ import android.arch.persistence.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 
 /**
+ * An embedded class representing the available slots on a piece of armor.
+ * Can be iterated on.
+ */
+data class ArmorSlots(
+        val slot_1: Int,
+        val slot_2: Int,
+        val slot_3: Int
+): Iterable<Int> {
+    override fun iterator(): Iterator<Int> {
+        return listOf(slot_1, slot_2, slot_3).iterator()
+    }
+}
+
+/**
  * The base model for a armor containing the basic identifying information
  */
 open class ArmorBase(
@@ -11,7 +25,15 @@ open class ArmorBase(
         val name: String?,
         val rarity: Int,
         val armor_type: ArmorType
-)
+) {
+    // note: slots are a var because @Embedded in both child AND parent params would cause issues,
+    // and @Embedded only works on var fields (and we need to use non-var in the child)
+
+    /**
+     * A list of slot level values (0-3) that can be iterated on.
+     */
+    @Embedded lateinit var slots: ArmorSlots
+}
 
 /**
  * Full information regarding an armor model
@@ -29,10 +51,6 @@ class Armor(
         val male: Boolean,
         val female: Boolean,
 
-        val slot_1: Int,
-        val slot_2: Int,
-        val slot_3: Int,
-
         val defense_base: Int,
         val defense_max: Int,
         val defense_augment_max: Int,
@@ -41,14 +59,7 @@ class Armor(
         val thunder: Int,
         val ice: Int,
         val dragon: Int
-): ArmorBase(id, name, rarity, armor_type) {
-    /**
-     * Generates a list containing all slot values,
-     * where each value is the "level" of the slot.
-     * 0 means that the slot doesn't exist.
-     */
-    val slots get() = listOf(slot_1, slot_2, slot_3)
-}
+): ArmorBase(id, name, rarity, armor_type)
 
 /**
  * Representation of a single armor set

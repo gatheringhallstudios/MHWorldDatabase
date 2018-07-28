@@ -125,7 +125,7 @@ abstract class SearchDao {
     protected abstract fun loadAllCharmsSync(langId: String): List<Charm>
 
     @Query("""
-        SELECT a.id, at.name, a.rarity, a.armor_type
+        SELECT a.id, at.name, a.rarity, a.armor_type, a.slot_1, a.slot_2, a.slot_3
         FROM armor a
             JOIN armor_text at USING (id)
         WHERE at.lang_id = :langId
