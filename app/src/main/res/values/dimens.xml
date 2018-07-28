@@ -36,6 +36,10 @@
     <dimen name="width_damage_value">36dp</dimen>
     <dimen name="margin_damage_value_right">14dp</dimen>
 
+    <!-- dimensions for icon paddings in various decorations -->
+    <dimen name="icon_padding_medium_decorated">4dp</dimen>
+    <dimen name="icon_padding_medium_zembellished">3dp</dimen>
+
     <!-- Dimens for Elevation copied from here -->
     <!-- https://material.io/design/environment/elevation.html#default-elevations -->
     <dimen name="elevation_bottom_sheet">16dp</dimen>

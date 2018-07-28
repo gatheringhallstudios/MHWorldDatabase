@@ -51,7 +51,7 @@
     </style>
 
     <style name="IconMedium.Decorated">
-        <item name="android:padding">4dp</item>
+        <item name="android:padding">@dimen/icon_padding_medium_decorated</item>
         <item name="android:background">@drawable/bg_icon_decorator</item>
     </style>
 
@@ -63,6 +63,11 @@
     <style name="IconXLarge.Decorated">
         <item name="android:padding">1dp</item>
         <item name="android:background">@drawable/bg_icon_decorator</item>
+    </style>
+
+    <style name="IconMedium.Zembellished">
+        <item name="android:padding">@dimen/icon_padding_medium_zembellished</item>
+        <item name="android:background">@drawable/ic_decorator_zembelish</item>
     </style>
 
     <style name="IconLarge.Zembellished">

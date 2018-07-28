@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
+import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import kotlinx.android.synthetic.main.listitem_universal_simple.*
 
 /**
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.listitem_universal_simple.*
 class SimpleUniversalBinding(
         val label: String?,
         val value: String?,
+        val iconType: IconType,
         val icon: Drawable?,
         val clickFn: (v: View) -> Unit
 )
@@ -52,7 +54,24 @@ class SimpleUniversalBinderAdapterDelegate: SimpleListDelegate<SimpleUniversalBi
 
     override fun bindView(viewHolder: SimpleViewHolder, data: SimpleUniversalBinder) {
         val result = data.build(viewHolder.context)
-        viewHolder.icon.setImageDrawable(result.icon)
+
+        val resources = viewHolder.resources
+        val padding = when (result.iconType) {
+            IconType.NORMAL -> 0f
+            IconType.EMBELLISHED -> resources.getDimension(R.dimen.icon_padding_medium_decorated)
+            IconType.ZEMBELLISHED -> resources.getDimension(R.dimen.icon_padding_medium_zembellished)
+        }.toInt()
+
+        with(viewHolder.icon) {
+            setImageDrawable(result.icon)
+            setPadding(padding, padding, padding, padding)
+            when (result.iconType) {
+                IconType.NORMAL -> background = null
+                IconType.EMBELLISHED -> setBackgroundResource(R.drawable.bg_icon_decorator)
+                IconType.ZEMBELLISHED -> setBackgroundResource(R.drawable.ic_decorator_zembelish)
+            }
+        }
+
         viewHolder.label_text.text = result.label
         viewHolder.value_text.text = result.value
 
