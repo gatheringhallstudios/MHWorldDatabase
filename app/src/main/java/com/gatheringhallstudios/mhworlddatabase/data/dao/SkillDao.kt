@@ -78,18 +78,19 @@ abstract class SkillDao {
             AND cs.skilltree_id = :skillTreeId
 
     """)
-    abstract fun loadCharmsWithSkill(langId: String, skillTreeId: Int): LiveData<List<CharmSkill>>
+    abstract fun loadCharmsWithSkill(langId: String, skillTreeId: Int): LiveData<List<CharmSkillLevel>>
 
 
     @Query("""
-        SELECT a.*, at.name, askill.skilltree_id, askill.level level, stt.icon_color
-            FROM armor a
+        SELECT a.id armor_id, at.name armor_name, a.rarity armor_rarity, a.armor_type armor_armor_type,
+            askill.level level
+        FROM armor a
             JOIN armor_text at ON a.id = at.id
             JOIN armor_skill askill ON a.id = askill.armor_id
             JOIN skilltree stt ON askill.skilltree_id = stt.id
-            WHERE at.lang_id = :langId
-               AND askill.skilltree_id = :skillTreeId
-            ORDER BY a.id ASC""")
+        WHERE at.lang_id = :langId
+          AND askill.skilltree_id = :skillTreeId
+        ORDER BY a.id ASC""")
     abstract fun loadArmorWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSkillLevel>>
 
     @Query("""

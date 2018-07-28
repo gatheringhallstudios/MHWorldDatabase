@@ -99,7 +99,7 @@ class SkillDetailFragment : Fragment() {
         }
     }
 
-    private fun populateCharms(charmSkills: List<CharmSkill>?) {
+    private fun populateCharms(charmSkills: List<CharmSkillLevel>?) {
         if (charm_layout.childCount > 0)
             charm_layout.removeAllViews()
 
@@ -111,13 +111,13 @@ class SkillDetailFragment : Fragment() {
         for (charmSkillView in charmSkills!!) {
             val view = IconLabelTextCell(context)
 
-            val icon = assetLoader.loadIconFor(charmSkillView.data!!)
+            val icon = assetLoader.loadIconFor(charmSkillView.charm!!)
             val levels = "+${charmSkillView.level} ${resources.getQuantityString(R.plurals.skills_level, charmSkillView.level)}"
 
             view.setLeftIconDrawable(icon)
-            view.setLabelText(charmSkillView.data.name)
+            view.setLabelText(charmSkillView.charm.name)
             view.setValueText(levels)
-            view.setOnClickListener {_ -> getRouter().navigateCharmDetail(charmSkillView.data.id)}
+            view.setOnClickListener { getRouter().navigateCharmDetail(charmSkillView.charm.id)}
 
             charm_layout.addView(view)
         }

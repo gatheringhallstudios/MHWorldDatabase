@@ -51,7 +51,7 @@ class SkillLevel(
  * When you load this, it is assumed that you already know what the skill is.
  */
 class ArmorSkillLevel(
-        @Embedded val armor: ArmorBase,
+        @Embedded(prefix = "armor_") val armor: ArmorBase,
         val level: Int
 )
 
@@ -60,7 +60,7 @@ class ArmorSkillLevel(
  * Represents a charm and its skill level. Used as part of a composite result.
  * When you load this, it is assumed that you already know what the skill is.
  */
-class CharmSkill(
-        @Embedded(prefix = "charm_") val data: Charm?,
+class CharmSkillLevel(
+        @Embedded(prefix = "charm_") val charm: Charm?,
         val level: Int
 )
