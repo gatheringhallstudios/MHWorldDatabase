@@ -11,60 +11,22 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/padding_footer_space">
 
-        <android.support.constraint.ConstraintLayout
+        <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
             android:id="@+id/skill_label"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/margin_large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/skill_icon"
-                style="@style/IconXLarge"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_ui_armor_skill_white" />
-
-            <TextView
-                android:id="@+id/skill_name"
-                style="@style/TextDisplayHigh"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="@id/skill_icon"
-                app:layout_constraintStart_toEndOf="@+id/skill_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Poison Resistance" />
-
-            <TextView
-                android:id="@+id/skill_description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextBodyLow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/skill_name"
-                app:layout_constraintTop_toBottomOf="@+id/skill_name"
-                tools:text="Increases the rate of sleep buildup. (Elemental buildup has a maximum limit.)" />
-        </android.support.constraint.ConstraintLayout>
+            android:layout_height="match_parent" />
 
 
         <LinearLayout
             android:id="@+id/skill_level_descriptions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/armor_header"
-            app:layout_constraintEnd_toEndOf="@+id/skill_label"
-            app:layout_constraintStart_toStartOf="@+id/skill_label"
+            app:layout_constraintEnd_toEndOf="@id/skill_label"
+            app:layout_constraintStart_toStartOf="@id/skill_label"
             app:layout_constraintTop_toBottomOf="@+id/skill_label">
 
             <include
