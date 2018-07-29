@@ -31,7 +31,7 @@ class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        val icon = AssetLoader(viewHolder.itemView.context).loadIconFor(armorSet)
+        val icon = AssetLoader.loadIconFor(armorSet)
 
         viewHolder.set_icon.setImageDrawable(icon)
         viewHolder.armor_set_name.text = armorSet.armorset_name
@@ -82,10 +82,9 @@ class ArmorSetDetailItem(val armor: Armor) : Item() {
         viewHolder.slot2.setImageDrawable(slotImages[1])
         viewHolder.slot3.setImageDrawable(slotImages[2])
 
-        val loader = AssetLoader(viewHolder.itemView.context)
-        val icon = loader.loadArmorIcon(armor.armor_type, armor.rarity)
+        val icon = AssetLoader.loadIconFor(armor)
         viewHolder.armor_icon.setImageDrawable(icon)
-        viewHolder.rarity_string.setTextColor(loader.loadRarityColor(armor.rarity))
+        viewHolder.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
 
         view.setOnClickListener {
             Router(Navigation.findNavController(view)).navigateArmorDetail(armor.id)

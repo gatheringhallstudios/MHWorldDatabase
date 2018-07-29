@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.assetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 
 import kotlinx.android.synthetic.main.fragment_item_summary.*
@@ -47,7 +47,7 @@ class ItemSummaryFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = item.name
 
         //Set the summary information
-        item_icon.setImageDrawable(assetLoader.loadIconFor(item))
+        item_icon.setImageDrawable(AssetLoader.loadIconFor(item))
         item_name.text = item.name
         item_description.text = item.description
 

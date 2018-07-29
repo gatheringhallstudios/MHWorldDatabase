@@ -17,27 +17,6 @@ import java.io.FileNotFoundException
 
 val TAG = "MHWorldAssetUtil"
 
-
-/**
- * Extension: Receives an asset loader for a fragment
- */
-val Fragment.assetLoader get() = AssetLoader(context!!)
-
-/**
- * Extension: Receives an asset loader for a view
- */
-val View.assetLoader get() = AssetLoader(context!!)
-
-/**
- * Extension: Receives an asset loader for this context.
- */
-val Context.assetLoader get() = AssetLoader(this)
-
-/**
- * Extension: Receives an asset loader for the context inside of the viewholder
- */
-val RecyclerView.ViewHolder.assetLoader get() = AssetLoader(this.itemView.context)
-
 /**
  * Extension: Loads a drawable from the assets folder.
  * Returns null on failure, or default resource if provided.
