@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.support.v7.app.AppCompatActivity
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
@@ -50,6 +51,6 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
     }
 
     private fun setTitle(title: String?) {
-        activity?.title = title
+        (activity as AppCompatActivity).supportActionBar?.title = title
     }
 }

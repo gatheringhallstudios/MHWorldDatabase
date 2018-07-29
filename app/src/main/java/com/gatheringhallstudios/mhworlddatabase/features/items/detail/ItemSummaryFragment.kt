@@ -8,6 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+import android.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
+
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Item
@@ -37,6 +43,8 @@ class ItemSummaryFragment : Fragment() {
 
     private fun populateItem(item: Item?) {
         if (item == null) return
+
+        (activity as AppCompatActivity).supportActionBar?.title = item.name
 
         //Set the summary information
         item_icon.setImageDrawable(AssetLoader.loadIconFor(item))

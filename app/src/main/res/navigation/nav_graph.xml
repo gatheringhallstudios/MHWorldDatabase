@@ -69,7 +69,6 @@
     <fragment
         android:id="@+id/monsterDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment"
-        android:label="Monster Detail"
         tools:layout="@layout/fragment_generic_pager" >
     </fragment>
     <action
@@ -81,7 +80,6 @@
     <fragment
         android:id="@+id/itemDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment"
-        android:label="Item Detail"
         tools:layout="@layout/fragment_generic_pager" >
     </fragment>
     <action
@@ -105,7 +103,6 @@
     <fragment
         android:id="@+id/skillDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillDetailFragment"
-        android:label="Skill Detail"
         tools:layout="@layout/fragment_skill_summary" >
     </fragment>
     <action
@@ -117,7 +114,6 @@
     <fragment
         android:id="@+id/decorationDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationDetailFragment"
-        android:label="Decoration Detail"
         tools:layout="@layout/fragment_decoration_summary" >
     </fragment>
     <action
@@ -129,7 +125,6 @@
     <fragment
         android:id="@+id/armorDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorDetailFragment"
-        android:label="Armor Detail"
         tools:layout="@layout/fragment_armor_summary" />
     <action
         android:id="@+id/openArmorDetailAction"
@@ -140,7 +135,6 @@
     <fragment
         android:id="@+id/charmDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.charms.CharmDetailFragment"
-        android:label="Charm Detail"
         tools:layout="@layout/fragment_charm_summary" />
     <action
         android:id="@+id/openCharmDetailAction"

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,9 @@ class DecorationDetailFragment : Fragment() {
     private fun populateDecoration(decoration: Decoration?) {
         if (decoration == null) return
 
-        val icon = AssetLoader.loadIconFor(decoration)
+        (activity as AppCompatActivity).supportActionBar?.title = decoration.name
+
+        val icon = assetLoader.loadIconFor(decoration)
         decoration_icon.setImageDrawable(icon)
         decoration_name.text = decoration.name
         decoration_description.text = getString(R.string.rarity_string, decoration.rarity)
