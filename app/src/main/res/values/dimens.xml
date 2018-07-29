@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- ALL MARGIN AND PADDING SIZES MUST BE MULTIPLES OF 4 -->
 
     <!-- Default screen margins, per the Android Design guidelines. -->
@@ -66,4 +66,6 @@
     <dimen name="elevation_submenu_4">12dp</dimen>
     <dimen name="elevation_switch">1dp</dimen>
     <dimen name="elevation_toolbar">4dp</dimen>
+
+    <dimen name="design_navigation_icon_size" tools:override="true">32dp</dimen>
 </resources>
