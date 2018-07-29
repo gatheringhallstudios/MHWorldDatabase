@@ -49,7 +49,7 @@ class SkillDetailFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = skillTreeFull.name
 
-        val icon = assetLoader.loadIconFor(skillTreeFull)
+        val icon = AssetLoader.loadIconFor(skillTreeFull)
         skill_label.setIconDrawable(icon)
         skill_label.setTitleText(skillTreeFull.name)
         skill_label.setDescriptionText(skillTreeFull.description)

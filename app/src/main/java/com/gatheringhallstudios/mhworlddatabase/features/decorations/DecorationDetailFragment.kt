@@ -44,7 +44,7 @@ class DecorationDetailFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = decoration.name
 
-        val icon = assetLoader.loadIconFor(decoration)
+        val icon = AssetLoader.loadIconFor(decoration)
         decoration_icon.setImageDrawable(icon)
         decoration_name.text = decoration.name
         decoration_description.text = getString(R.string.rarity_string, decoration.rarity)
