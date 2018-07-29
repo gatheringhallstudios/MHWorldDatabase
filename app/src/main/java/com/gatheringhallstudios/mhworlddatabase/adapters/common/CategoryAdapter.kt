@@ -63,8 +63,20 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
         this.addAll(items)
     }
 
-    fun addSubSections(sections: Map<String, Collection<Any>>) {
+    fun addSections(sections: Map<String, Collection<Any>>, skipEmpty: Boolean = false) {
         for ((key, value) in sections) {
+            if (skipEmpty && value.isEmpty()) {
+                continue
+            }
+            addSection(key, value)
+        }
+    }
+
+    fun addSubSections(sections: Map<String, Collection<Any>>, skipEmpty: Boolean = false) {
+        for ((key, value) in sections) {
+            if (skipEmpty && value.isEmpty()) {
+                continue
+            }
             addSubSection(key, value)
         }
     }

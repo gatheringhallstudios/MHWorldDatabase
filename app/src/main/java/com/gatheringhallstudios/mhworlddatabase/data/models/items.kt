@@ -65,14 +65,27 @@ class ItemReward(
  */
 class ItemUsages(
         val craftRecipes: List<ItemCombination>,
-        val charmBases: List<Charm>,
-        val armor: List<ArmorBase>
+        val charms: List<ItemUsageCharm>,
+        val armor: List<ItemUsageArmor>
 )
 
 class ItemSources(
         val craftRecipes: List<ItemCombination>,
         val locations: List<ItemLocation>,
         val rewards: List<ItemReward>
+)
+
+/**
+ * The usage of an item to make a piece of armor. Item is assumed to be known
+ */
+class ItemUsageArmor(
+        @Embedded val result: ArmorBase,
+        val quantity: Int
+)
+
+class ItemUsageCharm(
+        @Embedded val result: CharmBase,
+        val quantity: Int
 )
 
 /**

@@ -13,28 +13,28 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBi
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorBase
-import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsageArmor
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsageCharm
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsages
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
-fun bindCharmCraft(charmBase: Charm) = createSimpleUniversalBinder { ctx ->
+fun bindCharmCraft(data: ItemUsageCharm) = createSimpleUniversalBinder { ctx ->
     SimpleUniversalBinding(
-            label = charmBase.name,
-            value = ctx.getString(R.string.type_charm),
-            icon = AssetLoader.loadIconFor(charmBase),
+            label = data.result.name,
+            value = data.quantity.toString(),
+            icon = AssetLoader.loadIconFor(data.result),
             iconType = IconType.EMBELLISHED,
-            clickFn = { }
+            clickFn = { v -> v.getRouter().navigateCharmDetail(data.result.id) }
     )
 }
 
-fun bindArmorCraft(armor: ArmorBase) = createSimpleUniversalBinder { ctx ->
+fun bindArmorCraft(data: ItemUsageArmor) = createSimpleUniversalBinder { ctx ->
     SimpleUniversalBinding(
-            label = armor.name,
-            value = ctx.getString(R.string.type_armor),
-            icon = AssetLoader.loadIconFor(armor),
+            label = data.result.name,
+            value = data.quantity.toString(),
+            icon = AssetLoader.loadIconFor(data.result),
             iconType = IconType.ZEMBELLISHED,
-            clickFn = { v -> v.getRouter().navigateArmorDetail(armor.id) }
+            clickFn = { v -> v.getRouter().navigateArmorDetail(data.result.id) }
     )
 }
 
@@ -64,9 +64,11 @@ class ItemUsageFragment : RecyclerViewFragment() {
             return
         }
 
-        adapter.addAll(data.craftRecipes)
-        adapter.addAll(data.charmBases.map(::bindCharmCraft))
-        adapter.addAll(data.armor.map(::bindArmorCraft))
+        adapter.addSections(mapOf(
+                getString(R.string.item_header_crafting) to data.craftRecipes,
+                getString(R.string.item_header_usage_charms) to data.charms.map(::bindCharmCraft),
+                getString(R.string.item_header_usage_armor)to data.armor.map(::bindArmorCraft)
+        ), skipEmpty = true)
 
         adapter.notifyDataSetChanged()
     }

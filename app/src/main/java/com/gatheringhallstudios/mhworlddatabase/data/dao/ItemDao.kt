@@ -107,7 +107,7 @@ abstract class ItemDao {
     }
 
     @Query("""
-        SELECT c.id, c.rarity, c.previous_id, ctext.name
+        SELECT c.id, c.rarity, c.previous_id, ctext.name, cr.quantity
         FROM charm_recipe cr
             JOIN charm c
                 ON c.id = cr.charm_id
@@ -116,10 +116,10 @@ abstract class ItemDao {
         WHERE cr.item_id = :itemId
           AND ctext.lang_id = :langId
     """)
-    abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<Charm>
+    abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<ItemUsageCharm>
 
     @Query("""
-        SELECT armor_id id, name, armor_type, rarity, slot_1, slot_2, slot_3
+        SELECT armor_id id, name, armor_type, rarity, slot_1, slot_2, slot_3, ar.quantity
         FROM armor_recipe ar
             JOIN armor a
                 ON ar.armor_id = a.id
@@ -128,7 +128,7 @@ abstract class ItemDao {
         WHERE ar.item_id = :itemId
           AND atext.lang_id = :langId
     """)
-    abstract fun loadArmorUsageForSync(langId: String, itemId: Int): List<ArmorBase>
+    abstract fun loadArmorUsageForSync(langId: String, itemId: Int): List<ItemUsageArmor>
 
     /**
      * Loads all potential ways to use an item asynchronously
@@ -140,7 +140,7 @@ abstract class ItemDao {
                 craftRecipes = itemCombos.filter {
                     it.first.id == itemId || it.second?.id == itemId
                 },
-                charmBases = loadCharmUsageForSync(langId, itemId),
+                charms = loadCharmUsageForSync(langId, itemId),
                 armor = loadArmorUsageForSync(langId, itemId)
         )
     }
