@@ -60,7 +60,7 @@ class ArmorDetailFragment : Fragment() {
     private fun populateArmor(armorData: ArmorFull?) {
         if (armorData == null) return
 
-        (activity as AppCompatActivity).supportActionBar!!.title = armorData.armor.name
+        (activity as AppCompatActivity).supportActionBar?.title = armorData.armor.name
 
         populateArmorBasic(armorData.armor)
         populateSkills(armorData.skills)

@@ -49,7 +49,7 @@ class CharmDetailFragment : Fragment() {
 
         val charm = charmData.charm
 
-        (activity as AppCompatActivity).supportActionBar!!.title = charm.name
+        (activity as AppCompatActivity).supportActionBar?.title = charm.name
 
         charm_name.text = charm.name
         charm_rarity.text = getString(R.string.rarity_string, charm.rarity)

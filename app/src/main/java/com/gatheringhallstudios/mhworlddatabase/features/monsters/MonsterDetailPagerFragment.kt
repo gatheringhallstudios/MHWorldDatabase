@@ -51,6 +51,6 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
     }
 
     private fun setTitle(title: String?) {
-        (activity as AppCompatActivity).supportActionBar!!.title = title
+        (activity as AppCompatActivity).supportActionBar?.title = title
     }
 }

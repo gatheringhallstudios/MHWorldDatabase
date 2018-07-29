@@ -44,7 +44,7 @@ class ItemSummaryFragment : Fragment() {
     private fun populateItem(item: Item?) {
         if (item == null) return
 
-        (activity as AppCompatActivity).supportActionBar!!.title = item.name
+        (activity as AppCompatActivity).supportActionBar?.title = item.name
 
         //Set the summary information
         item_icon.setImageDrawable(assetLoader.loadIconFor(item))

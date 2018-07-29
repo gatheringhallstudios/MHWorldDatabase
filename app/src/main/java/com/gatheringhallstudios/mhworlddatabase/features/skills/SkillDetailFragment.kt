@@ -47,7 +47,7 @@ class SkillDetailFragment : Fragment() {
     private fun populateSkill(skillTreeFull: SkillTreeFull?) {
         if (skillTreeFull == null) return
 
-        (activity as AppCompatActivity).supportActionBar!!.title = skillTreeFull.name
+        (activity as AppCompatActivity).supportActionBar?.title = skillTreeFull.name
 
         val icon = assetLoader.loadIconFor(skillTreeFull)
         skill_label.setIconDrawable(icon)

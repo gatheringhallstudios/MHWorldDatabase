@@ -43,7 +43,7 @@ class DecorationDetailFragment : Fragment() {
     private fun populateDecoration(decoration: Decoration?) {
         if (decoration == null) return
 
-        (activity as AppCompatActivity).supportActionBar!!.title = decoration.name
+        (activity as AppCompatActivity).supportActionBar?.title = decoration.name
 
         val icon = assetLoader.loadIconFor(decoration)
         decoration_icon.setImageDrawable(icon)
