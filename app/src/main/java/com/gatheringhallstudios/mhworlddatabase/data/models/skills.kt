@@ -61,6 +61,6 @@ class ArmorSkillLevel(
  * When you load this, it is assumed that you already know what the skill is.
  */
 class CharmSkillLevel(
-        @Embedded(prefix = "charm_") val charm: Charm?,
+        @Embedded(prefix = "charm_") val charm: CharmBase,
         val level: Int
 )

@@ -14,15 +14,17 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.*
-
 
 class SkillDetailFragment : Fragment() {
     companion object {
         const val ARG_SKILLTREE_ID = "SKILL"
     }
+
+    // Wraps the adapter used by SkillDetailFragment.
+    // Make sure to remove the reference from recyclerview to avoid a leak
+    private val adapterBuilder = SkillDetailAdapterWrapper()
 
     private val viewModel: SkillDetailViewModel by lazy {
         ViewModelProviders.of(this).get(SkillDetailViewModel::class.java)
@@ -34,14 +36,40 @@ class SkillDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val args = arguments
-        val skillTreeId = args!!.getInt(ARG_SKILLTREE_ID)
+        // needs to also be removed in onDestroyView()
+        recycler_view.adapter = adapterBuilder.adapter
+        recycler_view.isNestedScrollingEnabled = false
 
-        viewModel.setSkill(skillTreeId)
+        viewModel.setSkill(arguments?.getInt(ARG_SKILLTREE_ID) ?: -1)
         viewModel.skillTreeFull.observe(this, Observer(::populateSkill))
-        viewModel.armorPieces.observe(this, Observer(::populateArmor))
-        viewModel.charms.observe(this, Observer(::populateCharms))
-        viewModel.decorations.observe(this, Observer(::populateDecorations))
+
+        viewModel.decorations.observe(this, Observer {
+            if (it != null) {
+                val title = getString(R.string.skills_decoration_header)
+                adapterBuilder.setDecorations(title, it)
+            }
+        })
+
+        viewModel.charms.observe(this, Observer {
+            if (it != null) {
+                val title = getString(R.string.skills_charm_header)
+                adapterBuilder.setCharms(title, it)
+            }
+        })
+
+        viewModel.armorPieces.observe(this, Observer {
+            if (it != null) {
+                val title = getString(R.string.skills_armor_header)
+                adapterBuilder.setArmor(title, it)
+            }
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // avoid mem leak. RecyclerViews create circular references inherently.
+        recycler_view.adapter = null
     }
 
     private fun populateSkill(skillTreeFull: SkillTreeFull?) {
@@ -55,30 +83,6 @@ class SkillDetailFragment : Fragment() {
         skill_label.setDescriptionText(skillTreeFull.description)
         skill_label.removeDecorator()
         populateDescriptions(skillTreeFull.skills)
-    }
-
-    private fun populateArmor(armorSkills: List<ArmorSkillLevel>?) {
-        if (armor_layout.childCount > 0)
-            armor_layout.removeAllViews()
-
-        if (armorSkills.orEmpty().isEmpty()) {
-            insertEmptyState(armor_layout)
-            return
-        }
-
-        for (armorSkillView in armorSkills!!) {
-            val view = IconLabelTextCell(context)
-            val levels = "+${armorSkillView.level} ${resources.getQuantityString(R.plurals.skills_level, armorSkillView.level)}"
-
-            val icon = AssetLoader.loadIconFor(armorSkillView.armor)
-            view.setLeftIconDrawable(icon)
-
-            view.setLabelText(armorSkillView.armor.name)
-            view.setValueText(levels)
-            view.setOnClickListener { getRouter().navigateArmorDetail(armorSkillView.armor.id) }
-
-            armor_layout.addView(view)
-        }
     }
 
     private fun populateDescriptions(skills: List<Skill>) {
@@ -99,60 +103,6 @@ class SkillDetailFragment : Fragment() {
             view.level_description.text = description
 
             skill_level_descriptions.addView(view)
-        }
-    }
-
-    private fun populateCharms(charmSkills: List<CharmSkillLevel>?) {
-        if (charm_layout.childCount > 0)
-            charm_layout.removeAllViews()
-
-        if (charmSkills.orEmpty().isEmpty()) {
-            insertEmptyState(charm_layout)
-            return
-        }
-
-        for (charmSkillView in charmSkills!!) {
-            val view = IconLabelTextCell(context)
-
-            val icon = AssetLoader.loadIconFor(charmSkillView.charm!!)
-            val levels = "+${charmSkillView.level} ${resources.getQuantityString(R.plurals.skills_level, charmSkillView.level)}"
-
-            view.setLeftIconDrawable(icon)
-            view.setLabelText(charmSkillView.charm.name)
-            view.setValueText(levels)
-            view.setOnClickListener { getRouter().navigateCharmDetail(charmSkillView.charm.id)}
-
-            charm_layout.addView(view)
-        }
-    }
-
-    private fun populateDecorations(decorations: List<DecorationBase>?) {
-        if (decoration_layout.childCount > 0) {
-            decoration_layout.removeAllViews()
-        }
-
-        if(decorations.orEmpty().isEmpty()) {
-            insertEmptyState(decoration_layout)
-            return
-        }
-
-        for (decorationView in decorations!!) {
-            val view = IconLabelTextCell(context)
-
-            val icon = AssetLoader.loadIconFor(decorationView)
-
-            //Decorations are only ever +1 point
-            val levels = "+1 ${resources.getQuantityString(R.plurals.skills_level, 1)}"
-
-            view.setLeftIconDrawable(icon)
-            view.setLabelText(decorationView.name)
-            view.setValueText(levels)
-
-            view.setOnClickListener {
-                getRouter().navigateDecorationDetail(decorationView.id)
-            }
-
-            decoration_layout.addView(view)
         }
     }
 

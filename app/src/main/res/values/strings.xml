@@ -32,6 +32,7 @@
     <string name="rarity_string">Rarity %1$d</string>
     <string name="none">None</string>
     <string name="quantity">x %1$d</string>
+    <string name="plus">+%1$d</string>
     <string name="percentage">%1$s%%</string>
 
     <!-- Headers -->

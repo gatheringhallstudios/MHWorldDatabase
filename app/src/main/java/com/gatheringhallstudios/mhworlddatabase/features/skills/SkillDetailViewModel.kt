@@ -18,7 +18,7 @@ class SkillDetailViewModel(application: Application) :  AndroidViewModel(applica
     lateinit var decorations: LiveData<List<DecorationBase>>
 
     fun setSkill(skillTreeId : Int) {
-        if(this.id == skillTreeId) {
+        if (this.id == skillTreeId) {
             return
         }
 
