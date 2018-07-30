@@ -37,7 +37,6 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
     private fun populateData(data: ItemSources?) {
         adapter.clear()
         if (data == null) {
-            adapter.notifyDataSetChanged()
             return
         }
 
@@ -57,7 +56,5 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
         if (data.rewards.isNotEmpty()) {
             adapter.addSection(getString(R.string.item_header_rewards), data.rewards)
         }
-
-        adapter.notifyDataSetChanged()
     }
 }

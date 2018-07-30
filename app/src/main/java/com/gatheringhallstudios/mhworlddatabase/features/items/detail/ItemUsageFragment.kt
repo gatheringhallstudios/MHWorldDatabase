@@ -60,7 +60,6 @@ class ItemUsageFragment : RecyclerViewFragment() {
     private fun populateData(data: ItemUsages?) {
         adapter.clear()
         if (data == null) {
-            adapter.notifyDataSetChanged()
             return
         }
 
@@ -69,7 +68,5 @@ class ItemUsageFragment : RecyclerViewFragment() {
                 getString(R.string.item_header_usage_charms) to data.charms.map(::bindCharmCraft),
                 getString(R.string.item_header_usage_armor)to data.armor.map(::bindArmorCraft)
         ), skipEmpty = true)
-
-        adapter.notifyDataSetChanged()
     }
 }

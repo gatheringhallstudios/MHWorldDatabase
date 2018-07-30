@@ -38,7 +38,5 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
         for ((area, items) in grouped) {
             adapter.addSection("Area $area", items)
         }
-
-        adapter.notifyDataSetChanged()
     }
 }

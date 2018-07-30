@@ -72,7 +72,5 @@ class MonsterRewardFragment : RecyclerViewFragment() {
         for ((condition, value) in grouped) {
             adapter.addSubSection(condition!!, value)
         }
-
-        adapter.notifyDataSetChanged()
     }
 }
