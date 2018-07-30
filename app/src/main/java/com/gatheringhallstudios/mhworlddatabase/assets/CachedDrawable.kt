@@ -45,8 +45,8 @@ class CachedDrawable(innerDrawable: Drawable) : DrawableWrapper(innerDrawable) {
     override fun draw(canvas: Canvas?) {
         if (canvas == null) return
 
-        val width = canvas.width
-        val height = canvas.height
+        val width = bounds.width()
+        val height = bounds.height()
 
         val key = CacheKey(cacheId, width, height)
 
