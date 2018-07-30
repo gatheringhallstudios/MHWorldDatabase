@@ -43,6 +43,7 @@ public class SectionHeaderAdapterDelegate extends AdapterDelegate<List<Object>> 
         HeaderViewHolder vh = (HeaderViewHolder) holder;
 
         vh.labelText.setText(sectionHeader.text);
+        vh.itemView.setTag(R.id.view_type, sectionHeader.getClass());
 
         if (position != 0) vh.addMarginTop();
     }

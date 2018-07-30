@@ -8,7 +8,7 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDecorator
+import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
 import com.xwray.groupie.ExpandableGroup
@@ -59,8 +59,8 @@ class ArmorSetListFragment : RecyclerViewFragment() {
         }
 
         // Add dividers between items
-        val dividerDrawable = ContextCompat.getDrawable(context!!, R.drawable.listitem_divider)
-        val itemDecor = HeaderItemDecorator(dividerDrawable!!)
+        val dividerDrawable = ContextCompat.getDrawable(context!!, R.drawable.divider_solid)
+        val itemDecor = HeaderItemDivider(dividerDrawable!!)
         recyclerView.addItemDecoration(itemDecor)
     }
 

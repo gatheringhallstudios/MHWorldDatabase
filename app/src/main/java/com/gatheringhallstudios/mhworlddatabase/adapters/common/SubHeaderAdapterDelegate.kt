@@ -33,6 +33,7 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
 
         val vh = holder as HeaderViewHolder
         vh.setTitle(subHeader.text)
+        vh.itemView.setTag(R.id.view_type, subHeader.javaClass)
 
         if (position != 0) vh.addMarginTop()
 
