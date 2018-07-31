@@ -1,7 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase.features.search
 
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinderAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinding
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
@@ -9,6 +11,26 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+
+/**
+ * Defines a search result adapter that can handle all types of search results.
+ * Binding the search results populates the adapter
+ */
+class SearchResultAdapter: BasicListDelegationAdapter<Any>(SimpleUniversalBinderAdapterDelegate()) {
+    fun bindSearchResults(results: SearchResults) {
+        val items = mutableListOf<Any>()
+        items.addAll(results.locations.map(::createLocationBinder))
+        items.addAll(results.monsters.map(::createMonsterBinder))
+        items.addAll(results.skillTrees.map(::createSkillTreeBinder))
+        items.addAll(results.charms.map(::createCharmBinder))
+        items.addAll(results.decorations.map(::createDecorationBinder))
+        items.addAll(results.armor.map(::createArmorBinder))
+        items.addAll(results.items.map(::createItemBinder))
+
+        this.items = items
+        notifyDataSetChanged()
+    }
+}
 
 fun createLocationBinder(location: Location) = createSimpleUniversalBinder { ctx ->
     val icon = AssetLoader.loadIconFor(location)
@@ -39,7 +61,7 @@ fun createSkillTreeBinder(skillTree: SkillTreeBase) = createSimpleUniversalBinde
     }
 }
 
-fun createCharmBinder(charm: Charm) = createSimpleUniversalBinder { ctx ->
+fun createCharmBinder(charm: CharmBase) = createSimpleUniversalBinder { ctx ->
     val icon = AssetLoader.loadIconFor(charm)
     val typeString = ctx.getString(R.string.type_charm)
     SimpleUniversalBinding(charm.name, typeString, IconType.EMBELLISHED, icon) {

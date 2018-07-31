@@ -7,7 +7,18 @@ import android.util.Log
 import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.common.ThrottledExecutor
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import kotlin.system.measureTimeMillis
+
+class SearchResults(
+        val locations: List<Location> = emptyList(),
+        val monsters: List<MonsterBase> = emptyList(),
+        val skillTrees: List<SkillTreeBase> = emptyList(),
+        val charms: List<CharmBase> = emptyList(),
+        val decorations: List<DecorationBase> = emptyList(),
+        val armor: List<ArmorBase> = emptyList(),
+        val items: List<ItemBase> = emptyList()
+)
 
 class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
     private val TAG = javaClass.simpleName
@@ -29,7 +40,7 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
      * Publicly exposed livedata containing the search results.
      * It is not recommended to update this directly, and instead observe.
      */
-    val searchResults = MutableLiveData<List<SimpleUniversalBinder>>()
+    val searchResults = MutableLiveData<SearchResults>()
 
     /**
      * Updates the search filter and begins searching.
@@ -61,21 +72,19 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
      * Internal helper that retrieves search results synchronously.
      * Run this on a background thread.
      */
-    private fun getResultsSync(filterStr: String): List<SimpleUniversalBinder> {
+    private fun getResultsSync(filterStr: String): SearchResults {
         if (filterStr == "") {
-            return emptyList()
+            return SearchResults()
         }
 
-        val results = mutableListOf<SimpleUniversalBinder>()
-
-        results.addAll(dao.searchLocations(filterStr).map(::createLocationBinder))
-        results.addAll(dao.searchMonsters(filterStr).map(::createMonsterBinder))
-        results.addAll(dao.searchSkillTrees(filterStr).map(::createSkillTreeBinder))
-        results.addAll(dao.searchCharms(filterStr).map(::createCharmBinder))
-        results.addAll(dao.searchDecorations(filterStr).map(::createDecorationBinder))
-        results.addAll(dao.searchArmor(filterStr).map(::createArmorBinder))
-        results.addAll(dao.searchItems(filterStr).map(::createItemBinder))
-
-        return results
+        return SearchResults(
+                locations = dao.searchLocations(filterStr),
+                monsters = dao.searchMonsters(filterStr),
+                skillTrees = dao.searchSkillTrees(filterStr),
+                charms = dao.searchCharms(filterStr),
+                decorations = dao.searchDecorations(filterStr),
+                armor = dao.searchArmor(filterStr),
+                items = dao.searchItems(filterStr)
+        )
     }
 }

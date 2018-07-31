@@ -9,11 +9,11 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegat
 import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinderAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 
-class UniversalSearchFragment : RecyclerViewFragment() {
 
-    // Universal Search results handle many types of data.
-    // Create an adapter that handles all of them
-    val adapter = BasicListDelegationAdapter<Any>(SimpleUniversalBinderAdapterDelegate())
+/**
+ * The main fragment used to display search results
+ */
+class UniversalSearchFragment : RecyclerViewFragment() {
 
     private val activityViewModel by lazy {
         ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
@@ -24,6 +24,7 @@ class UniversalSearchFragment : RecyclerViewFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val adapter = SearchResultAdapter()
         setAdapter(adapter)
 
         // open up the search menu (if not open) if we're on this page
@@ -36,8 +37,7 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         })
 
         searchViewModel.searchResults.observe(this, Observer {
-            adapter.items = it
-            adapter.notifyDataSetChanged()
+            if (it != null) adapter.bindSearchResults(it)
         })
     }
 
