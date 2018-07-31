@@ -16,26 +16,18 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterBase
 class MonsterListViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = MHWDatabase.getDatabase(application).monsterDao()
 
-    enum class Tab {
-        LARGE,
-        SMALL
-    }
-
-    private var currentTab: Tab? = null
+    private var currentTab: MonsterSize? = null
     lateinit var monsters: LiveData<List<MonsterBase>>
 
-    fun setTab(tab: Tab) {
-        if (currentTab == tab) {
+    /**
+     * Sets this viewmodel's "selected tab". Null means load all monsters
+     */
+    fun setTab(size: MonsterSize?) {
+        if (::monsters.isInitialized && currentTab == size) {
             return
         }
 
-        currentTab = tab
-
-        val monsterSize = when (tab) {
-            MonsterListViewModel.Tab.LARGE -> MonsterSize.LARGE
-            MonsterListViewModel.Tab.SMALL -> MonsterSize.SMALL
-        }
-
-        monsters = dao.loadMonsters(AppSettings.dataLocale, monsterSize)
+        currentTab = size
+        monsters = dao.loadMonsters(AppSettings.dataLocale, size)
     }
 }

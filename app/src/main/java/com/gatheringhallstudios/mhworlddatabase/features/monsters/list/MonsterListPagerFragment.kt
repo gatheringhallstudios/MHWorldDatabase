@@ -1,16 +1,10 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters.list
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListFragment
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListViewModel
-
-import butterknife.BindString
-import butterknife.BindView
+import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 
 /**
  * The main screen page for a monster list. Contains MonstListFragments as tabs
@@ -24,11 +18,11 @@ class MonsterListPagerFragment : BasePagerFragment() {
 
     override fun onAddTabs(tabs: BasePagerFragment.TabAdder) {
         tabs.addTab(getString(R.string.monsters_list_tab_large)) {
-            MonsterListFragment.newInstance(MonsterListViewModel.Tab.LARGE)
+            MonsterListFragment.newInstance(MonsterSize.LARGE)
         }
 
         tabs.addTab(getString(R.string.monsters_list_tab_small)) {
-            MonsterListFragment.newInstance(MonsterListViewModel.Tab.SMALL)
+            MonsterListFragment.newInstance(MonsterSize.SMALL)
         }
     }
 

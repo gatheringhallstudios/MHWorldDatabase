@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.skills
+package com.gatheringhallstudios.mhworlddatabase.features.skills.detail
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,6 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkillLevel

@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.skills
+package com.gatheringhallstudios.mhworlddatabase.features.skills.detail
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
