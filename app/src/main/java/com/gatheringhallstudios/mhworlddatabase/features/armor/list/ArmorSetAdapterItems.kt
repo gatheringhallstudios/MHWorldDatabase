@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.armor
+package com.gatheringhallstudios.mhworlddatabase.features.armor.list
 
 import android.graphics.Color
 import android.support.v4.content.ContextCompat

@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.armor
+package com.gatheringhallstudios.mhworlddatabase.features.armor.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -31,7 +31,7 @@ class ArmorDetailFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val armorId = arguments?.getInt(ArmorDetailFragment.ARG_ARMOR_ID) ?: -1
+        val armorId = arguments?.getInt(ARG_ARMOR_ID) ?: -1
         viewModel.loadArmor(armorId)
 
         return inflater.inflate(R.layout.fragment_armor_summary, parent, false)

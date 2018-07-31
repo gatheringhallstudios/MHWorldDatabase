@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.monsters
+package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -7,10 +7,6 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDamageFragment
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailViewModel
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterRewardFragment
-import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterSummaryFragment
 
 /**
  * Monster detail Hub. Displays information for a single monster.

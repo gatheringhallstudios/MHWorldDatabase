@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.armor
+package com.gatheringhallstudios.mhworlddatabase.features.armor.detail
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel

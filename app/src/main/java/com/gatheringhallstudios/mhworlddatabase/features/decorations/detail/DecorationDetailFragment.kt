@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.decorations
+package com.gatheringhallstudios.mhworlddatabase.features.decorations.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders

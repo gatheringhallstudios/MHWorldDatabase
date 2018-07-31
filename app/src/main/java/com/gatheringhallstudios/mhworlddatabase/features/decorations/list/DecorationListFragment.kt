@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.charms
+package com.gatheringhallstudios.mhworlddatabase.features.decorations.list
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
@@ -8,25 +8,25 @@ import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.CharmAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.DecorationAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
-class CharmListFragment : RecyclerViewFragment() {
+class DecorationListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(CharmListFragment.ViewModel::class.java)
+        ViewModelProviders.of(this).get(ViewModel::class.java)
     }
 
-    val adapter = BasicListDelegationAdapter(CharmAdapterDelegate {
-        getRouter().navigateCharmDetail(it.id)
+    val adapter = BasicListDelegationAdapter(DecorationAdapterDelegate {
+        getRouter().navigateDecorationDetail(it.id)
     })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
 
-        viewModel.charms.observe(this, Observer {
+        viewModel.decorations.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })
@@ -35,11 +35,11 @@ class CharmListFragment : RecyclerViewFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity?.title = getString(R.string.charms_title)
+        activity?.title = getString(R.string.skills_title)
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application) {
-        private val dao = MHWDatabase.getDatabase(application).charmDao()
-        val charms = dao.loadCharms(AppSettings.dataLocale)
+        private val dao = MHWDatabase.getDatabase(application).decorationDao()
+        val decorations = dao.loadDecorations(AppSettings.dataLocale)
     }
 }

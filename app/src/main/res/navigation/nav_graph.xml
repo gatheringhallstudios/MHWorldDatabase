@@ -12,12 +12,12 @@
 
     <fragment
         android:id="@+id/monsterListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterListPagerFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListPagerFragment"
         android:label="@string/monsters_list_title"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
         android:id="@+id/itemListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.items.ItemsListPagerFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.items.list.ItemListPagerFragment"
         android:label="Items"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
@@ -27,17 +27,17 @@
         tools:layout="@layout/list_generic" />
     <fragment
         android:id="@+id/armorListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorSetListPagerFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetListPagerFragment"
         android:label="Armor"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
         android:id="@+id/skillListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillListFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.list.SkillListFragment"
         android:label="Skills"
         tools:layout="@layout/fragment_generic_pager" />
     <fragment
         android:id="@+id/decorationListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationListFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.list.DecorationListFragment"
         android:label="Decorations List"
         tools:layout="@layout/list_generic" />
     <fragment
@@ -47,7 +47,7 @@
         tools:layout="@layout/list_generic" />
     <fragment
         android:id="@+id/charmListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.charms.CharmListFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.charms.list.CharmListFragment"
         android:label="Charms"
         tools:layout="@layout/list_generic" />
 
@@ -68,7 +68,7 @@
 
     <fragment
         android:id="@+id/monsterDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.MonsterDetailPagerFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment"
         tools:layout="@layout/fragment_generic_pager" >
     </fragment>
     <action
@@ -79,7 +79,7 @@
 
     <fragment
         android:id="@+id/itemDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.items.ItemDetailPagerFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment"
         tools:layout="@layout/fragment_generic_pager" >
     </fragment>
     <action
@@ -102,7 +102,7 @@
 
     <fragment
         android:id="@+id/skillDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.SkillDetailFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment"
         tools:layout="@layout/fragment_skill_summary" >
     </fragment>
     <action
@@ -113,7 +113,7 @@
 
     <fragment
         android:id="@+id/decorationDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.DecorationDetailFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment"
         tools:layout="@layout/fragment_decoration_summary" >
     </fragment>
     <action
@@ -124,7 +124,7 @@
 
     <fragment
         android:id="@+id/armorDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.ArmorDetailFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailFragment"
         tools:layout="@layout/fragment_armor_summary" />
     <action
         android:id="@+id/openArmorDetailAction"
@@ -134,7 +134,7 @@
 
     <fragment
         android:id="@+id/charmDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.charms.CharmDetailFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment"
         tools:layout="@layout/fragment_charm_summary" />
     <action
         android:id="@+id/openCharmDetailAction"

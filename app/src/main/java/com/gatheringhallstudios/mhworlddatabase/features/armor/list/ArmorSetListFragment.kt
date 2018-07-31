@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.armor
+package com.gatheringhallstudios.mhworlddatabase.features.armor.list
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders

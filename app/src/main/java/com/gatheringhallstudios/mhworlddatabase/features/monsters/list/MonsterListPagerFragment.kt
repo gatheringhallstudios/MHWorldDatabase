@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.monsters
+package com.gatheringhallstudios.mhworlddatabase.features.monsters.list
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout

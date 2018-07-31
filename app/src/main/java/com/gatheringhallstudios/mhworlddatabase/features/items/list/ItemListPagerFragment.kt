@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.items
+package com.gatheringhallstudios.mhworlddatabase.features.items.list
 
 import android.os.Bundle
 
@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
  * Monster Hub
  */
 
-class ItemsListPagerFragment : BasePagerFragment() {
+class ItemListPagerFragment : BasePagerFragment() {
 
     override fun onAddTabs(tabs: BasePagerFragment.TabAdder) {
         tabs.addTab(getString(R.string.items_tab_item)) {

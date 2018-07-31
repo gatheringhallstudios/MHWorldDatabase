@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.armor
+package com.gatheringhallstudios.mhworlddatabase.features.armor.list
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
@@ -6,7 +6,6 @@ import android.arch.lifecycle.LiveData
 
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
 

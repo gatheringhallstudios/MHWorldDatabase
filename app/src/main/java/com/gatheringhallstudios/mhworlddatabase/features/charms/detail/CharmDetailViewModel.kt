@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.charms
+package com.gatheringhallstudios.mhworlddatabase.features.charms.detail
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel

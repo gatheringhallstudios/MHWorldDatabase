@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.charms
+package com.gatheringhallstudios.mhworlddatabase.features.charms.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders

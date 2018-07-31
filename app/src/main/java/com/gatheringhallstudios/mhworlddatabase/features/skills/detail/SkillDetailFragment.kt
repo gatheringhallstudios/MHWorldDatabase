@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.skills
+package com.gatheringhallstudios.mhworlddatabase.features.skills.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -13,9 +13,11 @@ import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.Skill
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.*
+
 
 class SkillDetailFragment : Fragment() {
     companion object {

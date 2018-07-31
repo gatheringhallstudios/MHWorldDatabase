@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.items
+package com.gatheringhallstudios.mhworlddatabase.features.items.list
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
@@ -30,7 +30,7 @@ class ItemListFragment : RecyclerViewFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ItemListFragment.ViewModel::class.java)
+        ViewModelProviders.of(this).get(ViewModel::class.java)
     }
 
     // Setup recycler list adapter and the on-selected
