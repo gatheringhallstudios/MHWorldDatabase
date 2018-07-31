@@ -8,30 +8,24 @@ import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.SkillTreeAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.getRouter
+
 
 /**
- * Created by Carlos on 3/22/2018.
+ * Fragment for the main list of skill trees
  */
 class SkillListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(SkillListFragment.ViewModel::class.java)
     }
 
-    val adapter = BasicListDelegationAdapter(SkillTreeAdapterDelegate {
-        getRouter().navigateSkillDetail(it.id)
-    })
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val adapter = SkillTreeListAdapter()
         setAdapter(adapter)
 
         viewModel.skills.observe(this, Observer {
-            adapter.items = it
-            adapter.notifyDataSetChanged()
+            if (it != null) adapter.items = it
         })
     }
 

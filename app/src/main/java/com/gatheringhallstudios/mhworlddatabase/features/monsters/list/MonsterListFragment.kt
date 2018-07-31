@@ -11,7 +11,6 @@ import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 /**
  * Fragment for a list of monsters
  */
-
 class MonsterListFragment : RecyclerViewFragment() {
     companion object {
         private const val ARG_TAB = "MONSTER_TAB"

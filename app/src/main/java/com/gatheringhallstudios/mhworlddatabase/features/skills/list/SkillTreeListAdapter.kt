@@ -1,17 +1,18 @@
-package com.gatheringhallstudios.mhworlddatabase.adapters
+package com.gatheringhallstudios.mhworlddatabase.features.skills.list
 
 import android.view.ViewGroup
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleRecyclerViewAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTree
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 
-class SkillTreeAdapterDelegate(private val onSelected: (SkillTree) -> Unit)
-    : SimpleListDelegate<SkillTree>() {
 
-    override fun isForViewType(obj: Any) = obj is SkillTree
-
+/**
+ * A RecyclerView adapter for a homogeneous SkillTree list
+ */
+class SkillTreeListAdapter: SimpleRecyclerViewAdapter<SkillTree>() {
     override fun onCreateView(parent: ViewGroup): IconLabelTextCell {
         return IconLabelTextCell(parent.context)
     }
@@ -25,6 +26,6 @@ class SkillTreeAdapterDelegate(private val onSelected: (SkillTree) -> Unit)
             removeDecorator()
         }
 
-        viewHolder.itemView.setOnClickListener { onSelected(data) }
+        viewHolder.itemView.setOnClickListener { it.getRouter().navigateSkillDetail(data.id) }
     }
 }
