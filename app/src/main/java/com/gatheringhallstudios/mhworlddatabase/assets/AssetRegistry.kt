@@ -39,7 +39,9 @@ val VectorRegistry = createRegistry(
         "Fang" to R.xml.ic_items_fang_base,
         "Body" to R.xml.ic_items_body_base,
         "Hide" to R.xml.ic_items_hide_base,
-        "Sac" to R.xml.ic_icons_sac_base
+        "Sac" to R.xml.ic_items_sac_base,
+        "Ore" to R.xml.ic_items_ore_base,
+        "Voucher" to R.xml.ic_items_voucher_base
 
 )
 
