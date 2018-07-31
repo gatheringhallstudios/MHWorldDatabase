@@ -114,7 +114,7 @@ abstract class ArmorDao {
     abstract fun loadArmorComponentsSync(langId: String, armorId: Int) : List<ItemQuantity>
 
     @Query("""
-        SELECT s.id skill_id, stt.name skill_name, s.icon_color skill_color, askill.level level
+        SELECT s.id skill_id, stt.name skill_name, s.icon_color skill_icon_color, askill.level level
         FROM armor_skill askill
             JOIN armor a
                 ON askill.armor_id = a.id
