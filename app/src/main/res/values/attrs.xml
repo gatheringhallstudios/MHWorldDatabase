@@ -42,4 +42,9 @@
         <attr name="white" format="integer" />
         <attr name="purple" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="SkillLevelView">
+        <attr name="level" format="integer"/>
+        <attr name="maxLevel" format="integer"/>
+    </declare-styleable>
 </resources>
