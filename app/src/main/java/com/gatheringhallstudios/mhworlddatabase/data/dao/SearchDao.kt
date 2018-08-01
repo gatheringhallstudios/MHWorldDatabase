@@ -98,7 +98,7 @@ abstract class SearchDao {
     protected abstract fun loadAllMonstersSync(langId: String): List<MonsterBase>
 
     @Query("""
-        SELECT s.id, st.name, s.icon_color
+        SELECT s.id, st.name, s.max_level, s.icon_color
         FROM skilltree s
             JOIN skilltree_text st USING (id)
         WHERE st.lang_id = :langId

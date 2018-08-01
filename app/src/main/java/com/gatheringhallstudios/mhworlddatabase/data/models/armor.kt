@@ -27,7 +27,7 @@ open class ArmorBase(
         val armor_type: ArmorType
 ) {
     // note: slots are a var because @Embedded in both child AND parent params would cause issues,
-    // and @Embedded only works on var fields (and we need to use non-var in the child)
+    // and @Embedded only works on val/var fields (and we need to use non-var in the child)
 
     /**
      * A list of slot level values (0-3) that can be iterated on.

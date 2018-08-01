@@ -15,6 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationBase
+import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
@@ -34,11 +35,11 @@ class SkillDetailAdapterWrapper {
     private lateinit var charmTitle: String
     private lateinit var armorTitle: String
 
-    private lateinit var decorationList: List<DecorationBase>
+    private lateinit var decorationList: List<DecorationSkillLevel>
     private lateinit var charmList: List<CharmSkillLevel>
     private lateinit var armorList: List<ArmorSkillLevel>
 
-    fun setDecorations(title: String, decorations: List<DecorationBase>) {
+    fun setDecorations(title: String, decorations: List<DecorationSkillLevel>) {
         if (::decorationList.isInitialized) {
             return
         }
@@ -103,11 +104,11 @@ private class NullObjectAdapterDelegate: SimpleListDelegate<NullObject>() {
     }
 }
 
-private fun createDecorationSkillBinder(decoration: DecorationBase) = createSimpleUniversalBinder { ctx ->
-    val icon = AssetLoader.loadIconFor(decoration)
-    val value = ctx.getString(R.string.plus, 1)
-    SimpleUniversalBinding(decoration.name, value, IconType.EMBELLISHED, icon) {
-        it.getRouter().navigateDecorationDetail(decoration.id)
+private fun createDecorationSkillBinder(decoration: DecorationSkillLevel) = createSimpleUniversalBinder { ctx ->
+    val icon = AssetLoader.loadIconFor(decoration.decoration)
+    val value = ctx.getString(R.string.plus, decoration.level)
+    SimpleUniversalBinding(decoration.decoration.name, value, IconType.EMBELLISHED, icon) {
+        it.getRouter().navigateDecorationDetail(decoration.decoration.id)
     }
 }
 

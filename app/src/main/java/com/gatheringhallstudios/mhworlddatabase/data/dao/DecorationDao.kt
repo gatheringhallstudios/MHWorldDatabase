@@ -17,7 +17,8 @@ abstract class DecorationDao {
     abstract fun loadDecorations(langId: String): LiveData<List<DecorationBase>>
 
     @Query("""
-        SELECT d.*, dtext.name, s.id skill_id, stext.name skill_name, s.icon_color skill_icon_color
+        SELECT d.*, dtext.name,
+            s.id skill_id, stext.name skill_name, s.max_level skill_max_level, s.icon_color skill_icon_color
         FROM decoration d
             JOIN decoration_text dtext
                 ON dtext.id = d.id

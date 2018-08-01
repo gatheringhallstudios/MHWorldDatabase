@@ -82,7 +82,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class,
                 ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class
         },
-        version = 11,
+        version = 12,
         exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {

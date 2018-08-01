@@ -15,7 +15,7 @@ class SkillDetailViewModel(application: Application) :  AndroidViewModel(applica
     lateinit var skillTreeFull: LiveData<SkillTreeFull>
     lateinit var armorPieces: LiveData<List<ArmorSkillLevel>>
     lateinit var charms: LiveData<List<CharmSkillLevel>>
-    lateinit var decorations: LiveData<List<DecorationBase>>
+    lateinit var decorations: LiveData<List<DecorationSkillLevel>>
 
     fun setSkill(skillTreeId : Int) {
         if (this.id == skillTreeId) {

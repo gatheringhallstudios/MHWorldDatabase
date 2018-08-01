@@ -8,6 +8,7 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "skilltree")
 data class SkillTreeEntity(
         @PrimaryKey val id: Int,
+        val max_level: Int,
         val icon_color: String?
 )
 

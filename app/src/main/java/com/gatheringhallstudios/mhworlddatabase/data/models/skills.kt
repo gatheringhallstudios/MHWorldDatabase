@@ -6,6 +6,7 @@ import android.arch.persistence.room.Embedded
 open class SkillTreeBase(
         val id: Int,
         val name: String?,
+        val max_level: Int,
         val icon_color: String?
 )
 
@@ -17,9 +18,10 @@ open class SkillTreeBase(
 open class SkillTree(
         id: Int,
         name: String?,
+        max_level: Int,
         icon_color: String?,
         val description: String?
-): SkillTreeBase(id, name, icon_color)
+): SkillTreeBase(id, name, max_level, icon_color)
 
 /**
  * A skill tree with skill information included.
@@ -27,11 +29,12 @@ open class SkillTree(
 class SkillTreeFull(
         id: Int,
         name: String?,
-        description: String?,
+        max_level: Int,
         icon_color: String?,
+        description: String?,
 
         val skills: List<Skill>
-) : SkillTree(id, name, icon_color, description)
+) : SkillTree(id, name, max_level, icon_color, description)
 
 data class Skill(
         val skilltree_id: Int,
@@ -40,27 +43,37 @@ data class Skill(
 )
 
 
-
-class SkillLevel(
-        @Embedded(prefix = "skill_") val skillTree: SkillTreeBase,
+/**
+ * Represents a skill and an associated level.
+ */
+open class SkillLevel(
         val level: Int
-)
+) {
+    // note: Embeddeds must be a var in a superclass or it won't work
+
+    @Embedded(prefix = "skill_") lateinit var skillTree: SkillTreeBase
+}
 
 /**
- * Represents an armor and its skill level. Used as part of a composite result.
- * When you load this, it is assumed that you already know what the skill is.
+ * Represents an armor and its skill level.
  */
 class ArmorSkillLevel(
         @Embedded(prefix = "armor_") val armor: ArmorBase,
-        val level: Int
-)
-
+        level: Int
+): SkillLevel(level)
 
 /**
- * Represents a charm and its skill level. Used as part of a composite result.
- * When you load this, it is assumed that you already know what the skill is.
+ * Represents a charm and its skill level.
  */
 class CharmSkillLevel(
         @Embedded(prefix = "charm_") val charm: CharmBase,
-        val level: Int
-)
+        level: Int
+): SkillLevel(level)
+
+/**
+ * Represents a charm and its skill level.
+ */
+class DecorationSkillLevel(
+        @Embedded(prefix = "deco_") val decoration: DecorationBase,
+        level: Int
+): SkillLevel(level)
