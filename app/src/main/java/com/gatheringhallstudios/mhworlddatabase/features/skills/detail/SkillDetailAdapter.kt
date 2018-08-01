@@ -9,14 +9,13 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinding
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
-import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkillLevel
-import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationBase
 import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import kotlinx.android.synthetic.main.listitem_skill_level_armor.*
 
 /**
  * A wrapper used to build the adapter for skill details.
@@ -24,8 +23,11 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
  */
 class SkillDetailAdapterWrapper {
     val adapter = CategoryAdapter(
-            SimpleUniversalBinderAdapterDelegate(),
-            NullObjectAdapterDelegate()
+            NullObjectAdapterDelegate(),
+            DecorationSkillLevelAdapterDelegate(),
+            CharmSkillLevelAdapterDelegate(),
+            ArmorSkillLevelAdapterDelegate(),
+            SimpleUniversalBinderAdapterDelegate()
     )
 
     // once this = 3, all are loaded
@@ -80,9 +82,9 @@ class SkillDetailAdapterWrapper {
             false -> list
         }
 
-        adapter.addSection(decorationTitle, switchList(decorationList.map(::createDecorationSkillBinder)))
-        adapter.addSection(charmTitle, switchList(charmList.map(::createCharmSkillBinder)))
-        adapter.addSection(armorTitle, switchList(armorList.map(::createArmorSkillBinder)))
+        adapter.addSection(decorationTitle, switchList(decorationList))
+        adapter.addSection(charmTitle, switchList(charmList))
+        adapter.addSection(armorTitle, switchList(armorList))
     }
 }
 
@@ -104,26 +106,56 @@ private class NullObjectAdapterDelegate: SimpleListDelegate<NullObject>() {
     }
 }
 
-private fun createDecorationSkillBinder(decoration: DecorationSkillLevel) = createSimpleUniversalBinder { ctx ->
-    val icon = AssetLoader.loadIconFor(decoration.decoration)
-    val value = ctx.getString(R.string.plus, decoration.level)
-    SimpleUniversalBinding(decoration.decoration.name, value, IconType.EMBELLISHED, icon) {
-        it.getRouter().navigateDecorationDetail(decoration.decoration.id)
+class DecorationSkillLevelAdapterDelegate: SimpleListDelegate<DecorationSkillLevel>() {
+    override fun isForViewType(obj: Any) = obj is DecorationSkillLevel
+
+    override fun onCreateView(parent: ViewGroup): View {
+        val inflater = LayoutInflater.from(parent.context)
+        return inflater.inflate(R.layout.listitem_skill_level, parent, false)
+    }
+
+    override fun bindView(viewHolder: SimpleViewHolder, data: DecorationSkillLevel) {
+        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.decoration))
+        viewHolder.label_text.text = data.decoration.name
+        viewHolder.skill_level.maxLevel = data.skillTree.max_level
+        viewHolder.skill_level.level = data.level
+        viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
+        viewHolder.itemView.setOnClickListener { it.getRouter().navigateDecorationDetail(data.decoration.id) }
     }
 }
 
-private fun createCharmSkillBinder(charm: CharmSkillLevel) = createSimpleUniversalBinder {ctx ->
-    val icon = AssetLoader.loadIconFor(charm.charm)
-    val value = ctx.getString(R.string.plus, charm.level)
-    SimpleUniversalBinding(charm.charm.name, value, IconType.EMBELLISHED, icon) {
-        it.getRouter().navigateCharmDetail(charm.charm.id)
+class CharmSkillLevelAdapterDelegate: SimpleListDelegate<CharmSkillLevel>() {
+    override fun isForViewType(obj: Any) = obj is CharmSkillLevel
+
+    override fun onCreateView(parent: ViewGroup): View {
+        val inflater = LayoutInflater.from(parent.context)
+        return inflater.inflate(R.layout.listitem_skill_level, parent, false)
+    }
+
+    override fun bindView(viewHolder: SimpleViewHolder, data: CharmSkillLevel) {
+        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.charm))
+        viewHolder.label_text.text = data.charm.name
+        viewHolder.skill_level.maxLevel = data.skillTree.max_level
+        viewHolder.skill_level.level = data.level
+        viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
+        viewHolder.itemView.setOnClickListener { it.getRouter().navigateCharmDetail(data.charm.id) }
     }
 }
 
-private fun createArmorSkillBinder(armorSkill: ArmorSkillLevel) = createSimpleUniversalBinder { ctx ->
-    val icon = AssetLoader.loadIconFor(armorSkill.armor)
-    val value = ctx.getString(R.string.plus, armorSkill.level)
-    SimpleUniversalBinding(armorSkill.armor.name, value, IconType.ZEMBELLISHED, icon) {
-        it.getRouter().navigateArmorDetail(armorSkill.armor.id)
+class ArmorSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSkillLevel>() {
+    override fun isForViewType(obj: Any) = obj is ArmorSkillLevel
+
+    override fun onCreateView(parent: ViewGroup): View {
+        val inflater = LayoutInflater.from(parent.context)
+        return inflater.inflate(R.layout.listitem_skill_level_armor, parent, false)
+    }
+
+    override fun bindView(viewHolder: SimpleViewHolder, data: ArmorSkillLevel) {
+        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.armor))
+        viewHolder.label_text.text = data.armor.name
+        viewHolder.skill_level.maxLevel = data.skillTree.max_level
+        viewHolder.skill_level.level = data.level
+        viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
+        viewHolder.itemView.setOnClickListener { it.getRouter().navigateArmorDetail(data.armor.id) }
     }
 }

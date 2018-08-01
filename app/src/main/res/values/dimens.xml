@@ -40,6 +40,8 @@
     <dimen name="icon_padding_medium_decorated">4dp</dimen>
     <dimen name="icon_padding_medium_zembellished">3dp</dimen>
 
+    <dimen name="skill_level_height">18dp</dimen>
+
     <!-- Dimens for Elevation copied from here -->
     <!-- https://material.io/design/environment/elevation.html#default-elevations -->
     <dimen name="elevation_bottom_sheet">16dp</dimen>

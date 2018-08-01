@@ -103,6 +103,7 @@
         <item quantity="one">level</item>
         <item quantity="other">levels</item>
     </plurals>
+    <string name="skills_level_qty">Level %1$d</string>
     <string name="skills_armor_header">Armor</string>
     <string name="skills_charm_header">Charms</string>
     <string name="skills_decoration_header">Decorations</string>
