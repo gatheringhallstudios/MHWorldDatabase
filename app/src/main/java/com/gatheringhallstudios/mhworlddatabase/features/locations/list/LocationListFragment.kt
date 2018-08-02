@@ -7,6 +7,8 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
+import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
@@ -26,6 +28,10 @@ class LocationListFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
+
+        // Add dividers between items
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
+
         viewModel.locations.observe(this, Observer<List<Location>> {
             adapter.items = it
             adapter.notifyDataSetChanged()

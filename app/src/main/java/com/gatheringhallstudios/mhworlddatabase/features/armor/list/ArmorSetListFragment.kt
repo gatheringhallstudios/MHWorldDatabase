@@ -8,6 +8,7 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
@@ -41,6 +42,9 @@ class ArmorSetListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
 
+        // Add dividers between items
+        recyclerView.addItemDecoration(HeaderItemDivider(DashedDividerDrawable(context!!)))
+
         if (adapter.itemCount == 0) {
             val rank = arguments?.getSerializable(ARG_RANK) as? Rank
 
@@ -57,11 +61,6 @@ class ArmorSetListFragment : RecyclerViewFragment() {
                 adapter.update(items ?: emptyList())
             })
         }
-
-        // Add dividers between items
-        val dividerDrawable = ContextCompat.getDrawable(context!!, R.drawable.divider_solid)
-        val itemDecor = HeaderItemDivider(dividerDrawable!!)
-        recyclerView.addItemDecoration(itemDecor)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

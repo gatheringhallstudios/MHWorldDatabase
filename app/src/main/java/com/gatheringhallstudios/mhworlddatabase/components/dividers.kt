@@ -54,6 +54,25 @@ abstract class BaseVerticalDivider: RecyclerView.ItemDecoration() {
 }
 
 /**
+ * Defines a recyclerview item decoration that draws between all items, using a provided drawable.
+ * Similar to use the built in DividerItemDecoration, but defaults to vertical and takes a drawable in the constructor.
+ */
+class StandardDivider(private val drawable: Drawable?): BaseVerticalDivider() {
+    override fun shouldDraw(parent: RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
+        return true
+    }
+
+    override fun performDraw(canvas: Canvas, left: Int, right: Int, yCoord: Int) {
+        drawable?.let {
+            val top = yCoord - drawable.intrinsicHeight
+            drawable.setBounds(left, top, right, yCoord)
+            drawable.draw(canvas)
+        }
+    }
+
+}
+
+/**
  * Defines an recycler view item decoration that separates between groupie header items
  * but not detail items
  */

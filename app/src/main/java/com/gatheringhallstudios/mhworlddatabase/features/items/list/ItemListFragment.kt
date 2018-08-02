@@ -10,6 +10,8 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
+import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
@@ -40,6 +42,9 @@ class ItemListFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
+
+        // Add dividers between items
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         val category = arguments?.getSerializable(ARG_CATEGORY) as ItemCategory?
 

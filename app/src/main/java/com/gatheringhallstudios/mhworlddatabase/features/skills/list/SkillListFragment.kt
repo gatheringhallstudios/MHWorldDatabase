@@ -9,6 +9,8 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
+import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 
 
@@ -23,6 +25,9 @@ class SkillListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = SkillTreeListAdapter()
         setAdapter(adapter)
+
+        // Add dividers between items
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         viewModel.skills.observe(this, Observer {
             if (it != null) adapter.items = it

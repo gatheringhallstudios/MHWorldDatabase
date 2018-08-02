@@ -9,6 +9,12 @@ import com.gatheringhallstudios.mhworlddatabase.R
 
 fun dpToPx(dp: Int) =  (dp * Resources.getSystem().displayMetrics.density).toInt()
 
+/**
+ * A custom drawable used to draw dashed dividers.
+ * This is used because XML Line drawables do not support strokes for lines when hardware acceleration is enabled.
+ * The current XML version uses a workaround with a rectangle,
+ * but its generally safer and better performance to use this one when possible.
+ */
 class DashedDividerDrawable(context: Context): Drawable() {
     val color = ContextCompat.getColor(context, R.color.itemDividerColor)
 

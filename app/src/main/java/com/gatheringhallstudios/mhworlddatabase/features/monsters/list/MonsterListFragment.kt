@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
+import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 
@@ -28,6 +30,7 @@ class MonsterListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = MonsterListAdapter()
         this.setAdapter(adapter)
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         val tab = arguments?.getSerializable(ARG_TAB) as MonsterSize?
         viewModel.setTab(tab)

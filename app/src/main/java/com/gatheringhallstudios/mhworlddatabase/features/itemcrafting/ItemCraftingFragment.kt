@@ -11,6 +11,8 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
+import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 
 /**
@@ -27,13 +29,13 @@ class ItemCraftingFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
 
+        // Add dividers between items
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
+
         viewModel.combinationListData.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })
-
-        // Add dividers between items
-        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     }
 
     class ItemCombinationsViewModel(app: Application) : AndroidViewModel(app) {
