@@ -9,37 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/item_icon"
-            style="@style/IconXLarge.Decorated"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_large"
-            android:src="@drawable/ic_question_mark"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_question_mark" />
-
-        <TextView
-            android:id="@+id/item_name"
-            style="@style/TextDisplayHigh"
-            android:layout_width="wrap_content"
+        <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+            android:id="@+id/item_header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/item_icon"
-            app:layout_constraintTop_toBottomOf="@+id/item_icon"
-            tools:text="Godbug" />
-
-        <TextView
-            android:id="@+id/item_description"
-            style="@style/TextBodyMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/item_name"
-            app:layout_constraintTop_toBottomOf="@+id/item_name"
-            tools:text="An insect said to live a millennium. Combine it with other items to add their properties to the powder."/>
+            tools:iconSrc="@drawable/ic_question_mark"
+            tools:titleText="Azure Rathalos"
+            tools:descriptionText="An azure-colored subspecies of Rathalos. More mobile than their standard cousins, they locate prey from the air and quickly swoop in for the kill." />
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/item_data_header"
@@ -50,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_description" >
+            app:layout_constraintTop_toBottomOf="@+id/item_header" >
 
         </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
 

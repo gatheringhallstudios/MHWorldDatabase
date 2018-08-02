@@ -69,12 +69,10 @@ class ArmorDetailFragment : Fragment() {
     }
 
     private fun populateArmorBasic(armor: Armor) {
-        armor_detail_name.text = armor.name
-        armor_detail_rarity.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
-        armor_detail_rarity.text = getString(
-                R.string.rarity_string,
-                armor.rarity)
-        armor_icon.setImageDrawable(AssetLoader.loadIconFor(armor))
+        // Set header info
+        armor_header.setIconDrawable(AssetLoader.loadIconFor(armor))
+        armor_header.setTitleText(armor.name)
+        armor_header.setSubtitleText(getString(R.string.rarity_string, armor.rarity))
 
         // set defense label
         defense_cell.setLabelText(getString(

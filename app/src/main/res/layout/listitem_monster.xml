@@ -17,11 +17,12 @@
 
     <TextView
         android:id="@+id/monster_name"
-        android:layout_width="0dp"
+        style="@style/TextHeadlineHigh"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_medium"
-        android:textAppearance="?android:textAppearanceLarge"
+        android:paddingBottom="@dimen/padding_small"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toTopOf="@id/ecology_text"
         app:layout_constraintLeft_toRightOf="@id/icon"
@@ -31,7 +32,7 @@
     <TextView
         android:id="@+id/ecology_text"
         style="@style/TextBodyMedium"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_medium"

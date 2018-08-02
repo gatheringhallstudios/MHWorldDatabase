@@ -11,68 +11,22 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/padding_footer_space">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/armor_label"
+        <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+            android:id="@+id/armor_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/armor_icon"
-                style="@style/IconXLarge"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_ui_armor_skill_white" />
-
-            <TextView
-                android:id="@+id/armor_detail_name"
-                style="@style/TextDisplayHigh"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="@id/armor_icon"
-                app:layout_constraintStart_toEndOf="@+id/armor_icon"
-                tools:text="Diablos Helm Alpha" />
-
-            <TextView
-                android:id="@+id/armor_detail_rarity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toEndOf="@+id/armor_icon"
-                app:layout_constraintTop_toBottomOf="@+id/armor_detail_name"
-                tools:text="Rarity 6" />
-        </android.support.constraint.ConstraintLayout>
-
-
-        <FrameLayout
-            android:id="@+id/divider_1"
-            style="@style/HorizontalDivider"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/armor_label" />
+            tools:iconSrc="@drawable/ic_question_mark"
+            tools:titleText="Azure Rathalos" />
 
         <LinearLayout
             android:id="@+id/armor_data_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/status_layout"
-            app:layout_constraintTop_toBottomOf="@+id/divider_1"
+            app:layout_constraintTop_toBottomOf="@+id/armor_header"
             app:layout_constraintWidth_percent=".5">
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
@@ -113,11 +67,10 @@
             android:id="@+id/armor_data_layout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintLeft_toRightOf="@id/armor_data_layout"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider_1">
+            app:layout_constraintTop_toBottomOf="@id/armor_header">
 
             <LinearLayout
                 android:id="@+id/slot_section"

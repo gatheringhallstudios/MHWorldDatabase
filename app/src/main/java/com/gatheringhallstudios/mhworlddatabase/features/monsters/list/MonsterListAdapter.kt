@@ -25,7 +25,7 @@ class MonsterListAdapter: SimpleRecyclerViewAdapter<MonsterBase>() {
         val icon = AssetLoader.loadIconFor(data)
         viewHolder.icon.setImageDrawable(icon)
         viewHolder.monster_name.text = data.name
-        
+
         if (data.ecology.isNullOrEmpty()) {
             viewHolder.ecology_text.visibility = View.GONE
         } else {

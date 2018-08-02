@@ -83,6 +83,10 @@ class DetailHeaderCell : ConstraintLayout {
     }
 
     fun setDescriptionText(descriptionText: String?) {
+        header_description.visibility = when (descriptionText.isNullOrEmpty()) {
+            true -> View.GONE
+            false -> View.VISIBLE
+        }
         header_description.text = descriptionText
     }
 

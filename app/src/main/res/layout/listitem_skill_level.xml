@@ -23,7 +23,6 @@
         style="@style/TextBodyHigh"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:includeFontPadding="false"
         android:layout_marginStart="@dimen/margin_large"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toTopOf="@+id/skill_level"

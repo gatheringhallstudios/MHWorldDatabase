@@ -47,9 +47,9 @@ class ItemSummaryFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = item.name
 
         //Set the summary information
-        item_icon.setImageDrawable(AssetLoader.loadIconFor(item))
-        item_name.text = item.name
-        item_description.text = item.description
+        item_header.setIconDrawable(AssetLoader.loadIconFor(item))
+        item_header.setTitleText(item.name)
+        item_header.setDescriptionText(item.description)
 
         buy_price_value.text = evaluateValue(item.buy_price)
         sell_price_value.text = evaluateValue(item.sell_price)
