@@ -19,13 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/divider_stroke"/>
+
         <LinearLayout
             android:id="@+id/skill_level_descriptions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle"
             android:orientation="vertical">
 
             <include
@@ -48,7 +52,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_section_gap"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

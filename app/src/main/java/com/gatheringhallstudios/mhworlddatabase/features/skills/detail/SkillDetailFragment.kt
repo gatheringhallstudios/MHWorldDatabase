@@ -101,13 +101,10 @@ class SkillDetailFragment : Fragment() {
             return
         }
 
-        for (i in 0..4) {
+        for ((i, skill) in skills.withIndex()) {
             val view = layoutInflater.inflate(R.layout.listitem_skill_description, skill_level_descriptions, false)
-            val description: String? = skills.getOrNull(i)?.description
-
-            if (description.isNullOrBlank()) return
-            view.level_text.text = "${getString(R.string.skills_level_title)} ${i + 1}"
-            view.level_description.text = description
+            view.level_text.text = getString(R.string.skills_level_short_qty, i + 1)
+            view.level_description.text = skill.description
 
             skill_level_descriptions.addView(view)
         }
