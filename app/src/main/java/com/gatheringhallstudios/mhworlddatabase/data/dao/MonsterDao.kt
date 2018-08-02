@@ -13,7 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 @Dao
 abstract class MonsterDao {
     @Query("""
-        SELECT m.id, m.size, t.name
+        SELECT m.id, m.size, t.name, t.ecology
         from monster m JOIN monster_text t USING (id)
         WHERE t.lang_id = :langId
           AND (m.size = :size OR :size IS NULL)

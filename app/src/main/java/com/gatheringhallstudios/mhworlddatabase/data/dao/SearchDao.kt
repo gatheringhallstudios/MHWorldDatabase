@@ -90,7 +90,7 @@ abstract class SearchDao {
     protected abstract fun loadAllLocationsSync(langId: String): List<Location>
 
     @Query("""
-        SELECT m.id, mt.name, m.size
+        SELECT m.id, mt.name, m.size, mt.ecology
         FROM monster m
             JOIN monster_text mt USING (id)
         WHERE mt.lang_id = :langId

@@ -11,16 +11,17 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 open class MonsterBase(
         val id: Int,
         val name: String?,
-        val size: MonsterSize
+        val size: MonsterSize,
+        val ecology: String?
 )
 
 class Monster(
         id: Int,
         name: String,
         size: MonsterSize,
+        ecology: String?,
 
         val order_id: Int,
-        val ecology: String?,
         val description: String?,
 
         val has_alt_weakness: Boolean,
@@ -33,7 +34,7 @@ class Monster(
 
         @Embedded(prefix = "alt_weakness_")
         val alt_weaknesses: WeaknessSummaryElemental?
-): MonsterBase(id, name, size)
+): MonsterBase(id, name, size, ecology)
 
 class MonsterHabitat(
         @Embedded(prefix = "location_") val location: Location,
