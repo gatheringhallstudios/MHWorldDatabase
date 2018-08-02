@@ -38,22 +38,6 @@ class ArmorDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // todo: Icon Label Text cell probably shouldn't be used for things like defense values
-
-        defense_cell.removeDecorator()
-        fire_star_cell.removeDecorator()
-        water_star_cell.removeDecorator()
-        ice_star_cell.removeDecorator()
-        lightning_star_cell.removeDecorator()
-        dragon_star_cell.removeDecorator()
-
-        // todo: this kind of change should be part of the cell itself
-        fire_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
-        water_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
-        ice_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
-        lightning_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
-        dragon_star_cell.value_text.setTypeface(Typeface.DEFAULT_BOLD)
-
         viewModel.armor.observe(this, Observer(::populateArmor))
     }
 
@@ -75,23 +59,18 @@ class ArmorDetailFragment : Fragment() {
         armor_header.setSubtitleText(getString(R.string.rarity_string, armor.rarity))
 
         // set defense label
-        defense_cell.setLabelText(getString(
+        defense_value.text = getString(
                 R.string.armor_defense_value,
                 armor.defense_base,
                 armor.defense_max,
-                armor.defense_augment_max))
+                armor.defense_augment_max)
 
         // set elemental defense values
-        fire_star_cell.setLabelText(getString(R.string.armor_detail_vs_fire))
-        fire_star_cell.setValueText("${armor.fire}")
-        water_star_cell.setLabelText(getString(R.string.armor_detail_vs_water))
-        water_star_cell.setValueText("${armor.water}")
-        ice_star_cell.setLabelText(getString(R.string.armor_detail_vs_ice))
-        ice_star_cell.setValueText("${armor.ice}")
-        lightning_star_cell.setLabelText(getString(R.string.armor_detail_vs_thunder))
-        lightning_star_cell.setValueText("${armor.thunder}")
-        dragon_star_cell.setLabelText(getString(R.string.armor_detail_vs_dragon))
-        dragon_star_cell.setValueText("${armor.dragon}")
+        fire_value.text = "${armor.fire}"
+        water_value.text = "${armor.water}"
+        thunder_value.text = "${armor.thunder}"
+        ice_value.text = "${armor.ice}"
+        dragon_value.text = "${armor.dragon}"
 
         val slotImages = armor.slots.map {
             context?.getDrawableCompat(SlotEmptyRegistry(it))

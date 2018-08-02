@@ -81,6 +81,10 @@
     <string name="item_crafting_yield">\x %1$d</string>
     <string name="item_source_reward_condition">%1$s %2$s</string>
 
+    <!-- general equipment strings -->
+    <string name="equipment_detail_defense">Defense</string>
+    <string name="equipment_detail_slots">Slots</string>
+
     <!-- Weapons -->
     <string name="weapons_title">Weapons</string>
 
