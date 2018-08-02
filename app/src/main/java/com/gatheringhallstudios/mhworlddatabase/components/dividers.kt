@@ -84,7 +84,7 @@ class HeaderItemDivider(private val drawable: Drawable): BaseVerticalDivider() {
 /**
  * A divider that separates "child" items
  */
-class ChildDivider(private val drawable: Drawable): BaseVerticalDivider() {
+class ChildDivider(private val drawable: Drawable?): BaseVerticalDivider() {
     override fun shouldDraw(parent: RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
         val firstType = firstView.getTag(R.id.view_type)
         val secondType = secondView.getTag(R.id.view_type)
@@ -99,8 +99,10 @@ class ChildDivider(private val drawable: Drawable): BaseVerticalDivider() {
     }
 
     override fun performDraw(canvas: Canvas, left: Int, right: Int, yCoord: Int) {
-        val top = yCoord - drawable.intrinsicHeight
-        drawable.setBounds(left, top, right, yCoord)
-        drawable.draw(canvas)
+        drawable?.let {
+            val top = yCoord - drawable.intrinsicHeight
+            drawable.setBounds(left, top, right, yCoord)
+            drawable.draw(canvas)
+        }
     }
 }

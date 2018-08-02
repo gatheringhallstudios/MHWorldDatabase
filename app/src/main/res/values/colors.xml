@@ -10,7 +10,7 @@
     <color name="secondaryColor">#fdd835</color>
     <color name="secondaryLightColor">#feec65</color>
     <color name="secondaryDarkColor">#f7a738</color>
-    <color name="itemDividerColor">#1fffffff</color>
+    <color name="itemDividerColor">#2dffffff</color>
 
     <!-- Text Colors -->
     <color name="textColorHigh">#ffffff</color> <!-- High Emphasis -->

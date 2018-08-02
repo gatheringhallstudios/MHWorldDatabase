@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Skill
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
@@ -41,6 +43,9 @@ class SkillDetailFragment : Fragment() {
         // needs to also be removed in onDestroyView()
         recycler_view.adapter = adapterBuilder.adapter
         recycler_view.isNestedScrollingEnabled = false
+
+        val divider = ChildDivider(DashedDividerDrawable(context!!))
+        recycler_view.addItemDecoration(divider)
 
         viewModel.setSkill(arguments?.getInt(ARG_SKILLTREE_ID) ?: -1)
         viewModel.skillTreeFull.observe(this, Observer(::populateSkill))
