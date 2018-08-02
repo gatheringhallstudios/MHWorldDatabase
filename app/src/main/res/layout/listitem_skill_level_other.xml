@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/icon"
-        style="@style/IconMedium"
+        style="@style/IconMedium.Decorated"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="@dimen/margin_medium"
         android:layout_marginStart="@dimen/margin_large"
@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toTopOf="@+id/skill_level"
         app:layout_constraintStart_toEndOf="@id/icon"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Attack" />
+        tools:text="Some Label" />
 
     <com.gatheringhallstudios.mhworlddatabase.components.SkillLevelView
         android:id="@+id/skill_level"

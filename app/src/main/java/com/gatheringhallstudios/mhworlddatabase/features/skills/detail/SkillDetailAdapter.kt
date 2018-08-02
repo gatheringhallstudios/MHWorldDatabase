@@ -5,12 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinderAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinding
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationSkillLevel
@@ -111,7 +109,7 @@ class DecorationSkillLevelAdapterDelegate: SimpleListDelegate<DecorationSkillLev
 
     override fun onCreateView(parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)
-        return inflater.inflate(R.layout.listitem_skill_level, parent, false)
+        return inflater.inflate(R.layout.listitem_skill_level_other, parent, false)
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: DecorationSkillLevel) {
@@ -129,7 +127,7 @@ class CharmSkillLevelAdapterDelegate: SimpleListDelegate<CharmSkillLevel>() {
 
     override fun onCreateView(parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)
-        return inflater.inflate(R.layout.listitem_skill_level, parent, false)
+        return inflater.inflate(R.layout.listitem_skill_level_other, parent, false)
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: CharmSkillLevel) {

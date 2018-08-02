@@ -193,30 +193,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            >
-
+            android:layout_marginTop="@dimen/margin_section_gap">
             <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
                 android:id="@+id/armor_skill_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
                 app:labelText="@string/decorations_skill_information"/>
 
             <LinearLayout
                 android:id="@+id/armor_skill_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:orientation="vertical"
+
+                android:divider="@drawable/divider_stroke"
+                android:showDividers="middle"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/armor_set_bonus_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
             android:orientation="vertical">
 
             <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
@@ -225,6 +223,16 @@
                 android:layout_height="wrap_content"
                 app:labelText="@string/armor_detail_set_bonus"
                 />
+
+            <TextView
+                android:id="@+id/set_bonus_name"
+                style="@style/TextHeadlineHigh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                tools:text="Rathalos Mastery"/>
 
             <LinearLayout
                 android:id="@+id/armor_set_bonus_list"
@@ -237,6 +245,7 @@
             android:id="@+id/armor_components_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
             android:orientation="vertical">
 
             <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
@@ -249,7 +258,9 @@
                 android:id="@+id/armor_components_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical"
+                android:divider="@drawable/divider_stroke"
+                android:showDividers="middle"/>
         </LinearLayout>
 
     </LinearLayout>

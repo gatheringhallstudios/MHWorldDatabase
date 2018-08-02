@@ -52,6 +52,15 @@ val SlotEmptyRegistry = fun(slot: Int) = when(slot) {
     else -> R.drawable.ic_ui_slot_none
 }
 
+val SetBonusNumberRegistry = fun(num: Int) = when(num) {
+    1 -> R.drawable.ic_ui_set_bonus_1
+    2 -> R.drawable.ic_ui_set_bonus_2
+    3 -> R.drawable.ic_ui_set_bonus_3
+    4 -> R.drawable.ic_ui_set_bonus_4
+    5 -> R.drawable.ic_ui_set_bonus_5
+    else -> 0
+}
+
 val ColorRegistry = createRegistry(
         "rare1" to R.color.icon_gray,
         "rare2" to R.color.icon_white,
