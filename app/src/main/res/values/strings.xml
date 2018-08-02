@@ -25,6 +25,7 @@
 
     <string name="low_rank_short">LR</string>
     <string name="high_rank_short">HR</string>
+    <string name="all_rank_short">ANY</string> <!-- null rank -->
     <string name="low_rank">Low</string>
     <string name="high_rank">High</string>
     <string name="low_rank_full">Low Rank</string>

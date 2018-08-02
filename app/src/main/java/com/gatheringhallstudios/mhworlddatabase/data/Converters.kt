@@ -2,31 +2,73 @@ package com.gatheringhallstudios.mhworlddatabase.data
 
 import android.arch.persistence.room.TypeConverter
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.util.Converter
 
-import com.google.common.collect.EnumHashBiMap
+private val RankConverter = Converter(
+        "LR" to Rank.LOW,
+        "HR" to Rank.HIGH,
+        null to null
+)
 
-// internal helper to create a lookup map
-inline fun <reified T : Enum<T>> createLookupMap(): EnumHashBiMap<T, String> {
-    return EnumHashBiMap.create<T, String>(T::class.java)
-}
+private val MonsterSizeConverter = Converter(
+        "small" to MonsterSize.SMALL,
+        "large" to MonsterSize.LARGE,
+        null to null
+)
 
-// internal helper to get an enum from a lookup map, and throw an error on failure
-fun <T : Enum<T>> EnumHashBiMap<T, String>.toEnum(value : String?) : T {
-    try {
-        return this.inverse()[value]!!
-    } catch (ex: NullPointerException) {
-        throw IllegalArgumentException("Unknown value $value")
-    }
-}
+private val ExtractConverter = Converter(
+        "red" to Extract.RED,
+        "orange" to Extract.ORANGE,
+        "white" to Extract.WHITE,
+        "green" to Extract.GREEN,
+        null to null
+)
 
-// internal helper to get a string from the lookup map, and throw an error on failure
-fun <T: Enum<T>> EnumHashBiMap<T, String>.toString(value : T?): String? {
-    if (value == null) {
-        return null
-    }
-    return this[value] ?:
-        throw NoSuchFieldException("Value $value was not registered in the converter")
-}
+private val ItemCategoryConverter = Converter(
+        "item" to ItemCategory.ITEM,
+        "material" to ItemCategory.MATERIAL,
+        "misc" to ItemCategory.MISC,
+        "ammo" to ItemCategory.AMMO,
+        "hidden" to ItemCategory.HIDDEN,
+        null to null
+)
+
+private val ItemSubcategoryConverter = Converter(
+        null to ItemSubcategory.NONE,
+        "appraisal" to ItemSubcategory.APPRAISAL,
+        "account" to ItemSubcategory.ACCOUNT,
+        "supply" to ItemSubcategory.SUPPLY,
+        "trade" to ItemSubcategory.TRADE
+)
+
+private val ArmorTypeConverter = Converter(
+        "head" to ArmorType.HEAD,
+        "chest" to ArmorType.CHEST,
+        "arms" to ArmorType.ARMS,
+        "waist" to ArmorType.WAIST,
+        "legs" to ArmorType.LEGS,
+        null to null
+)
+
+private val WeaponTypeConverter = Converter(
+        "great-sword" to WeaponType.GREAT_SWORD,
+        "long-sword" to WeaponType.LONG_SWORD,
+        "sword-and-shield" to WeaponType.SWORD_AND_SHIELD,
+        "dual-blades" to WeaponType.DUAL_BLADES,
+        "hammer" to WeaponType.HAMMER,
+        "hunting-horn" to WeaponType.HUNTING_HORN,
+        "lance" to WeaponType.LANCE,
+        "gunlance" to WeaponType.GUNLANCE,
+        "switch-axe" to WeaponType.SWITCH_AXE,
+        "charge-blade" to WeaponType.CHARGE_BLADE,
+        "insect-glaive" to WeaponType.INSECT_GLAIVE ,
+        "bow" to WeaponType.BOW,
+        "light-bowgun" to WeaponType.LIGHT_BOWGUN,
+        "heavy-bowgun" to WeaponType.HEAVY_BOWGUN,
+        null to null
+)
+
+
 
 /**
  * Type conversions for things like enumerations.
@@ -36,94 +78,24 @@ fun <T: Enum<T>> EnumHashBiMap<T, String>.toString(value : T?): String? {
  */
 
 class Converters {
-    companion object {
-        private var rankMap = createLookupMap<Rank>()
-        private var itemCategoryMap = createLookupMap<ItemCategory>()
-        private var itemSubcategoryMap = createLookupMap<ItemSubcategory>()
-        private var monsterSizeMap = createLookupMap<MonsterSize>()
-        private var extractMap = createLookupMap<Extract>()
-        private var armorMap = createLookupMap<ArmorType>()
-        private var weaponMap = createLookupMap<WeaponType>()
+    @TypeConverter fun rankFromString(value: String?) = RankConverter.deserialize(value)
+    @TypeConverter fun fromRank(type: Rank?) = RankConverter.serialize(type)
 
-        private var dataTypeMap = createLookupMap<DataType>()
+    @TypeConverter fun monsterSizefromString(value: String) = MonsterSizeConverter.deserialize(value)
+    @TypeConverter fun fromMonsterSize(type: MonsterSize?) = MonsterSizeConverter.serialize(type)
 
-        init {
-            rankMap[Rank.LOW] = "LR"
-            rankMap[Rank.HIGH] = "HR"
+    @TypeConverter fun extractFromString(value: String) = ExtractConverter.deserialize(value)
+    @TypeConverter fun fromExtract(type: Extract?) = ExtractConverter.serialize(type)
 
-            monsterSizeMap[MonsterSize.SMALL] = "small"
-            monsterSizeMap[MonsterSize.LARGE] = "large"
+    @TypeConverter fun itemCategoryFromString(value: String) = ItemCategoryConverter.deserialize(value)
+    @TypeConverter fun fromItemCategory(category: ItemCategory?) = ItemCategoryConverter.serialize(category)
 
-            extractMap[Extract.RED] = "red"
-            extractMap[Extract.ORANGE] = "orange"
-            extractMap[Extract.WHITE] = "white"
-            extractMap[Extract.GREEN] = "green"
+    @TypeConverter fun itemSubcategoryFromString(value: String?) = ItemSubcategoryConverter.deserialize(value)
+    @TypeConverter fun fromItemSubcategory(subcategory: ItemSubcategory?) = ItemSubcategoryConverter.serialize(subcategory ?: ItemSubcategory.NONE)
 
-            itemCategoryMap[ItemCategory.ITEM] = "item"
-            itemCategoryMap[ItemCategory.MATERIAL] = "material"
-            itemCategoryMap[ItemCategory.MISC] = "misc"
-            itemCategoryMap[ItemCategory.AMMO] = "ammo"
-            itemCategoryMap[ItemCategory.HIDDEN] = "hidden"
+    @TypeConverter fun armorTypefromString(value: String) = ArmorTypeConverter.deserialize(value)
+    @TypeConverter fun fromArmorType(type: ArmorType?) = ArmorTypeConverter.serialize(type)
 
-            itemSubcategoryMap[ItemSubcategory.NONE] = null
-            itemSubcategoryMap[ItemSubcategory.APPRAISAL] = "appraisal"
-            itemSubcategoryMap[ItemSubcategory.ACCOUNT] = "account"
-            itemSubcategoryMap[ItemSubcategory.SUPPLY] = "supply"
-            itemSubcategoryMap[ItemSubcategory.TRADE] = "trade"
-
-            armorMap[ArmorType.HEAD] = "head"
-            armorMap[ArmorType.CHEST] = "chest"
-            armorMap[ArmorType.ARMS] = "arms"
-            armorMap[ArmorType.WAIST] = "waist"
-            armorMap[ArmorType.LEGS] = "legs"
-
-            weaponMap[WeaponType.GREAT_SWORD] = "great-sword"
-            weaponMap[WeaponType.LONG_SWORD] = "long-sword"
-            weaponMap[WeaponType.SWORD_AND_SHIELD] = "sword-and-shield"
-            weaponMap[WeaponType.DUAL_BLADES] = "dual-blades"
-            weaponMap[WeaponType.HAMMER] = "hammer"
-            weaponMap[WeaponType.HUNTING_HORN] = "hunting-horn"
-            weaponMap[WeaponType.LANCE] = "lance"
-            weaponMap[WeaponType.GUNLANCE] = "gunlance"
-            weaponMap[WeaponType.SWITCH_AXE] = "switch-axe"
-            weaponMap[WeaponType.CHARGE_BLADE] = "charge-blade"
-            weaponMap[WeaponType.INSECT_GLAIVE] = "insect-glaive"
-            weaponMap[WeaponType.BOW] = "bow"
-            weaponMap[WeaponType.LIGHT_BOWGUN] = "light-bowgun"
-            weaponMap[WeaponType.HEAVY_BOWGUN] = "heavy-bowgun"
-
-            dataTypeMap[DataType.LOCATION] = "location"
-            dataTypeMap[DataType.ITEM] = "item"
-            dataTypeMap[DataType.MONSTER] = "monster"
-            dataTypeMap[DataType.SKILL] = "skill"
-            dataTypeMap[DataType.DECORATION] = "decoration"
-            dataTypeMap[DataType.CHARM] = "charm"
-            dataTypeMap[DataType.ARMOR] = "armor"
-            dataTypeMap[DataType.WEAPON] = "weapon"
-        }
-    }
-
-    @TypeConverter fun rankFromString(value: String) = rankMap.toEnum(value)
-    @TypeConverter fun fromRank(type: Rank?) = rankMap.toString(type)
-
-    @TypeConverter fun itemCategoryFromString(value: String) = itemCategoryMap.toEnum(value)
-    @TypeConverter fun fromItemCategory(category: ItemCategory?) = itemCategoryMap.toString(category)
-
-    @TypeConverter fun itemSubcategoryFromString(value: String?) = itemSubcategoryMap.toEnum(value)
-    @TypeConverter fun fromItemSubcategory(subcategory: ItemSubcategory?) = itemSubcategoryMap.toString(subcategory)
-
-    @TypeConverter fun monsterSizefromString(value: String) = monsterSizeMap.toEnum(value)
-    @TypeConverter fun fromMonsterSize(type: MonsterSize?) = monsterSizeMap.toString(type)
-
-    @TypeConverter fun extractFromString(value: String) = extractMap.toEnum(value)
-    @TypeConverter fun fromExtract(type: Extract?) = extractMap.toString(type)
-
-    @TypeConverter fun armorTypefromString(value: String) = armorMap.toEnum(value)
-    @TypeConverter fun fromArmorType(type: ArmorType?) = armorMap.toString(type)
-
-    @TypeConverter fun weaponTypeFromString(value: String) = weaponMap.toEnum(value)
-    @TypeConverter fun fromWeaponType(type: WeaponType?) = weaponMap.toString(type)
-
-    @TypeConverter fun dataTypeFromString(value: String) = dataTypeMap.toEnum(value)
-    @TypeConverter fun fromDataType(type: DataType?) = dataTypeMap.toString(type)
+    @TypeConverter fun weaponTypeFromString(value: String) = WeaponTypeConverter.deserialize(value)
+    @TypeConverter fun fromWeaponType(type: WeaponType?) = WeaponTypeConverter.serialize(type)
 }

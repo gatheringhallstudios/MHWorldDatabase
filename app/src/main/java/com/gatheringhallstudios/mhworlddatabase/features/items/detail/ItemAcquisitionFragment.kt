@@ -13,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemSources
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 
 /**
@@ -45,9 +46,15 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
         }
 
         if (data.locations.isNotEmpty()) {
-            // todo: localize
             val groups = data.locations.groupBy {
-                "${it.rank} ${it.location.name}"
+                // todo: centralize
+                val rankString = when (it.rank) {
+                    Rank.LOW -> getString(R.string.low_rank_short)
+                    Rank.HIGH -> getString(R.string.high_rank_short)
+                    null -> getString(R.string.all_rank_short)
+                }
+
+                "$rankString ${it.location.name}"
             }
 
             adapter.addSection(getString(R.string.item_header_gathering), groups)

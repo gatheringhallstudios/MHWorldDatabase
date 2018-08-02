@@ -45,7 +45,7 @@ class ItemCombination(
 
 class ItemLocation(
         @Embedded(prefix = "location_") val location: Location,
-        val rank: Rank,
+        val rank: Rank?,
         val area: Int,
         val stack: Int,
         val percentage: Int,

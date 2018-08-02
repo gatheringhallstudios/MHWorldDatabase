@@ -26,7 +26,7 @@ data class Location(
  */
 data class LocationItem(
         @Embedded(prefix = "item_") val item: ItemBase,
-        val rank: Rank,
+        val rank: Rank?,
         val area: Int,
         val stack: Int,
         val percentage: Int,

@@ -17,7 +17,7 @@ data class LocationText(
 data class LocationItemEntity(
         @PrimaryKey val id: Int,
         val location_id: Int,
-        val rank: Rank,
+        val rank: Rank?,
         val area: Int,
         val item_id: Int,
         val stack: Int,
