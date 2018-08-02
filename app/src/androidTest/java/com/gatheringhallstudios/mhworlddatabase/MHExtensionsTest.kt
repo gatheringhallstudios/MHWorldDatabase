@@ -48,7 +48,7 @@ class MHExtensionsTest {
         val default = R.drawable.ic_question_mark
         val questionMark = ContextCompat.getDrawable(context, default)
 
-        val result = context.getVectorDrawable(R.drawable.ic_head)
+        val result = context.getVectorDrawable("ArmorHead", "Red")
         assertNotNull("Expected default non-null result", result)
         assertNotEquals("Should not be default", questionMark?.constantState, result?.constantState)
     }

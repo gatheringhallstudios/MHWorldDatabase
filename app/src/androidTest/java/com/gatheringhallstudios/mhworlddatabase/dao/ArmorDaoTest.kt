@@ -41,15 +41,8 @@ class ArmorDaoTest {
     
     @Test
     fun Can_Query_ArmorList() {
-        val results = dao.loadArmorList("en").getResult()
+        val results = dao.loadArmorList("en", Rank.HIGH).getResult()
         assertFalse("expected results", results.isEmpty())
-    }
-
-    @Test
-    fun Can_Filter_ArmorList_Rarity() {
-        val results = dao.loadArmorList("en", 3, 3).getResult()
-        val allAre3 =  results.all { it.rarity == 3 }
-        assertTrue("All armor should be rarity 3", allAre3)
     }
 
     @Test
@@ -57,7 +50,7 @@ class ArmorDaoTest {
         val armorId = 401 // Zorah Hide Alpha
         val result = dao.loadArmor("en", armorId).getResult()
 
-        assertEquals("expect name match", "Zorah Hide Alpha", result.name)
+        assertEquals("expect name match", "Zorah Hide α", result.name)
         assertEquals("expected type to match", ArmorType.CHEST, result.armor_type)
     }
 
@@ -66,13 +59,7 @@ class ArmorDaoTest {
         val armorSets = dao.loadArmorSets("en", Rank.HIGH).getResult()
 
         for (set in armorSets) {
-            var isAllEmpty = true
-            if (set.head_armor != null) isAllEmpty = false
-            if (set.chest_armor != null) isAllEmpty = false
-            if (set.arms_armor != null) isAllEmpty = false
-            if (set.waist_armor != null) isAllEmpty = false
-            if (set.legs_armor != null) isAllEmpty = false
-
+            val isAllEmpty = set.armor.isEmpty()
             assertFalse("expected non-empty armor", isAllEmpty)
         }
 
