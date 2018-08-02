@@ -135,8 +135,7 @@
             android:id="@+id/habitat_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
-            android:paddingBottom="@dimen/padding_medium"
+            android:layout_marginTop="@dimen/margin_section_gap"
             app:labelText="@string/header_habitat"
             app:layout_constraintTop_toBottomOf="@id/element_layout" />
 
@@ -145,6 +144,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle"
             app:layout_constraintTop_toBottomOf="@id/habitat_header">
 
             <!-- TODO Habitats will be populated here procedurally -->

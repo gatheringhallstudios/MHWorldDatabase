@@ -8,6 +8,8 @@ import com.gatheringhallstudios.mhworlddatabase.MainActivityViewModel
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinderAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
+import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 
 
 /**
@@ -26,6 +28,9 @@ class UniversalSearchFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = SearchResultAdapter()
         setAdapter(adapter)
+
+        // add decorator
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         // open up the search menu (if not open) if we're on this page
         // If the user hit back and returned to this page, we need to open it again
