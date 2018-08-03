@@ -7,6 +7,8 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.LocationItemsAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
@@ -24,6 +26,8 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
+        recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
+        
         viewModel.locationItems.observe(this, Observer(::setItems))
     }
 

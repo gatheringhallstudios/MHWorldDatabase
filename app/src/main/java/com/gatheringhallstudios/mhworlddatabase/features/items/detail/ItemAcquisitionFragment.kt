@@ -11,6 +11,8 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDele
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemSources
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
@@ -31,6 +33,7 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
+        recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
         viewModel.acquisitionData.observe(this, Observer(::populateData))
     }

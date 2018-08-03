@@ -12,6 +12,8 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsageArmor
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsageCharm
@@ -53,6 +55,7 @@ class ItemUsageFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
+        recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
         viewModel.usageData.observe(this, Observer(::populateData))
     }
