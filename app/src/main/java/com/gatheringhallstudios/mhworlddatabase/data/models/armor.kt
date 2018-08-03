@@ -15,6 +15,13 @@ data class ArmorSlots(
     override fun iterator(): Iterator<Int> {
         return listOf(slot_1, slot_2, slot_3).iterator()
     }
+
+    operator fun get(i: Int) = when(i) {
+        0 -> slot_1
+        1 -> slot_2
+        2 -> slot_3
+        else -> throw IndexOutOfBoundsException("Slot must be from 0-2")
+    }
 }
 
 /**

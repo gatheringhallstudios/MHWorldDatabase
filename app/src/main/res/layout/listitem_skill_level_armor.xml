@@ -42,19 +42,39 @@
         app:layout_constraintTop_toBottomOf="@+id/label_text"
         tools:level="2"
         tools:maxLevel="7"/>
+    
+    <LinearLayout
+        android:id="@+id/slot_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/level_text">
+        <ImageView
+            android:id="@+id/slot1"
+            style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_slot_none"/>
+        <ImageView
+            android:id="@+id/slot2"
+            style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_slot_none"/>
+        <ImageView
+            android:id="@+id/slot3"
+            style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_slot_none"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/level_text"
         style="@style/TextBodyHigh"
         android:textColor="@color/textColorSelected"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_large"
-        android:gravity="end"
-        android:textAlignment="textEnd"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/skill_level"
+        app:layout_constraintBottom_toBottomOf="@id/skill_level"
         tools:text="Level 2" />
 
 </android.support.constraint.ConstraintLayout>

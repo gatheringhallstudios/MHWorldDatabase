@@ -9,6 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationSkillLevel
@@ -153,6 +154,9 @@ class ArmorSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSkillLevel>() {
         viewHolder.label_text.text = data.armor.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
         viewHolder.skill_level.level = data.level
+        viewHolder.slot1.setImageResource(SlotEmptyRegistry(data.armor.slots[0]))
+        viewHolder.slot2.setImageResource(SlotEmptyRegistry(data.armor.slots[1]))
+        viewHolder.slot3.setImageResource(SlotEmptyRegistry(data.armor.slots[2]))
         viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateArmorDetail(data.armor.id) }
     }
