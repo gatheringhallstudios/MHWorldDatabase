@@ -3,9 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.components
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -30,7 +27,7 @@ abstract class BaseVerticalDivider: RecyclerView.ItemDecoration() {
      */
     abstract fun performDraw(canvas: Canvas, left: Int, right: Int, yCoord: Int)
 
-    override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         canvas.save()
 
         val left = parent.paddingLeft

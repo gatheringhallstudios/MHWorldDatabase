@@ -1,0 +1,14 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="250"
+    android:interpolator="@android:interpolator/accelerate_cubic"
+    android:shareInterpolator="false"
+    android:startOffset="150">
+    <translate
+        android:fromXDelta="0%"
+        android:fromYDelta="0%"
+        android:toXDelta="150%"
+        android:toYDelta="0%" />
+    <alpha
+        android:fromAlpha="1"
+        android:toAlpha="0" />
+</set>

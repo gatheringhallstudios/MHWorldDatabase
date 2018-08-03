@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.support.v4.util.LruCache
 import com.gatheringhallstudios.mhworlddatabase.util.DrawableWrapper
@@ -15,7 +16,7 @@ data class CacheKey(
 private val cacheSizeKB = 8 * 1024 // 8MB
 
 private val cache = object: LruCache<CacheKey, Bitmap>(cacheSizeKB) {
-    override fun sizeOf(key: CacheKey?, value: Bitmap): Int {
+    override fun sizeOf(key: CacheKey, value: Bitmap): Int {
         return value.byteCount / 1024 // return size in kilobytes
     }
 }

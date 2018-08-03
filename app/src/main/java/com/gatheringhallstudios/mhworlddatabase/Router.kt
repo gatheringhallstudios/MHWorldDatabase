@@ -60,14 +60,14 @@ class Router(private val navController: NavController) {
 
     fun navigateArmorDetail(armorId: Int) {
         navController.navigate(
-                R.id.armorDetailDestination,
+                R.id.openArmorDetailAction,
                 BundleBuilder().putInt(ArmorDetailFragment.ARG_ARMOR_ID, armorId).build()
         )
     }
 
     fun navigateCharmDetail(charmId: Int) {
         navController.navigate(
-                R.id.charmDetailDestination,
+                R.id.openCharmDetailAction,
                 BundleBuilder().putInt(CharmDetailFragment.ARG_CHARM_ID, charmId).build()
         )
     }

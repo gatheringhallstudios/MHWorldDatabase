@@ -5,7 +5,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/monsterListDestination"
+            android:id="@+id/monsterListAction"
             android:icon="@drawable/ic_ui_hunter_notes_white"
             android:title="@string/monsters_list_title" />
         <item
