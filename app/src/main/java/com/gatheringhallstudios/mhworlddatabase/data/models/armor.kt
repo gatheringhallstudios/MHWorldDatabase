@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
+import android.arch.persistence.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 
 /**
@@ -12,6 +13,16 @@ data class ArmorSlots(
         val slot_2: Int,
         val slot_3: Int
 ): Iterable<Int> {
+    /**
+     * Returns a list containing only active (non-zero) slots
+     */
+    @Ignore val active = this.asSequence().filter { it > 0 }.toList()
+
+    /**
+     * Returns true if the armor contains slots, false otherwise
+     */
+    @Ignore fun isEmpty() = active.isEmpty()
+
     override fun iterator(): Iterator<Int> {
         return listOf(slot_1, slot_2, slot_3).iterator()
     }

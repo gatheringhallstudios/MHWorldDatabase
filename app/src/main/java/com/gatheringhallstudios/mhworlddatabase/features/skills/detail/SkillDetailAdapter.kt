@@ -154,9 +154,27 @@ class ArmorSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSkillLevel>() {
         viewHolder.label_text.text = data.armor.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
         viewHolder.skill_level.level = data.level
-        viewHolder.slot1.setImageResource(SlotEmptyRegistry(data.armor.slots[0]))
-        viewHolder.slot2.setImageResource(SlotEmptyRegistry(data.armor.slots[1]))
-        viewHolder.slot3.setImageResource(SlotEmptyRegistry(data.armor.slots[2]))
+
+        // make it possible to reference slots using a list
+        val slots = data.armor.slots
+        val slotViews = arrayOf(viewHolder.slot1, viewHolder.slot2, viewHolder.slot3)
+
+        // Bind slots (only show those with a value)
+        for (i in 0 until 3) {
+            if (slots[i] == 0) {
+                slotViews[i].visibility = View.GONE
+            } else {
+                slotViews[i].visibility = View.VISIBLE
+                slotViews[i].setImageResource(SlotEmptyRegistry(slots[i]))
+            }
+        }
+
+        // show a single empty bar if there are no slots. The rest were set to invisible already
+        if (slots.isEmpty()) {
+            slotViews[0].setImageResource(SlotEmptyRegistry(0))
+            slotViews[0].visibility = View.VISIBLE
+        }
+
         viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateArmorDetail(data.armor.id) }
     }
