@@ -44,7 +44,7 @@
 
     <ImageView
         android:id="@+id/icon_defense"
-        style="@style/IconSmall"
+        style="@style/IconXSmall"
         android:src="@drawable/ic_ui_defense"
         android:layout_marginEnd="@dimen/margin_medium"
         app:layout_constraintTop_toTopOf="parent"
@@ -54,7 +54,7 @@
 
     <ImageView
         android:id="@+id/icon_slots"
-        style="@style/IconSmall"
+        style="@style/IconXSmall"
         android:src="@drawable/ic_ui_slots"
         android:layout_marginEnd="@dimen/margin_medium"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,15 +91,15 @@
 
         <ImageView
             android:id="@+id/slot1"
-            style="@style/IconSmall"
+            style="@style/IconXSmall"
             android:src="@drawable/ic_ui_slot_none"/>
         <ImageView
             android:id="@+id/slot2"
-            style="@style/IconSmall"
+            style="@style/IconXSmall"
             android:src="@drawable/ic_ui_slot_none"/>
         <ImageView
             android:id="@+id/slot3"
-            style="@style/IconSmall"
+            style="@style/IconXSmall"
             android:src="@drawable/ic_ui_slot_none"/>
     </LinearLayout>
 

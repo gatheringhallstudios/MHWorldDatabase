@@ -72,7 +72,7 @@
 
         <ImageView
             android:id="@+id/item1_icon"
-            style="@style/IconSmall.Decorated"
+            style="@style/IconXSmall.Decorated"
             tools:src="@drawable/ic_question_mark"
             android:layout_marginStart="@dimen/margin_medium" />
     </LinearLayout>
@@ -103,7 +103,7 @@
 
         <ImageView
             android:id="@+id/item2_icon"
-            style="@style/IconSmall.Decorated"
+            style="@style/IconXSmall.Decorated"
             tools:src="@drawable/ic_question_mark"
             android:layout_marginStart="@dimen/margin_medium" />
     </LinearLayout>

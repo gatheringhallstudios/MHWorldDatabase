@@ -63,15 +63,15 @@
         <!-- These should also be removed from this layout and added at runtime -->
 
         <ImageView
-            style="@style/IconSmall"
+            style="@style/IconXSmall"
             android:src="@drawable/ic_question_mark" />
 
         <ImageView
-            style="@style/IconSmall"
+            style="@style/IconXSmall"
             android:src="@drawable/ic_question_mark" />
 
         <ImageView
-            style="@style/IconSmall"
+            style="@style/IconXSmall"
             android:src="@drawable/ic_question_mark" />
 
     </LinearLayout>

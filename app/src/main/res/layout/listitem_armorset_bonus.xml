@@ -33,7 +33,7 @@
 
     <ImageView
         android:id="@+id/bonus_requirement"
-        style="@style/IconSmall"
+        style="@style/IconXSmall"
         tools:src="@drawable/ic_ui_set_bonus_2"
         android:layout_marginEnd="@dimen/margin_large"
         app:layout_constraintTop_toTopOf="parent"

@@ -25,9 +25,14 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Image Styles -->
-    <style name="IconSmall">
+    <style name="IconXSmall">
         <item name="android:layout_width">@dimen/image_size_xsmall</item>
         <item name="android:layout_height">@dimen/image_size_xsmall</item>
+    </style>
+
+    <style name="IconSmall">
+        <item name="android:layout_width">@dimen/image_size_small</item>
+        <item name="android:layout_height">@dimen/image_size_small</item>
     </style>
 
     <style name="IconMedium">
@@ -45,7 +50,7 @@
         <item name="android:layout_height">@dimen/image_size_xlarge</item>
     </style>
 
-    <style name="IconSmall.Decorated">
+    <style name="IconXSmall.Decorated">
         <item name="android:padding">2dp</item>
         <item name="android:background">@drawable/bg_icon_decorator</item>
     </style>

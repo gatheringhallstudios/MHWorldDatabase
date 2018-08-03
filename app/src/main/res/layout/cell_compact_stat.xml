@@ -11,7 +11,7 @@ the class that inflates it. Use parentTag is used to preview the layout in the e
 
 <ImageView
     android:id="@+id/generic_icon"
-    style="@style/IconSmall"
+    style="@style/IconXSmall"
     android:layout_gravity="center_vertical"
     android:layout_marginTop="@dimen/margin_small"
     android:layout_marginBottom="@dimen/margin_small"
