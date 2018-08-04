@@ -30,19 +30,24 @@ val VectorRegistry = createRegistry(
         "Decoration3" to R.xml.ic_ui_decoration_3_base,
 
         "Ammo" to R.xml.ic_items_ammo_base,
+        "Body" to R.xml.ic_items_body_base,
+        "Bone" to R.xml.ic_items_bone_base,
         "Carapace" to R.xml.ic_items_carapace_base,
-        "Meat" to R.xml.ic_items_meat_base,
+        "Fang" to R.xml.ic_items_fang_base,
+        "Feystone" to R.xml.ic_items_feystone_base,
+        "Gem" to R.xml.ic_items_gem_base,
+        "Hide" to R.xml.ic_items_hide_base,
+        "Husk" to R.xml.ic_items_husk_base,
         "Jaw" to R.xml.ic_items_monster_jaw_base,
+        "Liquid" to R.xml.ic_items_liquid_base,
+        "Meat" to R.xml.ic_items_meat_base,
+        "Ore" to R.xml.ic_items_ore_base,
         "Pellets" to R.xml.ic_items_pellets_base,
         "Slinger" to R.xml.ic_items_slinger_base,
         "Scale" to R.xml.ic_items_scale_base,
-        "Fang" to R.xml.ic_items_fang_base,
-        "Body" to R.xml.ic_items_body_base,
-        "Hide" to R.xml.ic_items_hide_base,
         "Sac" to R.xml.ic_items_sac_base,
-        "Ore" to R.xml.ic_items_ore_base,
-        "Voucher" to R.xml.ic_items_voucher_base
-
+        "Voucher" to R.xml.ic_items_voucher_base,
+        "Wing" to R.xml.ic_items_wing_base
 )
 
 val SlotEmptyRegistry = fun(slot: Int) = when(slot) {
