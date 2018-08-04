@@ -8,8 +8,8 @@
             <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
                 android:duration="@android:integer/config_shortAnimTime"
                 android:propertyName="rotation"
-                android:valueFrom="0"
-                android:valueTo="180"
+                android:valueFrom="180"
+                android:valueTo="0"
                 />
         </aapt:attr>
     </target>

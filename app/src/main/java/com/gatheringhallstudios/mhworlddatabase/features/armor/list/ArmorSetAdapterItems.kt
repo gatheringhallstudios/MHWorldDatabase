@@ -50,14 +50,14 @@ class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
 
         viewHolder.itemView.setOnClickListener {
             group.onToggleExpanded()
-            bindCurrentState(viewHolder)
+            bindCurrentState(viewHolder, stateChanging = true)
         }
     }
 
     /**
      * Updates view to match current expanded/collapsed state
      */
-    private fun bindCurrentState(viewHolder: ViewHolder) {
+    private fun bindCurrentState(viewHolder: ViewHolder, stateChanging: Boolean = false) {
         val view = viewHolder.itemView
         view.setBackgroundColor(when (group.isExpanded) {
             true -> ContextCompat.getColor(view.context, R.color.backgroundColorSectionHeader)
@@ -72,7 +72,7 @@ class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
 
         // animate (if can be animated)
         val drawable = viewHolder.dropdown_icon.drawable
-        if (drawable is Animatable) {
+        if (stateChanging && drawable is Animatable) {
             drawable.start()
         }
     }
