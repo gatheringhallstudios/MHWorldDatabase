@@ -11,48 +11,13 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/padding_footer_space">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/charm_label"
+        <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+            android:id="@+id/charm_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/margin_large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/charm_icon"
-                style="@style/IconXLarge.Decorated"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@xml/ic_equipment_charm_base" />
-
-            <TextView
-                android:id="@+id/charm_name"
-                style="@style/TextDisplayHigh"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="@id/charm_icon"
-                app:layout_constraintStart_toEndOf="@+id/charm_icon"
-                app:layout_constraintTop_toTopOf="@+id/charm_icon"
-                tools:text="Armor Charm" />
-
-            <TextView
-                android:id="@+id/charm_rarity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/charm_name"
-                app:layout_constraintTop_toBottomOf="@+id/charm_name"
-                tools:text="Rarity 6" />
-
-        </android.support.constraint.ConstraintLayout>
+            tools:iconSrc="@drawable/ic_question_mark"
+            tools:titleText="Azure Rathalos"
+            tools:descriptionText=""/>
 
         <include
             android:id="@+id/upgrade_label"
@@ -60,9 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/charm_label"
-            app:layout_constraintStart_toStartOf="@+id/charm_label"
-            app:layout_constraintTop_toBottomOf="@+id/charm_label" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/charm_header" />
 
         <LinearLayout
             android:id="@+id/previous_item_layout"
@@ -80,7 +45,7 @@
             android:id="@+id/charm_skill_header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_section_gap"
             app:labelText="@string/charms_skill_information"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,8 +57,9 @@
             android:id="@+id/charm_skill_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle"
             app:layout_constraintTop_toBottomOf="@+id/charm_skill_header">
 
         </LinearLayout>
@@ -102,7 +68,7 @@
             android:id="@+id/charm_components_header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_section_gap"
             app:labelText="@string/charms_components_information"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,8 +80,9 @@
             android:id="@+id/charm_components_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="vertical"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle"
             app:layout_constraintStart_toStartOf="@id/charm_components_header"
             app:layout_constraintTop_toBottomOf="@+id/charm_components_header">
 

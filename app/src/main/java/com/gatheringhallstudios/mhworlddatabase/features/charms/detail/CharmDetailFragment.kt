@@ -18,6 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.fragment_charm_summary.*
+import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
 
 class CharmDetailFragment : Fragment() {
@@ -50,12 +51,9 @@ class CharmDetailFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = charm.name
 
-        charm_name.text = charm.name
-        charm_rarity.text = getString(R.string.rarity_string, charm.rarity)
-        charm_rarity.setTextColor(AssetLoader.loadRarityColor(charm.rarity))
-
-        val icon = AssetLoader.loadIconFor(charm)
-        charm_icon.setImageDrawable(icon)
+        charm_header.setIconDrawable(AssetLoader.loadIconFor(charm))
+        charm_header.setTitleText(charm.name)
+        charm_header.setSubtitleText(getString(R.string.rarity_string, charm.rarity))
 
         previous_item_layout.removeAllViews()
         insertEmptyState(previous_item_layout)
@@ -122,17 +120,22 @@ class CharmDetailFragment : Fragment() {
             return
         }
 
-        for (skillLevel in skills) {
-            val view = IconLabelTextCell(context)
+        val inflater = LayoutInflater.from(context)
 
-            val skillTree = skillLevel.skillTree
+        for (skill in skills) {
+            val view = inflater.inflate(R.layout.listitem_skill_level, charm_skill_layout, false)
 
-            val icon = AssetLoader.loadIconFor(skillTree)
-            view.setLeftIconDrawable(icon)
-            view.setLabelText(skillTree.name)
-            view.setValueText("+${skillLevel.level} ${resources.getQuantityString(R.plurals.skills_level, skillLevel.level)}")
-            view.removeDecorator()
-            view.setOnClickListener { getRouter().navigateSkillDetail(skillTree.id) }
+            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
+            view.label_text.text = skill.skillTree.name
+            view.level_text.text = getString(R.string.skills_level_qty, skill.level)
+            with(view.skill_level) {
+                maxLevel = skill.skillTree.max_level
+                level = skill.level
+            }
+
+            view.setOnClickListener {
+                getRouter().navigateSkillDetail(skill.skillTree.id)
+            }
 
             charm_skill_layout.addView(view)
         }
