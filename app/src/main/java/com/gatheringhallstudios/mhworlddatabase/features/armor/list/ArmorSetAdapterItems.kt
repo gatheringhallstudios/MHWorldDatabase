@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.armor.list
 
 import android.graphics.Color
+import android.graphics.drawable.Animatable
 import android.support.v4.content.ContextCompat
 import androidx.navigation.Navigation
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -17,6 +18,16 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.listitem_armorset_armor.*
 import kotlinx.android.synthetic.main.listitem_armorset_header.*
 
+private val version = android.os.Build.VERSION.SDK_INT
+
+/**
+ * Returns desired if vectors are natively supported without fallbacks. Returns the fallback otherwise.
+ * It checks if the version is >= Lollipop (API 21)
+ */
+fun <T> compatSwitchVector(desired: T, fallback: T) = when (version >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+    true -> desired
+    false -> fallback
+}
 
 /**
  * Header item for collapsible armor sets
@@ -52,6 +63,18 @@ class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
             true -> ContextCompat.getColor(view.context, R.color.backgroundColorSectionHeader)
             false -> Color.TRANSPARENT
         })
+
+        // set dropdown arrow image
+        viewHolder.dropdown_icon.setImageResource(when (group.isExpanded) {
+            true -> compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less)
+            false -> compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more)
+        })
+
+        // animate (if can be animated)
+        val drawable = viewHolder.dropdown_icon.drawable
+        if (drawable is Animatable) {
+            drawable.start()
+        }
     }
 }
 

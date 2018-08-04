@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:drawable="@drawable/ic_expand_less">
+
+    <target android:name="arrow">
+        <aapt:attr name="android:animation">
+            <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+                android:duration="@android:integer/config_shortAnimTime"
+                android:propertyName="rotation"
+                android:valueFrom="0"
+                android:valueTo="180"
+                />
+        </aapt:attr>
+    </target>
+
+</animated-vector>
