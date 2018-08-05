@@ -24,6 +24,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
     <!-- Image Styles -->
     <style name="IconXSmall">
         <item name="android:layout_width">@dimen/image_size_xsmall</item>
