@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.util
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.content.res.Resources
 import android.util.Log
 import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
@@ -36,3 +37,8 @@ fun <T> createLiveData(block: () -> T): LiveData<T> {
     }
     return result
 }
+
+/**
+ * Converts a measurement from DP to onscreen pixels, uses the system density
+ */
+fun dpToPx(dp: Int) =  (dp * Resources.getSystem().displayMetrics.density).toInt()

@@ -32,6 +32,7 @@ class Item(
         val rarity: Int,
         val buy_price: Int?,
         val sell_price: Int,
+        val points: Int,
         val carry_limit: Int?
 ): ItemBase(id, name, icon_name, icon_color, category)
 

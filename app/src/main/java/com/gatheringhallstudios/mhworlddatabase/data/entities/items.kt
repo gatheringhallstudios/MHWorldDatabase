@@ -17,6 +17,7 @@ class ItemEntity(
         val rarity: Int,
         val buy_price: Int?,
         val sell_price: Int,
+        val points: Int,
         val carry_limit: Int?,
         val icon_name: String?,
         val icon_color: String?

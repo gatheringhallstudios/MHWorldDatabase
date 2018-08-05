@@ -6,8 +6,7 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
-
-fun dpToPx(dp: Int) =  (dp * Resources.getSystem().displayMetrics.density).toInt()
+import com.gatheringhallstudios.mhworlddatabase.util.dpToPx
 
 /**
  * A custom drawable used to draw dashed dividers.

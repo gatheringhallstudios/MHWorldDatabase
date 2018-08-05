@@ -8,19 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import android.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v7.widget.Toolbar;
-
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 import kotlinx.android.synthetic.main.fragment_item_summary.*
-import kotlinx.android.synthetic.main.listitem_item_data_summary.*
 
 /**
  * Binds item data values from the itemView object to the view
@@ -52,9 +46,19 @@ class ItemSummaryFragment : Fragment() {
         item_header.setTitleText(item.name)
         item_header.setDescriptionText(item.description)
 
+        rarity_value.setTextColor(AssetLoader.loadRarityColor(item.rarity))
+        rarity_value.text = getString(R.string.rarity_string, item.rarity)
+
         buy_price_value.text = evaluateValue(item.buy_price)
-        sell_price_value.text = evaluateValue(item.sell_price)
         carry_capacity_value.text = evaluateValue(item.carry_limit)
-        rarity_value.text = evaluateValue(item.rarity)
+
+        // Set sell value. Swaps to research points if research points are available
+        if (item.sell_price == 0 && item.points > 0) {
+            sell_price_value.text = item.points.toString()
+            sell_price_icon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_research_points))
+        } else {
+            sell_price_value.text = evaluateValue(item.sell_price)
+        }
+
     }
 }

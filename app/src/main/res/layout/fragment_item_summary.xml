@@ -17,29 +17,140 @@
             tools:titleText="Azure Rathalos"
             tools:descriptionText="An azure-colored subspecies of Rathalos. More mobile than their standard cousins, they locate prey from the air and quickly swoop in for the kill." />
 
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/item_data_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:labelText="@string/header_item_data"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_header" >
-
-        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
-
-        <LinearLayout
-            android:id="@+id/item_data_layout"
+        <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
+            android:id="@+id/divider_1"
             android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_header"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/vertical_halfway_guide"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@id/item_data_header"
-            app:layout_constraintTop_toBottomOf="@+id/item_data_header">
+            app:layout_constraintGuide_percent="0.5"/>
 
-            <include layout="@layout/listitem_item_data_summary" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/rarity_value"
+            style="@style/TextBodyHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_1"
+            app:layout_constraintBottom_toTopOf="@id/divider_2"
+            tools:text="Rare 5" />
+
+        <TextView
+            android:id="@+id/buy_price_label"
+            style="@style/TextBodyHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/vertical_halfway_guide"
+            app:layout_constraintTop_toBottomOf="@id/divider_1"
+            app:layout_constraintBottom_toTopOf="@id/divider_2"
+            android:text="@string/items_buy_price"/>
+
+        <TextView
+            android:id="@+id/buy_price_value"
+            style="@style/TextBodyHigh"
+            android:layout_width="70sp"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toEndOf="@id/buy_price_label"
+            app:layout_constraintBaseline_toBaselineOf="@id/buy_price_label"
+            android:textSize="16sp"
+            tools:text="30000" />
+
+        <ImageView
+            android:id="@+id/buy_price_icon"
+            style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_zenny"
+            android:layout_marginStart="@dimen/margin_medium"
+            app:layout_constraintStart_toEndOf="@id/buy_price_value"
+            app:layout_constraintTop_toBottomOf="@id/divider_1"
+            app:layout_constraintBottom_toTopOf="@id/divider_2" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
+            android:id="@+id/divider_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/row_height_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_1"/>
+
+        <TextView
+            android:id="@+id/carry_capacity_label"
+            style="@style/TextBodyHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_2"
+            app:layout_constraintBottom_toTopOf="@id/divider_3"
+            android:text="@string/items_carry_capacity" />
+
+        <TextView
+            android:id="@+id/carry_capacity_value"
+            style="@style/TextBodyHigh"
+            android:layout_width="48sp"
+            android:textAlignment="textEnd"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/carry_capacity_label"
+            app:layout_constraintBaseline_toBaselineOf="@id/carry_capacity_label"
+            tools:text="999" />
+
+        <ImageView
+            android:id="@+id/carry_icon"
+            style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_item_box"
+            android:layout_marginStart="@dimen/margin_medium"
+            app:layout_constraintStart_toEndOf="@id/carry_capacity_value"
+            app:layout_constraintTop_toBottomOf="@id/divider_2"
+            app:layout_constraintBottom_toTopOf="@id/divider_3" />
+
+        <TextView
+            android:id="@+id/sell_price_label"
+            style="@style/TextBodyHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/vertical_halfway_guide"
+            app:layout_constraintTop_toBottomOf="@id/divider_2"
+            app:layout_constraintBottom_toTopOf="@id/divider_3"
+            android:text="@string/items_sell_price"/>
+
+
+        <TextView
+            android:id="@+id/sell_price_value"
+            style="@style/TextBodyHigh"
+            android:layout_width="70sp"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toEndOf="@id/sell_price_label"
+            app:layout_constraintBaseline_toBaselineOf="@id/sell_price_label"
+            android:textSize="16sp"
+            tools:text="30000" />
+
+        <ImageView
+            android:id="@+id/sell_price_icon"
+            style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_zenny"
+            android:layout_marginStart="@dimen/margin_medium"
+            app:layout_constraintStart_toEndOf="@id/sell_price_value"
+            app:layout_constraintTop_toBottomOf="@id/divider_2"
+            app:layout_constraintBottom_toTopOf="@id/divider_3" />
+
+        <!-- artificial divider 3 to form a constraint (INVISIBLE) -->
+        <View
+            android:id="@+id/divider_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/row_height_small"
+            app:layout_constraintTop_toBottomOf="@id/divider_2"
+            android:background="@android:color/transparent"/>
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

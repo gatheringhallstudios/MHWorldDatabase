@@ -57,9 +57,9 @@
 
     <!-- Items -->
     <string name="items_title">Items</string>
-    <string name="items_buy_price">Buy price</string>
-    <string name="items_sell_price">Sell price</string>
-    <string name="items_carry_capacity">Carry capacity</string>
+    <string name="items_buy_price">Buy</string>
+    <string name="items_sell_price">Sell</string>
+    <string name="items_carry_capacity">Carry</string>
     <string name="items_rarity">Rarity</string>
 
     <string name="items_tab_item">Items</string>
