@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.*
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_armor_summary.*
 import kotlinx.android.synthetic.main.fragment_armor_summary.view.*
@@ -44,8 +45,7 @@ class ArmorDetailFragment : Fragment() {
     private fun populateArmor(armorData: ArmorFull?) {
         if (armorData == null) return
 
-        (activity as AppCompatActivity).supportActionBar?.title = armorData.armor.name
-
+        setActivityTitle(armorData.armor.name)
         populateArmorBasic(armorData.armor)
         populateSkills(armorData.skills)
         populateSetBonuses(armorData.setBonuses)
