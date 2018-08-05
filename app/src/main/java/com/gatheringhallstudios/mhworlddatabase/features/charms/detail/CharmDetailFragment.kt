@@ -17,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_charm_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
@@ -49,11 +50,11 @@ class CharmDetailFragment : Fragment() {
 
         val charm = charmData.charm
 
-        (activity as AppCompatActivity).supportActionBar?.title = charm.name
-
+        setActivityTitle(charm.name)
         charm_header.setIconDrawable(AssetLoader.loadIconFor(charm))
         charm_header.setTitleText(charm.name)
         charm_header.setSubtitleText(getString(R.string.rarity_string, charm.rarity))
+        charm_header.setSubtitleColor(AssetLoader.loadRarityColor(charm.rarity))
 
         previous_item_layout.removeAllViews()
         insertEmptyState(previous_item_layout)

@@ -8,6 +8,8 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.MonsterRewardAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterReward
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -37,40 +39,33 @@ class MonsterRewardFragment : RecyclerViewFragment() {
         ViewModelProviders.of(parentFragment!!).get(MonsterDetailViewModel::class.java)
     }
 
-    /**
-     * The rank pertaining to this reward fragment
-     */
-    private var rank : Rank? = null
-
-    private val adapter = CategoryAdapter(
-            MonsterRewardAdapterDelegate {
-                getRouter().navigateItemDetail(it.item.id)
-            }
-    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Setup Adapter to display rewards and headers
+        val adapter = CategoryAdapter(
+                MonsterRewardAdapterDelegate {
+                    getRouter().navigateItemDetail(it.item.id)
+                })
         this.setAdapter(adapter)
 
+        // Add divider
+        recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
+
+        // Get the rank. We filter by this field once we retrieve the results
+        val rank = arguments?.getSerializable(ARG_RANK) as Rank?
+
         // Load data
-        rank = arguments?.getSerializable(ARG_RANK) as Rank?
-        viewModel.rewards.observe(this, Observer(::setItems))
-    }
+        viewModel.rewards.observe(this, Observer { rewards ->
+            adapter.clear()
+            if (rewards == null) return@Observer
 
-    /**
-     * Set the rewards to be displayed in the fragment
-     * @param rewards items be of type Reward.
-     */
-    fun setItems(rewards: List<MonsterReward>?) {
-        adapter.clear()
-        if (rewards == null) return
+            val grouped = rewards.asSequence()
+                    .filter { it.rank == rank || rank == null }
+                    .groupBy { it.condition_name }
 
-        val grouped = rewards.asSequence()
-                .filter { it.rank == rank || rank == null }
-                .groupBy { it.condition_name }
-
-        for ((condition, value) in grouped) {
-            adapter.addSubSection(condition!!, value)
-        }
+            for ((condition, value) in grouped) {
+                adapter.addSubSection(condition!!, value)
+            }
+        })
     }
 }

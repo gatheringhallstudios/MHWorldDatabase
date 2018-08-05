@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Item
+import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 
 import kotlinx.android.synthetic.main.fragment_item_summary.*
 import kotlinx.android.synthetic.main.listitem_item_data_summary.*
@@ -44,7 +45,7 @@ class ItemSummaryFragment : Fragment() {
     private fun populateItem(item: Item?) {
         if (item == null) return
 
-        (activity as AppCompatActivity).supportActionBar?.title = item.name
+        setActivityTitle(item.name)
 
         //Set the summary information
         item_header.setIconDrawable(AssetLoader.loadIconFor(item))
