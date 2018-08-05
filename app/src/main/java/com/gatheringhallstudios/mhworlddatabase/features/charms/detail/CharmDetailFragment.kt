@@ -54,6 +54,7 @@ class CharmDetailFragment : Fragment() {
         charm_header.setIconDrawable(AssetLoader.loadIconFor(charm))
         charm_header.setTitleText(charm.name)
         charm_header.setSubtitleText(getString(R.string.rarity_string, charm.rarity))
+        charm_header.setSubtitleColor(AssetLoader.loadRarityColor(charm.rarity))
 
         previous_item_layout.removeAllViews()
         insertEmptyState(previous_item_layout)

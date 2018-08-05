@@ -95,6 +95,10 @@ class DetailHeaderCell : ConstraintLayout {
         header_subtitle.text = subtitleText
     }
 
+    fun setSubtitleColor(color: Int) {
+        header_subtitle.setTextColor(color)
+    }
+
     /**
      * Removes the decorator around the icon.
      * TODO Make this an instantiation flag if necessary
