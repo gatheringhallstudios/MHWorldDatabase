@@ -34,15 +34,15 @@
             android:title="@string/charms_title" />
         <item
             android:id="@+id/locationListDestination"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_ui_map"
             android:title="@string/locations_title" />
     </group>
 
     <item android:title="Other">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_ui_mascot"
                 android:title="About" />
         </menu>
     </item>
