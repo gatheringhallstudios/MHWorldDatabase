@@ -17,7 +17,7 @@
         android:id="@+id/weapon_image"
         style="@style/IconLarge.Decorated"
         android:layout_marginTop="@dimen/margin_small"
-        android:src="@drawable/ic_question_mark"
+        android:src="@xml/ic_ui_question_mark_base"
         app:layout_constraintBottom_toBottomOf="@id/basic_stat_layout"
         app:layout_constraintTop_toBottomOf="@id/weapon_name" />
 
@@ -36,7 +36,7 @@
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:iconSrc="@drawable/ic_question_mark"
+            app:iconSrc="@xml/ic_ui_question_mark_base"
             app:labelText="240" />
 
         <com.ghstudios.android.ui.general.SharpnessView
@@ -64,15 +64,15 @@
 
         <ImageView
             style="@style/IconXSmall"
-            android:src="@drawable/ic_question_mark" />
+            android:src="@xml/ic_ui_question_mark_base" />
 
         <ImageView
             style="@style/IconXSmall"
-            android:src="@drawable/ic_question_mark" />
+            android:src="@xml/ic_ui_question_mark_base" />
 
         <ImageView
             style="@style/IconXSmall"
-            android:src="@drawable/ic_question_mark" />
+            android:src="@xml/ic_ui_question_mark_base" />
 
     </LinearLayout>
 
@@ -90,19 +90,19 @@
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:iconSrc="@drawable/ic_question_mark"
+            app:iconSrc="@xml/ic_ui_question_mark_base"
             app:labelText="252" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:iconSrc="@drawable/ic_question_mark"
+            app:iconSrc="@xml/ic_ui_question_mark_base"
             app:labelText="20" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:iconSrc="@drawable/ic_question_mark"
+            app:iconSrc="@xml/ic_ui_question_mark_base"
             app:labelText="10%" />
     </LinearLayout>
 

@@ -16,7 +16,7 @@
             android:id="@+id/armor_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:iconSrc="@drawable/ic_question_mark"
+            tools:iconSrc="@xml/ic_ui_question_mark_base"
             tools:titleText="Azure Rathalos"
             tools:descriptionText=""/>
 
