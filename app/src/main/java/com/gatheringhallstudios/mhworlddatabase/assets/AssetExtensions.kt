@@ -90,5 +90,5 @@ fun Context.getVectorDrawable(
     }
 
     // Return a version that caches draw results
-    return CachedDrawable(modifiedVector)
+    return CachedDrawable(modifiedVector, key="$vectorName-$color")
 }

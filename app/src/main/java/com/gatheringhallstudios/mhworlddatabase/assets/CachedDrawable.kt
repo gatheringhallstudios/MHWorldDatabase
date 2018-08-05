@@ -40,8 +40,8 @@ inline fun <K, V> LruCache<K, V>.getOrPut(key: K, build: () -> V): V {
  * A wrapper over a drawable that caches the draw result to a bitmap,
  * and reuses the bitmap so long as it remains in the cache.
  */
-class CachedDrawable(innerDrawable: Drawable) : DrawableWrapper(innerDrawable) {
-    private val cacheId = UUID.randomUUID().toString()
+class CachedDrawable(innerDrawable: Drawable, key: String? = null) : DrawableWrapper(innerDrawable) {
+    private val cacheId = key ?: UUID.randomUUID().toString()
 
     override fun draw(canvas: Canvas?) {
         if (canvas == null) return
