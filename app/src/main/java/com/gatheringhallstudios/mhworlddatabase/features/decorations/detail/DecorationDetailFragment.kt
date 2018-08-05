@@ -45,10 +45,10 @@ class DecorationDetailFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = decoration.name
 
         val icon = AssetLoader.loadIconFor(decoration)
-        decoration_icon.setImageDrawable(icon)
-        decoration_name.text = decoration.name
-        decoration_description.text = getString(R.string.rarity_string, decoration.rarity)
-        decoration_description.setTextColor(AssetLoader.loadRarityColor(decoration.rarity))
+        decoration_header.setIconDrawable(icon)
+        decoration_header.setTitleText(decoration.name)
+        decoration_header.setSubtitleText(getString(R.string.rarity_string, decoration.rarity))
+        decoration_header.setSubtitleColor(AssetLoader.loadRarityColor(decoration.rarity))
 
         mysterious_feystone_chance_value.text = getString(R.string.percentage, decoration.mysterious_feystone_chance)
         gleaming_feystone_chance_value.text = getString(R.string.percentage, decoration.glowing_feystone_chance)
