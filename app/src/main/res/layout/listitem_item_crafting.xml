@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@xml/ic_ui_question_mark_base" />
+        tools:src="@drawable/ic_ui_question_mark_white" />
 
     <TextView
         android:id="@+id/result_name"
@@ -73,7 +73,7 @@
             android:id="@+id/item1_icon"
             style="@style/IconXSmall.Decorated"
             android:layout_marginStart="@dimen/margin_medium"
-            tools:src="@xml/ic_ui_question_mark_base" />
+            tools:src="@drawable/ic_ui_question_mark_white" />
     </LinearLayout>
 
     <LinearLayout
@@ -103,7 +103,7 @@
             android:id="@+id/item2_icon"
             style="@style/IconXSmall.Decorated"
             android:layout_marginStart="@dimen/margin_medium"
-            tools:src="@xml/ic_ui_question_mark_base" />
+            tools:src="@drawable/ic_ui_question_mark_white" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -10,7 +10,7 @@
         android:id="@+id/reward_icon"
         style="@style/IconMedium.Decorated"
         android:layout_marginStart="@dimen/margin_large"
-        android:src="@xml/ic_ui_question_mark_base"
+        android:src="@drawable/ic_ui_question_mark_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
