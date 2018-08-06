@@ -38,6 +38,15 @@ open class RecyclerViewFragment : Fragment() {
         recycler_view.adapter = adapter
     }
 
+    /**
+     * Shows the empty view instead of the recycler view.
+     * There is no way to revert. Only call this once you're SURE there is no data.
+     */
+    fun showEmptyView() {
+        recycler_view.visibility = View.GONE
+        empty_view.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 

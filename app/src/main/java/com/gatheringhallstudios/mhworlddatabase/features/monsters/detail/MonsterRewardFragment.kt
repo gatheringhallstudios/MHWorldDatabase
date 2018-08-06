@@ -55,13 +55,18 @@ class MonsterRewardFragment : RecyclerViewFragment() {
         val rank = arguments?.getSerializable(ARG_RANK) as Rank?
 
         // Load data
-        viewModel.rewards.observe(this, Observer { rewards ->
+        viewModel.getRewardsForRank(rank).observe(this, Observer { rewards ->
             adapter.clear()
-            if (rewards == null) return@Observer
+            if (rewards == null) {
+                return@Observer
+            }
 
-            val grouped = rewards.asSequence()
-                    .filter { it.rank == rank || rank == null }
-                    .groupBy { it.condition_name }
+            if (rewards.isEmpty()) {
+                showEmptyView()
+                return@Observer
+            }
+
+            val grouped = rewards.groupBy { it.condition_name }
 
             for ((condition, value) in grouped) {
                 adapter.addSubSection(condition!!, value)

@@ -3,10 +3,16 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Transformations
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
+
+private fun filterRank(items: List<MonsterReward>, rank: Rank): List<MonsterReward> {
+    return items.filter { it.rank == rank }
+}
 
 /**
  * A ViewModel for any monster summary fragment
@@ -37,5 +43,15 @@ class MonsterDetailViewModel(application: Application) : AndroidViewModel(applic
         rewards = dao.loadRewards(lang, monsterId)
         hitzones = dao.loadHitzones(lang, monsterId)
         breaks = dao.loadBreaks(lang, monsterId)
+    }
+
+    /**
+     * Returns a livedata containing a list of rewards for that rank.
+     * If rank is null, returns all rewards regardless of rank
+     */
+    fun getRewardsForRank(rank: Rank?): LiveData<List<MonsterReward>> = when (rank) {
+        null -> rewards
+        Rank.LOW -> Transformations.map(rewards) { filterRank(it, Rank.LOW) }
+        Rank.HIGH -> Transformations.map(rewards) { filterRank(it, Rank.HIGH) }
     }
 }
