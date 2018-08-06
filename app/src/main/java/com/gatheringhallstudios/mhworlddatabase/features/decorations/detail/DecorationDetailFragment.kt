@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
@@ -46,7 +48,7 @@ class DecorationDetailFragment : Fragment() {
 
         setActivityTitle(decoration.name)
 
-        decoration_skill_list.removeAllViews()
+        decoration_drop_list.removeAllViews()
 
         val icon = AssetLoader.loadIconFor(decoration)
         decoration_header.setIconDrawable(icon)

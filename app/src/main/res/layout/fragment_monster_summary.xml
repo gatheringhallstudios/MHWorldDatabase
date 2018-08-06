@@ -33,7 +33,9 @@
             android:id="@+id/element_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:divider="@drawable/divider_solid"
             android:orientation="vertical"
+            android:showDividers="middle"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/status_layout"
@@ -42,7 +44,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/fire_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_element_fire"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
@@ -50,7 +52,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/water_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_element_water"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
@@ -58,7 +60,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/lightning_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_element_thunder"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="3" />
@@ -66,7 +68,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/ice_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_element_ice"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
@@ -74,7 +76,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/dragon_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_element_dragon"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
@@ -85,7 +87,9 @@
             android:id="@+id/status_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:divider="@drawable/divider_solid"
             android:orientation="vertical"
+            android:showDividers="middle"
             app:layout_constraintLeft_toRightOf="@id/element_layout"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/weakness_header">
@@ -93,7 +97,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/poison_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_status_poison"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
@@ -101,7 +105,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/sleep_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_status_sleep"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="2" />
@@ -109,7 +113,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/paralysis_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_status_paralysis"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
@@ -117,7 +121,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/blast_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_status_blast"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
@@ -125,7 +129,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                 android:id="@+id/stun_star_cell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/row_height_small"
                 app:iconSrc="@drawable/ic_status_stun"
                 app:layout_constraintRight_toRightOf="parent"
                 app:numStars="1" />
@@ -143,8 +147,8 @@
             android:id="@+id/habitats_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:divider="@drawable/divider_stroke"
+            android:orientation="vertical"
             android:showDividers="middle"
             app:layout_constraintTop_toBottomOf="@id/habitat_header">
 
@@ -154,18 +158,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                tools:iconSrc="@drawable/ic_ui_question_mark_white"
                 app:labelText="Ancient Forest"
                 app:valueText="12 > 1, 4, 2, 6 > 12"
+                tools:iconSrc="@drawable/ic_ui_question_mark_white"
                 tools:visibility="visible" />
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                tools:iconSrc="@drawable/ic_ui_question_mark_white"
                 app:labelText="Elders Recess"
                 app:valueText="8 > 13, 5, 2 > 7"
+                tools:iconSrc="@drawable/ic_ui_question_mark_white"
                 tools:visibility="visible" />
 
         </LinearLayout>
