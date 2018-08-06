@@ -4,15 +4,14 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import com.gatheringhallstudios.mhworlddatabase.adapters.LocationItemsAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
-import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
+ * UNUSED
  * A sub-fragment that contains the list of items available to gather at a location.
  */
 class LocationGatheringListFragment : RecyclerViewFragment() {
@@ -20,14 +19,12 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
         ViewModelProviders.of(parentFragment!!).get(LocationDetailViewModel::class.java)
     }
 
-    private val adapter = CategoryAdapter(LocationItemsAdapterDelegate {
-        getRouter().navigateItemDetail(it.item.id)
-    })
+    private val adapter = CategoryAdapter(LocationItemsAdapterDelegate())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
-        
+
         viewModel.locationItems.observe(this, Observer(::setItems))
     }
 

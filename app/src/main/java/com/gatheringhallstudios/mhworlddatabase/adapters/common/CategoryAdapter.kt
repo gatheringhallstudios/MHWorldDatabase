@@ -5,14 +5,26 @@ import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
 
+// Consider making a nested list data structure with linear traversal
+// Much of the code below and future changes, including updating "in place", will become easier like that.
+
 /**
  * Defines an interface for a "section" of the CategoryAdapter.
  * This might eventually be extended to support collapsing.
  * Note: AdapterSection live updating is untested. Beware of potential errors.
  */
-interface AdapterSection {
-    val size: Int
-    fun update(items: List<Any>)
+class AdapterSection internal constructor (val parent: CategoryAdapter, val header: Any?, val items: Collection<Any>){
+    val size: Int get() = displayedItems.size
+
+    val displayedItems by lazy  {
+        val results = mutableListOf<Any>()
+        if (header != null) {
+            results.add(header)
+        }
+        results.addAll(items)
+
+        results
+    }
 }
 
 /**
@@ -23,7 +35,7 @@ interface AdapterSection {
 class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val delegatesManager = AdapterDelegatesManager<List<Any>>()
 
-    private val sections = ArrayList<Section>()
+    private val sections = ArrayList<AdapterSection>()
     private val items = ArrayList<Any>()
 
     init {
@@ -44,10 +56,16 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
     /**
      * Internal method. Handles adding the section to the list
      */
-    private fun addSectionInner(section: Section) {
+    private fun addSectionInner(section: AdapterSection) {
         this.sections.add(section)
-        section.addSelfTo(items)
+        this.items.addAll(section.displayedItems)
         notifyItemRangeInserted(items.size - section.size, section.size)
+    }
+
+    fun addSection(items: Collection<Any>): AdapterSection {
+        val section = AdapterSection(this, null, items)
+        addSectionInner(section)
+        return section
     }
 
     /**
@@ -56,7 +74,7 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
      * @param items the items under that section header
      */
     fun addSection(name: String, items: Collection<Any>): AdapterSection {
-        val section = Section(SectionHeader(name), items)
+        val section = AdapterSection(this, SectionHeader(name), items)
         addSectionInner(section)
         return section
     }
@@ -80,7 +98,7 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
      * @param items the items under that section header
      */
     fun addSubSection(name: String, items: Collection<Any>): AdapterSection {
-        val section = Section(SubHeader(name), items)
+        val section = AdapterSection(this, SubHeader(name), items)
         addSectionInner(section)
         return section
     }
@@ -106,6 +124,34 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
         }
     }
 
+//    May be enabled and tweaked if we ever implement collapse / expand
+//    private fun notifySectionUpdated(section: AdapterSection) {
+//        // references to parent objects
+//        val parentSections = this@CategoryAdapter.sections
+//        val parentItems = this@CategoryAdapter.items
+//
+//        val sectionIndex = parentSections.indexOf(this)
+//
+//        // figure out how much of the list doesn't have to change
+//        // delete everything after (we'll add it back soon)
+//        val previousSections = parentSections.subList(0, sectionIndex)
+//        val firstIdx = previousSections.sumBy { it.size }
+//        parentItems.subList(firstIdx, parentItems.size).clear()
+//
+//        // store a reference to the previous size
+//        val previousSize = this.items.size
+//        this.items = items
+//
+//        // add everything back
+//        for (section in parentSections.subList(sectionIndex, parentSections.size)) {
+//            section.addSelfTo(parentItems)
+//        }
+//
+//        // send notifications
+//        notifyItemRangeRemoved(firstIdx, previousSize)
+//        notifyItemRangeInserted(firstIdx, items.size)
+//    }
+
     override fun getItemViewType(position: Int): Int {
         return delegatesManager.getItemViewType(items, position)
     }
@@ -120,41 +166,5 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         return delegatesManager.onBindViewHolder(items, position, holder)
-    }
-
-    inner class Section(val header: Any, var items: Collection<Any> = emptyList()): AdapterSection {
-        override val size get() = 1 + items.size
-
-        override fun update(items: List<Any>) {
-            // references to parent objects
-            val parentSections = this@CategoryAdapter.sections
-            val parentItems = this@CategoryAdapter.items
-
-            val sectionIndex = parentSections.indexOf(this)
-
-            // figure out how much of the list doesn't have to change
-            // delete everything after (we'll add it back soon)
-            val previousSections = parentSections.subList(0, sectionIndex)
-            val firstIdx = previousSections.sumBy { it.size }
-            parentItems.subList(firstIdx, parentItems.size).clear()
-
-            // store a reference to the previous size
-            val previousSize = this.items.size
-            this.items = items
-
-            // add everything back
-            for (section in parentSections.subList(sectionIndex, parentSections.size)) {
-                section.addSelfTo(parentItems)
-            }
-
-            // send notifications
-            notifyItemRangeRemoved(firstIdx, previousSize)
-            notifyItemRangeInserted(firstIdx, items.size)
-        }
-
-        fun addSelfTo(aggregate: MutableList<Any>) {
-            aggregate.add(header)
-            aggregate.addAll(items)
-        }
     }
 }
