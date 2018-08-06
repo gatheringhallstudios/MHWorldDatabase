@@ -6,7 +6,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetai
 import com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment
-import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
@@ -37,7 +37,7 @@ class Router(private val navController: NavController) {
     fun navigateLocationDetail(locationId: Int) {
         navController.navigate(
                 R.id.openLocationDetailAction,
-                BundleBuilder().putInt(LocationDetailPagerFragment.ARG_LOCATION_ID, locationId).build())
+                BundleBuilder().putInt(LocationSummaryFragment.ARG_LOCATION_ID, locationId).build())
     }
 
     fun navigateMonsterDetail(monsterId: Int) {

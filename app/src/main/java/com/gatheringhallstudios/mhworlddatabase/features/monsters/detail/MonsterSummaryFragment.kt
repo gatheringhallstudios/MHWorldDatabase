@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -97,6 +98,7 @@ class MonsterSummaryFragment : Fragment() {
             habitat.rest_area?.let { areas.append(it) }
 
             val icon = AssetLoader.loadIconFor(habitat.location)
+            view.setLeftIconType(IconType.PAPER)
             view.setLeftIconDrawable(icon)
             view.setLabelText(habitat.location.name)
             view.setValueText(areas.toString())

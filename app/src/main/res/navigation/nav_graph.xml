@@ -101,7 +101,7 @@
 
     <fragment
         android:id="@+id/locationDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationDetailPagerFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment"
         android:label="Location Detail"
         tools:layout="@layout/fragment_generic_pager"></fragment>
     <action

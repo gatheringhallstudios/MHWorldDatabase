@@ -94,6 +94,10 @@ public class IconLabelTextCell extends ConstraintLayout{
         invalidate();
     }
 
+    public void setLeftIconType(IconType type) {
+        IconTypeFn.applyIconType(imageView, type);
+    }
+
     public void setLabelText(String labelText) {
         labelView.setText(labelText);
     }

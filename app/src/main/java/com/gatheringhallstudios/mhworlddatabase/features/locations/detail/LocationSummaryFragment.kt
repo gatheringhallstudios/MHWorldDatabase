@@ -10,38 +10,38 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
+import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import kotlinx.android.synthetic.main.fragment_location_summary.*
 
 /**
  * Fragment for displaying Location Summary
  */
-class LocationSummaryFragment : Fragment() {
+class LocationSummaryFragment : RecyclerViewFragment() {
+    companion object {
+        const val ARG_LOCATION_ID = "LOCATION_ID"
+    }
 
     private val viewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(LocationDetailViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstance: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_location_summary, parent, false)
-    }
-
     override fun onViewCreated(view:View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val locationId = arguments?.getInt(ARG_LOCATION_ID) ?: -1
+        viewModel.setLocation(locationId)
 
-        viewModel.location.observe(this, Observer(::populateLocation))
-    }
+        val adapter = LocationDetailAdapterWrapper()
+        setAdapter(adapter.adapter)
 
-    private fun populateLocation(location: Location?) {
-        if(location == null) return
+        viewModel.location.observe(this, Observer {
+            if (it != null) {
+                adapter.bindLocation(it)
+            }
+        })
 
-        val ctx = view?.context
-        val defaultIcon = R.drawable.ic_question_mark
-        //Because the location screenshot is not available in the database
-        val path : String = "locations/" + location.name?.replace(" ", "-")?.toLowerCase() + ".jpg";
-        val icon = ctx?.getAssetDrawable(path, defaultIcon)
-
-        location_name.text = location.name
-        location_icon.setImageDrawable(icon)
-
+        viewModel.locationItems.observe(this, Observer {
+            if (it != null) {
+                adapter.bindItems(context!!, it)
+            }
+        })
     }
 }

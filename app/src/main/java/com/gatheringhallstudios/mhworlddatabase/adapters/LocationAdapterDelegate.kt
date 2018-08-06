@@ -8,6 +8,8 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.components.IconType
+import com.gatheringhallstudios.mhworlddatabase.components.applyIconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 import kotlinx.android.synthetic.main.listitem_large.*
 
@@ -25,6 +27,7 @@ class LocationAdapterDelegate(private val onSelected: (Location) -> Unit): Simpl
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Location) {
         val icon = AssetLoader.loadIconFor(data)
+        viewHolder.item_icon.applyIconType(IconType.PAPER)
         viewHolder.item_icon.setImageDrawable(icon)
         viewHolder.item_name.text = data.name
         viewHolder.itemView.setOnClickListener { onSelected(data) }

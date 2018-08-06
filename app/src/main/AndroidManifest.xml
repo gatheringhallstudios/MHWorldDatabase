@@ -3,6 +3,7 @@
     package="com.gatheringhallstudios.mhworlddatabase">
 
     <application
+        android:name="com.gatheringhallstudios.mhworlddatabase.MhwApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

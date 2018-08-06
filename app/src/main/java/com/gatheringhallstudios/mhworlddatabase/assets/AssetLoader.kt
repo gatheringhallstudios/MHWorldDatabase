@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine
 @SuppressLint("StaticFieldLeak")
@@ -27,7 +28,7 @@ object AssetLoader {
     }
 
     fun loadIconFor(location: Location): Drawable? {
-        return ctx.getAssetDrawable("locations/${location.id}.jpg")
+        return ctx.getDrawableCompat(LocationDrawableRegistry(location.id))
     }
 
     fun loadIconFor(monster: MonsterBase): Drawable? {

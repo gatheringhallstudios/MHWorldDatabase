@@ -7,6 +7,8 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.components.IconType
+import com.gatheringhallstudios.mhworlddatabase.components.applyIconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemReward
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
@@ -31,6 +33,7 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation>() {
     override fun bindView(viewHolder: SimpleViewHolder, data: ItemLocation) {
         val ctx = viewHolder.context
 
+        viewHolder.reward_icon.applyIconType(IconType.PAPER)
         viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.location))
         viewHolder.reward_name.text = ctx.getString(R.string.location_area, data.area)
         viewHolder.reward_stack.text = ctx.getString(R.string.quantity, data.stack)
