@@ -204,10 +204,10 @@
                 android:id="@+id/armor_skill_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-
                 android:divider="@drawable/divider_stroke"
-                android:showDividers="middle"/>
+
+                android:orientation="vertical"
+                android:showDividers="middle" />
         </LinearLayout>
 
         <LinearLayout
