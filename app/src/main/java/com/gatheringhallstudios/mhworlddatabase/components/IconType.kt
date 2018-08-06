@@ -6,6 +6,7 @@ package com.gatheringhallstudios.mhworlddatabase.components
  */
 enum class IconType {
     NORMAL,
+    PAPER,
     EMBELLISHED,
     ZEMBELLISHED
 }

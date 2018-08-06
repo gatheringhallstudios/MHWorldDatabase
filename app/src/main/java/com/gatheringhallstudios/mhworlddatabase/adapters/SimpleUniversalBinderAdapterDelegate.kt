@@ -58,6 +58,7 @@ class SimpleUniversalBinderAdapterDelegate: SimpleListDelegate<SimpleUniversalBi
         val resources = viewHolder.resources
         val padding = when (result.iconType) {
             IconType.NORMAL -> 0f
+            IconType.PAPER -> 0f
             IconType.EMBELLISHED -> resources.getDimension(R.dimen.icon_padding_medium_decorated)
             IconType.ZEMBELLISHED -> resources.getDimension(R.dimen.icon_padding_medium_zembellished)
         }.toInt()
@@ -67,6 +68,7 @@ class SimpleUniversalBinderAdapterDelegate: SimpleListDelegate<SimpleUniversalBi
             setPadding(padding, padding, padding, padding)
             when (result.iconType) {
                 IconType.NORMAL -> background = null
+                IconType.PAPER -> setBackgroundResource(R.drawable.bg_icon_decorator_paper)
                 IconType.EMBELLISHED -> setBackgroundResource(R.drawable.bg_icon_decorator)
                 IconType.ZEMBELLISHED -> setBackgroundResource(R.drawable.ic_decorator_zembelish)
             }

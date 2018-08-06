@@ -37,7 +37,7 @@ fun createLocationBinder(location: Location) = createSimpleUniversalBinder { ctx
     val name = location.name
     val typeString = ctx.getString(R.string.type_location)
 
-    SimpleUniversalBinding(name, typeString, IconType.NORMAL, icon) {
+    SimpleUniversalBinding(name, typeString, IconType.PAPER, icon) {
         it.getRouter().navigateLocationDetail(location.id)
     }
 }
