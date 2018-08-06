@@ -1,14 +1,37 @@
 package com.gatheringhallstudios.mhworlddatabase.common
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 
 import kotlinx.android.synthetic.main.list_generic.*
+
+/**
+ * A special version of a recyclerview that updates the adapter
+ * to null when it is detatched from the window.
+ * Used internally by the RecyclerViewFragment.
+ * Do not use for nested recyclerviews.
+ */
+class DetachingRecyclerView : RecyclerView {
+    constructor(context: Context): super(context)
+
+    constructor(context: Context, attrs: AttributeSet?):
+            super(context, attrs)
+
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int):
+            super(context, attrs, defStyle)
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        adapter = null
+    }
+}
 
 /**
  * Creates a fragment that contains a recyclerview.
@@ -45,14 +68,5 @@ open class RecyclerViewFragment : Fragment() {
     fun showEmptyView() {
         recycler_view.visibility = View.GONE
         empty_view.visibility = View.VISIBLE
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        // Removes the adapter from the recyclerview on destroy
-        // This also causes the adapter to unregister the view,
-        // which prevents a potential cyclical reference memory leak.
-        recycler_view.adapter = null
     }
 }
