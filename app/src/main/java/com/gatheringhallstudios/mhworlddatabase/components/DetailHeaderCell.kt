@@ -78,6 +78,13 @@ class DetailHeaderCell : ConstraintLayout {
         invalidate()
     }
 
+    /**
+     * Sets the icon decoration type
+     */
+    fun setIconType(type: IconType) {
+        header_icon.applyIconType(type)
+    }
+
     fun setTitleText(titleText: String?) {
         header_title.text = titleText
     }

@@ -76,6 +76,15 @@ val SetBonusNumberRegistry = fun(num: Int) = when(num) {
     else -> 0
 }
 
+val LocationDrawableRegistry = fun(id: Int) = when(id) {
+    1 -> R.drawable.ic_location_ancient_forest
+    2 -> R.drawable.ic_locations_wildspire_waste
+    3 -> R.drawable.ic_locations_coral_highlands
+    4 -> R.drawable.ic_locations_rotten_vale
+    5 -> R.drawable.ic_locations_elders_recess
+    else -> R.drawable.ic_ui_question_mark_paper
+}
+
 val ColorRegistry = createRegistry(
         "rare1" to R.color.icon_gray,
         "rare2" to R.color.icon_white,

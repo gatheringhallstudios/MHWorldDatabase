@@ -10,6 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -72,6 +73,7 @@ class LocationHeaderAdapterDelegate : SimpleListDelegate<Location>() {
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Location) {
         with (viewHolder.itemView as DetailHeaderCell) {
+            setIconType(IconType.PAPER)
             setIconDrawable(AssetLoader.loadIconFor(data))
             setTitleText(data.name)
         }
