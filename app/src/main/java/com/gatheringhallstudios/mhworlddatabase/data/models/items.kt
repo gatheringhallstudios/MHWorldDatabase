@@ -68,13 +68,21 @@ class ItemUsages(
         val craftRecipes: List<ItemCombination>,
         val charms: List<ItemUsageCharm>,
         val armor: List<ItemUsageArmor>
-)
+) {
+    fun isEmpty() = craftRecipes.isEmpty() && charms.isEmpty() && armor.isEmpty()
+}
 
+/**
+ * Represents all potential ways to obtain an item.
+ * TODO: Should probably include special acquisitions like purchasing as well?
+ */
 class ItemSources(
         val craftRecipes: List<ItemCombination>,
         val locations: List<ItemLocation>,
         val rewards: List<ItemReward>
-)
+) {
+    fun isEmpty() = craftRecipes.isEmpty() && locations.isEmpty() && rewards.isEmpty()
+}
 
 /**
  * The usage of an item to make a piece of armor. Item is assumed to be known

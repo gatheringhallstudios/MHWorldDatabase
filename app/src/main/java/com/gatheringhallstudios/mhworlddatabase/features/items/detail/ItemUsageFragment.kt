@@ -65,6 +65,10 @@ class ItemUsageFragment : RecyclerViewFragment() {
         if (data == null) {
             return
         }
+        if (data.isEmpty()) {
+            showEmptyView()
+            return
+        }
 
         adapter.addSections(mapOf(
                 getString(R.string.item_header_crafting) to data.craftRecipes,
