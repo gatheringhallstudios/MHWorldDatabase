@@ -81,8 +81,8 @@ public class IconStarCell extends LinearLayout {
             ImageView star = new ImageView(getContext());
 
             LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            int height = getResources().getDimensionPixelSize(R.dimen.image_size_small);
-            int width = getResources().getDimensionPixelSize(R.dimen.image_size_small);
+            int height = getResources().getDimensionPixelSize(R.dimen.image_size_xsmall);
+            int width = getResources().getDimensionPixelSize(R.dimen.image_size_xsmall);
 
             lp.height = height;
             lp.width = width;
