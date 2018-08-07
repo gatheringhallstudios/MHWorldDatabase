@@ -7,7 +7,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_footer_space">
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/physical_damage_header"
@@ -144,7 +145,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/padding_footer_space"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_data_header">
@@ -156,6 +156,45 @@
             <include layout="@layout/listitem_monster_hitzone" />
 
             <include layout="@layout/listitem_monster_hitzone" />
+
+        </LinearLayout>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/break_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            app:labelText="@string/header_break"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/element_damage_layout" />
+
+        <TextView
+            style="@style/TextBodyHigh"
+            android:layout_width="@dimen/width_extract_value"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_damage_value_right"
+            android:text="@string/monsters_damage_column_extract"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="@id/break_header"
+            app:layout_constraintBottom_toBottomOf="@id/break_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        
+        <LinearLayout
+            android:id="@+id/break_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/break_header">
+
+            <!-- These layouts are here for mock but will be deleted at runtime -->
+
+            <include layout="@layout/listitem_monster_break" />
+
+            <include layout="@layout/listitem_monster_break" />
 
         </LinearLayout>
 

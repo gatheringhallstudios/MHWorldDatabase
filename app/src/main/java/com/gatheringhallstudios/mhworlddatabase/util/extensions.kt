@@ -5,6 +5,7 @@ import android.arch.lifecycle.MediatorLiveData
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -72,4 +73,13 @@ fun <T, A, B, C> mergeLiveData(
 @Suppress("NOTHING_TO_INLINE")
 inline fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
     return ContextCompat.getDrawable(this, id)
+}
+
+/**
+ * Extension: Retrieves a color associated with a resource id
+ * via ContextCompat using the called context.
+ */
+@Suppress("NOTHING_TO_INLINE")
+inline fun Context.getColorCompat(@ColorRes id: Int): Int {
+    return ContextCompat.getColor(this, id)
 }

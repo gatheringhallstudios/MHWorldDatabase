@@ -35,6 +35,7 @@
 
     <!-- Dimens for Monster Damage -->
     <dimen name="width_damage_value">36dp</dimen>
+    <dimen name="width_extract_value">72dp</dimen>
     <dimen name="margin_damage_value_right">14dp</dimen>
 
     <!-- dimensions for icon paddings in various decorations -->

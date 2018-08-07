@@ -12,15 +12,24 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterBreak
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHitzone
+import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
+import com.gatheringhallstudios.mhworlddatabase.util.getColorCompat
 
 import kotlinx.android.synthetic.main.fragment_monster_damage.*
+import kotlinx.android.synthetic.main.listitem_monster_break.view.*
 import kotlinx.android.synthetic.main.listitem_monster_hitzone.view.*
 
-/**
- * Fragment for a list of monsters
- */
+/** Resolves a hitzone text value to a string */
+private fun resolveInt(value: Int?) = when (value) {
+    null, 0 -> "-"
+    else -> value.toString()
+}
 
+/**
+ * Fragment for a monster's hitzone and break values
+ */
 class MonsterDamageFragment : Fragment() {
 
     private val viewModel by lazy {
@@ -49,6 +58,7 @@ class MonsterDamageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.hitzones.observe(this, Observer  { this.setHitzones(it) })
+        viewModel.breaks.observe(this, Observer { this.setBreaks(it) })
     }
 
     /**
@@ -104,11 +114,44 @@ class MonsterDamageFragment : Fragment() {
         }
     }
 
+    fun setBreaks(breaks: List<MonsterBreak>?) {
+        break_layout.removeAllViews()
+        if (breaks == null) return
+
+        val inflater = LayoutInflater.from(context)
+
+        for (breakData in breaks) {
+            val breakView = inflater.inflate(R.layout.listitem_monster_break, break_layout, false)
+
+            breakView.break_part_name.text = breakData.part_name
+
+            breakView.flinch.text = resolveInt(breakData.flinch)
+            breakView.wound.text = resolveInt(breakData.wound)
+            breakView.sever.text = resolveInt(breakData.sever)
+
+            breakView.extract.text = context?.getString(when (breakData.extract) {
+                Extract.ORANGE -> R.string.type_extract_orange
+                Extract.RED -> R.string.type_extract_red
+                Extract.WHITE -> R.string.type_extract_white
+                Extract.GREEN -> R.string.type_extract_green
+            })
+
+            breakView.extract.setTextColor(context?.getColorCompat(when (breakData.extract) {
+                Extract.ORANGE -> R.color.icon_orange
+                Extract.RED -> R.color.icon_red
+                Extract.WHITE -> R.color.icon_white
+                Extract.GREEN -> R.color.icon_green
+            }) ?: 0)
+
+            break_layout.addView(breakView)
+        }
+    }
+
     /**
      * Apply styles to hitzones
      */
     private fun bindHitzone(view: TextView, value: Int, threshold: Int, element: String) {
-        view.text = value.toString()
+        view.text = resolveInt(value)
 
         // Emphasise text based on effectiveness
         if (value == 0) {

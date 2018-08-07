@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/row_height_small"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/break_part_name"
+        style="@style/TextBodyHigh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_weight="1"
+        tools:text="Tail Tip (Break)" />
+
+    <TextView
+        android:id="@+id/flinch"
+        style="@style/TextBodyLow"
+        android:layout_width="@dimen/width_damage_value"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="50" />
+
+    <TextView
+        android:id="@+id/wound"
+        style="@style/TextBodyLow"
+        android:layout_width="@dimen/width_damage_value"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/sever"
+        style="@style/TextBodyLow"
+        android:layout_width="@dimen/width_damage_value"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/extract"
+        style="@style/TextBodyHigh"
+        android:textStyle="bold"
+        android:layout_width="@dimen/width_extract_value"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_damage_value_right"
+        android:gravity="center"
+        tools:text="Orange"
+        tools:textColor="@color/icon_orange"/>
+
+</LinearLayout>

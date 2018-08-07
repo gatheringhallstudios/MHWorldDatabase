@@ -31,6 +31,12 @@
     <string name="high_rank">High</string>
     <string name="low_rank_full">Low Rank</string>
     <string name="high_rank_full">High Rank</string>
+
+    <string name="type_extract_orange">Orange</string>
+    <string name="type_extract_red">Red</string>
+    <string name="type_extract_white">White</string>
+    <string name="type_extract_green">Green</string>
+
     <string name="rarity_string">Rarity %1$d</string>
     <string name="none">None</string>
     <string name="quantity">x %1$d</string>
@@ -40,8 +46,6 @@
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>
     <string name="header_weakness">Weakness</string>
-    <string name="header_hitzone_physical">Physical</string>
-    <string name="header_hitzone_elemental">Elemental</string>
     <string name="header_item_data">Item Data</string>
 
     <!-- ############ -->
@@ -56,6 +60,10 @@
     <string name="monsters_detail_tab_rewards_high_rank">High-Rank</string>
     <string name="monsters_detail_tab_rewards_low_rank">Low-Rank</string>
     <string name="monsters_detail_tab_damage">Damage</string>
+    <string name="monsters_damage_column_extract">Extract</string>
+    <string name="header_hitzone_physical">Physical</string>
+    <string name="header_hitzone_elemental">Elemental</string>
+    <string name="header_break">Breaks</string>
 
     <!-- Items -->
     <string name="items_title">Items</string>
