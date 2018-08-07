@@ -5,6 +5,7 @@ import android.arch.persistence.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
@@ -55,7 +56,10 @@ data class MonsterHitzone(
 )
 
 data class MonsterBreak(
-        @Embedded val data: MonsterBreakEntity,
+        val flinch: Int?,
+        val wound: Int?,
+        val sever: Int?,
+        val extract: Extract,
         val part_name: String?
 )
 

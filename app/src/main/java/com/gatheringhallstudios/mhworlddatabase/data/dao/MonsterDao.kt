@@ -49,7 +49,7 @@ abstract class MonsterDao {
     abstract fun loadHitzones(langId: String, monsterId: Int): LiveData<List<MonsterHitzone>>
 
     @Query("""
-        SELECT b.*, bt.part_name
+        SELECT b.flinch, b.wound, b.sever, b.extract, bt.part_name
         FROM monster_break b JOIN monster_break_text bt
             ON bt.id = b.id
         WHERE b.monster_id = :monsterId
