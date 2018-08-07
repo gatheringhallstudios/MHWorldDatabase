@@ -47,7 +47,7 @@
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="6dp"
         android:layout_marginTop="@dimen/margin_large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,6 @@
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_large"
-        android:paddingBottom="@dimen/margin_large"
         android:textAppearance="@style/TextBodyHigh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

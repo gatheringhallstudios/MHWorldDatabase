@@ -24,7 +24,7 @@
 
     <!-- Background Colors -->
     <color name="backgroundColor">#212121</color>
-    <color name="backgroundColorSectionHeader">@color/primaryLightColor</color>
+    <color name="backgroundColorSectionHeader">#99455a64</color>
 
     <!-- Asset Colors for ColorRegistry -->
     <color name="icon_gray">#C2BFBF</color>

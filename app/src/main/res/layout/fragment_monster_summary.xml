@@ -15,6 +15,7 @@
             android:id="@+id/weakness_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
             app:labelText="@string/header_weakness"
             app:layout_constraintTop_toBottomOf="@+id/monster_header">
 

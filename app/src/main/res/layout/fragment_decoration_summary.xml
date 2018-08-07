@@ -15,13 +15,43 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:id="@+id/drop_chance_section"
-            android:layout_width="match_parent"
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/decoration_drop_list_header"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_large"
+            app:labelText="@string/decorations_skill_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_header" />
+
+        <LinearLayout
+            android:id="@+id/decoration_drop_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/divider_stroke"
+            app:layout_constraintTop_toBottomOf="@id/decoration_drop_list_header"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/decoration_header">
+            android:showDividers="middle"
+            tools:layout_editor_absoluteY="160dp">
+
+            <!-- These views are here for mock but are removed at runtime -->
+
+            <include
+                layout="@layout/listitem_reward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                layout="@layout/listitem_reward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                layout="@layout/listitem_reward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -29,7 +59,7 @@
             android:id="@+id/decoration_skill_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_section_gap"
             app:labelText="@string/decorations_skill_information"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -44,33 +74,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/decoration_skill_header" />
-
-        <LinearLayout
-            android:id="@+id/decoration_drop_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:divider="@drawable/divider_stroke"
-            android:orientation="vertical"
-            android:showDividers="middle"
-            app:layout_constraintTop_toTopOf="@+id/drop_chance_section">
-
-            <include
-                layout="@layout/listitem_reward"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                layout="@layout/listitem_reward"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                layout="@layout/listitem_reward"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
 
 
     </android.support.constraint.ConstraintLayout>

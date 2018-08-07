@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:bottom="6dp">
+    <!-- Minimum drawable height of this view is 6. Recalculate if dimens change -->
+    <item android:bottom="4dp">
         <shape android:shape="rectangle">
             <size android:height="1.5dp"/>
             <solid android:color="@color/itemDividerColor"/>
         </shape>
     </item>
-    <item android:top="6dp">
+    <item android:top="4dp">
         <shape android:shape="rectangle">
             <size android:height="1.5dp"/>
             <solid android:color="@color/itemDividerColor"/>

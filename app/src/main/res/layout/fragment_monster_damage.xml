@@ -13,7 +13,7 @@
             android:id="@+id/physical_damage_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:labelText="@string/header_area"
+            app:labelText="@string/header_hitzone_physical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,6 +69,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/physical_damage_header">
 
+            <!-- These layouts are here for mock but will be deleted at runtime -->
+
             <include layout="@layout/listitem_monster_hitzone" />
 
             <include layout="@layout/listitem_monster_hitzone" />
@@ -81,8 +83,8 @@
             android:id="@+id/item_data_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            app:labelText="@string/header_area"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            app:labelText="@string/header_hitzone_physical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/physical_damage_layout" />
@@ -146,6 +148,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_data_header">
+
+            <!-- These layouts are here for mock but will be deleted at runtime -->
 
             <include layout="@layout/listitem_monster_hitzone" />
 

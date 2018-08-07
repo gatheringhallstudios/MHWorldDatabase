@@ -40,7 +40,8 @@
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>
     <string name="header_weakness">Weakness</string>
-    <string name="header_area">Area</string>
+    <string name="header_hitzone_physical">Physical</string>
+    <string name="header_hitzone_elemental">Elemental</string>
     <string name="header_item_data">Item Data</string>
 
     <!-- ############ -->

@@ -17,10 +17,11 @@
         <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
             android:id="@+id/skill_label"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
         <View
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_large"
             android:layout_height="1dp"
             android:background="@drawable/divider_stroke"/>
 
