@@ -10,11 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
+import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_decoration_summary.*
+import kotlinx.android.synthetic.main.listitem_reward.view.*
+import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
 
 class DecorationDetailFragment : Fragment() {
@@ -42,36 +46,64 @@ class DecorationDetailFragment : Fragment() {
     private fun populateDecoration(decoration: Decoration?) {
         if (decoration == null) return
 
-        (activity as AppCompatActivity).supportActionBar?.title = decoration.name
+        setActivityTitle(decoration.name)
+
+        decoration_drop_list.removeAllViews()
 
         val icon = AssetLoader.loadIconFor(decoration)
-        decoration_icon.setImageDrawable(icon)
-        decoration_name.text = decoration.name
-        decoration_description.text = getString(R.string.rarity_string, decoration.rarity)
-        decoration_description.setTextColor(AssetLoader.loadRarityColor(decoration.rarity))
+        decoration_header.setIconDrawable(icon)
+        decoration_header.setTitleText(decoration.name)
+        decoration_header.setSubtitleText(getString(R.string.rarity_string, decoration.rarity))
+        decoration_header.setSubtitleColor(AssetLoader.loadRarityColor(decoration.rarity))
 
-        mysterious_feystone_chance_value.text = getString(R.string.percentage, decoration.mysterious_feystone_chance)
-        gleaming_feystone_chance_value.text = getString(R.string.percentage, decoration.glowing_feystone_chance)
-        worn_feystone_chance_value.text = getString(R.string.percentage, decoration.worn_feystone_chance)
-        warped_feystone_chance_value.text = getString(R.string.percentage, decoration.warped_feystone_chance)
+        val view2 = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
+        //TODO: load feystone icon
+        //view.icon.setImageDrawable(AssetLoader.loadIconFor()
+        view2.reward_name.text = getString(R.string.decorations_mysterious_feystone_chance)
+        view2.reward_percent.text = getString(R.string.percentage, decoration.mysterious_feystone_chance.toString())
+        decoration_drop_list.addView(view2)
+
+        val view = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
+        //TODO: load feystone icon
+        //view.icon.setImageDrawable(AssetLoader.loadIconFor()
+        view.reward_name.text = getString(R.string.decorations_gleaming_feystone_chance)
+        view.reward_percent.text = getString(R.string.percentage, decoration.glowing_feystone_chance.toString())
+        decoration_drop_list.addView(view)
+
+        val view3 = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
+        //TODO: load feystone icon
+        //view.icon.setImageDrawable(AssetLoader.loadIconFor()
+        view3.reward_name.text = getString(R.string.decorations_worn_feystone_chance)
+        view3.reward_percent.text = getString(R.string.percentage, decoration.worn_feystone_chance.toString())
+        decoration_drop_list.addView(view3)
+
+        val view4 = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
+        view4.reward_name.text = getString(R.string.decorations_warped_feystone_chance)
+        view4.reward_percent.text = getString(R.string.percentage, decoration.warped_feystone_chance.toString())
+        decoration_drop_list.addView(view4)
 
         populateSkill(decoration.skillTree)
     }
 
-    private fun populateSkill(skillTreeFull: SkillTreeBase?) {
-        if(skillTreeFull == null) return
+    private fun populateSkill(skill: SkillTreeBase) {
 
-        if (decoration_skill_layout.childCount > 0)
-            decoration_skill_layout.removeAllViews()
+        decoration_skill_list.removeAllViews()
+        val view = layoutInflater.inflate(R.layout.listitem_skill_level, decoration_skill_list, false)
 
-        val view = IconLabelTextCell(context)
+        view.icon.setImageDrawable(AssetLoader.loadIconFor(skill))
+        view.label_text.text = skill.name
 
-        val icon = AssetLoader.loadSkillIcon(skillTreeFull.icon_color)
-        view.setLeftIconDrawable(icon)
-        view.setLabelText(skillTreeFull.name)
-        view.removeDecorator()
-        view.setOnClickListener { getRouter().navigateSkillDetail(skillTreeFull.id) }
+        //Decorations always only give 1 level. Sorry about the magic number
+        view.level_text.text = getString(R.string.skills_level_qty, 1)
+        with(view.skill_level) {
+            maxLevel = skill.max_level
+            level = 1
+        }
 
-        decoration_skill_layout.addView(view)
+        view.setOnClickListener {
+            getRouter().navigateSkillDetail(skill.id)
+        }
+
+        decoration_skill_list.addView(view)
     }
 }
