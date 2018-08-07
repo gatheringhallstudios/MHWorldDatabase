@@ -106,10 +106,8 @@ public abstract class MHWDatabase extends RoomDatabase {
      */
     public static MHWDatabase getDatabase(Context ctx) {
         // NOTE on implementation
-        // We use the RoomAsset library because Android cannot query directly from APK read-only data.
-        // Therefore, RoomAsset performs a migration from the assets to the user local files.
-        // A change in the database will require you to delete local data in the emulator if there is no version bump.
-        // https://stackoverflow.com/questions/44263891/how-to-use-room-persistence-library-with-pre-populated-database
+        // We use a custom SQLiteAssetHelperFactor that copies over the database
+        // on Room migration attempts. Make sure that the version
         if (instance == null) {
             instance = Room.databaseBuilder(ctx, MHWDatabase.class, "mhw.db")
                     .openHelperFactory(new SQLiteAssetHelperFactory(true))
