@@ -84,7 +84,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_section_gap"
-            app:labelText="@string/header_hitzone_physical"
+            app:labelText="@string/header_hitzone_elemental"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/physical_damage_layout" />
