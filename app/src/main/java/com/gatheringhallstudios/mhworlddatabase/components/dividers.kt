@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.SectionHeader
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.SubHeader
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.GroupAdapter
 
@@ -67,6 +65,12 @@ class StandardDivider(private val drawable: Drawable?): BaseVerticalDivider() {
         }
     }
 
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        super.getItemOffsets(outRect, view, parent, state)
+        drawable?.let {
+            outRect.bottom = drawable.intrinsicHeight
+        }
+    }
 }
 
 /**
@@ -95,6 +99,11 @@ class HeaderItemDivider(private val drawable: Drawable): BaseVerticalDivider() {
         drawable.setBounds(left, top, right, yCoord)
         drawable.draw(canvas)
     }
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        super.getItemOffsets(outRect, view, parent, state)
+        outRect.bottom = drawable.intrinsicHeight
+    }
 }
 
 /**
@@ -118,6 +127,13 @@ class ChildDivider(private val drawable: Drawable?): BaseVerticalDivider() {
             val top = yCoord - drawable.intrinsicHeight
             drawable.setBounds(left, top, right, yCoord)
             drawable.draw(canvas)
+        }
+    }
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        super.getItemOffsets(outRect, view, parent, state)
+        drawable?.let {
+            outRect.bottom = drawable.intrinsicHeight
         }
     }
 }
