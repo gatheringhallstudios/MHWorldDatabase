@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/reward_name"
         style="@style/TextBodyHigh"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,6 @@
         app:layout_constraintLeft_toRightOf="@id/reward_icon"
         app:layout_constraintRight_toLeftOf="@id/reward_stack"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="wrap"
         tools:text="Firecell Stone" />
 
     <TextView
