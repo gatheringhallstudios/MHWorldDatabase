@@ -6,7 +6,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_search">Settings</string>
-    <string name="general_no_data">No Data</string>
+    <string name="general_no_data">Nothing here, Meowster...</string>
 
     <!-- Simple descriptor for data types (including modified descriptors -->
     <string name="type_location">Location</string>
