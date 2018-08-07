@@ -7,6 +7,7 @@ import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+import kotlinx.android.synthetic.main.listitem_sub_header.*
 import kotlinx.android.synthetic.main.listitem_sub_header.view.*
 
 /**
@@ -21,8 +22,7 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.listitem_sub_header, parent, false)
-
-        return HeaderViewHolder(v)
+        return SimpleViewHolder(v)
     }
 
     override fun onBindViewHolder(items: List<Any>,
@@ -31,24 +31,8 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
                                   payloads: List<Any>) {
         val subHeader = items[position] as SubHeader
 
-        val vh = holder as HeaderViewHolder
-        vh.setTitle(subHeader.text)
-        vh.itemView.setTag(R.id.view_type, subHeader.javaClass)
-
-        if (position != 0) vh.addMarginTop()
-
-        // todo: allow collapsible header. Collapsible header via onSelected is not the proper way
-    }
-
-    internal inner class HeaderViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        fun setTitle(title : String?) {
-            view.label_text.text = title
-            //vh.labelText.setTypeface(vh.labelText.getTypeface(), Typeface.BOLD);
-        }
-
-        fun addMarginTop() {
-            var marginLayoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
-            marginLayoutParams.topMargin = view.resources.getDimensionPixelSize(R.dimen.margin_medium)
-        }
+        val vh = holder as SimpleViewHolder
+        vh.label_text.text = subHeader.text
+        vh.itemView.setTag(R.id.view_is_header, true)
     }
 }

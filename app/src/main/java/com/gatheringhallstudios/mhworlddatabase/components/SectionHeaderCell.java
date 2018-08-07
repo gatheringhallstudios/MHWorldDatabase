@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * This is a full height, full width cell that displays a section header. Used to generate
  * header rows in RecyclerView or inside XML layouts.
@@ -21,8 +18,7 @@ import butterknife.ButterKnife;
 public class SectionHeaderCell extends LinearLayout {
 
     private final String TAG = getClass().getSimpleName();
-
-    @BindView(R.id.label_text) TextView labelView;
+    TextView labelView;
 
     public SectionHeaderCell(Context context, String labelText) {
         super(context);
@@ -52,11 +48,11 @@ public class SectionHeaderCell extends LinearLayout {
     }
 
     public void init(String labelText) {
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
         inflater.inflate(R.layout.cell_section_header, this, true);
+        setTag(R.id.view_is_header, true);
 
-        ButterKnife.bind(this);
+        labelView = findViewById(R.id.label_text);
 
         setLabelText(labelText);
     }

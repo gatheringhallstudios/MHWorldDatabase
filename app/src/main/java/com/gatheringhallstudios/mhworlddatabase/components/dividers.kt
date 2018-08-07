@@ -102,12 +102,11 @@ class HeaderItemDivider(private val drawable: Drawable): BaseVerticalDivider() {
  */
 class ChildDivider(private val drawable: Drawable?): BaseVerticalDivider() {
     override fun shouldDraw(parent: RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
-        val firstType = firstView.getTag(R.id.view_type)
-        val secondType = secondView.getTag(R.id.view_type)
+        val firstIsHeader = firstView.getTag(R.id.view_is_header)
+        val secondIsHeader = secondView.getTag(R.id.view_is_header)
 
         // if either child or nextChild is a "header", should not draw
-        if (firstType == SectionHeader::class.java || firstType == SubHeader::class.java ||
-                secondType == SectionHeader::class.java || secondType == SubHeader::class.java) {
+        if (firstIsHeader == true || secondIsHeader == true) {
             return false
         }
 

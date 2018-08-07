@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="id" name="view_type"/>
+    <!-- Used in view tags to store a boolean -->
+    <item type="id" name="view_is_header"/>
 </resources>

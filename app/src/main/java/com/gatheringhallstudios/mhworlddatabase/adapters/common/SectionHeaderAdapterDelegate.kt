@@ -32,7 +32,7 @@ class SectionHeaderAdapterDelegate: AdapterDelegate<List<Any>>() {
 
         val vh = holder as SimpleViewHolder
         vh.label_text.text = sectionHeader.text
-        vh.itemView.setTag(R.id.view_type, sectionHeader.javaClass)
+        vh.itemView.setTag(R.id.view_is_header, true)
 
         val marginParams = vh.itemView.layoutParams as ViewGroup.MarginLayoutParams
 

@@ -51,9 +51,10 @@ class DetailHeaderCell : ConstraintLayout {
     }
 
     fun init(drawable: Drawable?, titleText: String?, descriptionText: String?, subtitleText: String?) {
-        val inflater = context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = LayoutInflater.from(context)
         inflater.inflate(R.layout.cell_detail_header, this, true)
+
+        setTag(R.id.view_is_header, true)
 
         header_icon.setImageDrawable(drawable)
         header_title.text = titleText

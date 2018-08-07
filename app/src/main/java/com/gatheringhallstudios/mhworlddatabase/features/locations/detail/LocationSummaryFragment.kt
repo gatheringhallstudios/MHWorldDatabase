@@ -11,6 +11,8 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import kotlinx.android.synthetic.main.fragment_location_summary.*
 
 /**
@@ -31,6 +33,8 @@ class LocationSummaryFragment : RecyclerViewFragment() {
 
         val adapter = LocationDetailAdapterWrapper()
         setAdapter(adapter.adapter)
+
+        recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
         viewModel.location.observe(this, Observer {
             if (it != null) {
