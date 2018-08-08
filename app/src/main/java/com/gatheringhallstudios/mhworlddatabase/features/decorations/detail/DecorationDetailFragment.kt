@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
+import com.gatheringhallstudios.mhworlddatabase.util.getColorCompat
 import kotlinx.android.synthetic.main.fragment_decoration_summary.*
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
@@ -63,7 +64,14 @@ class DecorationDetailFragment : Fragment() {
             val view = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
             view.reward_icon.setImageDrawable(context?.getVectorDrawable("Feystone", iconColor))
             view.reward_name.text = getString(nameResource)
-            view.reward_percent.text = getString(R.string.percentage, chance.toString())
+            if (chance == 0.0) {
+                view.reward_percent.text = "-"
+                val color = context?.getColorCompat(R.color.textColorMedium) ?: 0
+                view.reward_percent.setTextColor(color)
+            } else {
+                view.reward_percent.text = getString(R.string.percentage, chance.toString())
+            }
+
             return view
         }
 
