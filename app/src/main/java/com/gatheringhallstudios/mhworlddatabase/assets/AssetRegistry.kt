@@ -55,6 +55,7 @@ val VectorRegistry = createRegistry(
         "Seed" to R.xml.ic_items_seed_base,
         "Slinger" to R.xml.ic_items_slinger_base,
         "Sphere" to R.xml.ic_items_sphere_base,
+        "Streamstone" to R.xml.ic_items_streamstone_base,
         "Tail" to R.xml.ic_items_tail_base,
         "Voucher" to R.xml.ic_items_voucher_base,
         "Wing" to R.xml.ic_items_wing_base
