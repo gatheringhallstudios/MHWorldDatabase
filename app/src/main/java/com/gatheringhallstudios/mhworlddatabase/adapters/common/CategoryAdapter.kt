@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
+import com.xwray.groupie.Section
 
 // Consider making a nested list data structure with linear traversal
 // Much of the code below and future changes, including updating "in place", will become easier like that.
@@ -79,8 +80,9 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
         return section
     }
 
-    fun addEmptySection(name: String = ""): AdapterSection {
-        val section = AdapterSection(this, null, mutableListOf<Any>(EmptyState()))
+    fun addEmptySection(name: String? = null): AdapterSection {
+        val section = AdapterSection(this, if (name.isNullOrEmpty()) null else SectionHeader(name),
+                mutableListOf<Any>(EmptyState()))
         addSectionInner(section)
         return section
     }
@@ -123,7 +125,12 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
             }
             itemsToAdd.add(SectionHeader(key))
             itemsToAdd.add(SubHeader(key))
-            addSection(key, value)
+
+            if (value.isEmpty()) {
+                addEmptySection(key)
+            } else {
+                addSection(key, value)
+            }
         }
     }
 
