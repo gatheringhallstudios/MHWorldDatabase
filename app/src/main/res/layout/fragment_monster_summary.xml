@@ -11,16 +11,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/padding_footer_space">
 
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/weakness_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
-            app:labelText="@string/header_weakness"
-            app:layout_constraintTop_toBottomOf="@+id/monster_header">
-
-        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
-
         <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
             android:id="@+id/monster_header"
             android:layout_width="match_parent"
@@ -28,6 +18,33 @@
             tools:descriptionText="An azure-colored subspecies of Rathalos. More mobile than their standard cousins, they locate prey from the air and quickly swoop in for the kill."
             tools:iconSrc="@drawable/ic_ui_question_mark_white"
             tools:titleText="Azure Rathalos" />
+
+        <android.support.constraint.Group
+            android:id="@+id/weakness_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible"
+            android:visibility="gone"
+            app:constraint_referenced_ids="weakness_header,weakness_layout"/>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/weakness_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            app:labelText="@string/header_weakness"
+            app:layout_constraintTop_toBottomOf="@+id/monster_header"/>
+
+        <TextView
+            android:id="@+id/alt_weakness_caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextCaptionHigh"
+            app:layout_constraintTop_toTopOf="@id/weakness_header"
+            app:layout_constraintBottom_toBottomOf="@id/weakness_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/margin_large"
+            tools:text="( ) = when covered in mud"/>
 
         <TableLayout
             android:id="@+id/weakness_layout"

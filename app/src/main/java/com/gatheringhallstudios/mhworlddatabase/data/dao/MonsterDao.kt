@@ -21,7 +21,7 @@ abstract class MonsterDao {
     abstract fun loadMonsters(langId: String, size: MonsterSize? = null): LiveData<List<MonsterBase>>
 
     @Query("""
-        SELECT m.*, t.name, t.ecology, t.description
+        SELECT m.*, t.name, t.ecology, t.description, t.alt_state_description
         from monster m JOIN monster_text t USING (id)
         WHERE t.lang_id = :langId AND m.id = :id
         LIMIT 1""")

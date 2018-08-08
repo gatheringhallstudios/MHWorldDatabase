@@ -26,9 +26,65 @@
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
         android:layout_marginEnd="@dimen/margin_medium">
-
         <!-- Stars will be added here programmatically -->
+        <ImageView style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_effective_star"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+        <ImageView style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_effective_star"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+        <ImageView style="@style/IconXSmall"
+            android:src="@drawable/ic_ui_effective_star"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/alt_star_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+
+        tools:visibility="visible"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="("/>
+        <LinearLayout
+            android:id="@+id/alt_star_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="start|center_vertical"
+            android:orientation="horizontal">
+            <ImageView style="@style/IconXSmall"
+                android:src="@drawable/ic_ui_effective_star"
+                tools:visibility="visible"
+                android:visibility="gone"/>
+            <ImageView style="@style/IconXSmall"
+                android:src="@drawable/ic_ui_effective_star"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:alpha="0.25"/>
+            <ImageView style="@style/IconXSmall"
+                android:src="@drawable/ic_ui_effective_star"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:alpha="0.25"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text=")"/>
     </LinearLayout>
 
 </merge>

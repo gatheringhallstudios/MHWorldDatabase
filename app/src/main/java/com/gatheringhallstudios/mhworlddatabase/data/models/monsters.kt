@@ -24,7 +24,9 @@ class Monster(
 
         val order_id: Int,
         val description: String?,
+        val alt_state_description: String?,
 
+        val has_weakness: Boolean,
         val has_alt_weakness: Boolean,
 
         @Embedded(prefix = "weakness_")

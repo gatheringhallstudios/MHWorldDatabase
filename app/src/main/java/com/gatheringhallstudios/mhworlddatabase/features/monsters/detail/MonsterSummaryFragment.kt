@@ -43,9 +43,6 @@ class MonsterSummaryFragment : Fragment() {
     private fun populateMonster(monster: Monster?) {
         if (monster == null) return
 
-        val elemWeakness = monster.weaknesses
-        val statusWeakness = monster.status_weaknesses
-
         val icon = AssetLoader.loadIconFor(monster)
 
         monster_header.setIconDrawable(icon)
@@ -53,15 +50,35 @@ class MonsterSummaryFragment : Fragment() {
         if (monster.ecology != null) monster_header.setSubtitleText(monster.ecology)
         monster_header.setDescriptionText(monster.description)
 
-        // todo: remove weakness section if both are null
-        // note: newer data versions have an 'has_weakness' field. Use that.
+        if (monster.has_weakness) {
+            populateWeaknessSection(monster)
+        }
+    }
 
+    /**
+     * Populates the weakness data given a monster. Called by populateMonster().
+     */
+    private fun populateWeaknessSection(monster: Monster) {
+        weakness_section.visibility = View.VISIBLE
+        
+        val elemWeakness = monster.weaknesses
+        val altWeakness = monster.alt_weaknesses
+        val statusWeakness = monster.status_weaknesses
+        
         if (elemWeakness != null) {
             fire_star_cell.setStars(elemWeakness.fire)
             water_star_cell.setStars(elemWeakness.water)
             lightning_star_cell.setStars(elemWeakness.thunder)
             ice_star_cell.setStars(elemWeakness.ice)
             dragon_star_cell.setStars(elemWeakness.dragon)
+        }
+        
+        if (altWeakness != null) {
+            fire_star_cell.setAltStars(altWeakness.fire)
+            water_star_cell.setAltStars(altWeakness.water)
+            lightning_star_cell.setAltStars(altWeakness.thunder)
+            ice_star_cell.setAltStars(altWeakness.ice)
+            dragon_star_cell.setAltStars(altWeakness.dragon)
         }
 
         if (statusWeakness != null) {
@@ -72,7 +89,9 @@ class MonsterSummaryFragment : Fragment() {
             stun_star_cell.setStars(statusWeakness.stun)
         }
 
-        // todo: support alt weaknessess states
+        if (!monster.alt_state_description.isNullOrEmpty()) {
+            alt_weakness_caption.text = "( ) = ${monster.alt_state_description}"
+        }
     }
 
     private fun populateHabitats(habitats: List<MonsterHabitat>?) {
