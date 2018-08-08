@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val multiStartNavigationUi = MultiStartNavigationUI(listOf(
             R.id.monsterListDestination,
             R.id.itemListDestination,
-            R.id.itemCraftingDestination,
+            R.id.itemCraftingListDestination,
             R.id.armorListDestination,
             R.id.skillListDestination,
             R.id.decorationListDestination,

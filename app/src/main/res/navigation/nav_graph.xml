@@ -28,36 +28,92 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.items.list.ItemListPagerFragment"
         android:label="Items"
         tools:layout="@layout/fragment_generic_pager" />
+    <action
+        android:id="@+id/itemListAction"
+        app:destination="@id/itemListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     <fragment
-        android:id="@+id/itemCraftingDestination"
+        android:id="@+id/itemCraftingListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.itemcrafting.ItemCraftingFragment"
         android:label="Item Crafting"
         tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/itemCraftingListAction"
+        app:destination="@id/itemCraftingListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     <fragment
         android:id="@+id/armorListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetListPagerFragment"
         android:label="Armor"
         tools:layout="@layout/fragment_generic_pager" />
+    <action
+        android:id="@+id/armorListAction"
+        app:destination="@id/armorListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     <fragment
         android:id="@+id/skillListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.list.SkillListFragment"
         android:label="Skills"
         tools:layout="@layout/fragment_generic_pager" />
+    <action
+        android:id="@+id/skillListAction"
+        app:destination="@id/skillListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     <fragment
         android:id="@+id/decorationListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.list.DecorationListFragment"
         android:label="Decorations List"
         tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/decorationListAction"
+        app:destination="@id/decorationListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     <fragment
         android:id="@+id/locationListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.list.LocationListFragment"
         android:label="Locations"
         tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/locationListAction"
+        app:destination="@id/locationListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     <fragment
         android:id="@+id/charmListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.charms.list.CharmListFragment"
         android:label="Charms"
         tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/charmListAction"
+        app:destination="@id/charmListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
 
 
     <!-- REGULAR DESTINATIONS -->

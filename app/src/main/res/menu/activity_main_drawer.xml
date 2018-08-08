@@ -9,31 +9,31 @@
             android:icon="@drawable/ic_ui_hunter_notes_white"
             android:title="@string/monsters_list_title" />
         <item
-            android:id="@+id/itemListDestination"
+            android:id="@+id/itemListAction"
             android:icon="@drawable/ic_ui_item_box_white"
             android:title="@string/items_title" />
         <item
-            android:id="@+id/itemCraftingDestination"
+            android:id="@+id/itemCraftingListAction"
             android:icon="@drawable/ic_ui_crafting_white"
             android:title="@string/item_crafting_title" />
         <item
-            android:id="@+id/armorListDestination"
+            android:id="@+id/armorListAction"
             android:icon="@drawable/ic_equipment_armor_set_white"
             android:title="@string/armor_title" />
         <item
-            android:id="@+id/skillListDestination"
+            android:id="@+id/skillListAction"
             android:icon="@drawable/ic_ui_armor_skill_white"
             android:title="@string/skills_title" />
         <item
-            android:id="@+id/decorationListDestination"
+            android:id="@+id/decorationListAction"
             android:icon="@drawable/ic_ui_slots_white"
             android:title="@string/decorations_title" />
         <item
-            android:id="@+id/charmListDestination"
+            android:id="@+id/charmListAction"
             android:icon="@xml/ic_equipment_charm_base"
             android:title="@string/charms_title" />
         <item
-            android:id="@+id/locationListDestination"
+            android:id="@+id/locationListAction"
             android:icon="@drawable/ic_ui_map"
             android:title="@string/locations_title" />
     </group>
