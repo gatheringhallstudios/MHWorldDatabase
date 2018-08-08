@@ -30,6 +30,7 @@ val VectorRegistry = createRegistry(
         "Decoration3" to R.xml.ic_ui_decoration_3_base,
 
         "Ammo" to R.xml.ic_items_ammo_base,
+        "BarrelBomb" to R.xml.ic_items_barrel_bomb_base,
         "Body" to R.xml.ic_items_body_base,
         "Bone" to R.xml.ic_items_bone_base,
         "Bottle" to R.xml.ic_items_bottle_base,
@@ -54,10 +55,12 @@ val VectorRegistry = createRegistry(
         "Scale" to R.xml.ic_items_scale_base,
         "Seed" to R.xml.ic_items_seed_base,
         "Slinger" to R.xml.ic_items_slinger_base,
+        "Smoke" to R.xml.ic_items_smoke_base,
         "Sphere" to R.xml.ic_items_sphere_base,
         "Streamstone" to R.xml.ic_items_streamstone_base,
         "Tail" to R.xml.ic_items_tail_base,
         "Voucher" to R.xml.ic_items_voucher_base,
+        "Web" to R.xml.ic_items_web_base,
         "Wing" to R.xml.ic_items_wing_base
 )
 
