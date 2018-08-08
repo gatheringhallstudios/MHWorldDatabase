@@ -169,7 +169,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/element_damage_layout" />
 
+        <FrameLayout
+            android:id="@+id/flinch_icon"
+            android:layout_width="@dimen/width_break_value"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/wound_icon"
+            app:layout_constraintTop_toTopOf="@id/break_header"
+            app:layout_constraintBottom_toBottomOf="@id/break_header">
+            <ImageView
+                style="@style/IconSmall"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_ui_attack"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/wound_icon"
+            android:layout_width="@dimen/width_break_value"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/sever_icon"
+            app:layout_constraintTop_toTopOf="@id/break_header"
+            app:layout_constraintBottom_toBottomOf="@id/break_header">
+            <ImageView
+                style="@style/IconSmall"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_ui_attack"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/sever_icon"
+            android:layout_width="@dimen/width_break_value"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/extract_header"
+            app:layout_constraintTop_toTopOf="@id/break_header"
+            app:layout_constraintBottom_toBottomOf="@id/break_header">
+            <ImageView
+                style="@style/IconSmall"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_ui_attack"/>
+        </FrameLayout>
+
         <TextView
+            android:id="@+id/extract_header"
             style="@style/TextBodyHigh"
             android:layout_width="@dimen/width_extract_value"
             android:layout_height="wrap_content"
@@ -178,8 +218,7 @@
             android:textAlignment="center"
             app:layout_constraintTop_toTopOf="@id/break_header"
             app:layout_constraintBottom_toBottomOf="@id/break_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent" />
         
         <LinearLayout
             android:id="@+id/break_layout"

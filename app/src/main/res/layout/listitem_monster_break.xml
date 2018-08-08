@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/flinch"
         style="@style/TextBodyLow"
-        android:layout_width="@dimen/width_damage_value"
+        android:layout_width="@dimen/width_break_value"
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="50" />
@@ -27,7 +27,7 @@
     <TextView
         android:id="@+id/wound"
         style="@style/TextBodyLow"
-        android:layout_width="@dimen/width_damage_value"
+        android:layout_width="@dimen/width_break_value"
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="20" />
@@ -35,7 +35,7 @@
     <TextView
         android:id="@+id/sever"
         style="@style/TextBodyLow"
-        android:layout_width="@dimen/width_damage_value"
+        android:layout_width="@dimen/width_break_value"
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="20" />
