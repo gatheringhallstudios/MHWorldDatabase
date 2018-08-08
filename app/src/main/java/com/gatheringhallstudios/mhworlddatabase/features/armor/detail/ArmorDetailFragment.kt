@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.*
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
@@ -54,6 +55,7 @@ class ArmorDetailFragment : Fragment() {
 
     private fun populateArmorBasic(armor: Armor) {
         // Set header info
+        armor_header.setIconType(IconType.ZEMBELLISHED)
         armor_header.setIconDrawable(AssetLoader.loadIconFor(armor))
         armor_header.setTitleText(armor.name)
         armor_header.setSubtitleText(getString(R.string.rarity_string, armor.rarity))
