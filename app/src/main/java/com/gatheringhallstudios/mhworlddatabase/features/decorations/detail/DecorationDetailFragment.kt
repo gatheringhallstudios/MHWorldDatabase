@@ -4,14 +4,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
-import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
@@ -20,6 +18,10 @@ import kotlinx.android.synthetic.main.fragment_decoration_summary.*
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
+private val MYSTERIOUS_FEYSTONE_COLOR = "Gray"
+private val GLOWING_FEYSTONE_COLOR = "Blue"
+private val WORN_FEYSTONE_COLOR = "Beige"
+private val WARPED_FEYSTONE_COLOR = "Red"
 
 class DecorationDetailFragment : Fragment() {
     companion object {
@@ -56,31 +58,38 @@ class DecorationDetailFragment : Fragment() {
         decoration_header.setSubtitleText(getString(R.string.rarity_string, decoration.rarity))
         decoration_header.setSubtitleColor(AssetLoader.loadRarityColor(decoration.rarity))
 
-        val view2 = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
-        //TODO: load feystone icon
-        //view.icon.setImageDrawable(AssetLoader.loadIconFor()
-        view2.reward_name.text = getString(R.string.decorations_mysterious_feystone_chance)
-        view2.reward_percent.text = getString(R.string.percentage, decoration.mysterious_feystone_chance.toString())
-        decoration_drop_list.addView(view2)
+        // inner function used to inflate a feystone change row
+        fun inflateFeystoneChance(nameResource: Int, chance: Double, iconColor: String): View {
+            val view = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
+            view.reward_icon.setImageDrawable(context?.getVectorDrawable("Feystone", iconColor))
+            view.reward_name.text = getString(nameResource)
+            view.reward_percent.text = getString(R.string.percentage, chance.toString())
+            return view
+        }
 
-        val view = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
-        //TODO: load feystone icon
-        //view.icon.setImageDrawable(AssetLoader.loadIconFor()
-        view.reward_name.text = getString(R.string.decorations_gleaming_feystone_chance)
-        view.reward_percent.text = getString(R.string.percentage, decoration.glowing_feystone_chance.toString())
-        decoration_drop_list.addView(view)
+        decoration_drop_list.addView(inflateFeystoneChance(
+                R.string.decorations_mysterious_feystone_chance,
+                decoration.mysterious_feystone_chance,
+                MYSTERIOUS_FEYSTONE_COLOR
+        ))
 
-        val view3 = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
-        //TODO: load feystone icon
-        //view.icon.setImageDrawable(AssetLoader.loadIconFor()
-        view3.reward_name.text = getString(R.string.decorations_worn_feystone_chance)
-        view3.reward_percent.text = getString(R.string.percentage, decoration.worn_feystone_chance.toString())
-        decoration_drop_list.addView(view3)
+        decoration_drop_list.addView(inflateFeystoneChance(
+                R.string.decorations_glowing_feystone_chance,
+                decoration.glowing_feystone_chance,
+                GLOWING_FEYSTONE_COLOR
+        ))
 
-        val view4 = layoutInflater.inflate(R.layout.listitem_reward, decoration_drop_list, false)
-        view4.reward_name.text = getString(R.string.decorations_warped_feystone_chance)
-        view4.reward_percent.text = getString(R.string.percentage, decoration.warped_feystone_chance.toString())
-        decoration_drop_list.addView(view4)
+        decoration_drop_list.addView(inflateFeystoneChance(
+                R.string.decorations_worn_feystone_chance,
+                decoration.worn_feystone_chance,
+                WORN_FEYSTONE_COLOR
+        ))
+
+        decoration_drop_list.addView(inflateFeystoneChance(
+                R.string.decorations_warped_feystone_chance,
+                decoration.warped_feystone_chance,
+                WARPED_FEYSTONE_COLOR
+        ))
 
         populateSkill(decoration.skillTree)
     }
