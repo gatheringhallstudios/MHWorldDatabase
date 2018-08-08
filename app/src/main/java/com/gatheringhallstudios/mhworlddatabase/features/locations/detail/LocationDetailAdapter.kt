@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyState
+import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
@@ -26,12 +28,13 @@ class LocationDetailAdapterWrapper {
 
     val adapter = CategoryAdapter(
             LocationHeaderAdapterDelegate(),
-            LocationItemsAdapterDelegate()
+            LocationItemsAdapterDelegate(),
+            EmptyStateAdapterDelegate()
     )
 
     fun bindLocation(location: Location) {
         this.location = location
-        rebuild()
+        buildAdapter()
     }
 
     /**
@@ -46,21 +49,31 @@ class LocationDetailAdapterWrapper {
             newItems[context.getString(R.string.location_area, area)] = areaItems
         }
         this.items = newItems
-        rebuild()
+        buildAdapter()
     }
 
     /**
-     * Builds the list. Does nothing
+     * Builds the list. Does nothing until data is available.
      */
-    private fun rebuild() {
+    private fun buildAdapter() {
         adapter.clear()
+
+        // shadowing so kotlin's type refinements work
+        val location = location
+        val items = items
 
         if (location == null || items == null) {
             return
         }
 
-        adapter.addSection(listOf(location!!))
-        adapter.addSections(items!!)
+        if (items.isEmpty()) {
+            // if empty, add the header followed by an "empty" message
+            adapter.addSection(listOf(location, EmptyState()))
+        } else {
+            // if not empty, add the header followed by the items
+            adapter.addSection(listOf(location))
+            adapter.addSections(items)
+        }
     }
 }
 
