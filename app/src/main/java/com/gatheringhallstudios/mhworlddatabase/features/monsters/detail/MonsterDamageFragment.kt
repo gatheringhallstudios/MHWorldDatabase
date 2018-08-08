@@ -15,9 +15,13 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterBreak
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHitzone
 import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
+import com.gatheringhallstudios.mhworlddatabase.util.DataSynchronizer
+import com.gatheringhallstudios.mhworlddatabase.util.DataWatcher
 import com.gatheringhallstudios.mhworlddatabase.util.getColorCompat
 
 import kotlinx.android.synthetic.main.fragment_monster_damage.*
+import kotlinx.android.synthetic.main.fragment_monster_damage_breaks.*
+import kotlinx.android.synthetic.main.fragment_monster_damage_hitzones.*
 import kotlinx.android.synthetic.main.listitem_monster_break.view.*
 import kotlinx.android.synthetic.main.listitem_monster_hitzone.view.*
 
@@ -25,6 +29,15 @@ import kotlinx.android.synthetic.main.listitem_monster_hitzone.view.*
 private fun resolveInt(value: Int?) = when (value) {
     null, 0 -> "-"
     else -> value.toString()
+}
+
+
+/**
+ * Special data holder to synchronize damage data to handle all at once.
+ */
+class MonsterDamageData: DataSynchronizer() {
+    var hitzones: List<MonsterHitzone> by DataWatcher(this)
+    var breaks: List<MonsterBreak> by DataWatcher(this)
 }
 
 /**
@@ -57,8 +70,34 @@ class MonsterDamageFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.hitzones.observe(this, Observer  { this.setHitzones(it) })
-        viewModel.breaks.observe(this, Observer { this.setBreaks(it) })
+        // synchronize data loaded
+        val damageData = MonsterDamageData()
+
+        viewModel.hitzones.observe(this, Observer  {
+            if (it != null) damageData.hitzones = it
+        })
+        viewModel.breaks.observe(this, Observer {
+            if (it != null) damageData.breaks = it
+        })
+
+        damageData.observeAllLoaded(this) {
+            // make either empty or damage/hitzones visible depending on if loaded
+            if (damageData.hitzones.isEmpty() && damageData.breaks.isEmpty()) {
+                empty_section.visibility = View.VISIBLE
+            } else {
+                damage_section.visibility = View.VISIBLE
+
+                if (damageData.hitzones.isNotEmpty()) {
+                    hitzone_section.visibility = View.VISIBLE
+                    populateHitzones(damageData.hitzones)
+                }
+
+                if (damageData.breaks.isNotEmpty()) {
+                    break_section.visibility = View.VISIBLE
+                    populateBreaks(damageData.breaks)
+                }
+            }
+        }
     }
 
     /**
@@ -66,7 +105,7 @@ class MonsterDamageFragment : Fragment() {
      *
      * @param hitzones items be of type Reward.
      */
-    fun setHitzones(hitzones: List<MonsterHitzone>?) {
+    fun populateHitzones(hitzones: List<MonsterHitzone>?) {
         if (hitzones == null) return
 
         val physicalDamageLayout = this.physical_damage_layout
@@ -114,7 +153,7 @@ class MonsterDamageFragment : Fragment() {
         }
     }
 
-    fun setBreaks(breaks: List<MonsterBreak>?) {
+    fun populateBreaks(breaks: List<MonsterBreak>?) {
         break_layout.removeAllViews()
         if (breaks == null) return
 
@@ -131,7 +170,6 @@ class MonsterDamageFragment : Fragment() {
             breakView.wound.setTextColor(ContextCompat.getColor(context!!, R.color.textColorHigh))
             breakView.sever.text = resolveInt(breakData.sever)
             breakView.sever.setTextColor(ContextCompat.getColor(context!!, R.color.textColorHigh))
-
 
             breakView.extract.text = context?.getString(when (breakData.extract) {
                 Extract.ORANGE -> R.string.type_extract_orange_abbr

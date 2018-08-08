@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+        android:id="@+id/break_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:labelText="@string/header_break"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/flinch_icon"
+        android:layout_width="@dimen/width_break_value"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/break_header"
+        app:layout_constraintEnd_toStartOf="@id/wound_icon"
+        app:layout_constraintTop_toTopOf="@id/break_header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="FLN"
+            android:textColor="@color/textColorHigh" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/wound_icon"
+        android:layout_width="@dimen/width_break_value"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/break_header"
+        app:layout_constraintEnd_toStartOf="@id/sever_icon"
+        app:layout_constraintTop_toTopOf="@id/break_header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="BRK"
+            android:textColor="@color/textColorHigh" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/sever_icon"
+        android:layout_width="@dimen/width_break_value"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/break_header"
+        app:layout_constraintEnd_toStartOf="@id/extract_header"
+        app:layout_constraintTop_toTopOf="@id/break_header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="SVR"
+            android:textColor="@color/textColorHigh" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/extract_header"
+        android:layout_width="@dimen/width_extract_value"
+        android:layout_height="@dimen/image_size_medium"
+        android:layout_marginEnd="@dimen/margin_damage_value_right"
+        android:src="@drawable/ic_ui_kinsect_white"
+        app:layout_constraintBottom_toBottomOf="@id/break_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/break_header" />
+
+    <LinearLayout
+        android:id="@+id/break_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/break_header">
+
+        <!-- These layouts are here for mock but will be deleted at runtime -->
+        <include layout="@layout/listitem_monster_break"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+
+        <include layout="@layout/listitem_monster_break"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

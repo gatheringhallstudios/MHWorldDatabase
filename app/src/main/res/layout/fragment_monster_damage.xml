@@ -1,249 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <include
+        android:id="@+id/empty_section"
+        layout="@layout/empty"
+        tools:visibility="visible"
+        android:visibility="gone"/>
+
+    <ScrollView
+        android:id="@+id/damage_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/padding_footer_space">
+        tools:visibility="visible"
+        android:visibility="gone">
 
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/physical_damage_header"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:labelText="@string/header_hitzone_physical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Physical Damage Icons -->
-
-        <ImageView
-            android:id="@+id/icon_ko"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:src="@drawable/ic_status_stun"
-            app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
-            app:layout_constraintRight_toRightOf="@id/physical_damage_header"
-            app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
-
-        <ImageView
-            android:id="@+id/icon_shot"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_items_ammo_white"
-            app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
-            app:layout_constraintRight_toLeftOf="@id/icon_ko"
-            app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
-
-        <ImageView
-            android:id="@+id/icon_impact"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_equipment_hammer_white"
-            app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
-            app:layout_constraintRight_toLeftOf="@id/icon_shot"
-            app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
-
-        <ImageView
-            android:id="@+id/icon_cut"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_equipment_greatsword_white"
-            app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
-            app:layout_constraintRight_toLeftOf="@id/icon_impact"
-            app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
-
-        <LinearLayout
-            android:id="@+id/physical_damage_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/physical_damage_header">
+            android:paddingBottom="@dimen/padding_footer_space"
+            android:divider="@drawable/divider_section_gap"
+            android:showDividers="middle">
 
-            <!-- These layouts are here for mock but will be deleted at runtime -->
-
-            <include layout="@layout/listitem_monster_hitzone" />
-
-            <include layout="@layout/listitem_monster_hitzone" />
-
-            <include layout="@layout/listitem_monster_hitzone" />
-
+            <include
+                android:id="@+id/hitzone_section"
+                layout="@layout/fragment_monster_damage_hitzones"
+                tools:visibility="visible"
+                android:visibility="gone"/>
+            <include
+                android:id="@+id/break_section"
+                layout="@layout/fragment_monster_damage_breaks"
+                tools:visibility="visible"
+                android:visibility="gone"/>
         </LinearLayout>
+    </ScrollView>
 
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/item_data_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_gap"
-            app:labelText="@string/header_hitzone_elemental"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/physical_damage_layout" />
-
-        <ImageView
-            android:id="@+id/icon_dragon"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:src="@drawable/ic_element_dragon"
-            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
-            app:layout_constraintRight_toRightOf="@id/item_data_header"
-            app:layout_constraintTop_toTopOf="@id/item_data_header" />
-
-        <ImageView
-            android:id="@+id/icon_ice"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_element_ice"
-            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
-            app:layout_constraintRight_toLeftOf="@id/icon_dragon"
-            app:layout_constraintTop_toTopOf="@id/item_data_header" />
-
-        <ImageView
-            android:id="@+id/icon_thunder"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_element_thunder"
-            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
-            app:layout_constraintRight_toLeftOf="@id/icon_ice"
-            app:layout_constraintTop_toTopOf="@id/item_data_header" />
-
-        <ImageView
-            android:id="@+id/icon_water"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_element_water"
-            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
-            app:layout_constraintRight_toLeftOf="@id/icon_impact"
-            app:layout_constraintTop_toTopOf="@id/item_data_header" />
-
-        <ImageView
-            android:id="@+id/icon_fire"
-            android:layout_width="32dp"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_element_fire"
-            app:layout_constraintBottom_toBottomOf="@id/item_data_header"
-            app:layout_constraintRight_toLeftOf="@id/icon_water"
-            app:layout_constraintTop_toTopOf="@id/item_data_header" />
-
-        <LinearLayout
-            android:id="@+id/element_damage_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_data_header">
-
-            <!-- These layouts are here for mock but will be deleted at runtime -->
-
-            <include layout="@layout/listitem_monster_hitzone" />
-
-            <include layout="@layout/listitem_monster_hitzone" />
-
-            <include layout="@layout/listitem_monster_hitzone" />
-
-        </LinearLayout>
-
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/break_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_gap"
-            app:labelText="@string/header_break"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/element_damage_layout" />
-
-        <FrameLayout
-            android:id="@+id/flinch_icon"
-            android:layout_width="@dimen/width_break_value"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/break_header"
-            app:layout_constraintEnd_toStartOf="@id/wound_icon"
-            app:layout_constraintTop_toTopOf="@id/break_header">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="FLN"
-                android:textColor="@color/textColorHigh" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/wound_icon"
-            android:layout_width="@dimen/width_break_value"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/break_header"
-            app:layout_constraintEnd_toStartOf="@id/sever_icon"
-            app:layout_constraintTop_toTopOf="@id/break_header">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="BRK"
-                android:textColor="@color/textColorHigh" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/sever_icon"
-            android:layout_width="@dimen/width_break_value"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/break_header"
-            app:layout_constraintEnd_toStartOf="@id/extract_header"
-            app:layout_constraintTop_toTopOf="@id/break_header">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="SVR"
-                android:textColor="@color/textColorHigh" />
-        </FrameLayout>
-
-        <ImageView
-            android:id="@+id/extract_header"
-            android:layout_width="@dimen/width_extract_value"
-            android:layout_height="@dimen/image_size_medium"
-            android:layout_marginEnd="@dimen/margin_damage_value_right"
-            android:src="@drawable/ic_ui_kinsect_white"
-            app:layout_constraintBottom_toBottomOf="@id/break_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/break_header" />
-
-        <LinearLayout
-            android:id="@+id/break_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/break_header">
-
-            <!-- These layouts are here for mock but will be deleted at runtime -->
-
-            <include layout="@layout/listitem_monster_break" />
-
-            <include layout="@layout/listitem_monster_break" />
-
-        </LinearLayout>
-
-    </android.support.constraint.ConstraintLayout>
-
-</ScrollView>
+</FrameLayout>
