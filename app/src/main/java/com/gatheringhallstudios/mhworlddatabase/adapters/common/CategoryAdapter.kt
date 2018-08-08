@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
+import com.xwray.groupie.Section
 
 // Consider making a nested list data structure with linear traversal
 // Much of the code below and future changes, including updating "in place", will become easier like that.
@@ -13,10 +14,10 @@ import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
  * This might eventually be extended to support collapsing.
  * Note: AdapterSection live updating is untested. Beware of potential errors.
  */
-class AdapterSection internal constructor (val parent: CategoryAdapter, val header: Any?, val items: Collection<Any>){
+class AdapterSection internal constructor(val parent: CategoryAdapter, val header: Any?, val items: Collection<Any>) {
     val size: Int get() = displayedItems.size
 
-    val displayedItems by lazy  {
+    val displayedItems by lazy {
         val results = mutableListOf<Any>()
         if (header != null) {
             results.add(header)
@@ -79,6 +80,13 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
         return section
     }
 
+    fun addEmptySection(name: String? = null): AdapterSection {
+        val section = AdapterSection(this, if (name.isNullOrEmpty()) null else SectionHeader(name),
+                mutableListOf<Any>(EmptyState()))
+        addSectionInner(section)
+        return section
+    }
+
     /**
      * Adds a group headed by a regular SectionHeader,
      * with sub-groups headed by regular subheaders
@@ -105,13 +113,24 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
 
     fun addSections(sections: Map<String, Collection<Any>>, skipEmpty: Boolean = false) {
         val itemsToAdd = mutableListOf<Any>()
+
+        if (sections.isEmpty()) {
+            addEmptySection()
+            return
+        }
+
         for ((key, value) in sections) {
             if (skipEmpty && value.isEmpty()) {
                 continue
             }
             itemsToAdd.add(SectionHeader(key))
             itemsToAdd.add(SubHeader(key))
-            addSection(key, value)
+
+            if (value.isEmpty()) {
+                addEmptySection(key)
+            } else {
+                addSection(key, value)
+            }
         }
     }
 

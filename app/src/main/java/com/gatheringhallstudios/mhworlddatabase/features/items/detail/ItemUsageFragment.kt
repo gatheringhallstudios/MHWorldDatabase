@@ -5,11 +5,8 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinderAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinding
+import com.gatheringhallstudios.mhworlddatabase.adapters.*
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
-import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
@@ -50,7 +47,8 @@ class ItemUsageFragment : RecyclerViewFragment() {
 
     val adapter = CategoryAdapter(
             ItemCraftingAdapterDelegate(),
-            SimpleUniversalBinderAdapterDelegate()
+            SimpleUniversalBinderAdapterDelegate(),
+            EmptyStateAdapterDelegate()
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,7 +64,7 @@ class ItemUsageFragment : RecyclerViewFragment() {
             return
         }
         if (data.isEmpty()) {
-            showEmptyView()
+            adapter.addEmptySection()
             return
         }
 
