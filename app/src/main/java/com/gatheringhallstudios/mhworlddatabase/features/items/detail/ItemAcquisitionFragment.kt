@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
@@ -29,7 +30,8 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
     val adapter = CategoryAdapter(
             ItemCraftingAdapterDelegate(),
             ItemLocationAdapterDelegate(),
-            MonsterRewardSourceAdapterDelegate())
+            MonsterRewardSourceAdapterDelegate(),
+            EmptyStateAdapterDelegate())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
@@ -44,7 +46,7 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
             return
         }
         if (data.isEmpty()) {
-            showEmptyView()
+            adapter.addEmptySection()
             return
         }
 

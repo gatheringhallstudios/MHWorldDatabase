@@ -17,7 +17,6 @@ class EmptyStateAdapterDelegate : SimpleListDelegate<EmptyState>() {
 
     override fun onCreateView(parent: ViewGroup): View {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.empty, parent, false)
-        view.layoutParams.height = 700
         return view
     }
 }
