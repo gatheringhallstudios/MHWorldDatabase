@@ -13,10 +13,10 @@ import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
  * This might eventually be extended to support collapsing.
  * Note: AdapterSection live updating is untested. Beware of potential errors.
  */
-class AdapterSection internal constructor (val parent: CategoryAdapter, val header: Any?, val items: Collection<Any>){
+class AdapterSection internal constructor(val parent: CategoryAdapter, val header: Any?, val items: Collection<Any>) {
     val size: Int get() = displayedItems.size
 
-    val displayedItems by lazy  {
+    val displayedItems by lazy {
         val results = mutableListOf<Any>()
         if (header != null) {
             results.add(header)
@@ -79,6 +79,12 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
         return section
     }
 
+    fun addEmptySection(name: String = ""): AdapterSection {
+        val section = AdapterSection(this, null, mutableListOf<Any>(EmptyState()))
+        addSectionInner(section)
+        return section
+    }
+
     /**
      * Adds a group headed by a regular SectionHeader,
      * with sub-groups headed by regular subheaders
@@ -105,6 +111,12 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : RecyclerVi
 
     fun addSections(sections: Map<String, Collection<Any>>, skipEmpty: Boolean = false) {
         val itemsToAdd = mutableListOf<Any>()
+
+        if (sections.isEmpty()) {
+            addEmptySection()
+            return
+        }
+
         for ((key, value) in sections) {
             if (skipEmpty && value.isEmpty()) {
                 continue

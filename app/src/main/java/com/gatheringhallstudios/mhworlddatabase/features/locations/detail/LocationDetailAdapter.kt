@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.EmptyState
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
@@ -26,13 +28,17 @@ class LocationDetailAdapterWrapper {
 
     val adapter = CategoryAdapter(
             LocationHeaderAdapterDelegate(),
-            LocationItemsAdapterDelegate()
+            LocationItemsAdapterDelegate(),
+            EmptyStateAdapterDelegate()
     )
 
     fun bindLocation(location: Location) {
         this.location = location
         rebuild()
     }
+
+    fun bindEmpty() {}
+
 
     /**
      * Binds a list of items to the location detail, using the context
