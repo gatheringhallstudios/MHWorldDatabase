@@ -16,6 +16,7 @@ class SkillDetailViewModel(application: Application) :  AndroidViewModel(applica
     lateinit var armorPieces: LiveData<List<ArmorSkillLevel>>
     lateinit var charms: LiveData<List<CharmSkillLevel>>
     lateinit var decorations: LiveData<List<DecorationSkillLevel>>
+    lateinit var bonuses: LiveData<List<ArmorSetBonus>>
 
     fun setSkill(skillTreeId : Int) {
         if (this.id == skillTreeId) {
@@ -23,9 +24,12 @@ class SkillDetailViewModel(application: Application) :  AndroidViewModel(applica
         }
 
         this.id = skillTreeId
-        skillTreeFull = skillDao.loadSkillTree(AppSettings.dataLocale, skillTreeId)
-        armorPieces = skillDao.loadArmorWithSkill(AppSettings.dataLocale, skillTreeId)
-        charms = skillDao.loadCharmsWithSkill(AppSettings.dataLocale, skillTreeId)
-        decorations = skillDao.loadDecorationsWithSkill(AppSettings.dataLocale, skillTreeId)
+
+        val lang = AppSettings.dataLocale
+        skillTreeFull = skillDao.loadSkillTree(lang, skillTreeId)
+        armorPieces = skillDao.loadArmorWithSkill(lang, skillTreeId)
+        charms = skillDao.loadCharmsWithSkill(lang, skillTreeId)
+        decorations = skillDao.loadDecorationsWithSkill(lang, skillTreeId)
+        bonuses = skillDao.loadSetBonusesWithSkill(lang, skillTreeId)
     }
 }

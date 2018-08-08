@@ -94,7 +94,7 @@ class ArmorSet(
  * Basic representation of a single armor set bonus
  */
 class ArmorSetBonus(
-        @Embedded(prefix="skilltree_") val skillTree: SkillTree,
+        @Embedded(prefix="skilltree_") val skillTree: SkillTreeBase,
         val id: Int,
         val name: String?,
         val required: Int,

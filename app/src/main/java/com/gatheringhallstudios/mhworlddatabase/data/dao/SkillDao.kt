@@ -119,4 +119,18 @@ abstract class SkillDao {
           AND dt.lang_id = :langId
         ORDER BY dt.name ASC""")
     abstract fun loadDecorationsWithSkill(langId: String, skillTreeId: Int): LiveData<List<DecorationSkillLevel>>
+
+    @Query("""
+        SELECT stt.id skilltree_id, stext.name skilltree_name, stt.max_level skilltree_max_level, stt.icon_color skilltree_icon_color,
+            abs.setbonus_id as id, abt.name, abs.required
+        FROM armorset_bonus_skill abs
+            JOIN armorset_bonus_text abt ON (abt.id = abs.setbonus_id)
+            JOIN skilltree stt ON (stt.id = abs.skilltree_id)
+            JOIN skilltree_text stext
+                ON stext.id = stt.id
+                AND stext.lang_id = abt.lang_id
+        WHERE abs.skilltree_id = :skillTreeId
+          AND abt.lang_id = :langId
+        ORDER BY abt.name ASC""")
+    abstract fun loadSetBonusesWithSkill(langId: String, skillTreeId: Int): LiveData<List<ArmorSetBonus>>
 }

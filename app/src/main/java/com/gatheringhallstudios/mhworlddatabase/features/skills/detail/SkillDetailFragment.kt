@@ -26,10 +26,6 @@ class SkillDetailFragment : Fragment() {
         const val ARG_SKILLTREE_ID = "SKILL"
     }
 
-    // Wraps the adapter used by SkillDetailFragment.
-    // Make sure to remove the reference from recyclerview to avoid a leak
-    private val adapterBuilder = SkillDetailAdapterWrapper()
-
     private val viewModel: SkillDetailViewModel by lazy {
         ViewModelProviders.of(this).get(SkillDetailViewModel::class.java)
     }
@@ -40,6 +36,8 @@ class SkillDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val adapterBuilder = SkillDetailAdapterWrapper()
+
         // needs to also be removed in onDestroyView()
         recycler_view.adapter = adapterBuilder.adapter
         recycler_view.isNestedScrollingEnabled = false
@@ -70,13 +68,13 @@ class SkillDetailFragment : Fragment() {
                 adapterBuilder.setArmor(title, it)
             }
         })
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        // avoid mem leak. RecyclerViews create circular references inherently.
-        recycler_view.adapter = null
+        viewModel.bonuses.observe(this, Observer {
+            if (it != null) {
+                val title = getString(R.string.skills_setbonus_header)
+                adapterBuilder.setArmorSetBonuses(title, it)
+            }
+        })
     }
 
     private fun populateSkill(skillTreeFull: SkillTreeFull?) {

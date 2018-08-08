@@ -84,7 +84,7 @@ abstract class ArmorDao {
 
     @Query("""
         SELECT st.id as skilltree_id, stt.name as skilltree_name, st.max_level skilltree_max_level,
-            stt.description as skilltree_description,st.icon_color as skilltree_icon_color,
+            st.icon_color as skilltree_icon_color,
             abs.setbonus_id as id, abt.name, abs.required
         FROM armorset_bonus_skill abs
             JOIN armorset_bonus_text abt

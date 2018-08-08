@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinderAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationSkillLevel
@@ -26,19 +26,24 @@ class SkillDetailAdapterWrapper {
             DecorationSkillLevelAdapterDelegate(),
             CharmSkillLevelAdapterDelegate(),
             ArmorSkillLevelAdapterDelegate(),
-            SimpleUniversalBinderAdapterDelegate()
+            ArmorSetBonusSkillLevelAdapterDelegate()
     )
 
-    // once this = 3, all are loaded
+    // once this = itemsToLoad, all are loaded
     private var itemsLoaded = 0
+
+    // Number of items to wait for (all possible lists)
+    private val itemsToLoad = 4
 
     private lateinit var decorationTitle: String
     private lateinit var charmTitle: String
     private lateinit var armorTitle: String
+    private lateinit var bonusTitle: String
 
     private lateinit var decorationList: List<DecorationSkillLevel>
     private lateinit var charmList: List<CharmSkillLevel>
     private lateinit var armorList: List<ArmorSkillLevel>
+    private lateinit var bonusList: List<ArmorSetBonus>
 
     fun setDecorations(title: String, decorations: List<DecorationSkillLevel>) {
         if (::decorationList.isInitialized) {
@@ -70,9 +75,19 @@ class SkillDetailAdapterWrapper {
         handleItemLoaded()
     }
 
+    fun setArmorSetBonuses(title: String, bonuses: List<ArmorSetBonus>) {
+        if (::bonusList.isInitialized) {
+            return
+        }
+
+        this.bonusTitle = title
+        this.bonusList = bonuses
+        handleItemLoaded()
+    }
+
     private fun handleItemLoaded() {
         itemsLoaded++
-        if (itemsLoaded < 3) {
+        if (itemsLoaded < itemsToLoad) {
             return
         }
 
@@ -84,6 +99,7 @@ class SkillDetailAdapterWrapper {
         adapter.addSection(decorationTitle, switchList(decorationList))
         adapter.addSection(charmTitle, switchList(charmList))
         adapter.addSection(armorTitle, switchList(armorList))
+        adapter.addSection(bonusTitle, switchList(bonusList))
     }
 }
 
@@ -178,4 +194,24 @@ class ArmorSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSkillLevel>() {
         viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateArmorDetail(data.armor.id) }
     }
+}
+
+class ArmorSetBonusSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSetBonus>() {
+    override fun isForViewType(obj: Any) = obj is ArmorSetBonus
+
+    override fun onCreateView(parent: ViewGroup): View {
+        val inflater = LayoutInflater.from(parent.context)
+        return inflater.inflate(R.layout.listitem_skill_level_other, parent, false)
+    }
+
+    override fun bindView(viewHolder: SimpleViewHolder, data: ArmorSetBonus) {
+        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data))
+        viewHolder.label_text.text = data.name
+        viewHolder.skill_level.maxLevel = data.skillTree.max_level
+        viewHolder.skill_level.level = 1 // todo: don't hardcode?
+        viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, 1)
+
+        // todo: allow clicking
+    }
+
 }

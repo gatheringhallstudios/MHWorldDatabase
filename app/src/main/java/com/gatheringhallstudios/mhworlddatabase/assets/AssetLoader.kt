@@ -39,6 +39,11 @@ object AssetLoader {
         return loadSkillIcon(skill.icon_color)
     }
 
+    // loads an attempted potential representation. This will need to be tweaked
+    fun loadIconFor(setBonus: ArmorSetBonus): Drawable? {
+        return ctx.getVectorDrawable("ArmorSet", "rare1")
+    }
+
     fun loadIconFor(armorSet: ArmorSet): Drawable? {
         return ctx.getVectorDrawable("ArmorSet", "rare${armorSet.rarity}")
     }
