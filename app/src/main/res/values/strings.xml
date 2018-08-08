@@ -36,6 +36,10 @@
     <string name="type_extract_red">Red</string>
     <string name="type_extract_white">White</string>
     <string name="type_extract_green">Green</string>
+    <string name="type_extract_orange_abbr">ORN</string>
+    <string name="type_extract_red_abbr">RED</string>
+    <string name="type_extract_white_abbr">WHT</string>
+    <string name="type_extract_green_abbr">GRN</string>
 
     <string name="rarity_string">Rarity %1$d</string>
     <string name="none">None</string>

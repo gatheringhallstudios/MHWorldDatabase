@@ -44,11 +44,11 @@
         android:id="@+id/extract"
         style="@style/TextBodyHigh"
         android:textStyle="bold"
-        android:layout_width="@dimen/width_extract_value"
+        android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_damage_value_right"
         android:gravity="center"
-        tools:text="Orange"
+        tools:text="WHT"
         tools:textColor="@color/icon_orange"/>
 
 </LinearLayout>

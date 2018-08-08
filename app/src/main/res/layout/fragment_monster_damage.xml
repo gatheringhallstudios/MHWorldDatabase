@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -208,17 +209,15 @@
                 android:src="@drawable/ic_ui_attack"/>
         </FrameLayout>
 
-        <TextView
+        <ImageView
             android:id="@+id/extract_header"
-            style="@style/TextBodyHigh"
-            android:layout_width="@dimen/width_extract_value"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="@dimen/image_size_medium"
             android:layout_marginEnd="@dimen/margin_damage_value_right"
-            android:text="@string/monsters_damage_column_extract"
-            android:textAlignment="center"
-            app:layout_constraintTop_toTopOf="@id/break_header"
+            android:src="@drawable/ic_ui_kinsect_white"
             app:layout_constraintBottom_toBottomOf="@id/break_header"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/break_header" />
         
         <LinearLayout
             android:id="@+id/break_layout"
