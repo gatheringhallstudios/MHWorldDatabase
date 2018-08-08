@@ -102,6 +102,7 @@
     <string name="armor_title">Armor</string>
     <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
     <string name="armor_detail_tab_summary">Summary</string>
+    <string name="armor_detail_skills">Skills</string>
     <string name="armor_detail_set_bonus">Set Bonuses</string>
     <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string>
     <string name="armor_detail_tab_components">Required Materials</string>
@@ -126,12 +127,12 @@
 
     <!-- Decorations -->
     <string name="decorations_title">Decorations</string>
-    <string name="decorations_skill_information">Skill Information</string>
-    <string name="decorations_drop_information">Drop Chance</string>
-    <string name="decorations_mysterious_feystone_chance">Mysterious Feystone Chance</string>
-    <string name="decorations_glowing_feystone_chance">Glowing Feystone Chance</string>
-    <string name="decorations_worn_feystone_chance">Worn Feystone Chance</string>
-    <string name="decorations_warped_feystone_chance">Warped Feystone Chance</string>
+    <string name="decorations_skill_header">Skill</string>
+    <string name="decorations_drop_header">Drop</string>
+    <string name="decorations_mysterious_feystone_chance">Mysterious Feystone</string>
+    <string name="decorations_glowing_feystone_chance">Glowing Feystone</string>
+    <string name="decorations_worn_feystone_chance">Worn Feystone</string>
+    <string name="decorations_warped_feystone_chance">Warped Feystone</string>
 
     <!-- Charms -->
     <string name="charms_title">Charms</string>

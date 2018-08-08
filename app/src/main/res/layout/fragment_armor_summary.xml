@@ -198,7 +198,7 @@
                 android:id="@+id/armor_skill_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/decorations_skill_information"/>
+                app:labelText="@string/armor_detail_skills"/>
 
             <LinearLayout
                 android:id="@+id/armor_skill_list"
