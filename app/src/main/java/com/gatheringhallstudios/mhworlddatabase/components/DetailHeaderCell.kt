@@ -60,6 +60,11 @@ class DetailHeaderCell : ConstraintLayout {
         header_title.text = titleText
         header_description.text = descriptionText
 
+        if (descriptionText != null) {
+            header_description.visibility = View.VISIBLE
+            header_description.text = descriptionText
+        }
+
         if (subtitleText != null) {
             header_subtitle.visibility = View.VISIBLE
             header_subtitle.text = subtitleText
@@ -105,6 +110,10 @@ class DetailHeaderCell : ConstraintLayout {
 
     fun setSubtitleColor(color: Int) {
         header_subtitle.setTextColor(color)
+    }
+
+    fun updateDescriptionVisibility() {
+
     }
 
     /**
