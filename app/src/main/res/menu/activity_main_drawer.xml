@@ -41,7 +41,7 @@
     <item android:title="Other">
         <menu>
             <item
-                android:id="@+id/nav_about"
+                android:id="@+id/aboutAction"
                 android:icon="@drawable/ic_ui_mascot"
                 android:title="About" />
         </menu>

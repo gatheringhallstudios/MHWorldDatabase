@@ -52,6 +52,7 @@ dependencies {
 
     /*
      * Leak Canary
+     * https://github.com/square/leakcanary
      */
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
@@ -79,7 +80,7 @@ dependencies {
     /*
      * Android Navigation Component
      */
-    def nav_version = "1.0.0-alpha02"
+    def nav_version = "1.0.0-alpha04"
     implementation "android.arch.navigation:navigation-fragment:$nav_version"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui:$nav_version"
@@ -91,6 +92,7 @@ dependencies {
 
     /*
      * Butterknife
+     * https://github.com/JakeWharton/butterknife
      */
     implementation 'com.jakewharton:butterknife:8.8.1'
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
