@@ -16,6 +16,26 @@
             android:layout_height="match_parent" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/decoration_skill_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            app:labelText="@string/decorations_skill_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_header" />
+
+        <LinearLayout
+            android:id="@+id/decoration_skill_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/decoration_skill_header" />
+
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/decoration_drop_list_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -23,7 +43,7 @@
             app:labelText="@string/decorations_drop_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/decoration_header" />
+            app:layout_constraintTop_toBottomOf="@+id/decoration_skill_list" />
 
         <LinearLayout
             android:id="@+id/decoration_drop_list"
@@ -53,26 +73,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/decoration_skill_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_gap"
-            app:labelText="@string/decorations_skill_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/decoration_drop_list" />
-
-        <LinearLayout
-            android:id="@+id/decoration_skill_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/decoration_skill_header" />
-
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
