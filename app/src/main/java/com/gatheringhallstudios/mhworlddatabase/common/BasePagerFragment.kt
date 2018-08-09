@@ -1,18 +1,19 @@
 package com.gatheringhallstudios.mhworlddatabase.common
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.gatheringhallstudios.mhworlddatabase.R
-
-import java.util.ArrayList
-
 import kotlinx.android.synthetic.main.fragment_generic_pager.*
 import kotlinx.android.synthetic.main.fragment_generic_pager.view.*
+import java.util.*
+
 
 /**
  * Abstract Base Fragment for implementing Hubs with multiple detail tabs.
@@ -90,5 +91,36 @@ abstract class BasePagerFragment : Fragment() {
         fun getTabs(): List<PagerTab> {
             return tabs
         }
+    }
+
+    /*
+     * Displays a screenshot of the child fragment contents while being destroyed. Otherwise
+     * children will disappear before transition animations begin.
+     * https://gist.github.com/luksprog/4996190
+     *
+     * TODO Modify for version in comments with bitmap recycling
+     */
+
+    private var cachedBitmap: Bitmap? = null
+
+    override fun onPause() {
+        cachedBitmap = loadBitmapFromView(pager_list)
+        super.onPause()
+    }
+
+    private fun loadBitmapFromView(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(view.width,
+                view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.layout(0, 0 + tab_layout.height, view.width, view.height + tab_layout.height)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    override fun onDestroyView() {
+        val bitmapDrawable = BitmapDrawable(cachedBitmap)
+        pager_list.background = bitmapDrawable
+        cachedBitmap = null
+        super.onDestroyView()
     }
 }
