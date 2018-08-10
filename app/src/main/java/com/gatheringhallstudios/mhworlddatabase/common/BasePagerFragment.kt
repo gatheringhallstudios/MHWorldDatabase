@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,9 @@ import java.util.*
  */
 
 abstract class BasePagerFragment : Fragment() {
+    companion object {
+        val TAG = BasePagerFragment::class.java.simpleName
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate view
@@ -94,33 +98,46 @@ abstract class BasePagerFragment : Fragment() {
     }
 
     /*
-     * Displays a screenshot of the child fragment contents while being destroyed. Otherwise
+     * Contains a screenshot of the child fragment contents while being destroyed. Otherwise
      * children will disappear before transition animations begin.
      * https://gist.github.com/luksprog/4996190
-     *
-     * TODO Modify for version in comments with bitmap recycling
      */
-
     private var cachedBitmap: Bitmap? = null
 
     override fun onPause() {
-        cachedBitmap = loadBitmapFromView(pager_list)
+        if (isRemoving) {
+            createdCachedBitmap()
+        }
         super.onPause()
     }
 
-    private fun loadBitmapFromView(view: View): Bitmap {
-        val bitmap = Bitmap.createBitmap(view.width,
-                view.height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        view.layout(0, 0 + tab_layout.height, view.width, view.height + tab_layout.height)
-        view.draw(canvas)
-        return bitmap
+    /**
+     * Snapshots the current state of the viewpager, to then render it as a background during destroy.
+     * This is so that animations can work smoothly, since viewpagers clear the view before navigation.
+     */
+    private fun createdCachedBitmap() {
+        try {
+            val view = pager_list
+            val bitmap = Bitmap.createBitmap(view.width,
+                    view.height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            view.layout(0, 0 + tab_layout.height, view.width, view.height + tab_layout.height)
+            view.draw(canvas)
+
+            this.cachedBitmap = bitmap
+
+        } catch (ex: Exception) {
+            Log.e(TAG, "Failed to create cached bitmap for smooth navigation", ex)
+        }
     }
 
     override fun onDestroyView() {
-        val bitmapDrawable = BitmapDrawable(cachedBitmap)
-        pager_list.background = bitmapDrawable
-        cachedBitmap = null
+        cachedBitmap?.let {
+            val bitmapDrawable = BitmapDrawable(resources, it)
+            pager_list.background = bitmapDrawable
+            cachedBitmap = null
+        }
+
         super.onDestroyView()
     }
 }
