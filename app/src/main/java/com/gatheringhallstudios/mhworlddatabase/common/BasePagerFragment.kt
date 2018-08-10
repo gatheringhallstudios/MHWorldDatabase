@@ -120,9 +120,12 @@ abstract class BasePagerFragment : Fragment() {
             val view = pager_list
             val bitmap = Bitmap.createBitmap(view.width,
                     view.height, Bitmap.Config.ARGB_8888)
+
             val canvas = Canvas(bitmap)
-            view.layout(0, 0 + tab_layout.height, view.width, view.height + tab_layout.height)
+            canvas.save()
+            canvas.translate(-view.scrollX.toFloat(), 0F)
             view.draw(canvas)
+            canvas.restore() // restore canvas matrix/clip state
 
             this.cachedBitmap = bitmap
 
