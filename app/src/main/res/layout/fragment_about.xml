@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_discord"
-            app:labelText="https://discord.gg/KcrSTGz" />
+            app:labelText="https://discord.gg/k5rmEWh" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:layout_width="match_parent"
