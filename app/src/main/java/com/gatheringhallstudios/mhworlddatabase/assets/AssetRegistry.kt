@@ -49,6 +49,7 @@ val VectorRegistry = createRegistry(
         "Gem" to R.xml.ic_items_gem_base,
         "Herb" to R.xml.ic_items_herb_base,
         "Hide" to R.xml.ic_items_hide_base,
+        "Honey" to R.xml.ic_items_honey_base,
         "Husk" to R.xml.ic_items_husk_base,
         "Jaw" to R.xml.ic_items_monster_jaw_base,
         "Knife" to R.xml.ic_items_knife_base,
