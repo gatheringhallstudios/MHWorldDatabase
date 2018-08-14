@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     app:iconSrc="@drawable/ic_element_fire"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="1">
+                    tools:numStars="1">
 
                 </com.gatheringhallstudios.mhworlddatabase.components.IconStarCell>
 
@@ -78,29 +78,7 @@
                     android:layout_height="wrap_content"
                     app:iconSrc="@drawable/ic_status_poison"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="2" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/ice_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_element_ice"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="2" />
-
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/sleep_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_status_sleep"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="2" />
+                    tools:numStars="2" />
 
             </TableRow>
 
@@ -114,15 +92,16 @@
                     android:layout_height="wrap_content"
                     app:iconSrc="@drawable/ic_element_water"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="1" />
+                    tools:numStars="1" />
 
                 <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/paralysis_star_cell"
+                    android:id="@+id/sleep_star_cell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_status_paralysis"
+                    app:iconSrc="@drawable/ic_status_sleep"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="1" />
+                    tools:numStars="2" />
+
             </TableRow>
 
             <TableRow
@@ -135,7 +114,28 @@
                     android:layout_height="wrap_content"
                     app:iconSrc="@drawable/ic_element_thunder"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="3" />
+                    tools:numStars="3" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                    android:id="@+id/paralysis_star_cell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_status_paralysis"
+                    app:layout_constraintRight_toRightOf="parent"
+                    tools:numStars="1" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                    android:id="@+id/ice_star_cell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_element_ice"
+                    app:layout_constraintRight_toRightOf="parent"
+                    tools:numStars="2" />
 
                 <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                     android:id="@+id/blast_star_cell"
@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     app:iconSrc="@drawable/ic_status_blast"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="1">
+                    tools:numStars="1">
 
                 </com.gatheringhallstudios.mhworlddatabase.components.IconStarCell>
             </TableRow>
@@ -158,7 +158,7 @@
                     android:layout_height="wrap_content"
                     app:iconSrc="@drawable/ic_element_dragon"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="2" />
+                    tools:numStars="2" />
 
                 <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
                     android:id="@+id/stun_star_cell"
@@ -166,7 +166,7 @@
                     android:layout_height="wrap_content"
                     app:iconSrc="@drawable/ic_status_stun"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:numStars="1" />
+                    tools:numStars="1" />
             </TableRow>
 
         </TableLayout>
