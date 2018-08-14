@@ -15,24 +15,6 @@ The current system has several problems:
 It will also need a split like how entities are split.
  */
 
-data class Location(
-        val id: Int,
-        val name: String?
-)
-
-/**
- * Represents an item at a location.
- * It is expected that the location is already known.
- */
-data class LocationItem(
-        @Embedded(prefix = "item_") val item: ItemBase,
-        val rank: Rank?,
-        val area: Int,
-        val stack: Int,
-        val percentage: Int,
-        val nodes: Int
-)
-
 
 open class DecorationBase(
         val id: Int,

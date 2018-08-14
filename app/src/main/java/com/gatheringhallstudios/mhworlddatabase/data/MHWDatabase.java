@@ -31,6 +31,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.DecorationText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemCombinationEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationCampText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterBreakEntity;
@@ -61,7 +62,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 ItemEntity.class, ItemText.class, ItemCombinationEntity.class,
 
                 // Location classes
-                LocationText.class, LocationItemEntity.class,
+                LocationText.class, LocationItemEntity.class, LocationCampText.class,
 
                 // monster classes
                 MonsterEntity.class, MonsterText.class, MonsterHabitatEntity.class,
@@ -82,7 +83,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class,
                 ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class
         },
-        version = 15,
+        version = 16,
         exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {

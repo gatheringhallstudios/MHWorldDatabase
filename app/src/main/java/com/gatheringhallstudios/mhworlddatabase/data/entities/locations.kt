@@ -24,3 +24,12 @@ data class LocationItemEntity(
         val percentage: Int,
         val nodes: Int
 )
+
+@Entity(tableName = "location_camp_text")
+data class LocationCampText(
+        @PrimaryKey val id: Int,
+        val location_id: Int,
+        val lang_id: String,
+        val name: String?,
+        val area: Int
+)

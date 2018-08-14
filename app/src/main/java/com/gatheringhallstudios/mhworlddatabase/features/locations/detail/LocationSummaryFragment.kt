@@ -36,9 +36,17 @@ class LocationSummaryFragment : RecyclerViewFragment() {
 
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
+        // todo: clean up with coroutines
+
         viewModel.location.observe(this, Observer {
             if (it != null) {
                 adapter.bindLocation(it)
+            }
+        })
+
+        viewModel.camps.observe(this, Observer {
+            if (it != null) {
+                adapter.bindCamps(getString(R.string.location_camps), it)
             }
         })
 

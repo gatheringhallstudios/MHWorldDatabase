@@ -12,28 +12,40 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
+import com.gatheringhallstudios.mhworlddatabase.data.models.LocationCamp
 import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.util.DataSynchronizer
+import com.gatheringhallstudios.mhworlddatabase.util.DataWatcher
 import kotlinx.android.synthetic.main.listitem_reward.*
+
+class LocationData: DataSynchronizer() {
+    var location: Location by DataWatcher(this)
+    var items: Map<String, List<LocationItem>> by DataWatcher(this)
+    var camps: List<LocationCamp> by DataWatcher(this)
+}
 
 /**
  * A wrapper for an all-in-one location detail that contains the location and the gatherable items.
- * Updating
+ * Will not do anything unless ALL data is binded.
  */
 class LocationDetailAdapterWrapper {
-    private var location: Location? = null
-    private var items: MutableMap<String, List<LocationItem>>? = null
+    private val data = LocationData()
+
+    private var campTitle: String = ""
 
     val adapter = CategoryAdapter(
             LocationHeaderAdapterDelegate(),
+            LocationCampAdapterDelegate(),
             LocationItemsAdapterDelegate(),
             EmptyStateAdapterDelegate()
     )
 
     fun bindLocation(location: Location) {
-        this.location = location
+        data.location = location
         buildAdapter()
     }
 
@@ -48,7 +60,13 @@ class LocationDetailAdapterWrapper {
         for ((area, areaItems) in grouped) {
             newItems[context.getString(R.string.location_area, area)] = areaItems
         }
-        this.items = newItems
+        data.items = newItems
+        buildAdapter()
+    }
+
+    fun bindCamps(campTitle: String, camps: List<LocationCamp>) {
+        this.campTitle = campTitle
+        data.camps = camps
         buildAdapter()
     }
 
@@ -58,21 +76,22 @@ class LocationDetailAdapterWrapper {
     private fun buildAdapter() {
         adapter.clear()
 
-        // shadowing so kotlin's type refinements work
-        val location = location
-        val items = items
-
-        if (location == null || items == null) {
+        if (!data.allInitialized) {
             return
         }
 
-        if (items.isEmpty()) {
-            // if empty, add the header followed by an "empty" message
-            adapter.addSection(listOf(location, EmptyState()))
+        adapter.addSection(listOf(data.location))
+
+        if (data.camps.isNotEmpty()) {
+            adapter.addSection(campTitle, data.camps)
+        }
+
+        if (data.items.isEmpty()) {
+            // if empty, add the "empty" message
+            adapter.addSection(listOf(EmptyState()))
         } else {
-            // if not empty, add the header followed by the items
-            adapter.addSection(listOf(location))
-            adapter.addSections(items)
+            // if not empty, add the items
+            adapter.addSections(data.items)
         }
     }
 }
@@ -89,6 +108,21 @@ class LocationHeaderAdapterDelegate : SimpleListDelegate<Location>() {
             setIconType(IconType.PAPER)
             setIconDrawable(AssetLoader.loadIconFor(data))
             setTitleText(data.name)
+        }
+    }
+}
+
+class LocationCampAdapterDelegate : SimpleListDelegate<LocationCamp>() {
+    override fun isForViewType(obj: Any) = obj is LocationCamp
+
+    override fun onCreateView(parent: ViewGroup): View {
+        return IconLabelTextCell(parent.context)
+    }
+
+    override fun bindView(viewHolder: SimpleViewHolder, data: LocationCamp) {
+        with(viewHolder.itemView as IconLabelTextCell) {
+            setLabelText(data.name)
+            setValueText(viewHolder.context.getString(R.string.location_area, data.area))
         }
     }
 }

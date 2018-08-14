@@ -54,6 +54,12 @@ abstract class DataSynchronizer {
     private val initializedEvent = MutableLiveData<Boolean>()
 
     /**
+     * Set to true when all waiting data has been set
+     */
+    var allInitialized: Boolean = false
+        private set
+
+    /**
      * An event that triggers once all data is loaded. Accepts a lifecycle owner
      * and activates in the UI thread.
      */
@@ -76,6 +82,8 @@ abstract class DataSynchronizer {
      */
     internal fun notifyWatcherInitialized() {
         val allInitialized = watchers.all { it.initialized }
+        this.allInitialized = allInitialized
+
         if (allInitialized) {
             initializedEvent.postValue(true)
         }
