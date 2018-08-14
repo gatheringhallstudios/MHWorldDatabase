@@ -60,12 +60,12 @@ class DetailHeaderCell : ConstraintLayout {
         header_title.text = titleText
         header_description.text = descriptionText
 
-        if (descriptionText != null) {
+        if (!descriptionText.isNullOrEmpty()) {
             header_description.visibility = View.VISIBLE
             header_description.text = descriptionText
         }
 
-        if (subtitleText != null) {
+        if (!subtitleText.isNullOrEmpty()) {
             header_subtitle.visibility = View.VISIBLE
             header_subtitle.text = subtitleText
         }
