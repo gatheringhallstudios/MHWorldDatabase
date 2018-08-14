@@ -1,11 +1,12 @@
 package com.gatheringhallstudios.mhworlddatabase.features.search
 
 fun normalize(str: String): String {
-    // todo: make more efficient with a character to character mapping
+    // todo: make more efficient with a character to string mapping
     // todo: support additional characters like greek ones, support locale transformations
     var result = str.toLowerCase()
     result = result.replace("α", "alpha")
     result = result.replace("β", "beta")
+    result = result.replace("γ", "gamma")
     return result
 }
 
