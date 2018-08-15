@@ -2,10 +2,8 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_armor_summary.*
-import kotlinx.android.synthetic.main.fragment_armor_summary.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
-import kotlinx.android.synthetic.main.listitem_large.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
 class ArmorDetailFragment : Fragment() {
@@ -161,7 +157,7 @@ class ArmorDetailFragment : Fragment() {
 
             view.setLeftIconDrawable(icon)
             view.setLabelText(itemQuantity.item.name)
-            view.setValueText(getString(R.string.quantity, itemQuantity.quantity))
+            view.setValueText(getString(R.string.quantity_none, itemQuantity.quantity))
             view.setOnClickListener {
                 getRouter().navigateItemDetail(itemQuantity.item.id)
             }

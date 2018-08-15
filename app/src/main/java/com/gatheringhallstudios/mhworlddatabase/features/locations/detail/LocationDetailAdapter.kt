@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.locations.detail
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -121,6 +122,7 @@ class LocationCampAdapterDelegate : SimpleListDelegate<LocationCamp>() {
 
     override fun bindView(viewHolder: SimpleViewHolder, data: LocationCamp) {
         with(viewHolder.itemView as IconLabelTextCell) {
+            setLeftIconDrawable(ContextCompat.getDrawable(context, R.drawable.ic_ui_camp))
             setLabelText(data.name)
             setValueText(viewHolder.context.getString(R.string.location_area, data.area))
         }
@@ -138,7 +140,7 @@ class LocationItemsAdapterDelegate : SimpleListDelegate<LocationItem>() {
     override fun bindView(viewHolder: SimpleViewHolder, data: LocationItem) {
         viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.item))
         viewHolder.reward_name.text = data.item.name
-        viewHolder.reward_stack.text = viewHolder.resources.getString(R.string.quantity, data.stack)
+        viewHolder.reward_stack.text = viewHolder.resources.getString(R.string.quantity_x, data.stack)
         viewHolder.reward_percent.text = viewHolder.resources.getString(R.string.percentage, data.percentage)
 
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateItemDetail(data.item.id) }

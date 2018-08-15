@@ -45,9 +45,10 @@
 
     <string name="rarity_string">Rarity %1$d</string>
     <string name="none">None</string>
-    <string name="quantity">%1$d</string>
+    <string name="quantity_none">%1$d</string>
+    <string name="quantity_x">x %1$d</string>
     <string name="plus">+%1$d</string>
-    <string name="percentage">%1$s%%</string>
+    <string name="percentage">%1$d%%</string>
 
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>
