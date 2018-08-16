@@ -35,8 +35,8 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation>() {
         viewHolder.reward_icon.applyIconType(IconType.PAPER)
         viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.location))
         viewHolder.reward_name.text = ctx.getString(R.string.location_area, data.area)
-        viewHolder.reward_stack.text = ctx.getString(R.string.quantity_x, data.stack)
-        viewHolder.reward_percent.text = ctx.getString(R.string.percentage, data.percentage)
+        viewHolder.reward_stack.text = ctx.getString(R.string.format_quantity_x, data.stack)
+        viewHolder.reward_percent.text = ctx.getString(R.string.format_percentage, data.percentage)
 
         viewHolder.itemView.setOnClickListener {
             it.getRouter().navigateLocationDetail(data.location.id)
@@ -72,8 +72,8 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward>() {
         viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.monster))
         viewHolder.label_text.text = data.monster.name
         viewHolder.sublabel_text.text = source
-        viewHolder.value_text.text = viewHolder.resources.getString(R.string.percentage, data.percentage)
-        viewHolder.subvalue_text.text = viewHolder.resources.getString(R.string.quantity_none, data.stack)
+        viewHolder.value_text.text = viewHolder.resources.getString(R.string.format_percentage, data.percentage)
+        viewHolder.subvalue_text.text = viewHolder.resources.getString(R.string.format_quantity_none, data.stack)
 
         viewHolder.itemView.setOnClickListener {
             it.getRouter().navigateMonsterDetail(data.monster.id)

@@ -140,8 +140,8 @@ class LocationItemsAdapterDelegate : SimpleListDelegate<LocationItem>() {
     override fun bindView(viewHolder: SimpleViewHolder, data: LocationItem) {
         viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.item))
         viewHolder.reward_name.text = data.item.name
-        viewHolder.reward_stack.text = viewHolder.resources.getString(R.string.quantity_x, data.stack)
-        viewHolder.reward_percent.text = viewHolder.resources.getString(R.string.percentage, data.percentage)
+        viewHolder.reward_stack.text = viewHolder.resources.getString(R.string.format_quantity_x, data.stack)
+        viewHolder.reward_percent.text = viewHolder.resources.getString(R.string.format_percentage, data.percentage)
 
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateItemDetail(data.item.id) }
     }

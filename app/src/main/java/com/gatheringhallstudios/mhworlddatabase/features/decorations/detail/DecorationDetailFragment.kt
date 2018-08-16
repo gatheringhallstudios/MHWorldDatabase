@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
-import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getColorCompat
 import kotlinx.android.synthetic.main.fragment_decoration_summary.*
@@ -56,7 +56,7 @@ class DecorationDetailFragment : Fragment() {
         val icon = AssetLoader.loadIconFor(decoration)
         decoration_header.setIconDrawable(icon)
         decoration_header.setTitleText(decoration.name)
-        decoration_header.setSubtitleText(getString(R.string.rarity_string, decoration.rarity))
+        decoration_header.setSubtitleText(getString(R.string.format_rarity_string, decoration.rarity))
         decoration_header.setSubtitleColor(AssetLoader.loadRarityColor(decoration.rarity))
 
         // inner function used to inflate a feystone change row
@@ -69,7 +69,7 @@ class DecorationDetailFragment : Fragment() {
                 val color = context?.getColorCompat(R.color.textColorMedium) ?: 0
                 view.reward_percent.setTextColor(color)
             } else {
-                view.reward_percent.text = getString(R.string.percentage, chance.toString())
+                view.reward_percent.text = getString(R.string.format_percentage, chance.toString())
             }
 
             return view

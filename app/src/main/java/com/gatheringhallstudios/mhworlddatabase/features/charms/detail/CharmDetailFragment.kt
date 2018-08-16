@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +52,7 @@ class CharmDetailFragment : Fragment() {
         setActivityTitle(charm.name)
         charm_header.setIconDrawable(AssetLoader.loadIconFor(charm))
         charm_header.setTitleText(charm.name)
-        charm_header.setSubtitleText(getString(R.string.rarity_string, charm.rarity))
+        charm_header.setSubtitleText(getString(R.string.format_rarity_string, charm.rarity))
         charm_header.setSubtitleColor(AssetLoader.loadRarityColor(charm.rarity))
 
         previous_item_layout.removeAllViews()

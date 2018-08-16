@@ -89,7 +89,7 @@ class ArmorSetDetailItem(val armor: Armor) : Item() {
         val view = viewHolder.itemView
 
         viewHolder.armor_name.text = armor.name
-        viewHolder.rarity_string.text = view.resources.getString(R.string.rarity_string, armor.rarity)
+        viewHolder.rarity_string.text = view.resources.getString(R.string.format_rarity_string, armor.rarity)
         viewHolder.defense_value.text = view.resources.getString(
                 R.string.armor_defense_value,
                 armor.defense_base,

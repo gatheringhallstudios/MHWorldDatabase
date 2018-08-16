@@ -43,12 +43,14 @@
     <string name="type_extract_white_abbr">WHT</string>
     <string name="type_extract_green_abbr">GRN</string>
 
-    <string name="rarity_string">Rarity %1$d</string>
     <string name="none">None</string>
-    <string name="quantity_none">%1$d</string>
-    <string name="quantity_x">x %1$d</string>
-    <string name="plus">+%1$d</string>
-    <string name="percentage">%1$d%%</string>
+
+    <!-- Common String Formatting -->
+    <string name="format_rarity_string">Rarity %1$d</string>
+    <string name="format_quantity_none">%1$d</string>
+    <string name="format_quantity_x">x %1$d</string>
+    <string name="format_plus">+%1$d</string>
+    <string name="format_percentage">%1$s%%</string>
 
     <!-- Headers -->
     <string name="header_habitat">Habitat</string>

@@ -54,7 +54,7 @@ class ArmorDetailFragment : Fragment() {
         armor_header.setIconType(IconType.ZEMBELLISHED)
         armor_header.setIconDrawable(AssetLoader.loadIconFor(armor))
         armor_header.setTitleText(armor.name)
-        armor_header.setSubtitleText(getString(R.string.rarity_string, armor.rarity))
+        armor_header.setSubtitleText(getString(R.string.format_rarity_string, armor.rarity))
         armor_header.setSubtitleColor(AssetLoader.loadRarityColor(armor.rarity))
 
         // set defense label
@@ -157,7 +157,7 @@ class ArmorDetailFragment : Fragment() {
 
             view.setLeftIconDrawable(icon)
             view.setLabelText(itemQuantity.item.name)
-            view.setValueText(getString(R.string.quantity_none, itemQuantity.quantity))
+            view.setValueText(getString(R.string.format_quantity_none, itemQuantity.quantity))
             view.setOnClickListener {
                 getRouter().navigateItemDetail(itemQuantity.item.id)
             }
