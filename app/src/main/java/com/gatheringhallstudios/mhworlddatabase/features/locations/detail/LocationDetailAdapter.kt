@@ -122,6 +122,7 @@ class LocationCampAdapterDelegate : SimpleListDelegate<LocationCamp>() {
 
     override fun bindView(viewHolder: SimpleViewHolder, data: LocationCamp) {
         with(viewHolder.itemView as IconLabelTextCell) {
+            setLeftIconType(IconType.NORMAL)
             setLeftIconDrawable(ContextCompat.getDrawable(context, R.drawable.ic_ui_camp))
             setLabelText(data.name)
             setValueText(viewHolder.context.getString(R.string.location_area, data.area))
