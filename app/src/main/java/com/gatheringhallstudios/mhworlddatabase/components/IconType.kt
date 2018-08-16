@@ -17,9 +17,8 @@ enum class IconType {
 
 /**
  * Extension that applies the icon type to an image.
- * Does not modify padding, so its only a rough transformation
+ * Padding is set based on type
  * TODO: Move somewhere more sane
- * TODO: Handle padding somehow. Perhaps a rough 2dp for all but NORMAL and 0dp for normal suffices?
  */
 fun ImageView.applyIconType(type: IconType) {
     val background = when (type) {
@@ -34,4 +33,13 @@ fun ImageView.applyIconType(type: IconType) {
     } else {
         this.setBackgroundResource(background)
     }
+
+    val padding = when (type) {
+        IconType.NORMAL -> 0
+        IconType.PAPER, IconType.EMBELLISHED ->
+            this.resources.getDimensionPixelSize(R.dimen.icon_padding_decorated)
+        IconType.ZEMBELLISHED ->
+            this.resources.getDimensionPixelSize(R.dimen.icon_padding_zembellished)
+    }
+    this.setPadding(padding, padding, padding, padding)
 }
