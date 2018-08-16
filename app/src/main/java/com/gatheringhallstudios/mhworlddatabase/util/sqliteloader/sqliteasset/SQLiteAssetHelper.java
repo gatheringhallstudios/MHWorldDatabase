@@ -171,22 +171,21 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
         //if (mDatabase != null) mDatabase.lock();
         try {
             mIsInitializing = true;
-            //if (mName == null) {
-            //    db = SQLiteDatabase.create(null);
-            //} else {
-            //    db = mContext.openOrCreateDatabase(mName, 0, mFactory);
-            //}
-            db = createOrOpenDatabase(false);
 
+            db = createOrOpenDatabase(false);
             int version = db.getVersion();
 
             // do force upgrade
             if (version != 0 && version < mForcedUpgradeVersion) {
+                // close old db - we need to close the old one before making a new one - added by Supe 8/16/2018
+                db.close();
+
                 db = createOrOpenDatabase(true);
                 db.setVersion(mNewVersion);
                 version = db.getVersion();
             }
 
+            // do regular upgrade
             if (version != mNewVersion) {
                 db.beginTransaction();
                 try {
@@ -379,30 +378,38 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
         setForcedUpgrade(mNewVersion);
     }
 
+    /**
+     * Creates or opens a database. If force is enabled, it will also create a new DB.
+     * If force is disabled, will always default to returning an existing DB.
+     * Tweaked by Supe on 8/16/2018 in attempt to fix a bug in Android P.
+     * @param force
+     * @return
+     * @throws SQLiteAssetException
+     */
     private SQLiteDatabase createOrOpenDatabase(boolean force) throws SQLiteAssetException {
+        File file = new File (mDatabasePath + "/" + mName);
+        boolean fileExists = file.exists();
+
+        // If the file exists and force is enabled, assume there is a DB
+        if (fileExists && force) {
+            Log.w(TAG, "forcing database upgrade!");
+            copyDatabaseFromAssets();
+            return returnDatabase();
+        }
 
         // test for the existence of the db file first and don't attempt open
         // to prevent the error trace in log on API 14+
         SQLiteDatabase db = null;
-        File file = new File (mDatabasePath + "/" + mName);
-        if (file.exists()) {
+        if (fileExists) {
             db = returnDatabase();
         }
-        //SQLiteDatabase db = returnDatabase();
 
         if (db != null) {
-            // database already exists
-            if (force) {
-                Log.w(TAG, "forcing database upgrade!");
-                copyDatabaseFromAssets();
-                db = returnDatabase();
-            }
             return db;
         } else {
             // database does not exist, copy it from assets and return it
             copyDatabaseFromAssets();
-            db = returnDatabase();
-            return db;
+            return returnDatabase();
         }
     }
 
