@@ -67,7 +67,7 @@ object AssetLoader {
 
     fun loadArmorIcon(type: ArmorType, rarity: Int): Drawable? {
         val name = when (type) {
-            ArmorType.HEAD -> "ArmorArms"
+            ArmorType.HEAD -> "ArmorHead"
             ArmorType.CHEST -> "ArmorChest"
             ArmorType.ARMS -> "ArmorArms"
             ArmorType.WAIST -> "ArmorWaist"
