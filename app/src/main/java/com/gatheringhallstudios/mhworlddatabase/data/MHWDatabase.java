@@ -15,6 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SearchDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.WeaponDao;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorRecipeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetBonusEntity;
@@ -46,6 +47,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
 // laziness, since we need to manually add all entities which is quite cumbersome
@@ -81,7 +83,10 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
 
                 // Armor classes
                 ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class,
-                ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class
+                ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class,
+
+                // Weapon Classes
+                WeaponEntity.class
         },
         version = 16,
         exportSchema = false)
@@ -133,4 +138,6 @@ public abstract class MHWDatabase extends RoomDatabase {
     public abstract SearchDao searchDao();
 
     public abstract DecorationDao decorationDao();
+
+    public abstract WeaponDao weaponDao();
 }

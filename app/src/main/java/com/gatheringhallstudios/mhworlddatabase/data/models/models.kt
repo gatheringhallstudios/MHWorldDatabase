@@ -40,9 +40,9 @@ class Decoration(
 
 /**
  * A view for basic weapon information.
- * TODO: Replace
+ * TODO: Replace (How?)
  */
-data class WeaponBasic(
+data class WeaponBase(
         var id: Int,
         var name: String?,
 

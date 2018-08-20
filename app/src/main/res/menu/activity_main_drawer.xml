@@ -36,6 +36,10 @@
             android:id="@+id/locationListAction"
             android:icon="@drawable/ic_ui_map"
             android:title="@string/locations_title" />
+        <item
+            android:id="@+id/weaponListAction"
+            android:icon="@drawable/ic_equipment_charge_blade_white"
+            android:title="@string/weapons_title" />
     </group>
 
     <item android:title="Other">

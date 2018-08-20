@@ -115,6 +115,19 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 
     <fragment
+        android:id="@+id/weaponListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponListFragment"
+        android:label="@string/weapons_title"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/weaponListAction"
+        app:destination="@id/weaponListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    <fragment
         android:id="@+id/aboutDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.AboutDialogFragment"
         android:label="About"

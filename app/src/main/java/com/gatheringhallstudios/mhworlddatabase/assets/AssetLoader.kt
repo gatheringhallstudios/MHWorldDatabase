@@ -6,7 +6,9 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType as WeaponTypeEnum
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine
@@ -61,6 +63,27 @@ object AssetLoader {
         return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 
+    fun loadIconFor(type: WeaponType): Drawable? {
+        val name = when (type.weapon_type) {
+            WeaponTypeEnum.GREAT_SWORD -> "GreatSword"
+            WeaponTypeEnum.LONG_SWORD -> "LongSword"
+            WeaponTypeEnum.SWORD_AND_SHIELD -> "SwordAndShield"
+            WeaponTypeEnum.DUAL_BLADES -> "DualBlades"
+            WeaponTypeEnum.HAMMER -> "Hammer"
+            WeaponTypeEnum.HUNTING_HORN -> "HuntingHorn"
+            WeaponTypeEnum.LANCE -> "Lance"
+            WeaponTypeEnum.GUNLANCE -> "Gunlance"
+            WeaponTypeEnum.SWITCH_AXE -> "SwitchAxe"
+            WeaponTypeEnum.CHARGE_BLADE -> "ChargeBlade"
+            WeaponTypeEnum.INSECT_GLAIVE -> "InsectGlaive"
+            WeaponTypeEnum.BOW -> "Bow"
+            WeaponTypeEnum.LIGHT_BOWGUN -> "LightBowgun"
+            WeaponTypeEnum.HEAVY_BOWGUN -> "HeavyBowgun"
+        }
+
+        return ctx.getVectorDrawable(name, null)
+    }
+
     fun loadSkillIcon(color: String?): Drawable? {
         return ctx.getVectorDrawable("Skill", color)
     }
@@ -82,4 +105,5 @@ object AssetLoader {
         val colorId = ColorRegistry("rare$rarity") ?: ColorRegistry("rare1")
         return ContextCompat.getColor(ctx, colorId!!)
     }
+
 }
