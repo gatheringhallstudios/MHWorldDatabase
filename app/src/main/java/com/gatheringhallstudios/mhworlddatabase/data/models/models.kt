@@ -1,9 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.data.entities.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 /*
@@ -35,7 +32,7 @@ class Decoration(
         val glowing_feystone_chance: Double,
         val worn_feystone_chance: Double,
         val warped_feystone_chance: Double
-): DecorationBase(id, name, slot, icon_color)
+) : DecorationBase(id, name, slot, icon_color)
 
 
 /**
@@ -53,4 +50,9 @@ data class WeaponBase(
         var slot_1: Int,
         var slot_2: Int,
         var slot_3: Int
-)
+) {
+    var depth: Int = 0
+    var formatting: String = ""
+    var color: String = ""
+
+}
