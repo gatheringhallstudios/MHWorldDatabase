@@ -9,6 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetail
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreeListFragment
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 /**
@@ -69,6 +70,13 @@ class Router(private val navController: NavController) {
         navController.navigate(
                 R.id.openCharmDetailAction,
                 BundleBuilder().putInt(CharmDetailFragment.ARG_CHARM_ID, charmId).build()
+        )
+    }
+
+    fun navigateWeaponTree(weaponTypeName: String) {
+        navController.navigate(
+                R.id.openWeaponTreeDetailAction,
+                BundleBuilder().putString(WeaponTreeListFragment.ARG_WEAPON_TREE_NAME, weaponTypeName).build()
         )
     }
 

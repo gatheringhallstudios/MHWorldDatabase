@@ -9,13 +9,14 @@
         android:id="@+id/tree_branch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_gravity="left|center"
+        android:layout_weight="0"
+        android:text="TextView"
+        android:textSize="36sp" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/weapon_accent"

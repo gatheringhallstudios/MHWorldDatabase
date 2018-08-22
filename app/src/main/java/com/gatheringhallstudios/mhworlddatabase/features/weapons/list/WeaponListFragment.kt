@@ -21,7 +21,9 @@ class WeaponListFragment : RecyclerViewFragment() {
         ViewModelProviders.of(this).get(ViewModel::class.java)
     }
 
-    val adapter = BasicListDelegationAdapter(WeaponTypeAdapterDelegate())
+    val adapter = BasicListDelegationAdapter(WeaponTypeAdapterDelegate {
+        getRouter().navigateWeaponTree(it.name)
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
