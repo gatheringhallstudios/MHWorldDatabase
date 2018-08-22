@@ -53,6 +53,7 @@ class WeaponListFragment : RecyclerViewFragment() {
 
     class ViewModel(application: Application) : AndroidViewModel(application) {
         private val dao = MHWDatabase.getDatabase(application).weaponDao()
+        //TODO: Check if weapon types and their localizations are meant to be acquired from the database
 //        val weaponTypes = dao.loadWeaponTypes(AppSettings.dataLocale)
     }
 }

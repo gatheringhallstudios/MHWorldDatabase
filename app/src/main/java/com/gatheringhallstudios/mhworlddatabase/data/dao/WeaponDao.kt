@@ -6,12 +6,11 @@ import android.arch.persistence.room.Query
 
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponBase
 
-/**
- * Created by Carlos on 3/21/2018.
- */
+
 @Dao
 abstract class WeaponDao {
 
+    //TODO: expand this weapon dao when we actually need the weapon data
 //    @Query("SELECT DISTINCT w.weapon_type " +
 //            "FROM weapon w  " +
 //            "WHERE t.lang_id = :langId ")

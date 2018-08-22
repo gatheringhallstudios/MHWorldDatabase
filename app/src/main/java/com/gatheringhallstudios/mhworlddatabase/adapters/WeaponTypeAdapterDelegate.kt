@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponType
 import kotlinx.android.synthetic.main.listitem_large.*
 
 /**
- * Defines an adapter delegate for a list of item combinations
+ * Defines an adapter delegate for weapon types
  */
 class WeaponTypeAdapterDelegate : SimpleListDelegate<WeaponType>() {
     override fun isForViewType(obj: Any) = obj is WeaponType
