@@ -43,7 +43,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponBase) -> Unit
     internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(weaponBase: WeaponBase) {
             view.weapon_name.text = weaponBase.name
-            view.weapon_subtitle.text = view.resources.getString(R.string.format_rarity_string, weaponBase.rarity)
+            view.weapon_subtitle.text = "${weaponBase.depth}"
             view.tree_branch.text = weaponBase.formatting
         }
     }
