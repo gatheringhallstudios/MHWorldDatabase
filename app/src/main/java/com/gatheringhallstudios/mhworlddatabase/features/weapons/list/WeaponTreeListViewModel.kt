@@ -2,11 +2,16 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
+import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponBase
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 class WeaponTreeListViewModel(application: Application) : AndroidViewModel(application) {
+    private val dao = MHWDatabase.getDatabase(application).weaponDao()
+//    val weaponTrees = dao.loadWeaponTrees(AppSettings.dataLocale, "great-sword")
+
     lateinit var weaponTreeData: TreeNode<WeaponBase>
     var weaponPaths: MutableList<MutableList<TreeNode<WeaponBase>>> = mutableListOf()
     val weaponTree: List<WeaponBase> = listOf()
