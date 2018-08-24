@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
+import com.gatheringhallstudios.mhworlddatabase.data.entities.UpgradesFrom
 
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponBase
 
@@ -16,8 +17,8 @@ abstract class WeaponDao {
         (SELECT w.id, wt.name, wt.lang_id, w.weapon_type, w.rarity, 0,  CAST(w.id AS TEXT)
             FROM weapon w
                 JOIN weapon_text wt USING (id)
-            WHERE wt.lang_id = "en"
-              AND (w.weapon_type = "great-sword")
+            WHERE wt.lang_id = :langId
+              AND (w.weapon_type = :weaponType)
 			  AND w.previous_weapon_id IS NULL
             UNION ALL
             SELECT w.id, wt.name, wt.lang_id, w.weapon_type, w.rarity, level + 1, path || ">" || CAST(w.id AS TEXT)
@@ -32,5 +33,5 @@ abstract class WeaponDao {
         FROM upgrades_from
         ORDER BY level ASC
           """)
-    abstract fun loadWeaponTrees(langId: String, weaponType: String): List<WeaponBase>
+    abstract fun loadWeaponTrees(langId: String, weaponType: String): List<UpgradesFrom>
 }

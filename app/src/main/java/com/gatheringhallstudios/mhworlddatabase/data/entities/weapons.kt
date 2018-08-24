@@ -79,3 +79,15 @@ data class WeaponText(
         val name: String?
 )
 
+@Entity(tableName= "upgrades_from")
+data class UpgradesFrom(
+        @PrimaryKey
+        val id: Int,
+        val name: String,
+        val lang_id:String,
+        val weapon_type: String,
+        val rarity: String,
+        val level: String,
+        val path: String
+)
+
