@@ -10,9 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 class WeaponTreeListViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = MHWDatabase.getDatabase(application).weaponDao()
-
-    lateinit var weaponTreeRoots: List<TreeNode<WeaponTree>>
-    var weaponPaths: MutableList<MutableList<TreeNode<WeaponTree>>> = mutableListOf()
+    var weaponPaths: List<TreeNode<WeaponTree>> = listOf()
     private lateinit var currentWeaponType : WeaponType
 
     fun setWeaponType(weaponType: WeaponType) {
@@ -25,13 +23,15 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
         }
 
         val weaponTreeData = dao.loadWeaponTrees(AppSettings.dataLocale, weaponType.type)
-        buildTree(weaponTreeData)
-        weaponTreeRoots.forEach {x ->
-            weaponPaths.addAll(findWeaponPaths(x, 0, "", true))
+        val weaponTreeRoots = buildTree(weaponTreeData)
+        val buffer : List<MutableList<TreeNode<WeaponTree>>> = weaponTreeRoots.flatMap {x ->
+            findWeaponPaths(x, 0, "", true)
         }
+
+        weaponPaths = buffer.flatten().distinct()
     }
 
-    private fun buildTree(weaponList: List<WeaponTree>) {
+    private fun buildTree(weaponList: List<WeaponTree>) : List<TreeNode<WeaponTree>> {
         //Build all nodes first
         val weapons = mutableMapOf<Int, TreeNode<WeaponTree>>()
         for (weaponTree in weaponList) {
@@ -47,7 +47,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
         }
 
         //Return base nodes
-        weaponTreeRoots =  weapons.filter {k -> k.value.parent == null}.values.toList()
+        return weapons.filter {k -> k.value.parent == null}.values.toList()
     }
 
     private fun findWeaponPaths(node: TreeNode<WeaponTree>, depth: Int, prefix: String, isTail: Boolean): MutableList<MutableList<TreeNode<WeaponTree>>> {

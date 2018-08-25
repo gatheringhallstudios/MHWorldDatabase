@@ -29,7 +29,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
 
         // Load data
         viewModel.setWeaponType( arguments?.getSerializable(ARG_WEAPON_TREE_TYPE) as WeaponType)
-        adapter.items = viewModel.weaponPaths.flatten().distinct()
+        adapter.items = viewModel.weaponPaths
         adapter.notifyDataSetChanged()
     }
 }
