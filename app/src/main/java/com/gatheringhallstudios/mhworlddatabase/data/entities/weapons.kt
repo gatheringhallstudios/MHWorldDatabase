@@ -1,6 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.data.entities
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
 
 @Entity(tableName = "weapon")
@@ -21,9 +23,9 @@ data class WeaponEntity(
         val element_hidden: Int,
         val sharpness: String,
         val sharpness_complete: String,
-        val previous_weapon_id: Int,
+        val previous_weapon_id: Int?,
         val craftable: Int,
-        @ColumnInfo(name="final")
+        @ColumnInfo(name = "final")
         val isFinal: Int,
         val kinsect_bonus: String?,
         val deviation: String?,
@@ -78,16 +80,3 @@ data class WeaponText(
 
         val name: String?
 )
-
-@Entity(tableName= "upgrades_from")
-data class UpgradesFrom(
-        @PrimaryKey
-        val id: Int,
-        val name: String,
-        val lang_id:String,
-        val weapon_type: String,
-        val rarity: String,
-        val level: String,
-        val path: String
-)
-

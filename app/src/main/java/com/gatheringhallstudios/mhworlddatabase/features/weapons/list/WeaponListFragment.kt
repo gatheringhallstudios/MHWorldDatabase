@@ -17,12 +17,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType as WeaponT
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 class WeaponListFragment : RecyclerViewFragment() {
-    private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ViewModel::class.java)
-    }
-
     val adapter = BasicListDelegationAdapter(WeaponTypeAdapterDelegate {
-        getRouter().navigateWeaponTree(it.name)
+        getRouter().navigateWeaponTree(it.name, it.weapon_type)
     })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,11 +47,5 @@ class WeaponListFragment : RecyclerViewFragment() {
 
         adapter.items = weaponTypes
         adapter.notifyDataSetChanged()
-    }
-
-    class ViewModel(application: Application) : AndroidViewModel(application) {
-        private val dao = MHWDatabase.getDatabase(application).weaponDao()
-        //TODO: Check if weapon types and their localizations are meant to be acquired from the database
-//        val weaponTypes = dao.loadWeaponTypes(AppSettings.dataLocale)
     }
 }

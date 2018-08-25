@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 
 class WeaponTreeListFragment : RecyclerViewFragment() {
     companion object {
         const val ARG_WEAPON_TREE_NAME = "WEAPON_TREE_ID"
+        const val ARG_WEAPON_TREE_TYPE = "WEAPON_TREE_TYPE"
     }
 
     // Setup adapter and navigation
@@ -24,8 +26,9 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setActivityTitle(arguments?.getString(ARG_WEAPON_TREE_NAME))
         setAdapter(adapter)
+
         // Load data
-        viewModel.initializeTree()
+        viewModel.setWeaponType( arguments?.getSerializable(ARG_WEAPON_TREE_TYPE) as WeaponType)
         adapter.items = viewModel.weaponPaths.flatten().distinct()
         adapter.notifyDataSetChanged()
     }

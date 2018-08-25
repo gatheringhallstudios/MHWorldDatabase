@@ -34,25 +34,3 @@ class Decoration(
         val warped_feystone_chance: Double
 ) : DecorationBase(id, name, slot, icon_color)
 
-
-/**
- * A view for basic weapon information.
- * TODO: Replace (How?)
- */
-data class WeaponBase(
-        var id: Int,
-        var name: String?,
-
-        var weapon_type: WeaponType?,
-        var rarity: Int,
-        var attack: Int,
-
-        var slot_1: Int,
-        var slot_2: Int,
-        var slot_3: Int
-) {
-    var depth: Int = 0
-    var formatting: String = ""
-    var color: String = ""
-
-}
