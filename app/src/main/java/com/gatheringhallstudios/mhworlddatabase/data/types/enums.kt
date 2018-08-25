@@ -2,7 +2,12 @@ package com.gatheringhallstudios.mhworlddatabase.data.types
 
 /**
  * This file contains a collection of enumerations used in the MHWorld app.
- * These enums are automatically converted by Room via the rules set in "Converters.kt".
+ * These enums are automatically converted via "Converters.kt".
+ * These can be used in queries without having to convert them.
+ *
+ * KEEP THEM SIMPLE
+ * If these enums become complex, they are allegedly no longer optimized by Proguard.
+ * TODO: Verify the above claim
  */
 
 /**
@@ -64,21 +69,21 @@ enum class ArmorType {
  * An enumeration that defines the type of weapon.
  * Created by Carlos on 3/20/2018.
  */
-enum class WeaponType(val type: String) {
-    GREAT_SWORD("great-sword"),
-    LONG_SWORD("long-sword"),
-    SWORD_AND_SHIELD("sword-and-shield"),
-    DUAL_BLADES("dual-blades"),
-    HAMMER("hammer"),
-    HUNTING_HORN("hunting-horn"),
-    LANCE("lance"),
-    GUNLANCE("gunlance"),
-    SWITCH_AXE("switch-axe"),
-    CHARGE_BLADE("charge-blade"),
-    INSECT_GLAIVE("insect-glaive"),
-    BOW("bow"),
-    LIGHT_BOWGUN("light-bowgun"),
-    HEAVY_BOWGUN("heavy-bowgun")
+enum class WeaponType {
+    GREAT_SWORD,
+    LONG_SWORD,
+    SWORD_AND_SHIELD,
+    DUAL_BLADES,
+    HAMMER,
+    HUNTING_HORN,
+    LANCE,
+    GUNLANCE,
+    SWITCH_AXE,
+    CHARGE_BLADE,
+    INSECT_GLAIVE,
+    BOW,
+    LIGHT_BOWGUN,
+    HEAVY_BOWGUN
 }
 
 /**

@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTree
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 
 @Dao
@@ -31,7 +32,7 @@ abstract class WeaponDao {
 //        FROM upgrades_from
 //        ORDER BY level ASC
 //          """)
-//    abstract fun loadWeaponTrees(langId: String, weaponType: String): List<UpgradesFrom>
+//    abstract fun loadWeaponTrees(langId: String, weaponType: WeaponType): List<UpgradesFrom>
 
     /** Loads all of the weapons in the trees for a provided weapon type] */
     @Query("""
@@ -42,5 +43,5 @@ abstract class WeaponDao {
             AND w.weapon_type = :weaponType
         ORDER BY w.id ASC
           """)
-    abstract fun loadWeaponTrees(langId: String, weaponType: String): List<WeaponTree>
+    abstract fun loadWeaponTrees(langId: String, weaponType: WeaponType): List<WeaponTree>
 }

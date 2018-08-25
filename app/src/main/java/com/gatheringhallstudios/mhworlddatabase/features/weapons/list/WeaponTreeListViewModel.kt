@@ -22,7 +22,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
             return
         }
 
-        val weaponTreeData = dao.loadWeaponTrees(AppSettings.dataLocale, weaponType.type)
+        val weaponTreeData = dao.loadWeaponTrees(AppSettings.dataLocale, weaponType)
         val weaponTreeRoots = buildTree(weaponTreeData)
         val buffer : List<MutableList<TreeNode<WeaponTree>>> = weaponTreeRoots.flatMap {x ->
             findWeaponPaths(x, 0, "", true)
