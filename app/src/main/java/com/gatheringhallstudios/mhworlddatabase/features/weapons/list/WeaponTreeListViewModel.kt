@@ -14,13 +14,11 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
     private lateinit var currentWeaponType : WeaponType
 
     fun setWeaponType(weaponType: WeaponType) {
-
-        if (!::currentWeaponType.isInitialized || currentWeaponType != weaponType) {
-            currentWeaponType = weaponType
-        }
-        else {
+        if (::currentWeaponType.isInitialized && currentWeaponType == weaponType) {
             return
         }
+
+        currentWeaponType = weaponType
 
         val weaponTreeData = dao.loadWeaponTrees(AppSettings.dataLocale, weaponType)
         val weaponTreeRoots = buildTree(weaponTreeData)
@@ -59,12 +57,12 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
             node.value.formatting = prefix.plus(if (isTail) "└" else "├")
         }
 
-        if (node.getChlidren().isEmpty()) {
+        if (node.getChildren().isEmpty()) {
             val path: MutableList<TreeNode<WeaponTree>> = mutableListOf(node)
             paths.add(path)
         } else {
-            node.getChlidren().forEachIndexed { index, it ->
-                val nextIsTail = index == node.getChlidren().size - 1
+            node.getChildren().forEachIndexed { index, it ->
+                val nextIsTail = index == node.getChildren().size - 1
                 val pathLists = findWeaponPaths(it, node.value.depth!! + 1, prefix.plus(if (isTail) if(depth != 0 ) "  " else "" else "│"), nextIsTail)
                 pathLists.forEach {
                     it.add(0, node)
