@@ -1,5 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
+import android.arch.persistence.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 open class WeaponType(
@@ -21,8 +23,10 @@ class WeaponTree(
 ) : WeaponBase(id, name, weapon_type, rarity, attack, slot_1, slot_2, slot_3) {
 
     //Tree related fields
+    @Ignore
     var depth: Int? = 0
-    var formatting: String? = ""
+    @Ignore
+    var formatter: MutableList<TreeFormatter> = mutableListOf()
 }
 
 /**

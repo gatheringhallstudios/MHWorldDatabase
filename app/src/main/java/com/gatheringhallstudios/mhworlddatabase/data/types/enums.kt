@@ -100,3 +100,14 @@ enum class DataType {
     ARMOR,
     WEAPON
 }
+
+/**
+ * Represents the indents and the straight, L and T branches required to draw the tree for each row
+ * of the wepaons tree
+ */
+enum class TreeFormatter {
+    INDENT,
+    STRAIGHT_BRANCH,
+    L_BRANCH,
+    T_BRANCH
+}

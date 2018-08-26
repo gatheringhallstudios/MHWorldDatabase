@@ -1,19 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
-import android.provider.Settings.Global.getString
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
-import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
-import com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
-import com.gatheringhallstudios.mhworlddatabase.components.IconType
-import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterReward
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponBase
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTree
+import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 
@@ -45,8 +39,22 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
         fun bind(weaponTree: WeaponTree) {
             view.weapon_name.text = weaponTree.name
             view.weapon_subtitle.text = "${weaponTree.depth}"
-            view.tree_branch.text = weaponTree.formatting
+            view.tree_branch.text = createFormatString(weaponTree.formatter)
         }
     }
-}
 
+    //TODO: Convert this string builder into a proper tree drawing implementation
+    private fun createFormatString(formatter: List<TreeFormatter>): String {
+        var returnString = ""
+        formatter.forEach {
+            when (it) {
+                TreeFormatter.INDENT -> returnString += "  "
+                TreeFormatter.STRAIGHT_BRANCH -> returnString += "│"
+                TreeFormatter.T_BRANCH -> returnString += "├"
+                TreeFormatter.L_BRANCH -> returnString += "└"
+            }
+        }
+
+        return returnString
+    }
+}
