@@ -106,6 +106,20 @@
 
     <!-- Weapons -->
     <string name="weapons_title">Weapons</string>
+    <string name="great_sword_title">Great Sword</string>
+    <string name="long_sword_title">Long Sword</string>
+    <string name="sword_and_shield_title">Sword and Shield</string>
+    <string name="dual_blades_title">Dual Blades</string>
+    <string name="hammer_title">Hammer</string>
+    <string name="hunting_horn_title">Hunting Horn</string>
+    <string name="lance_title">Lance</string>
+    <string name="gunlance_title">Gunlance</string>
+    <string name="switch_axe_title">Switch Axe</string>
+    <string name="charge_blade_title">Charge Blade</string>
+    <string name="insect_glaive_title">Insect Glaive</string>
+    <string name="light_bowgun_title">Light Bowgun</string>
+    <string name="heavy_bowgun_title">Heavy Bowgun</string>
+    <string name="bow_title">Bow</string>
 
     <!-- Armor -->
     <string name="armor_title">Armor</string>
@@ -156,5 +170,5 @@
     <string name="locations_detail_summary">Summary</string>
     <string name="locations_detail_gathering">Gathering</string>
     <string name="location_camps">Base Camps</string>
-
+z
 </resources>

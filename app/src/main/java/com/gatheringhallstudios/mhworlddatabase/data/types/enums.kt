@@ -2,7 +2,12 @@ package com.gatheringhallstudios.mhworlddatabase.data.types
 
 /**
  * This file contains a collection of enumerations used in the MHWorld app.
- * These enums are automatically converted by Room via the rules set in "Converters.kt".
+ * These enums are automatically converted via "Converters.kt".
+ * These can be used in queries without having to convert them.
+ *
+ * KEEP THEM SIMPLE
+ * If these enums become complex, they are allegedly no longer optimized by Proguard.
+ * TODO: Verify the above claim
  */
 
 /**
@@ -94,4 +99,15 @@ enum class DataType {
     CHARM,
     ARMOR,
     WEAPON
+}
+
+/**
+ * Represents the indents and the straight, L and T branches required to draw the tree for each row
+ * of the wepaons tree
+ */
+enum class TreeFormatter {
+    INDENT,
+    STRAIGHT_BRANCH,
+    L_BRANCH,
+    T_BRANCH
 }
