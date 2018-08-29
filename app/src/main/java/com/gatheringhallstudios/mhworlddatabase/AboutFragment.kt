@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import kotlinx.android.synthetic.main.cell_icon_label_text.view.*
 import kotlinx.android.synthetic.main.fragment_about.*
 
-class AboutDialogFragment : Fragment() {
+class AboutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_about, container, false)
     }
@@ -22,10 +22,10 @@ class AboutDialogFragment : Fragment() {
         for (i in 0..about_layout.childCount) {
             if (about_layout.getChildAt(i) is IconLabelTextCell) {
                 val cell = about_layout.getChildAt(i) as IconLabelTextCell
-                val label = cell.label_text
 
                 cell.setOnClickListener {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(label.text.toString())))
+                    val href = cell.tag as? String ?: cell.labelText.toString()
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(href)))
                 }
             }
         }
