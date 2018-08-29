@@ -8,7 +8,12 @@
     <string name="action_search">Settings</string>
     <string name="general_no_data">Nothing here, Meowster…</string>
 
-    <string name="about_body">This app was developed by the hunters at Gathering Hall Studios</string>
+    <string name="about_body">
+        Gathering Hall Studios is an open source team of designers and developers
+        dedicated to building high-quality apps for the Monster Hunter series.
+        If you’d like to join or contribute, we’re always open to new developers and contributors.
+        Contact us at contact@gatheringhallstudios.com.
+    </string>
 
     <!-- Simple descriptor for data types (including modified descriptors -->
     <string name="type_location">Location</string>

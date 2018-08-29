@@ -98,6 +98,10 @@ public class IconLabelTextCell extends ConstraintLayout{
         IconTypeFn.applyIconType(imageView, type);
     }
 
+    public CharSequence getLabelText() {
+        return labelView.getText();
+    }
+
     public void setLabelText(String labelText) {
         labelView.setText(labelText);
     }

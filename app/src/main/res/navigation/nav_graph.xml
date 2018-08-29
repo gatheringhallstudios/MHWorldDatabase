@@ -129,7 +129,7 @@
 
     <fragment
         android:id="@+id/aboutDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.AboutDialogFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.AboutFragment"
         android:label="About"
         tools:layout="@layout/list_generic" />
     <action
