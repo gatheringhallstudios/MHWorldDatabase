@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
+import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
@@ -26,6 +28,8 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setActivityTitle(arguments?.getString(ARG_WEAPON_TREE_NAME))
         setAdapter(adapter)
+
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         // Load data
         viewModel.setWeaponType( arguments?.getSerializable(ARG_WEAPON_TREE_TYPE) as WeaponType)

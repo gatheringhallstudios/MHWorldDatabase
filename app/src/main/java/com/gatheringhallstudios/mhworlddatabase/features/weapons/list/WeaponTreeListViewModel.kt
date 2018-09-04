@@ -50,36 +50,46 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
     }
 
     /**
-     * Performs a depth first traversal on the weapon tree to find all possible routes and creates the enum representing the tree branches
+     * Performs a depth first traversal on the weapon tree to find all possible routes and creates the enum representing the tree component structure to be drawn
      */
     private fun findWeaponPaths(node: TreeNode<WeaponTree>, depth: Int, prefix: List<TreeFormatter>, isTail: Boolean): MutableList<MutableList<TreeNode<WeaponTree>>> {
         val paths: MutableList<MutableList<TreeNode<WeaponTree>>> = mutableListOf()
 
         node.value.depth = depth
-        //Don't append a branch on the root node
-        if (depth != 0) {
-            val finalValue = prefix.toMutableList()
-            finalValue.add(if (isTail) TreeFormatter.L_BRANCH else TreeFormatter.T_BRANCH)
-            node.value.formatter = finalValue
+
+        //The root node gets a special enum to show it is the start node
+        if (depth == 0) {
+            val formatter = prefix.toMutableList()
+            formatter.add(TreeFormatter.START)
+            node.value.formatter = formatter
+        } else {
+            val formatter = prefix.toMutableList()
+            formatter.add(if (isTail) TreeFormatter.L_BRANCH else TreeFormatter.T_BRANCH)
+            node.value.formatter = formatter
         }
 
         if (node.getChildren().isEmpty()) {
+            node.value.formatter.add(TreeFormatter.END)
             val path: MutableList<TreeNode<WeaponTree>> = mutableListOf(node)
             paths.add(path)
         } else {
+            //Root nodes are treated specially because of the way they are to be drawn on the UI
+            //They do not receive mid nodes (even though they obviously have children)
+            if (depth > 0) node.value.formatter.add(TreeFormatter.MID)
+
             node.getChildren().forEachIndexed { index, it ->
-                val nextIsTail = index == node.getChildren().size - 1
-                val nextValue = prefix.toMutableList()
+                val nextPrefix = prefix.toMutableList()
 
                 if (isTail) {
                     if (depth != 0) { //Only add the indent if this is not a root tree element
-                        nextValue.add(TreeFormatter.INDENT)
+                        nextPrefix.add(TreeFormatter.INDENT)
                     }
                 } else {
-                    nextValue.add(TreeFormatter.STRAIGHT_BRANCH)
+                    nextPrefix.add(TreeFormatter.STRAIGHT_BRANCH)
                 }
 
-                val pathLists = findWeaponPaths(it, node.value.depth!! + 1, nextValue, nextIsTail)
+                val nextIsTail = index == node.getChildren().size - 1
+                val pathLists = findWeaponPaths(it, node.value.depth!! + 1, nextPrefix, nextIsTail)
                 pathLists.forEach {
                     it.add(0, node)
                     paths.add(it)

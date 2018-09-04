@@ -3,14 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/padding_large">
+    android:layout_height="120dp"
+    android:paddingBottom="@dimen/margin_small"
+    android:paddingEnd="@dimen/margin_small"
+    android:paddingTop="@dimen/margin_small">
 
     <TextView
         android:id="@+id/weapon_name"
-        style="@style/TextAppearance.AppCompat.Headline"
+        style="@style/TextHeadlineHigh"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Diablos Tyrannis II" />
 
     <ImageView
@@ -89,19 +94,19 @@
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             app:iconSrc="@drawable/ic_ui_question_mark_white"
             app:labelText="252" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             app:iconSrc="@drawable/ic_ui_question_mark_white"
             app:labelText="20" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             app:iconSrc="@drawable/ic_ui_question_mark_white"
             app:labelText="10%" />
     </LinearLayout>

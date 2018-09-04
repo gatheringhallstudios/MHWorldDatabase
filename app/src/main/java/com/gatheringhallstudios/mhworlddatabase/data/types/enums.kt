@@ -109,5 +109,8 @@ enum class TreeFormatter {
     INDENT,
     STRAIGHT_BRANCH,
     L_BRANCH,
-    T_BRANCH
+    T_BRANCH,
+    START,
+    MID,
+    END
 }
