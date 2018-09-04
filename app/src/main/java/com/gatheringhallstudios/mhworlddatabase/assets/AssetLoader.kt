@@ -63,6 +63,11 @@ object AssetLoader {
         return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 
+//    fun loadIconFor(weaponTree: WeaponTree): Drawable? {
+//        val assetName = WeaponTypeEnum.valueOf(weaponTree.weapon_type!!).
+//
+//    }
+
     fun loadIconFor(type: WeaponType): Drawable? {
         val name = when (type.weapon_type) {
             WeaponTypeEnum.GREAT_SWORD -> "GreatSword"

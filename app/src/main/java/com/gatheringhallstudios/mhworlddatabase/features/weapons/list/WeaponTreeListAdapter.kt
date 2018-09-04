@@ -9,9 +9,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTree
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
 import kotlinx.android.synthetic.main.listitem_weapontree.view.*
@@ -43,6 +47,32 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
     internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(weaponTree: WeaponTree) {
             view.weapon_name.text = weaponTree.name
+            view.attack_value.setLabelText(weaponTree.attack.toString())
+
+            view.element_value.setLabelText(if (weaponTree.element1_attack != null) weaponTree.element1_attack.toString() else "-")
+            view.element_value.setLeftIconDrawable(
+                    when (weaponTree.element1) {
+                        "Fire" -> view.context.getDrawableCompat(R.drawable.ic_element_fire)
+                        "Dragon" -> view.context.getDrawableCompat(R.drawable.ic_element_dragon)
+                        "Poison" -> view.context.getDrawableCompat(R.drawable.ic_status_poison)
+                        "Water" -> view.context.getDrawableCompat(R.drawable.ic_element_water)
+                        "Thunder" -> view.context.getDrawableCompat(R.drawable.ic_element_thunder)
+                        "Ice" -> view.context.getDrawableCompat(R.drawable.ic_element_ice)
+                        "Blast" -> view.context.getDrawableCompat(R.drawable.ic_status_blast)
+                        "Paralysis" -> view.context.getDrawableCompat(R.drawable.ic_status_paralysis)
+                        "Sleep" -> view.context.getDrawableCompat(R.drawable.ic_status_sleep)
+                        else -> view.context.getDrawableCompat(R.drawable.ic_ui_slot_none)
+                    }
+            )
+
+//            view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weaponTree.weapon_type))
+            val slotImages = weaponTree.slots.map {
+                view.context.getDrawableCompat(SlotEmptyRegistry(it))
+            }
+
+            view.slot1.setImageDrawable(slotImages[0])
+            view.slot2.setImageDrawable(slotImages[1])
+            view.slot3.setImageDrawable(slotImages[2])
             createTreeLayout(weaponTree.formatter)
         }
 

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:paddingBottom="@dimen/margin_small"
-    android:paddingEnd="@dimen/margin_small"
-    android:paddingTop="@dimen/margin_small">
+    android:paddingBottom="@dimen/margin_medium"
+    android:paddingEnd="@dimen/margin_medium"
+    android:paddingTop="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/weapon_name"
@@ -39,9 +39,10 @@
         <!-- These should be removed from this layout and added at runtime -->
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/attack_value"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:iconSrc="@drawable/ic_ui_question_mark_white"
+            android:layout_height="24dp"
+            app:iconSrc="@drawable/ic_ui_attack"
             app:labelText="240" />
 
         <com.ghstudios.android.ui.general.SharpnessView
@@ -68,14 +69,17 @@
         <!-- These should also be removed from this layout and added at runtime -->
 
         <ImageView
+            android:id="@+id/slot1"
             style="@style/IconXSmall"
             android:src="@drawable/ic_ui_question_mark_white" />
 
         <ImageView
+            android:id="@+id/slot2"
             style="@style/IconXSmall"
             android:src="@drawable/ic_ui_question_mark_white" />
 
         <ImageView
+            android:id="@+id/slot3"
             style="@style/IconXSmall"
             android:src="@drawable/ic_ui_question_mark_white" />
 
@@ -93,18 +97,21 @@
         <!-- These should be removed from this layout and added at runtime -->
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/element_value"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             app:iconSrc="@drawable/ic_ui_question_mark_white"
             app:labelText="252" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/affinity_value"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             app:iconSrc="@drawable/ic_ui_question_mark_white"
             app:labelText="20" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/defense_value"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             app:iconSrc="@drawable/ic_ui_question_mark_white"
