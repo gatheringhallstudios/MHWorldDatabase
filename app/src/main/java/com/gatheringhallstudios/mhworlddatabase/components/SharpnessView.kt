@@ -34,7 +34,7 @@ class SharpnessView @JvmOverloads constructor(
         if (sharpness_maxed) return values
 
         var index = values.size - 1
-        val handicraftBonus = 10
+        val handicraftBonus = 50
         var remainder = 0
         do {
             values[index] -= handicraftBonus
