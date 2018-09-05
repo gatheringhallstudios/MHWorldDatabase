@@ -23,6 +23,31 @@ class SharpnessView @JvmOverloads constructor(
         init(sharpness)
     }
 
+    fun drawSharpness(values: IntArray, sharpness_maxed: Boolean) {
+        init(adjustSharpness(values, sharpness_maxed))
+    }
+
+    /**
+     * Function to adjust sharpness based on whether or not the weapon is affected by Handicraft
+     */
+    private fun adjustSharpness(values: IntArray, sharpness_maxed: Boolean): IntArray {
+        if (sharpness_maxed) return values
+
+        var index = values.size - 1
+        val handicraftBonus = 50
+        var remainder = 0
+        do {
+            values[index] -= handicraftBonus
+            remainder = values[index]
+            if (values[index] < 0) {
+                values[index] = 0
+            }
+            index--
+        } while (remainder < 0 && index > 0)
+
+        return values
+    }
+
     companion object {
         private val TAG = "DrawSharpness"
 
@@ -43,7 +68,7 @@ class SharpnessView @JvmOverloads constructor(
     private var viewWidth: Int = 0
 
     // Settings
-    private val maxSharpness = 40
+    private val maxSharpness = 400
     private val marginScale = 8 // higher = smaller margins
     private val innerMargin = 3   //Margin between sharpeness bar measured in pixels
 

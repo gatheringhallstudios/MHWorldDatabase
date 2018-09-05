@@ -5,10 +5,13 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="row_height_xxlarge">120dp</dimen>
     <dimen name="row_height_xlarge">88dp</dimen>
     <dimen name="row_height_large">72dp</dimen>
     <dimen name="row_height_medium">56dp</dimen>
     <dimen name="row_height_small">32dp</dimen>
+    <dimen name="row_height_xsmall">24dp</dimen>
+
 
     <!-- Standard margins and padding -->
     <!-- Use these before any others available -->

@@ -5,44 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tree_branch"
+    <LinearLayout
+        android:id="@+id/tree_components"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left|center"
-        android:layout_weight="0"
-        android:text="TextView"
-        android:textSize="36sp" />
+        android:orientation="horizontal">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <FrameLayout
-            android:id="@+id/weapon_accent"
-            android:layout_width="@dimen/default_gap"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent">
-
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/weapon_name"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/weapon_accent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:src="@drawable/ui_tree_node_start" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/weapon_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/weapon_accent"
-            app:layout_constraintTop_toBottomOf="@+id/weapon_name" />
-    </android.support.constraint.ConstraintLayout>
+    <include layout="@layout/listitem_weapon" />
 </LinearLayout>
