@@ -46,14 +46,15 @@
             app:labelText="240" />
 
         <com.ghstudios.android.ui.general.SharpnessView
+            android:id="@+id/sharpness_value"
             android:layout_width="128dp"
             android:layout_height="@dimen/row_height_small"
-            app:blue="3"
-            app:green="4"
-            app:orange="8"
-            app:red="10"
-            app:white="5"
-            app:yellow="5" />
+            app:blue="30"
+            app:green="40"
+            app:orange="80"
+            app:red="100"
+            app:white="50"
+            app:yellow="50" />
 
     </LinearLayout>
 
@@ -87,11 +88,11 @@
 
     <LinearLayout
         android:id="@+id/complex_stat_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:orientation="vertical"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/basic_stat_layout">
 
         <!-- These should be removed from this layout and added at runtime -->
@@ -100,21 +101,22 @@
             android:id="@+id/element_value"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            app:iconSrc="@drawable/ic_ui_question_mark_white"
+            android:minWidth="@dimen/image_size_small"
+            app:iconSrc="@drawable/ic_element_fire"
             app:labelText="252" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:id="@+id/affinity_value"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            app:iconSrc="@drawable/ic_ui_question_mark_white"
+            app:iconSrc="@drawable/ic_ui_affinity"
             app:labelText="20" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:id="@+id/defense_value"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            app:iconSrc="@drawable/ic_ui_question_mark_white"
+            app:iconSrc="@drawable/ic_ui_defense"
             app:labelText="10%" />
     </LinearLayout>
 

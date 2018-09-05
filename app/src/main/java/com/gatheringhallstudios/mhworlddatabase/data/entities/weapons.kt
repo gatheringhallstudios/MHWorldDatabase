@@ -22,7 +22,7 @@ data class WeaponEntity(
         val element2_attack: Int?,
         val element_hidden: Int,
         val sharpness: String,
-        val sharpness_complete: String,
+        val sharpness_maxed: Int,
         val previous_weapon_id: Int?,
         val craftable: Int,
         @ColumnInfo(name = "final")

@@ -14,7 +14,7 @@ class WeaponTree(
         id: Int,
         name: String,
         rarity: Int,
-        weapon_type: String?,
+        weapon_type: WeaponType,
         attack: Int,
 
         val element1: String?,
@@ -22,6 +22,9 @@ class WeaponTree(
         val element2: String?,
         val element2_attack: Int?,
         val element_hidden: Boolean,
+        val sharpness: String?,
+        val sharpness_maxed: Boolean,
+        val defense: Int?,
         val previous_weapon_id: Int?
 ) : WeaponBase(id, name, weapon_type, rarity, attack) {
 
@@ -42,7 +45,7 @@ open class WeaponBase(
         val id: Int,
         val name: String?,
 
-        val weapon_type: String?,
+        val weapon_type: WeaponType,
         val rarity: Int,
         val attack: Int
 )

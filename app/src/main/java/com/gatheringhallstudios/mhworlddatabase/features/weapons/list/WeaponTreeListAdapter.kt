@@ -13,7 +13,6 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTree
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
@@ -51,9 +50,11 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
 
         fun bind(weaponTree: WeaponTree) {
             view.weapon_name.text = weaponTree.name
+            view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weaponTree))
+
             view.attack_value.setLabelText(weaponTree.attack.toString())
 
-            view.element_value.setLabelText(if (weaponTree.element1_attack != null) weaponTree.element1_attack.toString() else "-")
+            view.element_value.setLabelText(createElementString(weaponTree.element1_attack, weaponTree.element_hidden))
             view.element_value.setLeftIconDrawable(
                     when (weaponTree.element1) {
                         "Fire" -> view.context.getDrawableCompat(R.drawable.ic_element_fire)
@@ -68,6 +69,16 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
                         else -> view.context.getDrawableCompat(R.drawable.ic_ui_slot_none)
                     }
             )
+            if (weaponTree.element_hidden) {
+                view.element_value.alpha = 0.5.toFloat()
+            } else {
+                view.element_value.alpha = 1.0.toFloat()
+            }
+
+            view.defense_value.setLabelText(weaponTree.defense.toString())
+
+            view.sharpness_value.drawSharpness(weaponTree.sharpness!!.split(",").map { it.toInt() }.toIntArray(),
+                    weaponTree.sharpness_maxed)
 
             val slotImages = weaponTree.slots.map {
                 view.context.getDrawableCompat(SlotEmptyRegistry(it))
@@ -77,6 +88,16 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             view.slot2.setImageDrawable(slotImages[1])
             view.slot3.setImageDrawable(slotImages[2])
             createTreeLayout(weaponTree.formatter)
+        }
+
+        fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
+            val workString = element1_attack ?: "-----"
+
+            if (element_hidden) {
+                return "(${workString})"
+            } else {
+                return workString.toString()
+            }
         }
 
         private fun createTreeLayout(formatter: List<TreeFormatter>) {
@@ -113,7 +134,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             }
         }
 
-        private fun createImageView(context: Context, resource : Int) : ImageView {
+        private fun createImageView(context: Context, resource: Int): ImageView {
             val imageView = ImageView(context)
             imageView.setPadding(0, 0, 0, 0)
             imageView.setImageResource(resource)

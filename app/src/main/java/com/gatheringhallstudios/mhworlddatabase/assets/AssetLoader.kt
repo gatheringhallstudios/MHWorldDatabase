@@ -63,12 +63,27 @@ object AssetLoader {
         return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 
-//    fun loadIconFor(weaponTree: WeaponTree): Drawable? {
-//        val assetName = WeaponTypeEnum.valueOf(weaponTree.weapon_type!!).
-//
-//    }
+    fun loadIconFor(weaponTree: WeaponTree): Drawable? {
+        val name = when (weaponTree.weapon_type) {
+            WeaponTypeEnum.GREAT_SWORD -> "GreatSword"
+            WeaponTypeEnum.LONG_SWORD -> "LongSword"
+            WeaponTypeEnum.SWORD_AND_SHIELD -> "SwordAndShield"
+            WeaponTypeEnum.DUAL_BLADES -> "DualBlades"
+            WeaponTypeEnum.HAMMER -> "Hammer"
+            WeaponTypeEnum.HUNTING_HORN -> "HuntingHorn"
+            WeaponTypeEnum.LANCE -> "Lance"
+            WeaponTypeEnum.GUNLANCE -> "Gunlance"
+            WeaponTypeEnum.SWITCH_AXE -> "SwitchAxe"
+            WeaponTypeEnum.CHARGE_BLADE -> "ChargeBlade"
+            WeaponTypeEnum.INSECT_GLAIVE -> "InsectGlaive"
+            WeaponTypeEnum.BOW -> "Bow"
+            WeaponTypeEnum.LIGHT_BOWGUN -> "LightBowgun"
+            WeaponTypeEnum.HEAVY_BOWGUN -> "HeavyBowgun"
+        }
+        return ctx.getVectorDrawable(name, "rare${weaponTree.rarity}")
+    }
 
-    fun loadIconFor(type: WeaponType): Drawable? {
+    fun loadIconFor(type: WeaponType, color: String? = null): Drawable? {
         val name = when (type.weapon_type) {
             WeaponTypeEnum.GREAT_SWORD -> "GreatSword"
             WeaponTypeEnum.LONG_SWORD -> "LongSword"
@@ -86,7 +101,7 @@ object AssetLoader {
             WeaponTypeEnum.HEAVY_BOWGUN -> "HeavyBowgun"
         }
 
-        return ctx.getVectorDrawable(name, null)
+        return ctx.getVectorDrawable(name, color)
     }
 
     fun loadSkillIcon(color: String?): Drawable? {
