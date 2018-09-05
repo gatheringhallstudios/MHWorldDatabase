@@ -20,7 +20,10 @@ import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
 import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 
+const val INDENT_SIZE = 42 //This value corresponds to the measured width of each of vectors used for drawing the tree
+
 class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit) : AdapterDelegate<List<TreeNode<WeaponTree>>>() {
+
     override fun isForViewType(items: List<TreeNode<WeaponTree>>, position: Int): Boolean {
         return items[position] is TreeNode<WeaponTree>
     }
@@ -45,6 +48,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
     }
 
     internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
         fun bind(weaponTree: WeaponTree) {
             view.weapon_name.text = weaponTree.name
             view.attack_value.setLabelText(weaponTree.attack.toString())
@@ -65,7 +69,6 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
                     }
             )
 
-//            view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weaponTree.weapon_type))
             val slotImages = weaponTree.slots.map {
                 view.context.getDrawableCompat(SlotEmptyRegistry(it))
             }
@@ -76,7 +79,6 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             createTreeLayout(weaponTree.formatter)
         }
 
-        //TODO: Convert this string builder into a proper tree drawing implementation
         private fun createTreeLayout(formatter: List<TreeFormatter>) {
             val treeView = view.tree_components
 
@@ -89,7 +91,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
                     }
                     TreeFormatter.INDENT -> {
                         val space = Space(treeView.context)
-                        space.layoutParams = LinearLayout.LayoutParams(42, LinearLayout.LayoutParams.MATCH_PARENT)
+                        space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE, LinearLayout.LayoutParams.MATCH_PARENT)
                         treeView.addView(space)
                     }
                     TreeFormatter.STRAIGHT_BRANCH -> {
@@ -113,7 +115,6 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
 
         private fun createImageView(context: Context, resource : Int) : ImageView {
             val imageView = ImageView(context)
-//            imageView.layoutParams = LinearLayout.LayoutParams(31, LinearLayout.LayoutParams.MATCH_PARENT)
             imageView.setPadding(0, 0, 0, 0)
             imageView.setImageResource(resource)
             return imageView

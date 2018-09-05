@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="@dimen/row_height_xxlarge"
     android:paddingBottom="@dimen/margin_medium"
     android:paddingEnd="@dimen/margin_medium"
     android:paddingTop="@dimen/margin_medium">
@@ -12,7 +12,7 @@
         android:id="@+id/weapon_name"
         style="@style/TextHeadlineHigh"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="@dimen/row_height_xsmall"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +41,7 @@
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:id="@+id/attack_value"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="@dimen/row_height_xsmall"
             app:iconSrc="@drawable/ic_ui_attack"
             app:labelText="240" />
 

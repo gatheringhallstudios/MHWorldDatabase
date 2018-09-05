@@ -48,7 +48,7 @@ open class WeaponBase(
 )
 
 /**
- * An embedded class representing the available slots on a piece of armor.
+ * An embedded class representing the available slots on a wepaon
  * Can be iterated on.
  */
 data class WeaponSlots(
@@ -62,7 +62,7 @@ data class WeaponSlots(
     @Ignore val active = this.asSequence().filter { it > 0 }.toList()
 
     /**
-     * Returns true if the armor contains slots, false otherwise
+     * Returns true if the weapon contains slots, false otherwise
      */
     @Ignore fun isEmpty() = active.isEmpty()
 
