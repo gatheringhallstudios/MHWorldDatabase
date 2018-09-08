@@ -13,19 +13,19 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 class ItemListPagerFragment : BasePagerFragment() {
 
     override fun onAddTabs(tabs: BasePagerFragment.TabAdder) {
-        tabs.addTab(getString(R.string.items_tab_item)) {
+        tabs.addTab(getString(R.string.tab_items_item)) {
             ItemListFragment.newInstance(ItemCategory.ITEM)
         }
 
-        tabs.addTab(getString(R.string.items_tab_materials)) {
+        tabs.addTab(getString(R.string.tab_items_materials)) {
             ItemListFragment.newInstance(ItemCategory.MATERIAL)
         }
 
-        tabs.addTab(getString(R.string.items_tab_ammo)) {
+        tabs.addTab(getString(R.string.tab_items_ammo)) {
             ItemListFragment.newInstance(ItemCategory.AMMO)
         }
 
-        tabs.addTab(getString(R.string.items_tab_misc)) {
+        tabs.addTab(getString(R.string.tab_items_misc)) {
             ItemListFragment.newInstance(ItemCategory.MISC)
         }
     }
@@ -33,6 +33,6 @@ class ItemListPagerFragment : BasePagerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity?.title = getString(R.string.items_title)
+        activity?.title = getString(R.string.items_list_title)
     }
 }

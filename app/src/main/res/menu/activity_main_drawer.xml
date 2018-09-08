@@ -11,11 +11,11 @@
         <item
             android:id="@+id/itemListAction"
             android:icon="@drawable/ic_ui_item_box_white"
-            android:title="@string/items_title" />
+            android:title="@string/items_list_title" />
         <item
             android:id="@+id/itemCraftingListAction"
             android:icon="@drawable/ic_ui_crafting_white"
-            android:title="@string/item_crafting_title" />
+            android:title="@string/item_crafting_list_title" />
         <item
             android:id="@+id/armorListAction"
             android:icon="@drawable/ic_equipment_armor_set_white"

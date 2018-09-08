@@ -3,20 +3,15 @@ package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
-import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemSources
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
-import kotlinx.android.synthetic.main.listitem_reward.view.*
 
 /**
  * A sub-fragment that displays the means of acquiring an item
@@ -49,7 +44,7 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
         }
 
         if (data.craftRecipes.isNotEmpty()) {
-            adapter.addSection(getString(R.string.item_header_crafting), data.craftRecipes)
+            adapter.addSection(getString(R.string.header_item_crafting), data.craftRecipes)
         }
 
         if (data.locations.isNotEmpty()) {
@@ -64,11 +59,11 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
                 "$rankString ${it.location.name}"
             }
 
-            adapter.addSection(getString(R.string.item_header_gathering), groups)
+            adapter.addSection(getString(R.string.header_item_gathering), groups)
         }
 
         if (data.rewards.isNotEmpty()) {
-            adapter.addSection(getString(R.string.item_header_rewards), data.rewards)
+            adapter.addSection(getString(R.string.header_item_rewards), data.rewards)
         }
     }
 }

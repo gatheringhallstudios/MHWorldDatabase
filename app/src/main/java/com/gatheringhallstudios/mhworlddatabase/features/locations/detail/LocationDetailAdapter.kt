@@ -59,7 +59,7 @@ class LocationDetailAdapterWrapper {
 
         val newItems = mutableMapOf<String, List<LocationItem>>()
         for ((area, areaItems) in grouped) {
-            newItems[context.getString(R.string.location_area, area)] = areaItems
+            newItems[context.getString(R.string.header_location_area, area)] = areaItems
         }
         data.items = newItems
         buildAdapter()
@@ -125,7 +125,7 @@ class LocationCampAdapterDelegate : SimpleListDelegate<LocationCamp>() {
             setLeftIconType(IconType.NORMAL)
             setLeftIconDrawable(ContextCompat.getDrawable(context, R.drawable.ic_ui_camp))
             setLabelText(data.name)
-            setValueText(viewHolder.context.getString(R.string.location_area, data.area))
+            setValueText(viewHolder.context.getString(R.string.header_location_area, data.area))
         }
     }
 }
