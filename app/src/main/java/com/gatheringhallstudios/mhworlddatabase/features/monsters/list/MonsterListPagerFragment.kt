@@ -17,11 +17,11 @@ class MonsterListPagerFragment : BasePagerFragment() {
      */
 
     override fun onAddTabs(tabs: BasePagerFragment.TabAdder) {
-        tabs.addTab(getString(R.string.monsters_list_tab_large)) {
+        tabs.addTab(getString(R.string.tab_monsters_list_large)) {
             MonsterListFragment.newInstance(MonsterSize.LARGE)
         }
 
-        tabs.addTab(getString(R.string.monsters_list_tab_small)) {
+        tabs.addTab(getString(R.string.tab_monsters_list_small)) {
             MonsterListFragment.newInstance(MonsterSize.SMALL)
         }
     }

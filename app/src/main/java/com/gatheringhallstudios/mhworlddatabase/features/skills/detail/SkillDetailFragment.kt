@@ -50,28 +50,28 @@ class SkillDetailFragment : Fragment() {
 
         viewModel.decorations.observe(this, Observer {
             if (it != null) {
-                val title = getString(R.string.skills_decoration_header)
+                val title = getString(R.string.header_skills_decorations)
                 adapterBuilder.setDecorations(title, it)
             }
         })
 
         viewModel.charms.observe(this, Observer {
             if (it != null) {
-                val title = getString(R.string.skills_charm_header)
+                val title = getString(R.string.header_skills_charms)
                 adapterBuilder.setCharms(title, it)
             }
         })
 
         viewModel.armorPieces.observe(this, Observer {
             if (it != null) {
-                val title = getString(R.string.skills_armor_header)
+                val title = getString(R.string.header_skills_armor)
                 adapterBuilder.setArmor(title, it)
             }
         })
 
         viewModel.bonuses.observe(this, Observer {
             if (it != null) {
-                val title = getString(R.string.skills_setbonus_header)
+                val title = getString(R.string.header_skills_set_bonuses)
                 adapterBuilder.setArmorSetBonuses(title, it)
             }
         })

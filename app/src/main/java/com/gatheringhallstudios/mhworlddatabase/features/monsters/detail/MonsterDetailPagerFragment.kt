@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
@@ -33,16 +32,16 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
         })
 
         // Now add our tabs
-        tabs.addTab(getString(R.string.monsters_detail_tab_summary)) {
+        tabs.addTab(getString(R.string.tab_monsters_detail_summary)) {
             MonsterSummaryFragment()
         }
-        tabs.addTab(getString(R.string.monsters_detail_tab_damage)) {
+        tabs.addTab(getString(R.string.tab_monsters_detail_damage)) {
             MonsterDamageFragment()
         }
-        tabs.addTab(getString(R.string.monsters_detail_tab_rewards_high_rank)) {
+        tabs.addTab(getString(R.string.tab_monsters_detail_rewards_high_rank)) {
             MonsterRewardFragment.newInstance(Rank.HIGH)
         }
-        tabs.addTab(getString(R.string.monsters_detail_tab_rewards_low_rank)) {
+        tabs.addTab(getString(R.string.tab_monsters_detail_rewards_low_rank)) {
             MonsterRewardFragment.newInstance(Rank.LOW)
         }
     }

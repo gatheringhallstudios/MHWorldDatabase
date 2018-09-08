@@ -19,9 +19,9 @@ class ItemDetailPagerFragment : BasePagerFragment() {
         val viewModel = ViewModelProviders.of(this).get(ItemDetailViewModel::class.java)
         viewModel.loadItem(itemId)
 
-        tabs.addTab(getString(R.string.item_tab_summary)) { ItemSummaryFragment() }
-        tabs.addTab(getString(R.string.item_tab_usage)) { ItemUsageFragment() }
-        tabs.addTab(getString(R.string.item_tab_acquisition)) { ItemAcquisitionFragment() }
+        tabs.addTab(getString(R.string.tab_item_summary)) { ItemSummaryFragment() }
+        tabs.addTab(getString(R.string.tab_item_usage)) { ItemUsageFragment() }
+        tabs.addTab(getString(R.string.tab_item_acquisition)) { ItemAcquisitionFragment() }
     }
 
     companion object {

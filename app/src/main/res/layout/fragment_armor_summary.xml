@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/equipment_detail_defense"/>
+                    android:text="@string/armor_detail_defense"/>
 
                 <TextView
                     android:id="@+id/defense_value"
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/equipment_detail_slots"/>
+                    android:text="@string/armor_detail_slots"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -198,7 +198,7 @@
                 android:id="@+id/armor_skill_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/armor_detail_skills"/>
+                app:labelText="@string/header_armor_skills"/>
 
             <LinearLayout
                 android:id="@+id/armor_skill_list"
@@ -221,7 +221,7 @@
                 android:id="@+id/armor_set_bonus_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/armor_detail_set_bonus"
+                app:labelText="@string/header_armor_set_bonuses"
                 />
 
             <TextView
@@ -251,7 +251,7 @@
             <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/armor_detail_tab_components"
+                app:labelText="@string/header_required_materials"
                 />
 
             <LinearLayout

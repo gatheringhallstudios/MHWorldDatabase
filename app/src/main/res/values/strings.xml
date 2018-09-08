@@ -1,36 +1,14 @@
 <resources>
+
+    <!-- ############### -->
+    <!-- # GENERAL # -->
+    <!-- ############### -->
+    <!-- This covers strings that are meant to be used across the app -->
     <string name="app_name">MHWorld Database</string>
     <string name="app_icon_name">MHWDB</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_search">Settings</string>
-    <string name="general_no_data">Nothing here, Meowster…</string>
-
-    <string name="about_body">
-        Gathering Hall Studios is an open source team of designers and developers
-        dedicated to building high-quality apps for the Monster Hunter series.
-        If you’d like to join or contribute, we’re always open.
-        Contact us at contact@gatheringhallstudios.com or visit our Discord.
-    </string>
-
-    <!-- Simple descriptor for data types (including modified descriptors -->
-    <string name="type_location">Location</string>
-    <string name="type_monster">Monster</string>
-    <string name="type_monster_small">Monster (Small)</string>
-    <string name="type_monster_large">Monster (Large)</string>
-    <string name="type_skilltree">Skill Tree</string>
-    <string name="type_decoration">Decoration</string>
-    <string name="type_charm">Charm</string>
-    <string name="type_armor">Armor</string>
-    <string name="type_weapon">Weapon</string>
-    <string name="type_item">Item</string>
-    <string name="type_item_basic">Item</string>
-    <string name="type_item_material">Material</string>
-    <string name="type_item_ammo">Ammo</string>
-    <string name="type_item_misc">Misc Item</string>
-
+    <string name="general_no_data">Nothing here, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
+    <string name="none">None</string> <!-- Empty message for skill/charms subsections -->
     <string name="low_rank_short">LR</string>
     <string name="high_rank_short">HR</string>
     <string name="all_rank_short">ANY</string> <!-- null rank -->
@@ -39,6 +17,39 @@
     <string name="low_rank_full">Low Rank</string>
     <string name="high_rank_full">High Rank</string>
 
+    <!-- Common Formatted Strings -->
+    <string name="format_rarity_string">Rarity %1$d</string> <!-- Example: Rarity 2 -->
+    <string name="format_quantity_none">%1$d</string> <!-- Example: 1 -->
+    <string name="format_quantity_x">x %1$d</string> <!-- Example: x 2 -->
+    <string name="format_plus">+%1$d</string> <!-- Example: +5 -->
+    <string name="format_percentage">%1$s%%</string> <!-- Example: 20%-->
+
+
+    <!-- ############### -->
+    <!-- # FEATURE MENUS # -->
+    <!-- ############### -->
+    <!-- ############### -->
+    <!-- # Monsters # -->
+    <!-- ############### -->
+    <string name="monsters_list_title">Monsters</string> <!-- Feature name used in the action bar on top -->
+
+    <!-- Tab Headers -->
+    <string name="tab_monsters_detail_summary">Summary</string>
+    <string name="tab_monsters_detail_damage">Damage</string>
+    <string name="tab_monsters_detail_rewards_high_rank">High-Rank</string>
+    <string name="tab_monsters_detail_rewards_low_rank">Low-Rank</string>
+    <string name="tab_monsters_list_small">Small</string>
+    <string name="tab_monsters_list_large">Large</string>
+
+    <!-- Section Headers -->
+    <string name="header_habitat">Habitat</string>
+    <string name="header_weakness">Weakness</string>
+    <string name="header_hitzone_physical">Physical</string>
+    <string name="header_hitzone_elemental">Elemental</string>
+
+    <!-- Breaks section under Monster Damage -->
+    <string name="header_break">Breaks</string>
+    <!-- Insect glaive extract -->
     <string name="type_extract_orange">Orange</string>
     <string name="type_extract_red">Red</string>
     <string name="type_extract_white">White</string>
@@ -48,68 +59,47 @@
     <string name="type_extract_white_abbr">WHT</string>
     <string name="type_extract_green_abbr">GRN</string>
 
-    <string name="none">None</string>
+    <!-- ############### -->
+    <!-- # ITEMS MENU # -->
+    <!-- ############### -->
+    <string name="items_list_title">Items</string> <!-- Feature name used in the action bar on top -->
 
-    <!-- Common String Formatting -->
-    <string name="format_rarity_string">Rarity %1$d</string>
-    <string name="format_quantity_none">%1$d</string>
-    <string name="format_quantity_x">x %1$d</string>
-    <string name="format_plus">+%1$d</string>
-    <string name="format_percentage">%1$s%%</string>
+    <!-- Tab Headers -->
+    <string name="tab_items_item">Items</string>
+    <string name="tab_items_materials">Materials</string>
+    <string name="tab_items_ammo">Ammo</string>
+    <string name="tab_items_misc">Misc</string>
+    <string name="tab_item_summary">Summary</string>
+    <string name="tab_item_usage">Usage</string>
+    <string name="tab_item_acquisition">Obtaining</string>
 
-    <!-- Headers -->
-    <string name="header_habitat">Habitat</string>
-    <string name="header_weakness">Weakness</string>
-    <string name="header_item_data">Item Data</string>
+    <!-- Section Headers -->
+    <string name="header_item_crafting">Crafting</string>
+    <string name="header_item_gathering">Gathering</string>
+    <string name="header_item_rewards">Rewards</string>
+    <string name="header_item_usage_charms">Charms</string>
+    <string name="header_item_usage_armor">Armor</string>
 
-    <!-- ############ -->
-    <!-- # FEATURES # -->
-    <!-- ############ -->
-
-    <!-- Monsters -->
-    <string name="monsters_list_title">Monsters</string>
-    <string name="monsters_list_tab_small">Small</string>
-    <string name="monsters_list_tab_large">Large</string>
-    <string name="monsters_detail_tab_summary">Summary</string>
-    <string name="monsters_detail_tab_rewards_high_rank">High-Rank</string>
-    <string name="monsters_detail_tab_rewards_low_rank">Low-Rank</string>
-    <string name="monsters_detail_tab_damage">Damage</string>
-    <string name="monsters_damage_column_extract">Extract</string>
-    <string name="header_hitzone_physical">Physical</string>
-    <string name="header_hitzone_elemental">Elemental</string>
-    <string name="header_break">Breaks</string>
-
-    <!-- Items -->
-    <string name="items_title">Items</string>
+    <!-- General Strings -->
     <string name="items_buy_price">Buy</string>
     <string name="items_sell_price">Sell</string>
     <string name="items_carry_capacity">Carry</string>
     <string name="items_rarity">Rarity</string>
 
-    <string name="items_tab_item">Items</string>
-    <string name="items_tab_materials">Materials</string>
-    <string name="items_tab_ammo">Ammo</string>
-    <string name="items_tab_misc">Misc</string>
 
-    <string name="item_tab_summary">Summary</string>
-    <string name="item_tab_usage">Usage</string>
-    <string name="item_tab_acquisition">Obtaining</string>
+    <!-- ############### -->
+    <!-- # ITEM CRAFTING MENU # -->
+    <!-- ############### -->
+    <string name="item_crafting_list_title">Item Crafting</string><!-- Feature name used in the action bar on top -->
 
-    <string name="item_header_crafting">Crafting</string>
-    <string name="item_header_gathering">Gathering</string>
-    <string name="item_header_rewards">Rewards</string>
-    <string name="item_header_usage_charms">Charms</string>
-    <string name="item_header_usage_armor">Armor</string>
-
-    <string name="item_crafting_title">Item Crafting</string>
+    <!-- General Strings -->
     <string name="item_crafting_yield">\x %1$d</string>
     <string name="item_source_reward_condition">%1$s %2$s</string>
 
-    <!-- general equipment strings -->
-    <string name="equipment_detail_defense">Defense</string>
-    <string name="equipment_detail_slots">Slots</string>
-
-    <!-- Weapons -->
+    <!-- ############### -->
+    <!-- # WEAPON MENU # -->
+    <!-- ############### -->
+    <!-- Weapon List Entries -->
     <string name="weapons_title">Weapons</string>
     <string name="great_sword_title">Great Sword</string>
     <string name="long_sword_title">Long Sword</string>
@@ -126,53 +116,108 @@
     <string name="heavy_bowgun_title">Heavy Bowgun</string>
     <string name="bow_title">Bow</string>
 
-    <!-- Armor -->
+    <!-- ############### -->
+    <!-- # ARMOR MENU # -->
+    <!-- ############### -->
     <string name="armor_title">Armor</string>
-    <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
-    <string name="armor_detail_tab_summary">Summary</string>
-    <string name="armor_detail_skills">Skills</string>
-    <string name="armor_detail_set_bonus">Set Bonuses</string>
-    <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string>
-    <string name="armor_detail_tab_components">Required Materials</string>
+
+    <!-- Section Headers -->
+    <string name="header_required_materials">Required Materials</string>
+    <string name="header_armor_skills">Skills</string>
+    <string name="header_armor_set_bonuses">Set Bonuses</string>
+
+    <!-- General Strings -->
+    <string name="armor_defense_value">%1$d - %2$d (%3$d)</string> <!-- Example: 32 - 64 (70) -->
+    <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string> <!-- Examples: 1-piece bonus: -->
     <string name="armor_detail_vs_fire">Vs. Fire</string>
     <string name="armor_detail_vs_water">Vs. Water</string>
     <string name="armor_detail_vs_thunder">Vs. Thunder</string>
     <string name="armor_detail_vs_ice">Vs. Ice</string>
     <string name="armor_detail_vs_dragon">Vs. Dragon</string>
+    <string name="armor_detail_defense">Defense</string>
+    <string name="armor_detail_slots">Slots</string>
 
-    <!-- Skills -->
+    <!-- ############### -->
+    <!-- # SKILLS MENU # -->
+    <!-- ############### -->
     <string name="skills_title">Skills</string>
+
+    <!-- Section Headers -->
+    <string name="header_skills_armor">Armor</string>
+    <string name="header_skills_charms">Charms</string>
+    <string name="header_skills_decorations">Decorations</string>
+    <string name="header_skills_set_bonuses">Set Bonuses</string>
+
+    <!-- General Strings -->
     <string name="skills_level_title">Level</string>
     <plurals name="skills_level">
         <item quantity="one">level</item>
         <item quantity="other">levels</item>
     </plurals>
-    <string name="skills_level_qty">Level %1$d</string>
-    <string name="skills_level_short_qty">Lv %1$d</string>
-    <string name="skills_armor_header">Armor</string>
-    <string name="skills_charm_header">Charms</string>
-    <string name="skills_decoration_header">Decorations</string>
-    <string name="skills_setbonus_header">Set Bonuses</string>
+    <string name="skills_level_qty">Level %1$d</string> <!-- Example: Level 1 -->
+    <string name="skills_level_short_qty">Lv %1$d</string> <!-- Example: Lv 2 -->
 
-    <!-- Decorations -->
+    <!-- ############### -->
+    <!-- # DECORATIONS MENU # -->
+    <!-- ############### -->
     <string name="decorations_title">Decorations</string>
-    <string name="decorations_skill_header">Skill</string>
-    <string name="decorations_drop_header">Drop</string>
+
+    <!-- Section Headers -->
+    <string name="header_decorations_skill">Skill</string>
+    <string name="header_decorations_drop">Drop</string>
+
+    <!-- General Strings -->s
     <string name="decorations_mysterious_feystone_chance">Mysterious Feystone</string>
     <string name="decorations_glowing_feystone_chance">Glowing Feystone</string>
     <string name="decorations_worn_feystone_chance">Worn Feystone</string>
     <string name="decorations_warped_feystone_chance">Warped Feystone</string>
 
-    <!-- Charms -->
+    <!-- ############### -->
+    <!-- # CHARMS MENU # -->
+    <!-- ############### -->
     <string name="charms_title">Charms</string>
-    <string name="upgrade_from_title">Upgrades from:</string>
-    <string name="charms_skill_information">Skills</string>
-    <string name="charms_components_information">Components</string>
 
-    <!-- Locations -->
+    <!-- Section Headers -->
+    <string name="header_charms_upgrade_from">Upgrades from:</string>
+    <string name="header_charms_skills">Skills</string>
+    <string name="header_charms_components">Components</string>
+
+    <!-- ############### -->
+    <!-- # LOCATIONS MENU # -->
+    <!-- ############### -->
     <string name="locations_title">Locations</string>
-    <string name="location_area">Area %1$d</string>
-    <string name="locations_detail_summary">Summary</string>
-    <string name="locations_detail_gathering">Gathering</string>
-    <string name="location_camps">Base Camps</string>
+
+    <!-- Section Headers -->
+    <string name="header_location_area">Area %1$d</string>
+    <string name="header_location_base_camps">Base Camps</string>
+
+    <!-- ############### -->
+    <!-- # SEARCH MENU # -->
+    <!-- ############### -->
+    <!-- General Strings -->
+    <!-- Simple descriptor for data types (including modified descriptors) -->
+    <string name="type_location">Location</string>
+    <string name="type_monster">Monster</string>
+    <string name="type_monster_small">Monster (Small)</string>
+    <string name="type_monster_large">Monster (Large)</string>
+    <string name="type_skilltree">Skill Tree</string>
+    <string name="type_decoration">Decoration</string>
+    <string name="type_charm">Charm</string>
+    <string name="type_armor">Armor</string>
+    <string name="type_weapon">Weapon</string>
+    <string name="type_item">Item</string>
+    <string name="type_item_basic">Item</string>
+    <string name="type_item_material">Material</string>
+    <string name="type_item_ammo">Ammo</string>
+    <string name="type_item_misc">Misc Item</string>
+
+    <!-- ############### -->
+    <!-- # ABOUT MENU # -->
+    <!-- ############### -->
+    <string name="about_body">
+        Gathering Hall Studios is an open source team of designers and developers
+        dedicated to building high-quality apps for the Monster Hunter series.
+        If you’d like to join or contribute, we’re always open.
+        Contact us at contact@gatheringhallstudios.com or visit our Discord.
+    </string>
 </resources>

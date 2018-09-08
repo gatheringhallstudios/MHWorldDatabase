@@ -34,7 +34,7 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation>() {
 
         viewHolder.reward_icon.applyIconType(IconType.PAPER)
         viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.location))
-        viewHolder.reward_name.text = ctx.getString(R.string.location_area, data.area)
+        viewHolder.reward_name.text = ctx.getString(R.string.header_location_area, data.area)
         viewHolder.reward_stack.text = ctx.getString(R.string.format_quantity_x, data.stack)
         viewHolder.reward_percent.text = ctx.getString(R.string.format_percentage, data.percentage)
 
