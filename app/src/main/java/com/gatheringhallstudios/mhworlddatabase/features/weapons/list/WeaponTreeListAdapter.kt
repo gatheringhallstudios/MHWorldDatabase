@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -55,20 +56,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             view.attack_value.setLabelText(weaponTree.attack.toString())
 
             view.element_value.setLabelText(createElementString(weaponTree.element1_attack, weaponTree.element_hidden))
-            view.element_value.setLeftIconDrawable(
-                    when (weaponTree.element1) {
-                        "Fire" -> view.context.getDrawableCompat(R.drawable.ic_element_fire)
-                        "Dragon" -> view.context.getDrawableCompat(R.drawable.ic_element_dragon)
-                        "Poison" -> view.context.getDrawableCompat(R.drawable.ic_status_poison)
-                        "Water" -> view.context.getDrawableCompat(R.drawable.ic_element_water)
-                        "Thunder" -> view.context.getDrawableCompat(R.drawable.ic_element_thunder)
-                        "Ice" -> view.context.getDrawableCompat(R.drawable.ic_element_ice)
-                        "Blast" -> view.context.getDrawableCompat(R.drawable.ic_status_blast)
-                        "Paralysis" -> view.context.getDrawableCompat(R.drawable.ic_status_paralysis)
-                        "Sleep" -> view.context.getDrawableCompat(R.drawable.ic_status_sleep)
-                        else -> view.context.getDrawableCompat(R.drawable.ic_ui_slot_none)
-                    }
-            )
+            view.element_value.setLeftIconDrawable(getElementIcon(view.context, weaponTree.element1))
             if (weaponTree.element_hidden) {
                 view.element_value.alpha = 0.5.toFloat()
             } else {
@@ -77,8 +65,13 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
 
             view.defense_value.setLabelText(weaponTree.defense.toString())
 
-            view.sharpness_value.drawSharpness(weaponTree.sharpness!!.split(",").map { it.toInt() }.toIntArray(),
-                    weaponTree.sharpness_maxed)
+            //Render sharpness data if it exists, else hide the bar
+            val sharpnessData = weaponTree.sharpnessData?.get(5)
+            if (sharpnessData != null) {
+                view.sharpness_value.drawSharpness(sharpnessData)
+            } else {
+                view.sharpness_value.visibility = View.INVISIBLE
+            }
 
             val slotImages = weaponTree.slots.map {
                 view.context.getDrawableCompat(SlotEmptyRegistry(it))
@@ -93,10 +86,9 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
         fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
             val workString = element1_attack ?: "-----"
 
-            if (element_hidden) {
-                return "(${workString})"
-            } else {
-                return workString.toString()
+            return when (element_hidden) {
+                true -> "(${workString})"
+                false -> workString.toString()
             }
         }
 
@@ -139,6 +131,21 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             imageView.setPadding(0, 0, 0, 0)
             imageView.setImageResource(resource)
             return imageView
+        }
+
+        private fun getElementIcon(context: Context, element: String?): Drawable? {
+            return when (element) {
+                "Fire" -> context.getDrawableCompat(R.drawable.ic_element_fire)
+                "Dragon" -> context.getDrawableCompat(R.drawable.ic_element_dragon)
+                "Poison" -> context.getDrawableCompat(R.drawable.ic_status_poison)
+                "Water" -> context.getDrawableCompat(R.drawable.ic_element_water)
+                "Thunder" -> context.getDrawableCompat(R.drawable.ic_element_thunder)
+                "Ice" -> context.getDrawableCompat(R.drawable.ic_element_ice)
+                "Blast" -> context.getDrawableCompat(R.drawable.ic_status_blast)
+                "Paralysis" -> context.getDrawableCompat(R.drawable.ic_status_paralysis)
+                "Sleep" -> context.getDrawableCompat(R.drawable.ic_status_sleep)
+                else -> context.getDrawableCompat(R.drawable.ic_ui_slot_none)
+            }
         }
     }
 }

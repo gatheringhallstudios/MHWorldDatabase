@@ -36,7 +36,8 @@ abstract class WeaponDao {
 
     /** Loads all of the weapons in the trees for a provided weapon type] */
     @Query("""
-        SELECT w.*, wt.*
+        SELECT w.id, w.element1, w.element1_attack, w.rarity, w.previous_weapon_id, w.weapon_type, w.attack, w.defense,
+        w.slot_1, w.slot_2, w.slot_3, w.sharpness, w.sharpness_maxed, w.element2, w.element2_attack, w.element_hidden, wt.*
         FROM weapon w
             JOIN weapon_text wt USING (id)
         WHERE wt.lang_id = :langId
