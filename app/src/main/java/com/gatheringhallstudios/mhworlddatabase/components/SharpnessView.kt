@@ -75,6 +75,7 @@ class SharpnessView @JvmOverloads constructor(
         blue = sharpness[4]
         white = sharpness[5]
         purple = sharpness[6]
+        invalidate()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
