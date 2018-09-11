@@ -66,7 +66,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             view.defense_value.setLabelText(weaponTree.defense.toString())
 
             //Render sharpness data if it exists, else hide the bar
-            val sharpnessData = weaponTree.sharpnessData?.get(5)
+            val sharpnessData = weaponTree.sharpnessData?.get(0)
             if (sharpnessData != null) {
                 view.sharpness_value.drawSharpness(sharpnessData)
             } else {
@@ -83,7 +83,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             createTreeLayout(weaponTree.formatter)
         }
 
-        fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
+        private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
             val workString = element1_attack ?: "-----"
 
             return when (element_hidden) {
