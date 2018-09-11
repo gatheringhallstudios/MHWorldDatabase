@@ -91,7 +91,7 @@ data class WeaponSharpness(
         val sharpness: String?
 ) {
     /**
-    Gets the sharpness of the weapon with the provided number of handicraft levels SUBTRACTED
+    Gets the sharpness of the weapon at the provided number of handicraft levels
      */
     fun get(handicraftLevel: Int): IntArray {
         return adjustSharpness(handicraftLevel);
@@ -101,7 +101,7 @@ data class WeaponSharpness(
      * Function to adjust sharpness based on whether or not the weapon is affected by Handicraft
      */
     private fun adjustSharpness(handicraftLevel: Int): IntArray {
-        if (handicraftLevel > 5) throw IllegalArgumentException("Only a maximum of 5 handicraft levels can be subtracted")
+        if (handicraftLevel > 5) throw IllegalArgumentException("Handicraft levels only go up to 5!")
         if (sharpness == null || sharpness_maxed == null)  {
             return IntArray(0)
         }
@@ -110,7 +110,7 @@ data class WeaponSharpness(
         if (sharpness_maxed) return values
 
         var index = values.size - 1
-        val handicraftBonus = 10 * handicraftLevel
+        val handicraftBonus = 10 * (5 - handicraftLevel)
         var remainder: Int
         do {
             values[index] -= handicraftBonus
