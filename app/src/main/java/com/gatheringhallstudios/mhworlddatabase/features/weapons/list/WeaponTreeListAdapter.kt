@@ -66,9 +66,9 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             view.defense_value.setLabelText(weaponTree.defense.toString())
 
             //Render sharpness data if it exists, else hide the bar
-            val sharpnessData = weaponTree.sharpnessData?.get(0)
+            val sharpnessData = weaponTree.sharpnessData
             if (sharpnessData != null) {
-                view.sharpness_value.drawSharpness(sharpnessData)
+                view.sharpness_value.drawSharpness(sharpnessData.get(0))
             } else {
                 view.sharpness_value.visibility = View.INVISIBLE
             }

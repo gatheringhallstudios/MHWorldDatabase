@@ -10,12 +10,76 @@ open class WeaponType(
         val weapon_type: WeaponType
 )
 
-class WeaponTree(
-        id: Int,
-        name: String,
-        rarity: Int,
-        weapon_type: WeaponType,
-        attack: Int,
+class Weapon(
+         id: Int,
+         name: String,
+         rarity: Int,
+         weapon_type: WeaponType,
+         attack: Int,
+
+         element1: String?,
+         element1_attack: Int?,
+         element2: String?,
+         element2_attack: Int?,
+         element_hidden: Boolean,
+         defense: Int?,
+         previous_weapon_id: Int?,
+
+         val craftable: Int,
+         val isFinal: Int,
+         val kinsect_bonus: String?,
+         val deviation: String?,
+         val special_ammo: String?,
+         val ammo_normal_1: String?,
+         val ammo_normal_2: String?,
+         val ammo_normal_3: String?,
+         val ammo_pierce_1: String?,
+         val ammo_pierce_2: String?,
+         val ammo_pierce_3: String?,
+         val ammo_spread_1: String?,
+         val ammo_spread_2: String?,
+         val ammo_spread_3: String?,
+         val ammo_sticky_1: String?,
+         val ammo_sticky_2: String?,
+         val ammo_sticky_3: String?,
+         val ammo_cluster_1: String?,
+         val ammo_cluster_2: String?,
+         val ammo_cluster_3: String?,
+         val ammo_recover_1: String?,
+         val ammo_recover_2: String?,
+         val ammo_poison_1: String?,
+         val ammo_poison_2: String?,
+         val ammo_paralysis_1: String?,
+         val ammo_paralysis_2: String?,
+         val ammo_sleep_1: String?,
+         val ammo_sleep_2: String?,
+         val ammo_exhaust_1: String?,
+         val ammo_exhaust_2: String?,
+         val ammo_flaming: String?,
+         val ammo_water: String?,
+         val ammo_freeze: String?,
+         val ammo_thunder: String?,
+         val ammo_dragon: String?,
+         val ammo_slicing: String?,
+         val ammo_wyvern: String?,
+         val ammo_demon: String?,
+         val ammo_armor: String?,
+         val ammo_tranq: String?,
+         val coating_close: String?,
+         val coating_power: String?,
+         val coating_poison: String?,
+         val coating_paralysis: String?,
+         val coating_sleep: String?,
+         val coating_blast: String?
+) : WeaponTree(id, name, rarity, weapon_type, attack, element1, element1_attack, element2, element2_attack,
+        element_hidden, defense, previous_weapon_id)
+
+open class WeaponTree(
+        val id: Int,
+        val name: String,
+        val rarity: Int,
+        val weapon_type: WeaponType,
+        val attack: Int,
 
         val element1: String?,
         val element1_attack: Int?,
@@ -24,7 +88,7 @@ class WeaponTree(
         val element_hidden: Boolean,
         val defense: Int?,
         val previous_weapon_id: Int?
-) : WeaponBase(id, name, weapon_type, rarity, attack) {
+) {
 
     //Tree related fields
     @Ignore
@@ -36,19 +100,6 @@ class WeaponTree(
     @Embedded
     var sharpnessData: WeaponSharpness? = null
 }
-
-/**
- * A view for basic weapon information.
- * TODO: Replace (How?)
- */
-open class WeaponBase(
-        val id: Int,
-        val name: String?,
-
-        val weapon_type: WeaponType,
-        val rarity: Int,
-        val attack: Int
-)
 
 /**
  * An embedded class representing the available slots on a weapon
@@ -102,7 +153,7 @@ data class WeaponSharpness(
      */
     private fun adjustSharpness(handicraftLevel: Int): IntArray {
         if (handicraftLevel > 5) throw IllegalArgumentException("Handicraft levels only go up to 5!")
-        if (sharpness == null || sharpness_maxed == null)  {
+        if (sharpness == null || sharpness_maxed == null) {
             return IntArray(0)
         }
 
@@ -124,3 +175,13 @@ data class WeaponSharpness(
         return values
     }
 }
+
+
+/**
+ * The result of fully loading a weapon.
+ * Loads the data you'd find in an weapon screen ingame.
+ */
+class WeaponFull(
+        val weapon: Weapon,
+        val recipe: List<ItemQuantity>
+)

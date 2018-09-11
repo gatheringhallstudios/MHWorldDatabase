@@ -13,7 +13,7 @@
         android:paddingBottom="@dimen/padding_footer_space">
 
         <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
-            android:id="@+id/armor_header"
+            android:id="@+id/weapon_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:iconSrc="@drawable/ic_ui_question_mark_white"
@@ -98,14 +98,40 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
                     android:text="@string/weapon_element"/>
-                <TextView
-                    android:id="@+id/element_value"
-                    style="@style/TextSubHead"
+
+                <LinearLayout
+                    android:id="@+id/element_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_large"
-                    android:gravity="end"
-                    tools:text="1"/>
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical|end">
+
+                    <ImageView
+                        android:id="@+id/element_icon"
+                        style="@style/IconXSmall"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:src="@drawable/ic_element_thunder" />
+
+                    <TextView
+                        android:id="@+id/element_type_value"
+                        style="@style/TextSubHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:gravity="end"
+                        tools:text="Thunder" />
+
+                    <TextView
+                        android:id="@+id/element_value"
+                        style="@style/TextSubHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:gravity="end"
+                        android:paddingLeft="@dimen/margin_medium"
+                        tools:text="150" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
@@ -169,29 +195,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/armor_skill_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/margin_section_gap">
-            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-                android:id="@+id/armor_skill_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:labelText="@string/header_skills"/>
-
-            <LinearLayout
-                android:id="@+id/armor_skill_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@drawable/divider_stroke"
-
-                android:orientation="vertical"
-                android:showDividers="middle" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/armor_components_section"
+            android:id="@+id/weapon_components_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_section_gap"
@@ -200,16 +204,15 @@
             <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/header_required_materials"
-                />
+                app:labelText="@string/header_required_materials" />
 
             <LinearLayout
-                android:id="@+id/armor_components_list"
+                android:id="@+id/weapon_components_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:divider="@drawable/divider_stroke"
-                android:showDividers="middle"/>
+                android:orientation="vertical"
+                android:showDividers="middle" />
         </LinearLayout>
 
     </LinearLayout>

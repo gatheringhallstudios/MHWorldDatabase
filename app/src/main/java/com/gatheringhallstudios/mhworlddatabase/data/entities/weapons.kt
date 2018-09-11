@@ -80,3 +80,11 @@ data class WeaponText(
 
         val name: String?
 )
+
+@Entity(tableName = "weapon_recipe")
+data class WeaponRecipe(
+        @PrimaryKey val weapon_id: Int,
+        val item_id: Int,
+        val quantity: Int,
+        val recipe_Type: String
+)
