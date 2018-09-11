@@ -19,7 +19,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
 
     // Setup adapter and navigation
     private val adapter = BasicListDelegationAdapter(WeaponTreeListAdapterDelegate {
-//        getRouter().navigateLocationDetail(it.id)
+        getRouter().navigateWeaponDetail(it.id)
     })
 
     private val viewModel by lazy {
