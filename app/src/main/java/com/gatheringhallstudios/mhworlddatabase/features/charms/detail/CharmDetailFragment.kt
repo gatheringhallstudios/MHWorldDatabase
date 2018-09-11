@@ -52,7 +52,7 @@ class CharmDetailFragment : Fragment() {
         setActivityTitle(charm.name)
         charm_header.setIconDrawable(AssetLoader.loadIconFor(charm))
         charm_header.setTitleText(charm.name)
-        charm_header.setSubtitleText(getString(R.string.format_rarity_string, charm.rarity))
+        charm_header.setSubtitleText(getString(R.string.format_rarity, charm.rarity))
         charm_header.setSubtitleColor(AssetLoader.loadRarityColor(charm.rarity))
 
         previous_item_layout.removeAllViews()
@@ -106,7 +106,7 @@ class CharmDetailFragment : Fragment() {
         val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
         val view = IconLabelTextCell(context)
         view.setLeftIconDrawable(icon)
-        view.setLabelText(getString(R.string.none))
+        view.setLabelText(getString(R.string.general_none))
 
         layout.addView(view)
     }
@@ -127,7 +127,7 @@ class CharmDetailFragment : Fragment() {
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.skills_level_qty, skill.level)
+            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
             with(view.skill_level) {
                 maxLevel = skill.skillTree.max_level
                 level = skill.level

@@ -47,7 +47,7 @@ class ItemSummaryFragment : Fragment() {
         item_header.setDescriptionText(item.description)
 
         rarity_value.setTextColor(AssetLoader.loadRarityColor(item.rarity))
-        rarity_value.text = getString(R.string.format_rarity_string, item.rarity)
+        rarity_value.text = getString(R.string.format_rarity, item.rarity)
 
         buy_price_value.text = evaluateValue(item.buy_price)
         carry_capacity_value.text = evaluateValue(item.carry_limit)

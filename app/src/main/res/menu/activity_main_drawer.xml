@@ -7,11 +7,11 @@
         <item
             android:id="@+id/monsterListAction"
             android:icon="@drawable/ic_ui_hunter_notes_white"
-            android:title="@string/monsters_list_title" />
+            android:title="@string/title_monster_list" />
         <item
             android:id="@+id/itemListAction"
             android:icon="@drawable/ic_ui_item_box_white"
-            android:title="@string/items_list_title" />
+            android:title="@string/title_item_list" />
         <item
             android:id="@+id/itemCraftingListAction"
             android:icon="@drawable/ic_ui_crafting_white"
@@ -19,27 +19,27 @@
         <item
             android:id="@+id/armorListAction"
             android:icon="@drawable/ic_equipment_armor_set_white"
-            android:title="@string/armor_title" />
+            android:title="@string/title_armor" />
         <item
             android:id="@+id/skillListAction"
             android:icon="@drawable/ic_ui_armor_skill_white"
-            android:title="@string/skills_title" />
+            android:title="@string/title_skills" />
         <item
             android:id="@+id/decorationListAction"
             android:icon="@drawable/ic_ui_slots_white"
-            android:title="@string/decorations_title" />
+            android:title="@string/title_decorations" />
         <item
             android:id="@+id/charmListAction"
             android:icon="@xml/ic_equipment_charm_base"
-            android:title="@string/charms_title" />
+            android:title="@string/title_charms" />
         <item
             android:id="@+id/locationListAction"
             android:icon="@drawable/ic_ui_map"
-            android:title="@string/locations_title" />
+            android:title="@string/title_locations" />
         <item
             android:id="@+id/weaponListAction"
             android:icon="@drawable/ic_equipment_charge_blade_white"
-            android:title="@string/weapons_title" />
+            android:title="@string/title_weapons" />
     </group>
 
     <item android:title="Other">

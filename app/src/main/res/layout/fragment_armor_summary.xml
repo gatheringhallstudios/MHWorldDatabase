@@ -198,7 +198,7 @@
                 android:id="@+id/armor_skill_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/header_armor_skills"/>
+                app:labelText="@string/header_skills"/>
 
             <LinearLayout
                 android:id="@+id/armor_skill_list"
@@ -221,7 +221,7 @@
                 android:id="@+id/armor_set_bonus_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/header_armor_set_bonuses"
+                app:labelText="@string/header_set_bonuses"
                 />
 
             <TextView

@@ -61,13 +61,13 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward>() {
     override fun bindView(viewHolder: SimpleViewHolder, data: ItemReward) {
         // Returns LR/HR depending on the rank
         val rankStr = viewHolder.resources.getString(when (data.rank) {
-            Rank.LOW -> R.string.low_rank_short
-            Rank.HIGH -> R.string.high_rank_short
+            Rank.LOW -> R.string.rank_short_low
+            Rank.HIGH -> R.string.rank_short_high
         })
 
         // The condition alongside the rank
         val source = viewHolder.resources.getString(
-                R.string.item_source_reward_condition, rankStr, data.condition_name)
+                R.string.item_crafting_source_condition_reward, rankStr, data.condition_name)
 
         viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.monster))
         viewHolder.label_text.text = data.monster.name

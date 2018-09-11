@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/monsterListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListPagerFragment"
-        android:label="@string/monsters_list_title"
+        android:label="@string/title_monster_list"
         tools:layout="@layout/fragment_generic_pager" />
     <action
         android:id="@+id/monsterListAction"
@@ -117,7 +117,7 @@
     <fragment
         android:id="@+id/weaponListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponListFragment"
-        android:label="@string/weapons_title"
+        android:label="@string/title_weapons"
         tools:layout="@layout/list_generic" />
     <action
         android:id="@+id/weaponListAction"
