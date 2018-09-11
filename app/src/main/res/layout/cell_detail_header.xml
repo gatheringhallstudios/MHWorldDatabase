@@ -18,18 +18,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/header_title"
         style="@style/TextHeadlineHigh"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
-        android:paddingBottom="@dimen/padding_small"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@id/header_icon"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        app:autoSizeMinTextSize="14dp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@id/header_subtitle"
-        tools:text="Azure Rathalos" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/header_icon"
+        app:layout_constraintTop_toTopOf="@+id/header_icon"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Azure Rathalos Long Text Wrap" />
 
     <TextView
         android:id="@+id/header_subtitle"
@@ -37,13 +42,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
+        app:layout_constraintBottom_toBottomOf="@id/header_icon"
         app:layout_constraintStart_toEndOf="@id/header_icon"
-        app:layout_constraintTop_toBottomOf="@+id/header_title"
-        app:layout_constraintBottom_toTopOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@id/header_title"
         android:visibility="gone"
         tools:visibility="visible"
         tools:text="Flying Wyvern" />
-
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
