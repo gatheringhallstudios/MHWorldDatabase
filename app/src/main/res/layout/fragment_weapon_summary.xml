@@ -72,17 +72,17 @@
 
                     <com.ghstudios.android.ui.general.SharpnessView
                         android:id="@+id/sharpness_value"
-                        android:layout_width="128dp"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/row_height_small"
                         android:layout_gravity="center_vertical|end"
                         android:layout_marginEnd="@dimen/margin_large"
                         android:layout_weight="1"
-                        app:blue="30"
-                        app:green="40"
-                        app:orange="80"
-                        app:red="100"
-                        app:white="50"
-                        app:yellow="50" />
+                        tools:blue="30"
+                        tools:green="40"
+                        tools:orange="80"
+                        tools:red="100"
+                        tools:white="50"
+                        tools:yellow="50" />
                 </LinearLayout>
 
             </LinearLayout>
