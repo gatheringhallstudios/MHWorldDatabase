@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_footer_space">
+
+        <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+            android:id="@+id/weapon_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:iconSrc="@drawable/ic_ui_question_mark_white"
+            tools:titleText="Obliteration Football"
+            tools:descriptionText=""/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle">
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_attack"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/weapon_attack"/>
+
+                <TextView
+                    android:id="@+id/attack_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="56-68"/>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_whetstone" />
+
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/weapon_sharpness" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|end"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <com.ghstudios.android.ui.general.SharpnessView
+                        android:id="@+id/sharpness_value"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/row_height_small"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:layout_weight="1"
+                        tools:blue="30"
+                        tools:green="40"
+                        tools:orange="80"
+                        tools:red="100"
+                        tools:white="50"
+                        tools:yellow="50" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_element"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/weapon_element"/>
+
+                <LinearLayout
+                    android:id="@+id/element_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical|end">
+
+                    <ImageView
+                        android:id="@+id/element_icon"
+                        style="@style/IconXSmall"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:src="@drawable/ic_element_thunder" />
+
+                    <TextView
+                        android:id="@+id/element_type_value"
+                        style="@style/TextSubHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:gravity="end"
+                        tools:text="Thunder" />
+
+                    <TextView
+                        android:id="@+id/element_value"
+                        style="@style/TextSubHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:gravity="end"
+                        android:paddingLeft="@dimen/margin_medium"
+                        tools:text="150" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_slots" />
+
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/armor_detail_slots" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/slot1"
+                        style="@style/IconXSmall"
+                        android:src="@drawable/ic_ui_slot_none" />
+
+                    <ImageView
+                        android:id="@+id/slot2"
+                        style="@style/IconXSmall"
+                        android:src="@drawable/ic_ui_slot_none" />
+
+                    <ImageView
+                        android:id="@+id/slot3"
+                        style="@style/IconXSmall"
+                        android:src="@drawable/ic_ui_slot_none" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_defense"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/weapon_defence"/>
+                <TextView
+                    android:id="@+id/defence_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="2"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/weapon_components_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:orientation="vertical">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/header_required_materials" />
+
+            <LinearLayout
+                android:id="@+id/weapon_components_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_stroke"
+                android:orientation="vertical"
+                android:showDividers="middle" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

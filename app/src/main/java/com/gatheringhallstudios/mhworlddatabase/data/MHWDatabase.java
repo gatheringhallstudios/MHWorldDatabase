@@ -48,6 +48,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponRecipe;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponText;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
@@ -87,7 +88,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class,
 
                 // Weapon Classes
-                WeaponEntity.class, WeaponText.class
+                WeaponEntity.class, WeaponText.class, WeaponRecipe.class
         },
         version = 16,
         exportSchema = false)

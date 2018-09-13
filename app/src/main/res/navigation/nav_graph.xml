@@ -247,8 +247,20 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreeListFragment"
         tools:layout="@layout/list_generic" />
     <action
-        android:id="@+id/openWeaponTreeDetailAction"
+        android:id="@+id/openWeaponTreeAction"
         app:destination="@id/weaponTreeDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
+
+    <fragment
+        android:id="@+id/weaponDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailFragment"
+        tools:layout="@layout/fragment_weapon_summary" />
+    <action
+        android:id="@+id/openWeaponDetailAction"
+        app:destination="@id/weaponDetailDestination"
         app:enterAnim="@anim/nav_enter_right"
         app:exitAnim="@anim/nav_exit_left"
         app:popEnterAnim="@anim/nav_enter_left"

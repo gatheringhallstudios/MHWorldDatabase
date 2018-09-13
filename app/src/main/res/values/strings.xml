@@ -130,6 +130,12 @@
     <string name="title_heavy_bowgun">Heavy Bowgun</string>
     <string name="title_bow">Bow</string>
 
+    <!-- General Strings -->
+    <string name="weapon_attack">Attack</string>
+    <string name="weapon_sharpness">Sharpness</string>
+    <string name="weapon_element">Element</string>
+    <string name="weapon_defence">Defence</string>
+
     <!-- ################ -->
     <!-- ## ARMOR MENU ## -->
     <!-- ################ -->
