@@ -172,10 +172,10 @@ class MonsterDamageFragment : Fragment() {
             breakView.sever.setTextColor(ContextCompat.getColor(context!!, R.color.textColorHigh))
 
             breakView.extract.text = context?.getString(when (breakData.extract) {
-                Extract.ORANGE -> R.string.type_extract_orange_abbr
-                Extract.RED -> R.string.type_extract_red_abbr
-                Extract.WHITE -> R.string.type_extract_white_abbr
-                Extract.GREEN -> R.string.type_extract_green_abbr
+                Extract.ORANGE -> R.string.extract_orange_abbr
+                Extract.RED -> R.string.extract_red_abbr
+                Extract.WHITE -> R.string.extract_white_abbr
+                Extract.GREEN -> R.string.extract_green_abbr
             })
 
             breakView.extract.setTextColor(context?.getColorCompat(when (breakData.extract) {

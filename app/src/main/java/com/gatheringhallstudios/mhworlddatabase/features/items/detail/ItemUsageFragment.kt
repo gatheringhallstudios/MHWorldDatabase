@@ -71,9 +71,9 @@ class ItemUsageFragment : RecyclerViewFragment() {
         }
 
         adapter.addSections(mapOf(
-                getString(R.string.header_item_crafting) to data.craftRecipes,
-                getString(R.string.header_item_usage_charms) to data.charms.map(::bindCharmCraft),
-                getString(R.string.header_item_usage_armor)to data.armor.map(::bindArmorCraft)
+                getString(R.string.header_crafting) to data.craftRecipes,
+                getString(R.string.header_charms) to data.charms.map(::bindCharmCraft),
+                getString(R.string.header_armor)to data.armor.map(::bindArmorCraft)
         ), skipEmpty = true)
     }
 }

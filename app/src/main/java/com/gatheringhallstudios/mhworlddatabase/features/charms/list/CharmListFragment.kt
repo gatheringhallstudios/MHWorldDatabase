@@ -40,7 +40,7 @@ class CharmListFragment : RecyclerViewFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity?.title = getString(R.string.charms_title)
+        activity?.title = getString(R.string.title_charms)
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application) {

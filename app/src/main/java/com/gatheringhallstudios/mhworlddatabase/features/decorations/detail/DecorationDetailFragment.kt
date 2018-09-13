@@ -56,7 +56,7 @@ class DecorationDetailFragment : Fragment() {
         val icon = AssetLoader.loadIconFor(decoration)
         decoration_header.setIconDrawable(icon)
         decoration_header.setTitleText(decoration.name)
-        decoration_header.setSubtitleText(getString(R.string.format_rarity_string, decoration.rarity))
+        decoration_header.setSubtitleText(getString(R.string.format_rarity, decoration.rarity))
         decoration_header.setSubtitleColor(AssetLoader.loadRarityColor(decoration.rarity))
 
         // inner function used to inflate a feystone change row
@@ -76,25 +76,25 @@ class DecorationDetailFragment : Fragment() {
         }
 
         decoration_drop_list.addView(inflateFeystoneChance(
-                R.string.decorations_mysterious_feystone_chance,
+                R.string.decorations_chance_mysterious,
                 decoration.mysterious_feystone_chance,
                 MYSTERIOUS_FEYSTONE_COLOR
         ))
 
         decoration_drop_list.addView(inflateFeystoneChance(
-                R.string.decorations_glowing_feystone_chance,
+                R.string.decorations_chance_glowing,
                 decoration.glowing_feystone_chance,
                 GLOWING_FEYSTONE_COLOR
         ))
 
         decoration_drop_list.addView(inflateFeystoneChance(
-                R.string.decorations_worn_feystone_chance,
+                R.string.decorations_chance_worn,
                 decoration.worn_feystone_chance,
                 WORN_FEYSTONE_COLOR
         ))
 
         decoration_drop_list.addView(inflateFeystoneChance(
-                R.string.decorations_warped_feystone_chance,
+                R.string.decorations_chance_warped,
                 decoration.warped_feystone_chance,
                 WARPED_FEYSTONE_COLOR
         ))
@@ -111,7 +111,7 @@ class DecorationDetailFragment : Fragment() {
         view.label_text.text = skill.name
 
         //Decorations always only give 1 level. Sorry about the magic number
-        view.level_text.text = getString(R.string.skills_level_qty, 1)
+        view.level_text.text = getString(R.string.skill_level_qty, 1)
         with(view.skill_level) {
             maxLevel = skill.max_level
             level = 1

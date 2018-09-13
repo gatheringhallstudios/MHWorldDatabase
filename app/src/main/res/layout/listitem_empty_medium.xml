@@ -13,5 +13,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/none"/>
+        android:text="@string/general_none"/>
 </android.support.constraint.ConstraintLayout>

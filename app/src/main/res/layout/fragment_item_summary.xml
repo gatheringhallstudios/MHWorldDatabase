@@ -49,7 +49,7 @@
             style="@style/TextBodyHigh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/items_buy_price"
+            android:text="@string/item_price_buy"
             app:layout_constraintBottom_toTopOf="@id/divider_2"
             app:layout_constraintStart_toEndOf="@id/vertical_halfway_guide"
             app:layout_constraintTop_toBottomOf="@id/divider_1" />
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
-            android:text="@string/items_carry_capacity"
+            android:text="@string/item_capacity_carry"
             app:layout_constraintBottom_toTopOf="@id/divider_3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_2" />
@@ -118,7 +118,7 @@
             style="@style/TextBodyHigh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/items_sell_price"
+            android:text="@string/item_price_sell"
             app:layout_constraintBottom_toTopOf="@id/divider_3"
             app:layout_constraintStart_toEndOf="@id/vertical_halfway_guide"
             app:layout_constraintTop_toBottomOf="@id/divider_2" />

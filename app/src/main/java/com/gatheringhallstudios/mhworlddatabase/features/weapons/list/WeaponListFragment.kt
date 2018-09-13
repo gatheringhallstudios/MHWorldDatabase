@@ -1,8 +1,5 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -11,7 +8,6 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegat
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
-import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponType as WeaponTypeModel
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType as WeaponTypeEnum
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -30,20 +26,20 @@ class WeaponListFragment : RecyclerViewFragment() {
         // Because localizations for weapon types do not exist in the database and also because MHW
         // will probably not add new weapon types for the life time of the game, title list is generated using string dictionary
         val weaponTypes = listOf(
-                WeaponTypeModel(getString(R.string.great_sword_title), WeaponTypeEnum.GREAT_SWORD),
-                WeaponTypeModel(getString(R.string.long_sword_title), WeaponTypeEnum.LONG_SWORD),
-                WeaponTypeModel(getString(R.string.sword_and_shield_title), WeaponTypeEnum.SWORD_AND_SHIELD),
-                WeaponTypeModel(getString(R.string.dual_blades_title), WeaponTypeEnum.DUAL_BLADES),
-                WeaponTypeModel(getString(R.string.hammer_title), WeaponTypeEnum.HAMMER),
-                WeaponTypeModel(getString(R.string.hunting_horn_title), WeaponTypeEnum.HUNTING_HORN),
-                WeaponTypeModel(getString(R.string.lance_title), WeaponTypeEnum.LANCE),
-                WeaponTypeModel(getString(R.string.gunlance_title), WeaponTypeEnum.GUNLANCE),
-                WeaponTypeModel(getString(R.string.switch_axe_title), WeaponTypeEnum.SWITCH_AXE),
-                WeaponTypeModel(getString(R.string.charge_blade_title), WeaponTypeEnum.CHARGE_BLADE),
-                WeaponTypeModel(getString(R.string.insect_glaive_title), WeaponTypeEnum.INSECT_GLAIVE),
-                WeaponTypeModel(getString(R.string.light_bowgun_title), WeaponTypeEnum.LIGHT_BOWGUN),
-                WeaponTypeModel(getString(R.string.heavy_bowgun_title), WeaponTypeEnum.HEAVY_BOWGUN),
-                WeaponTypeModel(getString(R.string.bow_title), WeaponTypeEnum.HEAVY_BOWGUN))
+                WeaponTypeModel(getString(R.string.title_great_sword), WeaponTypeEnum.GREAT_SWORD),
+                WeaponTypeModel(getString(R.string.title_long_sword), WeaponTypeEnum.LONG_SWORD),
+                WeaponTypeModel(getString(R.string.title_sword_and_shield), WeaponTypeEnum.SWORD_AND_SHIELD),
+                WeaponTypeModel(getString(R.string.title_dual_blades), WeaponTypeEnum.DUAL_BLADES),
+                WeaponTypeModel(getString(R.string.title_hammer), WeaponTypeEnum.HAMMER),
+                WeaponTypeModel(getString(R.string.title_hunting_horn), WeaponTypeEnum.HUNTING_HORN),
+                WeaponTypeModel(getString(R.string.title_lance), WeaponTypeEnum.LANCE),
+                WeaponTypeModel(getString(R.string.title_gunlance), WeaponTypeEnum.GUNLANCE),
+                WeaponTypeModel(getString(R.string.title_switch_axe), WeaponTypeEnum.SWITCH_AXE),
+                WeaponTypeModel(getString(R.string.title_charge_blade), WeaponTypeEnum.CHARGE_BLADE),
+                WeaponTypeModel(getString(R.string.title_insect_glaive), WeaponTypeEnum.INSECT_GLAIVE),
+                WeaponTypeModel(getString(R.string.title_light_bowgun), WeaponTypeEnum.LIGHT_BOWGUN),
+                WeaponTypeModel(getString(R.string.title_heavy_bowgun), WeaponTypeEnum.HEAVY_BOWGUN),
+                WeaponTypeModel(getString(R.string.title_bow), WeaponTypeEnum.HEAVY_BOWGUN))
 
         adapter.items = weaponTypes
         adapter.notifyDataSetChanged()

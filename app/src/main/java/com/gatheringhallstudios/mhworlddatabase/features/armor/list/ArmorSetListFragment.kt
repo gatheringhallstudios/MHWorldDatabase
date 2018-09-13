@@ -3,7 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor.list
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
@@ -65,6 +64,6 @@ class ArmorSetListFragment : RecyclerViewFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity?.title = getString(R.string.armor_title)
+        activity?.title = getString(R.string.title_armor)
     }
 }

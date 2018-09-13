@@ -134,7 +134,7 @@ class DecorationSkillLevelAdapterDelegate: SimpleListDelegate<DecorationSkillLev
         viewHolder.label_text.text = data.decoration.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
         viewHolder.skill_level.level = data.level
-        viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
+        viewHolder.level_text.text = viewHolder.context.getString(R.string.skill_level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateDecorationDetail(data.decoration.id) }
     }
 }
@@ -152,7 +152,7 @@ class CharmSkillLevelAdapterDelegate: SimpleListDelegate<CharmSkillLevel>() {
         viewHolder.label_text.text = data.charm.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
         viewHolder.skill_level.level = data.level
-        viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
+        viewHolder.level_text.text = viewHolder.context.getString(R.string.skill_level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateCharmDetail(data.charm.id) }
     }
 }
@@ -191,7 +191,7 @@ class ArmorSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSkillLevel>() {
             slotViews[0].visibility = View.VISIBLE
         }
 
-        viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, data.level)
+        viewHolder.level_text.text = viewHolder.context.getString(R.string.skill_level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateArmorDetail(data.armor.id) }
     }
 }
@@ -209,7 +209,7 @@ class ArmorSetBonusSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSetBonus>(
         viewHolder.label_text.text = data.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
         viewHolder.skill_level.level = 1 // todo: don't hardcode?
-        viewHolder.level_text.text = viewHolder.context.getString(R.string.skills_level_qty, 1)
+        viewHolder.level_text.text = viewHolder.context.getString(R.string.skill_level_qty, 1)
 
         // todo: allow clicking
     }

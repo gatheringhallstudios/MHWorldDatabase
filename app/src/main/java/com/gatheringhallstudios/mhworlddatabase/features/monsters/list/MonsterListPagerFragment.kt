@@ -28,6 +28,6 @@ class MonsterListPagerFragment : BasePagerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity?.title = getString(R.string.monsters_list_title)
+        activity?.title = getString(R.string.title_monster_list)
     }
 }

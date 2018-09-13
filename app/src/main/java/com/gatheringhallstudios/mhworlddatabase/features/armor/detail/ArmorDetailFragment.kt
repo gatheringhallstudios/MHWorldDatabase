@@ -54,7 +54,7 @@ class ArmorDetailFragment : Fragment() {
         armor_header.setIconType(IconType.ZEMBELLISHED)
         armor_header.setIconDrawable(AssetLoader.loadIconFor(armor))
         armor_header.setTitleText(armor.name)
-        armor_header.setSubtitleText(getString(R.string.format_rarity_string, armor.rarity))
+        armor_header.setSubtitleText(getString(R.string.format_rarity, armor.rarity))
         armor_header.setSubtitleColor(AssetLoader.loadRarityColor(armor.rarity))
 
         // set defense label
@@ -97,7 +97,7 @@ class ArmorDetailFragment : Fragment() {
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.skills_level_qty, skill.level)
+            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
             with(view.skill_level) {
                 maxLevel = skill.skillTree.max_level
                 level = skill.level

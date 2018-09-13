@@ -44,26 +44,26 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
         }
 
         if (data.craftRecipes.isNotEmpty()) {
-            adapter.addSection(getString(R.string.header_item_crafting), data.craftRecipes)
+            adapter.addSection(getString(R.string.header_crafting), data.craftRecipes)
         }
 
         if (data.locations.isNotEmpty()) {
             val groups = data.locations.groupBy {
                 // todo: centralize
                 val rankString = when (it.rank) {
-                    Rank.LOW -> getString(R.string.low_rank_short)
-                    Rank.HIGH -> getString(R.string.high_rank_short)
-                    null -> getString(R.string.all_rank_short)
+                    Rank.LOW -> getString(R.string.rank_short_low)
+                    Rank.HIGH -> getString(R.string.rank_short_high)
+                    null -> getString(R.string.rank_short_all)
                 }
 
                 "$rankString ${it.location.name}"
             }
 
-            adapter.addSection(getString(R.string.header_item_gathering), groups)
+            adapter.addSection(getString(R.string.header_gathering), groups)
         }
 
         if (data.rewards.isNotEmpty()) {
-            adapter.addSection(getString(R.string.header_item_rewards), data.rewards)
+            adapter.addSection(getString(R.string.header_rewards), data.rewards)
         }
     }
 }

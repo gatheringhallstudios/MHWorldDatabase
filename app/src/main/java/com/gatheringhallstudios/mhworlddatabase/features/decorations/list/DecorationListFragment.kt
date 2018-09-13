@@ -40,7 +40,7 @@ class DecorationListFragment : RecyclerViewFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity?.title = getString(R.string.skills_title)
+        activity?.title = getString(R.string.title_skills)
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application) {

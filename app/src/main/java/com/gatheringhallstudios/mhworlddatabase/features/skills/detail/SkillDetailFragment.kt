@@ -50,28 +50,28 @@ class SkillDetailFragment : Fragment() {
 
         viewModel.decorations.observe(this, Observer {
             if (it != null) {
-                val title = getString(R.string.header_skills_decorations)
+                val title = getString(R.string.header_decorations)
                 adapterBuilder.setDecorations(title, it)
             }
         })
 
         viewModel.charms.observe(this, Observer {
             if (it != null) {
-                val title = getString(R.string.header_skills_charms)
+                val title = getString(R.string.header_charms)
                 adapterBuilder.setCharms(title, it)
             }
         })
 
         viewModel.armorPieces.observe(this, Observer {
             if (it != null) {
-                val title = getString(R.string.header_skills_armor)
+                val title = getString(R.string.header_armor)
                 adapterBuilder.setArmor(title, it)
             }
         })
 
         viewModel.bonuses.observe(this, Observer {
             if (it != null) {
-                val title = getString(R.string.header_skills_set_bonuses)
+                val title = getString(R.string.header_set_bonuses)
                 adapterBuilder.setArmorSetBonuses(title, it)
             }
         })
@@ -101,7 +101,7 @@ class SkillDetailFragment : Fragment() {
 
         for ((i, skill) in skills.withIndex()) {
             val view = layoutInflater.inflate(R.layout.listitem_skill_description, skill_level_descriptions, false)
-            view.level_text.text = getString(R.string.skills_level_short_qty, i + 1)
+            view.level_text.text = getString(R.string.skill_level_short_qty, i + 1)
             view.level_description.text = skill.description
 
             skill_level_descriptions.addView(view)
@@ -112,7 +112,7 @@ class SkillDetailFragment : Fragment() {
         val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
         val view = IconLabelTextCell(context)
         view.setLeftIconDrawable(icon)
-        view.setLabelText(getString(R.string.none))
+        view.setLabelText(getString(R.string.general_none))
 
         layout.addView(view)
     }
