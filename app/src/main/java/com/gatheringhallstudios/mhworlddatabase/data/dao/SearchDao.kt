@@ -41,6 +41,10 @@ abstract class SearchDao {
         loadAllItemsSync(AppSettings.dataLocale)
     }
 
+    private val weaponDataCache = CachedValue(timeout) {
+        loadAllWeaponsSync(AppSettings.dataLocale)
+    }
+
 
     fun searchLocations(searchFilter: String): List<Location> {
         val filter = SearchFilter(searchFilter)
@@ -75,6 +79,11 @@ abstract class SearchDao {
     fun searchItems(searchFilter: String): List<ItemBase> {
         val filter = SearchFilter(searchFilter)
         return itemDataCache.get().filter { filter.matches(it.name) }
+    }
+
+    fun searchWeapons(searchFilter: String): List<WeaponTree> {
+        val filter = SearchFilter(searchFilter)
+        return weaponDataCache.get().filter {filter.matches(it.name)}
     }
 
     // All queries for search are below. Currently, it loads the entire table.
@@ -141,5 +150,15 @@ abstract class SearchDao {
         ORDER BY itext.name ASC
     """)
     protected abstract fun loadAllItemsSync(langId: String): List<ItemBase>
+
+
+    @Query("""
+        SELECT w.id, w.rarity, w.weapon_type, w.attack,
+        w.slot_1, w.slot_2, w.slot_3, w.element_hidden, wt.*
+        FROM weapon w
+            JOIN weapon_text wt USING (id)
+        WHERE wt.lang_id = :langId
+    """)
+    abstract fun loadAllWeaponsSync(langId: String): List<WeaponTree>
 
 }
