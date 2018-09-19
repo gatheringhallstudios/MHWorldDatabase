@@ -10,6 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
@@ -26,6 +27,7 @@ class SearchResultAdapter: BasicListDelegationAdapter<Any>(SimpleUniversalBinder
         items.addAll(results.decorations.map(::createDecorationBinder))
         items.addAll(results.armor.map(::createArmorBinder))
         items.addAll(results.items.map(::createItemBinder))
+        items.addAll(results.weapons.map(::createWeaponBinder))
 
         this.items = items
         notifyDataSetChanged()
@@ -98,5 +100,30 @@ fun createItemBinder(item: ItemBase) = createSimpleUniversalBinder { ctx ->
 
     SimpleUniversalBinding(name, typeString, IconType.EMBELLISHED, icon) {
         it.getRouter().navigateItemDetail(item.id)
+    }
+}
+
+fun createWeaponBinder(weapon: WeaponTree) = createSimpleUniversalBinder { ctx ->
+    val icon = AssetLoader.loadIconFor(weapon)
+    val name = weapon.name
+    val typeString = ctx.getString(when (weapon.weapon_type) {
+        WeaponType.GREAT_SWORD -> R.string.title_great_sword
+        WeaponType.LONG_SWORD -> R.string.title_long_sword
+        WeaponType.SWORD_AND_SHIELD -> R.string.title_sword_and_shield
+        WeaponType.DUAL_BLADES -> R.string.title_dual_blades
+        WeaponType.HAMMER -> R.string.title_hammer
+        WeaponType.HUNTING_HORN -> R.string.title_hunting_horn
+        WeaponType.LANCE -> R.string.title_lance
+        WeaponType.GUNLANCE -> R.string.title_gunlance
+        WeaponType.SWITCH_AXE -> R.string.title_switch_axe
+        WeaponType.CHARGE_BLADE -> R.string.title_charge_blade
+        WeaponType.INSECT_GLAIVE -> R.string.title_insect_glaive
+        WeaponType.BOW -> R.string.title_bow
+        WeaponType.LIGHT_BOWGUN -> R.string.title_light_bowgun
+        WeaponType.HEAVY_BOWGUN -> R.string.title_heavy_bowgun
+    })
+
+    SimpleUniversalBinding(name, typeString, IconType.ZEMBELLISHED, icon) {
+        it.getRouter().navigateWeaponDetail(weapon.id)
     }
 }
