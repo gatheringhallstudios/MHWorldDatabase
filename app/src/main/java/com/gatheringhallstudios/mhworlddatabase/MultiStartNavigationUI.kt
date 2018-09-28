@@ -20,7 +20,7 @@ class MultiStartNavigationUI(private val startDestinations: List<Int>) {
     }
 
     fun navigateUp(drawerLayout: DrawerLayout?, navController: NavController): Boolean {
-        if (drawerLayout != null && startDestinations.contains(navController.currentDestination.id)) {
+        if (drawerLayout != null && startDestinations.contains(navController.currentDestination?.id)) {
             drawerLayout.openDrawer(Gravity.START)
             return true
         } else {
@@ -30,7 +30,7 @@ class MultiStartNavigationUI(private val startDestinations: List<Int>) {
 
     fun onBackPressed(activity: AppCompatActivity,
                       navController: NavController): Boolean {
-        if (startDestinations.contains(navController.currentDestination.id)) {
+        if (startDestinations.contains(navController.currentDestination?.id)) {
             ActivityCompat.finishAfterTransition(activity)
             return true
         }
