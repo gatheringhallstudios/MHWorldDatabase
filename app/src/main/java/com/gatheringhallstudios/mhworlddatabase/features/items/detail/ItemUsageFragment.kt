@@ -17,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsageArmor
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsageCharm
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsageWeapon
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemUsages
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
@@ -37,6 +38,16 @@ fun bindArmorCraft(data: ItemUsageArmor) = createSimpleUniversalBinder { ctx ->
             icon = AssetLoader.loadIconFor(data.result),
             iconType = IconType.ZEMBELLISHED,
             clickFn = { v -> v.getRouter().navigateArmorDetail(data.result.id) }
+    )
+}
+
+fun bindWeaponCraft(data: ItemUsageWeapon) = createSimpleUniversalBinder { ctx ->
+    SimpleUniversalBinding(
+            label = data.result.name,
+            value = data.quantity.toString(),
+            icon = AssetLoader.loadIconFor(data.result),
+            iconType = IconType.EMBELLISHED,
+            clickFn = { v -> v.getRouter().navigateWeaponDetail(data.result.id) }
     )
 }
 
@@ -73,7 +84,9 @@ class ItemUsageFragment : RecyclerViewFragment() {
         adapter.addSections(mapOf(
                 getString(R.string.header_crafting) to data.craftRecipes,
                 getString(R.string.header_charms) to data.charms.map(::bindCharmCraft),
-                getString(R.string.header_armor)to data.armor.map(::bindArmorCraft)
+                getString(R.string.header_armor)to data.armor.map(::bindArmorCraft),
+                getString(R.string.header_weapons)to data.weapon.map(::bindWeaponCraft)
+
         ), skipEmpty = true)
     }
 }

@@ -71,15 +71,14 @@ abstract class WeaponDao {
             JOIN weapon_text wt USING (id)
         WHERE w.id = :weaponId
         AND wt.lang_id = :langId
-
         """)
-    abstract fun loadWeapon(langId: String, weaponId: Int) : Weapon
+    abstract fun loadWeapon(langId: String, weaponId: Int): Weapon
 
     fun loadWeaponFull(langId: String, weaponId: Int) = createLiveData {
         val weapon = loadWeapon(langId, weaponId)
         WeaponFull(
-            weapon = weapon,
-            recipe = loadWeaponComponents(langId, weaponId)
+                weapon = weapon,
+                recipe = loadWeaponComponents(langId, weaponId)
         )
     }
 }

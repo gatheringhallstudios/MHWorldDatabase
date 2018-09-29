@@ -41,7 +41,7 @@ abstract class ItemDao {
         WHERE li.item_id = :itemId
           AND lt.lang_id = :langId
         """)
-    abstract fun loadItemLocationsSync(langId: String, itemId : Int): List<ItemLocation>
+    abstract fun loadItemLocationsSync(langId: String, itemId: Int): List<ItemLocation>
 
     /**
      * Synchronously load all ways to get items from monsters
@@ -66,7 +66,7 @@ abstract class ItemDao {
     /**
      * Loads all possible gathering locations for an item asynchronously
      */
-    fun loadItemLocations(langId: String, itemId : Int) = createLiveData {
+    fun loadItemLocations(langId: String, itemId: Int) = createLiveData {
         return@createLiveData loadItemLocationsSync(langId, itemId)
     }
 
@@ -130,6 +130,18 @@ abstract class ItemDao {
     """)
     abstract fun loadArmorUsageForSync(langId: String, itemId: Int): List<ItemUsageArmor>
 
+
+    @Query("""
+        SELECT w.id, w.rarity, w.weapon_type, w.attack, w.affinity,
+        w.slot_1, w.slot_2, w.slot_3, w.element_hidden, wt.*, wr.quantity
+        FROM weapon w
+            JOIN weapon_text wt USING (id)
+            JOIN weapon_recipe wr ON w.id = wr.weapon_id
+        WHERE wt.lang_id = :langId
+            AND wr.item_id = :itemId
+    """)
+    abstract fun loadWeaponUsageForSync(langId: String, itemId: Int): List<ItemUsageWeapon>
+
     /**
      * Loads all potential ways to use an item asynchronously
      */
@@ -141,7 +153,8 @@ abstract class ItemDao {
                     it.first.id == itemId || it.second?.id == itemId
                 },
                 charms = loadCharmUsageForSync(langId, itemId),
-                armor = loadArmorUsageForSync(langId, itemId)
+                armor = loadArmorUsageForSync(langId, itemId),
+                weapon = loadWeaponUsageForSync(langId, itemId)
         )
     }
 

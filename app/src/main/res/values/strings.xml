@@ -51,6 +51,7 @@
     <string name="header_rewards">Rewards</string>
     <string name="header_armor">Armor</string>
     <string name="header_charms">Charms</string>
+    <string name="header_weapons">Weapons</string>
     <string name="header_decorations">Decorations</string>
     <string name="header_required_materials">Required Materials</string>
     <string name="header_required_materials_upgrade">Required Materials (Upgrade)</string>
