@@ -2,9 +2,11 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.data.embeds.MonsterAilments
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
 import com.gatheringhallstudios.mhworlddatabase.data.entities.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.AilmentStrength
 import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
@@ -36,7 +38,11 @@ class Monster(
         val status_weaknesses: WeaknessSummaryStatus?,
 
         @Embedded(prefix = "alt_weakness_")
-        val alt_weaknesses: WeaknessSummaryElemental?
+        val alt_weaknesses: WeaknessSummaryElemental?,
+
+        @Embedded(prefix="ailment_")
+        val ailments: MonsterAilments?
+
 ): MonsterBase(id, name, size, ecology)
 
 class MonsterHabitat(

@@ -46,6 +46,18 @@ enum class MonsterSize {
     LARGE
 }
 
+/**
+ * Represents the strength of a monster ailment.
+ * Those in the extreme category usually require special measures.
+ * Kushala's wind pressure is an example of an extreme ailment.
+ */
+enum class AilmentStrength {
+    NONE,
+    SMALL,
+    LARGE,
+    EXTREME
+}
+
 enum class Extract {
     RED,
     ORANGE,

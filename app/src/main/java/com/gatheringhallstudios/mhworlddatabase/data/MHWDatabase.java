@@ -90,7 +90,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 // Weapon Classes
                 WeaponEntity.class, WeaponText.class, WeaponRecipe.class
         },
-        version = 16,
+        version = 18,
         exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {
