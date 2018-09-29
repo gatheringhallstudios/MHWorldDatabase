@@ -50,6 +50,13 @@ private val ArmorTypeConverter = Converter(
         null to null
 )
 
+private val ElderSealLevelConverter = Converter(
+        null to ElderSealLevel.NONE,
+        "low" to ElderSealLevel.LOW,
+        "average" to ElderSealLevel.AVERAGE,
+        "high" to ElderSealLevel.HIGH
+)
+
 private val WeaponTypeConverter = Converter(
         "great-sword" to WeaponType.GREAT_SWORD,
         "long-sword" to WeaponType.LONG_SWORD,
@@ -98,4 +105,8 @@ class Converters {
 
     @TypeConverter fun weaponTypeFromString(value: String) = WeaponTypeConverter.deserialize(value)
     @TypeConverter fun fromWeaponType(type: WeaponType?) = WeaponTypeConverter.serialize(type)
+
+    @TypeConverter fun elderSealFromString(value: String?) = ElderSealLevelConverter.deserialize(value)
+    @TypeConverter fun fromElderSealLevel(type: ElderSealLevel) = ElderSealLevelConverter.serialize(type)
+
 }

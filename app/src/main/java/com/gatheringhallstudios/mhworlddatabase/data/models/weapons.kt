@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
 import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
@@ -11,38 +12,38 @@ open class WeaponType(
 )
 
 class Weapon(
-         id: Int,
-         name: String,
-         weapon_type: WeaponType,
-         rarity: Int,
-         attack: Int,
-         affinity: Int,
-         defense: Int?,
+        id: Int,
+        name: String,
+        weapon_type: WeaponType,
+        rarity: Int,
+        attack: Int,
+        affinity: Int,
+        defense: Int?,
 
-         element1: String?,
-         element1_attack: Int?,
-         element2: String?,
-         element2_attack: Int?,
-         element_hidden: Boolean,
-         previous_weapon_id: Int?,
+        element1: String?,
+        element1_attack: Int?,
+        element2: String?,
+        element2_attack: Int?,
+        element_hidden: Boolean,
+        previous_weapon_id: Int?,
 
-         val attack_true: Int,
-         val craftable: Int,
-         val isFinal: Int,
-         val kinsect_bonus: String?,
-         val elderseal: String?,
-         val phial: String?,
-         val phial_power: Int,
-         val shelling: String?,
-         val shelling_level: Int?,
-         val ammo_id: Int?,
-         val coating_close: String?,
-         val coating_power: String?,
-         val coating_poison: String?,
-         val coating_paralysis: String?,
-         val coating_sleep: String?,
-         val coating_blast: String?,
-         val notes: String?
+        val attack_true: Int,
+        val craftable: Int,
+        val isFinal: Int,
+        val kinsect_bonus: String?,
+        val elderseal: ElderSealLevel,
+        val phial: String?,
+        val phial_power: Int,
+        val shelling: String?,
+        val shelling_level: Int?,
+        val ammo_id: Int?,
+        val coating_close: String?,
+        val coating_power: String?,
+        val coating_poison: String?,
+        val coating_paralysis: String?,
+        val coating_sleep: String?,
+        val coating_blast: String?,
+        val notes: String?
 ) : WeaponTree(id, name, rarity, weapon_type, attack, affinity, element1, element1_attack, element2, element2_attack,
         element_hidden, defense, previous_weapon_id)
 

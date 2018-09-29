@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.entities
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
 
 
 @Entity(tableName = "weapon")

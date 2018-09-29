@@ -50,6 +50,27 @@
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_affinity"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/weapon_affinity"/>
+                <TextView
+                    android:id="@+id/affinity_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="2"/>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
 
                 <ImageView
                     style="@style/IconXSmall"
@@ -170,6 +191,27 @@
                         style="@style/IconXSmall"
                         android:src="@drawable/ic_ui_slot_none" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_defense"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/weapon_elderseal"/>
+                <TextView
+                    android:id="@+id/elderseal_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="2"/>
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">

@@ -9,10 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.*
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
+import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -54,6 +58,13 @@ class WeaponDetailFragment : Fragment() {
         weapon_header.setSubtitleColor(AssetLoader.loadRarityColor(weapon.rarity))
 
         attack_value.text = weapon.attack.toString()
+        affinity_value.text = weapon.affinity.toString()
+        elderseal_value.text = when (weapon.elderseal) {
+            ElderSealLevel.NONE -> getString(R.string.weapon_elderseal_none)
+            ElderSealLevel.LOW -> getString(R.string.weapon_elderseal_low)
+            ElderSealLevel.AVERAGE -> getString(R.string.weapon_elderseal_average)
+            ElderSealLevel.HIGH -> getString(R.string.weapon_elderseal_high)
+        }
 
         //Draw sharpness bar/hide it for weapons that don't have it
         val sharpnessData = weapon.sharpnessData
