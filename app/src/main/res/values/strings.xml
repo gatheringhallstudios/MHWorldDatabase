@@ -139,12 +139,12 @@
     <string name="weapon_element">Element</string>
     <string name="weapon_defence">Defence</string>
     <string name="weapon_affinity">Affinity</string>
+    <string name="weapon_handicraft">(with Handicraft)</string>
     <string name="weapon_elderseal">Elderseal</string>
     <string name="weapon_elderseal_none">None</string>
     <string name="weapon_elderseal_low">Low</string>
     <string name="weapon_elderseal_average">Average</string>
     <string name="weapon_elderseal_high">High</string>
-
 
     <!-- ################ -->
     <!-- ## ARMOR MENU ## -->

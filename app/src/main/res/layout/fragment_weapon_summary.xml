@@ -16,28 +16,30 @@
             android:id="@+id/weapon_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:descriptionText=""
             tools:iconSrc="@drawable/ic_ui_question_mark_white"
-            tools:titleText="Obliteration Football"
-            tools:descriptionText=""/>
+            tools:titleText="Obliteration Football" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:divider="@drawable/divider_stroke"
+            android:orientation="vertical"
             android:showDividers="middle">
 
             <LinearLayout style="@style/EquipmentRow">
+
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_attack"/>
+                    android:src="@drawable/ic_ui_attack" />
+
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/weapon_attack"/>
+                    android:text="@string/weapon_attack" />
 
                 <TextView
                     android:id="@+id/attack_value"
@@ -46,20 +48,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
-                    tools:text="56-68"/>
+                    tools:text="56-68" />
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
+
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_affinity"/>
+                    android:src="@drawable/ic_ui_affinity" />
+
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/weapon_affinity"/>
+                    android:text="@string/weapon_affinity" />
+
                 <TextView
                     android:id="@+id/affinity_value"
                     style="@style/TextSubHead"
@@ -67,64 +72,248 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
-                    tools:text="2"/>
+                    tools:text="2" />
             </LinearLayout>
 
-            <LinearLayout style="@style/EquipmentRow">
+            <LinearLayout
+                style="@style/EquipmentRow"
+                android:layout_height="wrap_content">
 
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
                     android:src="@drawable/ic_ui_whetstone" />
 
-                <TextView
-                    style="@style/TextSubHead"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/weapon_sharpness" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextSubHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:text="@string/weapon_sharpness" />
+
+                    <TextView
+                        style="@style/TextBodyMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weapon_handicraft" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
                     android:gravity="end"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <com.ghstudios.android.ui.general.SharpnessView
-                        android:id="@+id/sharpness_value"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/row_height_small"
-                        android:layout_gravity="center_vertical|end"
-                        android:layout_marginEnd="@dimen/margin_large"
-                        android:layout_weight="1"
-                        tools:blue="30"
-                        tools:green="40"
-                        tools:orange="80"
-                        tools:red="100"
-                        tools:white="50"
-                        tools:yellow="50" />
+                    <LinearLayout
+                        android:id="@+id/sharpness_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextSubHead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            tools:text="+0"
+                            android:id="@+id/sharpness_label"/>
+
+                        <com.ghstudios.android.ui.general.SharpnessView
+                            android:id="@+id/sharpness_value"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/row_height_small"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:layout_weight="1"
+                            tools:blue="30"
+                            tools:green="40"
+                            tools:orange="80"
+                            tools:red="100"
+                            tools:white="50"
+                            tools:yellow="50" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/sharpness_container1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextSubHead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            tools:text="+0"
+                            android:id="@+id/sharpness_label1"/>
+
+                        <com.ghstudios.android.ui.general.SharpnessView
+                            android:id="@+id/sharpness_value1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/row_height_small"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:layout_weight="1"
+                            tools:blue="30"
+                            tools:green="40"
+                            tools:orange="80"
+                            tools:red="100"
+                            tools:white="50"
+                            tools:yellow="50" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/sharpness_container2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextSubHead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            tools:text="+0"
+                            android:id="@+id/sharpness_label2"/>
+
+                        <com.ghstudios.android.ui.general.SharpnessView
+                            android:id="@+id/sharpness_value2"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/row_height_small"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:layout_weight="1"
+                            tools:blue="30"
+                            tools:green="40"
+                            tools:orange="80"
+                            tools:red="100"
+                            tools:white="50"
+                            tools:yellow="50" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/sharpness_container3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextSubHead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            tools:text="+0"
+                            android:id="@+id/sharpness_label3"/>
+
+                        <com.ghstudios.android.ui.general.SharpnessView
+                            android:id="@+id/sharpness_value3"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/row_height_small"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:layout_weight="1"
+                            tools:blue="30"
+                            tools:green="40"
+                            tools:orange="80"
+                            tools:red="100"
+                            tools:white="50"
+                            tools:yellow="50" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/sharpness_container4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextSubHead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            tools:text="+0"
+                            android:id="@+id/sharpness_label4"/>
+
+                        <com.ghstudios.android.ui.general.SharpnessView
+                            android:id="@+id/sharpness_value4"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/row_height_small"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:layout_weight="1"
+                            tools:blue="30"
+                            tools:green="40"
+                            tools:orange="80"
+                            tools:red="100"
+                            tools:white="50"
+                            tools:yellow="50" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/sharpness_container5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextSubHead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            tools:text="+0"
+                            android:id="@+id/sharpness_label5"/>
+
+                        <com.ghstudios.android.ui.general.SharpnessView
+                            android:id="@+id/sharpness_value5"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/row_height_small"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:layout_weight="1"
+                            tools:blue="30"
+                            tools:green="40"
+                            tools:orange="80"
+                            tools:red="100"
+                            tools:white="50"
+                            tools:yellow="50" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
+
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_element"/>
+                    android:src="@drawable/ic_ui_element" />
+
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/weapon_element"/>
+                    android:text="@string/weapon_element" />
 
                 <LinearLayout
                     android:id="@+id/element_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:gravity="center_vertical|end">
 
                     <ImageView
@@ -194,16 +383,19 @@
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
+
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_defense"/>
+                    android:src="@drawable/ic_ui_defense" />
+
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/weapon_elderseal"/>
+                    android:text="@string/weapon_elderseal" />
+
                 <TextView
                     android:id="@+id/elderseal_value"
                     style="@style/TextSubHead"
@@ -211,20 +403,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
-                    tools:text="2"/>
+                    tools:text="2" />
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
+
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_defense"/>
+                    android:src="@drawable/ic_ui_defense" />
+
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/weapon_defence"/>
+                    android:text="@string/weapon_defence" />
+
                 <TextView
                     android:id="@+id/defence_value"
                     style="@style/TextSubHead"
@@ -232,7 +427,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
-                    tools:text="2"/>
+                    tools:text="2" />
             </LinearLayout>
         </LinearLayout>
 

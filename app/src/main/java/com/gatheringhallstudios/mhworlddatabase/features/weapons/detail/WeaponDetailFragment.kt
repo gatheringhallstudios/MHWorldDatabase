@@ -16,6 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponSharpness
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
@@ -67,12 +68,7 @@ class WeaponDetailFragment : Fragment() {
         }
 
         //Draw sharpness bar/hide it for weapons that don't have it
-        val sharpnessData = weapon.sharpnessData
-        if (sharpnessData != null) {
-            sharpness_value.drawSharpness(sharpnessData.get(0))
-        } else {
-            sharpness_value.visibility = View.INVISIBLE
-        }
+        populateSharpness(weapon.sharpnessData)
 
         // Set elemental attack values
         element_value.text = createElementString(weapon.element1_attack, weapon.element_hidden)
@@ -147,5 +143,52 @@ class WeaponDetailFragment : Fragment() {
 
             weapon_components_list.addView(view)
         }
+    }
+
+    /**
+     * Draws 5 sharpness bars for weapons affected by the handicraft skill, 1 bar for weapons that aren't
+     * and hides the sharpness section for weapons that do not have sharpness
+     */
+    private fun populateSharpness(sharpness: WeaponSharpness?) {
+        if (sharpness != null) {
+            //One bar for weapons not affected by sharpness
+            if (sharpness.sharpness_maxed!!) {
+                sharpness_value.drawSharpness(sharpness.get(0))
+                sharpness_container1.visibility = View.GONE
+                sharpness_container2.visibility = View.GONE
+                sharpness_container3.visibility = View.GONE
+                sharpness_container4.visibility = View.GONE
+                sharpness_container5.visibility = View.GONE
+            } else {
+                sharpness_label.text = getString(R.string.format_plus, 0)
+                sharpness_value.drawSharpness(sharpness.get(0))
+
+                sharpness_label1.text = getString(R.string.format_plus, 1)
+                sharpness_value1.drawSharpness(sharpness.get(1))
+
+                sharpness_label2.text = getString(R.string.format_plus, 2)
+                sharpness_value2.drawSharpness(sharpness.get(2))
+
+                sharpness_label3.text = getString(R.string.format_plus, 3)
+                sharpness_value3.drawSharpness(sharpness.get(3))
+
+                sharpness_label4.text = getString(R.string.format_plus, 4)
+                sharpness_value4.drawSharpness(sharpness.get(4))
+
+                sharpness_label5.text = getString(R.string.format_plus, 5)
+                sharpness_value5.drawSharpness(sharpness.get(5))
+            }
+        } else {
+            hideSharpness()
+        }
+    }
+
+    private fun hideSharpness() {
+        sharpness_container.visibility = View.GONE
+        sharpness_container1.visibility = View.GONE
+        sharpness_container2.visibility = View.GONE
+        sharpness_container3.visibility = View.GONE
+        sharpness_container4.visibility = View.GONE
+        sharpness_container5.visibility = View.GONE
     }
 }
