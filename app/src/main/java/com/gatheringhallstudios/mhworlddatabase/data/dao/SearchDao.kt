@@ -153,7 +153,7 @@ abstract class SearchDao {
 
 
     @Query("""
-        SELECT w.id, w.rarity, w.weapon_type, w.attack,
+        SELECT w.id, w.rarity, w.weapon_type, w.attack, w.affinity,
         w.slot_1, w.slot_2, w.slot_3, w.element_hidden, wt.*
         FROM weapon w
             JOIN weapon_text wt USING (id)

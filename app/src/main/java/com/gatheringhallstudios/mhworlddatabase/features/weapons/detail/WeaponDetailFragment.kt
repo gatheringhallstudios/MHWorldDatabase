@@ -42,7 +42,7 @@ class WeaponDetailFragment : Fragment() {
 
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
-        populateComponents(weaponData.recipe)
+        populateComponents(weaponData.recipe, weaponData.weapon.craftable)
     }
 
     private fun populateWeaponBasic(weapon: Weapon) {
@@ -108,10 +108,16 @@ class WeaponDetailFragment : Fragment() {
         }
     }
 
-    private fun populateComponents(components: List<ItemQuantity>) {
+    private fun populateComponents(components: List<ItemQuantity>, craftable: Int) {
         if (components.isEmpty()) {
             weapon_components_section.visibility = View.GONE
             return
+        }
+
+        if (craftable == 0) {
+            weapon_components_header.setLabelText(getString(R.string.header_required_materials_upgrade))
+        } else {
+            weapon_components_header.setLabelText(getString(R.string.header_required_materials_craft))
         }
 
         weapon_components_section.visibility = View.VISIBLE

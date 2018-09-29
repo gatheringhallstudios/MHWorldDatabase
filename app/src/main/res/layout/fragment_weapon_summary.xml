@@ -202,6 +202,7 @@
             android:orientation="vertical">
 
             <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/weapon_components_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:labelText="@string/header_required_materials" />

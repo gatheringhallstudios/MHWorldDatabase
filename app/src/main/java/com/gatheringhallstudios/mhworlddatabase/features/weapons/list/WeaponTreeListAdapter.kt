@@ -54,6 +54,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weaponTree))
 
             view.attack_value.setLabelText(weaponTree.attack.toString())
+            view.affinity_value.setLabelText(weaponTree.affinity.toString())
 
             view.element_value.setLabelText(createElementString(weaponTree.element1_attack, weaponTree.element_hidden))
             view.element_value.setLeftIconDrawable(getElementIcon(view.context, weaponTree.element1))

@@ -53,6 +53,8 @@
     <string name="header_charms">Charms</string>
     <string name="header_decorations">Decorations</string>
     <string name="header_required_materials">Required Materials</string>
+    <string name="header_required_materials_upgrade">Required Materials (Upgrade)</string>
+    <string name="header_required_materials_craft">Required Materials (Craft)</string>
     <string name="header_skills">Skills</string>
     <string name="header_set_bonuses">Set Bonuses</string>
     <string name="header_skill">Skill</string>
