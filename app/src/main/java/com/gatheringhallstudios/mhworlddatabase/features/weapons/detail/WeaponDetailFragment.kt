@@ -22,6 +22,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
+import kotlinx.android.synthetic.main.listitem_section_header.view.*
 
 class WeaponDetailFragment : Fragment() {
     companion object {
@@ -47,7 +48,7 @@ class WeaponDetailFragment : Fragment() {
 
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
-        populateComponents(weaponData.recipe, weaponData.weapon.craftable)
+        populateComponents(weaponData.recipe)
     }
 
     private fun populateWeaponBasic(weapon: Weapon) {
@@ -115,33 +116,41 @@ class WeaponDetailFragment : Fragment() {
         }
     }
 
-    private fun populateComponents(components: List<ItemQuantity>, craftable: Int) {
-        if (components.isEmpty()) {
+    /**
+     * Converts the map of the different recipe types (craft, upgrade, etc.) into section headers and lists
+     */
+    private fun populateComponents(recipes: Map<String?, List<ItemQuantity>>) {
+        weapon_components_section.removeAllViews()
+
+        if (recipes.isEmpty()) {
             weapon_components_section.visibility = View.GONE
             return
         }
 
-        if (craftable == 0) {
-            weapon_components_header.setLabelText(getString(R.string.header_required_materials_upgrade))
-        } else {
-            weapon_components_header.setLabelText(getString(R.string.header_required_materials_craft))
-        }
-
         weapon_components_section.visibility = View.VISIBLE
-        weapon_components_list.removeAllViews()
 
-        for (itemQuantity in components) {
-            val view = IconLabelTextCell(context)
-            val icon = AssetLoader.loadIconFor(itemQuantity.item)
-
-            view.setLeftIconDrawable(icon)
-            view.setLabelText(itemQuantity.item.name)
-            view.setValueText(getString(R.string.format_quantity_none, itemQuantity.quantity))
-            view.setOnClickListener {
-                getRouter().navigateItemDetail(itemQuantity.item.id)
+        for (recipe in recipes) {
+            val sectionHeader = layoutInflater.inflate(R.layout.listitem_section_header, weapon_components_section, false)
+            sectionHeader.label_text.text = when (recipe.key) {
+                "Upgrade" -> getString(R.string.header_required_materials_upgrade)
+                "Create" -> getString(R.string.header_required_materials_craft)
+                else -> "Other"
             }
 
-            weapon_components_list.addView(view)
+            weapon_components_section.addView(sectionHeader)
+
+            for (component in recipe.value) {
+                val view = IconLabelTextCell(context)
+                val icon = AssetLoader.loadIconFor(component.item)
+
+                view.setLeftIconDrawable(icon)
+                view.setLabelText(component.item.name)
+                view.setValueText(getString(R.string.format_quantity_none, component.quantity))
+                view.setOnClickListener {
+                    getRouter().navigateItemDetail(component.item.id)
+                }
+                weapon_components_section.addView(view)
+            }
         }
     }
 

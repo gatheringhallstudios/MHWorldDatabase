@@ -52,7 +52,7 @@ abstract class WeaponDao {
 
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
-            i.category item_category, i.icon_color item_icon_color, w.quantity
+            i.category item_category, i.icon_color item_icon_color, w.quantity, w.recipe_type
          FROM weapon_recipe w
             JOIN item i
                 ON w.item_id = i.id
@@ -74,11 +74,15 @@ abstract class WeaponDao {
         """)
     abstract fun loadWeapon(langId: String, weaponId: Int): Weapon
 
+    fun queryRecipeComponents(langId: String, weaponId: Int): Map<String?, List<ItemQuantity>> {
+        return loadWeaponComponents(langId, weaponId).groupBy { it.recipe_type }
+    }
+
     fun loadWeaponFull(langId: String, weaponId: Int) = createLiveData {
         val weapon = loadWeapon(langId, weaponId)
         WeaponFull(
                 weapon = weapon,
-                recipe = loadWeaponComponents(langId, weaponId)
+                recipe = queryRecipeComponents(langId, weaponId)
         )
     }
 }

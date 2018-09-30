@@ -59,5 +59,5 @@ data class WeaponRecipe(
         @PrimaryKey val weapon_id: Int,
         val item_id: Int,
         val quantity: Int,
-        val recipe_Type: String
+        val recipe_type: String
 )

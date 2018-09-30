@@ -108,5 +108,6 @@ class ItemUsageCharm(
  */
 class ItemQuantity(
         @Embedded(prefix = "item_") val item: ItemBase,
-        val quantity: Int
+        val quantity: Int,
+        val recipe_type: String?
 )

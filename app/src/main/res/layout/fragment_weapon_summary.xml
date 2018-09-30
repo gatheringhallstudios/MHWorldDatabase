@@ -438,19 +438,6 @@
             android:layout_marginTop="@dimen/margin_section_gap"
             android:orientation="vertical">
 
-            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-                android:id="@+id/weapon_components_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:labelText="@string/header_required_materials" />
-
-            <LinearLayout
-                android:id="@+id/weapon_components_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@drawable/divider_stroke"
-                android:orientation="vertical"
-                android:showDividers="middle" />
         </LinearLayout>
 
     </LinearLayout>

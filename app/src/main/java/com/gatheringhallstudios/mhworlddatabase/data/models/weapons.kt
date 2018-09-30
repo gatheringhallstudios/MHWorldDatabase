@@ -157,5 +157,5 @@ data class WeaponSharpness(
  */
 class WeaponFull(
         val weapon: Weapon,
-        val recipe: List<ItemQuantity>
+        val recipe: Map<String?, List<ItemQuantity>>
 )
