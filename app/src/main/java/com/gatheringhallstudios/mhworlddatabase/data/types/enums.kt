@@ -69,7 +69,7 @@ enum class ArmorType {
  * An enumeration that defines the type of weapon.
  * Created by Carlos on 3/20/2018.
  */
-enum class WeaponType(val dbString : String) {
+enum class WeaponType(val dbString: String) {
     GREAT_SWORD("great-sword"),
     LONG_SWORD("long-sword"),
     SWORD_AND_SHIELD("sword-and-shield"),
@@ -113,4 +113,11 @@ enum class TreeFormatter {
     START,
     MID,
     END
+}
+
+enum class ElderSealLevel {
+    NONE,
+    LOW,
+    AVERAGE,
+    HIGH
 }

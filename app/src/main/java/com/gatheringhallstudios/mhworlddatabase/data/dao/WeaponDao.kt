@@ -40,8 +40,8 @@ abstract class WeaponDao {
 
     /** Loads all of the weapons in the trees for a provided weapon type] */
     @Query("""
-        SELECT w.id, w.element1, w.element1_attack, w.rarity, w.previous_weapon_id, w.weapon_type, w.attack, w.defense,
-        w.slot_1, w.slot_2, w.slot_3, w.sharpness, w.sharpness_maxed, w.element2, w.element2_attack, w.element_hidden, wt.*
+        SELECT w.id, w.element1, w.element1_attack, w.rarity, w.previous_weapon_id, w.weapon_type, w.attack, w.affinity, w.defense,
+        w.slot_1, w.slot_2, w.slot_3, w.sharpness, w.sharpness_maxed, w.element2, w.element2_attack, w.element_hidden, w.elderseal, wt.*
         FROM weapon w
             JOIN weapon_text wt USING (id)
         WHERE wt.lang_id = :langId
@@ -52,7 +52,7 @@ abstract class WeaponDao {
 
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
-            i.category item_category, i.icon_color item_icon_color, w.quantity
+            i.category item_category, i.icon_color item_icon_color, w.quantity, w.recipe_type
          FROM weapon_recipe w
             JOIN item i
                 ON w.item_id = i.id
@@ -71,15 +71,18 @@ abstract class WeaponDao {
             JOIN weapon_text wt USING (id)
         WHERE w.id = :weaponId
         AND wt.lang_id = :langId
-
         """)
-    abstract fun loadWeapon(langId: String, weaponId: Int) : Weapon
+    abstract fun loadWeapon(langId: String, weaponId: Int): Weapon
+
+    fun queryRecipeComponents(langId: String, weaponId: Int): Map<String?, List<ItemQuantity>> {
+        return loadWeaponComponents(langId, weaponId).groupBy { it.recipe_type }
+    }
 
     fun loadWeaponFull(langId: String, weaponId: Int) = createLiveData {
         val weapon = loadWeapon(langId, weaponId)
         WeaponFull(
-            weapon = weapon,
-            recipe = loadWeaponComponents(langId, weaponId)
+                weapon = weapon,
+                recipe = queryRecipeComponents(langId, weaponId)
         )
     }
 }

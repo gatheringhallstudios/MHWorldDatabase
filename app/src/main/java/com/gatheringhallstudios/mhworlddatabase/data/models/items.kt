@@ -67,7 +67,8 @@ class ItemReward(
 class ItemUsages(
         val craftRecipes: List<ItemCombination>,
         val charms: List<ItemUsageCharm>,
-        val armor: List<ItemUsageArmor>
+        val armor: List<ItemUsageArmor>,
+        val weapon: List<ItemUsageWeapon>
 ) {
     fun isEmpty() = craftRecipes.isEmpty() && charms.isEmpty() && armor.isEmpty()
 }
@@ -92,6 +93,11 @@ class ItemUsageArmor(
         val quantity: Int
 )
 
+class ItemUsageWeapon(
+        @Embedded val result: WeaponTree,
+        val quantity: Int
+)
+
 class ItemUsageCharm(
         @Embedded val result: CharmBase,
         val quantity: Int
@@ -102,5 +108,6 @@ class ItemUsageCharm(
  */
 class ItemQuantity(
         @Embedded(prefix = "item_") val item: ItemBase,
-        val quantity: Int
+        val quantity: Int,
+        val recipe_type: String?
 )

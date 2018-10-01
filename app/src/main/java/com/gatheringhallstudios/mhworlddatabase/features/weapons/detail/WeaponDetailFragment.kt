@@ -9,14 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.*
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
+import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponSharpness
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
+import kotlinx.android.synthetic.main.listitem_section_header.view.*
 
 class WeaponDetailFragment : Fragment() {
     companion object {
@@ -54,14 +60,16 @@ class WeaponDetailFragment : Fragment() {
         weapon_header.setSubtitleColor(AssetLoader.loadRarityColor(weapon.rarity))
 
         attack_value.text = weapon.attack.toString()
+        affinity_value.text = weapon.affinity.toString()
+        elderseal_value.text = when (weapon.elderseal) {
+            ElderSealLevel.NONE -> getString(R.string.weapon_elderseal_none)
+            ElderSealLevel.LOW -> getString(R.string.weapon_elderseal_low)
+            ElderSealLevel.AVERAGE -> getString(R.string.weapon_elderseal_average)
+            ElderSealLevel.HIGH -> getString(R.string.weapon_elderseal_high)
+        }
 
         //Draw sharpness bar/hide it for weapons that don't have it
-        val sharpnessData = weapon.sharpnessData
-        if (sharpnessData != null) {
-            sharpness_value.drawSharpness(sharpnessData.get(0))
-        } else {
-            sharpness_value.visibility = View.INVISIBLE
-        }
+        populateSharpness(weapon.sharpnessData)
 
         // Set elemental attack values
         element_value.text = createElementString(weapon.element1_attack, weapon.element_hidden)
@@ -108,27 +116,88 @@ class WeaponDetailFragment : Fragment() {
         }
     }
 
-    private fun populateComponents(components: List<ItemQuantity>) {
-        if (components.isEmpty()) {
+    /**
+     * Converts the map of the different recipe types (craft, upgrade, etc.) into section headers and lists
+     */
+    private fun populateComponents(recipes: Map<String?, List<ItemQuantity>>) {
+        weapon_components_section.removeAllViews()
+
+        if (recipes.isEmpty()) {
             weapon_components_section.visibility = View.GONE
             return
         }
 
         weapon_components_section.visibility = View.VISIBLE
-        weapon_components_list.removeAllViews()
 
-        for (itemQuantity in components) {
-            val view = IconLabelTextCell(context)
-            val icon = AssetLoader.loadIconFor(itemQuantity.item)
-
-            view.setLeftIconDrawable(icon)
-            view.setLabelText(itemQuantity.item.name)
-            view.setValueText(getString(R.string.format_quantity_none, itemQuantity.quantity))
-            view.setOnClickListener {
-                getRouter().navigateItemDetail(itemQuantity.item.id)
+        for (recipe in recipes) {
+            val sectionHeader = layoutInflater.inflate(R.layout.listitem_section_header, weapon_components_section, false)
+            sectionHeader.label_text.text = when (recipe.key) {
+                "Upgrade" -> getString(R.string.header_required_materials_upgrade)
+                "Create" -> getString(R.string.header_required_materials_craft)
+                else -> "Other"
             }
 
-            weapon_components_list.addView(view)
+            weapon_components_section.addView(sectionHeader)
+
+            for (component in recipe.value) {
+                val view = IconLabelTextCell(context)
+                val icon = AssetLoader.loadIconFor(component.item)
+
+                view.setLeftIconDrawable(icon)
+                view.setLabelText(component.item.name)
+                view.setValueText(getString(R.string.format_quantity_none, component.quantity))
+                view.setOnClickListener {
+                    getRouter().navigateItemDetail(component.item.id)
+                }
+                weapon_components_section.addView(view)
+            }
         }
+    }
+
+    /**
+     * Draws 5 sharpness bars for weapons affected by the handicraft skill, 1 bar for weapons that aren't
+     * and hides the sharpness section for weapons that do not have sharpness
+     */
+    private fun populateSharpness(sharpness: WeaponSharpness?) {
+        if (sharpness != null) {
+            //One bar for weapons not affected by sharpness
+            if (sharpness.sharpness_maxed!!) {
+                sharpness_value.drawSharpness(sharpness.get(0))
+                sharpness_container1.visibility = View.GONE
+                sharpness_container2.visibility = View.GONE
+                sharpness_container3.visibility = View.GONE
+                sharpness_container4.visibility = View.GONE
+                sharpness_container5.visibility = View.GONE
+            } else {
+                sharpness_label.text = getString(R.string.format_plus, 0)
+                sharpness_value.drawSharpness(sharpness.get(0))
+
+                sharpness_label1.text = getString(R.string.format_plus, 1)
+                sharpness_value1.drawSharpness(sharpness.get(1))
+
+                sharpness_label2.text = getString(R.string.format_plus, 2)
+                sharpness_value2.drawSharpness(sharpness.get(2))
+
+                sharpness_label3.text = getString(R.string.format_plus, 3)
+                sharpness_value3.drawSharpness(sharpness.get(3))
+
+                sharpness_label4.text = getString(R.string.format_plus, 4)
+                sharpness_value4.drawSharpness(sharpness.get(4))
+
+                sharpness_label5.text = getString(R.string.format_plus, 5)
+                sharpness_value5.drawSharpness(sharpness.get(5))
+            }
+        } else {
+            hideSharpness()
+        }
+    }
+
+    private fun hideSharpness() {
+        sharpness_container.visibility = View.GONE
+        sharpness_container1.visibility = View.GONE
+        sharpness_container2.visibility = View.GONE
+        sharpness_container3.visibility = View.GONE
+        sharpness_container4.visibility = View.GONE
+        sharpness_container5.visibility = View.GONE
     }
 }

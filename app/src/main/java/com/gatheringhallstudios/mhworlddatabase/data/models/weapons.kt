@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
 import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
@@ -11,67 +12,39 @@ open class WeaponType(
 )
 
 class Weapon(
-         id: Int,
-         name: String,
-         rarity: Int,
-         weapon_type: WeaponType,
-         attack: Int,
+        id: Int,
+        name: String,
+        weapon_type: WeaponType,
+        rarity: Int,
+        attack: Int,
+        affinity: Int,
+        defense: Int?,
 
-         element1: String?,
-         element1_attack: Int?,
-         element2: String?,
-         element2_attack: Int?,
-         element_hidden: Boolean,
-         defense: Int?,
-         previous_weapon_id: Int?,
+        element1: String?,
+        element1_attack: Int?,
+        element2: String?,
+        element2_attack: Int?,
+        element_hidden: Boolean,
+        previous_weapon_id: Int?,
 
-         val craftable: Int,
-         val isFinal: Int,
-         val kinsect_bonus: String?,
-         val deviation: String?,
-         val special_ammo: String?,
-         val ammo_normal_1: String?,
-         val ammo_normal_2: String?,
-         val ammo_normal_3: String?,
-         val ammo_pierce_1: String?,
-         val ammo_pierce_2: String?,
-         val ammo_pierce_3: String?,
-         val ammo_spread_1: String?,
-         val ammo_spread_2: String?,
-         val ammo_spread_3: String?,
-         val ammo_sticky_1: String?,
-         val ammo_sticky_2: String?,
-         val ammo_sticky_3: String?,
-         val ammo_cluster_1: String?,
-         val ammo_cluster_2: String?,
-         val ammo_cluster_3: String?,
-         val ammo_recover_1: String?,
-         val ammo_recover_2: String?,
-         val ammo_poison_1: String?,
-         val ammo_poison_2: String?,
-         val ammo_paralysis_1: String?,
-         val ammo_paralysis_2: String?,
-         val ammo_sleep_1: String?,
-         val ammo_sleep_2: String?,
-         val ammo_exhaust_1: String?,
-         val ammo_exhaust_2: String?,
-         val ammo_flaming: String?,
-         val ammo_water: String?,
-         val ammo_freeze: String?,
-         val ammo_thunder: String?,
-         val ammo_dragon: String?,
-         val ammo_slicing: String?,
-         val ammo_wyvern: String?,
-         val ammo_demon: String?,
-         val ammo_armor: String?,
-         val ammo_tranq: String?,
-         val coating_close: String?,
-         val coating_power: String?,
-         val coating_poison: String?,
-         val coating_paralysis: String?,
-         val coating_sleep: String?,
-         val coating_blast: String?
-) : WeaponTree(id, name, rarity, weapon_type, attack, element1, element1_attack, element2, element2_attack,
+        val attack_true: Int,
+        val craftable: Int,
+        val isFinal: Int,
+        val kinsect_bonus: String?,
+        val elderseal: ElderSealLevel,
+        val phial: String?,
+        val phial_power: Int,
+        val shelling: String?,
+        val shelling_level: Int?,
+        val ammo_id: Int?,
+        val coating_close: String?,
+        val coating_power: String?,
+        val coating_poison: String?,
+        val coating_paralysis: String?,
+        val coating_sleep: String?,
+        val coating_blast: String?,
+        val notes: String?
+) : WeaponTree(id, name, rarity, weapon_type, attack, affinity, element1, element1_attack, element2, element2_attack,
         element_hidden, defense, previous_weapon_id)
 
 open class WeaponTree(
@@ -80,6 +53,7 @@ open class WeaponTree(
         val rarity: Int,
         val weapon_type: WeaponType,
         val attack: Int,
+        val affinity: Int,
 
         val element1: String?,
         val element1_attack: Int?,
@@ -183,5 +157,5 @@ data class WeaponSharpness(
  */
 class WeaponFull(
         val weapon: Weapon,
-        val recipe: List<ItemQuantity>
+        val recipe: Map<String?, List<ItemQuantity>>
 )

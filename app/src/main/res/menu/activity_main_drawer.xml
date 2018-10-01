@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_ui_crafting_white"
             android:title="@string/item_crafting_list_title" />
         <item
+            android:id="@+id/weaponListAction"
+            android:icon="@drawable/ic_equipment_charge_blade_white"
+            android:title="@string/title_weapons" />
+        <item
             android:id="@+id/armorListAction"
             android:icon="@drawable/ic_equipment_armor_set_white"
             android:title="@string/title_armor" />
@@ -36,10 +40,6 @@
             android:id="@+id/locationListAction"
             android:icon="@drawable/ic_ui_map"
             android:title="@string/title_locations" />
-        <item
-            android:id="@+id/weaponListAction"
-            android:icon="@drawable/ic_equipment_charge_blade_white"
-            android:title="@string/title_weapons" />
     </group>
 
     <item android:title="Other">
