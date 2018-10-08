@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -73,226 +72,6 @@
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
                     tools:text="2" />
-            </LinearLayout>
-
-            <LinearLayout
-                style="@style/EquipmentRow"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    style="@style/IconXSmall"
-                    android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_whetstone" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextSubHead"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_large"
-                        android:text="@string/weapon_sharpness" />
-
-                    <TextView
-                        style="@style/TextBodyMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/weapon_handicraft" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
-                    android:gravity="end"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:id="@+id/sharpness_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextSubHead"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_large"
-                            tools:text="+0"
-                            android:id="@+id/sharpness_label"/>
-
-                        <com.ghstudios.android.ui.general.SharpnessView
-                            android:id="@+id/sharpness_value"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/row_height_small"
-                            android:layout_gravity="center_vertical|end"
-                            android:layout_marginEnd="@dimen/margin_large"
-                            android:layout_weight="1"
-                            tools:blue="30"
-                            tools:green="40"
-                            tools:orange="80"
-                            tools:red="100"
-                            tools:white="50"
-                            tools:yellow="50" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/sharpness_container1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextSubHead"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_large"
-                            tools:text="+0"
-                            android:id="@+id/sharpness_label1"/>
-
-                        <com.ghstudios.android.ui.general.SharpnessView
-                            android:id="@+id/sharpness_value1"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/row_height_small"
-                            android:layout_gravity="center_vertical|end"
-                            android:layout_marginEnd="@dimen/margin_large"
-                            android:layout_weight="1"
-                            tools:blue="30"
-                            tools:green="40"
-                            tools:orange="80"
-                            tools:red="100"
-                            tools:white="50"
-                            tools:yellow="50" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/sharpness_container2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextSubHead"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_large"
-                            tools:text="+0"
-                            android:id="@+id/sharpness_label2"/>
-
-                        <com.ghstudios.android.ui.general.SharpnessView
-                            android:id="@+id/sharpness_value2"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/row_height_small"
-                            android:layout_gravity="center_vertical|end"
-                            android:layout_marginEnd="@dimen/margin_large"
-                            android:layout_weight="1"
-                            tools:blue="30"
-                            tools:green="40"
-                            tools:orange="80"
-                            tools:red="100"
-                            tools:white="50"
-                            tools:yellow="50" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/sharpness_container3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextSubHead"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_large"
-                            tools:text="+0"
-                            android:id="@+id/sharpness_label3"/>
-
-                        <com.ghstudios.android.ui.general.SharpnessView
-                            android:id="@+id/sharpness_value3"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/row_height_small"
-                            android:layout_gravity="center_vertical|end"
-                            android:layout_marginEnd="@dimen/margin_large"
-                            android:layout_weight="1"
-                            tools:blue="30"
-                            tools:green="40"
-                            tools:orange="80"
-                            tools:red="100"
-                            tools:white="50"
-                            tools:yellow="50" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/sharpness_container4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextSubHead"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_large"
-                            tools:text="+0"
-                            android:id="@+id/sharpness_label4"/>
-
-                        <com.ghstudios.android.ui.general.SharpnessView
-                            android:id="@+id/sharpness_value4"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/row_height_small"
-                            android:layout_gravity="center_vertical|end"
-                            android:layout_marginEnd="@dimen/margin_large"
-                            android:layout_weight="1"
-                            tools:blue="30"
-                            tools:green="40"
-                            tools:orange="80"
-                            tools:red="100"
-                            tools:white="50"
-                            tools:yellow="50" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/sharpness_container5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextSubHead"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_large"
-                            tools:text="+0"
-                            android:id="@+id/sharpness_label5"/>
-
-                        <com.ghstudios.android.ui.general.SharpnessView
-                            android:id="@+id/sharpness_value5"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/row_height_small"
-                            android:layout_gravity="center_vertical|end"
-                            android:layout_marginEnd="@dimen/margin_large"
-                            android:layout_weight="1"
-                            tools:blue="30"
-                            tools:green="40"
-                            tools:orange="80"
-                            tools:red="100"
-                            tools:white="50"
-                            tools:yellow="50" />
-                    </LinearLayout>
-                </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
@@ -429,6 +208,12 @@
                     android:gravity="end"
                     tools:text="2" />
             </LinearLayout>
+
+            <ViewStub
+                android:id="@+id/weapon_specific_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 />
         </LinearLayout>
 
         <LinearLayout
