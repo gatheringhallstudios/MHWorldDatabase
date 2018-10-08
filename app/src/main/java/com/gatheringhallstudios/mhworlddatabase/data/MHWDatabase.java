@@ -61,6 +61,9 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
  * Created by Carlos on 3/4/2018.
  */
 @Database(
+        version = 17,
+        exportSchema = false,
+
         entities = {
                 // Items
                 ItemEntity.class, ItemText.class, ItemCombinationEntity.class,
@@ -89,9 +92,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
 
                 // Weapon Classes
                 WeaponEntity.class, WeaponText.class, WeaponRecipe.class
-        },
-        version = 16,
-        exportSchema = false)
+        })
 @TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;
