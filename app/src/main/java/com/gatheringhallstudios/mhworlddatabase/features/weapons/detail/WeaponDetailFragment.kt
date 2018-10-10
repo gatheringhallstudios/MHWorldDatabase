@@ -21,6 +21,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponSharpness
+import com.gatheringhallstudios.mhworlddatabase.data.types.CoatingType
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -265,35 +266,15 @@ class WeaponDetailFragment : Fragment() {
     }
 
     private fun bindBow(weapon: Weapon, view: View) {
-        blast_coating_icon.setImageDrawable(loadIconFor("blast"))
-        close_range_coating_icon.setImageDrawable(loadIconFor("close_range"))
-        poison_coating_icon.setImageDrawable(loadIconFor("poison"))
-        power_coating_icon.setImageDrawable(loadIconFor("power"))
-        paralysis_coating_icon.setImageDrawable(loadIconFor("paralysis"))
-        sleep_coating_icon.setImageDrawable(loadIconFor("sleep"))
-        
-        if (weapon.coating_blast == null || weapon.coating_blast < 1) {
-            blast_coating_icon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_slot_none))
-        }
-
-        if (weapon.coating_close == null || weapon.coating_close < 1) {
-            close_range_coating_icon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_slot_none))
-        }
-
-        if (weapon.coating_poison == null || weapon.coating_poison < 1) {
-            poison_coating_icon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_slot_none))
-        }
-
-        if (weapon.coating_power == null || weapon.coating_power < 1) {
-            power_coating_icon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_slot_none))
-        }
-
-        if (weapon.coating_paralysis == null || weapon.coating_paralysis < 1) {
-            paralysis_coating_icon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_slot_none))
-        }
-
-        if (weapon.coating_sleep == null || weapon.coating_sleep < 1) {
-            sleep_coating_icon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_slot_none))
+        weapon.weaponCoatings.iterator().forEach {
+            when (it) {
+                CoatingType.BLAST -> blast_coating_icon.setImageDrawable(loadIconFor(CoatingType.BLAST))
+                CoatingType.POWER -> power_coating_icon.setImageDrawable(loadIconFor(CoatingType.POWER))
+                CoatingType.POISON -> poison_coating_icon.setImageDrawable(loadIconFor(CoatingType.POISON))
+                CoatingType.PARALYSIS -> paralysis_coating_icon.setImageDrawable(loadIconFor(CoatingType.PARALYSIS))
+                CoatingType.SLEEP -> sleep_coating_icon.setImageDrawable(loadIconFor(CoatingType.SLEEP))
+                CoatingType.CLOSE_RANGE -> close_range_coating_icon.setImageDrawable(loadIconFor(CoatingType.CLOSE_RANGE))
+            }
         }
     }
 }

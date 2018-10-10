@@ -2,9 +2,13 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.data.types.CoatingType
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
 import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import kotlinx.android.synthetic.main.listitem_bow_detail.*
 
 open class WeaponType(
         val name: String,
@@ -36,18 +40,15 @@ class Weapon(
         val phial_power: Int,
         val shelling: String?,
         val shelling_level: Int?,
-        val coating_close: Int?,
-        val coating_power: Int?,
-        val coating_poison: Int?,
-        val coating_paralysis: Int?,
-        val coating_sleep: Int?,
-        val coating_blast: Int?,
         val notes: String?,
         @Embedded
         var weaponAmmo: WeaponAmmo? = null
 
 ) : WeaponTree(id, name, rarity, weapon_type, attack, affinity, element1, element1_attack, element2, element2_attack,
-        element_hidden, defense, previous_weapon_id)
+        element_hidden, defense, previous_weapon_id) {
+    @Embedded
+    lateinit var weaponCoatings: WeaponCoatings
+}
 
 open class WeaponTree(
         val id: Int,
@@ -152,7 +153,25 @@ data class WeaponSharpness(
     }
 }
 
+/**
+ * An embedded class representing the coatings available to bows
+ */
+data class WeaponCoatings(
+        val coating_close: Int?,
+        val coating_power: Int?,
+        val coating_poison: Int?,
+        val coating_paralysis: Int?,
+        val coating_sleep: Int?,
+        val coating_blast: Int?
+) :Iterable<CoatingType> {
 
+    override fun iterator(): Iterator<CoatingType> {
+        val buffer = mapOf(Pair(CoatingType.CLOSE_RANGE, coating_close), Pair(CoatingType.POWER, coating_power), Pair(CoatingType.POISON, coating_poison),
+                Pair(CoatingType.PARALYSIS, coating_paralysis), Pair(CoatingType.SLEEP, coating_sleep), Pair(CoatingType.BLAST, coating_blast))
+
+        return buffer.filter {(CoatingType, value) -> value != null && value > 0}.map {x -> x.key}.toList().iterator()
+    }
+}
 /**
  * The result of fully loading a weapon.
  * Loads the data you'd find in an weapon screen ingame.

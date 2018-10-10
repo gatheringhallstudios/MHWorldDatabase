@@ -121,3 +121,12 @@ enum class ElderSealLevel {
     AVERAGE,
     HIGH
 }
+
+enum class CoatingType {
+    POWER,
+    POISON,
+    CLOSE_RANGE,
+    SLEEP,
+    BLAST,
+    PARALYSIS
+}

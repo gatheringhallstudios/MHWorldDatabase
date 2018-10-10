@@ -63,15 +63,14 @@ object AssetLoader {
         return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 
-    fun loadIconFor(coating_type: String): Drawable? {
-        when (coating_type) {
-            "power" -> return ctx.getVectorDrawable("Ammo", "Red")
-            "sleep" -> return ctx.getVectorDrawable("Ammo", "Cyan")
-            "close_range" -> return ctx.getVectorDrawable("Ammo", "White")
-            "poison" -> return ctx.getVectorDrawable("Ammo", "DarkPurple")
-            "blast" -> return ctx.getVectorDrawable("Ammo", "Green")
-            "paralysis" -> return ctx.getVectorDrawable("Ammo", "Yellow")
-            else -> return null
+    fun loadIconFor(coating_type: CoatingType): Drawable? {
+        return when (coating_type) {
+            CoatingType.POWER ->  ctx.getVectorDrawable("Ammo", "Red")
+            CoatingType.SLEEP -> ctx.getVectorDrawable("Ammo", "Cyan")
+            CoatingType.CLOSE_RANGE -> ctx.getVectorDrawable("Ammo", "White")
+            CoatingType.POISON -> ctx.getVectorDrawable("Ammo", "DarkPurple")
+            CoatingType.BLAST -> ctx.getVectorDrawable("Ammo", "Green")
+            CoatingType.PARALYSIS -> ctx.getVectorDrawable("Ammo", "Yellow")
         }
     }
 
