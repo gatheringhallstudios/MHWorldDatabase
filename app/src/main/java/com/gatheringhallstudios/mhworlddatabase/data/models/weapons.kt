@@ -3,9 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.data.types.CoatingType
-import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
-import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.listitem_bow_detail.*
@@ -34,11 +32,11 @@ class Weapon(
         val attack_true: Int,
         val craftable: Int,
         val isFinal: Int,
-        val kinsect_bonus: String?,
+        val kinsect_bonus: KinsectBonus,
         val elderseal: ElderSealLevel,
-        val phial: String?,
+        val phial: PhialType,
         val phial_power: Int,
-        val shelling: String?,
+        val shelling: ShellingType,
         val shelling_level: Int?,
         val notes: String?,
         @Embedded

@@ -17,7 +17,7 @@
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_kinsect_white" />
+            android:src="@drawable/ic_ui_whetstone" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -226,43 +226,6 @@
                     tools:white="50"
                     tools:yellow="50" />
             </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        style="@style/EquipmentRow"
-        android:layout_width="match_parent">
-
-        <ImageView
-            style="@style/IconXSmall"
-            android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_element" />
-
-        <TextView
-            style="@style/TextSubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:text="@string/weapon_kinsect_bonus" />
-
-        <LinearLayout
-            android:id="@+id/kinsect_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:gravity="center_vertical|end">
-
-            <TextView
-                android:id="@+id/kinsect_bonus_value"
-                style="@style/TextSubHead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_large"
-                android:gravity="end"
-                tools:text="Thunder" />
-
         </LinearLayout>
 
     </LinearLayout>
