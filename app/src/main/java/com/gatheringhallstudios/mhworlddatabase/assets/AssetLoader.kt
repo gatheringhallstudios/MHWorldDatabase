@@ -63,6 +63,17 @@ object AssetLoader {
         return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 
+    fun loadIconFor(coating_type: CoatingType): Drawable? {
+        return when (coating_type) {
+            CoatingType.POWER ->  ctx.getVectorDrawable("Ammo", "Red")
+            CoatingType.SLEEP -> ctx.getVectorDrawable("Ammo", "Cyan")
+            CoatingType.CLOSE_RANGE -> ctx.getVectorDrawable("Ammo", "White")
+            CoatingType.POISON -> ctx.getVectorDrawable("Ammo", "DarkPurple")
+            CoatingType.BLAST -> ctx.getVectorDrawable("Ammo", "Green")
+            CoatingType.PARALYSIS -> ctx.getVectorDrawable("Ammo", "Yellow")
+        }
+    }
+
     fun loadIconFor(weapon: Weapon): Drawable? {
         val name = when (weapon.weapon_type) {
             WeaponTypeEnum.GREAT_SWORD -> "GreatSword"

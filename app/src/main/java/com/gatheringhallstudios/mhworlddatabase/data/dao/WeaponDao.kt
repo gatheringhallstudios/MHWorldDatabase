@@ -66,9 +66,22 @@ abstract class WeaponDao {
     abstract fun loadWeaponComponents(langId: String, weaponId: Int): List<ItemQuantity>
 
     @Query("""
-        SELECT w.*, wt.name, w.final AS isFinal
+        
+        SELECT w.id, w.weapon_type, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack, 
+        w.element2, w.element2_attack, w.element_hidden, w.sharpness, w.sharpness_maxed, w.previous_weapon_id, w.craftable, w.final AS isFinal, w.kinsect_bonus,
+        w.elderseal, w.phial, w.phial_power, w.shelling, w.shelling_level, w.coating_close, w.coating_power, w.coating_poison, w.coating_paralysis, w.coating_sleep, w.coating_blast,
+        w. notes, wt.name, wa.id AS ammo_id, wa.deviation, wa.special_ammo, wa.normal1_clip, wa.normal1_rapid, wa.normal2_clip, wa.normal2_rapid, wa.normal3_clip, wa.normal3_rapid, wa.pierce1_clip,
+        wa.pierce1_rapid, wa.pierce2_clip, wa.pierce2_rapid, wa.pierce3_clip, wa.pierce3_rapid, wa.spread1_clip, wa.spread1_rapid, wa.spread2_clip, wa.spread2_rapid,
+        wa.spread3_clip,wa.spread3_rapid,wa.sticky1_clip,wa.sticky1_rapid,wa.sticky2_clip,wa.sticky2_rapid,wa.sticky3_clip,wa.sticky3_rapid,wa.cluster1_clip,
+        wa.cluster1_rapid, wa.cluster2_clip, wa.cluster2_rapid, wa.cluster3_clip, wa.cluster3_rapid, wa.recover1_clip, wa.recover1_rapid, wa.recover2_clip,
+        wa.recover2_rapid, wa.poison1_clip, wa.poison1_rapid, wa.poison2_clip, wa.poison2_rapid, wa.paralysis1_clip, wa.paralysis1_rapid, wa.paralysis2_clip, wa.paralysis2_rapid, wa.sleep1_clip,
+        wa.sleep1_rapid, wa.sleep2_clip, wa.sleep2_rapid, wa.exhaust1_clip, wa.exhaust1_rapid, wa.exhaust2_clip, wa.exhaust2_rapid, wa.flaming_clip, wa.flaming_rapid, wa.water_clip,
+        wa.water_rapid, wa.freeze_clip, wa.freeze_rapid, wa.thunder_clip, wa.thunder_rapid, wa.dragon_clip, wa.dragon_rapid, wa.slicing_clip, wa.wyvern_clip,
+        wa.demon_clip, wa.armor_clip, wa.tranq_clip
+        
         FROM weapon w
             JOIN weapon_text wt USING (id)
+            LEFT OUTER JOIN weapon_ammo wa ON w.ammo_id = wa.id
         WHERE w.id = :weaponId
         AND wt.lang_id = :langId
         """)

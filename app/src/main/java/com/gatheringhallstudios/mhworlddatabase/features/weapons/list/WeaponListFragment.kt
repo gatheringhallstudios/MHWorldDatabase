@@ -39,7 +39,7 @@ class WeaponListFragment : RecyclerViewFragment() {
                 WeaponTypeModel(getString(R.string.title_insect_glaive), WeaponTypeEnum.INSECT_GLAIVE),
                 WeaponTypeModel(getString(R.string.title_light_bowgun), WeaponTypeEnum.LIGHT_BOWGUN),
                 WeaponTypeModel(getString(R.string.title_heavy_bowgun), WeaponTypeEnum.HEAVY_BOWGUN),
-                WeaponTypeModel(getString(R.string.title_bow), WeaponTypeEnum.HEAVY_BOWGUN))
+                WeaponTypeModel(getString(R.string.title_bow), WeaponTypeEnum.BOW))
 
         adapter.items = weaponTypes
         adapter.notifyDataSetChanged()

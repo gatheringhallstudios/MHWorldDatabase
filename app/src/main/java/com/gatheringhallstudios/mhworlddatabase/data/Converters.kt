@@ -75,6 +75,33 @@ private val WeaponTypeConverter = Converter(
         null to null
 )
 
+private val PhialTypeConverter = Converter(
+        "impact" to PhialType.IMPACT,
+        "power element" to PhialType.POWER_ELEMENT,
+        "power" to PhialType.POWER,
+        "paralysis" to PhialType.PARALYSIS,
+        "dragon" to PhialType.DRAGON,
+        "exhaust" to PhialType.EXHAUST,
+        null to PhialType.NONE
+)
+
+private val KinsectBonusTypeConverter = Converter(
+        "sever" to KinsectBonus.SEVER,
+        "speed" to KinsectBonus.SPEED,
+        "element" to KinsectBonus.ELEMENT,
+        "health" to KinsectBonus.HEALTH,
+        "stamina" to KinsectBonus.STAMINA,
+        "blunt" to KinsectBonus.BLUNT,
+        null to KinsectBonus.NONE
+)
+
+private val ShellingTypeConverter = Converter(
+        null to ShellingType.NONE,
+        "long" to ShellingType.LONG,
+        "normal" to ShellingType.NORMAL,
+        "wide" to ShellingType.WIDE
+)
+
 
 
 /**
@@ -109,4 +136,12 @@ class Converters {
     @TypeConverter fun elderSealFromString(value: String?) = ElderSealLevelConverter.deserialize(value)
     @TypeConverter fun fromElderSealLevel(type: ElderSealLevel) = ElderSealLevelConverter.serialize(type)
 
+    @TypeConverter fun phialTypeFromString(value: String?) = PhialTypeConverter.deserialize(value)
+    @TypeConverter fun fromPhialType(type: PhialType) = PhialTypeConverter.serialize(type)
+
+    @TypeConverter fun kinsectBonusFromString(value: String?) = KinsectBonusTypeConverter.deserialize(value)
+    @TypeConverter fun fromKinsectBonus(type: KinsectBonus) = KinsectBonusTypeConverter.serialize(type)
+
+    @TypeConverter fun shellingTypeFromString(value: String?) = ShellingTypeConverter.deserialize(value)
+    @TypeConverter fun fromShellingType(type: ShellingType) = ShellingTypeConverter.serialize(type)
 }
