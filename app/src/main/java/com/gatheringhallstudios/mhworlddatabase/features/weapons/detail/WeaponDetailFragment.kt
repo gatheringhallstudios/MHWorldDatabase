@@ -17,17 +17,17 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadIconFor
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
-import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
-import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponSharpness
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.ghstudios.android.ui.general.SharpnessView
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
 import kotlinx.android.synthetic.main.listitem_bow_detail.*
+import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
+import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
 import kotlinx.android.synthetic.main.listitem_section_header.view.*
 
 class WeaponDetailFragment : Fragment() {
@@ -148,6 +148,11 @@ class WeaponDetailFragment : Fragment() {
                 val view = weapon_specific_section.inflate()
                 bindBow(weapon, view)
             }
+            WeaponType.HEAVY_BOWGUN, WeaponType.LIGHT_BOWGUN -> {
+                weapon_specific_section.layoutResource = R.layout.listitem_bowgun_detail
+                val view = weapon_specific_section.inflate()
+                bindBowgun(weapon, view)
+            }
             else -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_generic_weapon_detail
                 val view = weapon_specific_section.inflate()
@@ -261,7 +266,7 @@ class WeaponDetailFragment : Fragment() {
 
     private fun bindInsectGlaive(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
-        view.findViewById<TextView>(R.id.kinsect_bonus_value).text = when(weapon.kinsect_bonus) {
+        view.findViewById<TextView>(R.id.kinsect_bonus_value).text = when (weapon.kinsect_bonus) {
             KinsectBonus.NONE -> ""
             KinsectBonus.SEVER -> getString(R.string.weapon_kinsect_bonus_sever)
             KinsectBonus.SPEED -> getString(R.string.weapon_kinsect_bonus_speed)
@@ -274,7 +279,7 @@ class WeaponDetailFragment : Fragment() {
 
     private fun bindGunlance(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
-        view.findViewById<TextView>(R.id.shelling_type).text = when(weapon.shelling) {
+        view.findViewById<TextView>(R.id.shelling_type).text = when (weapon.shelling) {
             ShellingType.NONE -> ""
             ShellingType.NORMAL -> getString(R.string.weapon_gunlance_shelling_normal)
             ShellingType.WIDE -> getString(R.string.weapon_gunlance_shelling_wide)
@@ -303,5 +308,60 @@ class WeaponDetailFragment : Fragment() {
 
     private fun bindGenericWeapon(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
+    }
+
+    private fun bindBowgun(weapon: Weapon, view: View) {
+        deviation_value.text = weapon.weaponAmmoData?.deviation
+        special_ammo_value.text = weapon.weaponAmmoData?.special_ammo
+
+        weapon.weaponAmmoData?.iterator()?.forEach {
+            val view = layoutInflater.inflate(R.layout.listitem_bowgun_ammo, ammo_layout, false)
+            view.ammo_type_name.text = when (it.type) {
+                AmmoType.NORMAL_AMMO1 -> getString(R.string.weapon_bowgun_ammo_normal, 1)
+                AmmoType.NORMAL_AMMO2 -> getString(R.string.weapon_bowgun_ammo_normal, 2)
+                AmmoType.NORMAL_AMMO3 -> getString(R.string.weapon_bowgun_ammo_normal, 3)
+                AmmoType.PIERCE_AMMO1 -> getString(R.string.weapon_bowgun_ammo_pierce, 1)
+                AmmoType.PIERCE_AMMO2 -> getString(R.string.weapon_bowgun_ammo_pierce, 2)
+                AmmoType.PIERCE_AMMO3 -> getString(R.string.weapon_bowgun_ammo_pierce, 3)
+                AmmoType.SPREAD_AMMO1 -> getString(R.string.weapon_bowgun_ammo_spread, 1)
+                AmmoType.SPREAD_AMMO2 -> getString(R.string.weapon_bowgun_ammo_spread, 2)
+                AmmoType.SPREAD_AMMO3 -> getString(R.string.weapon_bowgun_ammo_spread, 3)
+                AmmoType.STICKY_AMMO1 -> getString(R.string.weapon_bowgun_ammo_sticky, 1)
+                AmmoType.STICKY_AMMO2 -> getString(R.string.weapon_bowgun_ammo_sticky, 2)
+                AmmoType.STICKY_AMMO3 -> getString(R.string.weapon_bowgun_ammo_sticky, 3)
+                AmmoType.CLUSTER_AMMO1 -> getString(R.string.weapon_bowgun_ammo_cluster, 1)
+                AmmoType.CLUSTER_AMMO2 -> getString(R.string.weapon_bowgun_ammo_cluster, 2)
+                AmmoType.CLUSTER_AMMO3 -> getString(R.string.weapon_bowgun_ammo_cluster, 3)
+                AmmoType.RECOVER_AMMO1 -> getString(R.string.weapon_bowgun_ammo_recover, 1)
+                AmmoType.RECOVER_AMMO2 -> getString(R.string.weapon_bowgun_ammo_recover, 2)
+                AmmoType.POISON_AMMO1 -> getString(R.string.weapon_bowgun_ammo_poison, 1)
+                AmmoType.POISON_AMMO2 -> getString(R.string.weapon_bowgun_ammo_poison, 2)
+                AmmoType.PARALYSIS_AMMO1 -> getString(R.string.weapon_bowgun_ammo_paralysis, 1)
+                AmmoType.PARALYSIS_AMMO2 -> getString(R.string.weapon_bowgun_ammo_paralysis, 2)
+                AmmoType.SLEEP_AMMO1 -> getString(R.string.weapon_bowgun_ammo_sleep, 1)
+                AmmoType.SLEEP_AMMO2 -> getString(R.string.weapon_bowgun_ammo_sleep, 2)
+                AmmoType.EXHAUST_AMMO1 -> getString(R.string.weapon_bowgun_ammo_sleep, 1)
+                AmmoType.EXHAUST_AMMO2 -> getString(R.string.weapon_bowgun_ammo_sleep, 2)
+                AmmoType.FLAMING_AMMO -> getString(R.string.weapon_bowgun_ammo_flaming)
+                AmmoType.WATER_AMMO -> getString(R.string.weapon_bowgun_ammo_water)
+                AmmoType.FREEZE_AMMO -> getString(R.string.weapon_bowgun_ammo_freeze)
+                AmmoType.THUNDER_AMMO -> getString(R.string.weapon_bowgun_ammo_thunder)
+                AmmoType.DRAGON_AMMO -> getString(R.string.weapon_bowgun_ammo_dragon)
+                AmmoType.SLICING_AMMO -> getString(R.string.weapon_bowgun_ammo_slicing)
+                AmmoType.WYVERN_AMMO -> getString(R.string.weapon_bowgun_ammo_wyvern)
+                AmmoType.DEMON_AMMO -> getString(R.string.weapon_bowgun_ammo_demon)
+                AmmoType.ARMOR_AMMO -> getString(R.string.weapon_bowgun_ammo_armor)
+                AmmoType.TRANQ_AMMO -> getString(R.string.weapon_bowgun_ammo_tranq)
+            }
+            view.capacity_value.text = it.capacity.toString()
+            view.shot_type_value.text = when (it.isRapid) {
+                true -> getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
+                false -> getString(R.string.weapon_bowgun_ammo_shot_normal)
+            }
+
+            view.ammo_icon.setImageDrawable(loadIconFor(it.type))
+
+            ammo_layout.addView(view)
+        }
     }
 }

@@ -168,6 +168,7 @@
     <string name="weapon_gunlance_shelling_wide">Wide</string>
 
     <string name="weapon_hunting_horn_notes">Notes</string>
+
     <string name="weapon_bow_coatings">Coatings</string>
     <string name="weapon_bow_coatings_paralysis">Para</string>
     <string name="weapon_bow_coatings_sleep">Sleep</string>
@@ -175,6 +176,32 @@
     <string name="weapon_bow_coatings_poison">Poison</string>
     <string name="weapon_bow_coatings_close_range">Close</string>
     <string name="weapon_bow_coatings_blast">Blast</string>
+
+    <string name="weapon_bowgun_deviation">Deviation</string>
+    <string name="weapon_bowgun_special_ammo">Special Ammo</string>
+    <string name="weapon_bowgun_ammo_types">Ammo Types</string>
+    <string name="weapon_bowgun_ammo_normal">Normal Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_pierce">Pierce Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_spread">Spread Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_sticky">Sticky Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_cluster">Cluster Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_recover">Recover Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_poison">Poison Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_paralysis">Paralysis Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_sleep">Sleep Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_exhaust">Exhaust Ammo %1$d</string>
+    <string name="weapon_bowgun_ammo_flaming">Flaming Ammo</string>
+    <string name="weapon_bowgun_ammo_thunder">Thunder Ammo</string>
+    <string name="weapon_bowgun_ammo_dragon">Dragon Ammo</string>
+    <string name="weapon_bowgun_ammo_water">Water Ammo</string>
+    <string name="weapon_bowgun_ammo_freeze">Freeze Ammo</string>
+    <string name="weapon_bowgun_ammo_slicing">Slicing Ammo</string>
+    <string name="weapon_bowgun_ammo_wyvern">Wyvern Ammo</string>
+    <string name="weapon_bowgun_ammo_demon">Demon Ammo</string>
+    <string name="weapon_bowgun_ammo_armor">Armor Ammo</string>
+    <string name="weapon_bowgun_ammo_tranq">Tranq Ammo</string>
+    <string name="weapon_bowgun_ammo_shot_normal">Normal</string>
+    <string name="weapon_bowgun_ammo_shot_rapid_fire">Rapid Fire</string>
 
 
     <!-- ################ -->

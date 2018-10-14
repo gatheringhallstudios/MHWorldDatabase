@@ -17,7 +17,7 @@
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_items_ammo_white" />
+            android:src="@xml/ic_items_bottle_base" />
 
         <TextView
             style="@style/TextSubHead"

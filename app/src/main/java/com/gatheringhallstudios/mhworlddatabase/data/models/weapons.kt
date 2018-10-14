@@ -2,11 +2,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
-import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.listitem_bow_detail.*
 
 open class WeaponType(
         val name: String,
@@ -38,14 +35,15 @@ class Weapon(
         val phial_power: Int,
         val shelling: ShellingType,
         val shelling_level: Int?,
-        val notes: String?,
-        @Embedded
-        var weaponAmmo: WeaponAmmo? = null
+        val notes: String?
 
 ) : WeaponTree(id, name, rarity, weapon_type, attack, affinity, element1, element1_attack, element2, element2_attack,
         element_hidden, defense, previous_weapon_id) {
     @Embedded
     lateinit var weaponCoatings: WeaponCoatings
+
+    @Embedded
+    var weaponAmmoData: WeaponAmmoData? = null
 }
 
 open class WeaponTree(
@@ -179,7 +177,7 @@ class WeaponFull(
         val recipe: Map<String?, List<ItemQuantity>>
 )
 
-data class WeaponAmmo(
+data class WeaponAmmoData(
         val ammo_id: Int,
         val deviation: String?,
         val special_ammo: String?,
@@ -244,8 +242,54 @@ data class WeaponAmmo(
         val dragon_clip: Int,
         val dragon_rapid: Boolean,
         val slicing_clip: Int,
-        val wyvern_clip: Boolean,
-        val demon_clip: Boolean,
-        val armor_clip: Boolean,
-        val tranq_clip: Boolean
+        val wyvern_clip: Int,
+        val demon_clip: Int,
+        val armor_clip: Int,
+        val tranq_clip: Int
+) : Iterable<WeaponAmmo> {
+    override fun iterator(): Iterator<WeaponAmmo> {
+        val buffer = listOf(WeaponAmmo(AmmoType.NORMAL_AMMO1, normal1_clip, normal1_rapid, ""),
+                WeaponAmmo(AmmoType.NORMAL_AMMO2, normal2_clip, normal2_rapid, ""),
+                WeaponAmmo(AmmoType.NORMAL_AMMO3, normal3_clip, normal3_rapid, ""),
+                WeaponAmmo(AmmoType.PIERCE_AMMO1, pierce1_clip, pierce1_rapid, ""),
+                WeaponAmmo(AmmoType.PIERCE_AMMO2, pierce2_clip, pierce2_rapid, ""),
+                WeaponAmmo(AmmoType.PIERCE_AMMO3, pierce3_clip, pierce3_rapid, ""),
+                WeaponAmmo(AmmoType.SPREAD_AMMO1, spread1_clip, spread1_rapid, ""),
+                WeaponAmmo(AmmoType.SPREAD_AMMO2, spread2_clip, spread2_rapid, ""),
+                WeaponAmmo(AmmoType.SPREAD_AMMO3, spread3_clip, spread3_rapid, ""),
+                WeaponAmmo(AmmoType.STICKY_AMMO1, sticky1_clip, sticky1_rapid, ""),
+                WeaponAmmo(AmmoType.STICKY_AMMO2, sticky2_clip, sticky2_rapid, ""),
+                WeaponAmmo(AmmoType.STICKY_AMMO3, sticky3_clip, sticky3_rapid, ""),
+                WeaponAmmo(AmmoType.CLUSTER_AMMO1, cluster1_clip, cluster1_rapid, ""),
+                WeaponAmmo(AmmoType.CLUSTER_AMMO2, cluster2_clip, cluster2_rapid, ""),
+                WeaponAmmo(AmmoType.CLUSTER_AMMO3, cluster3_clip, cluster3_rapid, ""),
+                WeaponAmmo(AmmoType.RECOVER_AMMO1, recover1_clip, recover1_rapid, ""),
+                WeaponAmmo(AmmoType.RECOVER_AMMO2, recover2_clip, recover2_rapid, ""),
+                WeaponAmmo(AmmoType.POISON_AMMO1, poison1_clip, poison1_rapid, ""),
+                WeaponAmmo(AmmoType.POISON_AMMO2, poison2_clip, poison2_rapid, ""),
+                WeaponAmmo(AmmoType.PARALYSIS_AMMO1, paralysis1_clip, paralysis1_rapid, ""),
+                WeaponAmmo(AmmoType.PARALYSIS_AMMO2, paralysis1_clip, paralysis1_rapid, ""),
+                WeaponAmmo(AmmoType.SLEEP_AMMO1, sleep1_clip, sleep1_rapid, ""),
+                WeaponAmmo(AmmoType.SLEEP_AMMO2, sleep2_clip, sleep2_rapid, ""),
+                WeaponAmmo(AmmoType.EXHAUST_AMMO1, exhaust1_clip, exhaust2_rapid, ""),
+                WeaponAmmo(AmmoType.FLAMING_AMMO, thunder_clip, thunder_rapid, ""),
+                WeaponAmmo(AmmoType.WATER_AMMO, water_clip, water_rapid, ""),
+                WeaponAmmo(AmmoType.FREEZE_AMMO, freeze_clip, freeze_rapid, ""),
+                WeaponAmmo(AmmoType.THUNDER_AMMO, thunder_clip, thunder_rapid, ""),
+                WeaponAmmo(AmmoType.DRAGON_AMMO,dragon_clip, dragon_rapid, ""),
+                WeaponAmmo(AmmoType.SLICING_AMMO, slicing_clip, false, ""),
+                WeaponAmmo(AmmoType.WYVERN_AMMO, wyvern_clip, false, ""),
+                WeaponAmmo(AmmoType.DEMON_AMMO, demon_clip, false, ""),
+                WeaponAmmo(AmmoType.ARMOR_AMMO, armor_clip, false, ""),
+                WeaponAmmo(AmmoType.TRANQ_AMMO, tranq_clip, false, ""))
+
+        return buffer.filter { x -> x.capacity > 0 }.iterator()
+    }
+}
+
+class WeaponAmmo (
+    var type: AmmoType,
+    var capacity: Int,
+    var isRapid: Boolean,
+    var reload: String
 )
