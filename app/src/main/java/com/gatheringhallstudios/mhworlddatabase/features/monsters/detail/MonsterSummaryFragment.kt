@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,10 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
+import com.gatheringhallstudios.mhworlddatabase.data.embeds.MonsterAilments
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
+import com.gatheringhallstudios.mhworlddatabase.data.types.AilmentStrength
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
 
@@ -53,6 +56,8 @@ class MonsterSummaryFragment : Fragment() {
         if (monster.has_weakness) {
             populateWeaknessSection(monster)
         }
+
+        populateAilments(monster.ailments)
     }
 
     /**
@@ -92,6 +97,60 @@ class MonsterSummaryFragment : Fragment() {
         if (!monster.alt_state_description.isNullOrEmpty()) {
             alt_weakness_caption.text = "( ) = ${monster.alt_state_description}"
         }
+    }
+
+    private fun populateAilments(ailments: MonsterAilments?) {
+        if (ailments == null) {
+            ailments_text.setText(R.string.general_none)
+            return
+        }
+
+        val ailmentList = mutableListOf<String>()
+        fun addAilment(@StringRes resId: Int) {
+            ailmentList.add(getString(resId))
+        }
+
+        when (ailments.roar) {
+            AilmentStrength.NONE -> {}
+            AilmentStrength.SMALL -> addAilment(R.string.ailment_roar_small)
+            AilmentStrength.LARGE -> addAilment(R.string.ailment_roar_large)
+            AilmentStrength.EXTREME -> addAilment(R.string.ailment_roar_extreme)
+        }
+
+        when (ailments.wind) {
+            AilmentStrength.NONE -> {}
+            AilmentStrength.SMALL -> addAilment(R.string.ailment_wind_small)
+            AilmentStrength.LARGE -> addAilment(R.string.ailment_wind_large)
+            AilmentStrength.EXTREME -> addAilment(R.string.ailment_wind_extreme)
+        }
+
+        when (ailments.tremor) {
+            AilmentStrength.NONE -> {}
+            AilmentStrength.SMALL -> addAilment(R.string.ailment_tremor_small)
+            AilmentStrength.LARGE -> addAilment(R.string.ailment_tremor_large)
+            AilmentStrength.EXTREME -> addAilment(R.string.ailment_tremor_extreme)
+        }
+
+        if (ailments.fireblight) addAilment(R.string.ailment_fireblight)
+        if (ailments.waterblight) addAilment(R.string.ailment_waterblight)
+        if (ailments.thunderblight) addAilment(R.string.ailment_thunderblight)
+        if (ailments.iceblight) addAilment(R.string.ailment_iceblight)
+        if (ailments.dragonblight) addAilment(R.string.ailment_dragonblight)
+        if (ailments.blastblight) addAilment(R.string.ailment_blastblight)
+        if (ailments.poison) addAilment(R.string.ailment_poison)
+        if (ailments.sleep) addAilment(R.string.ailment_sleep)
+        if (ailments.paralysis) addAilment(R.string.ailment_paralysis)
+        if (ailments.bleed) addAilment(R.string.ailment_bleed)
+        if (ailments.stun) addAilment(R.string.ailment_stun)
+        if (ailments.mud) addAilment(R.string.ailment_mud)
+        if (ailments.effluvia) addAilment(R.string.ailment_effluvia)
+
+        if (ailmentList.isEmpty()) {
+            ailments_text.setText(R.string.general_none)
+            return
+        }
+
+        ailments_text.text = ailmentList.joinToString("\n")
     }
 
     private fun populateHabitats(habitats: List<MonsterHabitat>?) {

@@ -16,6 +16,14 @@ private val MonsterSizeConverter = Converter(
         null to null
 )
 
+private val AilmentStrengthConverter = Converter(
+        null to AilmentStrength.NONE,
+        "" to AilmentStrength.NONE,
+        "small" to AilmentStrength.SMALL,
+        "large" to AilmentStrength.LARGE,
+        "extreme" to AilmentStrength.EXTREME
+)
+
 private val ExtractConverter = Converter(
         "red" to Extract.RED,
         "orange" to Extract.ORANGE,
@@ -117,6 +125,9 @@ class Converters {
 
     @TypeConverter fun monsterSizefromString(value: String) = MonsterSizeConverter.deserialize(value)
     @TypeConverter fun fromMonsterSize(type: MonsterSize?) = MonsterSizeConverter.serialize(type)
+
+    @TypeConverter fun ailmentFromString(value: String?) = AilmentStrengthConverter.deserialize(value)
+    @TypeConverter fun fromAilment(ailment: AilmentStrength) = AilmentStrengthConverter.serialize(ailment)
 
     @TypeConverter fun extractFromString(value: String) = ExtractConverter.deserialize(value)
     @TypeConverter fun fromExtract(type: Extract?) = ExtractConverter.serialize(type)
