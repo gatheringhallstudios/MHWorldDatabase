@@ -2,9 +2,11 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
-import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
-import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
+import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import kotlinx.android.synthetic.main.listitem_bow_detail.*
 
 open class WeaponType(
         val name: String,
@@ -30,22 +32,21 @@ class Weapon(
         val attack_true: Int,
         val craftable: Int,
         val isFinal: Int,
-        val kinsect_bonus: String?,
+        val kinsect_bonus: KinsectBonus,
         val elderseal: ElderSealLevel,
-        val phial: String?,
+        val phial: PhialType,
         val phial_power: Int,
-        val shelling: String?,
+        val shelling: ShellingType,
         val shelling_level: Int?,
-        val ammo_id: Int?,
-        val coating_close: String?,
-        val coating_power: String?,
-        val coating_poison: String?,
-        val coating_paralysis: String?,
-        val coating_sleep: String?,
-        val coating_blast: String?,
-        val notes: String?
+        val notes: String?,
+        @Embedded
+        var weaponAmmo: WeaponAmmo? = null
+
 ) : WeaponTree(id, name, rarity, weapon_type, attack, affinity, element1, element1_attack, element2, element2_attack,
-        element_hidden, defense, previous_weapon_id)
+        element_hidden, defense, previous_weapon_id) {
+    @Embedded
+    lateinit var weaponCoatings: WeaponCoatings
+}
 
 open class WeaponTree(
         val id: Int,
@@ -150,7 +151,25 @@ data class WeaponSharpness(
     }
 }
 
+/**
+ * An embedded class representing the coatings available to bows
+ */
+data class WeaponCoatings(
+        val coating_close: Int?,
+        val coating_power: Int?,
+        val coating_poison: Int?,
+        val coating_paralysis: Int?,
+        val coating_sleep: Int?,
+        val coating_blast: Int?
+) :Iterable<CoatingType> {
 
+    override fun iterator(): Iterator<CoatingType> {
+        val buffer = mapOf(Pair(CoatingType.CLOSE_RANGE, coating_close), Pair(CoatingType.POWER, coating_power), Pair(CoatingType.POISON, coating_poison),
+                Pair(CoatingType.PARALYSIS, coating_paralysis), Pair(CoatingType.SLEEP, coating_sleep), Pair(CoatingType.BLAST, coating_blast))
+
+        return buffer.filter {(CoatingType, value) -> value != null && value > 0}.map {x -> x.key}.toList().iterator()
+    }
+}
 /**
  * The result of fully loading a weapon.
  * Loads the data you'd find in an weapon screen ingame.
@@ -158,4 +177,75 @@ data class WeaponSharpness(
 class WeaponFull(
         val weapon: Weapon,
         val recipe: Map<String?, List<ItemQuantity>>
+)
+
+data class WeaponAmmo(
+        val ammo_id: Int,
+        val deviation: String?,
+        val special_ammo: String?,
+        val normal1_clip: Int,
+        val normal1_rapid: Boolean,
+        val normal2_clip: Int,
+        val normal2_rapid: Boolean,
+        val normal3_clip: Int,
+        val normal3_rapid: Boolean,
+        val pierce1_clip: Int,
+        val pierce1_rapid: Boolean,
+        val pierce2_clip: Int,
+        val pierce2_rapid: Boolean,
+        val pierce3_clip: Int,
+        val pierce3_rapid: Boolean,
+        val spread1_clip: Int,
+        val spread1_rapid: Boolean,
+        val spread2_clip: Int,
+        val spread2_rapid: Boolean,
+        val spread3_clip: Int,
+        val spread3_rapid: Boolean,
+        val sticky1_clip: Int,
+        val sticky1_rapid: Boolean,
+        val sticky2_clip: Int,
+        val sticky2_rapid: Boolean,
+        val sticky3_clip: Int,
+        val sticky3_rapid: Boolean,
+        val cluster1_clip: Int,
+        val cluster1_rapid: Boolean,
+        val cluster2_clip: Int,
+        val cluster2_rapid: Boolean,
+        val cluster3_clip: Int,
+        val cluster3_rapid: Boolean,
+        val recover1_clip: Int,
+        val recover1_rapid: Boolean,
+        val recover2_clip: Int,
+        val recover2_rapid: Boolean,
+        val poison1_clip: Int,
+        val poison1_rapid: Boolean,
+        val poison2_clip: Int,
+        val poison2_rapid: Boolean,
+        val paralysis1_clip: Int,
+        val paralysis1_rapid: Boolean,
+        val paralysis2_clip: Int,
+        val paralysis2_rapid: Boolean,
+        val sleep1_clip: Int,
+        val sleep1_rapid: Boolean,
+        val sleep2_clip: Int,
+        val sleep2_rapid: Boolean,
+        val exhaust1_clip: Int,
+        val exhaust1_rapid: Boolean,
+        val exhaust2_clip: Int,
+        val exhaust2_rapid: Boolean,
+        val flaming_clip: Int,
+        val flaming_rapid: Boolean,
+        val water_clip: Int,
+        val water_rapid: Boolean,
+        val freeze_clip: Int,
+        val freeze_rapid: Boolean,
+        val thunder_clip: Int,
+        val thunder_rapid: Boolean,
+        val dragon_clip: Int,
+        val dragon_rapid: Boolean,
+        val slicing_clip: Int,
+        val wyvern_clip: Boolean,
+        val demon_clip: Boolean,
+        val armor_clip: Boolean,
+        val tranq_clip: Boolean
 )

@@ -50,6 +50,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponRecipe;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponAmmoEntity;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
 // laziness, since we need to manually add all entities which is quite cumbersome
@@ -61,7 +62,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
  * Created by Carlos on 3/4/2018.
  */
 @Database(
-        version = 17,
+        version = 18,
         exportSchema = false,
 
         entities = {
@@ -91,8 +92,9 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class,
 
                 // Weapon Classes
-                WeaponEntity.class, WeaponText.class, WeaponRecipe.class
+                WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class, WeaponRecipe.class
         })
+
 @TypeConverters({Converters.class})
 public abstract class MHWDatabase extends RoomDatabase {
     private static MHWDatabase instance;

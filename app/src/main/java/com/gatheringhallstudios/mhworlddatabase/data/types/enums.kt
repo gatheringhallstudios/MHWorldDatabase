@@ -1,5 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.data.types
 
+import android.support.v4.content.res.TypedArrayUtils.getString
+import com.gatheringhallstudios.mhworlddatabase.R
+
 /**
  * This file contains a collection of enumerations used in the MHWorld app.
  * These enums are automatically converted via "Converters.kt".
@@ -44,6 +47,18 @@ enum class ItemSubcategory {
 enum class MonsterSize {
     SMALL,
     LARGE
+}
+
+/**
+ * Represents the strength of a monster ailment.
+ * Those in the extreme category usually require special measures.
+ * Kushala's wind pressure is an example of an extreme ailment.
+ */
+enum class AilmentStrength {
+    NONE,
+    SMALL,
+    LARGE,
+    EXTREME
 }
 
 enum class Extract {
@@ -120,4 +135,40 @@ enum class ElderSealLevel {
     LOW,
     AVERAGE,
     HIGH
+}
+
+enum class CoatingType {
+    POWER,
+    POISON,
+    CLOSE_RANGE,
+    SLEEP,
+    BLAST,
+    PARALYSIS
+}
+
+enum class PhialType {
+    NONE,
+    EXHAUST,
+    POWER,
+    DRAGON,
+    POWER_ELEMENT,
+    PARALYSIS,
+    IMPACT
+}
+
+enum class KinsectBonus {
+    NONE,
+    SEVER,
+    SPEED,
+    ELEMENT,
+    HEALTH,
+    STAMINA,
+    BLUNT
+}
+
+enum class ShellingType {
+    NONE,
+    WIDE,
+    LONG,
+    NORMAL
 }

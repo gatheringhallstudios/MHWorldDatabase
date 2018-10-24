@@ -8,8 +8,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadIconFor
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
@@ -17,11 +21,13 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponSharpness
-import com.gatheringhallstudios.mhworlddatabase.data.types.ElderSealLevel
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import com.ghstudios.android.ui.general.SharpnessView
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
+import kotlinx.android.synthetic.main.listitem_bow_detail.*
 import kotlinx.android.synthetic.main.listitem_section_header.view.*
 
 class WeaponDetailFragment : Fragment() {
@@ -49,6 +55,7 @@ class WeaponDetailFragment : Fragment() {
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
         populateComponents(weaponData.recipe)
+        populateWeaponSpecificSection(weaponData.weapon)
     }
 
     private fun populateWeaponBasic(weapon: Weapon) {
@@ -67,9 +74,6 @@ class WeaponDetailFragment : Fragment() {
             ElderSealLevel.AVERAGE -> getString(R.string.weapon_elderseal_average)
             ElderSealLevel.HIGH -> getString(R.string.weapon_elderseal_high)
         }
-
-        //Draw sharpness bar/hide it for weapons that don't have it
-        populateSharpness(weapon.sharpnessData)
 
         // Set elemental attack values
         element_value.text = createElementString(weapon.element1_attack, weapon.element_hidden)
@@ -116,6 +120,42 @@ class WeaponDetailFragment : Fragment() {
         }
     }
 
+    /** Method for binding sections that are specific to certain weapons **/
+    private fun populateWeaponSpecificSection(weapon: Weapon) {
+        when (weapon.weapon_type) {
+            WeaponType.SWITCH_AXE, WeaponType.CHARGE_BLADE -> {
+                weapon_specific_section.layoutResource = R.layout.listitem_charge_blade_detail
+                val view = weapon_specific_section.inflate()
+                bindChargeBladeSwitchAxe(weapon, view)
+            }
+            WeaponType.INSECT_GLAIVE -> {
+                weapon_specific_section.layoutResource = R.layout.listitem_insect_glaive_detail
+                val view = weapon_specific_section.inflate()
+                bindInsectGlaive(weapon, view)
+            }
+            WeaponType.GUNLANCE -> {
+                weapon_specific_section.layoutResource = R.layout.listitem_gunlance_detail
+                val view = weapon_specific_section.inflate()
+                bindGunlance(weapon, view)
+            }
+            WeaponType.HUNTING_HORN -> {
+                weapon_specific_section.layoutResource = R.layout.listitem_hunting_horn_detail
+                val view = weapon_specific_section.inflate()
+                bindHuntingHorn(weapon, view)
+            }
+            WeaponType.BOW -> {
+                weapon_specific_section.layoutResource = R.layout.listitem_bow_detail
+                val view = weapon_specific_section.inflate()
+                bindBow(weapon, view)
+            }
+            else -> {
+                weapon_specific_section.layoutResource = R.layout.listitem_generic_weapon_detail
+                val view = weapon_specific_section.inflate()
+                bindGenericWeapon(weapon, view)
+            }
+        }
+    }
+
     /**
      * Converts the map of the different recipe types (craft, upgrade, etc.) into section headers and lists
      */
@@ -158,46 +198,110 @@ class WeaponDetailFragment : Fragment() {
      * Draws 5 sharpness bars for weapons affected by the handicraft skill, 1 bar for weapons that aren't
      * and hides the sharpness section for weapons that do not have sharpness
      */
-    private fun populateSharpness(sharpness: WeaponSharpness?) {
+    private fun populateSharpness(sharpness: WeaponSharpness?, view: View) {
         if (sharpness != null) {
             //One bar for weapons not affected by sharpness
             if (sharpness.sharpness_maxed!!) {
-                sharpness_value.drawSharpness(sharpness.get(0))
-                sharpness_container1.visibility = View.GONE
-                sharpness_container2.visibility = View.GONE
-                sharpness_container3.visibility = View.GONE
-                sharpness_container4.visibility = View.GONE
-                sharpness_container5.visibility = View.GONE
+                view.findViewById<SharpnessView>(R.id.sharpness_value).drawSharpness(sharpness.get(0))
+                view.findViewById<LinearLayout>(R.id.sharpness_container1).visibility = View.GONE
+                view.findViewById<LinearLayout>(R.id.sharpness_container2).visibility = View.GONE
+                view.findViewById<LinearLayout>(R.id.sharpness_container3).visibility = View.GONE
+                view.findViewById<LinearLayout>(R.id.sharpness_container4).visibility = View.GONE
+                view.findViewById<LinearLayout>(R.id.sharpness_container5).visibility = View.GONE
+
             } else {
-                sharpness_label.text = getString(R.string.format_plus, 0)
-                sharpness_value.drawSharpness(sharpness.get(0))
+                view.findViewById<TextView>(R.id.sharpness_label).text = getString(R.string.format_plus, 0)
+                view.findViewById<SharpnessView>(R.id.sharpness_value).drawSharpness(sharpness.get(0))
 
-                sharpness_label1.text = getString(R.string.format_plus, 1)
-                sharpness_value1.drawSharpness(sharpness.get(1))
+                view.findViewById<TextView>(R.id.sharpness_label1).text = getString(R.string.format_plus, 1)
+                view.findViewById<SharpnessView>(R.id.sharpness_value1).drawSharpness(sharpness.get(1))
 
-                sharpness_label2.text = getString(R.string.format_plus, 2)
-                sharpness_value2.drawSharpness(sharpness.get(2))
+                view.findViewById<TextView>(R.id.sharpness_label2).text = getString(R.string.format_plus, 2)
+                view.findViewById<SharpnessView>(R.id.sharpness_value2).drawSharpness(sharpness.get(2))
 
-                sharpness_label3.text = getString(R.string.format_plus, 3)
-                sharpness_value3.drawSharpness(sharpness.get(3))
+                view.findViewById<TextView>(R.id.sharpness_label3).text = getString(R.string.format_plus, 3)
+                view.findViewById<SharpnessView>(R.id.sharpness_value3).drawSharpness(sharpness.get(3))
 
-                sharpness_label4.text = getString(R.string.format_plus, 4)
-                sharpness_value4.drawSharpness(sharpness.get(4))
+                view.findViewById<TextView>(R.id.sharpness_label4).text = getString(R.string.format_plus, 4)
+                view.findViewById<SharpnessView>(R.id.sharpness_value4).drawSharpness(sharpness.get(4))
 
-                sharpness_label5.text = getString(R.string.format_plus, 5)
-                sharpness_value5.drawSharpness(sharpness.get(5))
+                view.findViewById<TextView>(R.id.sharpness_label5).text = getString(R.string.format_plus, 5)
+                view.findViewById<SharpnessView>(R.id.sharpness_value5).drawSharpness(sharpness.get(5))
             }
         } else {
-            hideSharpness()
+            hideSharpness(view)
         }
     }
 
-    private fun hideSharpness() {
-        sharpness_container.visibility = View.GONE
-        sharpness_container1.visibility = View.GONE
-        sharpness_container2.visibility = View.GONE
-        sharpness_container3.visibility = View.GONE
-        sharpness_container4.visibility = View.GONE
-        sharpness_container5.visibility = View.GONE
+    private fun hideSharpness(view: View) {
+        view.findViewById<LinearLayout>(R.id.sharpness_container).visibility = View.GONE
+        view.findViewById<LinearLayout>(R.id.sharpness_container1).visibility = View.GONE
+        view.findViewById<LinearLayout>(R.id.sharpness_container2).visibility = View.GONE
+        view.findViewById<LinearLayout>(R.id.sharpness_container3).visibility = View.GONE
+        view.findViewById<LinearLayout>(R.id.sharpness_container4).visibility = View.GONE
+        view.findViewById<LinearLayout>(R.id.sharpness_container5).visibility = View.GONE
+    }
+
+    private fun bindChargeBladeSwitchAxe(weapon: Weapon, view: View) {
+        //Draw sharpness bar/hide it for weapons that don't have it
+        populateSharpness(weapon.sharpnessData, view)
+
+        view.findViewById<ImageView>(R.id.phial_element_icon).setImageDrawable(getElementIcon(weapon.phial.toString()))
+        view.findViewById<TextView>(R.id.phial_type_value).text = when (weapon.phial) {
+            PhialType.NONE -> ""
+            PhialType.EXHAUST -> getString(R.string.weapon_charge_blade_exhaust)
+            PhialType.POWER -> getString(R.string.weapon_charge_blade_power)
+            PhialType.DRAGON -> getString(R.string.weapon_charge_blade_dragon)
+            PhialType.POWER_ELEMENT -> getString(R.string.weapon_charge_blade_power_element)
+            PhialType.PARALYSIS -> getString(R.string.weapon_charge_blade_paralysis)
+            PhialType.IMPACT -> getString(R.string.weapon_charge_blade_impact)
+        }
+        view.findViewById<TextView>(R.id.phial_power_value).text = weapon.phial_power.toString()
+    }
+
+    private fun bindInsectGlaive(weapon: Weapon, view: View) {
+        populateSharpness(weapon.sharpnessData, view)
+        view.findViewById<TextView>(R.id.kinsect_bonus_value).text = when(weapon.kinsect_bonus) {
+            KinsectBonus.NONE -> ""
+            KinsectBonus.SEVER -> getString(R.string.weapon_kinsect_bonus_sever)
+            KinsectBonus.SPEED -> getString(R.string.weapon_kinsect_bonus_speed)
+            KinsectBonus.ELEMENT -> getString(R.string.weapon_kinsect_bonus_element)
+            KinsectBonus.HEALTH -> getString(R.string.weapon_kinsect_bonus_health)
+            KinsectBonus.STAMINA -> getString(R.string.weapon_kinsect_bonus_stamina)
+            KinsectBonus.BLUNT -> getString(R.string.weapon_kinsect_bonus_blunt)
+        }
+    }
+
+    private fun bindGunlance(weapon: Weapon, view: View) {
+        populateSharpness(weapon.sharpnessData, view)
+        view.findViewById<TextView>(R.id.shelling_type).text = when(weapon.shelling) {
+            ShellingType.NONE -> ""
+            ShellingType.NORMAL -> getString(R.string.weapon_gunlance_shelling_normal)
+            ShellingType.WIDE -> getString(R.string.weapon_gunlance_shelling_wide)
+            ShellingType.LONG -> getString(R.string.weapon_gunlance_shelling_long)
+        }
+        view.findViewById<TextView>(R.id.shelling_level_value).text = getString(R.string.skill_level_short_qty, weapon.shelling_level)
+    }
+
+    private fun bindHuntingHorn(weapon: Weapon, view: View) {
+        populateSharpness(weapon.sharpnessData, view)
+        view.findViewById<TextView>(R.id.notes_value).text = weapon.notes.toString()
+    }
+
+    private fun bindBow(weapon: Weapon, view: View) {
+        weapon.weaponCoatings.iterator().forEach {
+            when (it) {
+                CoatingType.BLAST -> blast_coating_icon.setImageDrawable(loadIconFor(CoatingType.BLAST))
+                CoatingType.POWER -> power_coating_icon.setImageDrawable(loadIconFor(CoatingType.POWER))
+                CoatingType.POISON -> poison_coating_icon.setImageDrawable(loadIconFor(CoatingType.POISON))
+                CoatingType.PARALYSIS -> paralysis_coating_icon.setImageDrawable(loadIconFor(CoatingType.PARALYSIS))
+                CoatingType.SLEEP -> sleep_coating_icon.setImageDrawable(loadIconFor(CoatingType.SLEEP))
+                CoatingType.CLOSE_RANGE -> close_range_coating_icon.setImageDrawable(loadIconFor(CoatingType.CLOSE_RANGE))
+            }
+        }
+    }
+
+    private fun bindGenericWeapon(weapon: Weapon, view: View) {
+        populateSharpness(weapon.sharpnessData, view)
     }
 }

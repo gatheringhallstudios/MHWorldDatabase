@@ -29,6 +29,31 @@
     <string name="format_plus">+%1$d</string> <!-- Example: +5 -->
     <string name="format_percentage">%1$s%%</string> <!-- Example: 20%-->
 
+    <!-- Ailments -->
+    <string name="ailment_roar_small">Roar (small)</string>
+    <string name="ailment_roar_large">Roar (large)</string>
+    <string name="ailment_roar_extreme">Roar (extreme)</string>
+    <string name="ailment_wind_small">Wind Pressure (small)</string>
+    <string name="ailment_wind_large">Wind Pressure (large)</string>
+    <string name="ailment_wind_extreme">Wind Pressure (extreme)</string>
+    <string name="ailment_tremor_small">Tremor (small)</string>
+    <string name="ailment_tremor_large">Tremor (large)</string>
+    <string name="ailment_tremor_extreme">Tremor (extreme)</string>
+    <string name="ailment_defensedown">Defense Down</string>
+    <string name="ailment_fireblight">FireBlight</string>
+    <string name="ailment_waterblight">WaterBlight</string>
+    <string name="ailment_thunderblight">ThunderBlight</string>
+    <string name="ailment_iceblight">IceBlight</string>
+    <string name="ailment_dragonblight">DragonBlight</string>
+    <string name="ailment_blastblight">BlastBlight</string>
+    <string name="ailment_poison">Poison</string>
+    <string name="ailment_sleep">Sleep</string>
+    <string name="ailment_paralysis">Paralysis</string>
+    <string name="ailment_bleed">Bleed</string>
+    <string name="ailment_stun">Stun</string>
+    <string name="ailment_mud">Mud</string>
+    <string name="ailment_effluvia">Effluvia</string>
+
     <!-- Insect glaive extract -->
     <string name="extract_orange">Orange</string>
     <string name="extract_red">Red</string>
@@ -43,6 +68,7 @@
     <!-- These aren't tied to a particular screen so they can be used anywhere -->
     <string name="header_habitat">Habitat</string>
     <string name="header_weakness">Weakness</string>
+    <string name="header_ailments">Ailments</string>
     <string name="header_hitzone_physical">Physical</string>
     <string name="header_hitzone_elemental">Elemental</string>
     <string name="header_break">Breaks</string>
@@ -145,6 +171,37 @@
     <string name="weapon_elderseal_low">Low</string>
     <string name="weapon_elderseal_average">Average</string>
     <string name="weapon_elderseal_high">High</string>
+
+    <string name="weapon_charge_blade_phials">Phials</string>
+    <string name="weapon_charge_blade_exhaust">Exhaust</string>
+    <string name="weapon_charge_blade_power">Power</string>
+    <string name="weapon_charge_blade_dragon">Dragon</string>
+    <string name="weapon_charge_blade_power_element">Power Element</string>
+    <string name="weapon_charge_blade_paralysis">Paralysis</string>
+    <string name="weapon_charge_blade_impact">Impact</string>
+
+    <string name="weapon_kinsect_bonus">Kinsect Bonus</string>
+    <string name="weapon_kinsect_bonus_sever">Sever</string>
+    <string name="weapon_kinsect_bonus_speed">Speed</string>
+    <string name="weapon_kinsect_bonus_element">Element</string>
+    <string name="weapon_kinsect_bonus_health">Health</string>
+    <string name="weapon_kinsect_bonus_stamina">Stamina</string>
+    <string name="weapon_kinsect_bonus_blunt">Blunt</string>
+
+    <string name="weapon_gunlance_shelling">Shelling</string>
+    <string name="weapon_gunlance_shelling_long">Long</string>
+    <string name="weapon_gunlance_shelling_normal">Normal</string>
+    <string name="weapon_gunlance_shelling_wide">Wide</string>
+
+    <string name="weapon_hunting_horn_notes">Notes</string>
+    <string name="weapon_bow_coatings">Coatings</string>
+    <string name="weapon_bow_coatings_paralysis">Para</string>
+    <string name="weapon_bow_coatings_sleep">Sleep</string>
+    <string name="weapon_bow_coatings_power">Power</string>
+    <string name="weapon_bow_coatings_poison">Poison</string>
+    <string name="weapon_bow_coatings_close_range">Close</string>
+    <string name="weapon_bow_coatings_blast">Blast</string>
+
 
     <!-- ################ -->
     <!-- ## ARMOR MENU ## -->

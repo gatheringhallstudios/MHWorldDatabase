@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/padding_footer_space">
 
         <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
@@ -19,165 +20,181 @@
             tools:iconSrc="@drawable/ic_ui_question_mark_white"
             tools:titleText="Azure Rathalos" />
 
-        <android.support.constraint.Group
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/weakness_section"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:visibility="visible"
-            android:visibility="gone"
-            app:constraint_referenced_ids="weakness_header,weakness_layout"/>
+            android:visibility="gone">
 
-        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-            android:id="@+id/weakness_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
-            app:labelText="@string/header_weakness"
-            app:layout_constraintTop_toBottomOf="@+id/monster_header"/>
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/weakness_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                app:labelText="@string/header_weakness"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/alt_weakness_caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TextCaptionHigh"
-            app:layout_constraintTop_toTopOf="@id/weakness_header"
-            app:layout_constraintBottom_toBottomOf="@id/weakness_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/margin_large"
-            tools:text="( ) = when covered in mud"/>
+            <TextView
+                android:id="@+id/alt_weakness_caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextCaptionHigh"
+                app:layout_constraintTop_toTopOf="@id/weakness_header"
+                app:layout_constraintBottom_toBottomOf="@id/weakness_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/margin_large"
+                tools:text="( ) = when covered in mud"/>
 
-        <TableLayout
-            android:id="@+id/weakness_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@drawable/divider_stroke"
-            android:showDividers="middle"
-            android:stretchColumns="0, 1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/weakness_header">
-
-            <TableRow
+            <TableLayout
+                android:id="@+id/weakness_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:divider="@drawable/divider_stroke"
+                android:showDividers="middle"
+                android:stretchColumns="0, 1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weakness_header">
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/fire_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_element_fire"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="1">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                </com.gatheringhallstudios.mhworlddatabase.components.IconStarCell>
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/fire_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_element_fire"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="1">
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/poison_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_status_poison"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="2" />
+                    </com.gatheringhallstudios.mhworlddatabase.components.IconStarCell>
 
-            </TableRow>
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/poison_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_status_poison"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="2" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                </TableRow>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/water_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_element_water"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="1" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/sleep_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_status_sleep"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="2" />
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/water_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_element_water"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="1" />
 
-            </TableRow>
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/sleep_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_status_sleep"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="2" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                </TableRow>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/lightning_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_element_thunder"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="3" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/paralysis_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_status_paralysis"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="1" />
-            </TableRow>
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/lightning_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_element_thunder"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="3" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/paralysis_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_status_paralysis"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="1" />
+                </TableRow>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/ice_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_element_ice"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="2" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/blast_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_status_blast"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="1">
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/ice_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_element_ice"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="2" />
 
-                </com.gatheringhallstudios.mhworlddatabase.components.IconStarCell>
-            </TableRow>
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/blast_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_status_blast"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="1">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    </com.gatheringhallstudios.mhworlddatabase.components.IconStarCell>
+                </TableRow>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/dragon_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_element_dragon"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="2" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
-                    android:id="@+id/stun_star_cell"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:iconSrc="@drawable/ic_status_stun"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:numStars="1" />
-            </TableRow>
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/dragon_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_element_dragon"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="2" />
 
-        </TableLayout>
+                    <com.gatheringhallstudios.mhworlddatabase.components.IconStarCell
+                        android:id="@+id/stun_star_cell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:iconSrc="@drawable/ic_status_stun"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:numStars="1" />
+                </TableRow>
+            </TableLayout>
+        </android.support.constraint.ConstraintLayout>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/ailments_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            app:labelText="@string/header_ailments" />
+
+        <TextView
+            android:id="@+id/ailments_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            style="@style/TextBodyMedium"
+            tools:text="Large Roar\nMinor Tremor"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/habitat_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_section_gap"
-            app:labelText="@string/header_habitat"
-            app:layout_constraintTop_toBottomOf="@+id/weakness_layout" />
+            app:labelText="@string/header_habitat" />
 
         <LinearLayout
             android:id="@+id/habitats_layout"
@@ -185,8 +202,7 @@
             android:layout_height="wrap_content"
             android:divider="@drawable/divider_stroke"
             android:orientation="vertical"
-            android:showDividers="middle"
-            app:layout_constraintTop_toBottomOf="@id/habitat_header">
+            android:showDividers="middle">
 
             <!-- TODO Habitats will be populated here procedurally -->
 
@@ -209,6 +225,6 @@
                 tools:visibility="visible" />
 
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </ScrollView>
