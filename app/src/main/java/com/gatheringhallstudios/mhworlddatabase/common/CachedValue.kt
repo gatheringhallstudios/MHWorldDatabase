@@ -27,10 +27,11 @@ class CachedValue<T>(
      * Retrieves the cached value if one exists, otherwise runs builder().
      * Resets the timeout once called.
      */
+    @Suppress("UNCHECKED_CAST")
     fun get() : T {
         lock.read {
             if (hasValue) {
-                val returnValue = cachedValue!!
+                val returnValue = cachedValue as T
                 startTimeout()
                 return returnValue
             }
@@ -39,7 +40,7 @@ class CachedValue<T>(
                 hasValue = true
                 cachedValue = builder()
                 startTimeout()
-                return cachedValue!!
+                return cachedValue as T
             }
         }
     }
