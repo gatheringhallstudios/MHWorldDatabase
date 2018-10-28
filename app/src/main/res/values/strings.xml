@@ -235,7 +235,11 @@
     <string name="weapon_bowgun_ammo_reload_normal">Normal</string>
     <string name="weapon_bowgun_ammo_reload_fast">Fast</string>
     <string name="weapon_bowgun_ammo_reload_very_fast">Very Fast</string>
-s
+    <string name="weapon_bowgun_shot_type">Shot Type</string>
+    <string name="weapon_bowgun_capacity">CAP</string>
+    <string name="weapon_bowgun_reload">RLD</string>
+    <string name="weapon_bowgun_recoil">RCL</string>
+
 
     <!-- ################ -->
     <!-- ## ARMOR MENU ## -->

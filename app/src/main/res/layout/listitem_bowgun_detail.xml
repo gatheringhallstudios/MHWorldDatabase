@@ -117,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:text="Shot Type"
+                    android:text="@string/weapon_bowgun_shot_type"
                     android:textColor="@color/textColorHigh" />
             </FrameLayout>
 
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:text="CAP"
+                    android:text="@string/weapon_bowgun_capacity"
                     android:textColor="@color/textColorHigh" />
             </FrameLayout>
 
@@ -149,7 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:text="RLD"
+                    android:text="@string/weapon_bowgun_reload"
                     android:textColor="@color/textColorHigh" />
             </FrameLayout>
 
@@ -166,12 +166,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:text="RCL"
+                    android:text="@string/weapon_bowgun_recoil"
                     android:textColor="@color/textColorHigh" />
             </FrameLayout>
 
         </android.support.constraint.ConstraintLayout>
 
+        <!-- This section will be populated dynamically through code -->
         <LinearLayout
             android:id="@+id/ammo_layout"
             android:layout_width="match_parent"
