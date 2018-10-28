@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.entities
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import com.gatheringhallstudios.mhworlddatabase.data.embeds.MonsterAilments
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
@@ -31,7 +32,10 @@ data class MonsterEntity(
         val status_weaknesses: WeaknessSummaryStatus?,
 
         @Embedded(prefix = "alt_weakness_")
-        val alt_weaknesses: WeaknessSummaryElemental?
+        val alt_weaknesses: WeaknessSummaryElemental?,
+
+        @Embedded(prefix="ailment_")
+        val ailments: MonsterAilments?
 )
 
 /**

@@ -78,7 +78,8 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Requests the search view to contain a new value directly.
-     * This will indirectly update the viewmodel's filter property
+     * This will indirectly update the activity viewmodel's filter property.
+     * This does not activiate any query events.
      */
     fun updateSearchView(filterValue: String) {
         searchView?.let { searchView ->

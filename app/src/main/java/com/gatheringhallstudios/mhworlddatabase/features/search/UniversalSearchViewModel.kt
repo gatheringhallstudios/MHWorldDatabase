@@ -4,7 +4,6 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.common.ThrottledExecutor
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -32,7 +31,8 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
 
     // prevent double searching by storing the last search attempt
     // also used to check if the search should auto-open
-    var lastSearchFilter: String = ""
+    var searchFilter: String = ""
+        private set
 
     // todo: Perhaps creating binders in the viewmodel isn't a good idea?
     // decide if we wanna do that, return a "search results" composite object, or some sort of typed data stream
@@ -49,11 +49,11 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun searchData(filterString: String?) {
         val trimmedString = filterString?.trim() ?: ""
-        if (trimmedString == lastSearchFilter) {
+        if (trimmedString == searchFilter) {
             return
         }
 
-        lastSearchFilter = trimmedString
+        searchFilter = trimmedString
 
         executor.execute {
             try {
