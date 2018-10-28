@@ -17,9 +17,11 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadIconFor
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
+import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponSharpness
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -354,13 +356,33 @@ class WeaponDetailFragment : Fragment() {
                 AmmoType.TRANQ_AMMO -> getString(R.string.weapon_bowgun_ammo_tranq)
             }
             view.capacity_value.text = it.capacity.toString()
-            view.shot_type_value.text = when (it.isRapid) {
-                true -> getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
-                false -> getString(R.string.weapon_bowgun_ammo_shot_normal)
+
+            //Determining what kind of shot it actually is, is a combination of ammo type, rapid/normal,
+            //And reload speed due to game logic. I know this looks like it makes 0 sense
+            if (it.type == AmmoType.WYVERN_AMMO) {
+                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
+            } else if (it.isRapid == true) {
+                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
+            } else if (it.recoil == -1) {
+                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_auto_reload)
+            } else if (it.isRapid == false && it.recoil != -1) {
+                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_normal)
+            } else {
+                view.shot_type_value.text = getString(R.string.general_none)
             }
 
-            view.ammo_icon.setImageDrawable(loadIconFor(it.type))
+            view.reload_value.text = when (it.reload) {
+                ReloadType.NONE -> getString(R.string.general_none)
+                ReloadType.VERY_SLOW -> getString(R.string.weapon_bowgun_ammo_reload_very_slow)
+                ReloadType.SLOW -> getString(R.string.weapon_bowgun_ammo_reload_slow)
+                ReloadType.NORMAL -> getString(R.string.weapon_bowgun_ammo_reload_normal)
+                ReloadType.FAST -> getString(R.string.weapon_bowgun_ammo_reload_fast)
+                ReloadType.VERY_FAST -> getString(R.string.weapon_bowgun_ammo_reload_very_fast)
+            }
 
+            view.recoil_value.text = if (it.recoil < 0) "-" else getString(R.string.format_plus, it.recoil)
+
+            view.ammo_icon.setImageDrawable(loadIconFor(it.type))
             ammo_layout.addView(view)
         }
     }

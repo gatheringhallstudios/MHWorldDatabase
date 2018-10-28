@@ -210,3 +210,12 @@ enum class AmmoType {
     ARMOR_AMMO,
     TRANQ_AMMO
 }
+
+enum class ReloadType {
+    NONE,
+    VERY_SLOW,
+    SLOW,
+    NORMAL,
+    FAST,
+    VERY_FAST
+}

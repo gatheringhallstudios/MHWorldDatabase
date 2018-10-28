@@ -21,18 +21,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
-        android:layout_weight="0.5"
+        android:layout_weight="1.5"
         android:textSize="12sp"
         tools:text="Recover Ammo 1" />
 
     <TextView
         android:id="@+id/shot_type_value"
         style="@style/TextBodyLow"
-        android:layout_width="@dimen/width_break_value"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
         android:gravity="center"
-        tools:text="Rapid Fire" />
+        tools:text="Auto reload" />
 
     <TextView
         android:id="@+id/capacity_value"
@@ -51,14 +50,13 @@
         tools:text="20" />
 
     <TextView
-        android:id="@+id/special_value"
-        style="@style/TextBodyHigh"
+        android:id="@+id/recoil_value"
+        style="@style/TextBodyLow"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_damage_value_right"
         android:gravity="center"
-        android:textStyle="bold"
-        tools:text="WHT"
+        tools:text="+6"
         tools:textColor="@color/icon_orange" />
 
 </LinearLayout>
