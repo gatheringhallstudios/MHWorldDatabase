@@ -81,7 +81,7 @@ object AssetLoader {
             AmmoType.SPREAD_AMMO1, AmmoType.SPREAD_AMMO2, AmmoType.SPREAD_AMMO3 -> ctx.getVectorDrawable("Ammo", "DarkGreen")
             AmmoType.STICKY_AMMO1, AmmoType.STICKY_AMMO2, AmmoType.STICKY_AMMO3 -> ctx.getVectorDrawable("Ammo", "Beige")
             AmmoType.RECOVER_AMMO1, AmmoType.RECOVER_AMMO2 -> ctx.getVectorDrawable("Ammo", "Green")
-            AmmoType.POISON_AMMO1, AmmoType.POISON_AMMO2 -> ctx.getVectorDrawable("Ammo", "LightPurple")
+            AmmoType.POISON_AMMO1, AmmoType.POISON_AMMO2 -> ctx.getVectorDrawable("Ammo", "Violet")
             AmmoType.SLEEP_AMMO1, AmmoType.SLEEP_AMMO2 -> ctx.getVectorDrawable("Ammo", "Cyan")
             AmmoType.EXHAUST_AMMO1, AmmoType.EXHAUST_AMMO2, AmmoType.WATER_AMMO -> ctx.getVectorDrawable("Ammo", "DarkPurple")
             AmmoType.TRANQ_AMMO -> ctx.getVectorDrawable("Ammo", "Pink")
@@ -89,7 +89,7 @@ object AssetLoader {
             AmmoType.ARMOR_AMMO -> ctx.getVectorDrawable("Ammo", "Beige")
             AmmoType.PARALYSIS_AMMO1, AmmoType.PARALYSIS_AMMO2 -> ctx.getVectorDrawable("Ammo", "Yellow")
             AmmoType.THUNDER_AMMO -> ctx.getVectorDrawable("Ammo", "Gold")
-            AmmoType.WYVERN_AMMO -> ctx.getVectorDrawable("Ammo", "LightBrown")
+            AmmoType.WYVERN_AMMO -> ctx.getVectorDrawable("Ammo", "LightBeige")
             AmmoType.DEMON_AMMO ->  ctx.getVectorDrawable("Ammo", "Red")
             AmmoType.FLAMING_AMMO -> ctx.getVectorDrawable("Ammo", "Orange")
         }

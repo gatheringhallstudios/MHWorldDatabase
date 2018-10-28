@@ -348,7 +348,7 @@ data class WeaponAmmoData(
                 WeaponAmmo(AmmoType.FREEZE_AMMO, freeze_clip, freeze_rapid, freeze_reload, freeze_recoil),
                 WeaponAmmo(AmmoType.THUNDER_AMMO, thunder_clip, thunder_rapid, thunder_reload, thunder_recoil),
                 WeaponAmmo(AmmoType.DRAGON_AMMO,dragon_clip, dragon_rapid, dragon_reload, dragon_recoil),
-//                WeaponAmmo(AmmoType.SLICING_AMMO, slicing_clip, slicing_rapid, slicing_reload, slicing_recoil),
+                WeaponAmmo(AmmoType.SLICING_AMMO, slicing_clip, slicing_rapid, slicing_reload, slicing_recoil),
                 WeaponAmmo(AmmoType.WYVERN_AMMO, wyvern_clip, false, wyvern_reload, 0),
                 WeaponAmmo(AmmoType.DEMON_AMMO, demon_clip, false, demon_reload, demon_recoil),
                 WeaponAmmo(AmmoType.ARMOR_AMMO, armor_clip, false, armor_reload, armor_recoil),
