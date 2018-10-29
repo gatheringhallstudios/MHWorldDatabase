@@ -110,6 +110,15 @@ private val ShellingTypeConverter = Converter(
         "wide" to ShellingType.WIDE
 )
 
+private val ReloadTypeConverter = Converter(
+        null to ReloadType.NONE,
+        "very slow" to ReloadType.VERY_SLOW,
+        "slow" to ReloadType.SLOW,
+        "normal" to ReloadType.NORMAL,
+        "fast" to ReloadType.FAST,
+        "very fast" to ReloadType.VERY_FAST
+)
+
 
 
 /**
@@ -155,4 +164,7 @@ class Converters {
 
     @TypeConverter fun shellingTypeFromString(value: String?) = ShellingTypeConverter.deserialize(value)
     @TypeConverter fun fromShellingType(type: ShellingType) = ShellingTypeConverter.serialize(type)
+
+    @TypeConverter fun reloadTypeFromString(value: String?) = ReloadTypeConverter.deserialize(value)
+    @TypeConverter fun fromReloadType(type: ReloadType) = ReloadTypeConverter.serialize(type)
 }

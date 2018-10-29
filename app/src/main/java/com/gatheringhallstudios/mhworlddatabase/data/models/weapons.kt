@@ -2,11 +2,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
-import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.listitem_bow_detail.*
 
 open class WeaponType(
         val name: String,
@@ -38,14 +35,15 @@ class Weapon(
         val phial_power: Int,
         val shelling: ShellingType,
         val shelling_level: Int?,
-        val notes: String?,
-        @Embedded
-        var weaponAmmo: WeaponAmmo? = null
+        val notes: String?
 
 ) : WeaponTree(id, name, rarity, weapon_type, attack, affinity, element1, element1_attack, element2, element2_attack,
         element_hidden, defense, previous_weapon_id) {
     @Embedded
     lateinit var weaponCoatings: WeaponCoatings
+
+    @Embedded
+    var weaponAmmoData: WeaponAmmoData? = null
 }
 
 open class WeaponTree(
@@ -167,7 +165,7 @@ data class WeaponCoatings(
         val buffer = mapOf(Pair(CoatingType.CLOSE_RANGE, coating_close), Pair(CoatingType.POWER, coating_power), Pair(CoatingType.POISON, coating_poison),
                 Pair(CoatingType.PARALYSIS, coating_paralysis), Pair(CoatingType.SLEEP, coating_sleep), Pair(CoatingType.BLAST, coating_blast))
 
-        return buffer.filter {(CoatingType, value) -> value != null && value > 0}.map {x -> x.key}.toList().iterator()
+        return buffer.filter {(_, value) -> value != null && value > 0}.map {x -> x.key}.toList().iterator()
     }
 }
 /**
@@ -179,73 +177,191 @@ class WeaponFull(
         val recipe: Map<String?, List<ItemQuantity>>
 )
 
-data class WeaponAmmo(
+data class WeaponAmmoData(
         val ammo_id: Int,
         val deviation: String?,
         val special_ammo: String?,
         val normal1_clip: Int,
         val normal1_rapid: Boolean,
+        val normal1_recoil: Int,
+        val normal1_reload: ReloadType,
         val normal2_clip: Int,
         val normal2_rapid: Boolean,
+        val normal2_recoil: Int,
+        val normal2_reload: ReloadType,
         val normal3_clip: Int,
         val normal3_rapid: Boolean,
+        val normal3_recoil: Int,
+        val normal3_reload: ReloadType,
         val pierce1_clip: Int,
         val pierce1_rapid: Boolean,
+        val pierce1_recoil: Int,
+        val pierce1_reload: ReloadType,
         val pierce2_clip: Int,
         val pierce2_rapid: Boolean,
+        val pierce2_recoil: Int,
+        val pierce2_reload: ReloadType,
         val pierce3_clip: Int,
         val pierce3_rapid: Boolean,
+        val pierce3_recoil: Int,
+        val pierce3_reload: ReloadType,
         val spread1_clip: Int,
         val spread1_rapid: Boolean,
+        val spread1_recoil: Int,
+        val spread1_reload: ReloadType,
         val spread2_clip: Int,
         val spread2_rapid: Boolean,
+        val spread2_recoil: Int,
+        val spread2_reload: ReloadType,
         val spread3_clip: Int,
         val spread3_rapid: Boolean,
+        val spread3_recoil: Int,
+        val spread3_reload: ReloadType,
         val sticky1_clip: Int,
         val sticky1_rapid: Boolean,
+        val sticky1_recoil: Int,
+        val sticky1_reload: ReloadType,
         val sticky2_clip: Int,
         val sticky2_rapid: Boolean,
+        val sticky2_recoil: Int,
+        val sticky2_reload: ReloadType,
         val sticky3_clip: Int,
         val sticky3_rapid: Boolean,
+        val sticky3_recoil: Int,
+        val sticky3_reload: ReloadType,
         val cluster1_clip: Int,
         val cluster1_rapid: Boolean,
+        val cluster1_recoil: Int,
+        val cluster1_reload: ReloadType,
         val cluster2_clip: Int,
         val cluster2_rapid: Boolean,
+        val cluster2_recoil: Int,
+        val cluster2_reload: ReloadType,
         val cluster3_clip: Int,
         val cluster3_rapid: Boolean,
+        val cluster3_recoil: Int,
+        val cluster3_reload: ReloadType,
         val recover1_clip: Int,
         val recover1_rapid: Boolean,
+        val recover1_recoil: Int,
+        val recover1_reload: ReloadType,
         val recover2_clip: Int,
         val recover2_rapid: Boolean,
+        val recover2_recoil: Int,
+        val recover2_reload: ReloadType,
         val poison1_clip: Int,
         val poison1_rapid: Boolean,
+        val poison1_recoil: Int,
+        val poison1_reload: ReloadType,
         val poison2_clip: Int,
         val poison2_rapid: Boolean,
+        val poison2_recoil: Int,
+        val poison2_reload: ReloadType,
         val paralysis1_clip: Int,
         val paralysis1_rapid: Boolean,
+        val paralysis1_recoil: Int,
+        val paralysis1_reload: ReloadType,
         val paralysis2_clip: Int,
         val paralysis2_rapid: Boolean,
+        val paralysis2_recoil: Int,
+        val paralysis2_reload: ReloadType,
         val sleep1_clip: Int,
         val sleep1_rapid: Boolean,
+        val sleep1_recoil: Int,
+        val sleep1_reload: ReloadType,
         val sleep2_clip: Int,
         val sleep2_rapid: Boolean,
+        val sleep2_recoil: Int,
+        val sleep2_reload: ReloadType,
         val exhaust1_clip: Int,
         val exhaust1_rapid: Boolean,
+        val exhaust1_recoil: Int,
+        val exhaust1_reload: ReloadType,
         val exhaust2_clip: Int,
         val exhaust2_rapid: Boolean,
+        val exhaust2_recoil: Int,
+        val exhaust2_reload: ReloadType,
         val flaming_clip: Int,
         val flaming_rapid: Boolean,
+        val flaming_recoil: Int,
+        val flaming_reload: ReloadType,
         val water_clip: Int,
         val water_rapid: Boolean,
+        val water_recoil: Int,
+        val water_reload: ReloadType,
         val freeze_clip: Int,
         val freeze_rapid: Boolean,
+        val freeze_recoil: Int,
+        val freeze_reload: ReloadType,
         val thunder_clip: Int,
         val thunder_rapid: Boolean,
+        val thunder_recoil: Int,
+        val thunder_reload: ReloadType,
         val dragon_clip: Int,
         val dragon_rapid: Boolean,
+        val dragon_recoil: Int,
+        val dragon_reload: ReloadType,
         val slicing_clip: Int,
-        val wyvern_clip: Boolean,
-        val demon_clip: Boolean,
-        val armor_clip: Boolean,
-        val tranq_clip: Boolean
+        val slicing_rapid: Boolean,
+        val slicing_recoil: Int,
+        val slicing_reload: ReloadType,
+        val wyvern_clip: Int,
+        val wyvern_reload: ReloadType,
+        val demon_clip: Int,
+        val demon_recoil: Int,
+        val demon_reload: ReloadType,
+        val armor_clip: Int,
+        val armor_recoil: Int,
+        val armor_reload: ReloadType,
+        val tranq_clip: Int,
+        val tranq_recoil: Int,
+        val tranq_reload: ReloadType
+) : Iterable<WeaponAmmo> {
+    override fun iterator(): Iterator<WeaponAmmo> {
+        val buffer = listOf(WeaponAmmo(AmmoType.NORMAL_AMMO1, normal1_clip, normal1_rapid, normal1_reload, normal1_recoil),
+                WeaponAmmo(AmmoType.NORMAL_AMMO2, normal2_clip, normal2_rapid, normal2_reload, normal2_recoil),
+                WeaponAmmo(AmmoType.NORMAL_AMMO3, normal3_clip, normal3_rapid, normal3_reload, normal3_recoil),
+                WeaponAmmo(AmmoType.PIERCE_AMMO1, pierce1_clip, pierce1_rapid, pierce1_reload, pierce1_recoil),
+                WeaponAmmo(AmmoType.PIERCE_AMMO2, pierce2_clip, pierce2_rapid, pierce2_reload, pierce2_recoil),
+                WeaponAmmo(AmmoType.PIERCE_AMMO3, pierce3_clip, pierce3_rapid, pierce3_reload, pierce3_recoil),
+                WeaponAmmo(AmmoType.SPREAD_AMMO1, spread1_clip, spread1_rapid, spread1_reload, spread1_recoil),
+                WeaponAmmo(AmmoType.SPREAD_AMMO2, spread2_clip, spread2_rapid, spread2_reload, spread2_recoil),
+                WeaponAmmo(AmmoType.SPREAD_AMMO3, spread3_clip, spread3_rapid, spread3_reload, spread3_recoil),
+                WeaponAmmo(AmmoType.STICKY_AMMO1, sticky1_clip, sticky1_rapid, sticky1_reload, sticky1_recoil),
+                WeaponAmmo(AmmoType.STICKY_AMMO2, sticky2_clip, sticky2_rapid, sticky2_reload, sticky2_recoil),
+                WeaponAmmo(AmmoType.STICKY_AMMO3, sticky3_clip, sticky3_rapid, sticky3_reload, sticky3_recoil),
+                WeaponAmmo(AmmoType.CLUSTER_AMMO1, cluster1_clip, cluster1_rapid, cluster1_reload, cluster1_recoil),
+                WeaponAmmo(AmmoType.CLUSTER_AMMO2, cluster2_clip, cluster2_rapid, cluster2_reload, cluster2_recoil),
+                WeaponAmmo(AmmoType.CLUSTER_AMMO3, cluster3_clip, cluster3_rapid, cluster3_reload, cluster3_recoil),
+                WeaponAmmo(AmmoType.RECOVER_AMMO1, recover1_clip, recover1_rapid, recover1_reload, recover1_recoil),
+                WeaponAmmo(AmmoType.RECOVER_AMMO2, recover2_clip, recover2_rapid, recover2_reload, recover2_recoil),
+                WeaponAmmo(AmmoType.POISON_AMMO1, poison1_clip, poison1_rapid, poison1_reload, poison1_recoil),
+                WeaponAmmo(AmmoType.POISON_AMMO2, poison2_clip, poison2_rapid, poison2_reload, poison2_recoil),
+                WeaponAmmo(AmmoType.PARALYSIS_AMMO1, paralysis1_clip, paralysis1_rapid, paralysis1_reload, paralysis2_recoil),
+                WeaponAmmo(AmmoType.PARALYSIS_AMMO2, paralysis2_clip, paralysis2_rapid, paralysis2_reload, paralysis2_recoil),
+                WeaponAmmo(AmmoType.SLEEP_AMMO1, sleep1_clip, sleep1_rapid, sleep1_reload, sleep1_recoil),
+                WeaponAmmo(AmmoType.SLEEP_AMMO2, sleep2_clip, sleep2_rapid, sleep2_reload, sleep2_recoil),
+                WeaponAmmo(AmmoType.EXHAUST_AMMO1, exhaust1_clip, exhaust1_rapid, exhaust1_reload, exhaust1_recoil),
+                WeaponAmmo(AmmoType.EXHAUST_AMMO2, exhaust2_clip, exhaust2_rapid, exhaust2_reload, exhaust2_recoil),
+                WeaponAmmo(AmmoType.FLAMING_AMMO, flaming_clip, flaming_rapid, flaming_reload, flaming_recoil),
+                WeaponAmmo(AmmoType.WATER_AMMO, water_clip, water_rapid, water_reload, water_recoil),
+                WeaponAmmo(AmmoType.FREEZE_AMMO, freeze_clip, freeze_rapid, freeze_reload, freeze_recoil),
+                WeaponAmmo(AmmoType.THUNDER_AMMO, thunder_clip, thunder_rapid, thunder_reload, thunder_recoil),
+                WeaponAmmo(AmmoType.DRAGON_AMMO,dragon_clip, dragon_rapid, dragon_reload, dragon_recoil),
+                WeaponAmmo(AmmoType.SLICING_AMMO, slicing_clip, slicing_rapid, slicing_reload, slicing_recoil),
+                WeaponAmmo(AmmoType.WYVERN_AMMO, wyvern_clip, false, wyvern_reload, 0),
+                WeaponAmmo(AmmoType.DEMON_AMMO, demon_clip, false, demon_reload, demon_recoil),
+                WeaponAmmo(AmmoType.ARMOR_AMMO, armor_clip, false, armor_reload, armor_recoil),
+                WeaponAmmo(AmmoType.TRANQ_AMMO, tranq_clip, false, tranq_reload, tranq_recoil))
+
+        return buffer.filter { x -> x.capacity > 0 }.iterator()
+    }
+}
+
+class WeaponAmmo (
+    var type: AmmoType,
+    var capacity: Int,
+    var isRapid: Boolean,
+    var reload: ReloadType,
+    var recoil: Int
 )

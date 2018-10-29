@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/row_height_small"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/ammo_icon"
+        style="@style/IconXSmall"
+        android:layout_marginStart="@dimen/margin_large"
+        android:contentDescription="TODO"
+        android:src="@drawable/ic_items_ammo_white" />
+
+    <TextView
+        android:id="@+id/ammo_type_name"
+        style="@style/TextBodyHigh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_weight="1.5"
+        android:textSize="12sp"
+        tools:text="Recover Ammo 1" />
+
+    <TextView
+        android:id="@+id/shot_type_value"
+        style="@style/TextBodyLow"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="Auto reload" />
+
+    <TextView
+        android:id="@+id/capacity_value"
+        style="@style/TextBodyLow"
+        android:layout_width="@dimen/width_break_value"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/reload_value"
+        style="@style/TextBodyLow"
+        android:layout_width="@dimen/width_break_value"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/recoil_value"
+        style="@style/TextBodyLow"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_damage_value_right"
+        android:gravity="center"
+        tools:text="+6"
+        tools:textColor="@color/icon_orange" />
+
+</LinearLayout>

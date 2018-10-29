@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:divider="@drawable/divider_stroke"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <LinearLayout
+        android:id="@+id/deviation_layout"
+        style="@style/EquipmentRow"
+        android:layout_width="match_parent">
+
+        <ImageView
+            style="@style/IconXSmall"
+            android:layout_marginStart="@dimen/margin_large"
+            android:src="@drawable/ic_ui_element" />
+
+        <TextView
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@string/weapon_bowgun_deviation" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:gravity="center_vertical|end">
+
+            <TextView
+                android:id="@+id/deviation_value"
+                style="@style/TextSubHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:paddingLeft="@dimen/margin_medium"
+                tools:text="150" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/special_ammo_layout"
+        style="@style/EquipmentRow"
+        android:layout_width="match_parent">
+
+        <ImageView
+            style="@style/IconXSmall"
+            android:layout_marginStart="@dimen/margin_large"
+            android:src="@drawable/ic_ui_element" />
+
+        <TextView
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@string/weapon_bowgun_special_ammo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:gravity="center_vertical|end">
+
+            <TextView
+                android:id="@+id/special_ammo_value"
+                style="@style/TextSubHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:paddingLeft="@dimen/margin_medium"
+                tools:text="Wyernblast" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/ammo_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_section_gap"
+                app:labelText="@string/weapon_bowgun_ammo_types"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+
+            <FrameLayout
+                android:id="@+id/shot_type_icon"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="@id/ammo_header"
+                app:layout_constraintEnd_toStartOf="@+id/capacity_icon"
+                app:layout_constraintTop_toTopOf="@+id/ammo_header">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="@string/weapon_bowgun_shot_type"
+                    android:textColor="@color/textColorHigh" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/capacity_icon"
+                android:layout_width="@dimen/width_break_value"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="@id/ammo_header"
+                app:layout_constraintEnd_toStartOf="@+id/reload_icon"
+                app:layout_constraintTop_toTopOf="@+id/ammo_header">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="@string/weapon_bowgun_capacity"
+                    android:textColor="@color/textColorHigh" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/reload_icon"
+                android:layout_width="@dimen/width_break_value"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="@id/ammo_header"
+                app:layout_constraintEnd_toStartOf="@+id/special_icon"
+                app:layout_constraintTop_toTopOf="@+id/ammo_header">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="@string/weapon_bowgun_reload"
+                    android:textColor="@color/textColorHigh" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/special_icon"
+                android:layout_width="@dimen/width_extract_value"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/ammo_header"
+                app:layout_constraintEnd_toEndOf="@+id/ammo_header"
+                app:layout_constraintTop_toTopOf="@+id/ammo_header">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="@string/weapon_bowgun_recoil"
+                    android:textColor="@color/textColorHigh" />
+            </FrameLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <!-- This section will be populated dynamically through code -->
+        <LinearLayout
+            android:id="@+id/ammo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/listitem_bowgun_ammo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_height_small"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+
+

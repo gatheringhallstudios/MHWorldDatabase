@@ -65,12 +65,33 @@ object AssetLoader {
 
     fun loadIconFor(coating_type: CoatingType): Drawable? {
         return when (coating_type) {
-            CoatingType.POWER ->  ctx.getVectorDrawable("Ammo", "Red")
-            CoatingType.SLEEP -> ctx.getVectorDrawable("Ammo", "Cyan")
-            CoatingType.CLOSE_RANGE -> ctx.getVectorDrawable("Ammo", "White")
-            CoatingType.POISON -> ctx.getVectorDrawable("Ammo", "DarkPurple")
-            CoatingType.BLAST -> ctx.getVectorDrawable("Ammo", "Green")
-            CoatingType.PARALYSIS -> ctx.getVectorDrawable("Ammo", "Yellow")
+            CoatingType.POWER ->  ctx.getVectorDrawable("Bottle", "Red")
+            CoatingType.SLEEP -> ctx.getVectorDrawable("Bottle", "Cyan")
+            CoatingType.CLOSE_RANGE -> ctx.getVectorDrawable("Bottle", "White")
+            CoatingType.POISON -> ctx.getVectorDrawable("Bottle", "DarkPurple")
+            CoatingType.BLAST -> ctx.getVectorDrawable("Bottle", "Green")
+            CoatingType.PARALYSIS -> ctx.getVectorDrawable("Bottle", "Yellow")
+        }
+    }
+
+    fun loadIconFor(ammo_type: AmmoType): Drawable? {
+        return when (ammo_type) {
+            AmmoType.NORMAL_AMMO1, AmmoType.NORMAL_AMMO2, AmmoType.NORMAL_AMMO3, AmmoType.SLICING_AMMO, AmmoType.FREEZE_AMMO ->  ctx.getVectorDrawable("Ammo", "White")
+            AmmoType.PIERCE_AMMO1, AmmoType.PIERCE_AMMO2, AmmoType.PIERCE_AMMO3 -> ctx.getVectorDrawable("Ammo", "Blue")
+            AmmoType.SPREAD_AMMO1, AmmoType.SPREAD_AMMO2, AmmoType.SPREAD_AMMO3 -> ctx.getVectorDrawable("Ammo", "DarkGreen")
+            AmmoType.STICKY_AMMO1, AmmoType.STICKY_AMMO2, AmmoType.STICKY_AMMO3 -> ctx.getVectorDrawable("Ammo", "Beige")
+            AmmoType.RECOVER_AMMO1, AmmoType.RECOVER_AMMO2 -> ctx.getVectorDrawable("Ammo", "Green")
+            AmmoType.POISON_AMMO1, AmmoType.POISON_AMMO2 -> ctx.getVectorDrawable("Ammo", "Violet")
+            AmmoType.SLEEP_AMMO1, AmmoType.SLEEP_AMMO2 -> ctx.getVectorDrawable("Ammo", "Cyan")
+            AmmoType.EXHAUST_AMMO1, AmmoType.EXHAUST_AMMO2, AmmoType.WATER_AMMO -> ctx.getVectorDrawable("Ammo", "DarkPurple")
+            AmmoType.TRANQ_AMMO -> ctx.getVectorDrawable("Ammo", "Pink")
+            AmmoType.CLUSTER_AMMO1, AmmoType.CLUSTER_AMMO2, AmmoType.CLUSTER_AMMO3, AmmoType.DRAGON_AMMO -> ctx.getVectorDrawable("Ammo", "DarkRed")
+            AmmoType.ARMOR_AMMO -> ctx.getVectorDrawable("Ammo", "Beige")
+            AmmoType.PARALYSIS_AMMO1, AmmoType.PARALYSIS_AMMO2 -> ctx.getVectorDrawable("Ammo", "Yellow")
+            AmmoType.THUNDER_AMMO -> ctx.getVectorDrawable("Ammo", "Gold")
+            AmmoType.WYVERN_AMMO -> ctx.getVectorDrawable("Ammo", "LightBeige")
+            AmmoType.DEMON_AMMO ->  ctx.getVectorDrawable("Ammo", "Red")
+            AmmoType.FLAMING_AMMO -> ctx.getVectorDrawable("Ammo", "Orange")
         }
     }
 
