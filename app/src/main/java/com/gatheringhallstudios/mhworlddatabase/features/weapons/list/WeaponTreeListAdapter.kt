@@ -16,11 +16,12 @@ import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTree
 import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
 import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 
-const val INDENT_SIZE = 42 //This value corresponds to the measured width of each of vectors used for drawing the tree
+const val INDENT_SIZE = 16 //This value corresponds to the measured width of each of vectors used for drawing the tree in DP. Convert to pixels before use.
 
 class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit) : AdapterDelegate<List<TreeNode<WeaponTree>>>() {
 
@@ -105,7 +106,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
                     }
                     TreeFormatter.INDENT -> {
                         val space = Space(treeView.context)
-                        space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE, LinearLayout.LayoutParams.MATCH_PARENT)
+                        space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE.px, LinearLayout.LayoutParams.MATCH_PARENT)
                         treeView.addView(space)
                     }
                     TreeFormatter.STRAIGHT_BRANCH -> {

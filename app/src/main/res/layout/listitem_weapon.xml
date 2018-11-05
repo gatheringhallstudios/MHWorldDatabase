@@ -3,38 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/row_height_xxlarge"
-    android:paddingBottom="@dimen/margin_medium"
-    android:paddingEnd="@dimen/margin_medium"
-    android:paddingTop="@dimen/margin_medium">
+    android:layout_height="@dimen/row_height_xxlarge">
 
     <TextView
         android:id="@+id/weapon_name"
         style="@style/TextHeadlineHigh"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/row_height_xsmall"
+        android:layout_height="wrap_content"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/weapon_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Diablos Tyrannis II" />
 
     <ImageView
         android:id="@+id/weapon_image"
-        style="@style/IconLarge.Decorated"
-        android:layout_marginTop="@dimen/margin_small"
+        style="@style/IconMedium.Decorated"
         android:src="@drawable/ic_ui_question_mark_white"
-        app:layout_constraintBottom_toBottomOf="@id/basic_stat_layout"
-        app:layout_constraintTop_toBottomOf="@id/weapon_name" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <LinearLayout
         android:id="@+id/basic_stat_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_large"
         android:orientation="vertical"
-        app:layout_constraintLeft_toRightOf="@id/weapon_image"
-        app:layout_constraintTop_toBottomOf="@id/weapon_name">
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/complex_stat_layout">
 
         <!-- These should be removed from this layout and added at runtime -->
 
@@ -48,7 +45,9 @@
         <com.ghstudios.android.ui.general.SharpnessView
             android:id="@+id/sharpness_value"
             android:layout_width="128dp"
-            android:layout_height="@dimen/row_height_small"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
             app:blue="30"
             app:green="40"
             app:orange="80"
@@ -56,33 +55,30 @@
             app:white="50"
             app:yellow="50" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/slots_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/slots_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/row_height_small"
-        android:gravity="center_vertical|start"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/basic_stat_layout">
+            <!-- These should also be removed from this layout and added at runtime -->
 
-        <!-- These should also be removed from this layout and added at runtime -->
+            <ImageView
+                android:id="@+id/slot1"
+                style="@style/IconXSmall"
+                android:src="@drawable/ic_ui_question_mark_white" />
 
-        <ImageView
-            android:id="@+id/slot1"
-            style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_question_mark_white" />
+            <ImageView
+                android:id="@+id/slot2"
+                style="@style/IconXSmall"
+                android:src="@drawable/ic_ui_question_mark_white" />
 
-        <ImageView
-            android:id="@+id/slot2"
-            style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_question_mark_white" />
+            <ImageView
+                android:id="@+id/slot3"
+                style="@style/IconXSmall"
+                android:src="@drawable/ic_ui_question_mark_white" />
 
-        <ImageView
-            android:id="@+id/slot3"
-            style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_question_mark_white" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -90,10 +86,11 @@
         android:id="@+id/complex_stat_layout"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
         android:gravity="start"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/basic_stat_layout">
+        app:layout_constraintStart_toEndOf="@+id/weapon_image"
+        app:layout_constraintTop_toTopOf="@+id/weapon_image">
 
         <!-- These should be removed from this layout and added at runtime -->
 
