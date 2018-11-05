@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
+import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTree
 import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -54,18 +56,9 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             view.weapon_name.text = weaponTree.name
             view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weaponTree))
 
+            // STATIC STATS
+
             view.attack_value.setLabelText(weaponTree.attack.toString())
-            view.affinity_value.setLabelText(weaponTree.affinity.toString())
-
-            view.element_value.setLabelText(createElementString(weaponTree.element1_attack, weaponTree.element_hidden))
-            view.element_value.setLeftIconDrawable(getElementIcon(view.context, weaponTree.element1))
-            if (weaponTree.element_hidden) {
-                view.element_value.alpha = 0.5.toFloat()
-            } else {
-                view.element_value.alpha = 1.0.toFloat()
-            }
-
-            view.defense_value.setLabelText(weaponTree.defense.toString())
 
             //Render sharpness data if it exists, else hide the bar
             val sharpnessData = weaponTree.sharpnessData
@@ -82,6 +75,57 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             view.slot1.setImageDrawable(slotImages[0])
             view.slot2.setImageDrawable(slotImages[1])
             view.slot3.setImageDrawable(slotImages[2])
+
+            // DYNAMIC STATS
+
+            // Clear the placeholder layouts
+            view.complex_stat_layout.removeAllViews()
+
+            // Elemental Stat
+            if (weaponTree.element1 != null){
+                val elementView = CompactStatCell(
+                        view.context,
+                        getElementIcon(view.context, weaponTree.element1),
+                        createElementString(weaponTree.element1_attack, weaponTree.element_hidden))
+
+                if (weaponTree.element_hidden) {
+                    elementView.labelView.alpha = 0.5.toFloat()
+                } else {
+                    elementView.labelView.alpha = 1.0.toFloat()
+                }
+
+                view.complex_stat_layout.addView(elementView)
+            }
+
+            if (weaponTree.affinity != 0) {
+                val affinitySb = StringBuilder()
+                val prepend = if (weaponTree.affinity > 0) "+" else ""
+                affinitySb.append(prepend).append(weaponTree.affinity).append("%")
+
+                val affinityView = CompactStatCell(
+                        view.context,
+                        R.drawable.ic_ui_affinity,
+                        affinitySb.toString())
+
+                if (weaponTree.affinity > 0 ) {
+                    affinityView.labelView.setTextColor(ContextCompat.getColor(view.context, R.color.textColorGreen))
+                } else {
+                    affinityView.labelView.setTextColor(ContextCompat.getColor(view.context, R.color.textColorRed))
+                }
+
+                view.complex_stat_layout.addView(affinityView)
+            }
+
+            if (weaponTree.defense != 0) {
+                val defenseView = CompactStatCell(
+                        view.context,
+                        R.drawable.ic_ui_defense,
+                        weaponTree.defense.toString()
+                )
+
+                view.complex_stat_layout.addView(defenseView)
+            }
+
             createTreeLayout(weaponTree.formatter)
         }
 

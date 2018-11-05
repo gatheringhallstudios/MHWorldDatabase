@@ -84,9 +84,9 @@
 
     <LinearLayout
         android:id="@+id/complex_stat_layout"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_medium"
         android:gravity="start"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/weapon_image"
