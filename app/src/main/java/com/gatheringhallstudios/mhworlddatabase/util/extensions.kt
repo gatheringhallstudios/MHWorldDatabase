@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.util
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.ColorRes
@@ -83,3 +84,11 @@ inline fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
 inline fun Context.getColorCompat(@ColorRes id: Int): Int {
     return ContextCompat.getColor(this, id)
 }
+
+/**
+ * Extension: Converts an int to DP and from DP to int
+ */
+val Int.dp: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+val Int.px: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()

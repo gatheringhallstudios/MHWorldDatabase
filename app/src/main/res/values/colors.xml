@@ -20,6 +20,8 @@
     <color name="textColorYellowOrange">#E09E3C</color>
     <color name="textColorOrangeYellow">#D97719</color>
     <color name="textColorYellowPastel">#F8F8C5</color>
+    <color name="textColorGreen">#6AAC85</color>
+    <color name="textColorRed">#9A3548</color>
     <color name="textColorSelected">@color/colorAccent</color>
 
     <!-- Background Colors -->

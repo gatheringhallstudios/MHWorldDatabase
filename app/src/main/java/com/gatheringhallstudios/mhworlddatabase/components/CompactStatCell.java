@@ -27,14 +27,19 @@ public class CompactStatCell extends ConstraintLayout {
     private final String TAG = getClass().getSimpleName();
 
     @BindView(R.id.generic_icon)
-    ImageView imageView;
+    public ImageView imageView;
     @BindView(R.id.label_text)
-    TextView labelView;
+    public TextView labelView;
 
     public CompactStatCell(Context context, @DrawableRes int imgSrc, String labelText) {
         super(context);
         Drawable drawable = ContextCompat.getDrawable(getContext(), imgSrc);
         init(drawable, labelText);
+    }
+
+    public CompactStatCell(Context context, Drawable imgSrc, String labelText) {
+        super(context);
+        init(imgSrc, labelText);
     }
 
     public CompactStatCell(Context context) {
