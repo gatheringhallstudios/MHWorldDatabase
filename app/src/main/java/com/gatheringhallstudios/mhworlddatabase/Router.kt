@@ -76,10 +76,10 @@ class Router(private val navController: NavController) {
         )
     }
 
-    fun navigateWeaponTree(weaponTypeName: String, weaponType: WeaponType) {
+    fun navigateWeaponTree(weaponType: WeaponType) {
         navController.navigate(
                 R.id.openWeaponTreeAction,
-                BundleBuilder().putString(WeaponTreeListFragment.ARG_WEAPON_TREE_NAME, weaponTypeName).putSerializable(ARG_WEAPON_TREE_TYPE, weaponType).build()
+                BundleBuilder().putSerializable(ARG_WEAPON_TREE_TYPE, weaponType).build()
         )
     }
 

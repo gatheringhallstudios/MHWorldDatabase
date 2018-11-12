@@ -17,7 +17,7 @@ class SearchResults(
         val decorations: List<DecorationBase> = emptyList(),
         val armor: List<ArmorBase> = emptyList(),
         val items: List<ItemBase> = emptyList(),
-        val weapons: List<WeaponTree> = emptyList()
+        val weapons: List<WeaponBase> = emptyList()
 )
 
 class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {

@@ -13,10 +13,10 @@ import android.widget.Space
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.common.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTree
-import com.gatheringhallstudios.mhworlddatabase.data.types.TreeFormatter
+import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
@@ -25,10 +25,10 @@ import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 
 const val INDENT_SIZE = 16 //This value corresponds to the measured width of each of vectors used for drawing the tree in DP. Convert to pixels before use.
 
-class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit) : AdapterDelegate<List<TreeNode<WeaponTree>>>() {
+class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : AdapterDelegate<List<TreeNode<Weapon>>>() {
 
-    override fun isForViewType(items: List<TreeNode<WeaponTree>>, position: Int): Boolean {
-        return items[position] is TreeNode<WeaponTree>
+    override fun isForViewType(items: List<TreeNode<Weapon>>, position: Int): Boolean {
+        return items[position] is TreeNode<Weapon>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -38,37 +38,39 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
         return WeaponBaseHolder(v)
     }
 
-    override fun onBindViewHolder(items: List<TreeNode<WeaponTree>>,
+    override fun onBindViewHolder(items: List<TreeNode<Weapon>>,
                                   position: Int,
                                   holder: RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
         val weaponBaseTreeNode = items[position]
 
         val vh = holder as WeaponBaseHolder
-        vh.bind(weaponBaseTreeNode.value)
+        vh.bind(weaponBaseTreeNode)
 
         holder.view.setOnClickListener { onSelected(weaponBaseTreeNode.value) }
     }
 
     internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(weaponTree: WeaponTree) {
-            view.weapon_name.text = weaponTree.name
-            view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weaponTree))
+        fun bind(weaponNode: TreeNode<Weapon>) {
+            val weapon = weaponNode.value
+
+            view.weapon_name.text = weapon.name
+            view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weapon))
 
             // STATIC STATS
 
-            view.attack_value.setLabelText(weaponTree.attack.toString())
+            view.attack_value.setLabelText(weapon.attack.toString())
 
             //Render sharpness data if it exists, else hide the bar
-            val sharpnessData = weaponTree.sharpnessData
+            val sharpnessData = weapon.sharpnessData
             if (sharpnessData != null) {
                 view.sharpness_value.drawSharpness(sharpnessData.get(0))
             } else {
                 view.sharpness_value.visibility = View.INVISIBLE
             }
 
-            val slotImages = weaponTree.slots.map {
+            val slotImages = weapon.slots.map {
                 view.context.getDrawableCompat(SlotEmptyRegistry(it))
             }
 
@@ -82,13 +84,13 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             view.complex_stat_layout.removeAllViews()
 
             // Elemental Stat
-            if (weaponTree.element1 != null){
+            if (weapon.element1 != null){
                 val elementView = CompactStatCell(
                         view.context,
-                        getElementIcon(view.context, weaponTree.element1),
-                        createElementString(weaponTree.element1_attack, weaponTree.element_hidden))
+                        getElementIcon(view.context, weapon.element1),
+                        createElementString(weapon.element1_attack, weapon.element_hidden))
 
-                if (weaponTree.element_hidden) {
+                if (weapon.element_hidden) {
                     elementView.labelView.alpha = 0.5.toFloat()
                 } else {
                     elementView.labelView.alpha = 1.0.toFloat()
@@ -97,17 +99,17 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
                 view.complex_stat_layout.addView(elementView)
             }
 
-            if (weaponTree.affinity != 0) {
+            if (weapon.affinity != 0) {
                 val affinitySb = StringBuilder()
-                val prepend = if (weaponTree.affinity > 0) "+" else ""
-                affinitySb.append(prepend).append(weaponTree.affinity).append("%")
+                val prepend = if (weapon.affinity > 0) "+" else ""
+                affinitySb.append(prepend).append(weapon.affinity).append("%")
 
                 val affinityView = CompactStatCell(
                         view.context,
                         R.drawable.ic_ui_affinity,
                         affinitySb.toString())
 
-                if (weaponTree.affinity > 0 ) {
+                if (weapon.affinity > 0 ) {
                     affinityView.labelView.setTextColor(ContextCompat.getColor(view.context, R.color.textColorGreen))
                 } else {
                     affinityView.labelView.setTextColor(ContextCompat.getColor(view.context, R.color.textColorRed))
@@ -116,17 +118,17 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
                 view.complex_stat_layout.addView(affinityView)
             }
 
-            if (weaponTree.defense != 0) {
+            if (weapon.defense != 0) {
                 val defenseView = CompactStatCell(
                         view.context,
                         R.drawable.ic_ui_defense,
-                        weaponTree.defense.toString()
+                        weapon.defense.toString()
                 )
 
                 view.complex_stat_layout.addView(defenseView)
             }
 
-            createTreeLayout(weaponTree.formatter)
+            createTreeLayout(weaponNode.formatter)
         }
 
         private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
@@ -179,6 +181,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (WeaponTree) -> Unit
             return imageView
         }
 
+        // todo: there is already a registry for this...or there should be...
         private fun getElementIcon(context: Context, element: String?): Drawable? {
             return when (element) {
                 "Fire" -> context.getDrawableCompat(R.drawable.ic_element_fire)

@@ -5,6 +5,8 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.types.ReloadType
 
+// note: final is a java keyword which causes problems. Find some way to add it back later
+
 @Entity(tableName = "weapon")
 data class WeaponEntity(
         @PrimaryKey
@@ -26,9 +28,7 @@ data class WeaponEntity(
         val sharpness: String,
         val sharpness_maxed: Int,
         val previous_weapon_id: Int?,
-        val craftable: Int,
-        @ColumnInfo(name = "final")
-        val isFinal: Int,
+        val craftable: Boolean,
         val kinsect_bonus: String?,
         val elderseal: String?,
         val phial: String?,

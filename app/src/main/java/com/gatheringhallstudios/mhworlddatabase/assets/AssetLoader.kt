@@ -5,10 +5,10 @@ import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
+import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType as WeaponTypeEnum
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine
@@ -95,62 +95,26 @@ object AssetLoader {
         }
     }
 
-    fun loadIconFor(weapon: Weapon): Drawable? {
-        val name = when (weapon.weapon_type) {
-            WeaponTypeEnum.GREAT_SWORD -> "GreatSword"
-            WeaponTypeEnum.LONG_SWORD -> "LongSword"
-            WeaponTypeEnum.SWORD_AND_SHIELD -> "SwordAndShield"
-            WeaponTypeEnum.DUAL_BLADES -> "DualBlades"
-            WeaponTypeEnum.HAMMER -> "Hammer"
-            WeaponTypeEnum.HUNTING_HORN -> "HuntingHorn"
-            WeaponTypeEnum.LANCE -> "Lance"
-            WeaponTypeEnum.GUNLANCE -> "Gunlance"
-            WeaponTypeEnum.SWITCH_AXE -> "SwitchAxe"
-            WeaponTypeEnum.CHARGE_BLADE -> "ChargeBlade"
-            WeaponTypeEnum.INSECT_GLAIVE -> "InsectGlaive"
-            WeaponTypeEnum.BOW -> "Bow"
-            WeaponTypeEnum.LIGHT_BOWGUN -> "LightBowgun"
-            WeaponTypeEnum.HEAVY_BOWGUN -> "HeavyBowgun"
-        }
-        return ctx.getVectorDrawable(name, "rare${weapon.rarity}")
-    }
-
-    fun loadIconFor(weaponTree: WeaponTree): Drawable? {
-        val name = when (weaponTree.weapon_type) {
-            WeaponTypeEnum.GREAT_SWORD -> "GreatSword"
-            WeaponTypeEnum.LONG_SWORD -> "LongSword"
-            WeaponTypeEnum.SWORD_AND_SHIELD -> "SwordAndShield"
-            WeaponTypeEnum.DUAL_BLADES -> "DualBlades"
-            WeaponTypeEnum.HAMMER -> "Hammer"
-            WeaponTypeEnum.HUNTING_HORN -> "HuntingHorn"
-            WeaponTypeEnum.LANCE -> "Lance"
-            WeaponTypeEnum.GUNLANCE -> "Gunlance"
-            WeaponTypeEnum.SWITCH_AXE -> "SwitchAxe"
-            WeaponTypeEnum.CHARGE_BLADE -> "ChargeBlade"
-            WeaponTypeEnum.INSECT_GLAIVE -> "InsectGlaive"
-            WeaponTypeEnum.BOW -> "Bow"
-            WeaponTypeEnum.LIGHT_BOWGUN -> "LightBowgun"
-            WeaponTypeEnum.HEAVY_BOWGUN -> "HeavyBowgun"
-        }
-        return ctx.getVectorDrawable(name, "rare${weaponTree.rarity}")
+    fun loadIconFor(weapon: WeaponBase): Drawable? {
+        return loadIconFor(weapon.weapon_type, "rare${weapon.rarity}")
     }
 
     fun loadIconFor(type: WeaponType, color: String? = null): Drawable? {
-        val name = when (type.weapon_type) {
-            WeaponTypeEnum.GREAT_SWORD -> "GreatSword"
-            WeaponTypeEnum.LONG_SWORD -> "LongSword"
-            WeaponTypeEnum.SWORD_AND_SHIELD -> "SwordAndShield"
-            WeaponTypeEnum.DUAL_BLADES -> "DualBlades"
-            WeaponTypeEnum.HAMMER -> "Hammer"
-            WeaponTypeEnum.HUNTING_HORN -> "HuntingHorn"
-            WeaponTypeEnum.LANCE -> "Lance"
-            WeaponTypeEnum.GUNLANCE -> "Gunlance"
-            WeaponTypeEnum.SWITCH_AXE -> "SwitchAxe"
-            WeaponTypeEnum.CHARGE_BLADE -> "ChargeBlade"
-            WeaponTypeEnum.INSECT_GLAIVE -> "InsectGlaive"
-            WeaponTypeEnum.BOW -> "Bow"
-            WeaponTypeEnum.LIGHT_BOWGUN -> "LightBowgun"
-            WeaponTypeEnum.HEAVY_BOWGUN -> "HeavyBowgun"
+        val name = when (type) {
+            WeaponType.GREAT_SWORD -> "GreatSword"
+            WeaponType.LONG_SWORD -> "LongSword"
+            WeaponType.SWORD_AND_SHIELD -> "SwordAndShield"
+            WeaponType.DUAL_BLADES -> "DualBlades"
+            WeaponType.HAMMER -> "Hammer"
+            WeaponType.HUNTING_HORN -> "HuntingHorn"
+            WeaponType.LANCE -> "Lance"
+            WeaponType.GUNLANCE -> "Gunlance"
+            WeaponType.SWITCH_AXE -> "SwitchAxe"
+            WeaponType.CHARGE_BLADE -> "ChargeBlade"
+            WeaponType.INSECT_GLAIVE -> "InsectGlaive"
+            WeaponType.BOW -> "Bow"
+            WeaponType.LIGHT_BOWGUN -> "LightBowgun"
+            WeaponType.HEAVY_BOWGUN -> "HeavyBowgun"
         }
 
         return ctx.getVectorDrawable(name, color)
@@ -176,6 +140,26 @@ object AssetLoader {
     fun loadRarityColor(rarity: Int) : Int {
         val colorId = ColorRegistry("rare$rarity") ?: ColorRegistry("rare1")
         return ContextCompat.getColor(ctx, colorId!!)
+    }
+
+    /**
+     * Returns a localized name for the given weapon type
+     */
+    fun getNameFor(weaponType: WeaponType) = when (weaponType) {
+        WeaponType.GREAT_SWORD -> ctx.getString(R.string.title_great_sword)
+        WeaponType.LONG_SWORD -> ctx.getString(R.string.title_long_sword)
+        WeaponType.SWORD_AND_SHIELD -> ctx.getString(R.string.title_sword_and_shield)
+        WeaponType.DUAL_BLADES -> ctx.getString(R.string.title_dual_blades)
+        WeaponType.HAMMER -> ctx.getString(R.string.title_hammer)
+        WeaponType.HUNTING_HORN -> ctx.getString(R.string.title_hunting_horn)
+        WeaponType.LANCE -> ctx.getString(R.string.title_lance)
+        WeaponType.GUNLANCE -> ctx.getString(R.string.title_gunlance)
+        WeaponType.SWITCH_AXE -> ctx.getString(R.string.title_switch_axe)
+        WeaponType.CHARGE_BLADE -> ctx.getString(R.string.title_charge_blade)
+        WeaponType.INSECT_GLAIVE -> ctx.getString(R.string.title_insect_glaive)
+        WeaponType.LIGHT_BOWGUN -> ctx.getString(R.string.title_light_bowgun)
+        WeaponType.HEAVY_BOWGUN -> ctx.getString(R.string.title_heavy_bowgun)
+        WeaponType.BOW -> ctx.getString(R.string.title_bow)
     }
 
 }

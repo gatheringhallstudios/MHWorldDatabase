@@ -17,10 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadIconFor
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
-import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
-import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponSharpness
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
@@ -57,7 +54,7 @@ class WeaponDetailFragment : Fragment() {
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
         populateComponents(weaponData.recipe)
-        populateWeaponSpecificSection(weaponData.weapon)
+        populateWeaponSpecificSection(weaponData.weapon, weaponData.ammo)
     }
 
     private fun populateWeaponBasic(weapon: Weapon) {
@@ -123,7 +120,7 @@ class WeaponDetailFragment : Fragment() {
     }
 
     /** Method for binding sections that are specific to certain weapons **/
-    private fun populateWeaponSpecificSection(weapon: Weapon) {
+    private fun populateWeaponSpecificSection(weapon: Weapon, ammo: WeaponAmmoData?) {
         when (weapon.weapon_type) {
             WeaponType.SWITCH_AXE, WeaponType.CHARGE_BLADE -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_charge_blade_detail
@@ -153,7 +150,7 @@ class WeaponDetailFragment : Fragment() {
             WeaponType.HEAVY_BOWGUN, WeaponType.LIGHT_BOWGUN -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_bowgun_detail
                 val view = weapon_specific_section.inflate()
-                bindBowgun(weapon, view)
+                bindBowgun(ammo, view)
             }
             else -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_generic_weapon_detail
@@ -296,7 +293,7 @@ class WeaponDetailFragment : Fragment() {
     }
 
     private fun bindBow(weapon: Weapon, view: View) {
-        weapon.weaponCoatings.iterator().forEach {
+        weapon.weaponCoatings?.iterator()?.forEach {
             when (it) {
                 CoatingType.BLAST -> blast_coating_icon.setImageDrawable(loadIconFor(CoatingType.BLAST))
                 CoatingType.POWER -> power_coating_icon.setImageDrawable(loadIconFor(CoatingType.POWER))
@@ -312,11 +309,13 @@ class WeaponDetailFragment : Fragment() {
         populateSharpness(weapon.sharpnessData, view)
     }
 
-    private fun bindBowgun(weapon: Weapon, view: View) {
-        deviation_value.text = weapon.weaponAmmoData?.deviation
-        special_ammo_value.text = weapon.weaponAmmoData?.special_ammo
+    private fun bindBowgun(ammo: WeaponAmmoData?, view: View) {
+        if (ammo == null) return
 
-        weapon.weaponAmmoData?.iterator()?.forEach {
+        deviation_value.text = ammo.deviation
+        special_ammo_value.text = ammo.special_ammo
+
+        ammo.iterator().forEach {
             val view = layoutInflater.inflate(R.layout.listitem_bowgun_ammo, ammo_layout, false)
             view.ammo_type_name.text = when (it.type) {
                 AmmoType.NORMAL_AMMO1 -> getString(R.string.weapon_bowgun_ammo_normal, 1)

@@ -3,55 +3,25 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
-open class WeaponType(
+/**
+ * The base class for all weapon model types. Contains the basic identifying information
+ */
+open class WeaponBase(
+        val id: Int,
         val name: String,
+        val rarity: Int,
         val weapon_type: WeaponType
 )
 
 class Weapon(
         id: Int,
         name: String,
-        weapon_type: WeaponType,
         rarity: Int,
-        attack: Int,
-        affinity: Int,
-        defense: Int?,
+        weapon_type: WeaponType,
 
-        element1: String?,
-        element1_attack: Int?,
-        element2: String?,
-        element2_attack: Int?,
-        element_hidden: Boolean,
-        previous_weapon_id: Int?,
-
-        val attack_true: Int,
-        val craftable: Int,
-        val isFinal: Int,
-        val kinsect_bonus: KinsectBonus,
-        val elderseal: ElderSealLevel,
-        val phial: PhialType,
-        val phial_power: Int,
-        val shelling: ShellingType,
-        val shelling_level: Int?,
-        val notes: String?
-
-) : WeaponTree(id, name, rarity, weapon_type, attack, affinity, element1, element1_attack, element2, element2_attack,
-        element_hidden, defense, previous_weapon_id) {
-    @Embedded
-    lateinit var weaponCoatings: WeaponCoatings
-
-    @Embedded
-    var weaponAmmoData: WeaponAmmoData? = null
-}
-
-open class WeaponTree(
-        val id: Int,
-        val name: String,
-        val rarity: Int,
-        val weapon_type: WeaponType,
         val attack: Int,
+        val attack_true: Int,
         val affinity: Int,
 
         val element1: String?,
@@ -60,16 +30,24 @@ open class WeaponTree(
         val element2_attack: Int?,
         val element_hidden: Boolean,
         val defense: Int?,
-        val previous_weapon_id: Int?
-) {
+        val previous_weapon_id: Int?,
 
-    //Tree related fields
-    @Ignore
-    var depth: Int? = 0
-    @Ignore
-    var formatter: MutableList<TreeFormatter> = mutableListOf()
+        val craftable: Int,
+        val kinsect_bonus: KinsectBonus,
+        val elderseal: ElderSealLevel,
+        val phial: PhialType,
+        val phial_power: Int,
+        val shelling: ShellingType,
+        val shelling_level: Int?,
+        val notes: String?
+
+): WeaponBase(id, name, rarity, weapon_type)  {
     @Embedded
     lateinit var slots: WeaponSlots
+
+    @Embedded
+    var weaponCoatings: WeaponCoatings? = null
+
     @Embedded
     var sharpnessData: WeaponSharpness? = null
 }
@@ -174,6 +152,7 @@ data class WeaponCoatings(
  */
 class WeaponFull(
         val weapon: Weapon,
+        val ammo: WeaponAmmoData?,
         val recipe: Map<String?, List<ItemQuantity>>
 )
 
