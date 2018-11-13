@@ -23,9 +23,16 @@ val VectorRegistry = createRegistry(
         "ArmorWaist" to R.xml.ic_equipment_waist_base,
         "ArmorLegs" to R.xml.ic_equipment_leg_base,
 
-        "GreatSword" to R.drawable.ic_equipment_greatsword_white,
+        // TODO Add weapons
+        "GreatSword" to R.xml.ic_equipment_greatsword_base,
         //"ChargeBlade" to R.drawable.ic_equipment_charge_blade_white,
-        "Hammer" to R.drawable.ic_equipment_hammer_white,
+        "Hammer" to R.xml.ic_equipment_hammer_base,
+        "InsectGlaive" to R.xml.ic_equipment_insect_glaive_base,
+        "Lance" to R.xml.ic_equipment_lance_base,
+        "LongSword" to R.xml.ic_equipment_longsword_base,
+        "SwordAndShield" to R.xml.ic_equipment_sword_and_shield_base,
+        "DualBlades" to R.xml.ic_equipment_dual_blades_base,
+        "HuntingHorn" to R.xml.ic_equipment_hunting_horn_base,
 
         "Charm" to R.xml.ic_equipment_charm_base,
 
