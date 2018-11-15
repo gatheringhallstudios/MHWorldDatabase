@@ -142,6 +142,8 @@
     <!-- ## WEAPON MENU ## -->
     <!-- ################# -->
 
+    <string name="weapon_final_only">Final Only</string>
+
     <!-- Weapon List Entries -->
     <string name="title_weapons">Weapons</string>
     <string name="title_great_sword">Great Sword</string>

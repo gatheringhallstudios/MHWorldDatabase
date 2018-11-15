@@ -13,8 +13,6 @@ import android.widget.Space
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
-import com.gatheringhallstudios.mhworlddatabase.common.TreeFormatter
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -25,10 +23,10 @@ import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 
 const val INDENT_SIZE = 16 //This value corresponds to the measured width of each of vectors used for drawing the tree in DP. Convert to pixels before use.
 
-class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : AdapterDelegate<List<TreeNode<Weapon>>>() {
+class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : AdapterDelegate<List<RenderedTreeNode<Weapon>>>() {
 
-    override fun isForViewType(items: List<TreeNode<Weapon>>, position: Int): Boolean {
-        return items[position] is TreeNode<Weapon>
+    override fun isForViewType(items: List<RenderedTreeNode<Weapon>>, position: Int): Boolean {
+        return items[position] is RenderedTreeNode<Weapon>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -38,7 +36,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
         return WeaponBaseHolder(v)
     }
 
-    override fun onBindViewHolder(items: List<TreeNode<Weapon>>,
+    override fun onBindViewHolder(items: List<RenderedTreeNode<Weapon>>,
                                   position: Int,
                                   holder: RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
@@ -52,7 +50,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
 
     internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(weaponNode: TreeNode<Weapon>) {
+        fun bind(weaponNode: RenderedTreeNode<Weapon>) {
             val weapon = weaponNode.value
 
             view.weapon_name.text = weapon.name

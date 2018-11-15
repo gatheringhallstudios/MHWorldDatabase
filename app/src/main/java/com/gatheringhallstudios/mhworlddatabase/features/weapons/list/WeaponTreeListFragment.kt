@@ -1,8 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
@@ -21,6 +26,11 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
         const val ARG_WEAPON_TREE_TYPE = "WEAPON_TREE_TYPE"
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     // Setup adapter and navigation
     private val adapter = BasicListDelegationAdapter(WeaponTreeListAdapterDelegate {
         getRouter().navigateWeaponDetail(it.id)
@@ -29,6 +39,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(WeaponTreeListViewModel::class.java)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val type = arguments?.getSerializable(ARG_WEAPON_TREE_TYPE) as WeaponType
 
@@ -39,7 +50,32 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
 
         // Load data
         viewModel.setWeaponType(type)
-        adapter.items = viewModel.weaponTree.weaponPaths
-        adapter.notifyDataSetChanged()
+
+        viewModel.nodeListData.observe(this, Observer {
+            adapter.items = it ?: emptyList()
+            adapter.notifyDataSetChanged()
+        })
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_weapon_tree, menu)
+    }
+
+    /**
+     * Handled when a menu item is clicked. True is returned if handled.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.weapon_final_toggle -> {
+                val newSetting = !item.isChecked
+                viewModel.setShowFinal(newSetting)
+                item.isChecked = newSetting
+                true
+            }
+
+            // fallback to parent behavior if unhandled
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
