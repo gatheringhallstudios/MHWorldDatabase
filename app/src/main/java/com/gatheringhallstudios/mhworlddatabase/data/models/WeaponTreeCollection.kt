@@ -1,7 +1,6 @@
-package com.gatheringhallstudios.mhworlddatabase.features.weapons
+package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
-import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 
 
 /**
@@ -40,5 +39,8 @@ class WeaponTreeCollection(
         leaves = roots.map { it.leaves }.flatten()
     }
 
-
+    /**
+     * Method used to
+     */
+    fun getWeapon(weaponId: Int) = weaponMap[weaponId]
 }

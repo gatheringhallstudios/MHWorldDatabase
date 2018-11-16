@@ -25,7 +25,7 @@ abstract class WeaponDao {
             AND w.weapon_type = :weaponType
         ORDER BY w.id ASC
           """)
-    abstract fun loadWeaponTrees(langId: String, weaponType: WeaponType): List<Weapon>
+    abstract fun loadWeapons(langId: String, weaponType: WeaponType): List<Weapon>
 
     /**
      * Loads a single weapon by id
@@ -87,6 +87,10 @@ abstract class WeaponDao {
         return loadWeaponComponents(langId, weaponId).groupBy { it.recipe_type }
     }
 
+    /**
+     * Loads extended detail weapon for a particular weapon.
+     * Equivalent to calling loadWeapon with additional bundled information.
+     */
     fun loadWeaponFull(langId: String, weaponId: Int) = createLiveData {
         val weapon = loadWeapon(langId, weaponId)
         WeaponFull(
@@ -94,5 +98,13 @@ abstract class WeaponDao {
                 recipe = queryRecipeComponents(langId, weaponId),
                 ammo = loadWeaponAmmoData(langId, weaponId)
         )
+    }
+
+    /**
+     * Loads all weapons of a particular type, contained as a collection of weapon trees.
+     */
+    fun loadWeaponTrees(langId: String, weaponType: WeaponType): WeaponTreeCollection {
+        // todo: cache it
+        return WeaponTreeCollection(loadWeapons(langId, weaponType))
     }
 }

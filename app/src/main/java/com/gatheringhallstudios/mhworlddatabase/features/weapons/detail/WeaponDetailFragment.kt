@@ -30,17 +30,15 @@ import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
 import kotlinx.android.synthetic.main.listitem_section_header.view.*
 
 class WeaponDetailFragment : Fragment() {
-    companion object {
-        const val ARG_WEAPON_ID = "WEAPON"
-    }
 
+    /**
+     * Returns the viewmodel owned by the parent fragment
+     */
     private val viewModel: WeaponDetailViewModel by lazy {
-        ViewModelProviders.of(this).get(WeaponDetailViewModel::class.java)
+        ViewModelProviders.of(parentFragment!!).get(WeaponDetailViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val weaponId = arguments?.getInt(ARG_WEAPON_ID) ?: -1
-        viewModel.loadWeapon(weaponId)
         return inflater.inflate(R.layout.fragment_weapon_summary, parent, false)
     }
 

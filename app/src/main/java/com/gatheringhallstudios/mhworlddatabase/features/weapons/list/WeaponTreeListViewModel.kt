@@ -8,7 +8,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.WeaponTreeCollection
+import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTreeCollection
 
 
 
@@ -33,9 +33,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
         }
 
         currentWeaponType = weaponType
-
-        val weaponTreeData = dao.loadWeaponTrees(AppSettings.dataLocale, weaponType)
-        weaponTree = WeaponTreeCollection(weaponTreeData)
+        weaponTree = dao.loadWeaponTrees(AppSettings.dataLocale, weaponType)
 
         updateNodeList()
     }
@@ -54,11 +52,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
         nodeListData.value = when {
             finalOnly -> {
                 weaponTree.leaves.map {
-                    RenderedTreeNode(
-                            it.value,
-                            0,
-                            listOf(TreeFormatter.INDENT)
-                    )
+                    RenderedTreeNode(it.value)
                 }
             }
             else -> {

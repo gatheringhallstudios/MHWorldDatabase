@@ -8,15 +8,29 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 
+/**
+ * Viewmodel used for weapon detail data
+ */
 class WeaponDetailViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = MHWDatabase.getDatabase(application).weaponDao()
 
-    private var weaponId: Int = -1
+    var weaponId: Int = -1
+        private set
+
     lateinit var weapon: LiveData<WeaponFull>
+    lateinit var weaponTrees: LiveData<WeaponTreeCollection>
 
     fun loadWeapon(weaponId: Int) {
         if (this.weaponId == weaponId) return
 
-        weapon = dao.loadWeaponFull(AppSettings.dataLocale, weaponId)
+        this.weaponId = weaponId
+
+        val langId = AppSettings.dataLocale
+        weapon = dao.loadWeaponFull(langId, weaponId)
+        weaponTrees = Transformations.map(weapon) {
+            dao.loadWeaponTrees(langId, it.weapon.weapon_type)
+        }
     }
+
+
 }
