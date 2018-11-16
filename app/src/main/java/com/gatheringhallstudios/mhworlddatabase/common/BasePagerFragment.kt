@@ -1,9 +1,11 @@
 package com.gatheringhallstudios.mhworlddatabase.common
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -32,7 +34,7 @@ abstract class BasePagerFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_generic_pager, container, false)
 
         // Setup tabs
-        val adder = InnerTabAdder()
+        val adder = InnerTabAdder(context!!)
         onAddTabs(adder)
 
         // Pull info from setup phase
@@ -70,6 +72,14 @@ abstract class BasePagerFragment : Fragment() {
          */
         fun addTab(title: String, builder: () -> Fragment)
 
+
+        /**
+         * Adds a tab to the fragment
+         * @param titleRes The string resource to use as a title
+         * @param builder  A lambda that builds the tab fragment
+         */
+        fun addTab(@StringRes titleRes: Int, builder: () -> Fragment)
+
         /**
          * Sets the default selected tab idx
          * @param idx
@@ -78,10 +88,15 @@ abstract class BasePagerFragment : Fragment() {
     }
 
     /** Internal only implementation of the TabAdder  */
-    private class InnerTabAdder : TabAdder {
+    private class InnerTabAdder(private val ctx: Context): TabAdder {
         var defaultIdx = -1
             private set
         private val tabs = ArrayList<PagerTab>()
+
+
+        override fun addTab(titleRes: Int, builder: () -> Fragment) {
+            this.addTab(ctx.getString(titleRes), builder)
+        }
 
         override fun addTab(title: String, builder: () -> Fragment) {
             tabs.add(PagerTab(title, builder))
