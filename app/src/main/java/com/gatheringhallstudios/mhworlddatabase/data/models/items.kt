@@ -94,7 +94,7 @@ class ItemUsageArmor(
 )
 
 class ItemUsageWeapon(
-        @Embedded val result: WeaponTree,
+        @Embedded val result: Weapon,
         val quantity: Int
 )
 

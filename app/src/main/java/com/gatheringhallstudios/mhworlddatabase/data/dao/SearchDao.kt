@@ -81,7 +81,7 @@ abstract class SearchDao {
         return itemDataCache.get().filter { filter.matches(it.name) }
     }
 
-    fun searchWeapons(searchFilter: String): List<WeaponTree> {
+    fun searchWeapons(searchFilter: String): List<WeaponBase> {
         val filter = SearchFilter(searchFilter)
         return weaponDataCache.get().filter {filter.matches(it.name)}
     }
@@ -159,6 +159,6 @@ abstract class SearchDao {
             JOIN weapon_text wt USING (id)
         WHERE wt.lang_id = :langId
     """)
-    abstract fun loadAllWeaponsSync(langId: String): List<WeaponTree>
+    abstract fun loadAllWeaponsSync(langId: String): List<WeaponBase>
 
 }

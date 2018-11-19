@@ -10,8 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetail
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailFragment
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreeListFragment
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreeListFragment.Companion.ARG_WEAPON_TREE_TYPE
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
@@ -76,17 +75,17 @@ class Router(private val navController: NavController) {
         )
     }
 
-    fun navigateWeaponTree(weaponTypeName: String, weaponType: WeaponType) {
+    fun navigateWeaponTree(weaponType: WeaponType) {
         navController.navigate(
                 R.id.openWeaponTreeAction,
-                BundleBuilder().putString(WeaponTreeListFragment.ARG_WEAPON_TREE_NAME, weaponTypeName).putSerializable(ARG_WEAPON_TREE_TYPE, weaponType).build()
+                BundleBuilder().putSerializable(ARG_WEAPON_TREE_TYPE, weaponType).build()
         )
     }
 
     fun navigateWeaponDetail(weaponId: Int) {
         navController.navigate(
                 R.id.openWeaponDetailAction,
-                BundleBuilder().putInt(WeaponDetailFragment.ARG_WEAPON_ID, weaponId).build()
+                BundleBuilder().putInt(WeaponDetailPagerFragment.ARG_WEAPON_ID, weaponId).build()
         )
     }
 }

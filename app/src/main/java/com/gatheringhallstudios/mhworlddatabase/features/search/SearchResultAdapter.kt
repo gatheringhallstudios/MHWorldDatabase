@@ -103,7 +103,7 @@ fun createItemBinder(item: ItemBase) = createSimpleUniversalBinder { ctx ->
     }
 }
 
-fun createWeaponBinder(weapon: WeaponTree) = createSimpleUniversalBinder { ctx ->
+fun createWeaponBinder(weapon: WeaponBase) = createSimpleUniversalBinder { ctx ->
     val icon = AssetLoader.loadIconFor(weapon)
     val name = weapon.name
     val typeString = ctx.getString(when (weapon.weapon_type) {

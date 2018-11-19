@@ -256,7 +256,7 @@
 
     <fragment
         android:id="@+id/weaponDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailPagerFragment"
         tools:layout="@layout/fragment_weapon_summary" />
     <action
         android:id="@+id/openWeaponDetailAction"

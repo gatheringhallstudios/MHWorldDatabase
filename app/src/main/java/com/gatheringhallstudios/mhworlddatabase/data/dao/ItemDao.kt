@@ -132,8 +132,11 @@ abstract class ItemDao {
 
 
     @Query("""
-        SELECT w.id, w.rarity, w.weapon_type, w.attack, w.affinity,
-        w.slot_1, w.slot_2, w.slot_3, w.element_hidden, wt.*, wr.quantity
+        SELECT w.id, w.rarity, w.weapon_type, w.attack, w.affinity, w.attack_true, w.affinity,
+            w.element1, w.element1_attack, w.element1, w.element2_attack, w.element_hidden, w.defense,
+            w.previous_weapon_id, w.craftable, w.kinsect_bonus, w.elderseal, w.phial, w.phial_power,
+            w.shelling, w.shelling_level, w.notes, w.slot_1, w.slot_2, w.slot_3,
+            wt.*, wr.quantity
         FROM weapon w
             JOIN weapon_text wt USING (id)
             JOIN weapon_recipe wr ON w.id = wr.weapon_id

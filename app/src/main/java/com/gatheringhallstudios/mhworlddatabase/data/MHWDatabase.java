@@ -62,7 +62,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
  * Created by Carlos on 3/4/2018.
  */
 @Database(
-        version = 18,
+        version = 19,
         exportSchema = false,
 
         entities = {
