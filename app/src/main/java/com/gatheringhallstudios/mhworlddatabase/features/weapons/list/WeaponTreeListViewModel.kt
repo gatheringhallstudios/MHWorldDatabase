@@ -57,6 +57,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
             }
             else -> {
                 // Populate depth/formatter fields (todo: separate concerns, but this works for now)
+                // todo: consider moving to the WeaponTreeAdapter, and having it take the whole tree.
                 val buffer = weaponTree.roots.flatMap { x ->
                     findWeaponPaths(x, 0, listOf(), true)
                 }
@@ -86,7 +87,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
         formatter.add(newFormatter)
 
         if (node.getChildren().isEmpty()) {
-            paths.add(mutableListOf(RenderedTreeNode(node.value, depth, formatter)))
+            paths.add(mutableListOf(RenderedTreeNode(node.value, depth, formatter, node.nestedChildrenCount)))
             return paths
         }
 
@@ -94,7 +95,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
         //They do not receive mid nodes (even though they obviously have children)
         if (depth > 0) formatter.add(TreeFormatter.MID)
 
-        val resultNode = RenderedTreeNode(node.value, depth, formatter)
+        val resultNode = RenderedTreeNode(node.value, depth, formatter, node.nestedChildrenCount)
         paths.add(mutableListOf(resultNode))
 
         node.getChildren().forEachIndexed { index, it ->

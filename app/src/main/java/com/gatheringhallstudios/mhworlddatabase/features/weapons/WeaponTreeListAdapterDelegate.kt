@@ -25,7 +25,16 @@ import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 
 const val INDENT_SIZE = 16 //This value corresponds to the measured width of each of vectors used for drawing the tree in DP. Convert to pixels before use.
 
-class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : AdapterDelegate<List<RenderedTreeNode<Weapon>>>() {
+/**
+ * Adapter delegate used to render weapons in a weapon tree. These take "RenderedTreeNode" objects directly.
+ * Use this in the BasicDelegateAdapter or in a dedicated adapter like the WeaponTreeAdapter.
+ */
+class WeaponTreeListAdapterDelegate(
+        private val onSelected: (Weapon) -> Unit,
+        private val onLongSelect: ((Weapon) -> Unit)?
+) : AdapterDelegate<List<RenderedTreeNode<Weapon>>>() {
+
+    constructor(onSelected: (Weapon) -> Unit): this(onSelected, null)
 
     override fun isForViewType(items: List<RenderedTreeNode<Weapon>>, position: Int): Boolean {
         return items[position] is RenderedTreeNode<Weapon>
@@ -48,6 +57,13 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
         vh.bind(weaponBaseTreeNode)
 
         holder.view.setOnClickListener { onSelected(weaponBaseTreeNode.value) }
+        if (onLongSelect != null) {
+            holder.view.setOnLongClickListener {
+                // note: cannot pass position as an optimization, as it will not change on list updates unless re-rendered
+                onLongSelect.invoke(weaponBaseTreeNode.value)
+                true // notify that it was consumed
+            }
+        }
     }
 
     internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {

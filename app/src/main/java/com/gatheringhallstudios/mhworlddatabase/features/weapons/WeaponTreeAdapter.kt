@@ -1,0 +1,136 @@
+package com.gatheringhallstudios.mhworlddatabase.features.weapons
+
+import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.view.ViewGroup
+import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.RenderedTreeNode
+import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
+
+/**
+ * Adapter to display a weapon tree. Takes a list of RenderedTreeNodes and displays them.
+ * Items added to this list can be collapsed and expanded.
+ */
+class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    protected var delegatesManager = AdapterDelegatesManager<List<RenderedTreeNode<Weapon>>>()
+
+    init {
+        delegatesManager.addDelegate(WeaponTreeListAdapterDelegate(
+                onSelected=onSelected,
+                onLongSelect=this::onToggle))
+    }
+
+    /**
+     * Source items. When items are expanded, its pulled from this list.
+     */
+    private var sourceItems: List<RenderedTreeNode<Weapon>> = emptyList()
+
+    /**
+     * Contains the sourceItems to display in the recyclerview itself.
+     */
+    private val renderedItems: MutableList<RenderedTreeNode<Weapon>> = mutableListOf()
+
+    /**
+     * A mapping from weapon id to the position of the rendered tree node representation
+     */
+    private val nodeMap = mutableMapOf<Int, RenderedTreeNode<Weapon>>()
+
+    /**
+     * Binds the list of items to this adapter.
+     * TODO: Consider making it take the WeaponTreeCollection and doing the logic currently in the WeaponTreeListViewModel
+     */
+    fun setItems(items: List<RenderedTreeNode<Weapon>>) {
+        this.sourceItems = items
+        nodeMap.clear()
+        for (item in items) {
+            nodeMap[item.value.id] = item
+        }
+
+        renderedItems.clear()
+        renderedItems.addAll(sourceItems)
+
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return delegatesManager.onCreateViewHolder(parent, viewType)
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        delegatesManager.onBindViewHolder(renderedItems, position, holder, null)
+    }
+
+    /**
+     * Returns the count of items currently visible
+     */
+    override fun getItemCount(): Int {
+        return renderedItems.size
+    }
+
+    /**
+     * Internal function that toggles collapsed state.
+     * Note: This has poor performance as its O(N) on both tables. This could probably be improved in some way
+     * One idea is to construct using the actual tree and perform depth first search.
+     * That way we map to the actual tree and can "reconstruct" on expand.
+     */
+    private fun onToggle(weapon: Weapon) {
+        // todo: viewPosition might end up failing later... it depends on if "onBindViewHolder" causes an update for later entries
+
+        val node = nodeMap[weapon.id]
+        if (node == null) {
+            Log.e("WeaponTreeAdapter", "Tried to collapse/expand invalid weapon")
+            return
+        }
+
+        if (node.numChildren == 0) {
+            return // cannot be toggled
+        }
+
+        val destinationPosition = renderedItems.indexOf(node)
+
+        if (node.isCollapsed) {
+            // we're expanding
+            val sourcePosition = sourceItems.indexOf(node)
+            val newItems = sourceItems.subList(
+                    sourcePosition + 1,
+                    sourcePosition + 1 + node.numChildren)
+            renderedItems.addAll(destinationPosition + 1, newItems)
+            node.isCollapsed = false // no longer collapsed
+
+            // mark all children as expanded, otherwise wierdness will happen
+            // unfortunately the only alternative is "reconstruction".
+            for (item in newItems) {
+                item.isCollapsed = false
+            }
+
+            notifyItemChanged(destinationPosition)
+            notifyItemRangeInserted(destinationPosition + 1, node.numChildren)
+
+        } else {
+            // we're collapsing
+            val startDepth = node.depth
+            val startRemove = destinationPosition + 1
+
+            // Get the last point to remove. Test nodes until we resurface to this node's depth level.
+            var endRemove = startRemove
+            for (idx in endRemove until renderedItems.size) {
+                val testNode = renderedItems[idx]
+                if (testNode.depth <= startDepth) {
+                    break
+                }
+                endRemove = idx
+            }
+
+            // Remove items. Note that the end index is exclusive, necessitating + 1
+            val itemsToRemove = renderedItems.subList(startRemove, endRemove + 1)
+            val removalCount = itemsToRemove.size
+            itemsToRemove.clear()
+
+            // Update the node state and notify the recyclerview of removal
+            node.isCollapsed = true // collapsed
+            notifyItemChanged(destinationPosition)
+            notifyItemRangeRemoved(destinationPosition + 1, removalCount)
+        }
+    }
+}

@@ -20,10 +20,12 @@ enum class TreeFormatter {
 class RenderedTreeNode<T>(
         val value: T,
         val depth: Int,
-        val formatter: List<TreeFormatter>
+        val formatter: List<TreeFormatter>,
+        val numChildren: Int,
+        var isCollapsed: Boolean = false
 ) {
     /**
      * Alternative constructor used for "non-tree" usage.
      */
-    constructor(value: T): this(value, 0, listOf(TreeFormatter.INDENT))
+    constructor(value: T): this(value, 0, listOf(TreeFormatter.INDENT), 0)
 }
