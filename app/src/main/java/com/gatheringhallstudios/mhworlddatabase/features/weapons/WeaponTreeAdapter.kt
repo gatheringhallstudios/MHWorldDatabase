@@ -47,8 +47,25 @@ class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): RecyclerView.Adapter<Recy
             nodeMap[item.value.id] = item
         }
 
+        // add items to rendered, and handle the nodes that are collapsed.
+        // If any node is collapsed, do not add subsequent ones until we "resurface" to the correct depth.
         renderedItems.clear()
-        renderedItems.addAll(sourceItems)
+        var depthLevel: Int? = null
+        for (item in sourceItems) {
+            // if this item is deeper than the collapse level, skip
+            if (depthLevel != null && item.depth > depthLevel) {
+                continue
+            }
+
+            // if we got here, not in collapsed data, clear (if needed) and add the item
+            depthLevel = null
+            renderedItems.add(item)
+
+            // If collapsed, set the depth level and start ommiting items
+            if (item.isCollapsed) {
+                depthLevel = item.depth
+            }
+        }
 
         notifyDataSetChanged()
     }
