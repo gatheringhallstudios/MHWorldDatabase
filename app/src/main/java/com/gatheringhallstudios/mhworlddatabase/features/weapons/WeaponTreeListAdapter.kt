@@ -135,7 +135,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
             val workString = element1_attack ?: "-----"
 
             return when (element_hidden) {
-                true -> "(${workString})"
+                true -> "($workString)"
                 false -> workString.toString()
             }
         }
