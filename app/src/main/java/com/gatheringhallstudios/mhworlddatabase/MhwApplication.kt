@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import android.app.Application
+import android.os.Build
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.squareup.leakcanary.LeakCanary
 
@@ -19,6 +20,10 @@ class MhwApplication : Application() {
             // You should not init your app in this process.
             return
         }
-        LeakCanary.install(this)
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            // Bug in P causes excessive leaks, just disable for now
+            LeakCanary.install(this)
+        }
     }
 }
