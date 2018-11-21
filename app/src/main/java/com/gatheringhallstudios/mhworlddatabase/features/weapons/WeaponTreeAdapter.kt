@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.RenderedTreeNode
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
 
 /**
