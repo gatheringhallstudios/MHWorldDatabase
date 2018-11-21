@@ -10,7 +10,12 @@ enum class TreeFormatter {
     L_BRANCH,
     T_BRANCH,
     START,
+
+    /**
+     * Added when this branch has children. This is visually replaced when the node is collapsed
+     */
     MID,
+
     END
 }
 

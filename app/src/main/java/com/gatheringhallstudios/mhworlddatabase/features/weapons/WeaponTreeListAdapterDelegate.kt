@@ -144,7 +144,7 @@ class WeaponTreeListAdapterDelegate(
                 view.complex_stat_layout.addView(defenseView)
             }
 
-            createTreeLayout(weaponNode.formatter)
+            createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed)
         }
 
         private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
@@ -156,7 +156,7 @@ class WeaponTreeListAdapterDelegate(
             }
         }
 
-        private fun createTreeLayout(formatter: List<TreeFormatter>) {
+        private fun createTreeLayout(formatter: List<TreeFormatter>, isCollapsed: Boolean) {
             val treeView = view.tree_components
 
             if (treeView.childCount != 0) treeView.removeAllViews()
@@ -164,7 +164,11 @@ class WeaponTreeListAdapterDelegate(
             formatter.forEach {
                 when (it) {
                     TreeFormatter.START -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start))
+                        if (!isCollapsed) {
+                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start))
+                        } else {
+                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start_collapsed))
+                        }
                     }
                     TreeFormatter.INDENT -> {
                         val space = Space(treeView.context)
@@ -178,7 +182,11 @@ class WeaponTreeListAdapterDelegate(
                         treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_t))
                     }
                     TreeFormatter.MID -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid))
+                        if (!isCollapsed) {
+                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid))
+                        } else {
+                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid_collapsed))
+                        }
                     }
                     TreeFormatter.L_BRANCH -> {
                         treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_l))
