@@ -203,3 +203,21 @@ data class WeaponAmmoEntity(
         val tranq_recoil: Int,
         val tranq_reload: ReloadType
 )
+
+@Entity(tableName = "weapon_melody")
+data class WeaponMelodyEntity (
+        @PrimaryKey
+        val id: Int,
+        val notes: String,
+        val duration: String,
+        val extension: String
+)
+
+@Entity(tableName = "weapon_melody_text")
+data class WeaponMelodyTextEntity (
+        @PrimaryKey
+        val id: Int,
+        val lang_id: String,
+        val effect1: String,
+        val effect2: String
+)

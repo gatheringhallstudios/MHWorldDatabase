@@ -31,6 +31,4 @@ class WeaponDetailViewModel(application: Application) : AndroidViewModel(applica
             dao.loadWeaponTrees(langId, it.weapon.weapon_type)
         }
     }
-
-
 }

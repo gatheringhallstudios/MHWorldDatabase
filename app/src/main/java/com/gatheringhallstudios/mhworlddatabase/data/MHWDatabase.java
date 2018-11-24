@@ -48,6 +48,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponRecipe;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponAmmoEntity;
@@ -92,7 +94,8 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
                 ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class,
 
                 // Weapon Classes
-                WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class, WeaponRecipe.class
+                WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class, WeaponRecipe.class,
+                WeaponMelodyEntity.class, WeaponMelodyTextEntity.class
         })
 
 @TypeConverters({Converters.class})

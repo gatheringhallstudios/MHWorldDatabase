@@ -153,6 +153,7 @@ data class WeaponCoatings(
 class WeaponFull(
         val weapon: Weapon,
         val ammo: WeaponAmmoData?,
+        val melodies: List<WeaponMelody>,
         val recipe: Map<String?, List<ItemQuantity>>
 )
 
@@ -343,4 +344,13 @@ class WeaponAmmo (
     var isRapid: Boolean,
     var reload: ReloadType,
     var recoil: Int
+)
+
+class WeaponMelody (
+    val id: Int,
+    val notes: String,
+    val duration: String,
+    val extension: String,
+    val effect1: String,
+    val effect2: String
 )

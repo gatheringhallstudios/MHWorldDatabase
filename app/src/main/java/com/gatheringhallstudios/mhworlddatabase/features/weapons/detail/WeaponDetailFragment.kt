@@ -27,6 +27,9 @@ import kotlinx.android.synthetic.main.fragment_weapon_summary.*
 import kotlinx.android.synthetic.main.listitem_bow_detail.*
 import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
+import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
+import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.view.*
+import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
 import kotlinx.android.synthetic.main.listitem_section_header.view.*
 
 class WeaponDetailFragment : Fragment() {
@@ -52,7 +55,7 @@ class WeaponDetailFragment : Fragment() {
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
         populateComponents(weaponData.recipe)
-        populateWeaponSpecificSection(weaponData.weapon, weaponData.ammo)
+        populateWeaponSpecificSection(weaponData.weapon, weaponData.ammo, weaponData.melodies)
     }
 
     private fun populateWeaponBasic(weapon: Weapon) {
@@ -118,7 +121,7 @@ class WeaponDetailFragment : Fragment() {
     }
 
     /** Method for binding sections that are specific to certain weapons **/
-    private fun populateWeaponSpecificSection(weapon: Weapon, ammo: WeaponAmmoData?) {
+    private fun populateWeaponSpecificSection(weapon: Weapon, ammo: WeaponAmmoData?, melodies: List<WeaponMelody>?) {
         when (weapon.weapon_type) {
             WeaponType.SWITCH_AXE, WeaponType.CHARGE_BLADE -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_charge_blade_detail
@@ -138,7 +141,7 @@ class WeaponDetailFragment : Fragment() {
             WeaponType.HUNTING_HORN -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_hunting_horn_detail
                 val view = weapon_specific_section.inflate()
-                bindHuntingHorn(weapon, view)
+                bindHuntingHorn(weapon, melodies, view)
             }
             WeaponType.BOW -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_bow_detail
@@ -285,9 +288,21 @@ class WeaponDetailFragment : Fragment() {
         view.findViewById<TextView>(R.id.shelling_level_value).text = getString(R.string.skill_level_short_qty, weapon.shelling_level)
     }
 
-    private fun bindHuntingHorn(weapon: Weapon, view: View) {
+    private fun bindHuntingHorn(weapon: Weapon, melodies: List<WeaponMelody>?, view: View) {
         populateSharpness(weapon.sharpnessData, view)
         view.findViewById<TextView>(R.id.notes_value).text = weapon.notes.toString()
+
+        view.melody_layout.removeAllViews()
+
+        melodies?.forEach {
+            val melodyView = layoutInflater.inflate(R.layout.listitem_hunting_horn_melody, melody_layout, false )
+            melodyView.effect1.text = it.effect1
+            melodyView.effect2.text = it.effect2
+            melodyView.duration_value.text = it.duration
+            melodyView.extension_value.text = it.extension
+
+            melody_layout.addView(melodyView)
+        }
     }
 
     private fun bindBow(weapon: Weapon, view: View) {
