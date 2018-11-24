@@ -41,7 +41,7 @@ class Weapon(
         val shelling_level: Int?,
         val notes: String?
 
-): WeaponBase(id, name, rarity, weapon_type)  {
+) : WeaponBase(id, name, rarity, weapon_type) {
     @Embedded
     lateinit var slots: WeaponSlots
 
@@ -137,15 +137,16 @@ data class WeaponCoatings(
         val coating_paralysis: Int?,
         val coating_sleep: Int?,
         val coating_blast: Int?
-) :Iterable<CoatingType> {
+) : Iterable<CoatingType> {
 
     override fun iterator(): Iterator<CoatingType> {
         val buffer = mapOf(Pair(CoatingType.CLOSE_RANGE, coating_close), Pair(CoatingType.POWER, coating_power), Pair(CoatingType.POISON, coating_poison),
                 Pair(CoatingType.PARALYSIS, coating_paralysis), Pair(CoatingType.SLEEP, coating_sleep), Pair(CoatingType.BLAST, coating_blast))
 
-        return buffer.filter {(_, value) -> value != null && value > 0}.map {x -> x.key}.toList().iterator()
+        return buffer.filter { (_, value) -> value != null && value > 0 }.map { x -> x.key }.toList().iterator()
     }
 }
+
 /**
  * The result of fully loading a weapon.
  * Loads the data you'd find in an weapon screen ingame.
@@ -327,7 +328,7 @@ data class WeaponAmmoData(
                 WeaponAmmo(AmmoType.WATER_AMMO, water_clip, water_rapid, water_reload, water_recoil),
                 WeaponAmmo(AmmoType.FREEZE_AMMO, freeze_clip, freeze_rapid, freeze_reload, freeze_recoil),
                 WeaponAmmo(AmmoType.THUNDER_AMMO, thunder_clip, thunder_rapid, thunder_reload, thunder_recoil),
-                WeaponAmmo(AmmoType.DRAGON_AMMO,dragon_clip, dragon_rapid, dragon_reload, dragon_recoil),
+                WeaponAmmo(AmmoType.DRAGON_AMMO, dragon_clip, dragon_rapid, dragon_reload, dragon_recoil),
                 WeaponAmmo(AmmoType.SLICING_AMMO, slicing_clip, slicing_rapid, slicing_reload, slicing_recoil),
                 WeaponAmmo(AmmoType.WYVERN_AMMO, wyvern_clip, false, wyvern_reload, 0),
                 WeaponAmmo(AmmoType.DEMON_AMMO, demon_clip, false, demon_reload, demon_recoil),
@@ -338,19 +339,19 @@ data class WeaponAmmoData(
     }
 }
 
-class WeaponAmmo (
-    var type: AmmoType,
-    var capacity: Int,
-    var isRapid: Boolean,
-    var reload: ReloadType,
-    var recoil: Int
+class WeaponAmmo(
+        var type: AmmoType,
+        var capacity: Int,
+        var isRapid: Boolean,
+        var reload: ReloadType,
+        var recoil: Int
 )
 
-class WeaponMelody (
-    val id: Int,
-    val notes: String,
-    val duration: String,
-    val extension: String,
-    val effect1: String,
-    val effect2: String
+class WeaponMelody(
+        val id: Int,
+        val notes: String,
+        val duration: String,
+        val extension: String,
+        val effect1: String,
+        val effect2: String
 )
