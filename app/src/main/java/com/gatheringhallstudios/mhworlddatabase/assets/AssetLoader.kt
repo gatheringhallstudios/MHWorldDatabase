@@ -136,6 +136,19 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
+    fun loadIconFor(type: NoteType): Drawable? {
+        return when (type) {
+            NoteType.WHITE -> ctx.getVectorDrawable("HuntingHornNote", "White")
+            NoteType.CYAN -> ctx.getVectorDrawable("HuntingHornNote", "Cyan")
+            NoteType.RED -> ctx.getVectorDrawable("HuntingHornNote", "Red")
+            NoteType.YELLOW -> ctx.getVectorDrawable("HuntingHornNote", "Yellow")
+            NoteType.BLUE -> ctx.getVectorDrawable("HuntingHornNote", "Blue")
+            NoteType.PURPLE -> ctx.getVectorDrawable("HuntingHornNote", "Purple")
+            NoteType.GREEN -> ctx.getVectorDrawable("HuntingHornNote", "Green")
+            NoteType.ORANGE -> ctx.getVectorDrawable("HuntingHornNote", "Orange")
+        }
+    }
+
 
     fun loadRarityColor(rarity: Int) : Int {
         val colorId = ColorRegistry("rare$rarity") ?: ColorRegistry("rare1")

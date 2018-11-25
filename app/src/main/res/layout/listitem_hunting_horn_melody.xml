@@ -15,36 +15,38 @@
             android:id="@+id/note1_icon"
             android:layout_width="@dimen/image_size_small"
             android:layout_height="@dimen/image_size_small"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_weight="1"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/ic_ui_question_mark_white" />
 
         <ImageView
             android:id="@+id/note2_icon"
             android:layout_width="@dimen/image_size_small"
             android:layout_height="@dimen/image_size_small"
-            android:layout_marginStart="8dp"
             android:layout_weight="1"
             app:layout_constraintStart_toEndOf="@+id/note1_icon"
+            app:layout_constraintTop_toTopOf="@+id/note1_icon"
             tools:srcCompat="@drawable/ic_ui_question_mark_white" />
 
         <ImageView
             android:id="@+id/note3_icon"
             android:layout_width="@dimen/image_size_small"
             android:layout_height="@dimen/image_size_small"
-            android:layout_marginStart="8dp"
             android:layout_weight="1"
             app:layout_constraintStart_toEndOf="@+id/note2_icon"
+            app:layout_constraintTop_toTopOf="@+id/note2_icon"
             tools:srcCompat="@drawable/ic_ui_question_mark_white" />
 
         <ImageView
             android:id="@+id/note4_icon"
             android:layout_width="@dimen/image_size_small"
             android:layout_height="@dimen/image_size_small"
-            android:layout_marginStart="8dp"
             android:layout_weight="1"
             app:layout_constraintStart_toEndOf="@+id/note3_icon"
+            app:layout_constraintTop_toTopOf="@+id/note3_icon"
             tools:srcCompat="@drawable/ic_ui_question_mark_white" />
 
         <TextView
@@ -53,7 +55,6 @@
             android:layout_width="wrap_content"
             android:layout_height="14dp"
             android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_medium"
             android:layout_weight="1.5"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"

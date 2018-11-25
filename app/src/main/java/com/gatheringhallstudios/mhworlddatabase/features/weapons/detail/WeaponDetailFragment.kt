@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.view.*
+import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
 import kotlinx.android.synthetic.main.listitem_section_header.view.*
 
@@ -290,17 +291,51 @@ class WeaponDetailFragment : Fragment() {
 
     private fun bindHuntingHorn(weapon: Weapon, melodies: List<WeaponMelody>?, view: View) {
         populateSharpness(weapon.sharpnessData, view)
-        view.findViewById<TextView>(R.id.notes_value).text = weapon.notes.toString()
+        notes_layout.removeAllViews()
+        weapon.notes!!.forEach {
+            val noteIcon = ImageView(context)
+            noteIcon.layoutParams = ViewGroup.LayoutParams(resources.getDimension(R.dimen.image_size_small).toInt(), resources.getDimension(R.dimen.image_size_small).toInt())
+            when(it) {
+                'W' -> noteIcon.setImageDrawable(loadIconFor(NoteType.WHITE))
+                'R' -> noteIcon.setImageDrawable(loadIconFor(NoteType.RED))
+                'B' -> noteIcon.setImageDrawable(loadIconFor(NoteType.BLUE))
+                'O' -> noteIcon.setImageDrawable(loadIconFor(NoteType.ORANGE))
+                'Y' -> noteIcon.setImageDrawable(loadIconFor(NoteType.YELLOW))
+                'P' -> noteIcon.setImageDrawable(loadIconFor(NoteType.PURPLE))
+                'G' -> noteIcon.setImageDrawable(loadIconFor(NoteType.GREEN))
+                'C' -> noteIcon.setImageDrawable(loadIconFor(NoteType.CYAN))
+            }
+            notes_layout.addView(noteIcon)
+        }
 
         view.melody_layout.removeAllViews()
-
         melodies?.forEach {
             val melodyView = layoutInflater.inflate(R.layout.listitem_hunting_horn_melody, melody_layout, false )
+            it.notes.forEachIndexed { index, it ->
+                val noteIcon = when(index) {
+                    0 -> melodyView.note1_icon
+                    1 -> melodyView.note2_icon
+                    2 -> melodyView.note3_icon
+                    3 -> melodyView.note4_icon
+                    else -> null
+                }
+
+                when(it) {
+                    'W' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.WHITE))
+                    'R' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.RED))
+                    'B' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.BLUE))
+                    'O' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.ORANGE))
+                    'Y' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.YELLOW))
+                    'P' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.PURPLE))
+                    'G' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.GREEN))
+                    'C' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.CYAN))
+                }
+            }
+
             melodyView.effect1.text = it.effect1
             melodyView.effect2.text = it.effect2
             melodyView.duration_value.text = it.duration
             melodyView.extension_value.text = it.extension
-
             melody_layout.addView(melodyView)
         }
     }
