@@ -144,7 +144,7 @@ object AssetLoader {
             'B' -> ctx.getVectorDrawable(vectorName, "Blue")
             'O' -> ctx.getVectorDrawable(vectorName, "Orange")
             'Y' -> ctx.getVectorDrawable(vectorName, "Yellow")
-            'P' -> ctx.getVectorDrawable(vectorName, "Purple")
+            'P' -> ctx.getVectorDrawable(vectorName, "Violet")
             'G' -> ctx.getVectorDrawable(vectorName, "Green")
             'C' -> ctx.getVectorDrawable(vectorName, "Cyan")
             else -> null

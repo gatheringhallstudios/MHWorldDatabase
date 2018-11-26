@@ -294,17 +294,17 @@ class WeaponDetailFragment : Fragment() {
         populateSharpness(weapon.sharpnessData, view)
         notes_layout.removeAllViews()
 
-        weapon.notes!!.forEachIndexed { index, note ->
+        weapon.notes?.forEachIndexed { index, note ->
             val noteIcon = ImageView(context)
             noteIcon.layoutParams = ViewGroup.LayoutParams(resources.getDimension(R.dimen.image_size_small).toInt(), resources.getDimension(R.dimen.image_size_small).toInt())
-            noteIcon.setImageDrawable(loadNoteFromChar(note, index ))
+            noteIcon.setImageDrawable(loadNoteFromChar(note, index))
             notes_layout.addView(noteIcon)
         }
 
         view.melody_layout.removeAllViews()
-        melodies?.forEach {
+        melodies?.forEach { melody ->
             val melodyView = layoutInflater.inflate(R.layout.listitem_hunting_horn_melody, melody_layout, false )
-            it.notes.forEachIndexed { index, it ->
+            melody.notes.forEachIndexed { index, note ->
                 val noteIcon = when(index) {
                     0 -> melodyView.note1_icon
                     1 -> melodyView.note2_icon
@@ -313,13 +313,14 @@ class WeaponDetailFragment : Fragment() {
                     else -> null
                 }
 
-                noteIcon!!.setImageDrawable(loadNoteFromChar(it, weapon.notes.indexOf(it)))
+                val noteType = weapon.notes?.indexOf(note) ?: 0
+                noteIcon?.setImageDrawable(loadNoteFromChar(note, noteType))
             }
 
-            melodyView.effect1.text = it.effect1
-            melodyView.effect2.text = it.effect2
-            melodyView.duration_value.text = it.duration
-            melodyView.extension_value.text = it.extension
+            melodyView.effect1.text = melody.effect1
+            melodyView.effect2.text = melody.effect2
+            melodyView.duration_value.text = melody.duration
+            melodyView.extension_value.text = melody.extension
             melody_layout.addView(melodyView)
         }
     }

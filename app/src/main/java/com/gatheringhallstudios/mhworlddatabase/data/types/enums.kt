@@ -205,14 +205,3 @@ enum class ReloadType {
     FAST,
     VERY_FAST
 }
-
-enum class NoteType {
-    WHITE,
-    CYAN,
-    RED,
-    YELLOW,
-    BLUE,
-    PURPLE,
-    GREEN,
-    ORANGE,
-}
