@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadIconFor
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadNoteFromChar
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
@@ -292,19 +293,11 @@ class WeaponDetailFragment : Fragment() {
     private fun bindHuntingHorn(weapon: Weapon, melodies: List<WeaponMelody>?, view: View) {
         populateSharpness(weapon.sharpnessData, view)
         notes_layout.removeAllViews()
-        weapon.notes!!.forEach {
+
+        weapon.notes!!.forEachIndexed { index, note ->
             val noteIcon = ImageView(context)
             noteIcon.layoutParams = ViewGroup.LayoutParams(resources.getDimension(R.dimen.image_size_small).toInt(), resources.getDimension(R.dimen.image_size_small).toInt())
-            when(it) {
-                'W' -> noteIcon.setImageDrawable(loadIconFor(NoteType.WHITE))
-                'R' -> noteIcon.setImageDrawable(loadIconFor(NoteType.RED))
-                'B' -> noteIcon.setImageDrawable(loadIconFor(NoteType.BLUE))
-                'O' -> noteIcon.setImageDrawable(loadIconFor(NoteType.ORANGE))
-                'Y' -> noteIcon.setImageDrawable(loadIconFor(NoteType.YELLOW))
-                'P' -> noteIcon.setImageDrawable(loadIconFor(NoteType.PURPLE))
-                'G' -> noteIcon.setImageDrawable(loadIconFor(NoteType.GREEN))
-                'C' -> noteIcon.setImageDrawable(loadIconFor(NoteType.CYAN))
-            }
+            noteIcon.setImageDrawable(loadNoteFromChar(note, index ))
             notes_layout.addView(noteIcon)
         }
 
@@ -320,16 +313,7 @@ class WeaponDetailFragment : Fragment() {
                     else -> null
                 }
 
-                when(it) {
-                    'W' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.WHITE))
-                    'R' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.RED))
-                    'B' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.BLUE))
-                    'O' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.ORANGE))
-                    'Y' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.YELLOW))
-                    'P' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.PURPLE))
-                    'G' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.GREEN))
-                    'C' -> noteIcon?.setImageDrawable(loadIconFor(NoteType.CYAN))
-                }
+                noteIcon!!.setImageDrawable(loadNoteFromChar(it, weapon.notes.indexOf(it)))
             }
 
             melodyView.effect1.text = it.effect1

@@ -136,16 +136,18 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
-    fun loadIconFor(type: NoteType): Drawable? {
+    fun loadNoteFromChar(type: Char, noteNumber: Int): Drawable? {
+        val vectorName = "HuntingHornNote" + (noteNumber + 1)
         return when (type) {
-            NoteType.WHITE -> ctx.getVectorDrawable("HuntingHornNote", "White")
-            NoteType.CYAN -> ctx.getVectorDrawable("HuntingHornNote", "Cyan")
-            NoteType.RED -> ctx.getVectorDrawable("HuntingHornNote", "Red")
-            NoteType.YELLOW -> ctx.getVectorDrawable("HuntingHornNote", "Yellow")
-            NoteType.BLUE -> ctx.getVectorDrawable("HuntingHornNote", "Blue")
-            NoteType.PURPLE -> ctx.getVectorDrawable("HuntingHornNote", "Purple")
-            NoteType.GREEN -> ctx.getVectorDrawable("HuntingHornNote", "Green")
-            NoteType.ORANGE -> ctx.getVectorDrawable("HuntingHornNote", "Orange")
+            'W' -> ctx.getVectorDrawable(vectorName, "White")
+            'R' -> ctx.getVectorDrawable(vectorName, "Red")
+            'B' -> ctx.getVectorDrawable(vectorName, "Blue")
+            'O' -> ctx.getVectorDrawable(vectorName, "Orange")
+            'Y' -> ctx.getVectorDrawable(vectorName, "Yellow")
+            'P' -> ctx.getVectorDrawable(vectorName, "Purple")
+            'G' -> ctx.getVectorDrawable(vectorName, "Green")
+            'C' -> ctx.getVectorDrawable(vectorName, "Cyan")
+            else -> null
         }
     }
 
