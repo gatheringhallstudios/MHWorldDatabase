@@ -108,20 +108,24 @@ class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): RecyclerView.Adapter<Recy
         if (node.isCollapsed) {
             // we're expanding
             val sourcePosition = sourceItems.indexOf(node)
-            val newItems = sourceItems.subList(
-                    sourcePosition + 1,
-                    sourcePosition + 1 + node.numChildren)
+            val newItems = ArrayList<RenderedTreeNode<Weapon>>()
+
+            // Traverse source list and add all items while excluding collapsed items and their children
+            var idx = sourcePosition + 1
+            while (idx <= sourcePosition + node.numChildren) {
+                newItems.add(sourceItems[idx])
+
+                // Skip over collapsed children
+                if (sourceItems[idx].isCollapsed) idx += sourceItems[idx].numChildren
+
+                idx++
+            }
+
             renderedItems.addAll(destinationPosition + 1, newItems)
             node.isCollapsed = false // no longer collapsed
 
-            // mark all children as expanded, otherwise wierdness will happen
-            // unfortunately the only alternative is "reconstruction".
-            for (item in newItems) {
-                item.isCollapsed = false
-            }
-
             notifyItemChanged(destinationPosition)
-            notifyItemRangeInserted(destinationPosition + 1, node.numChildren)
+            notifyItemRangeInserted(destinationPosition + 1, newItems.count())
 
         } else {
             // we're collapsing
