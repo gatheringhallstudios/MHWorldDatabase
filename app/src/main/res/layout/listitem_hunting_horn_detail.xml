@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -237,7 +238,7 @@
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_element" />
+            android:src="@drawable/ic_ui_notes" />
 
         <TextView
             style="@style/TextSubHead"
@@ -254,18 +255,105 @@
             android:layout_marginEnd="@dimen/margin_large"
             android:gravity="center_vertical|end">
 
-            <TextView
-                android:id="@+id/notes_value"
-                style="@style/TextSubHead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_large"
-                android:gravity="end"
-                tools:text="PRB" />
+            <ImageView
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:src="@xml/ic_ui_note_2_base" />
+
+            <ImageView
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:src="@xml/ic_ui_note_2_base" />
+
+            <ImageView
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:src="@xml/ic_ui_note_2_base" />
+
+            <ImageView
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:src="@xml/ic_ui_note_2_base" />
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_section_gap">
+
+        <FrameLayout
+            android:id="@+id/duration_icon"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/melody_layout"
+            app:layout_constraintEnd_toStartOf="@+id/extension_icon"
+            app:layout_constraintTop_toTopOf="@+id/melody_header">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/weapon_hunting_horn_duration"
+                android:textColor="@color/textColorHigh" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/extension_icon"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/melody_layout"
+            app:layout_constraintEnd_toEndOf="@+id/melody_header"
+            app:layout_constraintTop_toTopOf="@+id/melody_header">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/weapon_hunting_horn_extension"
+                android:textColor="@color/textColorHigh" />
+        </FrameLayout>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:id="@+id/melody_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:labelText="@string/weapon_hunting_horn_melodies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+
+        <!-- This section will be populated dynamically through code -->
+        <LinearLayout
+            android:id="@+id/melody_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/melody_header">
+
+            <include
+                layout="@layout/listitem_hunting_horn_melody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
 

@@ -83,8 +83,45 @@ abstract class WeaponDao {
     """)
     abstract fun loadWeaponAmmoData(langId: String, weaponId: Int): WeaponAmmoData?
 
+    /**
+     * Loads all weapon melodies from the database. The reason for this is that it is very difficult
+     * to search for all permutations of hunting horn notes from the database. The note -> melody
+     * matching will be done in Kotlin instead
+     */
+    @Query("""
+        SELECT wm.id, wm.notes, wmt.effect1, wmt.effect2, wm.duration, wm.extension
+         FROM weapon_melody wm
+            JOIN weapon_melody_text wmt
+                ON  wm.id = wmt.id
+        WHERE wmt.lang_id = :langId
+        ORDER BY wm.id
+    """)
+    abstract fun loadWeaponMelodies(langId: String): List<WeaponMelody>
+
     fun queryRecipeComponents(langId: String, weaponId: Int): Map<String?, List<ItemQuantity>> {
         return loadWeaponComponents(langId, weaponId).groupBy { it.recipe_type }
+    }
+
+    fun queryWeaponMelodies(langId: String, weapon: Weapon): List<WeaponMelody> {
+        if (weapon.weapon_type != WeaponType.HUNTING_HORN) return listOf()
+        val comparator = Array(4) {
+            if (it < weapon.notes!!.length) {
+                Character.getNumericValue(weapon.notes[it])
+            } else {
+                0
+            }
+        }
+
+        return loadWeaponMelodies(langId).filter {
+            var result = true
+            for (note in it.notes!!) {
+                if (!comparator.contains(Character.getNumericValue(note))) {
+                    result = false
+                }
+            }
+
+            result
+        }
     }
 
     /**
@@ -96,7 +133,8 @@ abstract class WeaponDao {
         WeaponFull(
                 weapon = weapon,
                 recipe = queryRecipeComponents(langId, weaponId),
-                ammo = loadWeaponAmmoData(langId, weaponId)
+                ammo = loadWeaponAmmoData(langId, weaponId),
+                melodies = queryWeaponMelodies(langId, weapon)
         )
     }
 

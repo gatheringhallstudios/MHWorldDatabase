@@ -136,6 +136,21 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
+    fun loadNoteFromChar(type: Char, noteNumber: Int): Drawable? {
+        val vectorName = "HuntingHornNote" + (noteNumber + 1)
+        return when (type) {
+            'W' -> ctx.getVectorDrawable(vectorName, "White")
+            'R' -> ctx.getVectorDrawable(vectorName, "Red")
+            'B' -> ctx.getVectorDrawable(vectorName, "Blue")
+            'O' -> ctx.getVectorDrawable(vectorName, "Orange")
+            'Y' -> ctx.getVectorDrawable(vectorName, "Yellow")
+            'P' -> ctx.getVectorDrawable(vectorName, "Violet")
+            'G' -> ctx.getVectorDrawable(vectorName, "Green")
+            'C' -> ctx.getVectorDrawable(vectorName, "Cyan")
+            else -> null
+        }
+    }
+
 
     fun loadRarityColor(rarity: Int) : Int {
         val colorId = ColorRegistry("rare$rarity") ?: ColorRegistry("rare1")

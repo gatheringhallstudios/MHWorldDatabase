@@ -37,6 +37,9 @@ val VectorRegistry = createRegistry(
         "Bow" to R.xml.ic_equipment_bow_base,
         "LightBowgun" to R.xml.ic_equipment_light_bowgun_base,
         "HeavyBowgun" to R.xml.ic_equipment_heavy_bowgun_base,
+        "HuntingHornNote1" to R.xml.ic_ui_note_1_base,
+        "HuntingHornNote2" to R.xml.ic_ui_note_2_base,
+        "HuntingHornNote3" to R.xml.ic_ui_note_3_base,
 
         "Charm" to R.xml.ic_equipment_charm_base,
 
