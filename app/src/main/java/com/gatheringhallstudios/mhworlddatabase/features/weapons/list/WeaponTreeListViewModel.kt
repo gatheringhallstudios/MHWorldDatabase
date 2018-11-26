@@ -4,13 +4,12 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTreeCollection
-
-
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.createTreeRenderList
 
 /**
  * Viewmodel used to contain data for the Weapon Tree.
@@ -56,67 +55,12 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
                 }
             }
             else -> {
-                // Populate depth/formatter fields (todo: separate concerns, but this works for now)
-                val buffer = weaponTree.roots.flatMap { x ->
-                    findWeaponPaths(x, 0, listOf(), true)
+                // Render all root nodes and their children
+                weaponTree.roots.flatMap {
+                    createTreeRenderList(it)
                 }
-
-                // Populate weapon paths and processed leaves
-                buffer.flatten().distinct()
             }
         }
-    }
-
-    /**
-     * Performs a depth first traversal on the weapon tree to find all possible routes and creates the enum representing the tree component structure to be drawn
-     */
-    private fun findWeaponPaths(node: TreeNode<Weapon>, depth: Int, prefix: List<TreeFormatter>, isTail: Boolean): MutableList<MutableList<RenderedTreeNode<Weapon>>> {
-        val paths: MutableList<MutableList<RenderedTreeNode<Weapon>>> = mutableListOf()
-
-        val formatter = mutableListOf<TreeFormatter>()
-
-        //The root node gets a special enum to show it is the start node
-        val newFormatter = when {
-            depth == 0 -> TreeFormatter.START
-            isTail -> TreeFormatter.L_BRANCH
-            else -> TreeFormatter.T_BRANCH
-        }
-
-        formatter.addAll(prefix)
-        formatter.add(newFormatter)
-
-        if (node.getChildren().isEmpty()) {
-            paths.add(mutableListOf(RenderedTreeNode(node.value, depth, formatter)))
-            return paths
-        }
-
-        //Root nodes are treated specially because of the way they are to be drawn on the UI
-        //They do not receive mid nodes (even though they obviously have children)
-        if (depth > 0) formatter.add(TreeFormatter.MID)
-
-        val resultNode = RenderedTreeNode(node.value, depth, formatter)
-        paths.add(mutableListOf(resultNode))
-
-        node.getChildren().forEachIndexed { index, it ->
-            val nextPrefix = prefix.toMutableList()
-
-            if (isTail) {
-                if (depth != 0) { //Only add the indent if this is not a root tree element
-                    nextPrefix.add(TreeFormatter.INDENT)
-                }
-            } else {
-                nextPrefix.add(TreeFormatter.STRAIGHT_BRANCH)
-            }
-
-            val nextIsTail = index == node.getChildren().size - 1
-            val pathLists = findWeaponPaths(it, depth + 1, nextPrefix, nextIsTail)
-            pathLists.forEach {
-                //it.add(0, node)
-                paths.add(it)
-            }
-        }
-
-        return paths
     }
 }
 

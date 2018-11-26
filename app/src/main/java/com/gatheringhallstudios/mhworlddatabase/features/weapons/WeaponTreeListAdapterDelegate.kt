@@ -15,8 +15,6 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.RenderedTreeNode
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
@@ -25,7 +23,16 @@ import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 
 const val INDENT_SIZE = 16 //This value corresponds to the measured width of each of vectors used for drawing the tree in DP. Convert to pixels before use.
 
-class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : AdapterDelegate<List<RenderedTreeNode<Weapon>>>() {
+/**
+ * Adapter delegate used to render weapons in a weapon tree. These take "RenderedTreeNode" objects directly.
+ * Use this in the BasicDelegateAdapter or in a dedicated adapter like the WeaponTreeAdapter.
+ */
+class WeaponTreeListAdapterDelegate(
+        private val onSelected: (Weapon) -> Unit,
+        private val onLongSelect: ((Weapon) -> Unit)?
+) : AdapterDelegate<List<RenderedTreeNode<Weapon>>>() {
+
+    constructor(onSelected: (Weapon) -> Unit): this(onSelected, null)
 
     override fun isForViewType(items: List<RenderedTreeNode<Weapon>>, position: Int): Boolean {
         return items[position] is RenderedTreeNode<Weapon>
@@ -48,6 +55,13 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
         vh.bind(weaponBaseTreeNode)
 
         holder.view.setOnClickListener { onSelected(weaponBaseTreeNode.value) }
+        if (onLongSelect != null) {
+            holder.view.setOnLongClickListener {
+                // note: cannot pass position as an optimization, as it will not change on list updates unless re-rendered
+                onLongSelect.invoke(weaponBaseTreeNode.value)
+                true // notify that it was consumed
+            }
+        }
     }
 
     internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -128,7 +142,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
                 view.complex_stat_layout.addView(defenseView)
             }
 
-            createTreeLayout(weaponNode.formatter)
+            createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed)
         }
 
         private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
@@ -140,7 +154,7 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
             }
         }
 
-        private fun createTreeLayout(formatter: List<TreeFormatter>) {
+        private fun createTreeLayout(formatter: List<TreeFormatter>, isCollapsed: Boolean) {
             val treeView = view.tree_components
 
             if (treeView.childCount != 0) treeView.removeAllViews()
@@ -148,7 +162,11 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
             formatter.forEach {
                 when (it) {
                     TreeFormatter.START -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start))
+                        if (!isCollapsed) {
+                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start))
+                        } else {
+                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start_collapsed))
+                        }
                     }
                     TreeFormatter.INDENT -> {
                         val space = Space(treeView.context)
@@ -162,7 +180,11 @@ class WeaponTreeListAdapterDelegate(private val onSelected: (Weapon) -> Unit) : 
                         treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_t))
                     }
                     TreeFormatter.MID -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid))
+                        if (!isCollapsed) {
+                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid))
+                        } else {
+                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid_collapsed))
+                        }
                     }
                     TreeFormatter.L_BRANCH -> {
                         treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_l))

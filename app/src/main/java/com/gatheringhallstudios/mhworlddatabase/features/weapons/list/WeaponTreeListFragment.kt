@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.WeaponTreeAdapter
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.WeaponTreeListAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
@@ -32,11 +33,6 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
         setHasOptionsMenu(true)
     }
 
-    // Setup adapter and navigation
-    private val adapter = BasicListDelegationAdapter(WeaponTreeListAdapterDelegate {
-        getRouter().navigateWeaponDetail(it.id)
-    })
-
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(WeaponTreeListViewModel::class.java)
     }
@@ -45,6 +41,10 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
         val type = arguments?.getSerializable(ARG_WEAPON_TREE_TYPE) as WeaponType
 
         setActivityTitle(AssetLoader.getNameFor(type))
+
+        val adapter = WeaponTreeAdapter {
+            getRouter().navigateWeaponDetail(it.id)
+        }
         setAdapter(adapter)
 
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
@@ -53,7 +53,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
         viewModel.setWeaponType(type)
 
         viewModel.nodeListData.observe(this, Observer {
-            adapter.items = it ?: emptyList()
+            adapter.setItems(it ?: emptyList())
             adapter.notifyDataSetChanged()
         })
 
