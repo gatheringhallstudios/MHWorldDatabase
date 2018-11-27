@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadIconFor
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadNoteFromChar
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -31,6 +33,7 @@ import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.view.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
 import kotlinx.android.synthetic.main.listitem_section_header.view.*
+import kotlinx.android.synthetic.main.listitem_weapon.view.*
 
 class WeaponDetailFragment : Fragment() {
 
@@ -67,7 +70,19 @@ class WeaponDetailFragment : Fragment() {
         weapon_header.setSubtitleColor(AssetLoader.loadRarityColor(weapon.rarity))
 
         attack_value.text = weapon.attack.toString()
-        affinity_value.text = weapon.affinity.toString()
+
+        /** Affinity **/
+        val affinitySb = StringBuilder()
+        val prepend = if (weapon.affinity > 0) "+" else ""
+        affinitySb.append(prepend).append(weapon.affinity).append("%")
+        affinity_value.text = affinitySb.toString()
+
+        if (weapon.affinity > 0 ) {
+            affinity_value.setTextColor(ContextCompat.getColor(context!!, R.color.textColorGreen))
+        } else {
+            affinity_value.setTextColor(ContextCompat.getColor(context!!, R.color.textColorRed))
+        }
+
         elderseal_value.text = when (weapon.elderseal) {
             ElderSealLevel.NONE -> getString(R.string.weapon_elderseal_none)
             ElderSealLevel.LOW -> getString(R.string.weapon_elderseal_low)
@@ -93,7 +108,15 @@ class WeaponDetailFragment : Fragment() {
         slot2.setImageDrawable(slotImages[1])
         slot3.setImageDrawable(slotImages[2])
 
-        defence_value.text = weapon.defense.toString()
+        /** Defence **/
+        val defenceSb = StringBuilder()
+        val prepend2 = if (weapon.defense!! > 0) "+" else ""
+        defenceSb.append(prepend).append(weapon.defense)
+        defence_value.text = defenceSb.toString()
+        if (weapon.defense == 0) {
+            defence_value.alpha = 0.3.toFloat()
+            defence_label.alpha = 0.3.toFloat()
+        }
     }
 
     private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {

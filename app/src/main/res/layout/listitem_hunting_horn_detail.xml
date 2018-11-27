@@ -17,12 +17,14 @@
 
         <ImageView
             style="@style/IconXSmall"
+            android:layout_gravity="top"
             android:layout_marginStart="@dimen/margin_large"
             android:src="@drawable/ic_ui_whetstone" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:orientation="vertical">
 
             <TextView
@@ -32,11 +34,6 @@
                 android:layout_marginStart="@dimen/margin_large"
                 android:text="@string/weapon_sharpness" />
 
-            <TextView
-                style="@style/TextBodyMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weapon_handicraft" />
         </LinearLayout>
 
 
@@ -256,23 +253,23 @@
             android:gravity="center_vertical|end">
 
             <ImageView
-                android:layout_width="@dimen/image_size_small"
-                android:layout_height="@dimen/image_size_small"
+                android:layout_width="@dimen/image_size_xsmall"
+                android:layout_height="@dimen/image_size_xsmall"
                 android:src="@xml/ic_ui_note_2_base" />
 
             <ImageView
-                android:layout_width="@dimen/image_size_small"
-                android:layout_height="@dimen/image_size_small"
+                android:layout_width="@dimen/image_size_xsmall"
+                android:layout_height="@dimen/image_size_xsmall"
                 android:src="@xml/ic_ui_note_2_base" />
 
             <ImageView
-                android:layout_width="@dimen/image_size_small"
-                android:layout_height="@dimen/image_size_small"
+                android:layout_width="@dimen/image_size_xsmall"
+                android:layout_height="@dimen/image_size_xsmall"
                 android:src="@xml/ic_ui_note_2_base" />
 
             <ImageView
-                android:layout_width="@dimen/image_size_small"
-                android:layout_height="@dimen/image_size_small"
+                android:layout_width="@dimen/image_size_xsmall"
+                android:layout_height="@dimen/image_size_xsmall"
                 android:src="@xml/ic_ui_note_2_base" />
 
         </LinearLayout>
@@ -342,6 +339,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/melody_header">
