@@ -193,15 +193,15 @@
                     android:src="@drawable/ic_ui_defense" />
 
                 <TextView
-                    android:id="@+id/defence_label"
+                    android:id="@+id/defense_label"
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:text="@string/weapon_defence" />
+                    android:text="@string/weapon_defense" />
 
                 <TextView
-                    android:id="@+id/defence_value"
+                    android:id="@+id/defense_value"
                     style="@style/TextSubHead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

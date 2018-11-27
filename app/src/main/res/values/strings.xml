@@ -28,6 +28,7 @@
     <string name="format_rarity">Rarity %1$d</string> <!-- Example: Rarity 2 -->
     <string name="format_plus">+%1$d</string> <!-- Example: +5 -->
     <string name="format_percentage">%1$s%%</string> <!-- Example: 20%-->
+    <string name="format_plus_percentage">+%1$d%%</string> <!-- Example: +20%-->
 
     <!-- Ailments -->
     <string name="ailment_roar_small">Roar (small)</string>
@@ -169,7 +170,7 @@
     <string name="weapon_attack">Attack</string>
     <string name="weapon_sharpness">Sharpness</string>
     <string name="weapon_element">Element</string>
-    <string name="weapon_defence">Defence</string>
+    <string name="weapon_defense">Defense</string>
     <string name="weapon_affinity">Affinity</string>
     <string name="weapon_handicraft">(with Handicraft)</string>
     <string name="weapon_elderseal">Elderseal</string>
