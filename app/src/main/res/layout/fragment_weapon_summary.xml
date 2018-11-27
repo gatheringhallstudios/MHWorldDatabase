@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
-                    tools:text="2" />
+                    tools:text="2%" />
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
@@ -193,6 +193,7 @@
                     android:src="@drawable/ic_ui_defense" />
 
                 <TextView
+                    android:id="@+id/defence_label"
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
