@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weapon_components_section"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/margin_section_gap">
+
+    <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+        android:id="@+id/weapon_components_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:labelText="@string/header_required_materials"
+        />
+
+    <LinearLayout
+        android:id="@+id/weapon_components_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/divider_stroke"
+        android:showDividers="middle"/>
+</LinearLayout>

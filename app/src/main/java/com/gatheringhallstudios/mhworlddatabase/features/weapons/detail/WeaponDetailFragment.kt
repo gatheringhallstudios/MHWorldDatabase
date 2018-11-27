@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.view.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
-import kotlinx.android.synthetic.main.listitem_section_header.view.*
+import kotlinx.android.synthetic.main.view_weapon_recipe.view.*
 
 /**
  * Fragment used to display the main weapon detail information.
@@ -171,37 +171,42 @@ class WeaponDetailFragment : Fragment() {
      * Converts the map of the different recipe types (craft, upgrade, etc.) into section headers and lists
      */
     private fun populateComponents(recipes: Map<String?, List<ItemQuantity>>) {
-        weapon_components_section.removeAllViews()
-
         if (recipes.isEmpty()) {
-            weapon_components_section.visibility = View.GONE
+            weapon_recipes.visibility = View.GONE
             return
         }
 
-        weapon_components_section.visibility = View.VISIBLE
+        weapon_recipes.visibility = View.VISIBLE
 
-        for (recipe in recipes) {
-            val sectionHeader = layoutInflater.inflate(R.layout.listitem_section_header, weapon_components_section, false)
-            sectionHeader.label_text.text = when (recipe.key) {
-                "Upgrade" -> getString(R.string.header_required_materials_upgrade)
+        // Inner function to inflate a sub recipe view.
+        fun inflateRecipe(type: String, items: List<ItemQuantity>): View {
+            val view = layoutInflater.inflate(R.layout.view_weapon_recipe, weapon_recipes, false)
+
+            view.weapon_components_list_title.setLabelText(when (type) {
                 "Create" -> getString(R.string.header_required_materials_craft)
-                else -> "Other"
-            }
+                else -> getString(R.string.header_required_materials_upgrade)
+            })
 
-            weapon_components_section.addView(sectionHeader)
-
-            for (component in recipe.value) {
-                val view = IconLabelTextCell(context)
+            for (component in items) {
+                val itemView = IconLabelTextCell(context)
                 val icon = AssetLoader.loadIconFor(component.item)
 
-                view.setLeftIconDrawable(icon)
-                view.setLabelText(component.item.name)
-                view.setValueText(getString(R.string.format_quantity_none, component.quantity))
-                view.setOnClickListener {
+                itemView.setLeftIconDrawable(icon)
+                itemView.setLabelText(component.item.name)
+                itemView.setValueText(getString(R.string.format_quantity_none, component.quantity))
+                itemView.setOnClickListener {
                     getRouter().navigateItemDetail(component.item.id)
                 }
-                weapon_components_section.addView(view)
+
+                view.weapon_components_list.addView(itemView)
             }
+
+            return view
+        }
+
+        weapon_recipes.removeAllViews()
+        for (recipe in recipes) {
+            weapon_recipes.addView(inflateRecipe(recipe.key ?: "", recipe.value))
         }
     }
 

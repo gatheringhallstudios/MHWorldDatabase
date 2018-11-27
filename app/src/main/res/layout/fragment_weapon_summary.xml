@@ -218,14 +218,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/weapon_components_section"
+            android:id="@+id/weapon_recipes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_gap"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
+            android:orientation="vertical"/>
     </LinearLayout>
 
 </ScrollView>
