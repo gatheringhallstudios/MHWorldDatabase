@@ -30,7 +30,6 @@ import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.view.*
-import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
 import kotlinx.android.synthetic.main.listitem_section_header.view.*
 
@@ -258,6 +257,7 @@ class WeaponDetailFragment : Fragment() {
             PhialType.NONE -> ""
             PhialType.EXHAUST -> getString(R.string.weapon_charge_blade_exhaust)
             PhialType.POWER -> getString(R.string.weapon_charge_blade_power)
+            PhialType.POISON -> getString(R.string.weapon_charge_blade_poison)
             PhialType.DRAGON -> getString(R.string.weapon_charge_blade_dragon)
             PhialType.POWER_ELEMENT -> getString(R.string.weapon_charge_blade_power_element)
             PhialType.PARALYSIS -> getString(R.string.weapon_charge_blade_paralysis)

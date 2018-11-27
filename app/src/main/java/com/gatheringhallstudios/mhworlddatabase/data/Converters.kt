@@ -87,6 +87,7 @@ private val PhialTypeConverter = Converter(
         "impact" to PhialType.IMPACT,
         "power element" to PhialType.POWER_ELEMENT,
         "power" to PhialType.POWER,
+        "poison" to PhialType.POISON,
         "paralysis" to PhialType.PARALYSIS,
         "dragon" to PhialType.DRAGON,
         "exhaust" to PhialType.EXHAUST,

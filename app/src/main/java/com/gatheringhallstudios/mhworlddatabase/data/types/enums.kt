@@ -1,8 +1,5 @@
 package com.gatheringhallstudios.mhworlddatabase.data.types
 
-import android.support.v4.content.res.TypedArrayUtils.getString
-import com.gatheringhallstudios.mhworlddatabase.R
-
 /**
  * This file contains a collection of enumerations used in the MHWorld app.
  * These enums are automatically converted via "Converters.kt".
@@ -138,6 +135,7 @@ enum class PhialType {
     POWER,
     DRAGON,
     POWER_ELEMENT,
+    POISON,
     PARALYSIS,
     IMPACT
 }
