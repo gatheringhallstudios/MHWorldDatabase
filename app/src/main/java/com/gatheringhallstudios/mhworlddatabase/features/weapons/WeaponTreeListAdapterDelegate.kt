@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
@@ -197,6 +198,8 @@ class WeaponTreeListAdapterDelegate(
 
         private fun createImageView(context: Context, resource: Int): ImageView {
             val imageView = ImageView(context)
+            imageView.scaleType = ImageView.ScaleType.FIT_XY
+            imageView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
             imageView.setPadding(0, 0, 0, 0)
             imageView.setImageResource(resource)
             return imageView
