@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -78,7 +77,7 @@ class WeaponDetailFragment : Fragment() {
 
         // Set elemental attack values
         element_value.text = createElementString(weapon.element1_attack, weapon.element_hidden)
-        element_icon.setImageDrawable(getElementIcon(weapon.element1))
+        element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
         element_type_value.text = weapon.element1 //TODO: This element string needs to be localized in the DB
         if (weapon.element_hidden) {
             element_layout.alpha = 0.5.toFloat()
@@ -103,21 +102,6 @@ class WeaponDetailFragment : Fragment() {
         return when (element_hidden) {
             true -> "(${workString})"
             false -> workString.toString()
-        }
-    }
-
-    private fun getElementIcon(element: String?): Drawable? {
-        return when (element) {
-            "Fire" -> context!!.getDrawableCompat(R.drawable.ic_element_fire)
-            "Dragon" -> context!!.getDrawableCompat(R.drawable.ic_element_dragon)
-            "Poison" -> context!!.getDrawableCompat(R.drawable.ic_status_poison)
-            "Water" -> context!!.getDrawableCompat(R.drawable.ic_element_water)
-            "Thunder" -> context!!.getDrawableCompat(R.drawable.ic_element_thunder)
-            "Ice" -> context!!.getDrawableCompat(R.drawable.ic_element_ice)
-            "Blast" -> context!!.getDrawableCompat(R.drawable.ic_status_blast)
-            "Paralysis" -> context!!.getDrawableCompat(R.drawable.ic_status_paralysis)
-            "Sleep" -> context!!.getDrawableCompat(R.drawable.ic_status_sleep)
-            else -> context!!.getDrawableCompat(R.drawable.ic_ui_slot_none)
         }
     }
 
@@ -252,7 +236,7 @@ class WeaponDetailFragment : Fragment() {
         //Draw sharpness bar/hide it for weapons that don't have it
         populateSharpness(weapon.sharpnessData, view)
 
-        view.findViewById<ImageView>(R.id.phial_element_icon).setImageDrawable(getElementIcon(weapon.phial.toString()))
+        view.findViewById<ImageView>(R.id.phial_element_icon).setImageDrawable(AssetLoader.loadElementIcon(weapon.phial.toString()))
         view.findViewById<TextView>(R.id.phial_type_value).text = when (weapon.phial) {
             PhialType.NONE -> ""
             PhialType.EXHAUST -> getString(R.string.weapon_charge_blade_exhaust)

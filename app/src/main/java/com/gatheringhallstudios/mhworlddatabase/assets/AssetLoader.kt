@@ -7,7 +7,9 @@ import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.AmmoType
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.CoatingType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
@@ -134,6 +136,10 @@ object AssetLoader {
         }
 
         return ctx.getVectorDrawable(name, "rare$rarity")
+    }
+
+    fun loadElementIcon(element: String?): Drawable? {
+        return ctx.getDrawableCompat(ElementRegistry(element))
     }
 
     fun loadNoteFromChar(type: Char, noteNumber: Int): Drawable? {
