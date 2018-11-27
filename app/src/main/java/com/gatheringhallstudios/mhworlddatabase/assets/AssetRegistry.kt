@@ -93,6 +93,19 @@ val VectorRegistry = createRegistry(
         "Wing" to R.xml.ic_items_wing_base
 )
 
+val ElementRegistry = fun(element: String?) = when(element) {
+    "Fire" -> R.drawable.ic_element_fire
+    "Dragon" -> R.drawable.ic_element_dragon
+    "Poison" -> R.drawable.ic_status_poison
+    "Water" -> R.drawable.ic_element_water
+    "Thunder" -> R.drawable.ic_element_thunder
+    "Ice" -> R.drawable.ic_element_ice
+    "Blast" -> R.drawable.ic_status_blast
+    "Paralysis" -> R.drawable.ic_status_paralysis
+    "Sleep" -> R.drawable.ic_status_sleep
+    else -> R.drawable.ic_ui_slot_none
+}
+
 val SlotEmptyRegistry = fun(slot: Int) = when(slot) {
     1 -> R.drawable.ic_ui_slot_1_empty
     2 -> R.drawable.ic_ui_slot_2_empty

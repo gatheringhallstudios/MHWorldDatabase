@@ -1,12 +1,12 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
@@ -101,7 +101,7 @@ class WeaponTreeListAdapterDelegate(
             if (weapon.element1 != null){
                 val elementView = CompactStatCell(
                         view.context,
-                        getElementIcon(view.context, weapon.element1),
+                        AssetLoader.loadElementIcon(weapon.element1),
                         createElementString(weapon.element1_attack, weapon.element_hidden))
 
                 if (weapon.element_hidden) {
@@ -198,25 +198,11 @@ class WeaponTreeListAdapterDelegate(
 
         private fun createImageView(context: Context, resource: Int): ImageView {
             val imageView = ImageView(context)
+            imageView.scaleType = ImageView.ScaleType.FIT_XY
+            imageView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
             imageView.setPadding(0, 0, 0, 0)
             imageView.setImageResource(resource)
             return imageView
-        }
-
-        // todo: there is already a registry for this...or there should be...
-        private fun getElementIcon(context: Context, element: String?): Drawable? {
-            return when (element) {
-                "Fire" -> context.getDrawableCompat(R.drawable.ic_element_fire)
-                "Dragon" -> context.getDrawableCompat(R.drawable.ic_element_dragon)
-                "Poison" -> context.getDrawableCompat(R.drawable.ic_status_poison)
-                "Water" -> context.getDrawableCompat(R.drawable.ic_element_water)
-                "Thunder" -> context.getDrawableCompat(R.drawable.ic_element_thunder)
-                "Ice" -> context.getDrawableCompat(R.drawable.ic_element_ice)
-                "Blast" -> context.getDrawableCompat(R.drawable.ic_status_blast)
-                "Paralysis" -> context.getDrawableCompat(R.drawable.ic_status_paralysis)
-                "Sleep" -> context.getDrawableCompat(R.drawable.ic_status_sleep)
-                else -> context.getDrawableCompat(R.drawable.ic_ui_slot_none)
-            }
         }
     }
 }
