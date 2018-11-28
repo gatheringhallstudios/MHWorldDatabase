@@ -78,7 +78,7 @@ class WeaponDetailFragment : Fragment() {
 
         // Affinity
         affinity_value.text = getString(when {
-            weapon.affinity > 0 -> R.string.format_plus_percentage
+            weapon.affinity != 0 -> R.string.format_plus_percentage
             else -> R.string.format_percentage
         }, weapon.affinity)
 

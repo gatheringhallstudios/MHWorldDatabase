@@ -29,7 +29,7 @@ class Weapon(
         val element2: String?,
         val element2_attack: Int?,
         val element_hidden: Boolean,
-        val defense: Int?,
+        val defense: Int,
         val previous_weapon_id: Int?,
 
         val craftable: Int,
