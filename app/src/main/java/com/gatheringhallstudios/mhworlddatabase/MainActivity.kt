@@ -13,6 +13,12 @@ import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
 
+/**
+ * The main activity used in MHWorld Database.
+ * MHWorldDatabase is a single activity app, so all navigation replaces the active fragment.
+ * Searching is implemented by globally maintaining the state of the searchview.
+ * TODO: Consider making the search option a simple button, that navigates to an actionbarless fragment that handles all searching.
+ */
 class MainActivity : AppCompatActivity() {
 
     private val TAG = javaClass.simpleName
@@ -122,8 +128,14 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
 
+        // checks if the searchView was closed last time. Necessary if the options menu is being recreated.
+        val wasIconified = searchView?.isIconified ?: true
+
         searchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView?.setQuery(viewModel.filter.value, false)
+        if (!wasIconified) {
+            searchView?.isIconified = false
+        }
 
         setSearchListeners()
 
