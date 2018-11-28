@@ -97,7 +97,7 @@ class WeaponTreeListAdapterDelegate(
             // Clear the placeholder layouts
             view.complex_stat_layout.removeAllViews()
 
-            // Elemental Stat
+            // Elemental Stat (added if there's a value)
             if (weapon.element1 != null){
                 val elementView = CompactStatCell(
                         view.context,
@@ -113,31 +113,36 @@ class WeaponTreeListAdapterDelegate(
                 view.complex_stat_layout.addView(elementView)
             }
 
+            // Affinity (added if there's a value)
             if (weapon.affinity != 0) {
-                val affinitySb = StringBuilder()
-                val prepend = if (weapon.affinity > 0) "+" else ""
-                affinitySb.append(prepend).append(weapon.affinity).append("%")
+                val affinityValue = view.context.getString(R.string.format_plus_percentage, weapon.affinity)
 
                 val affinityView = CompactStatCell(
                         view.context,
                         R.drawable.ic_ui_affinity,
-                        affinitySb.toString())
+                        affinityValue)
 
-                if (weapon.affinity > 0 ) {
-                    affinityView.labelView.setTextColor(ContextCompat.getColor(view.context, R.color.textColorGreen))
-                } else {
-                    affinityView.labelView.setTextColor(ContextCompat.getColor(view.context, R.color.textColorRed))
-                }
+                affinityView.labelView.setTextColor(ContextCompat.getColor(view.context, when {
+                    weapon.affinity > 0 -> R.color.textColorGreen
+                    else -> R.color.textColorRed
+                }))
 
                 view.complex_stat_layout.addView(affinityView)
             }
 
+            // Defense, added if there's a value
             if (weapon.defense != 0) {
+                val defenseValue = view.context.getString(R.string.format_plus, weapon.defense)
                 val defenseView = CompactStatCell(
                         view.context,
                         R.drawable.ic_ui_defense,
-                        weapon.defense.toString()
+                        defenseValue
                 )
+
+                defenseView.labelView.setTextColor(ContextCompat.getColor(view.context, when {
+                    weapon.defense > 0 -> R.color.textColorGreen
+                    else -> R.color.textColorRed
+                }))
 
                 view.complex_stat_layout.addView(defenseView)
             }

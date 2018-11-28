@@ -16,7 +16,6 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadIconFor
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadNoteFromChar
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
-import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -32,9 +31,11 @@ import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.view.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
-import kotlinx.android.synthetic.main.listitem_section_header.view.*
-import kotlinx.android.synthetic.main.listitem_weapon.view.*
+import kotlinx.android.synthetic.main.view_weapon_recipe.view.*
 
+/**
+ * Fragment used to display the main weapon detail information.
+ */
 class WeaponDetailFragment : Fragment() {
 
     /**
@@ -61,6 +62,10 @@ class WeaponDetailFragment : Fragment() {
         populateWeaponSpecificSection(weaponData.weapon, weaponData.ammo, weaponData.melodies)
     }
 
+    /**
+     * Populates view elements with global weapon information, like name, attack,
+     * affinity, defense, rarity, etc.
+     */
     private fun populateWeaponBasic(weapon: Weapon) {
         // Set header info
         weapon_header.setIconType(IconType.ZEMBELLISHED)
@@ -71,18 +76,19 @@ class WeaponDetailFragment : Fragment() {
 
         attack_value.text = weapon.attack.toString()
 
-        /** Affinity **/
-        val affinitySb = StringBuilder()
-        val prepend = if (weapon.affinity > 0) "+" else ""
-        affinitySb.append(prepend).append(weapon.affinity).append("%")
-        affinity_value.text = affinitySb.toString()
+        // Affinity
+        affinity_value.text = getString(when {
+            weapon.affinity != 0 -> R.string.format_plus_percentage
+            else -> R.string.format_percentage
+        }, weapon.affinity)
 
-        if (weapon.affinity > 0 ) {
-            affinity_value.setTextColor(ContextCompat.getColor(context!!, R.color.textColorGreen))
-        } else {
-            affinity_value.setTextColor(ContextCompat.getColor(context!!, R.color.textColorRed))
-        }
+        affinity_value.setTextColor(ContextCompat.getColor(context!!, when {
+            weapon.affinity > 0 -> R.color.textColorGreen
+            weapon.affinity == 0 -> R.color.textColorHigh
+            else -> R.color.textColorRed
+        }))
 
+        // Elderseal
         elderseal_value.text = when (weapon.elderseal) {
             ElderSealLevel.NONE -> getString(R.string.weapon_elderseal_none)
             ElderSealLevel.LOW -> getString(R.string.weapon_elderseal_low)
@@ -90,15 +96,15 @@ class WeaponDetailFragment : Fragment() {
             ElderSealLevel.HIGH -> getString(R.string.weapon_elderseal_high)
         }
 
-        // Set elemental attack values
-        element_value.text = createElementString(weapon.element1_attack, weapon.element_hidden)
+        // Element
+        val elementAttackStr = weapon.element1_attack?.toString() ?: "-----"
         element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
-        element_type_value.text = weapon.element1 //TODO: This element string needs to be localized in the DB
-        if (weapon.element_hidden) {
-            element_layout.alpha = 0.5.toFloat()
-        } else {
-            element_layout.alpha = 1.0.toFloat()
+        element_value.text = when (weapon.element_hidden) {
+            true -> "($elementAttackStr)"
+            false -> elementAttackStr
         }
+        element_type_value.text = weapon.element1 //TODO: This element string needs to be localized in the DB
+        element_layout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
 
         //Slot information
         val slotImages = weapon.slots.map {
@@ -108,23 +114,15 @@ class WeaponDetailFragment : Fragment() {
         slot2.setImageDrawable(slotImages[1])
         slot3.setImageDrawable(slotImages[2])
 
-        /** Defence **/
-        val defenceSb = StringBuilder()
-        val prepend2 = if (weapon.defense!! > 0) "+" else ""
-        defenceSb.append(prepend).append(weapon.defense)
-        defence_value.text = defenceSb.toString()
+        // Defense
+        defense_value.text = getString(when {
+            weapon.defense != 0 -> R.string.format_plus
+            else -> R.string.format_quantity_none
+        }, weapon.defense)
+
         if (weapon.defense == 0) {
-            defence_value.alpha = 0.3.toFloat()
-            defence_label.alpha = 0.3.toFloat()
-        }
-    }
-
-    private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
-        val workString = element1_attack ?: "-----"
-
-        return when (element_hidden) {
-            true -> "(${workString})"
-            false -> workString.toString()
+            defense_value.alpha = 0.3F
+            defense_label.alpha = 0.3F
         }
     }
 
@@ -173,37 +171,42 @@ class WeaponDetailFragment : Fragment() {
      * Converts the map of the different recipe types (craft, upgrade, etc.) into section headers and lists
      */
     private fun populateComponents(recipes: Map<String?, List<ItemQuantity>>) {
-        weapon_components_section.removeAllViews()
-
         if (recipes.isEmpty()) {
-            weapon_components_section.visibility = View.GONE
+            weapon_recipes.visibility = View.GONE
             return
         }
 
-        weapon_components_section.visibility = View.VISIBLE
+        weapon_recipes.visibility = View.VISIBLE
 
-        for (recipe in recipes) {
-            val sectionHeader = layoutInflater.inflate(R.layout.listitem_section_header, weapon_components_section, false)
-            sectionHeader.label_text.text = when (recipe.key) {
-                "Upgrade" -> getString(R.string.header_required_materials_upgrade)
+        // Inner function to inflate a sub recipe view.
+        fun inflateRecipe(type: String, items: List<ItemQuantity>): View {
+            val view = layoutInflater.inflate(R.layout.view_weapon_recipe, weapon_recipes, false)
+
+            view.weapon_components_list_title.setLabelText(when (type) {
                 "Create" -> getString(R.string.header_required_materials_craft)
-                else -> "Other"
-            }
+                else -> getString(R.string.header_required_materials_upgrade)
+            })
 
-            weapon_components_section.addView(sectionHeader)
-
-            for (component in recipe.value) {
-                val view = IconLabelTextCell(context)
+            for (component in items) {
+                val itemView = IconLabelTextCell(context)
                 val icon = AssetLoader.loadIconFor(component.item)
 
-                view.setLeftIconDrawable(icon)
-                view.setLabelText(component.item.name)
-                view.setValueText(getString(R.string.format_quantity_none, component.quantity))
-                view.setOnClickListener {
+                itemView.setLeftIconDrawable(icon)
+                itemView.setLabelText(component.item.name)
+                itemView.setValueText(getString(R.string.format_quantity_none, component.quantity))
+                itemView.setOnClickListener {
                     getRouter().navigateItemDetail(component.item.id)
                 }
-                weapon_components_section.addView(view)
+
+                view.weapon_components_list.addView(itemView)
             }
+
+            return view
+        }
+
+        weapon_recipes.removeAllViews()
+        for (recipe in recipes) {
+            weapon_recipes.addView(inflateRecipe(recipe.key ?: "", recipe.value))
         }
     }
 
