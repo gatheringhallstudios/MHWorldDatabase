@@ -46,7 +46,7 @@
         <com.ghstudios.android.ui.general.SharpnessView
             android:id="@+id/sharpness_value"
             android:layout_width="128dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_small"
             app:blue="30"
@@ -88,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
-        android:gravity="start"
+        android:gravity="left|start"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/weapon_image"
         app:layout_constraintTop_toTopOf="@+id/weapon_image">

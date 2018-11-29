@@ -1,8 +1,11 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +18,8 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
+import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
@@ -66,6 +71,7 @@ class WeaponTreeListAdapterDelegate(
 
     internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
+        @SuppressLint("ResourceType")
         fun bind(weaponNode: RenderedTreeNode<Weapon>) {
             val weapon = weaponNode.value
 
@@ -73,7 +79,6 @@ class WeaponTreeListAdapterDelegate(
             view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weapon))
 
             // STATIC STATS
-
             view.attack_value.setLabelText(weapon.attack.toString())
 
             //Render sharpness data if it exists, else hide the bar
@@ -93,6 +98,49 @@ class WeaponTreeListAdapterDelegate(
             view.slot3.setImageDrawable(slotImages[2])
 
             // DYNAMIC STATS
+            //Weapon Specific stats (e.g. phials, kinsect bonus, special ammo etc.)
+            if (weapon.weapon_type == WeaponType.CHARGE_BLADE || weapon.weapon_type == WeaponType.SWITCH_AXE) {
+                val phialValue = when (weapon.phial) {
+                    PhialType.NONE -> ""
+                    PhialType.EXHAUST -> view.context.getString(R.string.weapon_charge_blade_exhaust)
+                    PhialType.POWER -> view.context.getString(R.string.weapon_charge_blade_power)
+                    PhialType.POISON -> view.context.getString(R.string.weapon_charge_blade_poison)
+                    PhialType.DRAGON -> view.context.getString(R.string.weapon_charge_blade_dragon)
+                    PhialType.POWER_ELEMENT -> view.context.getString(R.string.weapon_charge_blade_power_element)
+                    PhialType.PARALYSIS -> view.context.getString(R.string.weapon_charge_blade_paralysis)
+                    PhialType.IMPACT -> view.context.getString(R.string.weapon_charge_blade_impact)
+                }
+
+                val phialView = CompactStatCell(
+                        view.context,
+                        R.xml.ic_items_bottle_base,
+                        phialValue
+                )
+
+                view.basic_stat_layout.addView(phialView)
+            } else if (weapon.weapon_type == WeaponType.INSECT_GLAIVE) {
+                val kinsectValue = weapon.kinsect_bonus.toString()
+                val kinsectView = CompactStatCell(
+                        view.context,
+                        R.drawable.ic_ui_kinsect_white,
+                        kinsectValue
+                )
+
+                view.basic_stat_layout.addView(kinsectView)
+            } else if (weapon.weapon_type == WeaponType.GUNLANCE) {
+                val shellingValue = weapon.shelling.toString()
+                val shellingView = CompactStatCell( //TODO: Update Icon
+                        view.context,
+                        R.xml.ic_items_bottle_base,
+                        shellingValue
+                )
+
+                view.basic_stat_layout.addView(shellingView)
+            } else if (weapon.weapon_type == WeaponType.LIGHT_BOWGUN || weapon.weapon_type == WeaponType.HEAVY_BOWGUN) {
+
+            } else if (weapon.weapon_type == WeaponType.BOW) {
+
+            }
 
             // Clear the placeholder layouts
             view.complex_stat_layout.removeAllViews()
