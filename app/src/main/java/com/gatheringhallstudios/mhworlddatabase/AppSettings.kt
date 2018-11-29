@@ -4,6 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 
+/**
+ * A static class used to manage shared preferences and application settings.
+ * Must be initialized via the AppSettings.bindApplication() function.
+ */
 class AppSettings {
     companion object {
         @JvmStatic
@@ -26,10 +30,12 @@ class AppSettings {
 
         @JvmStatic
         val dataLocale : String
-            get() = sharedPreferences.getString(DATA_LOCALE, "en")
+            get() = sharedPreferences.getString(PROP_DATA_LOCALE, "en")
 
-        // keys
-        private val DATA_LOCALE = "DATA_LOCALE"
+        /**
+         * Settings key for data locale language
+         */
+        val PROP_DATA_LOCALE = "DATA_LOCALE"
 
     }
 }

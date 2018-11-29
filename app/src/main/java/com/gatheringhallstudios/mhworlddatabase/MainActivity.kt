@@ -1,7 +1,11 @@
 package com.gatheringhallstudios.mhworlddatabase
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
@@ -177,5 +181,16 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+    }
+
+    /**
+     * Restarts the app. Launches a new app and close the current one
+     */
+    fun restartApp() {
+        val restartIntent = baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
+        restartIntent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+        finish()
+        startActivity(restartIntent)
     }
 }
