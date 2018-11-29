@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase
+package com.gatheringhallstudios.mhworlddatabase.features.app
 
 import android.content.Intent
 import android.net.Uri
@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import kotlinx.android.synthetic.main.cell_icon_label_text.view.*
 import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment : Fragment() {
