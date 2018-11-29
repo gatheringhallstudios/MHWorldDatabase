@@ -32,7 +32,7 @@ class Weapon(
         val defense: Int,
         val previous_weapon_id: Int?,
 
-        val craftable: Int,
+        val craftable: Boolean,
         val kinsect_bonus: KinsectBonus,
         val elderseal: ElderSealLevel,
         val phial: PhialType,
