@@ -1,4 +1,4 @@
-package com.ghstudios.android.ui.general
+package com.gatheringhallstudios.mhworlddatabase.components
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,7 +8,20 @@ import android.util.AttributeSet
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 
-/*
+/**
+ * Collection of colors
+ */
+private object SharpnessColors {
+    val RED = Color.RED
+    val YELLOW = Color.YELLOW
+    val GREEN = Color.GREEN
+    val ORANGE = Color.rgb(255, 150, 0)
+    val BLUE = Color.rgb(20, 131, 208)
+    val WHITE = Color.WHITE
+    val PURPLE = Color.rgb(120, 81, 169)
+}
+
+/**
  * Draws a sharpness level by values
  *
  * Max sharpness units combined should not exceed the value of int maxSharpness
@@ -29,10 +42,6 @@ class SharpnessView @JvmOverloads constructor(
 
     companion object {
         private val TAG = "DrawSharpness"
-
-        var orangeColor = Color.rgb(255, 150, 0)
-        //int purpleColor = Color.rgb(120, 81, 169);
-        var blueColor = Color.rgb(20, 131, 208)
     }
 
     private var red: Int = 0
@@ -105,15 +114,14 @@ class SharpnessView @JvmOverloads constructor(
 
         // specify the width of each bar
         val barWidth = (scalefactor * maxSharpness).toInt() + margins * 2
-        val barHeight = viewHeight - 2 * margins - 2 * innerMargin
 
         // Draw the background
         paint.color = Color.BLACK
         paint.strokeWidth = 4f
         canvas.drawRect(0f, 0f, barWidth.toFloat(), viewHeight.toFloat(), paint)
 
-        // Draw top bar
-        val barBottom = Math.floor((margins + barHeight).toDouble()).toInt()
+        // Draw bar
+        val barBottom = viewHeight - margins
         drawBar(canvas, margins, scalefactor, margins, barBottom,
                 red, orange, yellow, green, blue, white, purple)
     }
@@ -123,41 +131,25 @@ class SharpnessView @JvmOverloads constructor(
                         igreen: Int, iblue: Int, iwhite: Int, ipurple: Int) {
 
         // Run through the bar and accumulate sharpness
-        var start = margins
-        var end = start + (ired * scalefactor).toInt()
         paint.strokeWidth = 0f
-        paint.color = Color.RED
-        canvas.drawRect(start.toFloat(), bartop.toFloat(), end.toFloat(), barbottom.toFloat(), paint)
 
-        start = end
-        end += (iorange * scalefactor).toInt()
-        paint.color = orangeColor
-        canvas.drawRect(start.toFloat(), bartop.toFloat(), end.toFloat(), barbottom.toFloat(), paint)
+        var start = margins
 
-        start = end
-        end += (iyellow * scalefactor).toInt()
-        paint.color = Color.YELLOW
-        canvas.drawRect(start.toFloat(), bartop.toFloat(), end.toFloat(), barbottom.toFloat(), paint)
+        // helper that draws the color for an amount, and progresses the bar
+        fun drawSegment(color: Int, amount: Int) {
+            val end = start + (amount * scalefactor).toInt()
+            paint.color = color
+            canvas.drawRect(start.toFloat(), bartop.toFloat(), end.toFloat(), barbottom.toFloat(), paint)
 
-        start = end
-        end += (igreen * scalefactor).toInt()
-        paint.color = Color.GREEN
-        canvas.drawRect(start.toFloat(), bartop.toFloat(), end.toFloat(), barbottom.toFloat(), paint)
+            start = end
+        }
 
-        start = end
-        end += (iblue * scalefactor).toInt()
-        paint.color = blueColor
-        canvas.drawRect(start.toFloat(), bartop.toFloat(), end.toFloat(), barbottom.toFloat(), paint)
-
-        start = end
-        end += (iwhite * scalefactor).toInt()
-        paint.color = Color.WHITE
-        canvas.drawRect(start.toFloat(), bartop.toFloat(), end.toFloat(), barbottom.toFloat(), paint)
-
-        // Disabled until we get weapons with purple sharpness
-        //        start = end;
-        //        end = end + (int) (ipurple*scalefactor);
-        //        paint.setColor(purpleColor);
-        //        canvas.drawRect(start, bartop, end, barbottom, paint);
+        drawSegment(SharpnessColors.RED, ired)
+        drawSegment(SharpnessColors.ORANGE, iorange)
+        drawSegment(SharpnessColors.YELLOW, iyellow)
+        drawSegment(SharpnessColors.GREEN, igreen)
+        drawSegment(SharpnessColors.BLUE, iblue)
+        drawSegment(SharpnessColors.WHITE, iwhite)
+        drawSegment(SharpnessColors.PURPLE, ipurple)
     }
 }

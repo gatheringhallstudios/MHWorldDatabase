@@ -52,10 +52,10 @@
             app:iconSrc="@drawable/ic_ui_attack"
             app:labelText="240" />
 
-        <com.ghstudios.android.ui.general.SharpnessView
+        <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
             android:id="@+id/sharpness_value"
             android:layout_width="128dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/row_height_small"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_small"
             app:blue="30"
