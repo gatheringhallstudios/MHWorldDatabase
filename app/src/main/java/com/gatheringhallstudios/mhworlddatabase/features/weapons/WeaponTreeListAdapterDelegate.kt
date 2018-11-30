@@ -20,9 +20,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
-import kotlinx.android.synthetic.main.listitem_bow_detail.view.*
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
 import kotlinx.android.synthetic.main.listitem_weapontree.view.*
+import kotlinx.android.synthetic.main.section_bow_coating.view.*
 
 const val INDENT_SIZE = 16 //This value corresponds to the measured width of each of vectors used for drawing the tree in DP. Convert to pixels before use.
 
@@ -83,11 +83,15 @@ class WeaponTreeListAdapterDelegate(
             // Populate static stats like attack, affinity...
             populateStaticStats(weapon)
             // Populate stats like horn notes, shelling type...
-            populateWeaponStats(weapon)
+            populateWeaponSpecificStats(weapon)
+            // Populate decorations
+            populateDecorations(weapon)
             // Populate stats like element, defense...
             populateComplexStats(weapon)
             // Populate tree lines
             createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed)
+
+            view.invalidate()
         }
 
         private fun populateStaticStats(weapon: Weapon) {
@@ -102,7 +106,9 @@ class WeaponTreeListAdapterDelegate(
             } else {
                 view.sharpness_container.visibility = View.GONE
             }
+        }
 
+        private fun populateDecorations(weapon: Weapon) {
             val slotImages = weapon.slots.map {
                 view.context.getDrawableCompat(SlotEmptyRegistry(it))
             }
@@ -110,9 +116,23 @@ class WeaponTreeListAdapterDelegate(
             view.slot1.setImageDrawable(slotImages[0])
             view.slot2.setImageDrawable(slotImages[1])
             view.slot3.setImageDrawable(slotImages[2])
+
+            // Hide views if no slots
+            view.slot1.visibility = when (weapon.slots[0]) {
+                0 -> View.GONE
+                else -> View.VISIBLE
+            }
+            view.slot2.visibility = when (weapon.slots[1]) {
+                0 -> View.GONE
+                else -> View.VISIBLE
+            }
+            view.slot3.visibility = when (weapon.slots[2]) {
+                0 -> View.GONE
+                else -> View.VISIBLE
+            }
         }
 
-        private fun populateWeaponStats(weapon: Weapon) {
+        private fun populateWeaponSpecificStats(weapon: Weapon) {
             //Weapon Specific stats (e.g. phials, kinsect bonus, special ammo etc.)
             view.tree_weapon_specific_section.removeAllViews()
 
@@ -131,7 +151,7 @@ class WeaponTreeListAdapterDelegate(
 
                     val phialView = CompactStatCell(
                             view.context,
-                            R.xml.ic_items_bottle_base,
+                            R.drawable.ic_ui_phials,
                             phialValue
                     )
                     view.tree_weapon_specific_section.addView(phialView)
@@ -185,32 +205,28 @@ class WeaponTreeListAdapterDelegate(
                 }
 
                 WeaponType.BOW -> {
-                    val coatingView = LayoutInflater.from(view.context).inflate(R.layout.listitem_bow_detail, view.tree_weapon_specific_section, false)
+                    val coatingView = LayoutInflater.from(view.context)
+                            .inflate(R.layout.section_bow_coating_compact, view.tree_weapon_specific_section, false)
+
                     weapon.weaponCoatings?.iterator()?.forEach {
                         when (it) {
                             CoatingType.CLOSE_RANGE -> {
                                 coatingView.close_range_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
-                                coatingView.close_range.visibility = View.VISIBLE
                             }
                             CoatingType.POWER -> {
                                 coatingView.power_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
-                                coatingView.power_coating.visibility = View.VISIBLE
                             }
                             CoatingType.PARALYSIS -> {
                                 coatingView.paralysis_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
-                                coatingView.paralysis_coating.visibility = View.VISIBLE
                             }
                             CoatingType.POISON -> {
                                 coatingView.poison_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
-                                coatingView.poison_coating.visibility = View.VISIBLE
                             }
                             CoatingType.SLEEP -> {
                                 coatingView.sleep_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
-                                coatingView.sleep_coating.visibility = View.VISIBLE
                             }
                             CoatingType.BLAST -> {
                                 coatingView.blast_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
-                                coatingView.blast_coating.visibility = View.VISIBLE
                             }
                         }
                     }
