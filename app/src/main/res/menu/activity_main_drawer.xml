@@ -46,7 +46,7 @@
         <menu>
             <item
                 android:id="@+id/settingsAction"
-                android:icon="@drawable/ic_items_ammo_white"
+                android:icon="@drawable/ic_ui_settings_white"
                 android:title="@string/title_settings" />
             <item
                 android:id="@+id/aboutAction"

@@ -20,7 +20,7 @@
     <ImageView
         android:id="@+id/weapon_craftable_image"
         style="@style/IconXSmall"
-        android:src="@drawable/ic_equipment_greatsword_white"
+        android:src="@drawable/ic_ui_buildable"
         android:layout_marginStart="@dimen/margin_small"
         app:layout_constraintStart_toEndOf="@id/weapon_name"
         app:layout_constraintTop_toTopOf="@id/weapon_name"

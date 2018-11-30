@@ -166,7 +166,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_defense" />
+                    android:src="@drawable/ic_ui_elderseal" />
 
                 <TextView
                     style="@style/TextSubHead"
