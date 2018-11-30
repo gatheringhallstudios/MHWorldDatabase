@@ -106,34 +106,32 @@ class SharpnessView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         // Margins are defined by height/marginScale
-        val margins = Math.floor((viewHeight / marginScale).toDouble()).toInt()
 
-        // Scale factor is used to multiply sharpness values to make sure full sharpness fills the bar
-        // Must be a float to retain accuracy until pixel conversion
-        val scalefactor = (viewWidth - margins * 2).toFloat() / maxSharpness
-
-        // specify the width of each bar
-        val barWidth = (scalefactor * maxSharpness).toInt() + margins * 2
 
         // Draw the background
         paint.color = Color.BLACK
         paint.strokeWidth = 4f
-        canvas.drawRect(0f, 0f, barWidth.toFloat(), viewHeight.toFloat(), paint)
+        canvas.drawRect(0f, 0f, viewWidth.toFloat(), viewHeight.toFloat(), paint)
 
         // Draw bar
-        val barBottom = viewHeight - margins
-        drawBar(canvas, margins, scalefactor, margins, barBottom,
-                red, orange, yellow, green, blue, white, purple)
+        //val barBottom = viewHeight - margins
+        drawBar(canvas, paddingLeft, paddingTop, viewWidth - paddingRight, viewHeight - paddingBottom)
     }
 
-    private fun drawBar(canvas: Canvas, margins: Int, scalefactor: Float, bartop: Int, barbottom: Int,
-                        ired: Int, iorange: Int, iyellow: Int,
-                        igreen: Int, iblue: Int, iwhite: Int, ipurple: Int) {
-
+    /**
+     * Draws the sharpness bar. Give the maximum allowable bar for full sharpness units,
+     * this method determines what section to draw it in.
+     */
+    private fun drawBar(canvas: Canvas, left: Int, bartop: Int, right: Int, barbottom: Int) {
         // Run through the bar and accumulate sharpness
         paint.strokeWidth = 0f
 
-        var start = margins
+        // Scale factor is used to multiply sharpness values to make sure full sharpness fills the bar
+        // Must be a float to retain accuracy until pixel conversion
+        val drawWidth = right - left
+        val scalefactor = drawWidth.toFloat() / maxSharpness
+
+        var start = left
 
         // helper that draws the color for an amount, and progresses the bar
         fun drawSegment(color: Int, amount: Int) {
@@ -144,12 +142,12 @@ class SharpnessView @JvmOverloads constructor(
             start = end
         }
 
-        drawSegment(SharpnessColors.RED, ired)
-        drawSegment(SharpnessColors.ORANGE, iorange)
-        drawSegment(SharpnessColors.YELLOW, iyellow)
-        drawSegment(SharpnessColors.GREEN, igreen)
-        drawSegment(SharpnessColors.BLUE, iblue)
-        drawSegment(SharpnessColors.WHITE, iwhite)
-        drawSegment(SharpnessColors.PURPLE, ipurple)
+        drawSegment(SharpnessColors.RED, red)
+        drawSegment(SharpnessColors.ORANGE, orange)
+        drawSegment(SharpnessColors.YELLOW, yellow)
+        drawSegment(SharpnessColors.GREEN, green)
+        drawSegment(SharpnessColors.BLUE, blue)
+        drawSegment(SharpnessColors.WHITE, white)
+        drawSegment(SharpnessColors.PURPLE, purple)
     }
 }

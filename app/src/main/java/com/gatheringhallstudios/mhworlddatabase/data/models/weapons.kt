@@ -93,10 +93,20 @@ data class WeaponSharpness(
         val sharpness: String?
 ) {
     /**
+     * Returns the min sharpness level (equivalent to handicraft 0)
+     */
+    val min get() = get(0)
+
+    /**
+     * Returns the max sharpness level (equivalent to handicraft 5)
+     */
+    val max get() = get(5)
+
+    /**
     Gets the sharpness of the weapon at the provided number of handicraft levels
      */
     fun get(handicraftLevel: Int): IntArray {
-        return adjustSharpness(handicraftLevel);
+        return adjustSharpness(handicraftLevel)
     }
 
     /**
