@@ -18,9 +18,10 @@ abstract class WeaponDao {
         SELECT w.id, w.weapon_type, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
             w.element2, w.element2_attack, w.element_hidden, w.sharpness, w.sharpness_maxed, w.previous_weapon_id, w.craftable, w.kinsect_bonus,
             w.elderseal, w.phial, w.phial_power, w.shelling, w.shelling_level, w.coating_close, w.coating_power, w.coating_poison, w.coating_paralysis, w.coating_sleep, w.coating_blast,
-            w.notes, wt.name
+            w.notes, wa.special_ammo, wt.name
         FROM weapon w
             JOIN weapon_text wt USING (id)
+            LEFT JOIN weapon_ammo wa ON w.ammo_id = wa.id
         WHERE wt.lang_id = :langId
             AND w.weapon_type = :weaponType
         ORDER BY w.id ASC

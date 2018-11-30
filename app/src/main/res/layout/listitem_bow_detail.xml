@@ -38,6 +38,7 @@
                 android:id="@+id/power_coating"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 tools:layout_editor_absoluteX="26dp">
 
                 <ImageView
@@ -70,7 +71,8 @@
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/poison_coating"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/poison_coating_icon"
@@ -101,7 +103,8 @@
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/close_range"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/close_range_coating_icon"
@@ -132,7 +135,8 @@
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/sleep_coating"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/sleep_coating_icon"
@@ -164,6 +168,7 @@
                 android:id="@+id/blast_coating"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="192dp">
@@ -198,6 +203,7 @@
                 android:id="@+id/paralysis_coating"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 tools:layout_editor_absoluteX="266dp">
 
                 <ImageView

@@ -39,7 +39,8 @@ class Weapon(
         val phial_power: Int,
         val shelling: ShellingType,
         val shelling_level: Int?,
-        val notes: String?
+        val notes: String?,
+        val special_ammo: String?
 
 ) : WeaponBase(id, name, rarity, weapon_type) {
     @Embedded

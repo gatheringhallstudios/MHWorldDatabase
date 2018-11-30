@@ -2,14 +2,14 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.constraint.ConstraintLayout
+import android.opengl.Visibility
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
+import android.view.ViewGroup.VISIBLE
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
@@ -18,11 +18,11 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+import kotlinx.android.synthetic.main.listitem_bow_detail.view.*
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
 import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 
@@ -86,7 +86,7 @@ class WeaponTreeListAdapterDelegate(
             if (sharpnessData != null) {
                 view.sharpness_value.drawSharpness(sharpnessData.get(0))
             } else {
-                view.sharpness_value.visibility = View.INVISIBLE
+                view.sharpness_value.visibility = View.GONE
             }
 
             val slotImages = weapon.slots.map {
@@ -99,6 +99,7 @@ class WeaponTreeListAdapterDelegate(
 
             // DYNAMIC STATS
             //Weapon Specific stats (e.g. phials, kinsect bonus, special ammo etc.)
+            view.tree_weapon_specific_section.removeAllViews()
             if (weapon.weapon_type == WeaponType.CHARGE_BLADE || weapon.weapon_type == WeaponType.SWITCH_AXE) {
                 val phialValue = when (weapon.phial) {
                     PhialType.NONE -> ""
@@ -117,29 +118,79 @@ class WeaponTreeListAdapterDelegate(
                         phialValue
                 )
 
-                view.basic_stat_layout.addView(phialView)
+                view.tree_weapon_specific_section.addView(phialView)
             } else if (weapon.weapon_type == WeaponType.INSECT_GLAIVE) {
-                val kinsectValue = weapon.kinsect_bonus.toString()
+                val kinsectValue = when (weapon.kinsect_bonus) {
+                    KinsectBonus.NONE -> ""
+                    KinsectBonus.SEVER -> view.context.getString(R.string.weapon_kinsect_bonus_sever)
+                    KinsectBonus.SPEED ->view.context.getString(R.string.weapon_kinsect_bonus_speed)
+                    KinsectBonus.ELEMENT -> view.context.getString(R.string.weapon_kinsect_bonus_element)
+                    KinsectBonus.HEALTH -> view.context.getString(R.string.weapon_kinsect_bonus_health)
+                    KinsectBonus.STAMINA -> view.context.getString(R.string.weapon_kinsect_bonus_stamina)
+                    KinsectBonus.BLUNT -> view.context.getString(R.string.weapon_kinsect_bonus_blunt)
+                }
                 val kinsectView = CompactStatCell(
                         view.context,
                         R.drawable.ic_ui_kinsect_white,
                         kinsectValue
                 )
 
-                view.basic_stat_layout.addView(kinsectView)
+                view.tree_weapon_specific_section.addView(kinsectView)
             } else if (weapon.weapon_type == WeaponType.GUNLANCE) {
-                val shellingValue = weapon.shelling.toString()
+                val shellingValue = when (weapon.shelling) {
+                    ShellingType.NONE -> ""
+                    ShellingType.NORMAL -> view.context.getString(R.string.weapon_gunlance_shelling_normal)
+                    ShellingType.WIDE -> view.context.getString(R.string.weapon_gunlance_shelling_wide)
+                    ShellingType.LONG -> view.context.getString(R.string.weapon_gunlance_shelling_long)
+                }
                 val shellingView = CompactStatCell( //TODO: Update Icon
                         view.context,
                         R.xml.ic_items_bottle_base,
                         shellingValue
                 )
 
-                view.basic_stat_layout.addView(shellingView)
+                view.tree_weapon_specific_section.addView(shellingView)
             } else if (weapon.weapon_type == WeaponType.LIGHT_BOWGUN || weapon.weapon_type == WeaponType.HEAVY_BOWGUN) {
+                val specialAmmoValue = weapon.special_ammo.toString()
+                val specialAmmoView = CompactStatCell( //TODO: Update Icon
+                        view.context,
+                        R.xml.ic_items_bottle_base,
+                        specialAmmoValue
+                )
 
+                view.tree_weapon_specific_section.addView(specialAmmoView)
             } else if (weapon.weapon_type == WeaponType.BOW) {
+                val coatingView = LayoutInflater.from(view.context).inflate(R.layout.listitem_bow_detail, view.tree_weapon_specific_section, false)
+                weapon.weaponCoatings?.iterator()?.forEach {
+                    when (it) {
+                        CoatingType.BLAST -> {
+                            coatingView.blast_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
+                            coatingView.blast_coating.visibility = View.VISIBLE
+                        }
+                        CoatingType.POWER -> {
+                            coatingView.power_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
+                            coatingView.power_coating.visibility = View.VISIBLE
+                        }
+                        CoatingType.POISON -> {
+                            coatingView.poison_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
+                            coatingView.poison_coating.visibility = View.VISIBLE
+                        }
+                        CoatingType.PARALYSIS -> {
+                            coatingView.paralysis_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
+                            coatingView.paralysis_coating.visibility = View.VISIBLE
+                        }
+                        CoatingType.SLEEP -> {
+                            coatingView.sleep_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
+                            coatingView.sleep_coating.visibility = View.VISIBLE
+                        }
+                        CoatingType.CLOSE_RANGE -> {
+                            coatingView.close_range_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
+                            coatingView.close_range.visibility = View.VISIBLE
+                        }
+                    }
+                }
 
+                view.tree_weapon_specific_section.addView(coatingView)
             }
 
             // Clear the placeholder layouts

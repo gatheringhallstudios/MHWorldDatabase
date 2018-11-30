@@ -26,6 +26,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.ghstudios.android.ui.general.SharpnessView
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
 import kotlinx.android.synthetic.main.listitem_bow_detail.*
+import kotlinx.android.synthetic.main.listitem_bow_detail.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
@@ -338,12 +339,30 @@ class WeaponDetailFragment : Fragment() {
     private fun bindBow(weapon: Weapon, view: View) {
         weapon.weaponCoatings?.iterator()?.forEach {
             when (it) {
-                CoatingType.BLAST -> blast_coating_icon.setImageDrawable(loadIconFor(CoatingType.BLAST))
-                CoatingType.POWER -> power_coating_icon.setImageDrawable(loadIconFor(CoatingType.POWER))
-                CoatingType.POISON -> poison_coating_icon.setImageDrawable(loadIconFor(CoatingType.POISON))
-                CoatingType.PARALYSIS -> paralysis_coating_icon.setImageDrawable(loadIconFor(CoatingType.PARALYSIS))
-                CoatingType.SLEEP -> sleep_coating_icon.setImageDrawable(loadIconFor(CoatingType.SLEEP))
-                CoatingType.CLOSE_RANGE -> close_range_coating_icon.setImageDrawable(loadIconFor(CoatingType.CLOSE_RANGE))
+                CoatingType.BLAST -> {
+                    blast_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
+                    blast_coating.visibility = View.VISIBLE
+                }
+                CoatingType.POWER -> {
+                    power_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
+                    power_coating.visibility = View.VISIBLE
+                }
+                CoatingType.POISON -> {
+                    poison_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
+                    poison_coating.visibility = View.VISIBLE
+                }
+                CoatingType.PARALYSIS -> {
+                    paralysis_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
+                    paralysis_coating.visibility = View.VISIBLE
+                }
+                CoatingType.SLEEP -> {
+                    sleep_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
+                    sleep_coating.visibility = View.VISIBLE
+                }
+                CoatingType.CLOSE_RANGE -> {
+                    close_range_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
+                    close_range.visibility = View.VISIBLE
+                }
             }
         }
     }
