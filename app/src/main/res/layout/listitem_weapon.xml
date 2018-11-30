@@ -44,7 +44,6 @@
         app:layout_constraintTop_toTopOf="@+id/complex_stat_layout">
 
         <!-- These should be removed from this layout and added at runtime -->
-
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:id="@+id/attack_value"
             android:layout_width="wrap_content"
@@ -88,7 +87,6 @@
                 app:yellow="50" />
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/slots_layout"
             android:layout_width="wrap_content"
@@ -114,6 +112,13 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/tree_weapon_specific_section"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right|end"
+            android:orientation="vertical"></LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -121,7 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
-        android:gravity="start"
+        android:gravity="left|start"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/weapon_image"
         app:layout_constraintTop_toTopOf="@+id/weapon_image">

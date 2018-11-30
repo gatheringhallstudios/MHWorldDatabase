@@ -5,82 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:divider="@drawable/divider_stroke"
-    android:orientation="vertical"
-    android:showDividers="middle">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/deviation_layout"
-        style="@style/EquipmentRow"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:divider="@drawable/divider_stroke"
+        android:showDividers="middle">
 
+        <LinearLayout
+            android:id="@+id/special_ammo_layout"
+            style="@style/EquipmentRow"
+            android:layout_width="match_parent">
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
             android:src="@drawable/ic_ui_deviation" />
 
-        <TextView
-            style="@style/TextSubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:text="@string/weapon_bowgun_deviation" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:gravity="center_vertical|end">
-
             <TextView
-                android:id="@+id/deviation_value"
                 style="@style/TextSubHead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
-                android:paddingLeft="@dimen/margin_medium"
-                tools:text="150" />
+                android:layout_marginStart="@dimen/margin_large"
+                android:text="@string/weapon_bowgun_special_ammo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:gravity="center_vertical|end">
+
+                <TextView
+                    android:id="@+id/special_ammo_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingLeft="@dimen/margin_medium"
+                    tools:text="Wyernblast" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/special_ammo_layout"
-        style="@style/EquipmentRow"
-        android:layout_width="match_parent">
-
-        <ImageView
-            style="@style/IconXSmall"
-            android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_special_ammo" />
-
-        <TextView
-            style="@style/TextSubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:text="@string/weapon_bowgun_special_ammo" />
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:gravity="center_vertical|end">
+            android:id="@+id/deviation_layout"
+            style="@style/EquipmentRow"
+            android:layout_width="match_parent">
+
+            <ImageView
+                style="@style/IconXSmall"
+                android:layout_marginStart="@dimen/margin_large"
+                android:src="@drawable/ic_ui_special_ammo" />
 
             <TextView
-                android:id="@+id/special_ammo_value"
                 style="@style/TextSubHead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
-                android:paddingLeft="@dimen/margin_medium"
-                tools:text="Wyernblast" />
+                android:layout_marginStart="@dimen/margin_large"
+                android:text="@string/weapon_bowgun_deviation" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:gravity="center_vertical|end">
+
+                <TextView
+                    android:id="@+id/deviation_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingLeft="@dimen/margin_medium"
+                    tools:text="150" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
     </LinearLayout>
 
 
