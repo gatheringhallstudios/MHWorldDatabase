@@ -45,9 +45,13 @@
     <item android:title="Other">
         <menu>
             <item
+                android:id="@+id/settingsAction"
+                android:icon="@drawable/ic_ui_settings_white"
+                android:title="@string/title_settings" />
+            <item
                 android:id="@+id/aboutAction"
                 android:icon="@drawable/ic_ui_mascot"
-                android:title="About" />
+                android:title="@string/title_about" />
         </menu>
     </item>
 

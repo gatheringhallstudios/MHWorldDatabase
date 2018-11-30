@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data;
 
 import android.app.Application;
 import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
@@ -12,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.CharmDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.DecorationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.MetaDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SearchDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
@@ -32,6 +34,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.DecorationText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemCombinationEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.Language;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationCampText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationText;
@@ -55,7 +58,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponAmmoEntity;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
-// laziness, since we need to manually add all entities which is quite cumbersome
+import java.util.List;
 
 /**
  * DO NOT CONVERT TO KOTLIN YET.
@@ -68,6 +71,9 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
         exportSchema = false,
 
         entities = {
+                // Meta
+                Language.class,
+
                 // Items
                 ItemEntity.class, ItemText.class, ItemCombinationEntity.class,
 
@@ -148,4 +154,14 @@ public abstract class MHWDatabase extends RoomDatabase {
     public abstract DecorationDao decorationDao();
 
     public abstract WeaponDao weaponDao();
+
+    /** Internal method to recieve meta information queries **/
+    protected abstract MetaDao metaDao();
+
+    /**
+     * Retrieves all languages supported by the database
+     */
+    public List<Language> getLanguages() {
+        return metaDao().queryLanguages();
+    }
 }

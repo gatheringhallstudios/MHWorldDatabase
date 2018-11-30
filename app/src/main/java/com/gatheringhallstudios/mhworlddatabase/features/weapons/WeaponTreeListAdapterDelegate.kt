@@ -77,6 +77,10 @@ class WeaponTreeListAdapterDelegate(
 
             view.weapon_name.text = weapon.name
             view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weapon))
+            view.weapon_craftable_image.visibility = when {
+                weapon.craftable -> View.VISIBLE
+                else -> View.GONE
+            }
 
             // STATIC STATS
             view.attack_value.setLabelText(weapon.attack.toString())

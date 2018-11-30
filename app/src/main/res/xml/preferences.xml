@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/title_settings">
+
+    <ListPreference
+        android:key="DATA_LOCALE"
+        android:title="@string/preference_data_language"
+        android:summary="@string/preference_data_language_description"
+        android:icon="@drawable/ic_ui_hunter_notes_white"/>
+
+</PreferenceScreen>

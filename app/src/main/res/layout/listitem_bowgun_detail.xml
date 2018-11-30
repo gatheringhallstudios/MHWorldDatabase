@@ -18,6 +18,10 @@
             android:id="@+id/special_ammo_layout"
             style="@style/EquipmentRow"
             android:layout_width="match_parent">
+        <ImageView
+            style="@style/IconXSmall"
+            android:layout_marginStart="@dimen/margin_large"
+            android:src="@drawable/ic_ui_deviation" />
 
             <ImageView
                 style="@style/IconXSmall"
@@ -50,6 +54,7 @@
             </LinearLayout>
 
         </LinearLayout>
+            android:src="@drawable/ic_ui_special_ammo" />
 
         <LinearLayout
             android:id="@+id/deviation_layout"
