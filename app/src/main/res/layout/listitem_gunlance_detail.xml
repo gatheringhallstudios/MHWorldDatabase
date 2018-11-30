@@ -234,7 +234,7 @@
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_element" />
+            android:src="@drawable/ic_ui_shelling" />
 
         <TextView
             style="@style/TextSubHead"

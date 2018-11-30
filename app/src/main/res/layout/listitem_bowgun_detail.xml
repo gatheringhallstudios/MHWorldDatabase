@@ -17,7 +17,7 @@
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_element" />
+            android:src="@drawable/ic_ui_deviation" />
 
         <TextView
             style="@style/TextSubHead"
@@ -54,7 +54,7 @@
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_element" />
+            android:src="@drawable/ic_ui_special_ammo" />
 
         <TextView
             style="@style/TextSubHead"
