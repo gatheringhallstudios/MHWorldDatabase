@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,6 @@ import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
 import kotlinx.android.synthetic.main.listitem_bow_detail.*
-import kotlinx.android.synthetic.main.listitem_bow_detail.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
@@ -83,12 +81,6 @@ class WeaponDetailFragment : Fragment() {
             else -> R.string.format_percentage
         }, weapon.affinity)
 
-        affinity_value.setTextColor(ContextCompat.getColor(context!!, when {
-            weapon.affinity > 0 -> R.color.textColorGreen
-            weapon.affinity == 0 -> R.color.textColorHigh
-            else -> R.color.textColorRed
-        }))
-
         // Elderseal
         elderseal_value.text = when (weapon.elderseal) {
             ElderSealLevel.NONE -> getString(R.string.weapon_elderseal_none)
@@ -98,8 +90,12 @@ class WeaponDetailFragment : Fragment() {
         }
 
         // Element
-        val elementAttackStr = weapon.element1_attack?.toString() ?: "-----"
+        val elementAttackStr = weapon.element1_attack?.toString() ?: getString(R.string.weapon_element_none)
         element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
+        element_icon.visibility = when (weapon.element1) {
+            null -> View.GONE
+            else -> View.VISIBLE
+        }
         element_value.text = when (weapon.element_hidden) {
             true -> "($elementAttackStr)"
             false -> elementAttackStr
@@ -120,11 +116,6 @@ class WeaponDetailFragment : Fragment() {
             weapon.defense != 0 -> R.string.format_plus
             else -> R.string.format_quantity_none
         }, weapon.defense)
-
-        if (weapon.defense == 0) {
-            defense_value.alpha = 0.3F
-            defense_label.alpha = 0.3F
-        }
     }
 
     /** Method for binding sections that are specific to certain weapons **/

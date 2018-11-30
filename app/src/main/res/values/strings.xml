@@ -182,6 +182,7 @@
     <string name="weapon_attack">Attack</string>
     <string name="weapon_sharpness">Sharpness</string>
     <string name="weapon_element">Element</string>
+    <string name="weapon_element_none">None</string>
     <string name="weapon_defense">Defense</string>
     <string name="weapon_affinity">Affinity</string>
     <string name="weapon_handicraft">(with Handicraft)</string>
