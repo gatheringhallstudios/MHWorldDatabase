@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
-    android:divider="@drawable/divider_stroke"
     android:orientation="vertical"
     android:showDividers="middle">
 
     <LinearLayout
         style="@style/EquipmentRow"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/row_height_medium">
+        android:layout_height="wrap_content">
 
         <ImageView
             style="@style/IconXSmall"
@@ -29,90 +27,22 @@
         <LinearLayout
             android:id="@+id/coatings_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:gravity="center_vertical|end"
             android:orientation="horizontal">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/power_coating"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                tools:layout_editor_absoluteX="26dp">
-
-                <ImageView
-                    android:id="@+id/power_coating_icon"
-                    android:layout_width="@dimen/image_size_xsmall"
-                    android:layout_height="@dimen/image_size_xsmall"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_ui_slot_none"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/power_coating_label"
-                    style="@style/TextBodyMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/weapon_bow_coatings_power"
-                    android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/power_coating_icon"
-                    tools:text="Power" />
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/poison_coating"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/poison_coating_icon"
-                    android:layout_width="@dimen/image_size_xsmall"
-                    android:layout_height="@dimen/image_size_xsmall"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_ui_slot_none"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/poison_coating_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/weapon_bow_coatings_poison"
-                    android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/poison_coating_icon"
-                    tools:text="Poison" />
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
                 android:id="@+id/close_range"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/close_range_coating_icon"
                     android:layout_width="@dimen/image_size_xsmall"
                     android:layout_height="@dimen/image_size_xsmall"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
                     android:src="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -122,97 +52,54 @@
                     android:id="@+id/close_range_coating_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:text="@string/weapon_bow_coatings_close_range"
                     android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/close_range_coating_icon"
+                    app:layout_constraintStart_toStartOf="@+id/close_range_coating_icon"
                     app:layout_constraintTop_toBottomOf="@id/close_range_coating_icon"
                     tools:text="Close" />
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/sleep_coating"
+                android:id="@+id/power_coating"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/sleep_coating_icon"
+                    android:id="@+id/power_coating_icon"
                     android:layout_width="@dimen/image_size_xsmall"
                     android:layout_height="@dimen/image_size_xsmall"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
                     android:src="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/sleep_coating_label"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/power_coating_label"
+                    style="@style/TextBodyMedium"
+                    android:layout_width="24dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/weapon_bow_coatings_sleep"
+                    android:text="@string/weapon_bow_coatings_power"
                     android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/sleep_coating_icon"
-                    tools:text="Sleep" />
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/blast_coating"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="192dp">
-
-                <ImageView
-                    android:id="@+id/blast_coating_icon"
-                    android:layout_width="@dimen/image_size_xsmall"
-                    android:layout_height="@dimen/image_size_xsmall"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_ui_slot_none"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/blast_coating_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/weapon_bow_coatings_blast"
-                    android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/blast_coating_icon"
-                    tools:text="Blast" />
+                    app:layout_constraintEnd_toEndOf="@+id/power_coating_icon"
+                    app:layout_constraintStart_toStartOf="@+id/power_coating_icon"
+                    app:layout_constraintTop_toBottomOf="@id/power_coating_icon"
+                    tools:text="Power" />
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/paralysis_coating"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                tools:layout_editor_absoluteX="266dp">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/paralysis_coating_icon"
                     android:layout_width="@dimen/image_size_xsmall"
                     android:layout_height="@dimen/image_size_xsmall"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
                     android:src="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -222,14 +109,99 @@
                     android:id="@+id/paralysis_coating_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:text="@string/weapon_bow_coatings_paralysis"
                     android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/paralysis_coating_icon"
+                    app:layout_constraintStart_toStartOf="@+id/paralysis_coating_icon"
                     app:layout_constraintTop_toBottomOf="@id/paralysis_coating_icon"
                     tools:text="Para" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/poison_coating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/poison_coating_icon"
+                    android:layout_width="@dimen/image_size_xsmall"
+                    android:layout_height="@dimen/image_size_xsmall"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:src="@drawable/ic_ui_slot_none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/poison_coating_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weapon_bow_coatings_poison"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="@+id/poison_coating_icon"
+                    app:layout_constraintStart_toStartOf="@+id/poison_coating_icon"
+                    app:layout_constraintTop_toBottomOf="@id/poison_coating_icon"
+                    tools:text="Poison" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/sleep_coating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/sleep_coating_icon"
+                    android:layout_width="@dimen/image_size_xsmall"
+                    android:layout_height="@dimen/image_size_xsmall"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:src="@drawable/ic_ui_slot_none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sleep_coating_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weapon_bow_coatings_sleep"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="@+id/sleep_coating_icon"
+                    app:layout_constraintStart_toStartOf="@+id/sleep_coating_icon"
+                    app:layout_constraintTop_toBottomOf="@id/sleep_coating_icon"
+                    tools:text="Sleep" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/blast_coating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/blast_coating_icon"
+                    android:layout_width="@dimen/image_size_xsmall"
+                    android:layout_height="@dimen/image_size_xsmall"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_slot_none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/blast_coating_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weapon_bow_coatings_blast"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="@+id/blast_coating_icon"
+                    app:layout_constraintStart_toStartOf="@+id/blast_coating_icon"
+                    app:layout_constraintTop_toBottomOf="@id/blast_coating_icon"
+                    tools:text="Blast" />
             </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>

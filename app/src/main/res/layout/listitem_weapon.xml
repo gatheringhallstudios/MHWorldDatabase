@@ -20,26 +20,27 @@
     <ImageView
         android:id="@+id/weapon_craftable_image"
         style="@style/IconXSmall"
-        android:src="@drawable/ic_ui_buildable"
         android:layout_marginStart="@dimen/margin_small"
+        android:src="@drawable/ic_ui_buildable"
+        app:layout_constraintBottom_toBottomOf="@id/weapon_name"
         app:layout_constraintStart_toEndOf="@id/weapon_name"
-        app:layout_constraintTop_toTopOf="@id/weapon_name"
-        app:layout_constraintBottom_toBottomOf="@id/weapon_name"/>
+        app:layout_constraintTop_toTopOf="@id/weapon_name" />
 
     <ImageView
         android:id="@+id/weapon_image"
         style="@style/IconMedium.Decorated"
         android:src="@drawable/ic_ui_question_mark_white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/basic_stat_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_large"
-        android:orientation="vertical"
         android:gravity="end"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/complex_stat_layout">
 
@@ -61,24 +62,25 @@
                 android:id="@+id/sharpness_value"
                 android:layout_width="128dp"
                 android:layout_height="12dp"
-                android:paddingTop="@dimen/padding_small"
-                android:paddingBottom="1dp"
                 android:paddingStart="@dimen/padding_small"
+                android:paddingTop="@dimen/padding_small"
                 android:paddingEnd="@dimen/padding_small"
+                android:paddingBottom="1dp"
                 app:blue="30"
                 app:green="40"
                 app:orange="80"
                 app:red="100"
                 app:white="50"
                 app:yellow="50" />
+
             <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                 android:id="@+id/sharpness_max_value"
                 android:layout_width="128dp"
                 android:layout_height="12dp"
-                android:paddingTop="1dp"
-                android:paddingBottom="@dimen/padding_small"
                 android:paddingStart="@dimen/padding_small"
+                android:paddingTop="1dp"
                 android:paddingEnd="@dimen/padding_small"
+                android:paddingBottom="@dimen/padding_small"
                 app:blue="30"
                 app:green="40"
                 app:orange="80"
@@ -88,12 +90,17 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/tree_weapon_specific_section"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right|end"
+            android:orientation="vertical" />
+
+        <LinearLayout
             android:id="@+id/slots_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <!-- These should also be removed from this layout and added at runtime -->
 
             <ImageView
                 android:id="@+id/slot1"
@@ -112,13 +119,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/tree_weapon_specific_section"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="right|end"
-            android:orientation="vertical"></LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -128,6 +128,7 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:gravity="left|start"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium"
         app:layout_constraintStart_toEndOf="@+id/weapon_image"
         app:layout_constraintTop_toTopOf="@+id/weapon_image">
 
