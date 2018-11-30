@@ -52,18 +52,42 @@
             app:iconSrc="@drawable/ic_ui_attack"
             app:labelText="240" />
 
-        <com.ghstudios.android.ui.general.SharpnessView
-            android:id="@+id/sharpness_value"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
-            app:blue="30"
-            app:green="40"
-            app:orange="80"
-            app:red="100"
-            app:white="50"
-            app:yellow="50" />
+        <LinearLayout
+            android:id="@+id/sharpness_container"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:orientation="vertical">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
+                android:id="@+id/sharpness_value"
+                android:layout_width="128dp"
+                android:layout_height="12dp"
+                android:paddingTop="@dimen/padding_small"
+                android:paddingBottom="1dp"
+                android:paddingStart="@dimen/padding_small"
+                android:paddingEnd="@dimen/padding_small"
+                app:blue="30"
+                app:green="40"
+                app:orange="80"
+                app:red="100"
+                app:white="50"
+                app:yellow="50" />
+            <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
+                android:id="@+id/sharpness_max_value"
+                android:layout_width="128dp"
+                android:layout_height="12dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingStart="@dimen/padding_small"
+                android:paddingEnd="@dimen/padding_small"
+                app:blue="30"
+                app:green="40"
+                app:orange="80"
+                app:red="100"
+                app:white="50"
+                app:yellow="50" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/slots_layout"
