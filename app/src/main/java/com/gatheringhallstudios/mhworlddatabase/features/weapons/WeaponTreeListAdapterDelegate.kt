@@ -85,12 +85,14 @@ class WeaponTreeListAdapterDelegate(
             // STATIC STATS
             view.attack_value.setLabelText(weapon.attack.toString())
 
-            //Render sharpness data if it exists, else hide the bar
+            //Render sharpness data if it exists, else hide the bars
             val sharpnessData = weapon.sharpnessData
             if (sharpnessData != null) {
-                view.sharpness_value.drawSharpness(sharpnessData.get(0))
+                view.sharpness_container.visibility = View.VISIBLE
+                view.sharpness_value.drawSharpness(sharpnessData.min)
+                view.sharpness_max_value.drawSharpness(sharpnessData.max)
             } else {
-                view.sharpness_value.visibility = View.GONE
+                view.sharpness_container.visibility = View.GONE
             }
 
             val slotImages = weapon.slots.map {

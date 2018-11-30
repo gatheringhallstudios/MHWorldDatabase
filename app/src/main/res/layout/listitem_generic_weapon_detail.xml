@@ -58,7 +58,7 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
@@ -88,7 +88,7 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value1"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
@@ -118,7 +118,7 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value2"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
@@ -148,7 +148,7 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value3"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
@@ -179,7 +179,7 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value4"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
@@ -209,7 +209,7 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value5"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
