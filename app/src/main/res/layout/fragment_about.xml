@@ -64,6 +64,10 @@
             app:labelText="Help Support Gathering Hall Studios"
             android:tag="https://opencollective.com/gathering-hall-studios#" />
 
+        <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,7 +78,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_equipment_hammer_white"
-            app:labelText="https://github.com/jaysondc" />
+            app:labelText="https://github.com/jaysondc"
+            android:tag="https://github.com/jaysondc" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -84,7 +89,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_equipment_greatsword_white"
-            app:labelText="https://github.com/CarlosFdez" />
+            app:labelText="https://github.com/CarlosFdez"
+            android:tag="https://github.com/CarlosFdez"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -94,7 +100,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_equipment_charge_blade_white"
-            app:labelText="https://github.com/ahctang" />
+            app:labelText="https://github.com/ahctang"
+            android:tag="https://github.com/ahctang"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -104,7 +111,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_equipment_charge_blade_white"
-            app:labelText="https://github.com/kevinn" />
+            app:labelText="https://github.com/kevinn"
+            android:tag="https://github.com/kevinn"/>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            app:labelText="Translations" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconSrc="@drawable/ic_element_thunder"
+            app:labelText="Kailackous"
+            app:valueText="Data (Various)"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -159,7 +184,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_github"
-            app:labelText="https://github.com/JakeWharton/butterknife" />
+            app:labelText="https://github.com/JakeWharton/butterknife"
+            android:tag="https://github.com/JakeWharton/butterknife"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -169,7 +195,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_github"
-            app:labelText="https://github.com/square/leakcanary" />
+            app:labelText="https://github.com/square/leakcanary"
+            android:tag="https://github.com/square/leakcanary"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -179,7 +206,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_github"
-            app:labelText="https://github.com/sockeqwe/AdapterDelegates" />
+            app:labelText="https://github.com/sockeqwe/AdapterDelegates"
+            android:tag="https://github.com/sockeqwe/AdapterDelegates"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -189,7 +217,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_github"
-            app:labelText="https://github.com/lisawray/groupie" />
+            app:labelText="https://github.com/lisawray/groupie"
+            android:tag="https://github.com/lisawray/groupie"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -199,7 +228,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_github"
-            app:labelText="https://github.com/harjot-oberai/VectorMaster" />
+            app:labelText="https://github.com/harjot-oberai/VectorMaster"
+            android:tag="https://github.com/harjot-oberai/VectorMaster"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
