@@ -138,16 +138,7 @@ class WeaponTreeListAdapterDelegate(
 
             when (weapon.weapon_type) {
                  WeaponType.CHARGE_BLADE, WeaponType.SWITCH_AXE -> {
-                    val phialValue = when (weapon.phial) {
-                        PhialType.NONE -> ""
-                        PhialType.EXHAUST -> view.context.getString(R.string.weapon_charge_blade_exhaust)
-                        PhialType.POWER -> view.context.getString(R.string.weapon_charge_blade_power)
-                        PhialType.POISON -> view.context.getString(R.string.weapon_charge_blade_poison)
-                        PhialType.DRAGON -> view.context.getString(R.string.weapon_charge_blade_dragon)
-                        PhialType.POWER_ELEMENT -> view.context.getString(R.string.weapon_charge_blade_power_element)
-                        PhialType.PARALYSIS -> view.context.getString(R.string.weapon_charge_blade_paralysis)
-                        PhialType.IMPACT -> view.context.getString(R.string.weapon_charge_blade_impact)
-                    }
+                    val phialValue = AssetLoader.localizePhialType(weapon.phial)
 
                     val phialView = CompactStatCell(
                             view.context,
@@ -159,15 +150,8 @@ class WeaponTreeListAdapterDelegate(
                 }
 
                 WeaponType.INSECT_GLAIVE -> {
-                    val kinsectValue = when (weapon.kinsect_bonus) {
-                        KinsectBonus.NONE -> ""
-                        KinsectBonus.SEVER -> view.context.getString(R.string.weapon_kinsect_bonus_sever)
-                        KinsectBonus.SPEED -> view.context.getString(R.string.weapon_kinsect_bonus_speed)
-                        KinsectBonus.ELEMENT -> view.context.getString(R.string.weapon_kinsect_bonus_element)
-                        KinsectBonus.HEALTH -> view.context.getString(R.string.weapon_kinsect_bonus_health)
-                        KinsectBonus.STAMINA -> view.context.getString(R.string.weapon_kinsect_bonus_stamina)
-                        KinsectBonus.BLUNT -> view.context.getString(R.string.weapon_kinsect_bonus_blunt)
-                    }
+                    val kinsectValue = AssetLoader.localizeKinsectBonus(weapon.kinsect_bonus)
+
                     val kinsectView = CompactStatCell(
                             view.context,
                             R.drawable.ic_ui_kinsect_white,
@@ -178,12 +162,7 @@ class WeaponTreeListAdapterDelegate(
                 }
 
                 WeaponType.GUNLANCE -> {
-                    val shellingValue = when (weapon.shelling) {
-                        ShellingType.NONE -> ""
-                        ShellingType.NORMAL -> view.context.getString(R.string.weapon_gunlance_shelling_normal)
-                        ShellingType.WIDE -> view.context.getString(R.string.weapon_gunlance_shelling_wide)
-                        ShellingType.LONG -> view.context.getString(R.string.weapon_gunlance_shelling_long)
-                    }
+                    val shellingValue = AssetLoader.localizeShellingType(weapon.shelling)
                     val shellingView = CompactStatCell(
                             view.context,
                             R.drawable.ic_ui_shelling,
