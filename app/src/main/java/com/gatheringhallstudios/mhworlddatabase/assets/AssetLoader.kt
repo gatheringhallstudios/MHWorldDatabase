@@ -7,10 +7,7 @@ import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.AmmoType
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
-import com.gatheringhallstudios.mhworlddatabase.data.types.CoatingType
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine
@@ -183,4 +180,40 @@ object AssetLoader {
         WeaponType.BOW -> ctx.getString(R.string.title_bow)
     }
 
+    /**
+     * Returns the phial type in the current app language setting
+     */
+    fun localizePhialType(phialType: PhialType): String = when (phialType) {
+        PhialType.NONE -> ""
+        PhialType.EXHAUST -> ctx.getString(R.string.weapon_phial_exhaust)
+        PhialType.POWER -> ctx.getString(R.string.weapon_phial_power)
+        PhialType.POISON -> ctx.getString(R.string.weapon_phial_poison)
+        PhialType.DRAGON -> ctx.getString(R.string.weapon_phial_dragon)
+        PhialType.POWER_ELEMENT -> ctx.getString(R.string.weapon_phial_power_element)
+        PhialType.PARALYSIS -> ctx.getString(R.string.weapon_phial_paralysis)
+        PhialType.IMPACT -> ctx.getString(R.string.weapon_phial_impact)
+    }
+
+    /**
+     * Return the kinsect bonus in the current app language setting.
+     */
+    fun localizeKinsectBonus(kinsectBonus: KinsectBonus): String = when (kinsectBonus) {
+        KinsectBonus.NONE -> ""
+        KinsectBonus.SEVER -> ctx.getString(R.string.weapon_kinsect_bonus_sever)
+        KinsectBonus.SPEED -> ctx.getString(R.string.weapon_kinsect_bonus_speed)
+        KinsectBonus.ELEMENT -> ctx.getString(R.string.weapon_kinsect_bonus_element)
+        KinsectBonus.HEALTH -> ctx.getString(R.string.weapon_kinsect_bonus_health)
+        KinsectBonus.STAMINA -> ctx.getString(R.string.weapon_kinsect_bonus_stamina)
+        KinsectBonus.BLUNT -> ctx.getString(R.string.weapon_kinsect_bonus_blunt)
+    }
+
+    /**
+     * Returns the shelling type in the current app language setting.
+     */
+    fun localizeShellingType(shellingType: ShellingType): String = when (shellingType) {
+        ShellingType.NONE -> ""
+        ShellingType.NORMAL -> ctx.getString(R.string.weapon_gunlance_shelling_normal)
+        ShellingType.WIDE -> ctx.getString(R.string.weapon_gunlance_shelling_wide)
+        ShellingType.LONG -> ctx.getString(R.string.weapon_gunlance_shelling_long)
+    }
 }

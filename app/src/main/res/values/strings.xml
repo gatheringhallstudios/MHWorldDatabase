@@ -193,13 +193,13 @@
     <string name="weapon_elderseal_high">High</string>
 
     <string name="weapon_charge_blade_phials">Phials</string>
-    <string name="weapon_charge_blade_exhaust">Exhaust</string>
-    <string name="weapon_charge_blade_power">Power</string>
-    <string name="weapon_charge_blade_poison">Poison</string>
-    <string name="weapon_charge_blade_dragon">Dragon</string>
-    <string name="weapon_charge_blade_power_element">Power Element</string>
-    <string name="weapon_charge_blade_paralysis">Paralysis</string>
-    <string name="weapon_charge_blade_impact">Impact</string>
+    <string name="weapon_phial_exhaust">Exhaust</string>
+    <string name="weapon_phial_power">Power</string>
+    <string name="weapon_phial_poison">Poison</string>
+    <string name="weapon_phial_dragon">Dragon</string>
+    <string name="weapon_phial_power_element">Power Element</string>
+    <string name="weapon_phial_paralysis">Paralysis</string>
+    <string name="weapon_phial_impact">Impact</string>
 
     <string name="weapon_kinsect_bonus">Kinsect Bonus</string>
     <string name="weapon_kinsect_bonus_sever">Sever</string>

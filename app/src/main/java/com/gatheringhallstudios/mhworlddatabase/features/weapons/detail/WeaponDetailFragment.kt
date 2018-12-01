@@ -58,7 +58,7 @@ class WeaponDetailFragment : Fragment() {
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
         populateComponents(weaponData.recipe)
-        populateWeaponSpecificSection(weaponData.weapon, weaponData.ammo, weaponData.melodies)
+        populateWeaponSpecificSection(weaponData)
     }
 
     /**
@@ -119,7 +119,11 @@ class WeaponDetailFragment : Fragment() {
     }
 
     /** Method for binding sections that are specific to certain weapons **/
-    private fun populateWeaponSpecificSection(weapon: Weapon, ammo: WeaponAmmoData?, melodies: List<WeaponMelody>?) {
+    private fun populateWeaponSpecificSection(weaponData: WeaponFull) {
+        val weapon = weaponData.weapon
+        val ammo = weaponData.ammo
+        val melodies = weaponData.melodies
+
         when (weapon.weapon_type) {
             WeaponType.SWITCH_AXE, WeaponType.CHARGE_BLADE -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_charge_blade_detail
@@ -154,7 +158,7 @@ class WeaponDetailFragment : Fragment() {
             else -> {
                 weapon_specific_section.layoutResource = R.layout.listitem_generic_weapon_detail
                 val view = weapon_specific_section.inflate()
-                bindGenericWeapon(weapon, view)
+                bindBasicBladeWeapon(weapon, view)
             }
         }
     }
@@ -255,40 +259,18 @@ class WeaponDetailFragment : Fragment() {
         populateSharpness(weapon.sharpnessData, view)
 
         view.findViewById<ImageView>(R.id.phial_element_icon).setImageDrawable(AssetLoader.loadElementIcon(weapon.phial.toString()))
-        view.findViewById<TextView>(R.id.phial_type_value).text = when (weapon.phial) {
-            PhialType.NONE -> ""
-            PhialType.EXHAUST -> getString(R.string.weapon_charge_blade_exhaust)
-            PhialType.POWER -> getString(R.string.weapon_charge_blade_power)
-            PhialType.POISON -> getString(R.string.weapon_charge_blade_poison)
-            PhialType.DRAGON -> getString(R.string.weapon_charge_blade_dragon)
-            PhialType.POWER_ELEMENT -> getString(R.string.weapon_charge_blade_power_element)
-            PhialType.PARALYSIS -> getString(R.string.weapon_charge_blade_paralysis)
-            PhialType.IMPACT -> getString(R.string.weapon_charge_blade_impact)
-        }
+        view.findViewById<TextView>(R.id.phial_type_value).text = AssetLoader.localizePhialType(weapon.phial)
         view.findViewById<TextView>(R.id.phial_power_value).text = weapon.phial_power.toString()
     }
 
     private fun bindInsectGlaive(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
-        view.findViewById<TextView>(R.id.kinsect_bonus_value).text = when (weapon.kinsect_bonus) {
-            KinsectBonus.NONE -> ""
-            KinsectBonus.SEVER -> getString(R.string.weapon_kinsect_bonus_sever)
-            KinsectBonus.SPEED -> getString(R.string.weapon_kinsect_bonus_speed)
-            KinsectBonus.ELEMENT -> getString(R.string.weapon_kinsect_bonus_element)
-            KinsectBonus.HEALTH -> getString(R.string.weapon_kinsect_bonus_health)
-            KinsectBonus.STAMINA -> getString(R.string.weapon_kinsect_bonus_stamina)
-            KinsectBonus.BLUNT -> getString(R.string.weapon_kinsect_bonus_blunt)
-        }
+        view.findViewById<TextView>(R.id.kinsect_bonus_value).text = AssetLoader.localizeKinsectBonus(weapon.kinsect_bonus)
     }
 
     private fun bindGunlance(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
-        view.findViewById<TextView>(R.id.shelling_type).text = when (weapon.shelling) {
-            ShellingType.NONE -> ""
-            ShellingType.NORMAL -> getString(R.string.weapon_gunlance_shelling_normal)
-            ShellingType.WIDE -> getString(R.string.weapon_gunlance_shelling_wide)
-            ShellingType.LONG -> getString(R.string.weapon_gunlance_shelling_long)
-        }
+        view.findViewById<TextView>(R.id.shelling_type).text = AssetLoader.localizeShellingType(weapon.shelling)
         view.findViewById<TextView>(R.id.shelling_level_value).text = getString(R.string.skill_level_short_qty, weapon.shelling_level)
     }
 
@@ -358,7 +340,7 @@ class WeaponDetailFragment : Fragment() {
         }
     }
 
-    private fun bindGenericWeapon(weapon: Weapon, view: View) {
+    private fun bindBasicBladeWeapon(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
     }
 
