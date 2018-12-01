@@ -25,9 +25,9 @@ import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
 import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
-import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
-import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
-import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.view.*
+import kotlinx.android.synthetic.main.view_bowgun_detail.*
+import kotlinx.android.synthetic.main.view_hunting_horn_detail.*
+import kotlinx.android.synthetic.main.view_hunting_horn_detail.view.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
 import kotlinx.android.synthetic.main.section_bow_coating.*
 import kotlinx.android.synthetic.main.view_weapon_recipe.view.*
@@ -126,22 +126,22 @@ class WeaponDetailFragment : Fragment() {
 
         when (weapon.weapon_type) {
             WeaponType.SWITCH_AXE, WeaponType.CHARGE_BLADE -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_charge_blade_detail
+                weapon_specific_section.layoutResource = R.layout.view_blade_phial_detail
                 val view = weapon_specific_section.inflate()
                 bindChargeBladeSwitchAxe(weapon, view)
             }
             WeaponType.INSECT_GLAIVE -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_insect_glaive_detail
+                weapon_specific_section.layoutResource = R.layout.view_insect_glaive_detail
                 val view = weapon_specific_section.inflate()
                 bindInsectGlaive(weapon, view)
             }
             WeaponType.GUNLANCE -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_gunlance_detail
+                weapon_specific_section.layoutResource = R.layout.view_gunlance_detail
                 val view = weapon_specific_section.inflate()
                 bindGunlance(weapon, view)
             }
             WeaponType.HUNTING_HORN -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_hunting_horn_detail
+                weapon_specific_section.layoutResource = R.layout.view_hunting_horn_detail
                 val view = weapon_specific_section.inflate()
                 bindHuntingHorn(weapon, melodies, view)
             }
@@ -151,12 +151,12 @@ class WeaponDetailFragment : Fragment() {
                 bindBow(weapon, view)
             }
             WeaponType.HEAVY_BOWGUN, WeaponType.LIGHT_BOWGUN -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_bowgun_detail
+                weapon_specific_section.layoutResource = R.layout.view_bowgun_detail
                 val view = weapon_specific_section.inflate()
                 bindBowgun(ammo, view)
             }
             else -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_generic_weapon_detail
+                weapon_specific_section.layoutResource = R.layout.view_weapon_sharpness
                 val view = weapon_specific_section.inflate()
                 bindBasicBladeWeapon(weapon, view)
             }
