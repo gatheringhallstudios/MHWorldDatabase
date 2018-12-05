@@ -192,7 +192,7 @@
     <string name="weapon_elderseal_average">Average</string>
     <string name="weapon_elderseal_high">High</string>
 
-    <string name="weapon_charge_blade_phials">Phials</string>
+    <string name="weapon_blade_phial_type">Phial Type</string>
     <string name="weapon_phial_exhaust">Exhaust</string>
     <string name="weapon_phial_power">Power</string>
     <string name="weapon_phial_poison">Poison</string>

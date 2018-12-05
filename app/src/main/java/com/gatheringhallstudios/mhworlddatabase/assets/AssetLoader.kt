@@ -62,6 +62,13 @@ object AssetLoader {
         return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 
+    fun loadIconFor(phial: PhialType?): Drawable? {
+        return when (PhialRegistry(phial)) {
+            0 -> null
+            else -> ctx.getDrawableCompat(PhialRegistry(phial))
+        }
+    }
+
     fun loadIconFor(coating_type: CoatingType): Drawable? {
         return when (coating_type) {
             CoatingType.POWER ->  ctx.getVectorDrawable("Bottle", "Red")

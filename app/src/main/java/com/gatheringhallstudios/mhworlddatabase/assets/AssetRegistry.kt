@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
 
 private fun <T, K> createRegistry(vararg pairs: Pair<T, K>): (T) -> K? {
     val registry = mapOf(*pairs)
@@ -93,7 +94,7 @@ val VectorRegistry = createRegistry(
         "Wing" to R.xml.ic_items_wing_base
 )
 
-val ElementRegistry = fun(element: String?) = when(element) {
+val ElementRegistry = fun(element: String?) = when (element) {
     "Fire" -> R.drawable.ic_element_fire
     "Dragon" -> R.drawable.ic_element_dragon
     "Poison" -> R.drawable.ic_status_poison
@@ -106,14 +107,26 @@ val ElementRegistry = fun(element: String?) = when(element) {
     else -> R.drawable.ic_ui_slot_none
 }
 
-val SlotEmptyRegistry = fun(slot: Int) = when(slot) {
+val PhialRegistry = fun(phial: PhialType?) = when (phial) {
+    // TODO Add icons for these phial types if they exist
+    PhialType.EXHAUST -> 0
+    PhialType.POWER -> 0
+    PhialType.DRAGON -> R.drawable.ic_element_dragon
+    PhialType.POWER_ELEMENT -> 0
+    PhialType.POISON -> R.drawable.ic_status_poison
+    PhialType.PARALYSIS -> R.drawable.ic_status_paralysis
+    PhialType.IMPACT -> 0
+    else -> 0
+}
+
+val SlotEmptyRegistry = fun(slot: Int) = when (slot) {
     1 -> R.drawable.ic_ui_slot_1_empty
     2 -> R.drawable.ic_ui_slot_2_empty
     3 -> R.drawable.ic_ui_slot_3_empty
     else -> R.drawable.ic_ui_slot_none
 }
 
-val SetBonusNumberRegistry = fun(num: Int) = when(num) {
+val SetBonusNumberRegistry = fun(num: Int) = when (num) {
     1 -> R.drawable.ic_ui_set_bonus_1
     2 -> R.drawable.ic_ui_set_bonus_2
     3 -> R.drawable.ic_ui_set_bonus_3
@@ -122,7 +135,7 @@ val SetBonusNumberRegistry = fun(num: Int) = when(num) {
     else -> 0
 }
 
-val LocationDrawableRegistry = fun(id: Int) = when(id) {
+val LocationDrawableRegistry = fun(id: Int) = when (id) {
     1 -> R.drawable.ic_location_ancient_forest
     2 -> R.drawable.ic_locations_wildspire_waste
     3 -> R.drawable.ic_locations_coral_highlands
