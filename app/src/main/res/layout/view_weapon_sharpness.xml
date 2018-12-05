@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
-    android:divider="@drawable/divider_stroke"
-    android:orientation="vertical"
-    android:showDividers="middle">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
     <LinearLayout
         style="@style/EquipmentRow"
@@ -58,13 +55,14 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:layout_weight="1"
+                    android:padding="@dimen/padding_small"
                     tools:blue="30"
                     tools:green="40"
                     tools:orange="80"
@@ -88,13 +86,14 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value1"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:layout_weight="1"
+                    android:padding="@dimen/padding_small"
                     tools:blue="30"
                     tools:green="40"
                     tools:orange="80"
@@ -118,13 +117,14 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value2"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:layout_weight="1"
+                    android:padding="@dimen/padding_small"
                     tools:blue="30"
                     tools:green="40"
                     tools:orange="80"
@@ -148,13 +148,14 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value3"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:layout_weight="1"
+                    android:padding="@dimen/padding_small"
                     tools:blue="30"
                     tools:green="40"
                     tools:orange="80"
@@ -179,13 +180,14 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value4"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:layout_weight="1"
+                    android:padding="@dimen/padding_small"
                     tools:blue="30"
                     tools:green="40"
                     tools:orange="80"
@@ -209,13 +211,14 @@
                     android:layout_marginStart="@dimen/margin_large"
                     tools:text="+0" />
 
-                <com.ghstudios.android.ui.general.SharpnessView
+                <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                     android:id="@+id/sharpness_value5"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_small"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:layout_weight="1"
+                    android:padding="@dimen/padding_small"
                     tools:blue="30"
                     tools:green="40"
                     tools:orange="80"
@@ -227,52 +230,4 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        style="@style/EquipmentRow"
-        android:layout_width="match_parent">
-
-        <ImageView
-            style="@style/IconXSmall"
-            android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_shelling" />
-
-        <TextView
-            style="@style/TextSubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:text="@string/weapon_gunlance_shelling" />
-
-        <LinearLayout
-            android:id="@+id/shelling_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:gravity="center_vertical|end">
-
-            <TextView
-                android:id="@+id/shelling_type"
-                style="@style/TextSubHead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_large"
-                android:gravity="end"
-                tools:text="Thunder" />
-
-            <TextView
-                android:id="@+id/shelling_level_value"
-                style="@style/TextSubHead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:paddingLeft="@dimen/margin_medium"
-                tools:text="150" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
 </LinearLayout>
-
-

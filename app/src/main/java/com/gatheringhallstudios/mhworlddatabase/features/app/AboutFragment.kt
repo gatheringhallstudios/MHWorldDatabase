@@ -24,8 +24,11 @@ class AboutFragment : Fragment() {
                 val cell = about_layout.getChildAt(i) as IconLabelTextCell
 
                 cell.setOnClickListener {
-                    val href = cell.tag as? String ?: cell.labelText.toString()
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(href)))
+                    val href = cell.tag as? String
+                    if (!href.isNullOrBlank()) {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(href))
+                        startActivity(intent)
+                    }
                 }
             }
         }

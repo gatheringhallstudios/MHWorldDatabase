@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:divider="@drawable/divider_stroke"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <include layout="@layout/view_weapon_sharpness"/>
+
+    <LinearLayout
+        style="@style/EquipmentRow"
+        android:layout_width="match_parent">
+
+        <ImageView
+            style="@style/IconXSmall"
+            android:layout_marginStart="@dimen/margin_large"
+            android:src="@drawable/ic_ui_kinsect_white" />
+
+        <TextView
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="@string/weapon_kinsect_bonus" />
+
+        <LinearLayout
+            android:id="@+id/kinsect_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:gravity="center_vertical|end">
+
+            <TextView
+                android:id="@+id/kinsect_bonus_value"
+                style="@style/TextSubHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:gravity="end"
+                tools:text="Thunder" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

@@ -2,14 +2,12 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.opengl.Visibility
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
-import android.view.ViewGroup.VISIBLE
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
@@ -22,9 +20,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
-import kotlinx.android.synthetic.main.listitem_bow_detail.view.*
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
 import kotlinx.android.synthetic.main.listitem_weapontree.view.*
+import kotlinx.android.synthetic.main.section_bow_coating.view.*
 
 const val INDENT_SIZE = 16 //This value corresponds to the measured width of each of vectors used for drawing the tree in DP. Convert to pixels before use.
 
@@ -82,17 +80,35 @@ class WeaponTreeListAdapterDelegate(
                 else -> View.GONE
             }
 
-            // STATIC STATS
+            // Populate static stats like attack, affinity...
+            populateStaticStats(weapon)
+            // Populate stats like horn notes, shelling type...
+            populateWeaponSpecificStats(weapon)
+            // Populate decorations
+            populateDecorations(weapon)
+            // Populate stats like element, defense...
+            populateComplexStats(weapon)
+            // Populate tree lines
+            createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed)
+
+            view.invalidate()
+        }
+
+        private fun populateStaticStats(weapon: Weapon) {
             view.attack_value.setLabelText(weapon.attack.toString())
 
-            //Render sharpness data if it exists, else hide the bar
+            //Render sharpness data if it exists, else hide the bars
             val sharpnessData = weapon.sharpnessData
             if (sharpnessData != null) {
-                view.sharpness_value.drawSharpness(sharpnessData.get(0))
+                view.sharpness_container.visibility = View.VISIBLE
+                view.sharpness_value.drawSharpness(sharpnessData.min)
+                view.sharpness_max_value.drawSharpness(sharpnessData.max)
             } else {
-                view.sharpness_value.visibility = View.GONE
+                view.sharpness_container.visibility = View.GONE
             }
+        }
 
+        private fun populateDecorations(weapon: Weapon) {
             val slotImages = weapon.slots.map {
                 view.context.getDrawableCompat(SlotEmptyRegistry(it))
             }
@@ -101,107 +117,112 @@ class WeaponTreeListAdapterDelegate(
             view.slot2.setImageDrawable(slotImages[1])
             view.slot3.setImageDrawable(slotImages[2])
 
-            // DYNAMIC STATS
+            // Hide views if no slots
+            view.slot1.visibility = when (weapon.slots[0]) {
+                0 -> View.GONE
+                else -> View.VISIBLE
+            }
+            view.slot2.visibility = when (weapon.slots[1]) {
+                0 -> View.GONE
+                else -> View.VISIBLE
+            }
+            view.slot3.visibility = when (weapon.slots[2]) {
+                0 -> View.GONE
+                else -> View.VISIBLE
+            }
+        }
+
+        private fun populateWeaponSpecificStats(weapon: Weapon) {
             //Weapon Specific stats (e.g. phials, kinsect bonus, special ammo etc.)
             view.tree_weapon_specific_section.removeAllViews()
-            if (weapon.weapon_type == WeaponType.CHARGE_BLADE || weapon.weapon_type == WeaponType.SWITCH_AXE) {
-                val phialValue = when (weapon.phial) {
-                    PhialType.NONE -> ""
-                    PhialType.EXHAUST -> view.context.getString(R.string.weapon_charge_blade_exhaust)
-                    PhialType.POWER -> view.context.getString(R.string.weapon_charge_blade_power)
-                    PhialType.POISON -> view.context.getString(R.string.weapon_charge_blade_poison)
-                    PhialType.DRAGON -> view.context.getString(R.string.weapon_charge_blade_dragon)
-                    PhialType.POWER_ELEMENT -> view.context.getString(R.string.weapon_charge_blade_power_element)
-                    PhialType.PARALYSIS -> view.context.getString(R.string.weapon_charge_blade_paralysis)
-                    PhialType.IMPACT -> view.context.getString(R.string.weapon_charge_blade_impact)
+
+            when (weapon.weapon_type) {
+                 WeaponType.CHARGE_BLADE, WeaponType.SWITCH_AXE -> {
+                    val phialValue = AssetLoader.localizePhialType(weapon.phial)
+
+                    val phialView = CompactStatCell(
+                            view.context,
+                            R.drawable.ic_ui_phials,
+                            phialValue
+                    )
+                    view.tree_weapon_specific_section.addView(phialView)
+
                 }
 
-                val phialView = CompactStatCell(
-                        view.context,
-                        R.xml.ic_items_bottle_base,
-                        phialValue
-                )
+                WeaponType.INSECT_GLAIVE -> {
+                    val kinsectValue = AssetLoader.localizeKinsectBonus(weapon.kinsect_bonus)
 
-                view.tree_weapon_specific_section.addView(phialView)
-            } else if (weapon.weapon_type == WeaponType.INSECT_GLAIVE) {
-                val kinsectValue = when (weapon.kinsect_bonus) {
-                    KinsectBonus.NONE -> ""
-                    KinsectBonus.SEVER -> view.context.getString(R.string.weapon_kinsect_bonus_sever)
-                    KinsectBonus.SPEED ->view.context.getString(R.string.weapon_kinsect_bonus_speed)
-                    KinsectBonus.ELEMENT -> view.context.getString(R.string.weapon_kinsect_bonus_element)
-                    KinsectBonus.HEALTH -> view.context.getString(R.string.weapon_kinsect_bonus_health)
-                    KinsectBonus.STAMINA -> view.context.getString(R.string.weapon_kinsect_bonus_stamina)
-                    KinsectBonus.BLUNT -> view.context.getString(R.string.weapon_kinsect_bonus_blunt)
+                    val kinsectView = CompactStatCell(
+                            view.context,
+                            R.drawable.ic_ui_kinsect_white,
+                            kinsectValue
+                    )
+                    view.tree_weapon_specific_section.addView(kinsectView)
+
                 }
-                val kinsectView = CompactStatCell(
-                        view.context,
-                        R.drawable.ic_ui_kinsect_white,
-                        kinsectValue
-                )
 
-                view.tree_weapon_specific_section.addView(kinsectView)
-            } else if (weapon.weapon_type == WeaponType.GUNLANCE) {
-                val shellingValue = when (weapon.shelling) {
-                    ShellingType.NONE -> ""
-                    ShellingType.NORMAL -> view.context.getString(R.string.weapon_gunlance_shelling_normal)
-                    ShellingType.WIDE -> view.context.getString(R.string.weapon_gunlance_shelling_wide)
-                    ShellingType.LONG -> view.context.getString(R.string.weapon_gunlance_shelling_long)
+                WeaponType.GUNLANCE -> {
+                    val shellingValue = AssetLoader.localizeShellingType(weapon.shelling)
+                    val shellingView = CompactStatCell(
+                            view.context,
+                            R.drawable.ic_ui_shelling,
+                            shellingValue
+                    )
+                    view.tree_weapon_specific_section.addView(shellingView)
+
                 }
-                val shellingView = CompactStatCell( //TODO: Update Icon
-                        view.context,
-                        R.xml.ic_items_bottle_base,
-                        shellingValue
-                )
 
-                view.tree_weapon_specific_section.addView(shellingView)
-            } else if (weapon.weapon_type == WeaponType.LIGHT_BOWGUN || weapon.weapon_type == WeaponType.HEAVY_BOWGUN) {
-                val specialAmmoValue = weapon.special_ammo.toString()
-                val specialAmmoView = CompactStatCell( //TODO: Update Icon
-                        view.context,
-                        R.xml.ic_items_bottle_base,
-                        specialAmmoValue
-                )
+                WeaponType.LIGHT_BOWGUN, WeaponType.HEAVY_BOWGUN -> {
+                    val specialAmmoValue = weapon.special_ammo.toString()
+                    val specialAmmoView = CompactStatCell(
+                            view.context,
+                            R.drawable.ic_ui_special_ammo,
+                            specialAmmoValue
+                    )
+                    view.tree_weapon_specific_section.addView(specialAmmoView)
 
-                view.tree_weapon_specific_section.addView(specialAmmoView)
-            } else if (weapon.weapon_type == WeaponType.BOW) {
-                val coatingView = LayoutInflater.from(view.context).inflate(R.layout.listitem_bow_detail, view.tree_weapon_specific_section, false)
-                weapon.weaponCoatings?.iterator()?.forEach {
-                    when (it) {
-                        CoatingType.BLAST -> {
-                            coatingView.blast_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
-                            coatingView.blast_coating.visibility = View.VISIBLE
-                        }
-                        CoatingType.POWER -> {
-                            coatingView.power_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
-                            coatingView.power_coating.visibility = View.VISIBLE
-                        }
-                        CoatingType.POISON -> {
-                            coatingView.poison_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
-                            coatingView.poison_coating.visibility = View.VISIBLE
-                        }
-                        CoatingType.PARALYSIS -> {
-                            coatingView.paralysis_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
-                            coatingView.paralysis_coating.visibility = View.VISIBLE
-                        }
-                        CoatingType.SLEEP -> {
-                            coatingView.sleep_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
-                            coatingView.sleep_coating.visibility = View.VISIBLE
-                        }
-                        CoatingType.CLOSE_RANGE -> {
-                            coatingView.close_range_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
-                            coatingView.close_range.visibility = View.VISIBLE
+                }
+
+                WeaponType.BOW -> {
+                    val coatingView = LayoutInflater.from(view.context)
+                            .inflate(R.layout.section_bow_coating_compact, view.tree_weapon_specific_section, false)
+
+                    weapon.weaponCoatings?.iterator()?.forEach {
+                        when (it) {
+                            CoatingType.CLOSE_RANGE -> {
+                                coatingView.close_range_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
+                            }
+                            CoatingType.POWER -> {
+                                coatingView.power_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
+                            }
+                            CoatingType.PARALYSIS -> {
+                                coatingView.paralysis_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
+                            }
+                            CoatingType.POISON -> {
+                                coatingView.poison_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
+                            }
+                            CoatingType.SLEEP -> {
+                                coatingView.sleep_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
+                            }
+                            CoatingType.BLAST -> {
+                                coatingView.blast_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
+                            }
                         }
                     }
+
+                    view.tree_weapon_specific_section.addView(coatingView)
                 }
 
-                view.tree_weapon_specific_section.addView(coatingView)
+                else -> Unit
             }
+        }
 
+        private fun populateComplexStats(weapon: Weapon) {
             // Clear the placeholder layouts
             view.complex_stat_layout.removeAllViews()
 
             // Elemental Stat (added if there's a value)
-            if (weapon.element1 != null){
+            if (weapon.element1 != null) {
                 val elementView = CompactStatCell(
                         view.context,
                         AssetLoader.loadElementIcon(weapon.element1),
@@ -249,8 +270,6 @@ class WeaponTreeListAdapterDelegate(
 
                 view.complex_stat_layout.addView(defenseView)
             }
-
-            createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed)
         }
 
         private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {

@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,20 +17,19 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadNoteFromC
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
+import com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import com.ghstudios.android.ui.general.SharpnessView
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
-import kotlinx.android.synthetic.main.listitem_bow_detail.*
-import kotlinx.android.synthetic.main.listitem_bow_detail.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
-import kotlinx.android.synthetic.main.listitem_bowgun_detail.*
-import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.*
-import kotlinx.android.synthetic.main.listitem_hunting_horn_detail.view.*
+import kotlinx.android.synthetic.main.view_bowgun_detail.*
+import kotlinx.android.synthetic.main.view_hunting_horn_detail.*
+import kotlinx.android.synthetic.main.view_hunting_horn_detail.view.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
+import kotlinx.android.synthetic.main.section_bow_coating.*
 import kotlinx.android.synthetic.main.view_weapon_recipe.view.*
 
 /**
@@ -60,7 +58,7 @@ class WeaponDetailFragment : Fragment() {
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
         populateComponents(weaponData.recipe)
-        populateWeaponSpecificSection(weaponData.weapon, weaponData.ammo, weaponData.melodies)
+        populateWeaponSpecificSection(weaponData)
     }
 
     /**
@@ -83,12 +81,6 @@ class WeaponDetailFragment : Fragment() {
             else -> R.string.format_percentage
         }, weapon.affinity)
 
-        affinity_value.setTextColor(ContextCompat.getColor(context!!, when {
-            weapon.affinity > 0 -> R.color.textColorGreen
-            weapon.affinity == 0 -> R.color.textColorHigh
-            else -> R.color.textColorRed
-        }))
-
         // Elderseal
         elderseal_value.text = when (weapon.elderseal) {
             ElderSealLevel.NONE -> getString(R.string.weapon_elderseal_none)
@@ -98,8 +90,12 @@ class WeaponDetailFragment : Fragment() {
         }
 
         // Element
-        val elementAttackStr = weapon.element1_attack?.toString() ?: "-----"
+        val elementAttackStr = weapon.element1_attack?.toString() ?: getString(R.string.weapon_element_none)
         element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
+        element_icon.visibility = when (weapon.element1) {
+            null -> View.GONE
+            else -> View.VISIBLE
+        }
         element_value.text = when (weapon.element_hidden) {
             true -> "($elementAttackStr)"
             false -> elementAttackStr
@@ -120,50 +116,49 @@ class WeaponDetailFragment : Fragment() {
             weapon.defense != 0 -> R.string.format_plus
             else -> R.string.format_quantity_none
         }, weapon.defense)
-
-        if (weapon.defense == 0) {
-            defense_value.alpha = 0.3F
-            defense_label.alpha = 0.3F
-        }
     }
 
     /** Method for binding sections that are specific to certain weapons **/
-    private fun populateWeaponSpecificSection(weapon: Weapon, ammo: WeaponAmmoData?, melodies: List<WeaponMelody>?) {
+    private fun populateWeaponSpecificSection(weaponData: WeaponFull) {
+        val weapon = weaponData.weapon
+        val ammo = weaponData.ammo
+        val melodies = weaponData.melodies
+
         when (weapon.weapon_type) {
             WeaponType.SWITCH_AXE, WeaponType.CHARGE_BLADE -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_charge_blade_detail
+                weapon_specific_section.layoutResource = R.layout.view_blade_phial_detail
                 val view = weapon_specific_section.inflate()
                 bindChargeBladeSwitchAxe(weapon, view)
             }
             WeaponType.INSECT_GLAIVE -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_insect_glaive_detail
+                weapon_specific_section.layoutResource = R.layout.view_insect_glaive_detail
                 val view = weapon_specific_section.inflate()
                 bindInsectGlaive(weapon, view)
             }
             WeaponType.GUNLANCE -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_gunlance_detail
+                weapon_specific_section.layoutResource = R.layout.view_gunlance_detail
                 val view = weapon_specific_section.inflate()
                 bindGunlance(weapon, view)
             }
             WeaponType.HUNTING_HORN -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_hunting_horn_detail
+                weapon_specific_section.layoutResource = R.layout.view_hunting_horn_detail
                 val view = weapon_specific_section.inflate()
                 bindHuntingHorn(weapon, melodies, view)
             }
             WeaponType.BOW -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_bow_detail
+                weapon_specific_section.layoutResource = R.layout.section_bow_coating
                 val view = weapon_specific_section.inflate()
                 bindBow(weapon, view)
             }
             WeaponType.HEAVY_BOWGUN, WeaponType.LIGHT_BOWGUN -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_bowgun_detail
+                weapon_specific_section.layoutResource = R.layout.view_bowgun_detail
                 val view = weapon_specific_section.inflate()
                 bindBowgun(ammo, view)
             }
             else -> {
-                weapon_specific_section.layoutResource = R.layout.listitem_generic_weapon_detail
+                weapon_specific_section.layoutResource = R.layout.view_weapon_sharpness
                 val view = weapon_specific_section.inflate()
-                bindGenericWeapon(weapon, view)
+                bindBasicBladeWeapon(weapon, view)
             }
         }
     }
@@ -264,40 +259,18 @@ class WeaponDetailFragment : Fragment() {
         populateSharpness(weapon.sharpnessData, view)
 
         view.findViewById<ImageView>(R.id.phial_element_icon).setImageDrawable(AssetLoader.loadElementIcon(weapon.phial.toString()))
-        view.findViewById<TextView>(R.id.phial_type_value).text = when (weapon.phial) {
-            PhialType.NONE -> ""
-            PhialType.EXHAUST -> getString(R.string.weapon_charge_blade_exhaust)
-            PhialType.POWER -> getString(R.string.weapon_charge_blade_power)
-            PhialType.POISON -> getString(R.string.weapon_charge_blade_poison)
-            PhialType.DRAGON -> getString(R.string.weapon_charge_blade_dragon)
-            PhialType.POWER_ELEMENT -> getString(R.string.weapon_charge_blade_power_element)
-            PhialType.PARALYSIS -> getString(R.string.weapon_charge_blade_paralysis)
-            PhialType.IMPACT -> getString(R.string.weapon_charge_blade_impact)
-        }
+        view.findViewById<TextView>(R.id.phial_type_value).text = AssetLoader.localizePhialType(weapon.phial)
         view.findViewById<TextView>(R.id.phial_power_value).text = weapon.phial_power.toString()
     }
 
     private fun bindInsectGlaive(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
-        view.findViewById<TextView>(R.id.kinsect_bonus_value).text = when (weapon.kinsect_bonus) {
-            KinsectBonus.NONE -> ""
-            KinsectBonus.SEVER -> getString(R.string.weapon_kinsect_bonus_sever)
-            KinsectBonus.SPEED -> getString(R.string.weapon_kinsect_bonus_speed)
-            KinsectBonus.ELEMENT -> getString(R.string.weapon_kinsect_bonus_element)
-            KinsectBonus.HEALTH -> getString(R.string.weapon_kinsect_bonus_health)
-            KinsectBonus.STAMINA -> getString(R.string.weapon_kinsect_bonus_stamina)
-            KinsectBonus.BLUNT -> getString(R.string.weapon_kinsect_bonus_blunt)
-        }
+        view.findViewById<TextView>(R.id.kinsect_bonus_value).text = AssetLoader.localizeKinsectBonus(weapon.kinsect_bonus)
     }
 
     private fun bindGunlance(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
-        view.findViewById<TextView>(R.id.shelling_type).text = when (weapon.shelling) {
-            ShellingType.NONE -> ""
-            ShellingType.NORMAL -> getString(R.string.weapon_gunlance_shelling_normal)
-            ShellingType.WIDE -> getString(R.string.weapon_gunlance_shelling_wide)
-            ShellingType.LONG -> getString(R.string.weapon_gunlance_shelling_long)
-        }
+        view.findViewById<TextView>(R.id.shelling_type).text = AssetLoader.localizeShellingType(weapon.shelling)
         view.findViewById<TextView>(R.id.shelling_level_value).text = getString(R.string.skill_level_short_qty, weapon.shelling_level)
     }
 
@@ -367,7 +340,7 @@ class WeaponDetailFragment : Fragment() {
         }
     }
 
-    private fun bindGenericWeapon(weapon: Weapon, view: View) {
+    private fun bindBasicBladeWeapon(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
     }
 
