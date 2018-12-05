@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+import com.gatheringhallstudios.mhworlddatabase.components.CompactStatLayoutCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -137,7 +139,7 @@ class WeaponTreeListAdapterDelegate(
             view.tree_weapon_specific_section.removeAllViews()
 
             when (weapon.weapon_type) {
-                 WeaponType.CHARGE_BLADE, WeaponType.SWITCH_AXE -> {
+                WeaponType.CHARGE_BLADE, WeaponType.SWITCH_AXE -> {
                     val phialValue = AssetLoader.localizePhialType(weapon.phial)
 
                     val phialView = CompactStatCell(
@@ -159,6 +161,16 @@ class WeaponTreeListAdapterDelegate(
                     )
                     view.tree_weapon_specific_section.addView(kinsectView)
 
+                }
+
+                WeaponType.HUNTING_HORN -> {
+                    val notesView = CompactStatLayoutCell(view.context, R.drawable.ic_ui_notes)
+
+                    weapon.notes?.forEachIndexed { index, note ->
+                        notesView.addLayoutIcon(AssetLoader.loadNoteFromChar(note, index)!!)
+                    }
+
+                    view.tree_weapon_specific_section.addView(notesView)
                 }
 
                 WeaponType.GUNLANCE -> {
