@@ -24,13 +24,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
-            android:text="@string/weapon_charge_blade_phials" />
+            android:text="@string/weapon_blade_phial_type" />
 
         <LinearLayout
             android:id="@+id/phial_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_large"
             android:gravity="center_vertical|end">
 
             <ImageView
@@ -53,9 +54,8 @@
                 style="@style/TextSubHead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_large"
                 android:gravity="end"
-                android:paddingLeft="@dimen/margin_medium"
+                android:layout_marginStart="@dimen/margin_medium"
                 tools:text="150" />
         </LinearLayout>
 

@@ -25,11 +25,11 @@ import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
 import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
+import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
+import kotlinx.android.synthetic.main.section_bow_coating.*
 import kotlinx.android.synthetic.main.view_bowgun_detail.*
 import kotlinx.android.synthetic.main.view_hunting_horn_detail.*
 import kotlinx.android.synthetic.main.view_hunting_horn_detail.view.*
-import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
-import kotlinx.android.synthetic.main.section_bow_coating.*
 import kotlinx.android.synthetic.main.view_weapon_recipe.view.*
 
 /**
@@ -258,9 +258,23 @@ class WeaponDetailFragment : Fragment() {
         //Draw sharpness bar/hide it for weapons that don't have it
         populateSharpness(weapon.sharpnessData, view)
 
-        view.findViewById<ImageView>(R.id.phial_element_icon).setImageDrawable(AssetLoader.loadElementIcon(weapon.phial.toString()))
         view.findViewById<TextView>(R.id.phial_type_value).text = AssetLoader.localizePhialType(weapon.phial)
-        view.findViewById<TextView>(R.id.phial_power_value).text = weapon.phial_power.toString()
+
+        when (weapon.phial_power) {
+            0 -> view.findViewById<TextView>(R.id.phial_power_value).visibility = View.GONE
+            else -> {
+                view.findViewById<TextView>(R.id.phial_power_value).visibility = View.VISIBLE
+                view.findViewById<TextView>(R.id.phial_power_value).text = weapon.phial_power.toString()
+            }
+        }
+
+        when (AssetLoader.loadIconFor(weapon.phial)) {
+            null -> view.findViewById<ImageView>(R.id.phial_element_icon).visibility = View.GONE
+            else -> {
+                view.findViewById<TextView>(R.id.phial_power_value).visibility = View.VISIBLE
+                view.findViewById<ImageView>(R.id.phial_element_icon).setImageDrawable(AssetLoader.loadIconFor(weapon.phial))
+            }
+        }
     }
 
     private fun bindInsectGlaive(weapon: Weapon, view: View) {

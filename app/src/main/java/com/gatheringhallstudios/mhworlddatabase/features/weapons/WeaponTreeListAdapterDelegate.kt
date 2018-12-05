@@ -16,7 +16,8 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.CoatingType
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
@@ -35,7 +36,7 @@ class WeaponTreeListAdapterDelegate(
         private val onLongSelect: ((Weapon) -> Unit)?
 ) : AdapterDelegate<List<RenderedTreeNode<Weapon>>>() {
 
-    constructor(onSelected: (Weapon) -> Unit): this(onSelected, null)
+    constructor(onSelected: (Weapon) -> Unit) : this(onSelected, null)
 
     override fun isForViewType(items: List<RenderedTreeNode<Weapon>>, position: Int): Boolean {
         return items[position] is RenderedTreeNode<Weapon>
@@ -137,13 +138,17 @@ class WeaponTreeListAdapterDelegate(
             view.tree_weapon_specific_section.removeAllViews()
 
             when (weapon.weapon_type) {
-                 WeaponType.CHARGE_BLADE, WeaponType.SWITCH_AXE -> {
+                WeaponType.CHARGE_BLADE, WeaponType.SWITCH_AXE -> {
                     val phialValue = AssetLoader.localizePhialType(weapon.phial)
+                    val phialPower = weapon.phial_power
 
                     val phialView = CompactStatCell(
                             view.context,
                             R.drawable.ic_ui_phials,
-                            phialValue
+                            when (phialPower){
+                                0 -> phialValue
+                                else -> "$phialValue $phialPower"
+                            }
                     )
                     view.tree_weapon_specific_section.addView(phialView)
 
