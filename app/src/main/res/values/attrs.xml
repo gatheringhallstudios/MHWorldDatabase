@@ -25,6 +25,12 @@
         <attr name="labelText" />
     </declare-styleable>
 
+    <declare-styleable name="CompactStatLayoutCell">
+        <attr name="iconSrc" />
+        <attr name="labelText" />
+    </declare-styleable>
+
+
     <declare-styleable name="SectionHeaderCell">
         <attr name="labelText" />
     </declare-styleable>
