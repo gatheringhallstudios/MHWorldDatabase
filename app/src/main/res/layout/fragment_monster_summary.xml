@@ -24,8 +24,8 @@
             android:id="@+id/weakness_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:visibility="visible"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
                 android:id="@+id/weakness_header"
@@ -33,18 +33,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_large"
                 app:labelText="@string/header_weakness"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/alt_weakness_caption"
+                style="@style/TextCaptionHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextCaptionHigh"
-                app:layout_constraintTop_toTopOf="@id/weakness_header"
+                android:layout_marginEnd="@dimen/margin_large"
                 app:layout_constraintBottom_toBottomOf="@id/weakness_header"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/margin_large"
-                tools:text="( ) = when covered in mud"/>
+                app:layout_constraintTop_toTopOf="@id/weakness_header"
+                tools:text="( ) = when covered in mud" />
 
             <TableLayout
                 android:id="@+id/weakness_layout"
@@ -178,16 +178,13 @@
             android:layout_marginTop="@dimen/margin_section_gap"
             app:labelText="@string/header_ailments" />
 
-        <TextView
-            android:id="@+id/ailments_text"
+        <LinearLayout
+            android:id="@+id/ailments_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            style="@style/TextBodyMedium"
-            tools:text="Large Roar\nMinor Tremor"/>
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:divider="@drawable/divider_stroke" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/habitat_header"

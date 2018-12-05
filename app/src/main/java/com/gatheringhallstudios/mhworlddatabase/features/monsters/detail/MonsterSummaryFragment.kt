@@ -18,6 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
 import com.gatheringhallstudios.mhworlddatabase.data.types.AilmentStrength
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.fragment_monster_summary.*
+import kotlinx.android.synthetic.main.listitem_ailment.view.*
 
 /**
  * Fragment for displaying Monster Summary
@@ -100,16 +101,21 @@ class MonsterSummaryFragment : Fragment() {
     }
 
     private fun populateAilments(ailments: MonsterAilments?) {
-        if (ailments == null) {
-            ailments_text.setText(R.string.general_none)
-            return
-        }
 
         val ailmentList = mutableListOf<String>()
         fun addAilment(@StringRes resId: Int) {
             ailmentList.add(getString(resId))
         }
 
+        // Empty handling
+        if (ailments == null) {
+            val ailmentView = layoutInflater.inflate(R.layout.listitem_ailment, ailments_layout, false)
+            ailmentView.ailment_text.text = getString(R.string.general_none)
+            ailments_layout.addView(ailmentView)
+            return
+        }
+
+        // Speicific
         when (ailments.roar) {
             AilmentStrength.NONE -> {}
             AilmentStrength.SMALL -> addAilment(R.string.ailment_roar_small)
@@ -145,12 +151,18 @@ class MonsterSummaryFragment : Fragment() {
         if (ailments.mud) addAilment(R.string.ailment_mud)
         if (ailments.effluvia) addAilment(R.string.ailment_effluvia)
 
-        if (ailmentList.isEmpty()) {
-            ailments_text.setText(R.string.general_none)
-            return
+        if (ailmentList.isEmpty()) addAilment(R.string.general_none)
+
+        // Populate ailments to views
+        for (ailment in ailmentList) {
+            val ailmentView = layoutInflater.inflate(R.layout.listitem_ailment, ailments_layout, false)
+            ailmentView.ailment_text.text = ailment
+            ailments_layout.addView(ailmentView)
         }
 
-        ailments_text.text = ailmentList.joinToString("\n")
+        // Request a layout pass because our height has changed
+        ailments_layout.requestLayout()
+
     }
 
     private fun populateHabitats(habitats: List<MonsterHabitat>?) {
