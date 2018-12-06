@@ -11,8 +11,8 @@ android {
         applicationId "com.gatheringhallstudios.mhworlddatabase"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.0.4"
+        versionCode 5
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
