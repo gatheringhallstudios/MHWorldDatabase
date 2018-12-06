@@ -10,18 +10,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:divider="@drawable/divider_stroke"
+        android:orientation="vertical"
         android:showDividers="middle">
 
         <LinearLayout
             android:id="@+id/special_ammo_layout"
             style="@style/EquipmentRow"
             android:layout_width="match_parent">
-        <ImageView
-            style="@style/IconXSmall"
-            android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_deviation" />
+
+            <ImageView
+                style="@style/IconXSmall"
+                android:layout_marginStart="@dimen/margin_large"
+                android:src="@drawable/ic_ui_special_ammo" />
 
             <TextView
                 style="@style/TextSubHead"
@@ -58,7 +59,7 @@
             <ImageView
                 style="@style/IconXSmall"
                 android:layout_marginStart="@dimen/margin_large"
-                android:src="@drawable/ic_ui_special_ammo" />
+                android:src="@drawable/ic_ui_deviation" />
 
             <TextView
                 style="@style/TextSubHead"
@@ -110,70 +111,42 @@
 
             </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
 
-            <FrameLayout
-                android:id="@+id/shot_type_icon"
-                android:layout_width="100dp"
+            <TextView
+                android:id="@+id/ammo_recoil_label"
+                android:layout_width="112dp"
                 android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/weapon_bowgun_shot_type_rcl"
+                android:textColor="@color/textColorHigh"
                 app:layout_constraintBottom_toBottomOf="@id/ammo_header"
                 app:layout_constraintEnd_toStartOf="@+id/capacity_icon"
                 app:layout_constraintTop_toTopOf="@+id/ammo_header">
+            </TextView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="@string/weapon_bowgun_shot_type"
-                    android:textColor="@color/textColorHigh" />
-            </FrameLayout>
-
-            <FrameLayout
+            <TextView
                 android:id="@+id/capacity_icon"
-                android:layout_width="@dimen/width_break_value"
+                android:layout_width="72dp"
                 android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/weapon_bowgun_reload"
+                android:textColor="@color/textColorHigh"
                 app:layout_constraintBottom_toBottomOf="@id/ammo_header"
-                app:layout_constraintEnd_toStartOf="@+id/reload_icon"
+                app:layout_constraintEnd_toStartOf="@+id/capacity_label"
                 app:layout_constraintTop_toTopOf="@+id/ammo_header">
+            </TextView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="@string/weapon_bowgun_capacity"
-                    android:textColor="@color/textColorHigh" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/reload_icon"
-                android:layout_width="@dimen/width_break_value"
+            <TextView
+                android:id="@+id/capacity_label"
+                style="@style/TextBodyHigh"
+                android:layout_width="32dp"
                 android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="@id/ammo_header"
-                app:layout_constraintEnd_toStartOf="@+id/special_icon"
-                app:layout_constraintTop_toTopOf="@+id/ammo_header">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="@string/weapon_bowgun_reload"
-                    android:textColor="@color/textColorHigh" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/special_icon"
-                android:layout_width="@dimen/width_extract_value"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="14sp"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:gravity="center"
+                android:text="@string/weapon_bowgun_capacity"
                 app:layout_constraintBottom_toBottomOf="@id/ammo_header"
                 app:layout_constraintEnd_toEndOf="@+id/ammo_header"
-                app:layout_constraintTop_toTopOf="@+id/ammo_header">
+                app:layout_constraintTop_toTopOf="@+id/ammo_header" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="@string/weapon_bowgun_recoil"
-                    android:textColor="@color/textColorHigh" />
-            </FrameLayout>
 
         </android.support.constraint.ConstraintLayout>
 

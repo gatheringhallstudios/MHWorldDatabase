@@ -407,17 +407,20 @@ class WeaponDetailFragment : Fragment() {
 
             //Determining what kind of shot it actually is, is a combination of ammo type, rapid/normal,
             //And reload speed due to game logic. I know this looks like it makes 0 sense
-            if (it.type == AmmoType.WYVERN_AMMO) {
-                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
-            } else if (it.isRapid == true) {
-                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
+            val shotTypeStr = if (it.type == AmmoType.WYVERN_AMMO) {
+                getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
+            } else if (it.isRapid) {
+                getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
             } else if (it.recoil == -1) {
-                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_auto_reload)
-            } else if (it.isRapid == false && it.recoil != -1) {
-                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_normal)
+                getString(R.string.weapon_bowgun_ammo_shot_auto_reload)
+            } else if (!it.isRapid && it.recoil != -1) {
+                getString(R.string.weapon_bowgun_ammo_shot_normal)
             } else {
-                view.shot_type_value.text = getString(R.string.general_none)
+                getString(R.string.general_none)
             }
+            val recoilStr = if (it.recoil <= 0) "" else getString(R.string.format_plus, it.recoil)
+
+            view.shot_type_value_recoil.text = String.format("%s%s", shotTypeStr, recoilStr)
 
             view.reload_value.text = when (it.reload) {
                 ReloadType.NONE -> getString(R.string.general_none)
@@ -427,8 +430,6 @@ class WeaponDetailFragment : Fragment() {
                 ReloadType.FAST -> getString(R.string.weapon_bowgun_ammo_reload_fast)
                 ReloadType.VERY_FAST -> getString(R.string.weapon_bowgun_ammo_reload_very_fast)
             }
-
-            view.recoil_value.text = if (it.recoil < 0) "-" else getString(R.string.format_plus, it.recoil)
 
             view.ammo_icon.setImageDrawable(loadIconFor(it.type))
             ammo_layout.addView(view)

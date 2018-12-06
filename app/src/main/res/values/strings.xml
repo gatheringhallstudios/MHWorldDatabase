@@ -256,14 +256,14 @@
     <string name="weapon_bowgun_ammo_shot_rapid_fire">Rapid Fire</string>
     <string name="weapon_bowgun_ammo_shot_auto_reload">Auto Reload</string>
     <string name="weapon_bowgun_ammo_shot_wyvern">Wyvern</string>
-    <string name="weapon_bowgun_ammo_reload_very_slow">Very Slow</string>
+    <string name="weapon_bowgun_ammo_reload_very_slow">V. Slow</string>
     <string name="weapon_bowgun_ammo_reload_slow">Slow</string>
     <string name="weapon_bowgun_ammo_reload_normal">Normal</string>
     <string name="weapon_bowgun_ammo_reload_fast">Fast</string>
-    <string name="weapon_bowgun_ammo_reload_very_fast">Very Fast</string>
-    <string name="weapon_bowgun_shot_type">Shot Type</string>
+    <string name="weapon_bowgun_ammo_reload_very_fast">V. Fast</string>
+    <string name="weapon_bowgun_shot_type_rcl">Shot Type+RCL</string>
     <string name="weapon_bowgun_capacity">CAP</string>
-    <string name="weapon_bowgun_reload">RLD</string>
+    <string name="weapon_bowgun_reload">Reload</string>
     <string name="weapon_bowgun_recoil">RCL</string>
 
 
