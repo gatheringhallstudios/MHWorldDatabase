@@ -26,7 +26,7 @@
                 android:src="@drawable/ic_ui_notes" />
 
             <TextView
-                style="@style/TextSubHead"
+                style="@style/TextBodyHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"

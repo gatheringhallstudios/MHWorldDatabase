@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -18,11 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * This is a full height, full width cell that displays an icon, label, and value. Used to generate
- * data rows in RecyclerView or inside XML layouts.
+ * This is a cell that displays a horizontal layout of icons with an optional left icon.
  */
-
-public class CompactStatLayoutCell extends ConstraintLayout {
+public class CompactStatIconLayoutCell extends ConstraintLayout {
 
     private final String TAG = getClass().getSimpleName();
 
@@ -31,16 +30,21 @@ public class CompactStatLayoutCell extends ConstraintLayout {
     @BindView(R.id.value_layout)
     public LinearLayout linearLayout;
 
-    public CompactStatLayoutCell(Context context, @DrawableRes int imgSrc) {
+    public CompactStatIconLayoutCell(Context context, @DrawableRes int imgSrc) {
         super(context);
         Drawable drawable = ContextCompat.getDrawable(getContext(), imgSrc);
         init(drawable);
     }
 
-    public CompactStatLayoutCell(Context context, @Nullable AttributeSet attrs) {
+    public CompactStatIconLayoutCell(Context context) {
+        super(context);
+        init(null);
+    }
+
+    public CompactStatIconLayoutCell(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.CompactStatLayoutCell);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.CompactStatIconLayoutCell);
 
         // Set values from attributes
         Drawable drawable;
@@ -60,14 +64,22 @@ public class CompactStatLayoutCell extends ConstraintLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cell_compact_layout_stat, this, true);
         ButterKnife.bind(this);
+
         setLeftIconDrawable(drawable);
     }
 
     /**
-     * Set custom drawable for the left icon
+     * Set custom drawable for the left icon.
+     *
+     * @param drawable to use as the left icon. Pass null to hide the icon.
      */
-    public void setLeftIconDrawable(Drawable drawable) {
-        imageView.setImageDrawable(drawable);
+    public void setLeftIconDrawable(@Nullable Drawable drawable) {
+        if (drawable != null) {
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setImageDrawable(drawable);
+        } else {
+            imageView.setVisibility(View.GONE);
+        }
 
         // Invalidate to trigger layout update
         invalidate();
