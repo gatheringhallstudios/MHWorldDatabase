@@ -90,7 +90,8 @@ class WeaponDetailFragment : Fragment() {
         }
 
         // Element
-        val elementAttackStr = weapon.element1_attack?.toString() ?: getString(R.string.weapon_element_none)
+        val elementAttackStr = weapon.element1_attack?.toString()
+                ?: getString(R.string.weapon_element_none)
         element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
         element_icon.visibility = when (weapon.element1) {
             null -> View.GONE
@@ -212,34 +213,23 @@ class WeaponDetailFragment : Fragment() {
      */
     private fun populateSharpness(sharpness: WeaponSharpness?, view: View) {
         if (sharpness != null) {
-            //One bar for weapons not affected by sharpness
-            if (sharpness.sharpness_maxed!!) {
-                view.findViewById<SharpnessView>(R.id.sharpness_value).drawSharpness(sharpness.get(0))
-                view.findViewById<LinearLayout>(R.id.sharpness_container1).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.sharpness_container2).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.sharpness_container3).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.sharpness_container4).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.sharpness_container5).visibility = View.GONE
+            view.findViewById<TextView>(R.id.sharpness_label).text = getString(R.string.format_plus, 0)
+            view.findViewById<SharpnessView>(R.id.sharpness_value).drawSharpness(sharpness.get(0))
 
-            } else {
-                view.findViewById<TextView>(R.id.sharpness_label).text = getString(R.string.format_plus, 0)
-                view.findViewById<SharpnessView>(R.id.sharpness_value).drawSharpness(sharpness.get(0))
+            view.findViewById<TextView>(R.id.sharpness_label1).text = getString(R.string.format_plus, 1)
+            view.findViewById<SharpnessView>(R.id.sharpness_value1).drawSharpness(sharpness.get(1))
 
-                view.findViewById<TextView>(R.id.sharpness_label1).text = getString(R.string.format_plus, 1)
-                view.findViewById<SharpnessView>(R.id.sharpness_value1).drawSharpness(sharpness.get(1))
+            view.findViewById<TextView>(R.id.sharpness_label2).text = getString(R.string.format_plus, 2)
+            view.findViewById<SharpnessView>(R.id.sharpness_value2).drawSharpness(sharpness.get(2))
 
-                view.findViewById<TextView>(R.id.sharpness_label2).text = getString(R.string.format_plus, 2)
-                view.findViewById<SharpnessView>(R.id.sharpness_value2).drawSharpness(sharpness.get(2))
+            view.findViewById<TextView>(R.id.sharpness_label3).text = getString(R.string.format_plus, 3)
+            view.findViewById<SharpnessView>(R.id.sharpness_value3).drawSharpness(sharpness.get(3))
 
-                view.findViewById<TextView>(R.id.sharpness_label3).text = getString(R.string.format_plus, 3)
-                view.findViewById<SharpnessView>(R.id.sharpness_value3).drawSharpness(sharpness.get(3))
+            view.findViewById<TextView>(R.id.sharpness_label4).text = getString(R.string.format_plus, 4)
+            view.findViewById<SharpnessView>(R.id.sharpness_value4).drawSharpness(sharpness.get(4))
 
-                view.findViewById<TextView>(R.id.sharpness_label4).text = getString(R.string.format_plus, 4)
-                view.findViewById<SharpnessView>(R.id.sharpness_value4).drawSharpness(sharpness.get(4))
-
-                view.findViewById<TextView>(R.id.sharpness_label5).text = getString(R.string.format_plus, 5)
-                view.findViewById<SharpnessView>(R.id.sharpness_value5).drawSharpness(sharpness.get(5))
-            }
+            view.findViewById<TextView>(R.id.sharpness_label5).text = getString(R.string.format_plus, 5)
+            view.findViewById<SharpnessView>(R.id.sharpness_value5).drawSharpness(sharpness.get(5))
         } else {
             hideSharpness(view)
         }
@@ -301,9 +291,9 @@ class WeaponDetailFragment : Fragment() {
 
         view.melody_layout.removeAllViews()
         melodies?.forEach { melody ->
-            val melodyView = layoutInflater.inflate(R.layout.listitem_hunting_horn_melody, melody_layout, false )
+            val melodyView = layoutInflater.inflate(R.layout.listitem_hunting_horn_melody, melody_layout, false)
             melody.notes.forEachIndexed { index, note ->
-                val noteIcon = when(index) {
+                val noteIcon = when (index) {
                     0 -> melodyView.note1_icon
                     1 -> melodyView.note2_icon
                     2 -> melodyView.note3_icon
