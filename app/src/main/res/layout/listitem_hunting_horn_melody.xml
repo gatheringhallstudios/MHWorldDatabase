@@ -4,30 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/row_height_xlarge"
+    android:layout_height="wrap_content"
     android:gravity="center_vertical">
 
     <ImageView
         android:id="@+id/note1_icon"
-        android:layout_width="@dimen/image_size_medium"
-        android:layout_height="@dimen/image_size_medium"
-        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_width="@dimen/image_size_small"
+        android:layout_height="@dimen/image_size_small"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/ic_ui_question_mark_white" />
 
     <ImageView
         android:id="@+id/note2_icon"
-        android:layout_width="@dimen/image_size_medium"
-        android:layout_height="@dimen/image_size_medium"
+        android:layout_width="@dimen/image_size_small"
+        android:layout_height="@dimen/image_size_small"
         app:layout_constraintStart_toEndOf="@+id/note1_icon"
         app:layout_constraintTop_toTopOf="@+id/note1_icon"
         tools:srcCompat="@drawable/ic_ui_question_mark_white" />
 
     <ImageView
         android:id="@+id/note3_icon"
-        android:layout_width="@dimen/image_size_medium"
-        android:layout_height="@dimen/image_size_medium"
+        android:layout_width="@dimen/image_size_small"
+        android:layout_height="@dimen/image_size_small"
         app:layout_constraintStart_toEndOf="@+id/note2_icon"
         app:layout_constraintTop_toTopOf="@+id/note2_icon"
         tools:srcCompat="@drawable/ic_ui_question_mark_white" />
@@ -38,20 +39,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
+        android:paddingBottom="@dimen/padding_medium"
         app:layout_constraintStart_toStartOf="@+id/effect1"
         app:layout_constraintTop_toBottomOf="@+id/effect1"
         tools:text="Attack Deflection Prevention" />
-
-    <TextView
-        android:id="@+id/extension_value"
-        style="@style/TextBodyMedium"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/note4_icon"
-        app:layout_constraintEnd_toStartOf="@+id/duration_value"
-        tools:text="+90(+120)"
-        tools:textColor="@color/icon_orange" />
 
     <TextView
         android:id="@+id/effect1"
@@ -65,8 +56,8 @@
 
     <ImageView
         android:id="@+id/note4_icon"
-        android:layout_width="@dimen/image_size_medium"
-        android:layout_height="@dimen/image_size_medium"
+        android:layout_width="@dimen/image_size_small"
+        android:layout_height="@dimen/image_size_small"
         app:layout_constraintStart_toEndOf="@+id/note3_icon"
         app:layout_constraintTop_toTopOf="@+id/note3_icon"
         tools:srcCompat="@drawable/ic_ui_question_mark_white" />
@@ -76,10 +67,25 @@
         style="@style/TextBodyMedium"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_medium"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/extension_value"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/note1_icon"
+        app:layout_constraintEnd_toStartOf="@+id/extension_value"
+        app:layout_constraintTop_toTopOf="@+id/note1_icon"
         tools:text="120(150)" />
+
+    <TextView
+        android:id="@+id/extension_value"
+        style="@style/TextBodyMedium"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_large"
+
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/duration_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/duration_value"
+
+        tools:text="+90(+120)"
+        tools:textColor="@color/icon_orange" />
 
 </android.support.constraint.ConstraintLayout>

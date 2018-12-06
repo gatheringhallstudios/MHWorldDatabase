@@ -90,7 +90,8 @@ class WeaponDetailFragment : Fragment() {
         }
 
         // Element
-        val elementAttackStr = weapon.element1_attack?.toString() ?: getString(R.string.weapon_element_none)
+        val elementAttackStr = weapon.element1_attack?.toString()
+                ?: getString(R.string.weapon_element_none)
         element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
         element_icon.visibility = when (weapon.element1) {
             null -> View.GONE
@@ -212,34 +213,23 @@ class WeaponDetailFragment : Fragment() {
      */
     private fun populateSharpness(sharpness: WeaponSharpness?, view: View) {
         if (sharpness != null) {
-            //One bar for weapons not affected by sharpness
-            if (sharpness.sharpness_maxed!!) {
-                view.findViewById<SharpnessView>(R.id.sharpness_value).drawSharpness(sharpness.get(0))
-                view.findViewById<LinearLayout>(R.id.sharpness_container1).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.sharpness_container2).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.sharpness_container3).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.sharpness_container4).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.sharpness_container5).visibility = View.GONE
+            view.findViewById<TextView>(R.id.sharpness_label).text = getString(R.string.format_plus, 0)
+            view.findViewById<SharpnessView>(R.id.sharpness_value).drawSharpness(sharpness.get(0))
 
-            } else {
-                view.findViewById<TextView>(R.id.sharpness_label).text = getString(R.string.format_plus, 0)
-                view.findViewById<SharpnessView>(R.id.sharpness_value).drawSharpness(sharpness.get(0))
+            view.findViewById<TextView>(R.id.sharpness_label1).text = getString(R.string.format_plus, 1)
+            view.findViewById<SharpnessView>(R.id.sharpness_value1).drawSharpness(sharpness.get(1))
 
-                view.findViewById<TextView>(R.id.sharpness_label1).text = getString(R.string.format_plus, 1)
-                view.findViewById<SharpnessView>(R.id.sharpness_value1).drawSharpness(sharpness.get(1))
+            view.findViewById<TextView>(R.id.sharpness_label2).text = getString(R.string.format_plus, 2)
+            view.findViewById<SharpnessView>(R.id.sharpness_value2).drawSharpness(sharpness.get(2))
 
-                view.findViewById<TextView>(R.id.sharpness_label2).text = getString(R.string.format_plus, 2)
-                view.findViewById<SharpnessView>(R.id.sharpness_value2).drawSharpness(sharpness.get(2))
+            view.findViewById<TextView>(R.id.sharpness_label3).text = getString(R.string.format_plus, 3)
+            view.findViewById<SharpnessView>(R.id.sharpness_value3).drawSharpness(sharpness.get(3))
 
-                view.findViewById<TextView>(R.id.sharpness_label3).text = getString(R.string.format_plus, 3)
-                view.findViewById<SharpnessView>(R.id.sharpness_value3).drawSharpness(sharpness.get(3))
+            view.findViewById<TextView>(R.id.sharpness_label4).text = getString(R.string.format_plus, 4)
+            view.findViewById<SharpnessView>(R.id.sharpness_value4).drawSharpness(sharpness.get(4))
 
-                view.findViewById<TextView>(R.id.sharpness_label4).text = getString(R.string.format_plus, 4)
-                view.findViewById<SharpnessView>(R.id.sharpness_value4).drawSharpness(sharpness.get(4))
-
-                view.findViewById<TextView>(R.id.sharpness_label5).text = getString(R.string.format_plus, 5)
-                view.findViewById<SharpnessView>(R.id.sharpness_value5).drawSharpness(sharpness.get(5))
-            }
+            view.findViewById<TextView>(R.id.sharpness_label5).text = getString(R.string.format_plus, 5)
+            view.findViewById<SharpnessView>(R.id.sharpness_value5).drawSharpness(sharpness.get(5))
         } else {
             hideSharpness(view)
         }
@@ -294,16 +284,18 @@ class WeaponDetailFragment : Fragment() {
 
         weapon.notes?.forEachIndexed { index, note ->
             val noteIcon = ImageView(context)
-            noteIcon.layoutParams = ViewGroup.LayoutParams(resources.getDimension(R.dimen.image_size_small).toInt(), resources.getDimension(R.dimen.image_size_small).toInt())
+            noteIcon.layoutParams = ViewGroup.LayoutParams(
+                    resources.getDimension(R.dimen.image_size_xsmall).toInt(),
+                    resources.getDimension(R.dimen.image_size_xsmall).toInt())
             noteIcon.setImageDrawable(loadNoteFromChar(note, index))
             notes_layout.addView(noteIcon)
         }
 
         view.melody_layout.removeAllViews()
         melodies?.forEach { melody ->
-            val melodyView = layoutInflater.inflate(R.layout.listitem_hunting_horn_melody, melody_layout, false )
+            val melodyView = layoutInflater.inflate(R.layout.listitem_hunting_horn_melody, melody_layout, false)
             melody.notes.forEachIndexed { index, note ->
-                val noteIcon = when(index) {
+                val noteIcon = when (index) {
                     0 -> melodyView.note1_icon
                     1 -> melodyView.note2_icon
                     2 -> melodyView.note3_icon
@@ -407,17 +399,20 @@ class WeaponDetailFragment : Fragment() {
 
             //Determining what kind of shot it actually is, is a combination of ammo type, rapid/normal,
             //And reload speed due to game logic. I know this looks like it makes 0 sense
-            if (it.type == AmmoType.WYVERN_AMMO) {
-                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
-            } else if (it.isRapid == true) {
-                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
+            val shotTypeStr = if (it.type == AmmoType.WYVERN_AMMO) {
+                getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
+            } else if (it.isRapid) {
+                getString(R.string.weapon_bowgun_ammo_shot_rapid_fire)
             } else if (it.recoil == -1) {
-                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_auto_reload)
-            } else if (it.isRapid == false && it.recoil != -1) {
-                view.shot_type_value.text = getString(R.string.weapon_bowgun_ammo_shot_normal)
+                getString(R.string.weapon_bowgun_ammo_shot_auto_reload)
+            } else if (!it.isRapid && it.recoil != -1) {
+                getString(R.string.weapon_bowgun_ammo_shot_normal)
             } else {
-                view.shot_type_value.text = getString(R.string.general_none)
+                getString(R.string.general_none)
             }
+            val recoilStr = if (it.recoil <= 0) "" else getString(R.string.format_plus, it.recoil)
+
+            view.shot_type_value_recoil.text = String.format("%s%s", shotTypeStr, recoilStr)
 
             view.reload_value.text = when (it.reload) {
                 ReloadType.NONE -> getString(R.string.general_none)
@@ -427,8 +422,6 @@ class WeaponDetailFragment : Fragment() {
                 ReloadType.FAST -> getString(R.string.weapon_bowgun_ammo_reload_fast)
                 ReloadType.VERY_FAST -> getString(R.string.weapon_bowgun_ammo_reload_very_fast)
             }
-
-            view.recoil_value.text = if (it.recoil < 0) "-" else getString(R.string.format_plus, it.recoil)
 
             view.ammo_icon.setImageDrawable(loadIconFor(it.type))
             ammo_layout.addView(view)

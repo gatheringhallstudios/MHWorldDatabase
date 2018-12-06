@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -16,7 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
-import com.gatheringhallstudios.mhworlddatabase.components.CompactStatLayoutCell
+import com.gatheringhallstudios.mhworlddatabase.components.CompactStatIconLayoutCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.CoatingType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
@@ -147,7 +146,7 @@ class WeaponTreeListAdapterDelegate(
                     val phialView = CompactStatCell(
                             view.context,
                             R.drawable.ic_ui_phials,
-                            when (phialPower){
+                            when (phialPower) {
                                 0 -> phialValue
                                 else -> "$phialValue $phialPower"
                             }
@@ -169,7 +168,7 @@ class WeaponTreeListAdapterDelegate(
                 }
 
                 WeaponType.HUNTING_HORN -> {
-                    val notesView = CompactStatLayoutCell(view.context, R.drawable.ic_ui_notes)
+                    val notesView = CompactStatIconLayoutCell(view.context)
 
                     weapon.notes?.forEachIndexed { index, note ->
                         notesView.addLayoutIcon(AssetLoader.loadNoteFromChar(note, index)!!)
@@ -179,7 +178,7 @@ class WeaponTreeListAdapterDelegate(
                 }
 
                 WeaponType.GUNLANCE -> {
-                    val shellingValue = AssetLoader.localizeShellingType(weapon.shelling)
+                    val shellingValue = AssetLoader.localizeShellingType(weapon.shelling) + " " + view.context.getString(R.string.skill_level_short_qty, weapon.shelling_level)
                     val shellingView = CompactStatCell(
                             view.context,
                             R.drawable.ic_ui_shelling,
