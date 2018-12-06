@@ -46,7 +46,7 @@
 
             <TextView
                 android:id="@+id/sharpness_label"
-                style="@style/TextBodyMedium"
+                style="@style/TextBodyHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
@@ -78,7 +78,7 @@
 
             <TextView
                 android:id="@+id/sharpness_label1"
-                style="@style/TextBodyMedium"
+                style="@style/TextBodyHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
@@ -110,7 +110,7 @@
 
             <TextView
                 android:id="@+id/sharpness_label2"
-                style="@style/TextBodyMedium"
+                style="@style/TextBodyHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
@@ -142,7 +142,7 @@
 
             <TextView
                 android:id="@+id/sharpness_label3"
-                style="@style/TextBodyMedium"
+                style="@style/TextBodyHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
@@ -175,7 +175,7 @@
 
             <TextView
                 android:id="@+id/sharpness_label4"
-                style="@style/TextBodyMedium"
+                style="@style/TextBodyHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
@@ -206,7 +206,7 @@
 
             <TextView
                 android:id="@+id/sharpness_label5"
-                style="@style/TextBodyMedium"
+                style="@style/TextBodyHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
