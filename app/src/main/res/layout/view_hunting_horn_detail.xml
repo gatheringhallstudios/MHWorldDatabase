@@ -10,11 +10,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:divider="@drawable/divider_stroke"
+        android:orientation="vertical"
         android:showDividers="middle">
 
-        <include layout="@layout/view_weapon_sharpness"/>
+        <include layout="@layout/view_weapon_sharpness" />
 
         <LinearLayout
             style="@style/EquipmentRow"
@@ -71,46 +71,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_section_gap">
 
-        <FrameLayout
-            android:id="@+id/duration_icon"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/melody_layout"
-            app:layout_constraintEnd_toStartOf="@+id/extension_icon"
-            app:layout_constraintTop_toTopOf="@+id/melody_header">
-
-            <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/weapon_hunting_horn_duration"
-                android:textColor="@color/textColorHigh" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/extension_icon"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/melody_layout"
-            app:layout_constraintEnd_toEndOf="@+id/melody_header"
-            app:layout_constraintTop_toTopOf="@+id/melody_header">
-
-            <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/weapon_hunting_horn_extension"
-                android:textColor="@color/textColorHigh" />
-        </FrameLayout>
-
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/melody_header"
             android:layout_width="0dp"
@@ -118,17 +78,40 @@
             app:labelText="@string/weapon_hunting_horn_melodies"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+        <TextView
+            android:id="@+id/duration_label"
+            style="@style/TextBodyHigh"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/weapon_hunting_horn_duration"
+            app:layout_constraintBottom_toTopOf="@+id/melody_layout"
+            app:layout_constraintEnd_toStartOf="@+id/extension_label"
+            app:layout_constraintTop_toTopOf="@+id/melody_header" />
+
+        <TextView
+            android:id="@+id/extension_label"
+            style="@style/TextBodyHigh"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:gravity="center"
+            android:text="@string/weapon_hunting_horn_extension"
+            app:layout_constraintBottom_toTopOf="@+id/melody_layout"
+            app:layout_constraintEnd_toEndOf="@+id/melody_header"
+            app:layout_constraintTop_toTopOf="@+id/melody_header" />
 
         <!-- This section will be populated dynamically through code -->
         <LinearLayout
             android:id="@+id/melody_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:divider="@drawable/divider_stroke"
+            android:orientation="vertical"
             android:showDividers="middle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

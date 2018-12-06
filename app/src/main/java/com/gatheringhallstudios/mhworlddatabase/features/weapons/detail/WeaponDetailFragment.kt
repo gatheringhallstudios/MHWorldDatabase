@@ -284,7 +284,9 @@ class WeaponDetailFragment : Fragment() {
 
         weapon.notes?.forEachIndexed { index, note ->
             val noteIcon = ImageView(context)
-            noteIcon.layoutParams = ViewGroup.LayoutParams(resources.getDimension(R.dimen.image_size_small).toInt(), resources.getDimension(R.dimen.image_size_small).toInt())
+            noteIcon.layoutParams = ViewGroup.LayoutParams(
+                    resources.getDimension(R.dimen.image_size_xsmall).toInt(),
+                    resources.getDimension(R.dimen.image_size_xsmall).toInt())
             noteIcon.setImageDrawable(loadNoteFromChar(note, index))
             notes_layout.addView(noteIcon)
         }
