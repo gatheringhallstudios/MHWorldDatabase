@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
 import android.graphics.Canvas
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import android.util.Log
 import com.gatheringhallstudios.mhworlddatabase.util.DrawableWrapper
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable

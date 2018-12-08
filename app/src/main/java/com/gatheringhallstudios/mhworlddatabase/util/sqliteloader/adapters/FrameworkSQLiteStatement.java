@@ -15,7 +15,7 @@ package com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.adapters;
  * limitations under the License.
  */
 
-import android.arch.persistence.db.SupportSQLiteStatement;
+import androidx.sqlite.db.SupportSQLiteStatement;
 import android.database.sqlite.SQLiteStatement;
 
 /**

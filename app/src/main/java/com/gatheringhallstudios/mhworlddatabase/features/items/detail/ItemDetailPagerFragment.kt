@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment

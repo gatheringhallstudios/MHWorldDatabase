@@ -3,23 +3,23 @@ package com.gatheringhallstudios.mhworlddatabase
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.support.v4.app.ActivityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.graphics.drawable.DrawerArrowDrawable
+import androidx.core.app.ActivityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import android.view.Gravity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 
 class MultiStartNavigationUI(private val startDestinations: List<Int>) {
     fun setupActionBarWithNavController(activity: AppCompatActivity, navController: NavController,
-                                        drawerLayout: DrawerLayout?) {
+                                        drawerLayout: androidx.drawerlayout.widget.DrawerLayout?) {
 
         navController.addOnNavigatedListener(ActionBarOnNavigatedListener(
                 activity, startDestinations, drawerLayout))
     }
 
-    fun navigateUp(drawerLayout: DrawerLayout?, navController: NavController): Boolean {
+    fun navigateUp(drawerLayout: androidx.drawerlayout.widget.DrawerLayout?, navController: NavController): Boolean {
         if (drawerLayout != null && startDestinations.contains(navController.currentDestination?.id)) {
             drawerLayout.openDrawer(Gravity.START)
             return true
@@ -41,7 +41,7 @@ class MultiStartNavigationUI(private val startDestinations: List<Int>) {
     private class ActionBarOnNavigatedListener(
             private val mActivity: AppCompatActivity,
             private val startDestinations: List<Int>,
-            private val mDrawerLayout: DrawerLayout?
+            private val mDrawerLayout: androidx.drawerlayout.widget.DrawerLayout?
     ) : NavController.OnNavigatedListener {
         private var mArrowDrawable: DrawerArrowDrawable? = null
         private var mAnimator: ValueAnimator? = null

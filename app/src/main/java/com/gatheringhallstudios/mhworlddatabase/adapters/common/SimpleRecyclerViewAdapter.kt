@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters.common
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import java.util.*
@@ -9,7 +9,7 @@ import java.util.*
  * Defines an adapter for a simple item meant to be used via KTX.
  * For an adapter with multiple items, use a delegate instead.
  */
-abstract class SimpleRecyclerViewAdapter<T>: RecyclerView.Adapter<SimpleViewHolder>() {
+abstract class SimpleRecyclerViewAdapter<T>: androidx.recyclerview.widget.RecyclerView.Adapter<SimpleViewHolder>() {
     protected abstract fun onCreateView(parent: ViewGroup): View
     protected abstract fun bindView(viewHolder: SimpleViewHolder, data: T)
 

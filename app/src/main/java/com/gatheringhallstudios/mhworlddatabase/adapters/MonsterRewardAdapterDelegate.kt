@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterReward
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 
 class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Unit) : AdapterDelegate<List<Any>>() {
@@ -17,7 +17,7 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Un
         return items[position] is MonsterReward
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.listitem_reward, parent, false)
 
@@ -26,7 +26,7 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Un
 
     override fun onBindViewHolder(items: List<Any>,
                                   position: Int,
-                                  holder: RecyclerView.ViewHolder,
+                                  holder: androidx.recyclerview.widget.RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
         val reward = items[position] as MonsterReward
 
@@ -36,7 +36,7 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Un
         holder.view.setOnClickListener { onSelected(reward) }
     }
 
-    internal inner class RewardViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    internal inner class RewardViewHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         fun bind(reward: MonsterReward) {
             val icon = AssetLoader.loadIconFor(reward.item)
             view.reward_icon.setImageDrawable(icon)

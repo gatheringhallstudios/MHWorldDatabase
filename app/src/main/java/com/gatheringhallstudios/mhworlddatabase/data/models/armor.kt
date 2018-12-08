@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Ignore
+import androidx.room.Embedded
+import androidx.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 
 /**

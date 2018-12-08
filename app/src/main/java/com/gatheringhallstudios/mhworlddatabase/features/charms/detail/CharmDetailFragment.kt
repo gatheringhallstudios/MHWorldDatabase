@@ -1,10 +1,10 @@
 package com.gatheringhallstudios.mhworlddatabase.features.charms.detail
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_charm_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
 
-class CharmDetailFragment : Fragment() {
+class CharmDetailFragment : androidx.fragment.app.Fragment() {
     companion object {
         const val ARG_CHARM_ID = "CHARM_ID"
     }

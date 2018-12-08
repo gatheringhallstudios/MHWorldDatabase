@@ -1,9 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import android.content.Context
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.content.ContextCompat
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
+import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import org.junit.Rule

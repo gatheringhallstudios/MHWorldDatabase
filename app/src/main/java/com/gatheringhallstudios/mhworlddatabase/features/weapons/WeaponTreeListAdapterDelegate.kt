@@ -2,8 +2,8 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.CoatingType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
 import kotlinx.android.synthetic.main.listitem_weapontree.view.*
 import kotlinx.android.synthetic.main.section_bow_coating.view.*
@@ -43,7 +43,7 @@ class WeaponTreeListAdapterDelegate(
         return items[position] is RenderedTreeNode<Weapon>
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.listitem_weapontree, parent, false)
 
@@ -52,7 +52,7 @@ class WeaponTreeListAdapterDelegate(
 
     override fun onBindViewHolder(items: List<RenderedTreeNode<Weapon>>,
                                   position: Int,
-                                  holder: RecyclerView.ViewHolder,
+                                  holder: androidx.recyclerview.widget.RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
         val weaponBaseTreeNode = items[position]
 
@@ -69,7 +69,7 @@ class WeaponTreeListAdapterDelegate(
         }
     }
 
-    internal inner class WeaponBaseHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    internal inner class WeaponBaseHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
         @SuppressLint("ResourceType")
         fun bind(weaponNode: RenderedTreeNode<Weapon>) {
