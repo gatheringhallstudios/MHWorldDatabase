@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
+import androidx.room.Dao
+import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.common.CachedValue
 import com.gatheringhallstudios.mhworlddatabase.data.models.*

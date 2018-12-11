@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.assets
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.support.v4.util.LruCache
+import androidx.collection.LruCache
 import com.gatheringhallstudios.mhworlddatabase.util.DrawableWrapper
 import java.util.*
 
@@ -15,7 +15,7 @@ data class CacheKey(
 
 private val cacheSizeKB = 8 * 1024 // 8MB
 
-private val cache = object: LruCache<CacheKey, Bitmap>(cacheSizeKB) {
+private val cache = object: androidx.collection.LruCache<CacheKey, Bitmap>(cacheSizeKB) {
     override fun sizeOf(key: CacheKey, value: Bitmap): Int {
         return value.byteCount / 1024 // return size in kilobytes
     }
@@ -24,7 +24,7 @@ private val cache = object: LruCache<CacheKey, Bitmap>(cacheSizeKB) {
 /**
  * Extension: Gets a value from an LRUCache, or inserts and returns it
  */
-inline fun <K, V> LruCache<K, V>.getOrPut(key: K, build: () -> V): V {
+inline fun <K, V> androidx.collection.LruCache<K, V>.getOrPut(key: K, build: () -> V): V {
     val value: V? = this[key]
     if (value != null) {
         return value

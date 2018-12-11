@@ -20,7 +20,7 @@
             tools:iconSrc="@drawable/ic_ui_question_mark_white"
             tools:titleText="Azure Rathalos" />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/weakness_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                         tools:numStars="1" />
                 </TableRow>
             </TableLayout>
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
             android:id="@+id/ailments_header"

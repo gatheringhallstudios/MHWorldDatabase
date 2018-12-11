@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.util
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import kotlin.reflect.KProperty
 
 /**

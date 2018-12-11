@@ -1,9 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.util.sqliteloader;
 
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.adapters.SupportSQLiteOpenHelperAdapter;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.sqliteasset.SQLiteAssetHelper;

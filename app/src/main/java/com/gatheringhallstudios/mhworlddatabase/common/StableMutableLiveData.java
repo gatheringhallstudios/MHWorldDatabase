@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.common;
 
-import android.arch.lifecycle.MutableLiveData;
+import androidx.lifecycle.MutableLiveData;
 
 /**
  * A variation of mutable live data that extends LiveData

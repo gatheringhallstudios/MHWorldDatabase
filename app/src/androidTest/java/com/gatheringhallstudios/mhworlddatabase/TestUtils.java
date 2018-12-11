@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

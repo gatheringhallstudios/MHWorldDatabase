@@ -1,8 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.data.entities
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.types.ReloadType
 
 // note: final is a java keyword which causes problems. Find some way to add it back later

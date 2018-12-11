@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.locations.list
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase

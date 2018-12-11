@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.adapters;
 
-import android.arch.persistence.db.SupportSQLiteProgram;
+import androidx.sqlite.db.SupportSQLiteProgram;
 import android.database.sqlite.SQLiteProgram;
 
 /**

@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.components
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -13,11 +13,11 @@ import com.xwray.groupie.GroupAdapter
 /**
  * Defines a base divider for vertical RecyclerViews.
  */
-abstract class BaseVerticalDivider: RecyclerView.ItemDecoration() {
+abstract class BaseVerticalDivider: androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
     /**
      * Returns true if a divider should be drawn between the two views
      */
-    abstract fun shouldDraw(parent: RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean
+    abstract fun shouldDraw(parent: androidx.recyclerview.widget.RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean
 
     /**
      * Performs the actual draw at the left/right coordinate (adjusted for padding)
@@ -25,7 +25,7 @@ abstract class BaseVerticalDivider: RecyclerView.ItemDecoration() {
      */
     abstract fun performDraw(canvas: Canvas, left: Int, right: Int, yCoord: Int)
 
-    override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDraw(canvas: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         canvas.save()
 
         val left = parent.paddingLeft
@@ -53,7 +53,7 @@ abstract class BaseVerticalDivider: RecyclerView.ItemDecoration() {
  * Similar to use the built in DividerItemDecoration, but defaults to vertical and takes a drawable in the constructor.
  */
 class StandardDivider(private val drawable: Drawable?): BaseVerticalDivider() {
-    override fun shouldDraw(parent: RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
+    override fun shouldDraw(parent: androidx.recyclerview.widget.RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
         return true
     }
 
@@ -65,7 +65,7 @@ class StandardDivider(private val drawable: Drawable?): BaseVerticalDivider() {
         }
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         drawable?.let {
             outRect.bottom = drawable.intrinsicHeight
@@ -78,7 +78,7 @@ class StandardDivider(private val drawable: Drawable?): BaseVerticalDivider() {
  * but not detail items
  */
 class HeaderItemDivider(private val drawable: Drawable): BaseVerticalDivider() {
-    override fun shouldDraw(parent: RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
+    override fun shouldDraw(parent: androidx.recyclerview.widget.RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
         val adapter = parent.adapter as? GroupAdapter
         if (adapter == null) {
             Log.e("HeaderItemDivider", "HeaderItemDivider only works for GroupAdapters")
@@ -87,7 +87,7 @@ class HeaderItemDivider(private val drawable: Drawable): BaseVerticalDivider() {
 
         // these should draw if the secondview is a header.
         val secondAdapterIdx = parent.getChildAdapterPosition(secondView)
-        if (secondAdapterIdx == RecyclerView.NO_POSITION) {
+        if (secondAdapterIdx == androidx.recyclerview.widget.RecyclerView.NO_POSITION) {
             return false // view doesn't exist (aka collapsing), so don't draw
         }
 
@@ -100,7 +100,7 @@ class HeaderItemDivider(private val drawable: Drawable): BaseVerticalDivider() {
         drawable.draw(canvas)
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         outRect.bottom = drawable.intrinsicHeight
     }
@@ -110,7 +110,7 @@ class HeaderItemDivider(private val drawable: Drawable): BaseVerticalDivider() {
  * A divider that separates "child" items
  */
 class ChildDivider(private val drawable: Drawable?): BaseVerticalDivider() {
-    override fun shouldDraw(parent: RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
+    override fun shouldDraw(parent: androidx.recyclerview.widget.RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
         val firstIsHeader = firstView.getTag(R.id.view_is_header)
         val secondIsHeader = secondView.getTag(R.id.view_is_header)
 
@@ -130,7 +130,7 @@ class ChildDivider(private val drawable: Drawable?): BaseVerticalDivider() {
         }
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         drawable?.let {
             outRect.bottom = drawable.intrinsicHeight

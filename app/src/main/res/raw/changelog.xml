@@ -1,0 +1,45 @@
+<changelog>
+    <release
+        versionCode="110"
+        versionName="Version 1.1.0">
+        <info>Features:
+            [br]&#9;- Weapons Section
+            [br]&#9;- TRANSLATIONS BETA! We're looking for translation help! Contact us on Discord
+            [br](link in About page). Supported Languages:
+            [br]&#9;&#9;- English
+            [br]&#9;&#9;- 日本語
+            [br]&#9;&#9;- Français
+            [br]&#9;&#9;- Italiano
+            [br]&#9;&#9;- Deutsch
+            [br]&#9;&#9;- Español
+            [br]&#9;&#9;- Português do Brasil
+            [br]&#9;&#9;- Polski
+            [br]&#9;&#9;- Pусский
+            [br]&#9;&#9;- 한국어
+            [br]&#9;&#9;- 繁體中文
+            [br]&#9;&#9;- Arabe
+        </info>
+        <info>Improvements:
+            [br]&#9;- Bug fixes
+            [br]&#9;- Monster Ailments
+            [br]&#9;- Deviljo Gear
+        </info>
+        <info>Thank you for your patience! 😺</info>
+    </release>
+    <release
+        versionCode="103"
+        versionName="Version 1.0.3">
+        <new>Added base camp locations.</new>
+        <bugfix>Fixed a bug causing monster ice hitzones to be 0.</bugfix>
+    </release>
+    <release
+        versionCode="101"
+        versionName="Version 1.0.1">
+        <bugfix>Fixed crashes occurring on some devices.</bugfix>
+    </release>
+    <release
+        versionCode="100"
+        versionName="Version 1.0">
+        <info>Initial Release! MHWorld Database is finally here!</info>
+    </release>
+</changelog>
