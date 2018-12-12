@@ -16,6 +16,14 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
+import com.michaelflisar.changelog.classes.ChangelogFilter
+import com.michaelflisar.changelog.classes.ImportanceChangelogSorter
+import com.michaelflisar.changelog.ChangelogBuilder
+import com.michaelflisar.changelog.classes.DefaultAutoVersionNameFormatter
+
+
+
+
 
 /**
  * The main activity used in MHWorld Database.
@@ -56,6 +64,13 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(this.toolbar)
         setupNavigation()
+
+        ChangelogBuilder()
+                .withManagedShowOnStart(true)  // library will take care to show activity/dialog only if the changelog has new infos and will only show this new infos
+                .withMinVersionToShow(110)
+                .withTitle("New features and bug fixes!") // provide a custom title if desired, default one is "Changelog <VERSION>"
+                .withOkButtonLabel("Ok") // provide a custom ok button text if desired, default one is "OK"
+                .buildAndShowDialog(this, true) // second parameter defines, if the dialog has a dark or light theme
 
         viewModel.searchActive.observe(this, Observer {
             val active = it ?: false
