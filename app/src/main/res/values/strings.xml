@@ -101,6 +101,7 @@
         Show names and descriptions using %s.
         \nChanging this will restart the app.
     </string>
+    <string name="preference_language_default">Default</string>
 
     <!-- ################### -->
     <!-- ## FEATURE MENUS ## -->
