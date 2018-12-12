@@ -20,9 +20,7 @@ import com.michaelflisar.changelog.classes.ChangelogFilter
 import com.michaelflisar.changelog.classes.ImportanceChangelogSorter
 import com.michaelflisar.changelog.ChangelogBuilder
 import com.michaelflisar.changelog.classes.DefaultAutoVersionNameFormatter
-
-
-
+import com.michaelflisar.changelog.internal.ChangelogPreferenceUtil
 
 
 /**
@@ -64,13 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(this.toolbar)
         setupNavigation()
-
-        ChangelogBuilder()
-                .withManagedShowOnStart(true)  // library will take care to show activity/dialog only if the changelog has new infos and will only show this new infos
-                .withMinVersionToShow(110)
-                .withTitle("New features and bug fixes!") // provide a custom title if desired, default one is "Changelog <VERSION>"
-                .withOkButtonLabel("Ok") // provide a custom ok button text if desired, default one is "OK"
-                .buildAndShowDialog(this, true) // second parameter defines, if the dialog has a dark or light theme
+        showChangelog()
 
         viewModel.searchActive.observe(this, Observer {
             val active = it ?: false
@@ -99,6 +91,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun showChangelog() {
+        ChangelogBuilder()
+                // library will take care to show activity/dialog only if the changelog has new
+                // info and will only show this new info
+                .withManagedShowOnStart(true)
+                // provide a custom title if desired, default one is "Changelog <VERSION>"
+                .withTitle(getString(R.string.label_whats_new))
+                // provide a custom ok button text if desired, default one is "OK"
+                .withOkButtonLabel(getString(R.string.action_ok))
+                .withRateButton(true)
+                .withRateButtonLabel(getString(R.string.label_rate_app))
+                // second parameter defines, if the dialog has a dark or light theme
+                .buildAndShowDialog(this, true)
     }
 
     /**

@@ -49,6 +49,10 @@
                 android:icon="@drawable/ic_ui_settings_white"
                 android:title="@string/title_settings" />
             <item
+                android:id="@+id/changelogAction"
+                android:icon="@xml/ic_items_voucher_base"
+                android:title="@string/title_changelog"/>
+            <item
                 android:id="@+id/aboutAction"
                 android:icon="@drawable/ic_ui_mascot"
                 android:title="@string/title_about" />
