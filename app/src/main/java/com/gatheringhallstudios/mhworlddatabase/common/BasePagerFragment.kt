@@ -5,9 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
+import androidx.annotation.StringRes
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +24,7 @@ import java.util.*
  * Butterknife is already called, so onCreateView cannot be inherited.
  */
 
-abstract class BasePagerFragment : Fragment() {
+abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
     companion object {
         val TAG = BasePagerFragment::class.java.simpleName
     }
@@ -70,7 +70,7 @@ abstract class BasePagerFragment : Fragment() {
          * @param title   The title to display for the tab
          * @param builder A TabFactory or lambda that builds the tab fragment
          */
-        fun addTab(title: String, builder: () -> Fragment)
+        fun addTab(title: String, builder: () -> androidx.fragment.app.Fragment)
 
 
         /**
@@ -78,7 +78,7 @@ abstract class BasePagerFragment : Fragment() {
          * @param titleRes The string resource to use as a title
          * @param builder  A lambda that builds the tab fragment
          */
-        fun addTab(@StringRes titleRes: Int, builder: () -> Fragment)
+        fun addTab(@StringRes titleRes: Int, builder: () -> androidx.fragment.app.Fragment)
 
         /**
          * Sets the default selected tab idx
@@ -94,11 +94,11 @@ abstract class BasePagerFragment : Fragment() {
         private val tabs = ArrayList<PagerTab>()
 
 
-        override fun addTab(titleRes: Int, builder: () -> Fragment) {
+        override fun addTab(titleRes: Int, builder: () -> androidx.fragment.app.Fragment) {
             this.addTab(ctx.getString(titleRes), builder)
         }
 
-        override fun addTab(title: String, builder: () -> Fragment) {
+        override fun addTab(title: String, builder: () -> androidx.fragment.app.Fragment) {
             tabs.add(PagerTab(title, builder))
         }
 

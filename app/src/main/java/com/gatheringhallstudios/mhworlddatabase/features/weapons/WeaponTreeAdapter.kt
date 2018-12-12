@@ -1,16 +1,16 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
 /**
  * Adapter to display a weapon tree. Takes a list of RenderedTreeNodes and displays them.
  * Items added to this list can be collapsed and expanded.
  */
-class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     protected var delegatesManager = AdapterDelegatesManager<List<RenderedTreeNode<Weapon>>>()
 
@@ -69,11 +69,11 @@ class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): RecyclerView.Adapter<Recy
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return delegatesManager.onCreateViewHolder(parent, viewType)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         delegatesManager.onBindViewHolder(renderedItems, position, holder, null)
     }
 

@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
-import android.arch.persistence.room.Embedded
+import androidx.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
 

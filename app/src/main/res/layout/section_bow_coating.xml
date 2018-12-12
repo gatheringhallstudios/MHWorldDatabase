@@ -32,7 +32,7 @@
             android:gravity="center_vertical|end"
             android:orientation="horizontal">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/close_range"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -58,9 +58,9 @@
                     app:layout_constraintStart_toStartOf="@+id/close_range_coating_icon"
                     app:layout_constraintTop_toBottomOf="@id/close_range_coating_icon"
                     tools:text="Close" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/power_coating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -87,9 +87,9 @@
                     app:layout_constraintStart_toStartOf="@+id/power_coating_icon"
                     app:layout_constraintTop_toBottomOf="@id/power_coating_icon"
                     tools:text="Power" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/paralysis_coating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -115,9 +115,9 @@
                     app:layout_constraintStart_toStartOf="@+id/paralysis_coating_icon"
                     app:layout_constraintTop_toBottomOf="@id/paralysis_coating_icon"
                     tools:text="Para" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/poison_coating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -143,10 +143,10 @@
                     app:layout_constraintStart_toStartOf="@+id/poison_coating_icon"
                     app:layout_constraintTop_toBottomOf="@id/poison_coating_icon"
                     tools:text="Poison" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/sleep_coating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -172,9 +172,9 @@
                     app:layout_constraintStart_toStartOf="@+id/sleep_coating_icon"
                     app:layout_constraintTop_toBottomOf="@id/sleep_coating_icon"
                     tools:text="Sleep" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/blast_coating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
                     app:layout_constraintStart_toStartOf="@+id/blast_coating_icon"
                     app:layout_constraintTop_toBottomOf="@id/blast_coating_icon"
                     tools:text="Blast" />
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 

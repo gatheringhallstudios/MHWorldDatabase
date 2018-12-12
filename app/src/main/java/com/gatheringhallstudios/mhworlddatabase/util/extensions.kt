@@ -1,15 +1,15 @@
 package com.gatheringhallstudios.mhworlddatabase.util
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 
 // A collection of extension functions used by the app.
 // Only those that could reasonably belong to a separate library should be here.
@@ -19,7 +19,7 @@ import android.support.v4.content.ContextCompat
  * Adds a bundle to a fragment and then returns the fragment.
  * A lambda is used to set values to the bundle
  */
-fun <T: Fragment> T.applyArguments(block: Bundle.() -> Unit): T {
+fun <T: androidx.fragment.app.Fragment> T.applyArguments(block: Bundle.() -> Unit): T {
     val bundle = Bundle()
     bundle.block()
     this.arguments = bundle

@@ -1,13 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters.common
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.listitem_section_header.*
 
 /**
@@ -18,7 +18,7 @@ class SectionHeaderAdapterDelegate: AdapterDelegate<List<Any>>() {
         return items[position] is SectionHeader
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.listitem_section_header, parent, false)
         return SimpleViewHolder(v)
@@ -26,7 +26,7 @@ class SectionHeaderAdapterDelegate: AdapterDelegate<List<Any>>() {
 
     override fun onBindViewHolder(items: List<Any>,
                                   position: Int,
-                                  holder: RecyclerView.ViewHolder,
+                                  holder: androidx.recyclerview.widget.RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
         val sectionHeader = items[position] as SectionHeader
 

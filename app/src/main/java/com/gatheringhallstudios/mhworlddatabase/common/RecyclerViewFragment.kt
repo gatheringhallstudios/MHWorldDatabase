@@ -2,14 +2,11 @@ package com.gatheringhallstudios.mhworlddatabase.common
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
-
 import kotlinx.android.synthetic.main.list_generic.*
 
 /**
@@ -18,7 +15,7 @@ import kotlinx.android.synthetic.main.list_generic.*
  * Used internally by the RecyclerViewFragment.
  * Do not use for nested recyclerviews.
  */
-class DetachingRecyclerView : RecyclerView {
+class DetachingRecyclerView : androidx.recyclerview.widget.RecyclerView {
     constructor(context: Context): super(context)
 
     constructor(context: Context, attrs: AttributeSet?):
@@ -37,7 +34,7 @@ class DetachingRecyclerView : RecyclerView {
  * Creates a fragment that contains a recyclerview.
  * This handles most of the setup and handles a potential memory leak case.
  */
-open class RecyclerViewFragment : Fragment() {
+open class RecyclerViewFragment : androidx.fragment.app.Fragment() {
     /**
      * Returns the recyclerview owned by this fragment to use directly
      */
@@ -57,7 +54,7 @@ open class RecyclerViewFragment : Fragment() {
      * This function has to be called everytime the view is recreated
      * by overriding onViewCreated().
      */
-    fun setAdapter(adapter: RecyclerView.Adapter<*>) {
+    fun setAdapter(adapter: androidx.recyclerview.widget.RecyclerView.Adapter<*>) {
         recycler_view.adapter = adapter
     }
 

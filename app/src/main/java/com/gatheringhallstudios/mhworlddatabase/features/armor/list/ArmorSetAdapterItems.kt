@@ -2,7 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor.list
 
 import android.graphics.Color
 import android.graphics.drawable.Animatable
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.Router

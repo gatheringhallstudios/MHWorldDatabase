@@ -1,9 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters.common
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.extensions.LayoutContainer
 import kotlin.reflect.KClass
 
@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
  * A simple container-only viewholder used by SimpleListDelegate. Using a viewholder
  * when using KTX allows caching to work.
  */
-class SimpleViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {
+class SimpleViewHolder(override val containerView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(containerView), LayoutContainer {
     val context get() = itemView.context
     val resources get() = itemView.resources
 }
@@ -45,13 +45,13 @@ abstract class SimpleListDelegate<IClass : Any>: AdapterDelegate<List<Any>>() {
         return isForViewType(items[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val v = onCreateView(parent)
         return SimpleViewHolder(v)
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBindViewHolder(items: List<Any>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(items: List<Any>, position: Int, holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, payloads: MutableList<Any>) {
         val item = items[position] as IClass
         val viewHolder = holder as SimpleViewHolder
         bindView(viewHolder, item)
