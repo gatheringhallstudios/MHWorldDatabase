@@ -9,6 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.MainActivity
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
+import com.gatheringhallstudios.mhworlddatabase.data.entities.Language
 
 /**
  * Fragment used to display app preferences
@@ -38,14 +39,15 @@ class PreferencesFragment : PreferenceFragmentCompat() {
     private fun initDataLanguages() {
         val localePref = findPreference(AppSettings.PROP_DATA_LOCALE) as ListPreference
 
-        // todo: implement "default" language. Add a fake language entry in the beginning of the list
-        val languages = MHWDatabase.getDatabase(context).languages
+        // Get the list of languages. Add a "default" language to the front
+        val defaultLanguage = Language("", getString(R.string.preference_language_default))
+        val languages = listOf(defaultLanguage) + MHWDatabase.getDatabase(context).languages
         val languageCodes = languages.map { it.id }
         val languageNames = languages.map { it.name }
 
         localePref.entryValues = languageCodes.toTypedArray()
         localePref.entries = languageNames.toTypedArray()
-        localePref.value = AppSettings.dataLocale // ensure a value is set
+        localePref.value = AppSettings.configuredDataLocale // ensure a value is set
     }
 
     /**
