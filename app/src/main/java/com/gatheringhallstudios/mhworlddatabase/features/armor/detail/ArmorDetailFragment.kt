@@ -12,6 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.*
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment.Companion.ARG_ARMOR_ID
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -20,18 +21,12 @@ import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
 class ArmorDetailFragment : androidx.fragment.app.Fragment() {
-    companion object {
-        const val ARG_ARMOR_ID = "ARMOR"
-    }
 
     private val viewModel: ArmorDetailViewModel by lazy {
-        ViewModelProviders.of(this).get(ArmorDetailViewModel::class.java)
+        ViewModelProviders.of(parentFragment!!).get(ArmorDetailViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val armorId = arguments?.getInt(ARG_ARMOR_ID) ?: -1
-        viewModel.loadArmor(armorId)
-
         return inflater.inflate(R.layout.fragment_armor_summary, parent, false)
     }
 

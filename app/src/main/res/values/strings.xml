@@ -277,6 +277,10 @@
     <!-- ################ -->
     <string name="title_armor">Armor</string>
 
+    <!-- Tab headers -->
+    <string name="tab_armor_detail">Detail</string>
+    <string name="tab_armor_set_summary">Armor Set Details</string>
+
     <!-- General Strings -->
     <string name="armor_defense_value">%1$d - %2$d (%3$d)</string> <!-- Example: 32 - 64 (70) -->
     <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string> <!-- Examples: 1-piece bonus: -->
