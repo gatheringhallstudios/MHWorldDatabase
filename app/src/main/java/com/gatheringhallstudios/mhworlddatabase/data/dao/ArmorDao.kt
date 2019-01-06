@@ -33,12 +33,48 @@ abstract class ArmorDao {
                 ON ast.id = a.armorset_id
                 AND ast.lang_id = at.lang_id
         WHERE at.lang_id = :langId
+          AND (a.armorset_id = :armorSetId)
+    """)
+    abstract fun loadArmorList(langId: String, armorSetId: Int): LiveData<List<Armor>>
+
+    @Query("""
+        SELECT a.*, at.name, ast.name armorset_name
+        FROM armor a
+            JOIN armor_text at USING (id)
+            JOIN armorset_text ast
+                ON ast.id = a.armorset_id
+                AND ast.lang_id = at.lang_id
+        WHERE at.lang_id = :langId
         AND a.id = :armorId""")
     abstract fun loadArmorSync(langId: String, armorId: Int): Armor
 
-
     fun loadArmor(langId: String, armorId: Int) = createLiveData {
         loadArmorSync(langId, armorId)
+    }
+
+    fun loadArmorSetFull(langId: String, armorSetId: Int): LiveData<ArmorSetFull> {
+        val armorSet = loadArmorList(langId, armorSetId)
+
+        return Transformations.map(armorSet) { data ->
+            val armorSetId = armorSet.value!!.first().armorset_id
+            val armorSetName = armorSet.value!!.first().armorset_name
+            val armorList = mutableListOf<ArmorFull>()
+
+            for (armor in data) {
+                val armorFull = ArmorFull(
+                        armor = armor,
+                        recipe = loadArmorComponentsSync(langId, armor.id),
+                        skills = loadArmorSkillsSync(langId, armor.id),
+                        setBonuses = when (armor.armorset_bonus_id) {
+                            null -> emptyList()
+                            else -> loadArmorSetBonusSync(langId, armor.armorset_bonus_id)
+                        })
+
+                armorList.add(armorFull)
+            }
+
+            ArmorSetFull(armorSetId, armorSetName, armorList)
+        }
     }
 
     /**
@@ -96,7 +132,7 @@ abstract class ArmorDao {
                 AND abt.lang_id = stt.lang_id
         WHERE abt.lang_id = :langId
         AND abs.setbonus_id= :setBonusId""")
-    abstract fun loadArmorSetBonusSync(langId: String, setBonusId: Int) : List<ArmorSetBonus>
+    abstract fun loadArmorSetBonusSync(langId: String, setBonusId: Int): List<ArmorSetBonus>
 
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
@@ -111,7 +147,7 @@ abstract class ArmorDao {
         AND a.armor_id= :armorId
         ORDER BY i.id
     """)
-    abstract fun loadArmorComponentsSync(langId: String, armorId: Int) : List<ItemQuantity>
+    abstract fun loadArmorComponentsSync(langId: String, armorId: Int): List<ItemQuantity>
 
     @Query("""
         SELECT s.id skill_id, stt.name skill_name, s.max_level skill_max_level, s.icon_color skill_icon_color,
@@ -126,5 +162,5 @@ abstract class ArmorDao {
             WHERE stt.lang_id = :langId
                AND askill.armor_id = :armorId
             ORDER BY askill.skilltree_id ASC""")
-    abstract fun loadArmorSkillsSync(langId: String, armorId: Int) : List<SkillLevel>
+    abstract fun loadArmorSkillsSync(langId: String, armorId: Int): List<SkillLevel>
 }

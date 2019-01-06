@@ -89,6 +89,8 @@
     <string name="header_drop">Drop</string>
     <string name="header_upgrade_from">Upgrades from:</string>
     <string name="header_components">Components</string>
+    <string name="header_armor_set_pieces">Armor Set Pieces</string>
+    <string name="header_armor_set_skills">Armor Set Skills</string>
 
     <!-- ####################### -->
     <!-- ## Settings and Meta ## -->
@@ -312,7 +314,7 @@
 
     <string name="title_decorations">Decorations</string>
 
-    <!-- General Strings -->s
+    <!-- General Strings -->
     <string name="decorations_chance_mysterious">Mysterious Feystone</string>
     <string name="decorations_chance_glowing">Glowing Feystone</string>
     <string name="decorations_chance_worn">Worn Feystone</string>
