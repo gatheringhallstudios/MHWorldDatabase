@@ -122,17 +122,16 @@ data class WeaponSharpness(
         val values = sharpness.split(",").map { it.toInt() }.toIntArray()
         if (sharpness_maxed) return values
 
+        val handicraftReduction = 10 * (5 - handicraftLevel)
+
         var index = values.size - 1
-        val handicraftBonus = 10 * (5 - handicraftLevel)
-        var remainder: Int
+        var remainder: Int = handicraftReduction
         do {
-            values[index] -= handicraftBonus
-            remainder = values[index]
-            if (values[index] < 0) {
-                values[index] = 0
-            }
+            val toRemove = Math.min(values[index], remainder)
+            values[index] -= toRemove
+            remainder -= toRemove
             index--
-        } while (remainder < 0 && index > 0)
+        } while (remainder > 0 && index > 0)
 
         return values
     }
