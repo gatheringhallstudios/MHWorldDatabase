@@ -127,6 +127,9 @@ class ArmorSetDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateSetComponents(armorSet: List<ArmorFull>) {
+        //The armor set components need to be "added up" to create a cumulative list of components
+        //Incoming item quantities are added to a map. If there is a repeated key, the existing ItemQuantity
+        //object is replaced with an updated one because the models are immutable.
         val components = mutableMapOf<Int, ItemQuantity>()
         armor_set_components_list.removeAllViews()
 
@@ -141,7 +144,7 @@ class ArmorSetDetailFragment : androidx.fragment.app.Fragment() {
             }
         }
 
-
+        //Iterate over the cumulative map instead of the individual ArmorFull objects
         components.forEach {
             val component = it.value
             val view = IconLabelTextCell(context)
@@ -159,6 +162,9 @@ class ArmorSetDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateArmorSetSkills(armorSet: List<ArmorFull>) {
+        //The armor skill levels need to be "added up" to create a cumulative list of skills
+        //Incoming skill levels are added to a map. If there is a repeated key, the existing SkillLevel
+        //object is replaced with an updated one because the models are immutable.
         val skills = mutableMapOf<Int, SkillLevel>()
         armor_set_skill_list.removeAllViews()
 
@@ -175,6 +181,7 @@ class ArmorSetDetailFragment : androidx.fragment.app.Fragment() {
             }
         }
 
+        //Iterate over the cumulative map instead of the individual ArmorFull objects
         skills.forEach {
             val skill = it.value
             //Set the label for the Set name

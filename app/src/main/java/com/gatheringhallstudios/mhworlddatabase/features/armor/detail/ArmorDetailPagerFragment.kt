@@ -7,7 +7,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 /**
- * The main page for displaying item detail information
+ * The main page for displaying armor detail information
  */
 class ArmorDetailPagerFragment : BasePagerFragment() {
 
@@ -30,7 +30,7 @@ class ArmorDetailPagerFragment : BasePagerFragment() {
         fun newInstance(armorId: Int): ArmorDetailPagerFragment {
             val fragment = ArmorDetailPagerFragment()
             fragment.arguments = BundleBuilder()
-                    .putSerializable(ARG_ARMOR_ID, armorId)
+                    .putInt(ARG_ARMOR_ID, armorId)
                     .build()
             return fragment
         }

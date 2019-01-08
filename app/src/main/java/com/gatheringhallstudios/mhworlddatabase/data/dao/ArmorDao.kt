@@ -35,7 +35,7 @@ abstract class ArmorDao {
         WHERE at.lang_id = :langId
           AND (a.armorset_id = :armorSetId)
     """)
-    abstract fun loadArmorList(langId: String, armorSetId: Int): LiveData<List<Armor>>
+    abstract fun loadArmorListBySet(langId: String, armorSetId: Int): LiveData<List<Armor>>
 
     @Query("""
         SELECT a.*, at.name, ast.name armorset_name
@@ -53,7 +53,7 @@ abstract class ArmorDao {
     }
 
     fun loadArmorSetFull(langId: String, armorSetId: Int): LiveData<ArmorSetFull> {
-        val armorSet = loadArmorList(langId, armorSetId)
+        val armorSet = loadArmorListBySet(langId, armorSetId)
 
         return Transformations.map(armorSet) { data ->
             val armorSetId = armorSet.value!!.first().armorset_id
@@ -79,7 +79,7 @@ abstract class ArmorDao {
 
     /**
      * Generates a list of ArmorSets with embedded ArmorViews
-     * Equivalent to loadArmorList and then grouping
+     * Equivalent to loadArmorListBySet and then grouping
      */
     fun loadArmorSets(langId: String, rank: Rank?): LiveData<List<ArmorSet>> {
         // Load raw view of Armor with Armor Set info
