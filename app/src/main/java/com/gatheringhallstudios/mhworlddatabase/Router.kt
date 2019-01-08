@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailFragment
+import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment
@@ -64,7 +65,7 @@ class Router(private val navController: NavController) {
     fun navigateArmorDetail(armorId: Int) {
         navController.navigate(
                 R.id.openArmorDetailAction,
-                BundleBuilder().putInt(ArmorDetailFragment.ARG_ARMOR_ID, armorId).build()
+                BundleBuilder().putInt(ArmorDetailPagerFragment.ARG_ARMOR_ID, armorId).build()
         )
     }
 

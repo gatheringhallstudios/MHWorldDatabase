@@ -91,6 +91,17 @@ class ArmorSet(
 }
 
 /**
+ * Representation of a single armor set
+ */
+class ArmorSetFull(
+        val armorset_id: Int,
+        val armorset_name: String?,
+        val armor: List<ArmorFull>
+) {
+    val rarity get() = armor.first().armor.rarity
+}
+
+/**
  * Basic representation of a single armor set bonus
  */
 class ArmorSetBonus(

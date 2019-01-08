@@ -244,8 +244,8 @@
 
     <fragment
         android:id="@+id/armorDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailFragment"
-        tools:layout="@layout/fragment_armor_summary" />
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment"
+        tools:layout="@layout/fragment_generic_pager" />
     <action
         android:id="@+id/openArmorDetailAction"
         app:destination="@id/armorDetailDestination"

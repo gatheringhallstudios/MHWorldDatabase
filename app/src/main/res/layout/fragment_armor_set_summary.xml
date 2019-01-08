@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_footer_space">
+
+        <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+            android:id="@+id/armor_set_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:descriptionText=""
+            tools:iconSrc="@drawable/ic_ui_question_mark_white"
+            tools:titleText="Azure Rathalos" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle">
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_ui_defense"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/armor_detail_defense"/>
+
+                <TextView
+                    android:id="@+id/armor_set_defense_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="56-68" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_element_fire"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/armor_detail_vs_fire"/>
+
+                <TextView
+                    android:id="@+id/armor_set_fire_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="1" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_element_water"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/armor_detail_vs_water"/>
+
+                <TextView
+                    android:id="@+id/armor_set_water_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="2" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_element_thunder"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/armor_detail_vs_thunder"/>
+
+                <TextView
+                    android:id="@+id/armor_set_thunder_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="-2" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_element_ice"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/armor_detail_vs_ice"/>
+
+                <TextView
+                    android:id="@+id/armor_set_ice_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="2" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:src="@drawable/ic_element_dragon"/>
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/armor_detail_vs_dragon"/>
+
+                <TextView
+                    android:id="@+id/armor_set_dragon_value"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="5" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/armor_set_piece_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_section_gap">
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/armor_set_piece_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/header_armor_set_pieces"/>
+
+            <LinearLayout
+                android:id="@+id/armor_set_piece_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_stroke"
+
+                android:orientation="vertical"
+                android:showDividers="middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/armor_skill_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_section_gap">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/armor_set_skill_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/header_armor_set_skills" />
+
+            <LinearLayout
+                android:id="@+id/armor_set_skill_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_stroke"
+
+                android:orientation="vertical"
+                android:showDividers="middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/armor_set_set_bonus_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:orientation="vertical">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/armor_set_set_bonus_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/header_set_bonuses" />
+
+            <TextView
+                android:id="@+id/armor_set_set_bonus_name"
+                style="@style/TextHeadlineHigh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_large"
+                tools:text="Rathalos Mastery" />
+
+            <LinearLayout
+                android:id="@+id/armor_set_set_bonus_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/armor_set_components_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:orientation="vertical">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/header_required_materials" />
+
+            <LinearLayout
+                android:id="@+id/armor_set_components_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_stroke"
+                android:orientation="vertical"
+                android:showDividers="middle" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

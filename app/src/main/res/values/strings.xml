@@ -89,6 +89,8 @@
     <string name="header_drop">Drop</string>
     <string name="header_upgrade_from">Upgrades from:</string>
     <string name="header_components">Components</string>
+    <string name="header_armor_set_pieces">Armor Set Pieces</string>
+    <string name="header_armor_set_skills">Armor Set Skills</string>
 
     <!-- ####################### -->
     <!-- ## Settings and Meta ## -->
@@ -277,6 +279,10 @@
     <!-- ################ -->
     <string name="title_armor">Armor</string>
 
+    <!-- Tab headers -->
+    <string name="tab_armor_detail">Detail</string>
+    <string name="tab_armor_set_summary">Armor Set Details</string>
+
     <!-- General Strings -->
     <string name="armor_defense_value">%1$d - %2$d (%3$d)</string> <!-- Example: 32 - 64 (70) -->
     <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string> <!-- Examples: 1-piece bonus: -->
@@ -308,7 +314,7 @@
 
     <string name="title_decorations">Decorations</string>
 
-    <!-- General Strings -->s
+    <!-- General Strings -->
     <string name="decorations_chance_mysterious">Mysterious Feystone</string>
     <string name="decorations_chance_glowing">Glowing Feystone</string>
     <string name="decorations_chance_worn">Worn Feystone</string>

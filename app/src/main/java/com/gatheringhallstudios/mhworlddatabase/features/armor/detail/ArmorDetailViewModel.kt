@@ -13,10 +13,13 @@ class ArmorDetailViewModel(application: Application) : AndroidViewModel(applicat
 
     private var armorId: Int = -1
     lateinit var armor: LiveData<ArmorFull>
+    lateinit var armorSet: LiveData<ArmorSetFull>
 
     fun loadArmor(armorId: Int) {
         if (this.armorId == armorId) return
 
         armor = dao.loadArmorFull(AppSettings.dataLocale, armorId)
+        armorSet= Transformations.switchMap(armor) {
+            dao.loadArmorSetFull(AppSettings.dataLocale, it.armor.armorset_id) }
     }
 }
