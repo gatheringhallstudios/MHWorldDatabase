@@ -9,6 +9,7 @@
     <string name="app_name_icon">MHWDB</string>
 
     <string name="action_search">Settings</string>
+    <string name="action_favorite">Favorite</string>
 
     <string name="general_no_data">Nothing here, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
     <string name="general_none">None</string> <!-- Empty message for skill/charms subsections -->

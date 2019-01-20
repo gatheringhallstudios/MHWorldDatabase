@@ -13,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = javaClass.simpleName
 
-    private var searchView : SearchView? = null
+    private var searchView: SearchView? = null
 
     /*
      * List of Start Destination IDs. These destinations
@@ -174,14 +175,14 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
 
-
         return if (id == R.id.action_search) {
             true
-        } else super.onOptionsItemSelected(item)
-
+        } else if (id == R.id.action_toggle_favorite) {
+            false
+        }else super.onOptionsItemSelected(item)
     }
 
-    private fun resetSearchListeners(callback : () -> Unit) {
+    private fun resetSearchListeners(callback: () -> Unit) {
         searchView?.setOnSearchClickListener(null)
         searchView?.setOnQueryTextListener(null)
         searchView?.setOnCloseListener(null)
@@ -204,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.handleSearchUpdate(query ?: "")
                 return true
