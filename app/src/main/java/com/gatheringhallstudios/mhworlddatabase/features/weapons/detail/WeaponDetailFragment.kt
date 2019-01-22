@@ -18,7 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.features.favorites.Favorites
+import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -59,8 +59,8 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_favoritable, menu)
-
-        if (Favorites.isFavorited(viewModel.weapon.value)) {
+        val weaponData = viewModel.weapon.value
+        if (weaponData != null && FavoritesFeature.isFavorited(weaponData)) {
             menu.findItem(action_toggle_favorite)
                     .setIcon((context!!.getDrawableCompat(R.drawable.ic_element_dragon)))
         }
@@ -71,7 +71,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         val id = item.itemId
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_favorite) {
-            Favorites.toggleFavorite(viewModel.weapon.value)
+            FavoritesFeature.toggleFavorite(viewModel.weapon.value)
             activity!!.invalidateOptionsMenu()
             true
         } else false
@@ -79,6 +79,9 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
     private fun populateWeapon(weaponData: WeaponFull?) {
         if (weaponData == null) return
+
+        //Rerender the menu bar because we are 100% sure we have the weapon data now
+        activity!!.invalidateOptionsMenu()
 
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)

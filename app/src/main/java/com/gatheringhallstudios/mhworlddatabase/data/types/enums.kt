@@ -110,7 +110,8 @@ enum class DataType {
     DECORATION,
     CHARM,
     ARMOR,
-    WEAPON
+    WEAPON,
+    NONE
 }
 
 enum class ElderSealLevel {
