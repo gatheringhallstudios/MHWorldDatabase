@@ -1,11 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data;
 
 import android.app.Application;
-import androidx.room.Database;
-import androidx.room.Query;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
 import android.content.Context;
 
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
@@ -50,15 +45,20 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponAmmoEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponRecipe;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponText;
-import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponAmmoEntity;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
 import java.util.List;
+
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 /**
  * DO NOT CONVERT TO KOTLIN YET.
@@ -67,7 +67,7 @@ import java.util.List;
  * Created by Carlos on 3/4/2018.
  */
 @Database(
-        version = 21,
+        version = 22,
         exportSchema = false,
 
         entities = {
