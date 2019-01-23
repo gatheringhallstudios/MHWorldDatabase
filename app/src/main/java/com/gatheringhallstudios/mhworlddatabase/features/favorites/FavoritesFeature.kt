@@ -38,9 +38,10 @@ object FavoritesFeature {
                 GlobalScope.launch { dao.insert(FavoriteEntity(getId(entity), classToEnum(entity), date)) }
             } else {
                 val index = favoritesList.indexOfFirst {it.dataId == getId(entity) && it.dataType == classToEnum(entity)}
-                GlobalScope.launch { dao.delete(FavoriteEntity(favoritesList[index].dataId,
-                        favoritesList[index].dataType, favoritesList[index].dateAdded)) }
+                val favorite = favoritesList[index]
                 favoritesList.removeAt(index)
+                GlobalScope.launch { dao.delete(FavoriteEntity(favorite.dataId,
+                        favorite.dataType, favorite.dateAdded)) }
             }
         }
     }

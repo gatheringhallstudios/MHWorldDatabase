@@ -62,7 +62,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         val weaponData = viewModel.weapon.value
         if (weaponData != null && FavoritesFeature.isFavorited(weaponData)) {
             menu.findItem(action_toggle_favorite)
-                    .setIcon((context!!.getDrawableCompat(R.drawable.ic_element_dragon)))
+                    .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
     }
 
