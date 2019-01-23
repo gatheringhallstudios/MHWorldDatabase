@@ -3,18 +3,18 @@ package com.gatheringhallstudios.mhworlddatabase.features.decorations.detail
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
+import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getColorCompat
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_decoration_summary.*
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
@@ -31,6 +31,31 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
 
     private val viewModel: DecorationDetailViewModel by lazy {
         ViewModelProviders.of(this).get(DecorationDetailViewModel::class.java)
+    }
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_favoritable, menu)
+        val decorationData = viewModel.decorationData.value
+        if (decorationData != null && FavoritesFeature.isFavorited(decorationData)) {
+            menu.findItem(R.id.action_toggle_favorite)
+                    .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Try to handle the favorites button onclick here instead of the main activity
+        val id = item.itemId
+        super.onOptionsItemSelected(item)
+        return if (id == R.id.action_toggle_favorite) {
+            FavoritesFeature.toggleFavorite(viewModel.decorationData.value)
+            activity!!.invalidateOptionsMenu()
+            true
+        } else false
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
@@ -50,6 +75,8 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
         if (decoration == null) return
 
         setActivityTitle(decoration.name)
+        //Rerender the menu bar because we are 100% sure we have the decoration data now
+        activity!!.invalidateOptionsMenu()
 
         decoration_drop_list.removeAllViews()
 

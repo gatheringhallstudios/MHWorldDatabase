@@ -54,11 +54,11 @@ object FavoritesFeature {
         return when (entity) {
             is Monster -> DataType.MONSTER
             is Location -> DataType.LOCATION
-            is Armor -> DataType.ARMOR
-            is Charm -> DataType.CHARM
+            is ArmorFull -> DataType.ARMOR
+            is CharmFull -> DataType.CHARM
             is Item -> DataType.ITEM
             is Decoration -> DataType.DECORATION
-            is Skill -> DataType.SKILL
+            is SkillTreeFull -> DataType.SKILL
             is WeaponFull -> DataType.WEAPON
             else -> DataType.NONE
         }
@@ -68,11 +68,11 @@ object FavoritesFeature {
         return when (entity) {
             is Monster -> entity.id
             is Location -> entity.id
-            is Armor -> entity.id
-            is Charm -> entity.id
+            is ArmorFull -> entity.armor.id
+            is CharmFull -> entity.charm.id
             is Item -> entity.id
             is Decoration -> entity.id
-            is Skill -> entity.skilltree_id
+            is SkillTreeFull -> entity.id
             is WeaponFull -> entity.weapon.id
             else -> 0
         }

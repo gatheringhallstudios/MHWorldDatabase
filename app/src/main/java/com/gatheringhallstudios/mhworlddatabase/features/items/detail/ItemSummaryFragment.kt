@@ -3,7 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,8 +37,6 @@ class ItemSummaryFragment : androidx.fragment.app.Fragment() {
 
     private fun populateItem(item: Item?) {
         if (item == null) return
-
-        setActivityTitle(item.name)
 
         //Set the summary information
         item_header.setIconDrawable(AssetLoader.loadIconFor(item))

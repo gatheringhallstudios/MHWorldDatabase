@@ -37,7 +37,6 @@ class ArmorDetailFragment : androidx.fragment.app.Fragment() {
     private fun populateArmor(armorData: ArmorFull?) {
         if (armorData == null) return
 
-        setActivityTitle(armorData.armor.name)
         populateArmorBasic(armorData.armor)
         populateSkills(armorData.skills)
         populateSetBonuses(armorData.setBonuses)
