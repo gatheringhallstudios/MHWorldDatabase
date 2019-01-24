@@ -45,6 +45,18 @@ abstract class ArmorDao {
                 ON ast.id = a.armorset_id
                 AND ast.lang_id = at.lang_id
         WHERE at.lang_id = :langId
+        AND a.id IN (:armorIds)
+    """)
+    abstract fun loadArmorByIdList(langId: String, armorIds: IntArray) : LiveData<List<Armor>>
+
+    @Query("""
+        SELECT a.*, at.name, ast.name armorset_name
+        FROM armor a
+            JOIN armor_text at USING (id)
+            JOIN armorset_text ast
+                ON ast.id = a.armorset_id
+                AND ast.lang_id = at.lang_id
+        WHERE at.lang_id = :langId
         AND a.id = :armorId""")
     abstract fun loadArmorSync(langId: String, armorId: Int): Armor
 

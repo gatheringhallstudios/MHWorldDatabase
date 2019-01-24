@@ -40,6 +40,10 @@
             android:id="@+id/locationListAction"
             android:icon="@drawable/ic_ui_map"
             android:title="@string/title_locations" />
+        <item
+            android:id="@+id/favoritesListAction"
+            android:icon="@android:drawable/btn_star_big_on"
+            android:title="@string/title_favorites" />
     </group>
 
     <item android:title="Other">

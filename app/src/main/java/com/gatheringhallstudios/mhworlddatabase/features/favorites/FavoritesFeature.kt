@@ -20,7 +20,7 @@ import java.util.*
 // we are storing an application context, so its fine
 @SuppressLint("StaticFieldLeak")
 object FavoritesFeature {
-    //For the sake of
+    //For the sake of setting a cap
     private val FAVORITES_MAX = 200
     lateinit private var ctx: Context
     lateinit private var favoritesList: MutableList<Favorite>
@@ -35,7 +35,7 @@ object FavoritesFeature {
 
     fun toggleFavorite(entity: Favoritable?) {
         if (entity != null) {
-            if (!isFavorited(entity)) {
+            if (!isFavorited(entity) && favoritesList.size < FAVORITES_MAX) {
                 val date = Date()
                 favoritesList.add(Favorite(entity.getEntityId(), entity.getType(), date))
                 GlobalScope.launch { dao.insert(FavoriteEntity(entity.getEntityId(), entity.getType(), date)) }
@@ -54,5 +54,9 @@ object FavoritesFeature {
 
     fun isFavorited(entity: Favoritable): Boolean {
         return favoritesList.indexOfFirst { it.dataId == entity.getEntityId() && it.dataType == entity.getType() } != -1
+    }
+
+    fun getFavoritesByType(dataType: DataType) : List<Favorite> {
+        return favoritesList.filter {it.dataType == dataType}
     }
 }

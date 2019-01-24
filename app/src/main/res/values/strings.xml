@@ -358,6 +358,12 @@
     <string name="type_item_ammo">Ammo</string>
     <string name="type_item_misc">Misc Item</string>
 
+    <!-- #################### -->
+    <!-- ## FAVORITES MENU ## -->
+    <!-- #################### -->
+
+    <string name="title_favorites">Favorites</string>
+
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->

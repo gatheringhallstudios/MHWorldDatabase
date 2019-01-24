@@ -140,6 +140,19 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 
     <fragment
+        android:id="@+id/favoritesListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesListFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/favoritesListAction"
+        app:destination="@id/favoritesListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    <fragment
         android:id="@+id/aboutDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.app.AboutFragment"
         android:label="About"

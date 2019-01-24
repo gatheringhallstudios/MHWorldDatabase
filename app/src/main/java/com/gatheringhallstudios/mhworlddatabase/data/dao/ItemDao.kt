@@ -21,6 +21,17 @@ abstract class ItemDao {
     abstract fun loadItems(langId: String, category: ItemCategory? = null): LiveData<List<Item>>
 
     @Query("""
+        SELECT i.*, it.name, it.description, i.category
+        FROM item i
+            JOIN item_text it
+                ON it.id = i.id
+                AND it.lang_id = :langId
+        WHERE i.id IN (:itemIds)
+        ORDER BY i.id""")
+    abstract fun loadItemsByIdList(langId: String, itemIds: IntArray): LiveData<List<Item>>
+
+
+    @Query("""
         SELECT i.*, it.name, it.description
         FROM item i
         JOIN item_text it

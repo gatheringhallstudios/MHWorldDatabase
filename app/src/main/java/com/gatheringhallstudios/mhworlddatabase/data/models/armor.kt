@@ -126,7 +126,7 @@ class ArmorFull(
         val skills: List<SkillLevel>
 ): Favoritable {
     override fun getEntityId() : Int {
-        return armor.armorset_id
+        return armor.id
     }
 
     override fun getType(): DataType {
