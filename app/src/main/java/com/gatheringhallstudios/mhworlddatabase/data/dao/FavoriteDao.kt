@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.gatheringhallstudios.mhworlddatabase.data.models.Favorite
 import com.gatheringhallstudios.mhworlddatabase.data.entities.FavoriteEntity
-import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
+
 
 @Dao
 abstract class FavoriteDao {
@@ -26,6 +26,4 @@ abstract class FavoriteDao {
 
     @Delete
     abstract fun delete(entities: FavoriteEntity)
-
-    fun getFavorites
 }

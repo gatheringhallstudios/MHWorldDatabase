@@ -8,3 +8,14 @@ open class Favorite(
         val dataType: DataType,
         val dateAdded: Date
 )
+
+class FavoriteEntities(
+        val locations: List<Location> = emptyList(),
+        val monsters: List<MonsterBase> = emptyList(),
+        val skillTrees: List<SkillTree> = emptyList(),
+        val charms: List<Charm> = emptyList(),
+        val decorations: List<DecorationBase> = emptyList(),
+        val armor: List<Armor> = emptyList(),
+        val items: List<Item> = emptyList(),
+        val weapons: List<Weapon> = emptyList()
+)
