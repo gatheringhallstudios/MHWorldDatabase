@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import androidx.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 
 /**
@@ -166,7 +167,15 @@ class WeaponFull(
         val ammo: WeaponAmmoData?,
         val melodies: List<WeaponMelody>,
         val recipe: Map<String?, List<ItemQuantity>>
-)
+) : Favoritable {
+    override fun getEntityId(): Int {
+        return weapon.id
+    }
+
+    override fun getType(): DataType {
+        return DataType.WEAPON
+    }
+}
 
 data class WeaponAmmoData(
         val ammo_id: Int,

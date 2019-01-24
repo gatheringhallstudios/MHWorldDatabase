@@ -2,7 +2,9 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import androidx.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 /**
  * An embedded class representing the available slots on a piece of armor.
@@ -122,4 +124,12 @@ class ArmorFull(
         val setBonuses: List<ArmorSetBonus>,
         val recipe: List<ItemQuantity>,
         val skills: List<SkillLevel>
-)
+): Favoritable {
+    override fun getEntityId() : Int {
+        return armor.armorset_id
+    }
+
+    override fun getType(): DataType {
+        return DataType.ARMOR
+    }
+}

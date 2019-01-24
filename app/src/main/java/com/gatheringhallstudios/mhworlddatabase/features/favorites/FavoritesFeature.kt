@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
+import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.FavoriteDao
 import com.gatheringhallstudios.mhworlddatabase.data.entities.FavoriteEntity
@@ -19,9 +20,11 @@ import java.util.*
 // we are storing an application context, so its fine
 @SuppressLint("StaticFieldLeak")
 object FavoritesFeature {
+    //For the sake of
+    private val FAVORITES_MAX = 200
     lateinit private var ctx: Context
-    lateinit private var favoritesList : MutableList<Favorite>
-    lateinit private var dao : FavoriteDao
+    lateinit private var favoritesList: MutableList<Favorite>
+    lateinit private var dao: FavoriteDao
 
     fun bindApplication(app: Application) {
         this.ctx = app.applicationContext
@@ -30,51 +33,26 @@ object FavoritesFeature {
         runBlocking { favoritesList = deferred.await() }
     }
 
-    fun toggleFavorite(entity: Any?) {
+    fun toggleFavorite(entity: Favoritable?) {
         if (entity != null) {
             if (!isFavorited(entity)) {
                 val date = Date()
-                favoritesList.add(Favorite(getId(entity), classToEnum(entity), date))
-                GlobalScope.launch { dao.insert(FavoriteEntity(getId(entity), classToEnum(entity), date)) }
+                favoritesList.add(Favorite(entity.getEntityId(), entity.getType(), date))
+                GlobalScope.launch { dao.insert(FavoriteEntity(entity.getEntityId(), entity.getType(), date)) }
             } else {
-                val index = favoritesList.indexOfFirst {it.dataId == getId(entity) && it.dataType == classToEnum(entity)}
+                val index = favoritesList.indexOfFirst { it.dataId == entity.getEntityId() && it.dataType == entity.getType() }
                 val favorite = favoritesList[index]
                 favoritesList.removeAt(index)
-                GlobalScope.launch { dao.delete(FavoriteEntity(favorite.dataId,
-                        favorite.dataType, favorite.dateAdded)) }
+                GlobalScope.launch {
+                    dao.delete(FavoriteEntity(favorite.dataId,
+                            favorite.dataType, favorite.dateAdded))
+                }
             }
         }
     }
 
-    fun isFavorited(entity: Any): Boolean {
-        return favoritesList.indexOfFirst {it.dataId == getId(entity) && it.dataType == classToEnum(entity)} != -1
-    }
 
-    private fun classToEnum(entity: Any?): DataType {
-        return when (entity) {
-            is Monster -> DataType.MONSTER
-            is Location -> DataType.LOCATION
-            is ArmorFull -> DataType.ARMOR
-            is CharmFull -> DataType.CHARM
-            is Item -> DataType.ITEM
-            is Decoration -> DataType.DECORATION
-            is SkillTreeFull -> DataType.SKILL
-            is WeaponFull -> DataType.WEAPON
-            else -> DataType.NONE
-        }
-    }
-
-    private fun getId(entity: Any): Int {
-        return when (entity) {
-            is Monster -> entity.id
-            is Location -> entity.id
-            is ArmorFull -> entity.armor.id
-            is CharmFull -> entity.charm.id
-            is Item -> entity.id
-            is Decoration -> entity.id
-            is SkillTreeFull -> entity.id
-            is WeaponFull -> entity.weapon.id
-            else -> 0
-        }
+    fun isFavorited(entity: Favoritable): Boolean {
+        return favoritesList.indexOfFirst { it.dataId == entity.getEntityId() && it.dataType == entity.getType() } != -1
     }
 }

@@ -1,6 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
+import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 /*
@@ -32,5 +34,13 @@ class Decoration(
         val glowing_feystone_chance: Double,
         val worn_feystone_chance: Double,
         val warped_feystone_chance: Double
-) : DecorationBase(id, name, slot, icon_color)
+) : DecorationBase(id, name, slot, icon_color), Favoritable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.DECORATION
+    }
+}
 
