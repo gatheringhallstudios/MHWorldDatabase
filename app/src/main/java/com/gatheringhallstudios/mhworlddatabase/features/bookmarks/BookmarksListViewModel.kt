@@ -16,7 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
  * This viewmodel should be attached to the pager fragment,
  * and accessed through the parent for sub-fragments
  */
-class FavoritesListViewModel(app: Application) : AndroidViewModel(app) {
+class BookmarksListViewModel(app: Application) : AndroidViewModel(app) {
     private val favoriteDao = MHWDatabase.getDatabase(app).favoritesSearchDao()
 
     lateinit var  favoriteEntities: LiveData<FavoriteEntities>

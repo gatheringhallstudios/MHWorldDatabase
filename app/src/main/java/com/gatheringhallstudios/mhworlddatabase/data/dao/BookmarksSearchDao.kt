@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 @Dao
 abstract class FavoritesSearchDao {
 
-    fun getFavoriteEntities(langId: String,
+    fun getBookmarkEntities(langId: String,
                             armorIds: IntArray,
                             charmIds: IntArray,
                             itemIds: IntArray,
@@ -17,8 +17,8 @@ abstract class FavoritesSearchDao {
                             monsterIds: IntArray,
                             skillTreeIds: IntArray,
                             weaponIds: IntArray,
-                            decorationIds: IntArray): LiveData<FavoriteEntities> = createLiveData {
-        return@createLiveData FavoriteEntities(
+                            decorationIds: IntArray): LiveData<BookmarkEntities> = createLiveData {
+        return@createLiveData BookmarkEntities(
                 armor = loadArmorByIdList(langId, armorIds),
                 items = loadItemsByIdList(langId, itemIds),
                 charms = loadCharmsByIdList(langId, charmIds),

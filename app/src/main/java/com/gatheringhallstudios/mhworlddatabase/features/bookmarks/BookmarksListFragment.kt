@@ -15,9 +15,9 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 /**
  * A sub-fragment that displays the means of acquiring an item
  */
-class FavoritesListFragment : RecyclerViewFragment() {
+class BookmarksListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(FavoritesListViewModel::class.java)
+        ViewModelProviders.of(parentFragment!!).get(BookmarksListViewModel::class.java)
     }
 
     val adapter = CategoryAdapter(
