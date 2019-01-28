@@ -51,7 +51,6 @@ object FavoritesFeature {
         }
     }
 
-
     fun isFavorited(entity: Favoritable): Boolean {
         return favoritesList.indexOfFirst { it.dataId == entity.getEntityId() && it.dataType == entity.getType() } != -1
     }

@@ -14,7 +14,15 @@ open class MonsterBase(
         val name: String?,
         val size: MonsterSize,
         val ecology: String?
-)
+) : Favoritable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.MONSTER
+    }
+}
 
 class Monster(
         id: Int,

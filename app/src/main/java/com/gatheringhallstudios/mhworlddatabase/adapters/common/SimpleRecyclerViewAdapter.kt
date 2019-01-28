@@ -9,7 +9,8 @@ import java.util.*
  * Defines an adapter for a simple item meant to be used via KTX.
  * For an adapter with multiple items, use a delegate instead.
  */
-abstract class SimpleRecyclerViewAdapter<T>: androidx.recyclerview.widget.RecyclerView.Adapter<SimpleViewHolder>() {
+abstract class
+SimpleRecyclerViewAdapter<T>: androidx.recyclerview.widget.RecyclerView.Adapter<SimpleViewHolder>() {
     protected abstract fun onCreateView(parent: ViewGroup): View
     protected abstract fun bindView(viewHolder: SimpleViewHolder, data: T)
 

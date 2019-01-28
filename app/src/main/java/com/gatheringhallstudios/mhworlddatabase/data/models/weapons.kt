@@ -43,7 +43,7 @@ class Weapon(
         val notes: String?,
         val special_ammo: String?
 
-) : WeaponBase(id, name, rarity, weapon_type) {
+) : WeaponBase(id, name, rarity, weapon_type), Favoritable {
     @Embedded
     lateinit var slots: WeaponSlots
 
@@ -52,6 +52,14 @@ class Weapon(
 
     @Embedded
     var sharpnessData: WeaponSharpness? = null
+
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.WEAPON
+    }
 }
 
 /**

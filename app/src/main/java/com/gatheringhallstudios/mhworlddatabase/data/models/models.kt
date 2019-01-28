@@ -20,7 +20,15 @@ open class DecorationBase(
         val name: String?,
         val slot: Int,
         val icon_color: String?
-)
+) :Favoritable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.DECORATION
+    }
+}
 
 class Decoration(
         id: Int,

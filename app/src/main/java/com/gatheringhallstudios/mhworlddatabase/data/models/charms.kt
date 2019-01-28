@@ -19,7 +19,15 @@ open class Charm(
         name: String?,
         rarity: Int,
         val previous_id: Int?
-): CharmBase(id, name, rarity)
+): CharmBase(id, name, rarity), Favoritable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.CHARM
+    }
+}
 
 /**
  * Contains the charm and any additional join data related to the charm

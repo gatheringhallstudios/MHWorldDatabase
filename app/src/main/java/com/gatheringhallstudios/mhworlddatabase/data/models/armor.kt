@@ -79,7 +79,15 @@ class Armor(
         val thunder: Int,
         val ice: Int,
         val dragon: Int
-): ArmorBase(id, name, rarity, armor_type)
+): ArmorBase(id, name, rarity, armor_type), Favoritable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.WEAPON
+    }
+}
 
 /**
  * Representation of a single armor set
