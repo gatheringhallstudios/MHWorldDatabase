@@ -1,12 +1,16 @@
 package com.gatheringhallstudios.mhworlddatabase.data;
 
 import android.app.Application;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import android.content.Context;
 
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.CharmDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.DecorationDao;
-import com.gatheringhallstudios.mhworlddatabase.data.dao.FavoritesSearchDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.BookmarksSearchDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MetaDao;
@@ -156,7 +160,7 @@ public abstract class MHWDatabase extends RoomDatabase {
 
     public abstract WeaponDao weaponDao();
 
-    public abstract FavoritesSearchDao favoritesSearchDao();
+    public abstract BookmarksSearchDao bookmarksSearchDao();
 
     /** Internal method to recieve meta information queries **/
     protected abstract MetaDao metaDao();

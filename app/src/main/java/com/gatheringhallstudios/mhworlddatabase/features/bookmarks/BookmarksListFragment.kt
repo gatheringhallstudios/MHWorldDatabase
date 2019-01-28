@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.favorites
+package com.gatheringhallstudios.mhworlddatabase.features.bookmarks
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
-import com.gatheringhallstudios.mhworlddatabase.data.models.FavoriteEntities
+import com.gatheringhallstudios.mhworlddatabase.data.models.BookmarkEntities
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
@@ -34,11 +34,11 @@ class BookmarksListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
-        viewModel.loadFavorites()
-        viewModel.favoriteEntities.observe(this, Observer(::populateFavoriteEntities))
+        viewModel.loadBookmarks()
+        viewModel.bookmarkEntities.observe(this, Observer(::populateBookmarkEntities))
     }
 
-    private fun populateFavoriteEntities(data: FavoriteEntities) {
+    private fun populateBookmarkEntities(data: BookmarkEntities) {
         adapter.clear()
         if (data.armor.isNotEmpty()) {
             adapter.addSection(getString(R.string.title_armor), data.armor)

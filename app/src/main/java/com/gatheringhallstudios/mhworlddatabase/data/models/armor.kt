@@ -2,7 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import androidx.room.Ignore
-import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
@@ -79,7 +79,7 @@ class Armor(
         val thunder: Int,
         val ice: Int,
         val dragon: Int
-): ArmorBase(id, name, rarity, armor_type), Favoritable {
+): ArmorBase(id, name, rarity, armor_type), Bookmarkable {
     override fun getEntityId(): Int {
         return id
     }
@@ -132,7 +132,7 @@ class ArmorFull(
         val setBonuses: List<ArmorSetBonus>,
         val recipe: List<ItemQuantity>,
         val skills: List<SkillLevel>
-): Favoritable {
+): Bookmarkable {
     override fun getEntityId() : Int {
         return armor.id
     }

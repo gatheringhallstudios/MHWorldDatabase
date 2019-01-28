@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
-import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 open class CharmBase(
@@ -19,7 +19,7 @@ open class Charm(
         name: String?,
         rarity: Int,
         val previous_id: Int?
-): CharmBase(id, name, rarity), Favoritable {
+): CharmBase(id, name, rarity), Bookmarkable {
     override fun getEntityId(): Int {
         return id
     }
@@ -36,7 +36,7 @@ class CharmFull(
         val charm: Charm,
         val skills: List<SkillLevel>,
         val components: List<ItemQuantity>
-): Favoritable {
+): Bookmarkable {
     override fun getEntityId(): Int {
         return charm.id
     }

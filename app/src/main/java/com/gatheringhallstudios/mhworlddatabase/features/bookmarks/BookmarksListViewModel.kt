@@ -1,10 +1,9 @@
-package com.gatheringhallstudios.mhworlddatabase.features.favorites
+package com.gatheringhallstudios.mhworlddatabase.features.bookmarks
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
-import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -17,28 +16,28 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
  * and accessed through the parent for sub-fragments
  */
 class BookmarksListViewModel(app: Application) : AndroidViewModel(app) {
-    private val favoriteDao = MHWDatabase.getDatabase(app).favoritesSearchDao()
+    private val bookmarkDao = MHWDatabase.getDatabase(app).bookmarksSearchDao()
 
-    lateinit var  favoriteEntities: LiveData<FavoriteEntities>
+    lateinit var  bookmarkEntities: LiveData<BookmarkEntities>
 
-    fun loadFavorites() {
-        favoriteEntities = favoriteDao.getFavoriteEntities(AppSettings.dataLocale,
-                FavoritesFeature
-                        .getFavoritesByType(DataType.ARMOR).map {it.dataId}.toIntArray(),
-                FavoritesFeature
-                        .getFavoritesByType(DataType.CHARM).map {it.dataId}.toIntArray(),
-                FavoritesFeature
-                        .getFavoritesByType(DataType.ITEM).map {it.dataId}.toIntArray(),
-                FavoritesFeature
-                        .getFavoritesByType(DataType.LOCATION).map {it.dataId}.toIntArray(),
-                FavoritesFeature
-                        .getFavoritesByType(DataType.MONSTER).map {it.dataId}.toIntArray(),
-                FavoritesFeature
-                        .getFavoritesByType(DataType.SKILL).map {it.dataId}.toIntArray(),
-                FavoritesFeature
-                        .getFavoritesByType(DataType.WEAPON).map {it.dataId}.toIntArray(),
-                FavoritesFeature
-                        .getFavoritesByType(DataType.DECORATION).map {it.dataId}.toIntArray()
+    fun loadBookmarks() {
+        bookmarkEntities = bookmarkDao.getBookmarkEntities(AppSettings.dataLocale,
+                BookmarksFeature
+                        .getBookmarksByType(DataType.ARMOR).map {it.dataId}.toIntArray(),
+                BookmarksFeature
+                        .getBookmarksByType(DataType.CHARM).map {it.dataId}.toIntArray(),
+                BookmarksFeature
+                        .getBookmarksByType(DataType.ITEM).map {it.dataId}.toIntArray(),
+                BookmarksFeature
+                        .getBookmarksByType(DataType.LOCATION).map {it.dataId}.toIntArray(),
+                BookmarksFeature
+                        .getBookmarksByType(DataType.MONSTER).map {it.dataId}.toIntArray(),
+                BookmarksFeature
+                        .getBookmarksByType(DataType.SKILL).map {it.dataId}.toIntArray(),
+                BookmarksFeature
+                        .getBookmarksByType(DataType.WEAPON).map {it.dataId}.toIntArray(),
+                BookmarksFeature
+                        .getBookmarksByType(DataType.DECORATION).map {it.dataId}.toIntArray()
                 )
     }
 }

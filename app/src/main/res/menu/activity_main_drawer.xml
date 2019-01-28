@@ -43,7 +43,7 @@
         <item
             android:id="@+id/favoritesListAction"
             android:icon="@android:drawable/btn_star_big_on"
-            android:title="@string/title_favorites" />
+            android:title="@string/title_bookmarks" />
     </group>
 
     <item android:title="Other">

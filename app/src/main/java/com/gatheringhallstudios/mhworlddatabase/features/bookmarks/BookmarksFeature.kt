@@ -1,13 +1,12 @@
-package com.gatheringhallstudios.mhworlddatabase.features.favorites
+package com.gatheringhallstudios.mhworlddatabase.features.bookmarks
 
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.LiveData
-import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.dao.FavoriteDao
-import com.gatheringhallstudios.mhworlddatabase.data.entities.FavoriteEntity
+import com.gatheringhallstudios.mhworlddatabase.data.dao.BookmarksDao
+import com.gatheringhallstudios.mhworlddatabase.data.entities.BookmarkEntity
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.GlobalScope
@@ -19,43 +18,43 @@ import java.util.*
 
 // we are storing an application context, so its fine
 @SuppressLint("StaticFieldLeak")
-object FavoritesFeature {
+object BookmarksFeature {
     //For the sake of setting a cap
-    private val FAVORITES_MAX = 200
+    private val BOOKMARKS_MAX = 200
     lateinit private var ctx: Context
-    lateinit private var favoritesList: MutableList<Favorite>
-    lateinit private var dao: FavoriteDao
+    lateinit private var bookmarksList: MutableList<Bookmark>
+    lateinit private var dao: BookmarksDao
 
     fun bindApplication(app: Application) {
         this.ctx = app.applicationContext
-        dao = AppDatabase.getAppDataBase(ctx)!!.favoriteDao()
-        val deferred = GlobalScope.async { dao.loadFavorites() }
-        runBlocking { favoritesList = deferred.await() }
+        dao = AppDatabase.getAppDataBase(ctx)!!.bookmarkDao()
+        val deferred = GlobalScope.async { dao.loadBookmarks() }
+        runBlocking { bookmarksList = deferred.await() }
     }
 
-    fun toggleFavorite(entity: Favoritable?) {
+    fun toggleBookmark(entity: Bookmarkable?) {
         if (entity != null) {
-            if (!isFavorited(entity) && favoritesList.size < FAVORITES_MAX) {
+            if (!isBookmarked(entity) && bookmarksList.size < BOOKMARKS_MAX) {
                 val date = Date()
-                favoritesList.add(Favorite(entity.getEntityId(), entity.getType(), date))
-                GlobalScope.launch { dao.insert(FavoriteEntity(entity.getEntityId(), entity.getType(), date)) }
+                bookmarksList.add(Bookmark(entity.getEntityId(), entity.getType(), date))
+                GlobalScope.launch { dao.insert(BookmarkEntity(entity.getEntityId(), entity.getType(), date)) }
             } else {
-                val index = favoritesList.indexOfFirst { it.dataId == entity.getEntityId() && it.dataType == entity.getType() }
-                val favorite = favoritesList[index]
-                favoritesList.removeAt(index)
+                val index = bookmarksList.indexOfFirst { it.dataId == entity.getEntityId() && it.dataType == entity.getType() }
+                val bookmark = bookmarksList[index]
+                bookmarksList.removeAt(index)
                 GlobalScope.launch {
-                    dao.delete(FavoriteEntity(favorite.dataId,
-                            favorite.dataType, favorite.dateAdded))
+                    dao.delete(BookmarkEntity(bookmark.dataId,
+                            bookmark.dataType, bookmark.dateAdded))
                 }
             }
         }
     }
 
-    fun isFavorited(entity: Favoritable): Boolean {
-        return favoritesList.indexOfFirst { it.dataId == entity.getEntityId() && it.dataType == entity.getType() } != -1
+    fun isBookmarked(entity: Bookmarkable): Boolean {
+        return bookmarksList.indexOfFirst { it.dataId == entity.getEntityId() && it.dataType == entity.getType() } != -1
     }
 
-    fun getFavoritesByType(dataType: DataType) : List<Favorite> {
-        return favoritesList.filter {it.dataType == dataType}
+    fun getBookmarksByType(dataType: DataType) : List<Bookmark> {
+        return bookmarksList.filter {it.dataType == dataType}
     }
 }

@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 
@@ -23,7 +23,7 @@ open class SkillTree(
         max_level: Int,
         icon_color: String?,
         val description: String?
-): SkillTreeBase(id, name, max_level, icon_color), Favoritable {
+): SkillTreeBase(id, name, max_level, icon_color), Bookmarkable {
     override fun getEntityId(): Int {
         return id
     }

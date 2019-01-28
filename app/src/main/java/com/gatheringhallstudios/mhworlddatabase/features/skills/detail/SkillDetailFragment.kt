@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.LinearLayout
@@ -15,7 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Skill
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
-import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.*
@@ -43,7 +42,7 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_favoritable, menu)
         val weaponData = viewModel.skillTreeFull.value
-        if (weaponData != null && FavoritesFeature.isFavorited(weaponData)) {
+        if (weaponData != null && BookmarksFeature.isBookmarked(weaponData)) {
             menu.findItem(R.id.action_toggle_favorite)
                     .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
@@ -54,7 +53,7 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
         val id = item.itemId
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_favorite) {
-            FavoritesFeature.toggleFavorite(viewModel.skillTreeFull.value)
+            BookmarksFeature.toggleBookmark(viewModel.skillTreeFull.value)
             activity!!.invalidateOptionsMenu()
             true
         } else false

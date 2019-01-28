@@ -141,8 +141,8 @@
 
     <fragment
         android:id="@+id/favoritesListDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesListFragment"
-        android:label="@string/title_favorites"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksListFragment"
+        android:label="@string/title_bookmarks"
         tools:layout="@layout/list_generic" />
     <action
         android:id="@+id/favoritesListAction"

@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -13,7 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
-import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -52,7 +51,7 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_favoritable, menu)
         val charmData = viewModel.charmFullData.value
-        if (charmData != null && FavoritesFeature.isFavorited(charmData)) {
+        if (charmData != null && BookmarksFeature.isBookmarked(charmData)) {
             menu.findItem(R.id.action_toggle_favorite)
                     .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
@@ -63,7 +62,7 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
         val id = item.itemId
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_favorite) {
-            FavoritesFeature.toggleFavorite(viewModel.charmFullData.value)
+            BookmarksFeature.toggleBookmark(viewModel.charmFullData.value)
             activity!!.invalidateOptionsMenu()
             true
         } else false

@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
-import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 /**
@@ -34,7 +34,7 @@ class LocationSummaryFragment : RecyclerViewFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_favoritable, menu)
         val locationData = viewModel.location.value
-        if (locationData != null && FavoritesFeature.isFavorited(locationData)) {
+        if (locationData != null && BookmarksFeature.isBookmarked(locationData)) {
             menu.findItem(R.id.action_toggle_favorite)
                     .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
@@ -45,7 +45,7 @@ class LocationSummaryFragment : RecyclerViewFragment() {
         val id = item.itemId
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_favorite) {
-            FavoritesFeature.toggleFavorite(viewModel.location.value)
+            BookmarksFeature.toggleBookmark(viewModel.location.value)
             activity!!.invalidateOptionsMenu()
             true
         } else false

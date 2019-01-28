@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
-import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
@@ -34,7 +34,7 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_favoritable, menu)
         val monsterData = viewModel.monster.value
-        if (monsterData != null && FavoritesFeature.isFavorited(monsterData)) {
+        if (monsterData != null && BookmarksFeature.isBookmarked(monsterData)) {
             menu.findItem(R.id.action_toggle_favorite)
                     .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
@@ -45,7 +45,7 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
         val id = item.itemId
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_favorite) {
-            FavoritesFeature.toggleFavorite(viewModel.monster.value)
+            BookmarksFeature.toggleBookmark(viewModel.monster.value)
             activity!!.invalidateOptionsMenu()
             true
         } else false

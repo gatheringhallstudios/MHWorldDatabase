@@ -4,13 +4,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
-import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getColorCompat
@@ -41,7 +40,7 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_favoritable, menu)
         val decorationData = viewModel.decorationData.value
-        if (decorationData != null && FavoritesFeature.isFavorited(decorationData)) {
+        if (decorationData != null && BookmarksFeature.isBookmarked(decorationData)) {
             menu.findItem(R.id.action_toggle_favorite)
                     .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
@@ -52,7 +51,7 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
         val id = item.itemId
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_favorite) {
-            FavoritesFeature.toggleFavorite(viewModel.decorationData.value)
+            BookmarksFeature.toggleBookmark(viewModel.decorationData.value)
             activity!!.invalidateOptionsMenu()
             true
         } else false

@@ -1,9 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 /*
 todo: refactor. The current version has problems. Details below:
@@ -20,7 +19,7 @@ open class DecorationBase(
         val name: String?,
         val slot: Int,
         val icon_color: String?
-) :Favoritable {
+) :Bookmarkable {
     override fun getEntityId(): Int {
         return id
     }
@@ -42,7 +41,7 @@ class Decoration(
         val glowing_feystone_chance: Double,
         val worn_feystone_chance: Double,
         val warped_feystone_chance: Double
-) : DecorationBase(id, name, slot, icon_color), Favoritable {
+) : DecorationBase(id, name, slot, icon_color), Bookmarkable {
     override fun getEntityId(): Int {
         return id
     }

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorFull
-import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -29,7 +29,7 @@ class ArmorDetailPagerFragment : BasePagerFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_favoritable, menu)
         val itemData = viewModel.armor.value
-        if (itemData != null && FavoritesFeature.isFavorited(itemData)) {
+        if (itemData != null && BookmarksFeature.isBookmarked(itemData)) {
             menu.findItem(R.id.action_toggle_favorite)
                     .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
@@ -40,7 +40,7 @@ class ArmorDetailPagerFragment : BasePagerFragment() {
         val id = item.itemId
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_favorite) {
-            FavoritesFeature.toggleFavorite(viewModel.armor.value)
+            BookmarksFeature.toggleBookmark(viewModel.armor.value)
             activity!!.invalidateOptionsMenu()
             true
         } else false

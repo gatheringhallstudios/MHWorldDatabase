@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.Favoritable
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 data class Location(
         val id: Int,
         val name: String?
-) : Favoritable {
+) : Bookmarkable {
     override fun getEntityId(): Int {
         return id
     }

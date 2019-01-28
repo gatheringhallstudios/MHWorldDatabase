@@ -362,7 +362,7 @@
     <!-- ## FAVORITES MENU ## -->
     <!-- #################### -->
 
-    <string name="title_favorites">Favorites</string>
+    <string name="title_bookmarks">Bookmarks</string>
 
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->

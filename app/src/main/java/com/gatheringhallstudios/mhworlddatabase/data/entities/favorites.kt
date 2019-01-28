@@ -6,7 +6,7 @@ import java.util.*
 
 @Entity(tableName = "favorites",
         primaryKeys = ["dataId", "dataType"])
-data class FavoriteEntity(
+data class BookmarkEntity(
         val dataId: Int,
         val dataType: DataType,
         val dateAdded: Date

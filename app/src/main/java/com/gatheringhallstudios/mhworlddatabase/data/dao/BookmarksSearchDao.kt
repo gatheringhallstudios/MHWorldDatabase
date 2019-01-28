@@ -7,7 +7,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 @Dao
-abstract class FavoritesSearchDao {
+abstract class BookmarksSearchDao {
 
     fun getBookmarkEntities(langId: String,
                             armorIds: IntArray,

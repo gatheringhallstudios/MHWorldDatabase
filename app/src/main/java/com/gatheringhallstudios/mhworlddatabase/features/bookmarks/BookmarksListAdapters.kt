@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.favorites
+package com.gatheringhallstudios.mhworlddatabase.features.bookmarks
 
 import android.content.Context
 import android.view.LayoutInflater

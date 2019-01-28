@@ -5,13 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.gatheringhallstudios.mhworlddatabase.data.dao.FavoriteDao
-import com.gatheringhallstudios.mhworlddatabase.data.entities.FavoriteEntity
+import com.gatheringhallstudios.mhworlddatabase.data.dao.BookmarksDao
+import com.gatheringhallstudios.mhworlddatabase.data.entities.BookmarkEntity
 
-@Database(entities = [FavoriteEntity::class], version = 1)
+@Database(entities = [BookmarkEntity::class], version = 1)
 @TypeConverters(AppConverters::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun favoriteDao(): FavoriteDao
+    abstract fun bookmarkDao(): BookmarksDao
 
     companion object {
         var INSTANCE: AppDatabase? = null

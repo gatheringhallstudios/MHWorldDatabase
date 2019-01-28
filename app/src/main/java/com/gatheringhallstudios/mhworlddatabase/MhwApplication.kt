@@ -4,7 +4,7 @@ import android.app.Application
 import android.os.Build
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.features.favorites.FavoritesFeature
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.squareup.leakcanary.LeakCanary
 
 class MhwApplication : Application() {
@@ -15,7 +15,7 @@ class MhwApplication : Application() {
         // todo: if there are issues, create an Application subclass and bind there
         AppSettings.bindApplication(this)
         AssetLoader.bindApplication(this)
-        FavoritesFeature.bindApplication(this)
+        BookmarksFeature.bindApplication(this)
 
         // Bind supported languages to app settings
         val languages = MHWDatabase.getDatabase(this).languages.map { it.id }
