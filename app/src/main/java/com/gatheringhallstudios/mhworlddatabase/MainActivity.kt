@@ -1,10 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.GravityCompat
@@ -13,15 +10,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
-import com.michaelflisar.changelog.classes.ChangelogFilter
-import com.michaelflisar.changelog.classes.ImportanceChangelogSorter
 import com.michaelflisar.changelog.ChangelogBuilder
-import com.michaelflisar.changelog.classes.DefaultAutoVersionNameFormatter
-import com.michaelflisar.changelog.internal.ChangelogPreferenceUtil
 
 
 /**
@@ -51,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             R.id.locationListDestination,
             R.id.charmListDestination,
             R.id.weaponListDestination,
-            R.id.favoritesListDestination
+            R.id.bookmarksListDestination
     ))
 
     val viewModel by lazy {
@@ -178,7 +170,7 @@ class MainActivity : AppCompatActivity() {
 
         return if (id == R.id.action_search) {
             true
-        } else if (id == R.id.action_toggle_favorite) {
+        } else if (id == R.id.action_toggle_bookmark) {
             false
         }else super.onOptionsItemSelected(item)
     }

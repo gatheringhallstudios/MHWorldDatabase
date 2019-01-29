@@ -58,19 +58,19 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_favoritable, menu)
+        inflater.inflate(R.menu.main_bookmarkable, menu)
         val weaponData = viewModel.weapon.value
         if (weaponData != null && BookmarksFeature.isBookmarked(weaponData)) {
-            menu.findItem(action_toggle_favorite)
+            menu.findItem(action_toggle_bookmark)
                     .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Try to handle the favorites button onclick here instead of the main activity
+        // Try to handle the bookmarks button onclick here instead of the main activity
         val id = item.itemId
         super.onOptionsItemSelected(item)
-        return if (id == R.id.action_toggle_favorite) {
+        return if (id == R.id.action_toggle_bookmark) {
             BookmarksFeature.toggleBookmark(viewModel.weapon.value)
             activity!!.invalidateOptionsMenu()
             true

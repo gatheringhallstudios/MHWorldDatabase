@@ -38,19 +38,19 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_favoritable, menu)
+        inflater.inflate(R.menu.main_bookmarkable, menu)
         val decorationData = viewModel.decorationData.value
         if (decorationData != null && BookmarksFeature.isBookmarked(decorationData)) {
-            menu.findItem(R.id.action_toggle_favorite)
+            menu.findItem(R.id.action_toggle_bookmark)
                     .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Try to handle the favorites button onclick here instead of the main activity
+        // Try to handle the bookmarks button onclick here instead of the main activity
         val id = item.itemId
         super.onOptionsItemSelected(item)
-        return if (id == R.id.action_toggle_favorite) {
+        return if (id == R.id.action_toggle_bookmark) {
             BookmarksFeature.toggleBookmark(viewModel.decorationData.value)
             activity!!.invalidateOptionsMenu()
             true

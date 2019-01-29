@@ -4,7 +4,7 @@ import androidx.room.Entity
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import java.util.*
 
-@Entity(tableName = "favorites",
+@Entity(tableName = "bookmarks",
         primaryKeys = ["dataId", "dataType"])
 data class BookmarkEntity(
         val dataId: Int,

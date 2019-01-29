@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyState
+import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
@@ -21,14 +23,15 @@ class BookmarksListFragment : RecyclerViewFragment() {
     }
 
     val adapter = CategoryAdapter(
-            ItemBookmarkDelegate{ getRouter().navigateItemDetail(it.id) },
-            LocationBookmarkDelegate{ getRouter().navigateLocationDetail(it.id) },
-            CharmBookmarkDelegate{ getRouter().navigateCharmDetail(it.id) },
-            DecorationBaseBookmarkDelegate{ getRouter().navigateDecorationDetail(it.id) },
-            MonsterBaseBookmarkDelegate{ getRouter().navigateMonsterDetail(it.id) },
-            SkillTreeBookmarkDelegate{ getRouter().navigateSkillDetail(it.id) },
-            WeaponBookmarkDelegate{ getRouter().navigateWeaponDetail(it.id) },
-            ArmorBookmarkDelegate{ getRouter().navigateArmorDetail(it.id) }
+            ItemBookmarkDelegate { getRouter().navigateItemDetail(it.id) },
+            LocationBookmarkDelegate { getRouter().navigateLocationDetail(it.id) },
+            CharmBookmarkDelegate { getRouter().navigateCharmDetail(it.id) },
+            DecorationBaseBookmarkDelegate { getRouter().navigateDecorationDetail(it.id) },
+            MonsterBaseBookmarkDelegate { getRouter().navigateMonsterDetail(it.id) },
+            SkillTreeBookmarkDelegate { getRouter().navigateSkillDetail(it.id) },
+            WeaponBookmarkDelegate { getRouter().navigateWeaponDetail(it.id) },
+            ArmorBookmarkDelegate { getRouter().navigateArmorDetail(it.id) },
+            EmptyStateAdapterDelegate()
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,6 +43,12 @@ class BookmarksListFragment : RecyclerViewFragment() {
 
     private fun populateBookmarkEntities(data: BookmarkEntities) {
         adapter.clear()
+
+        if (data.isEmpty) {
+            adapter.addSection(listOf(EmptyState()))
+            return
+        }
+
         if (data.armor.isNotEmpty()) {
             adapter.addSection(getString(R.string.title_armor), data.armor)
         }
@@ -71,5 +80,6 @@ class BookmarksListFragment : RecyclerViewFragment() {
         if (data.decorations.isNotEmpty()) {
             adapter.addSection(getString(R.string.title_decorations), data.decorations)
         }
+
     }
 }

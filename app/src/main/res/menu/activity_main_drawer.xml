@@ -41,7 +41,7 @@
             android:icon="@drawable/ic_ui_map"
             android:title="@string/title_locations" />
         <item
-            android:id="@+id/favoritesListAction"
+            android:id="@+id/bookmarksListAction"
             android:icon="@android:drawable/btn_star_big_on"
             android:title="@string/title_bookmarks" />
     </group>

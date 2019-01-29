@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_toggle_favorite"
+        android:id="@+id/action_toggle_bookmark"
         android:icon="@android:drawable/btn_star_big_off"
-        android:title="@string/action_favorite"
+        android:title="@string/action_bookmark"
         app:showAsAction="ifRoom" />
 </menu>
