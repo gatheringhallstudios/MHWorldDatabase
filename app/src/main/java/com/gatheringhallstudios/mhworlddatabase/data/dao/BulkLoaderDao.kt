@@ -7,18 +7,18 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 @Dao
-abstract class BookmarksSearchDao {
+abstract class BulkLoaderDao {
 
-    fun getBookmarkEntities(langId: String,
-                            armorIds: IntArray,
-                            charmIds: IntArray,
-                            itemIds: IntArray,
-                            locationIds: IntArray,
-                            monsterIds: IntArray,
-                            skillTreeIds: IntArray,
-                            weaponIds: IntArray,
-                            decorationIds: IntArray): LiveData<BookmarkEntities> = createLiveData {
-        BookmarkEntities(
+    fun getModels(langId: String,
+                  armorIds: IntArray,
+                  charmIds: IntArray,
+                  itemIds: IntArray,
+                  locationIds: IntArray,
+                  monsterIds: IntArray,
+                  skillTreeIds: IntArray,
+                  weaponIds: IntArray,
+                  decorationIds: IntArray): LiveData<BulkModels> = createLiveData {
+        BulkModels(
                 armor = loadArmorByIdList(langId, armorIds),
                 items = loadItemsByIdList(langId, itemIds),
                 charms = loadCharmsByIdList(langId, charmIds),

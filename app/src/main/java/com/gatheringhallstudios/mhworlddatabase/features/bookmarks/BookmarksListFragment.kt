@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
-import com.gatheringhallstudios.mhworlddatabase.data.models.BookmarkEntities
+import com.gatheringhallstudios.mhworlddatabase.data.models.BulkModels
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
@@ -38,10 +38,10 @@ class BookmarksListFragment : RecyclerViewFragment() {
         setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
         viewModel.loadBookmarks()
-        viewModel.bookmarkEntities.observe(this, Observer(::populateBookmarkEntities))
+        viewModel.bulkModels.observe(this, Observer(::populateBookmarkEntities))
     }
 
-    private fun populateBookmarkEntities(data: BookmarkEntities) {
+    private fun populateBookmarkEntities(data: BulkModels) {
         adapter.clear()
 
         if (data.isEmpty()) {

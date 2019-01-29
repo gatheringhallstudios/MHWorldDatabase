@@ -18,10 +18,10 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 class BookmarksListViewModel(app: Application) : AndroidViewModel(app) {
     private val bookmarkDao = MHWDatabase.getDatabase(app).bookmarksSearchDao()
 
-    lateinit var  bookmarkEntities: LiveData<BookmarkEntities>
+    lateinit var  bulkModels: LiveData<BulkModels>
 
     fun loadBookmarks() {
-        bookmarkEntities = bookmarkDao.getBookmarkEntities(AppSettings.dataLocale,
+        bulkModels = bookmarkDao.getModels(AppSettings.dataLocale,
                 BookmarksFeature
                         .getBookmarksByType(DataType.ARMOR).map {it.dataId}.toIntArray(),
                 BookmarksFeature
