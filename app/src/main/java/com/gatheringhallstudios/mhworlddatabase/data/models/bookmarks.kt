@@ -19,13 +19,15 @@ class BookmarkEntities(
         val items: List<Item> = emptyList(),
         val weapons: List<Weapon> = emptyList()
 ) {
-    val isEmpty = locations.isNullOrEmpty() &&
-            monsters.isNullOrEmpty() &&
-            skillTrees.isNullOrEmpty() &&
-            charms.isNullOrEmpty() &&
-            decorations.isNullOrEmpty() &&
-            armor.isNullOrEmpty() &&
-            items.isNullOrEmpty() &&
-            weapons.isNullOrEmpty()
+    fun isEmpty() : Boolean {
+        return locations.isNullOrEmpty() &&
+                monsters.isNullOrEmpty() &&
+                skillTrees.isNullOrEmpty() &&
+                charms.isNullOrEmpty() &&
+                decorations.isNullOrEmpty() &&
+                armor.isNullOrEmpty() &&
+                items.isNullOrEmpty() &&
+                weapons.isNullOrEmpty()
+    }
 
 }

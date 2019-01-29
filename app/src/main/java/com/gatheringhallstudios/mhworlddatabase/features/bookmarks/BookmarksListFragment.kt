@@ -44,7 +44,7 @@ class BookmarksListFragment : RecyclerViewFragment() {
     private fun populateBookmarkEntities(data: BookmarkEntities) {
         adapter.clear()
 
-        if (data.isEmpty) {
+        if (data.isEmpty()) {
             adapter.addSection(listOf(EmptyState()))
             return
         }

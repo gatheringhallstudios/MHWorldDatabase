@@ -18,7 +18,7 @@ abstract class BookmarksSearchDao {
                             skillTreeIds: IntArray,
                             weaponIds: IntArray,
                             decorationIds: IntArray): LiveData<BookmarkEntities> = createLiveData {
-        return@createLiveData BookmarkEntities(
+        BookmarkEntities(
                 armor = loadArmorByIdList(langId, armorIds),
                 items = loadItemsByIdList(langId, itemIds),
                 charms = loadCharmsByIdList(langId, charmIds),
