@@ -3,12 +3,9 @@ package com.gatheringhallstudios.mhworlddatabase.features.skills.detail
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
@@ -17,6 +14,8 @@ import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Skill
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_skill_summary.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.*
 
@@ -30,9 +29,34 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
         ViewModelProviders.of(this).get(SkillDetailViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_skill_summary, parent, false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_bookmarkable, menu)
+        val weaponData = viewModel.skillTreeFull.value
+        if (weaponData != null && BookmarksFeature.isBookmarked(weaponData)) {
+            menu.findItem(R.id.action_toggle_bookmark)
+                    .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Try to handle the bookmarks button onclick here instead of the main activity
+        val id = item.itemId
+        super.onOptionsItemSelected(item)
+        return if (id == R.id.action_toggle_bookmark) {
+            BookmarksFeature.toggleBookmark(viewModel.skillTreeFull.value)
+            activity!!.invalidateOptionsMenu()
+            true
+        } else false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,6 +105,9 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
         if (skillTreeFull == null) return
 
         (activity as AppCompatActivity).supportActionBar?.title = skillTreeFull.name
+
+        //Rerender the menu bar because we are 100% sure we have the skill tree data now
+        activity!!.invalidateOptionsMenu()
 
         val icon = AssetLoader.loadIconFor(skillTreeFull)
         skill_label.setIconDrawable(icon)

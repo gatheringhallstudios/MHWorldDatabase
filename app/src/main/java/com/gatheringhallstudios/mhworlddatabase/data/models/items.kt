@@ -1,7 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationItemEntity
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemSubcategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
@@ -34,7 +35,15 @@ class Item(
         val sell_price: Int,
         val points: Int,
         val carry_limit: Int?
-): ItemBase(id, name, icon_name, icon_color, category)
+): ItemBase(id, name, icon_name, icon_color, category), Bookmarkable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.ITEM
+    }
+}
 
 class ItemCombination(
         val id: Int,

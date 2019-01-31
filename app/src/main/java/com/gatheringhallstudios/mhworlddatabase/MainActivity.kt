@@ -1,10 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.GravityCompat
@@ -16,11 +13,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
-import com.michaelflisar.changelog.classes.ChangelogFilter
-import com.michaelflisar.changelog.classes.ImportanceChangelogSorter
 import com.michaelflisar.changelog.ChangelogBuilder
-import com.michaelflisar.changelog.classes.DefaultAutoVersionNameFormatter
-import com.michaelflisar.changelog.internal.ChangelogPreferenceUtil
 
 
 /**
@@ -33,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = javaClass.simpleName
 
-    private var searchView : SearchView? = null
+    private var searchView: SearchView? = null
 
     /*
      * List of Start Destination IDs. These destinations
@@ -49,7 +42,8 @@ class MainActivity : AppCompatActivity() {
             R.id.decorationListDestination,
             R.id.locationListDestination,
             R.id.charmListDestination,
-            R.id.weaponListDestination
+            R.id.weaponListDestination,
+            R.id.bookmarksListDestination
     ))
 
     val viewModel by lazy {
@@ -174,14 +168,14 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
 
-
         return if (id == R.id.action_search) {
             true
-        } else super.onOptionsItemSelected(item)
-
+        } else if (id == R.id.action_toggle_bookmark) {
+            false
+        }else super.onOptionsItemSelected(item)
     }
 
-    private fun resetSearchListeners(callback : () -> Unit) {
+    private fun resetSearchListeners(callback: () -> Unit) {
         searchView?.setOnSearchClickListener(null)
         searchView?.setOnQueryTextListener(null)
         searchView?.setOnCloseListener(null)
@@ -204,7 +198,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.handleSearchUpdate(query ?: "")
                 return true

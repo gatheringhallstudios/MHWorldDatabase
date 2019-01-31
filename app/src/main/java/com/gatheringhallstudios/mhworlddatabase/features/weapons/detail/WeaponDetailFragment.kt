@@ -3,10 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons.detail
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -21,6 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -32,6 +30,7 @@ import kotlinx.android.synthetic.main.view_bowgun_detail.*
 import kotlinx.android.synthetic.main.view_hunting_horn_detail.*
 import kotlinx.android.synthetic.main.view_hunting_horn_detail.view.*
 import kotlinx.android.synthetic.main.view_weapon_recipe.view.*
+
 
 /**
  * Fragment used to display the main weapon detail information.
@@ -45,6 +44,11 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         ViewModelProviders.of(parentFragment!!).get(WeaponDetailViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_weapon_summary, parent, false)
     }
@@ -53,8 +57,31 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         viewModel.weapon.observe(this, Observer(::populateWeapon))
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_bookmarkable, menu)
+        val weaponData = viewModel.weapon.value
+        if (weaponData != null && BookmarksFeature.isBookmarked(weaponData)) {
+            menu.findItem(action_toggle_bookmark)
+                    .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Try to handle the bookmarks button onclick here instead of the main activity
+        val id = item.itemId
+        super.onOptionsItemSelected(item)
+        return if (id == R.id.action_toggle_bookmark) {
+            BookmarksFeature.toggleBookmark(viewModel.weapon.value)
+            activity!!.invalidateOptionsMenu()
+            true
+        } else false
+    }
+
     private fun populateWeapon(weaponData: WeaponFull?) {
         if (weaponData == null) return
+
+        //Rerender the menu bar because we are 100% sure we have the weapon data now
+        activity!!.invalidateOptionsMenu()
 
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)

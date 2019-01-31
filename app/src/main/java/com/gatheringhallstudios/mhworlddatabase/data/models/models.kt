@@ -1,7 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 /*
 todo: refactor. The current version has problems. Details below:
@@ -18,7 +19,15 @@ open class DecorationBase(
         val name: String?,
         val slot: Int,
         val icon_color: String?
-)
+) :Bookmarkable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.DECORATION
+    }
+}
 
 class Decoration(
         id: Int,
@@ -32,5 +41,35 @@ class Decoration(
         val glowing_feystone_chance: Double,
         val worn_feystone_chance: Double,
         val warped_feystone_chance: Double
-) : DecorationBase(id, name, slot, icon_color)
+) : DecorationBase(id, name, slot, icon_color), Bookmarkable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.DECORATION
+    }
+}
+
+class BulkModels(
+        val locations: List<Location> = emptyList(),
+        val monsters: List<MonsterBase> = emptyList(),
+        val skillTrees: List<SkillTree> = emptyList(),
+        val charms: List<Charm> = emptyList(),
+        val decorations: List<DecorationBase> = emptyList(),
+        val armor: List<Armor> = emptyList(),
+        val items: List<Item> = emptyList(),
+        val weapons: List<Weapon> = emptyList()
+) {
+    fun isEmpty() : Boolean {
+        return locations.isNullOrEmpty() &&
+                monsters.isNullOrEmpty() &&
+                skillTrees.isNullOrEmpty() &&
+                charms.isNullOrEmpty() &&
+                decorations.isNullOrEmpty() &&
+                armor.isNullOrEmpty() &&
+                items.isNullOrEmpty() &&
+                weapons.isNullOrEmpty()
+    }
+}
 

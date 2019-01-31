@@ -51,7 +51,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
     implementation 'androidx.preference:preference:1.1.0-alpha01'
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
-
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
     /*
      * Leak Canary
      * https://github.com/square/leakcanary

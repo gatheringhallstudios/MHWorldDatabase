@@ -30,6 +30,7 @@ class Router(private val navController: NavController) {
         DataType.CHARM -> navigateCharmDetail(id)
         DataType.DECORATION -> navigateDecorationDetail(id)
         DataType.WEAPON -> navigateWeaponDetail(id)
+        else -> Unit
     }
 
     fun navigateItemDetail(itemId: Int) {

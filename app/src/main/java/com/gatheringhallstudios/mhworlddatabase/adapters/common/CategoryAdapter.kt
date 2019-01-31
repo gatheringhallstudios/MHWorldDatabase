@@ -124,6 +124,7 @@ class CategoryAdapter(vararg delegates: AdapterDelegate<List<Any>>) : androidx.r
         }
     }
 
+
 //    May be enabled and tweaked if we ever implement collapse / expand
 //    private fun notifySectionUpdated(section: AdapterSection) {
 //        // references to parent objects

@@ -2,7 +2,9 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import androidx.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 /**
  * An embedded class representing the available slots on a piece of armor.
@@ -77,7 +79,15 @@ class Armor(
         val thunder: Int,
         val ice: Int,
         val dragon: Int
-): ArmorBase(id, name, rarity, armor_type)
+): ArmorBase(id, name, rarity, armor_type), Bookmarkable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.WEAPON
+    }
+}
 
 /**
  * Representation of a single armor set
@@ -122,4 +132,12 @@ class ArmorFull(
         val setBonuses: List<ArmorSetBonus>,
         val recipe: List<ItemQuantity>,
         val skills: List<SkillLevel>
-)
+): Bookmarkable {
+    override fun getEntityId() : Int {
+        return armor.id
+    }
+
+    override fun getType(): DataType {
+        return DataType.ARMOR
+    }
+}

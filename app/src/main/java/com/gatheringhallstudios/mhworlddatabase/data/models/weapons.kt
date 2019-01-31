@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import androidx.room.Ignore
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 
 /**
@@ -42,7 +43,7 @@ class Weapon(
         val notes: String?,
         val special_ammo: String?
 
-) : WeaponBase(id, name, rarity, weapon_type) {
+) : WeaponBase(id, name, rarity, weapon_type), Bookmarkable {
     @Embedded
     lateinit var slots: WeaponSlots
 
@@ -51,6 +52,14 @@ class Weapon(
 
     @Embedded
     var sharpnessData: WeaponSharpness? = null
+
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.WEAPON
+    }
 }
 
 /**
@@ -166,7 +175,15 @@ class WeaponFull(
         val ammo: WeaponAmmoData?,
         val melodies: List<WeaponMelody>,
         val recipe: Map<String?, List<ItemQuantity>>
-)
+) : Bookmarkable {
+    override fun getEntityId(): Int {
+        return weapon.id
+    }
+
+    override fun getType(): DataType {
+        return DataType.WEAPON
+    }
+}
 
 data class WeaponAmmoData(
         val ammo_id: Int,

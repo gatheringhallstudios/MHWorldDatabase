@@ -1,13 +1,23 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
+import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 
 
 data class Location(
         val id: Int,
         val name: String?
-)
+) : Bookmarkable {
+    override fun getEntityId(): Int {
+        return id
+    }
+
+    override fun getType(): DataType {
+        return DataType.LOCATION
+    }
+}
 
 /**
  * Represents an item at a location.
