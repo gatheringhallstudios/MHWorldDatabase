@@ -2,7 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import androidx.room.Ignore
-import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
+import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.MonsterAilments
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryElemental
 import com.gatheringhallstudios.mhworlddatabase.data.embeds.WeaknessSummaryStatus
@@ -14,14 +14,9 @@ open class MonsterBase(
         val name: String?,
         val size: MonsterSize,
         val ecology: String?
-) : Bookmarkable {
-    override fun getEntityId(): Int {
-        return id
-    }
-
-    override fun getType(): DataType {
-        return DataType.MONSTER
-    }
+) : MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.MONSTER
 }
 
 class Monster(
@@ -49,14 +44,9 @@ class Monster(
         @Embedded(prefix="ailment_")
         val ailments: MonsterAilments?
 
-): MonsterBase(id, name, size, ecology), Bookmarkable {
-    override fun getEntityId(): Int {
-        return id
-    }
-
-    override fun getType(): DataType {
-        return DataType.MONSTER
-    }
+): MonsterBase(id, name, size, ecology), MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.MONSTER
 }
 
 class MonsterHabitat(
