@@ -48,7 +48,7 @@ class BulkModels(
         val items: List<Item> = emptyList(),
         val weapons: List<Weapon> = emptyList()
 ) {
-    val isEmpty get() = (
+    fun isEmpty() = (
             locations.isEmpty() &&
             monsters.isEmpty() &&
             skillTrees.isEmpty() &&
