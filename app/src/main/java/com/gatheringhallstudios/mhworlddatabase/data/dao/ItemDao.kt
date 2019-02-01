@@ -157,7 +157,7 @@ abstract class ItemDao {
                 },
                 charms = loadCharmUsageForSync(langId, itemId),
                 armor = loadArmorUsageForSync(langId, itemId),
-                weapon = loadWeaponUsageForSync(langId, itemId)
+                weapons = loadWeaponUsageForSync(langId, itemId)
         )
     }
 

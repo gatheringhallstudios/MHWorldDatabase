@@ -72,9 +72,13 @@ class ItemUsages(
         val craftRecipes: List<ItemCombination>,
         val charms: List<ItemUsageCharm>,
         val armor: List<ItemUsageArmor>,
-        val weapon: List<ItemUsageWeapon>
+        val weapons: List<ItemUsageWeapon>
 ) {
-    fun isEmpty() = craftRecipes.isEmpty() && charms.isEmpty() && armor.isEmpty()
+    fun isEmpty() = (
+            craftRecipes.isEmpty() &&
+            charms.isEmpty() &&
+            armor.isEmpty() &&
+            weapons.isEmpty())
 }
 
 /**
