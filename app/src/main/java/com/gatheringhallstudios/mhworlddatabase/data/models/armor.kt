@@ -45,7 +45,10 @@ open class ArmorBase(
         val name: String?,
         val rarity: Int,
         val armor_type: ArmorType
-) {
+): MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.ARMOR
+
     // note: slots are a var because @Embedded in both child AND parent params would cause issues,
     // and @Embedded only works on val/var fields (and we need to use non-var in the child)
 
@@ -79,10 +82,7 @@ class Armor(
         val thunder: Int,
         val ice: Int,
         val dragon: Int
-): ArmorBase(id, name, rarity, armor_type), MHEntity {
-    override val entityId get() = id
-    override val entityType get() = DataType.ARMOR
-}
+): ArmorBase(id, name, rarity, armor_type)
 
 /**
  * Representation of a single armor set

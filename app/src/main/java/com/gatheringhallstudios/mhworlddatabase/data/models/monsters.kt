@@ -44,10 +44,7 @@ class Monster(
         @Embedded(prefix="ailment_")
         val ailments: MonsterAilments?
 
-): MonsterBase(id, name, size, ecology), MHEntity {
-    override val entityId get() = id
-    override val entityType get() = DataType.MONSTER
-}
+): MonsterBase(id, name, size, ecology)
 
 class MonsterHabitat(
         @Embedded(prefix = "location_") val location: Location,

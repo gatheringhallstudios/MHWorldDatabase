@@ -36,10 +36,7 @@ class Decoration(
         val glowing_feystone_percent: Double,
         val worn_feystone_percent: Double,
         val warped_feystone_percent: Double
-) : DecorationBase(id, name, slot, icon_color), MHEntity {
-    override val entityId get() = id
-    override val entityType get() = DataType.DECORATION
-}
+) : DecorationBase(id, name, slot, icon_color)
 
 class BulkModels(
         val locations: List<Location> = emptyList(),

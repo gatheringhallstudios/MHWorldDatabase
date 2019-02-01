@@ -16,7 +16,10 @@ open class ItemBase(
         val icon_name: String?,
         val icon_color: String?,
         val category: ItemCategory
-)
+) : MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.ITEM
+}
 
 /**
  * Full information regarding an item model
@@ -35,10 +38,7 @@ class Item(
         val sell_price: Int,
         val points: Int,
         val carry_limit: Int?
-): ItemBase(id, name, icon_name, icon_color, category), MHEntity {
-    override val entityId get() = id
-    override val entityType get() = DataType.ITEM
-}
+): ItemBase(id, name, icon_name, icon_color, category)
 
 class ItemCombination(
         val id: Int,

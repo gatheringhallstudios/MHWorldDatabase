@@ -13,7 +13,10 @@ open class WeaponBase(
         val name: String,
         val rarity: Int,
         val weapon_type: WeaponType
-)
+) : MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.WEAPON
+}
 
 class Weapon(
         id: Int,
@@ -43,7 +46,7 @@ class Weapon(
         val notes: String?,
         val special_ammo: String?
 
-) : WeaponBase(id, name, rarity, weapon_type), MHEntity {
+) : WeaponBase(id, name, rarity, weapon_type) {
     @Embedded
     lateinit var slots: WeaponSlots
 
@@ -52,9 +55,6 @@ class Weapon(
 
     @Embedded
     var sharpnessData: WeaponSharpness? = null
-
-    override val entityId get() = id
-    override val entityType get() = DataType.WEAPON
 }
 
 /**

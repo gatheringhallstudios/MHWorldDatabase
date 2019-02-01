@@ -7,7 +7,10 @@ open class CharmBase(
         val id: Int,
         val name: String?,
         val rarity: Int
-)
+) : MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.CHARM
+}
 
 /**
  * The base charm class.
@@ -19,10 +22,7 @@ open class Charm(
         name: String?,
         rarity: Int,
         val previous_id: Int?
-): CharmBase(id, name, rarity), MHEntity {
-    override val entityId get() = id
-    override val entityType get() = DataType.CHARM
-}
+) : CharmBase(id, name, rarity)
 
 /**
  * Contains the charm and any additional join data related to the charm
@@ -31,7 +31,7 @@ class CharmFull(
         val charm: Charm,
         val skills: List<SkillLevel>,
         val components: List<ItemQuantity>
-): MHEntity {
+) : MHEntity {
     override val entityId get() = charm.id
     override val entityType get() = DataType.CHARM
 }
