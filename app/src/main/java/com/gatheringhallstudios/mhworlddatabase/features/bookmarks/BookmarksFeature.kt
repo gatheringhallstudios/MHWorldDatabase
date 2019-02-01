@@ -16,6 +16,10 @@ import kotlinx.coroutines.runBlocking
 import java.util.*
 
 
+/**
+ * Singleton object used to drive the bookmarks feature
+ * Needs to be binded to the application in the main Application class.
+ */
 // we are storing an application context, so its fine
 @SuppressLint("StaticFieldLeak")
 object BookmarksFeature {
