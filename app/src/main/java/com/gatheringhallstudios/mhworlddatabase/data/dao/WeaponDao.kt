@@ -125,6 +125,21 @@ abstract class WeaponDao {
         }
     }
 
+    @Query("""
+        SELECT s.id skill_id, stt.name skill_name, s.max_level skill_max_level, s.icon_color skill_icon_color,
+            wskill.level level
+        FROM weapon_skill wskill
+            JOIN weapon w
+                ON wskill.weapon_id = w.id
+            JOIN skilltree s
+                ON wskill.skilltree_id = s.id
+            JOIN skilltree_text stt
+                ON wskill.skilltree_id = stt.id
+            WHERE stt.lang_id = :langId
+               AND wskill.weapon_id = :weaponId
+            ORDER BY wskill.skilltree_id ASC""")
+    abstract fun queryWeaponSkillsSync(langId: String, weaponId: Int): List<SkillLevel>
+
     /**
      * Loads extended detail weapon for a particular weapon.
      * Equivalent to calling loadWeapon with additional bundled information.
@@ -135,7 +150,8 @@ abstract class WeaponDao {
                 weapon = weapon,
                 recipe = queryRecipeComponents(langId, weaponId),
                 ammo = loadWeaponAmmoData(langId, weaponId),
-                melodies = queryWeaponMelodies(langId, weapon)
+                melodies = queryWeaponMelodies(langId, weapon),
+                skills = queryWeaponSkillsSync(langId, weaponId)
         )
     }
 

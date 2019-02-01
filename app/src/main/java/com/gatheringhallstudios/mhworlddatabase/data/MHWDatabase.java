@@ -55,6 +55,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponRecipe;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponText;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
 
@@ -67,7 +68,7 @@ import java.util.List;
  * Created by Carlos on 3/4/2018.
  */
 @Database(
-        version = 22,
+        version = 23,
         exportSchema = false,
 
         entities = {
@@ -101,7 +102,7 @@ import java.util.List;
 
                 // Weapon Classes
                 WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class, WeaponRecipe.class,
-                WeaponMelodyEntity.class, WeaponMelodyTextEntity.class
+                WeaponMelodyEntity.class, WeaponMelodyTextEntity.class, WeaponSkill.class
         })
 
 @TypeConverters({Converters.class})

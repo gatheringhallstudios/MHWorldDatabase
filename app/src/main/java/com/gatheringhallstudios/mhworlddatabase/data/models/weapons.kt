@@ -169,7 +169,8 @@ class WeaponFull(
         val weapon: Weapon,
         val ammo: WeaponAmmoData?,
         val melodies: List<WeaponMelody>,
-        val recipe: Map<String?, List<ItemQuantity>>
+        val recipe: Map<String?, List<ItemQuantity>>,
+        val skills: List<SkillLevel>
 ) : MHEntity {
     override val entityId get() = weapon.id
     override val entityType get() = DataType.WEAPON

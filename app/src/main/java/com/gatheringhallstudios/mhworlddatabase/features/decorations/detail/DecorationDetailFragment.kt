@@ -17,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_decoration_summary.*
 import kotlinx.android.synthetic.main.listitem_reward.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import java.text.DecimalFormat
 
 private val MYSTERIOUS_FEYSTONE_COLOR = "Gray"
 private val GLOWING_FEYSTONE_COLOR = "Blue"
@@ -95,7 +96,10 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
                 val color = context?.getColorCompat(R.color.textColorMedium) ?: 0
                 view.reward_percent.setTextColor(color)
             } else {
-                view.reward_percent.text = getString(R.string.format_percentage, chance.toString())
+                val formatter = DecimalFormat()
+                formatter.maximumFractionDigits = 10 // arbitrary large number
+                view.reward_percent.text = getString(
+                        R.string.format_percentage, formatter.format(chance))
             }
 
             return view
@@ -103,25 +107,25 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
 
         decoration_drop_list.addView(inflateFeystoneChance(
                 R.string.decorations_chance_mysterious,
-                decoration.mysterious_feystone_chance,
+                decoration.mysterious_feystone_percent,
                 MYSTERIOUS_FEYSTONE_COLOR
         ))
 
         decoration_drop_list.addView(inflateFeystoneChance(
                 R.string.decorations_chance_glowing,
-                decoration.glowing_feystone_chance,
+                decoration.glowing_feystone_percent,
                 GLOWING_FEYSTONE_COLOR
         ))
 
         decoration_drop_list.addView(inflateFeystoneChance(
                 R.string.decorations_chance_worn,
-                decoration.worn_feystone_chance,
+                decoration.worn_feystone_percent,
                 WORN_FEYSTONE_COLOR
         ))
 
         decoration_drop_list.addView(inflateFeystoneChance(
                 R.string.decorations_chance_warped,
-                decoration.warped_feystone_chance,
+                decoration.warped_feystone_percent,
                 WARPED_FEYSTONE_COLOR
         ))
 

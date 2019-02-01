@@ -19,7 +19,7 @@ open class DecorationBase(
         val name: String?,
         val slot: Int,
         val icon_color: String?
-) :MHEntity {
+) : MHEntity {
     override val entityId get() = id
     override val entityType get() = DataType.DECORATION
 }
@@ -32,10 +32,10 @@ class Decoration(
 
         val rarity: Int,
         @Embedded(prefix = "skill_") val skillTree: SkillTreeBase,
-        val mysterious_feystone_chance: Double,
-        val glowing_feystone_chance: Double,
-        val worn_feystone_chance: Double,
-        val warped_feystone_chance: Double
+        val mysterious_feystone_percent: Double,
+        val glowing_feystone_percent: Double,
+        val worn_feystone_percent: Double,
+        val warped_feystone_percent: Double
 ) : DecorationBase(id, name, slot, icon_color), MHEntity {
     override val entityId get() = id
     override val entityType get() = DataType.DECORATION
