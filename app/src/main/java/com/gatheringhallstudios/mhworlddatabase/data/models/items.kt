@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
+import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemSubcategory
@@ -16,7 +16,10 @@ open class ItemBase(
         val icon_name: String?,
         val icon_color: String?,
         val category: ItemCategory
-)
+) : MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.ITEM
+}
 
 /**
  * Full information regarding an item model
@@ -35,15 +38,7 @@ class Item(
         val sell_price: Int,
         val points: Int,
         val carry_limit: Int?
-): ItemBase(id, name, icon_name, icon_color, category), Bookmarkable {
-    override fun getEntityId(): Int {
-        return id
-    }
-
-    override fun getType(): DataType {
-        return DataType.ITEM
-    }
-}
+): ItemBase(id, name, icon_name, icon_color, category)
 
 class ItemCombination(
         val id: Int,
@@ -77,9 +72,13 @@ class ItemUsages(
         val craftRecipes: List<ItemCombination>,
         val charms: List<ItemUsageCharm>,
         val armor: List<ItemUsageArmor>,
-        val weapon: List<ItemUsageWeapon>
+        val weapons: List<ItemUsageWeapon>
 ) {
-    fun isEmpty() = craftRecipes.isEmpty() && charms.isEmpty() && armor.isEmpty()
+    fun isEmpty() = (
+            craftRecipes.isEmpty() &&
+            charms.isEmpty() &&
+            armor.isEmpty() &&
+            weapons.isEmpty())
 }
 
 /**

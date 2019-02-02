@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.entities
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.types.ReloadType
 
@@ -220,4 +220,20 @@ data class WeaponMelodyTextEntity (
         val lang_id: String,
         val effect1: String,
         val effect2: String
+)
+
+@Entity(tableName = "weapon_skill",
+        primaryKeys = ["weapon_id", "skilltree_id"],
+        foreignKeys = [
+                (ForeignKey(entity = WeaponEntity::class,
+                        parentColumns = ["id"],
+                        childColumns = ["weapon_id"])),
+                (ForeignKey(entity = SkillTreeEntity::class,
+                        parentColumns = ["id"],
+                        childColumns = ["skilltree_id"]))
+        ])
+data class WeaponSkill(
+        val weapon_id: Int,
+        val skilltree_id: Int,
+        val level: Int
 )

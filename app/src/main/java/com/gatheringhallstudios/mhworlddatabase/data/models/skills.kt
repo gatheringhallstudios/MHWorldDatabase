@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
+import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 
@@ -10,7 +10,10 @@ open class SkillTreeBase(
         val name: String?,
         val max_level: Int,
         val icon_color: String?
-)
+) : MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.SKILL
+}
 
 /**
  * Basic representation of a skill tree.
@@ -23,15 +26,7 @@ open class SkillTree(
         max_level: Int,
         icon_color: String?,
         val description: String?
-): SkillTreeBase(id, name, max_level, icon_color), Bookmarkable {
-    override fun getEntityId(): Int {
-        return id
-    }
-
-    override fun getType(): DataType {
-        return DataType.SKILL
-    }
-}
+) : SkillTreeBase(id, name, max_level, icon_color)
 
 /**
  * A skill tree with skill information included.

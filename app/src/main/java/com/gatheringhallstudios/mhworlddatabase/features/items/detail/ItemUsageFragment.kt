@@ -84,8 +84,8 @@ class ItemUsageFragment : RecyclerViewFragment() {
         adapter.addSections(mapOf(
                 getString(R.string.header_crafting) to data.craftRecipes,
                 getString(R.string.header_charms) to data.charms.map(::bindCharmCraft),
-                getString(R.string.header_armor)to data.armor.map(::bindArmorCraft),
-                getString(R.string.header_weapons)to data.weapon.map(::bindWeaponCraft)
+                getString(R.string.header_armor) to data.armor.map(::bindArmorCraft),
+                getString(R.string.header_weapons) to data.weapons.map(::bindWeaponCraft)
 
         ), skipEmpty = true)
     }

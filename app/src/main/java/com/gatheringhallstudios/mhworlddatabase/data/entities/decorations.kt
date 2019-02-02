@@ -20,10 +20,10 @@ data class DecorationEntity(
         val slot: Int,
         val icon_color: String?,
 
-        val mysterious_feystone_chance: Double,
-        val glowing_feystone_chance: Double,
-        val worn_feystone_chance: Double,
-        val warped_feystone_chance: Double
+        val mysterious_feystone_percent: Double,
+        val glowing_feystone_percent: Double,
+        val worn_feystone_percent: Double,
+        val warped_feystone_percent: Double
 )
 
 @Entity(tableName = "decoration_text",

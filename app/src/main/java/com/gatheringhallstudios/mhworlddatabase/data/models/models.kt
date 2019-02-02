@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.Bookmarkable
+import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 /*
@@ -19,14 +19,9 @@ open class DecorationBase(
         val name: String?,
         val slot: Int,
         val icon_color: String?
-) :Bookmarkable {
-    override fun getEntityId(): Int {
-        return id
-    }
-
-    override fun getType(): DataType {
-        return DataType.DECORATION
-    }
+) : MHEntity {
+    override val entityId get() = id
+    override val entityType get() = DataType.DECORATION
 }
 
 class Decoration(
@@ -37,19 +32,11 @@ class Decoration(
 
         val rarity: Int,
         @Embedded(prefix = "skill_") val skillTree: SkillTreeBase,
-        val mysterious_feystone_chance: Double,
-        val glowing_feystone_chance: Double,
-        val worn_feystone_chance: Double,
-        val warped_feystone_chance: Double
-) : DecorationBase(id, name, slot, icon_color), Bookmarkable {
-    override fun getEntityId(): Int {
-        return id
-    }
-
-    override fun getType(): DataType {
-        return DataType.DECORATION
-    }
-}
+        val mysterious_feystone_percent: Double,
+        val glowing_feystone_percent: Double,
+        val worn_feystone_percent: Double,
+        val warped_feystone_percent: Double
+) : DecorationBase(id, name, slot, icon_color)
 
 class BulkModels(
         val locations: List<Location> = emptyList(),
@@ -61,15 +48,14 @@ class BulkModels(
         val items: List<Item> = emptyList(),
         val weapons: List<Weapon> = emptyList()
 ) {
-    fun isEmpty() : Boolean {
-        return locations.isNullOrEmpty() &&
-                monsters.isNullOrEmpty() &&
-                skillTrees.isNullOrEmpty() &&
-                charms.isNullOrEmpty() &&
-                decorations.isNullOrEmpty() &&
-                armor.isNullOrEmpty() &&
-                items.isNullOrEmpty() &&
-                weapons.isNullOrEmpty()
-    }
+    fun isEmpty() = (
+            locations.isEmpty() &&
+            monsters.isEmpty() &&
+            skillTrees.isEmpty() &&
+            charms.isEmpty() &&
+            decorations.isEmpty() &&
+            armor.isEmpty() &&
+            items.isEmpty() &&
+            weapons.isEmpty())
 }
 

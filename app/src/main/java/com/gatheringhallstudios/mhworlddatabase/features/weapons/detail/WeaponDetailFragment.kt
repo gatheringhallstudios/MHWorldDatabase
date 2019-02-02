@@ -25,6 +25,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
 import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
+import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 import kotlinx.android.synthetic.main.section_bow_coating.*
 import kotlinx.android.synthetic.main.view_bowgun_detail.*
 import kotlinx.android.synthetic.main.view_hunting_horn_detail.*
@@ -85,6 +86,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
+        populateWeaponSkills(weaponData.skills)
         populateComponents(weaponData.recipe)
         populateWeaponSpecificSection(weaponData)
     }
@@ -145,6 +147,37 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
             weapon.defense != 0 -> R.string.format_plus
             else -> R.string.format_quantity_none
         }, weapon.defense)
+    }
+
+    private fun populateWeaponSkills(skills: List<SkillLevel>) {
+        if (skills.isEmpty()) {
+            skill_section.visibility = View.GONE
+            return
+        }
+
+        skill_section.visibility = View.VISIBLE
+        skill_list.removeAllViews()
+
+        val inflater = LayoutInflater.from(context)
+
+        for (skill in skills) {
+            //Set the label for the Set name
+            val view = inflater.inflate(R.layout.listitem_skill_level, skill_list, false)
+
+            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
+            view.label_text.text = skill.skillTree.name
+            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            with(view.skill_level) {
+                maxLevel = skill.skillTree.max_level
+                level = skill.level
+            }
+
+            view.setOnClickListener {
+                getRouter().navigateSkillDetail(skill.skillTree.id)
+            }
+
+            skill_list.addView(view)
+        }
     }
 
     /** Method for binding sections that are specific to certain weapons **/
