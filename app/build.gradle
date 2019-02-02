@@ -14,6 +14,7 @@ android {
         versionCode 6
         versionName "1.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = false
     }
     buildTypes {
         release {
@@ -46,7 +47,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    implementation 'com.google.android.material:material:1.1.0-alpha03'
     implementation 'androidx.interpolator:interpolator:1.0.0'
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
     implementation 'androidx.preference:preference:1.1.0-alpha01'

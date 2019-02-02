@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 
@@ -73,7 +74,7 @@ fun <T, A, B, C> mergeLiveData(
  */
 @Suppress("NOTHING_TO_INLINE")
 inline fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
-    return ContextCompat.getDrawable(this, id)
+    return AppCompatResources.getDrawable(this, id)
 }
 
 /**

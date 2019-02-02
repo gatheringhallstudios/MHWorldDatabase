@@ -67,7 +67,7 @@
         android:layout_width="@dimen/width_extract_value"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_damage_value_right"
-        android:src="@drawable/ic_ui_kinsect_white"
+        app:srcCompat="@drawable/ic_ui_kinsect_white"
         app:layout_constraintBottom_toBottomOf="@id/break_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/break_header" />

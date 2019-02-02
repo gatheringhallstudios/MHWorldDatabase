@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import com.gatheringhallstudios.mhworlddatabase.R
 import kotlinx.android.synthetic.main.cell_detail_header.view.*
 
@@ -20,7 +21,7 @@ class DetailHeaderCell : ConstraintLayout {
     private val TAG = javaClass.simpleName
 
     constructor(context: Context, @DrawableRes imgSrc: Int, titleText: String, descriptionText: String, subtitleText: String? = null) : super(context) {
-        val drawable = ContextCompat.getDrawable(getContext(), imgSrc)
+        val drawable = AppCompatResources.getDrawable(getContext(), imgSrc)
         init(drawable, titleText, descriptionText, subtitleText)
     }
 

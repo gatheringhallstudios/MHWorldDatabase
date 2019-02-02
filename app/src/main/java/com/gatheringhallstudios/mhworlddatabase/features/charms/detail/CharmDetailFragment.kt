@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
 import android.widget.LinearLayout
+import androidx.appcompat.content.res.AppCompatResources
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
@@ -131,7 +132,7 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun insertEmptyState(layout: LinearLayout) {
-        val icon = ContextCompat.getDrawable(context!!, R.drawable.ic_question_mark)
+        val icon = AppCompatResources.getDrawable(context!!, R.drawable.ic_question_mark)
         val view = IconLabelTextCell(context)
         view.setLeftIconDrawable(icon)
         view.setLabelText(getString(R.string.general_none))

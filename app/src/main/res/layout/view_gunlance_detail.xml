@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:attr/selectableItemBackground"
     android:divider="@drawable/divider_stroke"
     android:orientation="vertical"
@@ -17,7 +18,7 @@
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@drawable/ic_ui_shelling" />
+            app:srcCompat="@drawable/ic_ui_shelling" />
 
         <TextView
             style="@style/TextSubHead"

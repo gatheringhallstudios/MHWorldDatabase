@@ -15,7 +15,7 @@
         <ImageView
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_large"
-            android:src="@xml/ic_equipment_bow_base" />
+            app:srcCompat="@xml/ic_equipment_bow_base" />
 
         <TextView
             style="@style/TextSubHead"
@@ -43,7 +43,7 @@
                     android:layout_height="@dimen/image_size_xsmall"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_medium"
-                    android:src="@drawable/ic_ui_slot_none"
+                    app:srcCompat="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +71,7 @@
                     android:layout_height="@dimen/image_size_xsmall"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_medium"
-                    android:src="@drawable/ic_ui_slot_none"
+                    app:srcCompat="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -100,7 +100,7 @@
                     android:layout_height="@dimen/image_size_xsmall"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_medium"
-                    android:src="@drawable/ic_ui_slot_none"
+                    app:srcCompat="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -128,7 +128,7 @@
                     android:layout_height="@dimen/image_size_xsmall"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_medium"
-                    android:src="@drawable/ic_ui_slot_none"
+                    app:srcCompat="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -157,7 +157,7 @@
                     android:layout_height="@dimen/image_size_xsmall"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_medium"
-                    android:src="@drawable/ic_ui_slot_none"
+                    app:srcCompat="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -187,7 +187,7 @@
                     android:layout_height="@dimen/image_size_xsmall"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_slot_none"
+                    app:srcCompat="@drawable/ic_ui_slot_none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

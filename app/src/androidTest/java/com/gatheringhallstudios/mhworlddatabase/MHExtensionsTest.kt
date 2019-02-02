@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import android.content.Context
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import androidx.core.content.ContextCompat
@@ -26,7 +27,7 @@ class MHExtensionsTest {
     @Test
     fun getAssetDrawable_returnsOnSuccess() {
         val default = R.drawable.ic_question_mark
-        val defaultImage = ContextCompat.getDrawable(context, default)
+        val defaultImage = AppCompatResources.getDrawable(context, default)
 
         val result = context.getAssetDrawable("monsters/30.png", default)
         assertNotNull("Expected image", result)
@@ -36,7 +37,7 @@ class MHExtensionsTest {
     @Test
     fun getAssetDrawable_defaultOnFailure() {
         val default = R.drawable.ic_question_mark
-        val questionMark = ContextCompat.getDrawable(context, default)
+        val questionMark = AppCompatResources.getDrawable(context, default)
 
         val result = context.getAssetDrawable("fake", default)
         assertNotNull("Expected result", result)
@@ -46,7 +47,7 @@ class MHExtensionsTest {
     @Test
     fun getVectorDrawable_returnsOnSuccess() {
         val default = R.drawable.ic_question_mark
-        val questionMark = ContextCompat.getDrawable(context, default)
+        val questionMark = AppCompatResources.getDrawable(context, default)
 
         val result = context.getVectorDrawable("ArmorHead", "Red")
         assertNotNull("Expected default non-null result", result)
@@ -56,7 +57,7 @@ class MHExtensionsTest {
     @Test
     fun getVectorDrawable_defaultOnFailure() {
         val default = R.drawable.ic_question_mark
-        val questionMark = ContextCompat.getDrawable(context, default)
+        val questionMark = AppCompatResources.getDrawable(context, default)
 
         val result = context.getVectorDrawable("fake", "rare1", default)
         assertNotNull("Expected non-null result", result)

@@ -3,9 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.components;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 
 /**
  * This view is a custom cell with an icon on the left followed by some stars.
@@ -30,7 +31,7 @@ public class IconStarCell extends LinearLayout {
 
     public IconStarCell(Context context, @DrawableRes int imgSrc, int numStars) {
         super(context);
-        Drawable drawable = ContextCompat.getDrawable(getContext(), imgSrc);
+        Drawable drawable = AppCompatResources.getDrawable(getContext(), imgSrc);
         init(drawable, numStars);
     }
 
@@ -88,7 +89,7 @@ public class IconStarCell extends LinearLayout {
         layout.removeAllViews();
         for (int i = 0; i < 3; i++) {
             ImageView star = new ImageView(getContext());
-            star.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_ui_effective_star));
+            star.setImageDrawable(AppCompatResources.getDrawable(getContext(), R.drawable.ic_ui_effective_star));
 
             LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lp.height = getResources().getDimensionPixelSize(R.dimen.image_size_xsmall);

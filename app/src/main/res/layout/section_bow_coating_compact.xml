@@ -19,7 +19,7 @@
                 android:layout_width="@dimen/image_size_xsmall"
                 android:layout_height="@dimen/image_size_xsmall"
 
-                android:src="@drawable/ic_ui_slot_none"
+                app:srcCompat="@drawable/ic_ui_slot_none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
                 android:layout_width="@dimen/image_size_xsmall"
                 android:layout_height="@dimen/image_size_xsmall"
 
-                android:src="@drawable/ic_ui_slot_none"
+                app:srcCompat="@drawable/ic_ui_slot_none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +51,7 @@
                 android:layout_width="@dimen/image_size_xsmall"
                 android:layout_height="@dimen/image_size_xsmall"
 
-                android:src="@drawable/ic_ui_slot_none"
+                app:srcCompat="@drawable/ic_ui_slot_none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +67,7 @@
                 android:layout_width="@dimen/image_size_xsmall"
                 android:layout_height="@dimen/image_size_xsmall"
 
-                android:src="@drawable/ic_ui_slot_none"
+                app:srcCompat="@drawable/ic_ui_slot_none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +83,7 @@
                 android:id="@+id/sleep_coating_icon"
                 android:layout_width="@dimen/image_size_xsmall"
                 android:layout_height="@dimen/image_size_xsmall"
-                android:src="@drawable/ic_ui_slot_none"
+                app:srcCompat="@drawable/ic_ui_slot_none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -100,7 +100,7 @@
                 android:id="@+id/blast_coating_icon"
                 android:layout_width="@dimen/image_size_xsmall"
                 android:layout_height="@dimen/image_size_xsmall"
-                android:src="@drawable/ic_ui_slot_none"
+                app:srcCompat="@drawable/ic_ui_slot_none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

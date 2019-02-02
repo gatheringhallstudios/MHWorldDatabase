@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.sdsmdg.harjot.vectormaster.VectorMasterDrawable
@@ -39,7 +40,7 @@ fun Context.getAssetDrawable(
             }
         }
 
-        return ContextCompat.getDrawable(this, default)
+        return AppCompatResources.getDrawable(this, default)
     }
 }
 

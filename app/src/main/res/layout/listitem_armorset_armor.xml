@@ -45,7 +45,7 @@
     <ImageView
         android:id="@+id/icon_defense"
         style="@style/IconXSmall"
-        android:src="@drawable/ic_ui_defense"
+        app:srcCompat="@drawable/ic_ui_defense"
         android:layout_marginEnd="@dimen/margin_medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/icon_slots"
@@ -55,7 +55,7 @@
     <ImageView
         android:id="@+id/icon_slots"
         style="@style/IconXSmall"
-        android:src="@drawable/ic_ui_slots"
+        app:srcCompat="@drawable/ic_ui_slots"
         android:layout_marginEnd="@dimen/margin_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/icon_defense"
@@ -92,15 +92,15 @@
         <ImageView
             android:id="@+id/slot1"
             style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_slot_none"/>
+            app:srcCompat="@drawable/ic_ui_slot_none"/>
         <ImageView
             android:id="@+id/slot2"
             style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_slot_none"/>
+            app:srcCompat="@drawable/ic_ui_slot_none"/>
         <ImageView
             android:id="@+id/slot3"
             style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_slot_none"/>
+            app:srcCompat="@drawable/ic_ui_slot_none"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

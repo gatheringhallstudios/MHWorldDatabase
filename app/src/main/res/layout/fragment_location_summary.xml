@@ -14,7 +14,6 @@
             style="@style/IconXLarge.Decorated"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
-            android:src="@drawable/ic_ui_question_mark_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_ui_question_mark_white" />
