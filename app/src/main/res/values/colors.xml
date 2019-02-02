@@ -41,7 +41,7 @@
     <color name="icon_pink">#F399A6</color>
     <color name="icon_red">#9A3548</color>
     <color name="icon_dark_red">#781D38</color>
-    <color name="icon_light_beige">#E8A669</color> <!-- color not picked, temporarily = biege -->
+    <color name="icon_light_beige">#f7d99b</color> <!-- color not picked, temporarily = biege -->
     <color name="icon_beige">#E8A669</color>
     <color name="icon_dark_beige">#d4a55a</color>
     <color name="icon_yellow">#E6EE09</color>
