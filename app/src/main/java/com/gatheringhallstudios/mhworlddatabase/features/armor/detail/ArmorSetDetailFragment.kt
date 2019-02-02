@@ -41,7 +41,7 @@ class ArmorSetDetailFragment : androidx.fragment.app.Fragment() {
         armor_set_header.setTitleText(armorSet.armorset_name)
         armor_set_header.setSubtitleText(getString(R.string.format_rarity, armorSet.rarity))
         armor_set_header.setSubtitleColor(AssetLoader.loadRarityColor(armorSet.rarity))
-        armor_set_header.setIconDrawable(AssetLoader.loadArmorIcon(ArmorType.CHEST, armorSet.rarity))
+        armor_set_header.setIconDrawable(AssetLoader.loadIconFor(armorSet))
 
         //Populate armor pieces section
         armor_set_piece_list.removeAllViews()

@@ -84,26 +84,33 @@ class Armor(
         val dragon: Int
 ): ArmorBase(id, name, rarity, armor_type)
 
+abstract class ArmorSetBase(
+        val armorset_id: Int,
+        val armorset_name: String?
+) {
+    abstract val rarity: Int
+}
+
 /**
  * Representation of a single armor set
  */
 class ArmorSet(
-        val armorset_id: Int,
-        val armorset_name: String?,
+        armorset_id: Int,
+        armorset_name: String?,
         val armor: List<Armor>
-) {
-    val rarity get() = armor.first().rarity
+) : ArmorSetBase(armorset_id, armorset_name) {
+    override val rarity get() = armor.first().rarity
 }
 
 /**
  * Representation of a single armor set
  */
 class ArmorSetFull(
-        val armorset_id: Int,
-        val armorset_name: String?,
+        armorset_id: Int,
+        armorset_name: String?,
         val armor: List<ArmorFull>
-) {
-    val rarity get() = armor.first().armor.rarity
+): ArmorSetBase(armorset_id, armorset_name) {
+    override val rarity get() = armor.first().armor.rarity
 }
 
 /**

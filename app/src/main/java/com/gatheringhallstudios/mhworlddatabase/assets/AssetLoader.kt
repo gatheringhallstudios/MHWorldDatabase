@@ -45,7 +45,7 @@ object AssetLoader {
         return ctx.getVectorDrawable("ArmorSet", "rare1")
     }
 
-    fun loadIconFor(armorSet: ArmorSet): Drawable? {
+    fun loadIconFor(armorSet: ArmorSetBase): Drawable? {
         return ctx.getVectorDrawable("ArmorSet", "rare${armorSet.rarity}")
     }
     
