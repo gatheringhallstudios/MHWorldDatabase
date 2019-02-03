@@ -186,6 +186,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setSearchListeners() {
+        // Navigate to search fragment once search starts
         searchView?.setOnSearchClickListener {
             viewModel.startNewSearch()
 

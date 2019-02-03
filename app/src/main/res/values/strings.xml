@@ -8,7 +8,7 @@
     <string name="app_name">MHWorld Database</string>
     <string name="app_name_icon">MHWDB</string>
 
-    <string name="action_search">Settings</string>
+    <string name="action_search">Search</string>
     <string name="action_bookmark">Bookmark</string>
 
     <string name="general_no_data">Nothing here, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->

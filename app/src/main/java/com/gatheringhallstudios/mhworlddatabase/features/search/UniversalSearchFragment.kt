@@ -2,7 +2,10 @@ package com.gatheringhallstudios.mhworlddatabase.features.search
 
 import androidx.lifecycle.*
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.MainActivity
 import com.gatheringhallstudios.mhworlddatabase.MainActivityViewModel
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
@@ -24,6 +27,11 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         ViewModelProviders.of(this).get(UniversalSearchViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = SearchResultAdapter()
         setAdapter(adapter)
@@ -32,7 +40,7 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         // This will also update the current search filter, restoring the search title.
         val savedFilter = savedInstanceState?.getString(SEARCH_FILTER)
         if (!savedFilter.isNullOrBlank() && searchViewModel.searchFilter == "") {
-            searchViewModel.searchData(savedFilter!!)
+            searchViewModel.searchData(savedFilter)
         }
 
         // add decorator
@@ -52,6 +60,10 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         searchViewModel.searchResults.observe(this, Observer {
             if (it != null) adapter.bindSearchResults(it)
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.empty, menu)
     }
 
     override fun onDetach() {
