@@ -81,22 +81,18 @@ dependencies {
     /*
      * Android Navigation Component
      */
-    def nav_version = "1.0.0-alpha06"
+    def nav_version = "1.0.0-alpha11"
     implementation "android.arch.navigation:navigation-fragment:$nav_version"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui:$nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
 
-    // optional - Test helpers
-    androidTestImplementation "android.arch.navigation:navigation-testing:$nav_version"
-    androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
-
     /*
      * Butterknife
      * https://github.com/JakeWharton/butterknife
      */
-    implementation 'com.jakewharton:butterknife:9.0.0-rc2'
-    kapt 'com.jakewharton:butterknife-compiler:9.0.0-rc2'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    kapt 'com.jakewharton:butterknife-compiler:10.0.0'
 
     /*
      * Adapter Delegates

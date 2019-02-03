@@ -3,11 +3,13 @@ package com.gatheringhallstudios.mhworlddatabase
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import android.view.Gravity
+import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 
@@ -15,13 +17,13 @@ class MultiStartNavigationUI(private val startDestinations: List<Int>) {
     fun setupActionBarWithNavController(activity: AppCompatActivity, navController: NavController,
                                         drawerLayout: androidx.drawerlayout.widget.DrawerLayout?) {
 
-        navController.addOnNavigatedListener(ActionBarOnNavigatedListener(
+        navController.addOnDestinationChangedListener(ActionBarOnNavigatedListener(
                 activity, startDestinations, drawerLayout))
     }
 
     fun navigateUp(drawerLayout: androidx.drawerlayout.widget.DrawerLayout?, navController: NavController): Boolean {
         if (drawerLayout != null && startDestinations.contains(navController.currentDestination?.id)) {
-            drawerLayout.openDrawer(Gravity.START)
+            drawerLayout.openDrawer(GravityCompat.START)
             return true
         } else {
             return navController.navigateUp()
@@ -42,11 +44,11 @@ class MultiStartNavigationUI(private val startDestinations: List<Int>) {
             private val mActivity: AppCompatActivity,
             private val startDestinations: List<Int>,
             private val mDrawerLayout: androidx.drawerlayout.widget.DrawerLayout?
-    ) : NavController.OnNavigatedListener {
+    ) : NavController.OnDestinationChangedListener {
         private var mArrowDrawable: DrawerArrowDrawable? = null
         private var mAnimator: ValueAnimator? = null
 
-        override fun onNavigated(controller: NavController, destination: NavDestination) {
+        override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
             val actionBar = mActivity.supportActionBar
 
             val title = destination.label
@@ -58,7 +60,6 @@ class MultiStartNavigationUI(private val startDestinations: List<Int>) {
             actionBar?.setDisplayHomeAsUpEnabled(this.mDrawerLayout != null || !isStartDestination)
             setActionBarUpIndicator(mDrawerLayout != null && isStartDestination)
         }
-
 
         private fun setActionBarUpIndicator(showAsDrawerIndicator: Boolean) {
             val delegate = mActivity.drawerToggleDelegate
