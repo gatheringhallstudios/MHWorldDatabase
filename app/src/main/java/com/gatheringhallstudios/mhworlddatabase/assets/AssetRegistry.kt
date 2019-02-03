@@ -55,6 +55,7 @@ val VectorRegistry = createRegistry(
         "Binoculars" to R.xml.ic_items_binoculars_base,
         "Body" to R.xml.ic_items_body_base,
         "Bone" to R.xml.ic_items_bone_base,
+        "Book" to R.xml.ic_items_book_base,
         "Boomerang" to R.xml.ic_items_boomerang_base,
         "Bottle" to R.xml.ic_items_bottle_base,
         "Bug" to R.xml.ic_items_bug_base,
