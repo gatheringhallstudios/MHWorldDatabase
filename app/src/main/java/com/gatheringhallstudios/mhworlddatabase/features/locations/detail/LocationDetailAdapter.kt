@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyState
 import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
@@ -123,7 +124,7 @@ class LocationCampAdapterDelegate : SimpleListDelegate<LocationCamp>() {
     override fun bindView(viewHolder: SimpleViewHolder, data: LocationCamp) {
         with(viewHolder.itemView as IconLabelTextCell) {
             setLeftIconType(IconType.NORMAL)
-            setLeftIconDrawable(ContextCompat.getDrawable(context, R.drawable.ic_ui_camp))
+            setLeftIconDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_ui_camp))
             setLabelText(data.name)
             setValueText(viewHolder.context.getString(R.string.header_location_area, data.area))
         }

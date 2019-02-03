@@ -23,7 +23,7 @@
             <ImageView
                 style="@style/IconXSmall"
                 android:layout_marginStart="@dimen/margin_large"
-                android:src="@drawable/ic_ui_notes" />
+                app:srcCompat="@drawable/ic_ui_notes" />
 
             <TextView
                 style="@style/TextBodyHigh"
@@ -43,22 +43,22 @@
                 <ImageView
                     android:layout_width="@dimen/image_size_xsmall"
                     android:layout_height="@dimen/image_size_xsmall"
-                    android:src="@xml/ic_ui_note_2_base" />
+                    app:srcCompat="@xml/ic_ui_note_2_base" />
 
                 <ImageView
                     android:layout_width="@dimen/image_size_xsmall"
                     android:layout_height="@dimen/image_size_xsmall"
-                    android:src="@xml/ic_ui_note_2_base" />
+                    app:srcCompat="@xml/ic_ui_note_2_base" />
 
                 <ImageView
                     android:layout_width="@dimen/image_size_xsmall"
                     android:layout_height="@dimen/image_size_xsmall"
-                    android:src="@xml/ic_ui_note_2_base" />
+                    app:srcCompat="@xml/ic_ui_note_2_base" />
 
                 <ImageView
                     android:layout_width="@dimen/image_size_xsmall"
                     android:layout_height="@dimen/image_size_xsmall"
-                    android:src="@xml/ic_ui_note_2_base" />
+                    app:srcCompat="@xml/ic_ui_note_2_base" />
 
             </LinearLayout>
 

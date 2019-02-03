@@ -21,7 +21,7 @@
         android:id="@+id/weapon_craftable_image"
         style="@style/IconXSmall"
         android:layout_marginStart="@dimen/margin_small"
-        android:src="@drawable/ic_ui_buildable"
+        app:srcCompat="@drawable/ic_ui_buildable"
         app:layout_constraintBottom_toBottomOf="@id/weapon_name"
         app:layout_constraintStart_toEndOf="@id/weapon_name"
         app:layout_constraintTop_toTopOf="@id/weapon_name" />
@@ -29,7 +29,7 @@
     <ImageView
         android:id="@+id/weapon_image"
         style="@style/IconMedium.Decorated"
-        android:src="@drawable/ic_ui_question_mark_white"
+        app:srcCompat="@drawable/ic_ui_question_mark_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,17 +105,17 @@
             <ImageView
                 android:id="@+id/slot1"
                 style="@style/IconXSmall"
-                android:src="@drawable/ic_ui_question_mark_white" />
+                app:srcCompat="@drawable/ic_ui_question_mark_white" />
 
             <ImageView
                 android:id="@+id/slot2"
                 style="@style/IconXSmall"
-                android:src="@drawable/ic_ui_question_mark_white" />
+                app:srcCompat="@drawable/ic_ui_question_mark_white" />
 
             <ImageView
                 android:id="@+id/slot3"
                 style="@style/IconXSmall"
-                android:src="@drawable/ic_ui_question_mark_white" />
+                app:srcCompat="@drawable/ic_ui_question_mark_white" />
 
         </LinearLayout>
 

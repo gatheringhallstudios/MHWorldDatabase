@@ -31,7 +31,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_defense"/>
+                    app:srcCompat="@drawable/ic_ui_defense"/>
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_slots"/>
+                    app:srcCompat="@drawable/ic_ui_slots"/>
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
@@ -70,15 +70,15 @@
                     <ImageView
                         android:id="@+id/slot1"
                         style="@style/IconXSmall"
-                        android:src="@drawable/ic_ui_slot_none"/>
+                        app:srcCompat="@drawable/ic_ui_slot_none"/>
                     <ImageView
                         android:id="@+id/slot2"
                         style="@style/IconXSmall"
-                        android:src="@drawable/ic_ui_slot_none"/>
+                        app:srcCompat="@drawable/ic_ui_slot_none"/>
                     <ImageView
                         android:id="@+id/slot3"
                         style="@style/IconXSmall"
-                        android:src="@drawable/ic_ui_slot_none"/>
+                        app:srcCompat="@drawable/ic_ui_slot_none"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -86,7 +86,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_element_fire"/>
+                    app:srcCompat="@drawable/ic_element_fire"/>
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
@@ -107,7 +107,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_element_water"/>
+                    app:srcCompat="@drawable/ic_element_water"/>
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_element_thunder"/>
+                    app:srcCompat="@drawable/ic_element_thunder"/>
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_element_ice"/>
+                    app:srcCompat="@drawable/ic_element_ice"/>
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"
@@ -170,7 +170,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_element_dragon"/>
+                    app:srcCompat="@drawable/ic_element_dragon"/>
                 <TextView
                     style="@style/TextSubHead"
                     android:layout_width="wrap_content"

@@ -12,7 +12,7 @@
         android:id="@+id/ammo_icon"
         style="@style/IconXSmall"
         android:layout_marginStart="@dimen/margin_large"
-        android:src="@drawable/ic_items_ammo_white" />
+        app:srcCompat="@drawable/ic_items_ammo_white" />
 
     <TextView
         android:id="@+id/ammo_type_name"

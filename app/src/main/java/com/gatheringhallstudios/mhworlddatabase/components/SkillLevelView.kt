@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import com.gatheringhallstudios.mhworlddatabase.R
 
 /**
@@ -54,11 +55,11 @@ class SkillLevelView @JvmOverloads constructor(
     private val maxSkillPoints = 7
     private val aspectRatio = maxSkillPoints + 2 // width scaling
 
-    private val leftImg = ContextCompat.getDrawable(context, R.drawable.ui_skill_left)
-    private val rightImg = ContextCompat.getDrawable(context, R.drawable.ui_skill_right)
-    private val filledImg = ContextCompat.getDrawable(context, R.drawable.ui_skill_filled)
-    private val emptyImg = ContextCompat.getDrawable(context, R.drawable.ui_skill_empty)
-    private val gapImg = ContextCompat.getDrawable(context, R.drawable.ui_skill_space)
+    private val leftImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_left)
+    private val rightImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_right)
+    private val filledImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_filled)
+    private val emptyImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_empty)
+    private val gapImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_space)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         Log.d(TAG, "Measured height: $heightMeasureSpec")

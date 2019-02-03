@@ -69,7 +69,7 @@
             android:id="@+id/buy_price_icon"
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_medium"
-            android:src="@drawable/ic_ui_zenny"
+            app:srcCompat="@drawable/ic_ui_zenny"
             app:layout_constraintBottom_toTopOf="@id/divider_2"
             app:layout_constraintStart_toEndOf="@id/buy_price_value"
             app:layout_constraintTop_toBottomOf="@id/divider_1" />
@@ -108,7 +108,7 @@
             android:id="@+id/carry_icon"
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_medium"
-            android:src="@drawable/ic_ui_item_box"
+            app:srcCompat="@drawable/ic_ui_item_box"
             app:layout_constraintBottom_toTopOf="@id/divider_3"
             app:layout_constraintStart_toEndOf="@id/carry_capacity_value"
             app:layout_constraintTop_toBottomOf="@id/divider_2" />
@@ -139,7 +139,7 @@
             android:id="@+id/sell_price_icon"
             style="@style/IconXSmall"
             android:layout_marginStart="@dimen/margin_medium"
-            android:src="@drawable/ic_ui_zenny"
+            app:srcCompat="@drawable/ic_ui_zenny"
             app:layout_constraintBottom_toTopOf="@id/divider_3"
             app:layout_constraintStart_toEndOf="@id/sell_price_value"
             app:layout_constraintTop_toBottomOf="@id/divider_2" />

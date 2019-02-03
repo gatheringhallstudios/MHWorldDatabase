@@ -21,7 +21,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_large"
-        android:src="@drawable/ic_status_stun"
+        app:srcCompat="@drawable/ic_status_stun"
         app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
         app:layout_constraintRight_toRightOf="@id/physical_damage_header"
         app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
@@ -31,7 +31,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_small"
-        android:src="@drawable/ic_items_ammo_white"
+        app:srcCompat="@drawable/ic_items_ammo_white"
         app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
         app:layout_constraintRight_toLeftOf="@id/icon_ko"
         app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
@@ -41,7 +41,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_small"
-        android:src="@drawable/ic_equipment_hammer_white"
+        app:srcCompat="@drawable/ic_equipment_hammer_white"
         app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
         app:layout_constraintRight_toLeftOf="@id/icon_shot"
         app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
@@ -51,7 +51,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_small"
-        android:src="@drawable/ic_equipment_greatsword_white"
+        app:srcCompat="@drawable/ic_equipment_greatsword_white"
         app:layout_constraintBottom_toBottomOf="@id/physical_damage_header"
         app:layout_constraintRight_toLeftOf="@id/icon_impact"
         app:layout_constraintTop_toTopOf="@id/physical_damage_header" />
@@ -90,7 +90,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_large"
-        android:src="@drawable/ic_element_dragon"
+        app:srcCompat="@drawable/ic_element_dragon"
         app:layout_constraintBottom_toBottomOf="@id/item_data_header"
         app:layout_constraintRight_toRightOf="@id/item_data_header"
         app:layout_constraintTop_toTopOf="@id/item_data_header" />
@@ -100,7 +100,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_small"
-        android:src="@drawable/ic_element_ice"
+        app:srcCompat="@drawable/ic_element_ice"
         app:layout_constraintBottom_toBottomOf="@id/item_data_header"
         app:layout_constraintRight_toLeftOf="@id/icon_dragon"
         app:layout_constraintTop_toTopOf="@id/item_data_header" />
@@ -110,7 +110,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_small"
-        android:src="@drawable/ic_element_thunder"
+        app:srcCompat="@drawable/ic_element_thunder"
         app:layout_constraintBottom_toBottomOf="@id/item_data_header"
         app:layout_constraintRight_toLeftOf="@id/icon_ice"
         app:layout_constraintTop_toTopOf="@id/item_data_header" />
@@ -120,7 +120,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_small"
-        android:src="@drawable/ic_element_water"
+        app:srcCompat="@drawable/ic_element_water"
         app:layout_constraintBottom_toBottomOf="@id/item_data_header"
         app:layout_constraintRight_toLeftOf="@id/icon_impact"
         app:layout_constraintTop_toTopOf="@id/item_data_header" />
@@ -130,7 +130,7 @@
         android:layout_width="32dp"
         android:layout_height="@dimen/image_size_medium"
         android:layout_marginEnd="@dimen/margin_small"
-        android:src="@drawable/ic_element_fire"
+        app:srcCompat="@drawable/ic_element_fire"
         app:layout_constraintBottom_toBottomOf="@id/item_data_header"
         app:layout_constraintRight_toLeftOf="@id/icon_water"
         app:layout_constraintTop_toTopOf="@id/item_data_header" />

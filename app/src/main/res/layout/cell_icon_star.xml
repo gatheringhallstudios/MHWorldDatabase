@@ -13,7 +13,7 @@
         android:id="@+id/generic_icon"
         style="@style/IconSmall"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_ui_question_mark_white"
+        app:srcCompat="@drawable/ic_ui_question_mark_white"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginBottom="@dimen/margin_medium"/>
@@ -28,15 +28,15 @@
         android:layout_marginEnd="@dimen/margin_medium">
         <!-- Stars will be added here programmatically -->
         <ImageView style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_effective_star"
+            app:srcCompat="@drawable/ic_ui_effective_star"
             tools:visibility="visible"
             android:visibility="gone"/>
         <ImageView style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_effective_star"
+            app:srcCompat="@drawable/ic_ui_effective_star"
             tools:visibility="visible"
             android:visibility="gone"/>
         <ImageView style="@style/IconXSmall"
-            android:src="@drawable/ic_ui_effective_star"
+            app:srcCompat="@drawable/ic_ui_effective_star"
             tools:visibility="visible"
             android:visibility="gone"/>
     </LinearLayout>
@@ -66,16 +66,16 @@
             android:gravity="start|center_vertical"
             android:orientation="horizontal">
             <ImageView style="@style/IconXSmall"
-                android:src="@drawable/ic_ui_effective_star"
+                app:srcCompat="@drawable/ic_ui_effective_star"
                 tools:visibility="visible"
                 android:visibility="gone"/>
             <ImageView style="@style/IconXSmall"
-                android:src="@drawable/ic_ui_effective_star"
+                app:srcCompat="@drawable/ic_ui_effective_star"
                 tools:visibility="visible"
                 android:visibility="gone"
                 android:alpha="0.25"/>
             <ImageView style="@style/IconXSmall"
-                android:src="@drawable/ic_ui_effective_star"
+                app:srcCompat="@drawable/ic_ui_effective_star"
                 tools:visibility="visible"
                 android:visibility="gone"
                 android:alpha="0.25"/>

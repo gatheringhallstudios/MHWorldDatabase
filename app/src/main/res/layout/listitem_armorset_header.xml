@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/set_icon"
         style="@style/IconLarge.Decorated"
-        android:src="@drawable/ic_equipment_armor_set_white"
+        app:srcCompat="@drawable/ic_equipment_armor_set_white"
         android:layout_marginStart="@dimen/margin_large"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
         android:id="@+id/dropdown_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_expand_more"
+        app:srcCompat="@drawable/ic_expand_more"
         android:padding="@dimen/margin_large"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

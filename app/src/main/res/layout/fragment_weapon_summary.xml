@@ -32,7 +32,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_attack" />
+                    app:srcCompat="@drawable/ic_ui_attack" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -56,7 +56,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_affinity" />
+                    app:srcCompat="@drawable/ic_ui_affinity" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -80,7 +80,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_element" />
+                    app:srcCompat="@drawable/ic_ui_element" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -100,7 +100,7 @@
                         android:id="@+id/element_icon"
                         style="@style/IconXSmall"
                         android:layout_marginStart="@dimen/margin_large"
-                        android:src="@drawable/ic_element_thunder" />
+                        app:srcCompat="@drawable/ic_element_thunder" />
 
                     <TextView
                         android:id="@+id/element_type_value"
@@ -129,7 +129,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_slots" />
+                    app:srcCompat="@drawable/ic_ui_slots" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -148,17 +148,17 @@
                     <ImageView
                         android:id="@+id/slot1"
                         style="@style/IconXSmall"
-                        android:src="@drawable/ic_ui_slot_none" />
+                        app:srcCompat="@drawable/ic_ui_slot_none" />
 
                     <ImageView
                         android:id="@+id/slot2"
                         style="@style/IconXSmall"
-                        android:src="@drawable/ic_ui_slot_none" />
+                        app:srcCompat="@drawable/ic_ui_slot_none" />
 
                     <ImageView
                         android:id="@+id/slot3"
                         style="@style/IconXSmall"
-                        android:src="@drawable/ic_ui_slot_none" />
+                        app:srcCompat="@drawable/ic_ui_slot_none" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -167,7 +167,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_elderseal" />
+                    app:srcCompat="@drawable/ic_ui_elderseal" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -191,7 +191,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    android:src="@drawable/ic_ui_defense" />
+                    app:srcCompat="@drawable/ic_ui_defense" />
 
                 <TextView
                     android:id="@+id/defense_label"

@@ -3,10 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.components;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -16,6 +12,10 @@ import android.widget.TextView;
 
 import com.gatheringhallstudios.mhworlddatabase.R;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -34,7 +34,7 @@ public class IconLabelTextCell extends ConstraintLayout{
 
     public IconLabelTextCell (Context context, @DrawableRes int imgSrc, String labelText, String valueText) {
         super(context);
-        Drawable drawable = ContextCompat.getDrawable(getContext(), imgSrc);
+        Drawable drawable = AppCompatResources.getDrawable(getContext(), imgSrc);
         init(drawable, labelText, valueText);
     }
 

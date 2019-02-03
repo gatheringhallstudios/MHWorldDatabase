@@ -13,7 +13,7 @@ the class that inflates it. Use parentTag is used to preview the layout in the e
     android:id="@+id/generic_icon"
     style="@style/IconXSmall"
     android:layout_gravity="center_vertical"
-    android:src="@drawable/ic_ui_question_mark_white"
+    app:srcCompat="@drawable/ic_ui_question_mark_white"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
