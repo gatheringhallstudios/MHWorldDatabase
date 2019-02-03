@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <group
+        android:translateX="100"
+        android:translateY="56">
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M295.2 16H16v359.74l139.6-39.81 139.6 39.81z"/>
+        <path
+            android:fillColor="#000000"
+            android:pathData="M295.2 16H16v359.74l139.6-39.81 139.6 39.8V16zM0 0h311.2v400l-155.6-46.67L0 400V0z"/>
+        <path
+            android:fillColor="#1A000000"
+            android:pathData="M295.2 16H16v359.74l139.6-39.81 139.6 39.81z"/>
+        <path
+            android:fillColor="#B3000000"
+            android:pathData="M156.63 88l39 39-39 39-39-39 39-39zm0 204l-39-39 39-39 39 39-39 39zM219 228.86l-39-39 39-39 39 39-39 39zm-126 0l-39-39 39-39 39 39-39 39zm63-33.44L91.62 259.8l-5.42-5.42L150.58 190 86.2 125.62l5.42-5.42L156 184.58l64.38-64.38 5.42 5.42L161.42 190l64.38 64.38-5.42 5.42L156 195.42z"/>
+        <path
+            android:fillColor="#4D000000"
+            android:pathData="M258 310.5l19-20.5v41l-19-20.5zM54 69.5L35 90V49l19 20.5zm0 161.33l-19 20.5v-41l19 20.5zm0-80.66l-19 20.5v-41l19 20.5zm0 161.33L35 332v-41l19 20.5zm204-243L277 48v41l-19-20.5zm0 161l19-20.5v41l-19-20.5zm0-80l19-20.5v41l-19-20.5z"/>
+    </group>
+</vector>

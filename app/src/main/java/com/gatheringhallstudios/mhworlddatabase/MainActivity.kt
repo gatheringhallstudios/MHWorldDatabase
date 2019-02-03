@@ -1,19 +1,19 @@
 package com.gatheringhallstudios.mhworlddatabase
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.michaelflisar.changelog.ChangelogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
-import com.michaelflisar.changelog.ChangelogBuilder
 
 
 /**
@@ -168,11 +168,11 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
 
-        return if (id == R.id.action_search) {
-            true
-        } else if (id == R.id.action_toggle_bookmark) {
-            false
-        }else super.onOptionsItemSelected(item)
+        return when (id) {
+            R.id.action_search -> true
+            R.id.action_toggle_bookmark -> false
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun resetSearchListeners(callback: () -> Unit) {

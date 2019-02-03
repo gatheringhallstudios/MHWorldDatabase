@@ -1,13 +1,12 @@
 package com.gatheringhallstudios.mhworlddatabase.features.skills.detail
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
@@ -44,8 +43,7 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val weaponData = viewModel.skillTreeFull.value
         if (weaponData != null && BookmarksFeature.isBookmarked(weaponData)) {
-            menu.findItem(R.id.action_toggle_bookmark)
-                    .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
         }
     }
 

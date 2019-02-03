@@ -1,12 +1,11 @@
 package com.gatheringhallstudios.mhworlddatabase.features.charms.detail
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import androidx.core.content.ContextCompat
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
@@ -53,8 +52,7 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val charmData = viewModel.charmFullData.value
         if (charmData != null && BookmarksFeature.isBookmarked(charmData)) {
-            menu.findItem(R.id.action_toggle_bookmark)
-                    .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
         }
     }
 
