@@ -60,7 +60,11 @@ fun <T> createTreeRenderList(node: TreeNode<T>, depth: Int = 0, prefix: List<Tre
     formatter.addAll(prefix)
     formatter.add(newFormatter)
 
+    // Complete if this is a leaf.
     if (node.getChildren().isEmpty()) {
+        if (depth != 0) {
+            formatter.add(TreeFormatter.END)
+        }
         paths.add(RenderedTreeNode(node.value, depth, formatter, node.nestedChildrenCount))
         return paths
     }
