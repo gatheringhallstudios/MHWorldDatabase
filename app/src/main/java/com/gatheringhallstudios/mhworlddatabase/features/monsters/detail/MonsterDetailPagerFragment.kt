@@ -8,8 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -35,8 +35,7 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val monsterData = viewModel.monster.value
         if (monsterData != null && BookmarksFeature.isBookmarked(monsterData)) {
-            menu.findItem(R.id.action_toggle_bookmark)
-                    .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
         }
     }
 

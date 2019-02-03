@@ -42,7 +42,7 @@
             android:title="@string/title_locations" />
         <item
             android:id="@+id/bookmarksListAction"
-            android:icon="@android:drawable/btn_star_big_on"
+            android:icon="@drawable/ic_ui_bookmark"
             android:title="@string/title_bookmarks" />
     </group>
 

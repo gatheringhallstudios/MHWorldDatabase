@@ -42,8 +42,7 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val decorationData = viewModel.decorationData.value
         if (decorationData != null && BookmarksFeature.isBookmarked(decorationData)) {
-            menu.findItem(R.id.action_toggle_bookmark)
-                    .setIcon((context!!.getDrawableCompat(android.R.drawable.btn_star_big_on)))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
         }
     }
 

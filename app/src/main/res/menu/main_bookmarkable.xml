@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_toggle_bookmark"
-        android:icon="@android:drawable/btn_star_big_off"
+        android:icon="@drawable/ic_ui_bookmark_off_white"
         android:title="@string/action_bookmark"
         app:showAsAction="ifRoom" />
 </menu>
