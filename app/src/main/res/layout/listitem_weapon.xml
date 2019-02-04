@@ -21,28 +21,32 @@
         android:id="@+id/weapon_craftable_image"
         style="@style/IconXSmall"
         android:layout_marginStart="@dimen/margin_small"
-        app:srcCompat="@drawable/ic_ui_buildable"
         app:layout_constraintBottom_toBottomOf="@id/weapon_name"
         app:layout_constraintStart_toEndOf="@id/weapon_name"
-        app:layout_constraintTop_toTopOf="@id/weapon_name" />
+        app:layout_constraintTop_toTopOf="@id/weapon_name"
+        app:srcCompat="@drawable/ic_ui_buildable" />
 
     <ImageView
         android:id="@+id/weapon_image"
         style="@style/IconMedium.Decorated"
-        app:srcCompat="@drawable/ic_ui_question_mark_white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_ui_question_mark_white" />
 
     <LinearLayout
         android:id="@+id/basic_stat_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="@dimen/margin_large"
         android:gravity="end"
         android:orientation="vertical"
         android:paddingBottom="@dimen/padding_medium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/complex_stat_layout">
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/complex_stat_layout"
+        app:layout_constraintTop_toTopOf="@+id/complex_stat_layout"
+        app:layout_constraintWidth_max="@dimen/width_sharpness_bar">
 
         <!-- These should be removed from this layout and added at runtime -->
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
@@ -60,7 +64,7 @@
 
             <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                 android:id="@+id/sharpness_value"
-                android:layout_width="128dp"
+                android:layout_width="match_parent"
                 android:layout_height="12dp"
                 android:paddingStart="@dimen/padding_small"
                 android:paddingTop="@dimen/padding_small"
@@ -75,7 +79,7 @@
 
             <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
                 android:id="@+id/sharpness_max_value"
-                android:layout_width="128dp"
+                android:layout_width="match_parent"
                 android:layout_height="12dp"
                 android:paddingStart="@dimen/padding_small"
                 android:paddingTop="1dp"

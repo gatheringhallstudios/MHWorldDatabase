@@ -37,9 +37,9 @@ fun ImageView.applyIconType(type: IconType) {
     val padding = when (type) {
         IconType.NORMAL -> 0
         IconType.PAPER, IconType.EMBELLISHED ->
-            this.resources.getDimensionPixelSize(R.dimen.icon_padding_decorated)
+            this.resources.getDimensionPixelSize(R.dimen.padding_icon_decorated)
         IconType.ZEMBELLISHED ->
-            this.resources.getDimensionPixelSize(R.dimen.icon_padding_zembellished)
+            this.resources.getDimensionPixelSize(R.dimen.padding_icon_zembellished)
     }
     this.setPadding(padding, padding, padding, padding)
 }
