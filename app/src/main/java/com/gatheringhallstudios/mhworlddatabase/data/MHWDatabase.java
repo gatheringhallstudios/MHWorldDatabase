@@ -68,7 +68,7 @@ import java.util.List;
  * Created by Carlos on 3/4/2018.
  */
 @Database(
-        version = 23,
+        version = 24,
         exportSchema = false,
 
         entities = {
