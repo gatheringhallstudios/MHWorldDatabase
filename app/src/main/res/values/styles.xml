@@ -64,7 +64,7 @@
     </style>
 
     <style name="IconMedium.Decorated">
-        <item name="android:padding">@dimen/icon_padding_decorated</item>
+        <item name="android:padding">@dimen/padding_icon_decorated</item>
         <item name="android:background">@drawable/bg_icon_decorator</item>
     </style>
 
@@ -79,7 +79,7 @@
     </style>
 
     <style name="IconMedium.Zembellished">
-        <item name="android:padding">@dimen/icon_padding_zembellished</item>
+        <item name="android:padding">@dimen/padding_icon_zembellished</item>
         <item name="android:background">@drawable/ic_decorator_zembelish</item>
     </style>
 

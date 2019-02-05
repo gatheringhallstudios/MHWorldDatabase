@@ -33,7 +33,7 @@
     <com.gatheringhallstudios.mhworlddatabase.components.SkillLevelView
         android:id="@+id/skill_level"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/skill_level_height"
+        android:layout_height="@dimen/height_skill_level"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"

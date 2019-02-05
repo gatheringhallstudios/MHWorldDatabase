@@ -43,10 +43,12 @@
     <dimen name="margin_damage_value_right">14dp</dimen>
 
     <!-- dimensions for icon paddings in various decorations -->
-    <dimen name="icon_padding_decorated">4dp</dimen>
-    <dimen name="icon_padding_zembellished">3dp</dimen>
+    <dimen name="padding_icon_decorated">4dp</dimen>
+    <dimen name="padding_icon_zembellished">3dp</dimen>
 
-    <dimen name="skill_level_height">18dp</dimen>
+    <dimen name="height_skill_level">18dp</dimen>
+
+    <dimen name="width_sharpness_bar">128dp</dimen>
 
     <!-- Dimens for Elevation copied from here -->
     <!-- https://material.io/design/environment/elevation.html#default-elevations -->
