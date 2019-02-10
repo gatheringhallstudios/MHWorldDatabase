@@ -92,6 +92,7 @@ val VectorRegistry = createRegistry(
         "TrapTool" to R.xml.ic_items_trap_tool_base,
         "Voucher" to R.xml.ic_items_voucher_base,
         "Web" to R.xml.ic_items_web_base,
+        "Webbing" to R.xml.ic_items_honey_base,
         "Wing" to R.xml.ic_items_wing_base
 )
 
