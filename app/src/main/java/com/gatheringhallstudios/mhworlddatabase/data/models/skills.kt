@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 
@@ -10,7 +9,7 @@ open class SkillTreeBase(
         val name: String?,
         val max_level: Int,
         val icon_color: String?
-) : MHEntity {
+) : MHModel {
     override val entityId get() = id
     override val entityType get() = DataType.SKILL
 }

@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.bookmarks
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHModel
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.BookmarksDao
 import com.gatheringhallstudios.mhworlddatabase.data.entities.BookmarkEntity
@@ -36,15 +36,15 @@ object BookmarksFeature {
         runBlocking { bookmarksList = deferred.await() }
     }
 
-    fun toggleBookmark(entity: MHEntity?) {
-        if (entity != null) {
-            if (!isBookmarked(entity) && bookmarksList.size < BOOKMARKS_MAX) {
+    fun toggleBookmark(model: MHModel?) {
+        if (model != null) {
+            if (!isBookmarked(model) && bookmarksList.size < BOOKMARKS_MAX) {
                 val date = Date()
-                bookmarksList.add(Bookmark(entity.entityId, entity.entityType, date))
-                GlobalScope.launch { dao.insert(BookmarkEntity(entity.entityId, entity.entityType, date)) }
+                bookmarksList.add(Bookmark(model.entityId, model.entityType, date))
+                GlobalScope.launch { dao.insert(BookmarkEntity(model.entityId, model.entityType, date)) }
             } else {
                 val index = bookmarksList.indexOfFirst {
-                    it.dataId == entity.entityId && it.dataType == entity.entityType
+                    it.dataId == model.entityId && it.dataType == model.entityType
                 }
                 val bookmark = bookmarksList[index]
                 bookmarksList.removeAt(index)
@@ -56,9 +56,9 @@ object BookmarksFeature {
         }
     }
 
-    fun isBookmarked(entity: MHEntity): Boolean {
+    fun isBookmarked(model: MHModel): Boolean {
         return bookmarksList.indexOfFirst {
-            it.dataId == entity.entityId && it.dataType == entity.entityType
+            it.dataId == model.entityId && it.dataType == model.entityType
         } != -1
     }
 

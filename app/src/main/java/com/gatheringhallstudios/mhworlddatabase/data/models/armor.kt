@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import androidx.room.Ignore
-import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
@@ -45,7 +44,7 @@ open class ArmorBase(
         val name: String?,
         val rarity: Int,
         val armor_type: ArmorType
-): MHEntity {
+): MHModel {
     override val entityId get() = id
     override val entityType get() = DataType.ARMOR
 
@@ -134,7 +133,7 @@ class ArmorFull(
         val setBonuses: List<ArmorSetBonus>,
         val recipe: List<ItemQuantity>,
         val skills: List<SkillLevel>
-): MHEntity {
+): MHModel {
     override val entityId get() = armor.id
     override val entityType get() = DataType.ARMOR
 }

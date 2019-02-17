@@ -18,7 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 
 /**
- * Fragment that displays the WeaponTreeCollection object.
+ * Fragment that displays the MHModelTree object.
  * This displays the weapons of a particular weapon type as a tree.
  */
 class WeaponTreeListFragment : RecyclerViewFragment() {

@@ -7,7 +7,7 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponTreeCollection
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.createTreeRenderList
 
@@ -24,7 +24,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
      */
     val nodeListData = MutableLiveData<List<RenderedTreeNode<Weapon>>>()
 
-    lateinit var weaponTree: WeaponTreeCollection
+    lateinit var weaponTree: MHModelTree<Weapon>
 
     fun setWeaponType(weaponType: WeaponType) {
         if (::currentWeaponType.isInitialized && currentWeaponType == weaponType) {

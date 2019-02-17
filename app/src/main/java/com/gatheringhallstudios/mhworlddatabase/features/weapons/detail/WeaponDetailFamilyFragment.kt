@@ -37,7 +37,7 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
         viewModel.weaponTrees.observe(this, Observer { tree ->
             if (tree == null) return@Observer
 
-            val familyPath = tree.getWeapon(viewModel.weaponId)?.path
+            val familyPath = tree.getModel(viewModel.weaponId)?.path
             adapter.items = familyPath?.map { RenderedTreeNode(it.value) } ?: emptyList()
             adapter.notifyDataSetChanged()
         })

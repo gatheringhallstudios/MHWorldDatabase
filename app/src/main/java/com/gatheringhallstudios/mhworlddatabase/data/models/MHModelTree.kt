@@ -2,45 +2,44 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 
-
 /**
  * A collection of weapon trees for a particular weapon type
  * todo: move to another file once we decided where it should go.
  */
-class WeaponTreeCollection(
-        weapons: List<Weapon>
+class MHModelTree<T: MHParentedModel>(
+        models: List<T>
 ) {
     /**
      * A list of all tree roots for this collection
      */
-    val roots: List<TreeNode<Weapon>>
+    val roots: List<TreeNode<T>>
 
     /**
      * A list of all "leaf nodes" in this weapon tree
      */
-    val leaves: List<TreeNode<Weapon>>
+    val leaves: List<TreeNode<T>>
 
-    private val weaponMap: Map<Int, TreeNode<Weapon>>
+    private val modelMap: Map<Int, TreeNode<T>>
 
     init {
         // create a mapping of id -> weapon treenode
-        weaponMap = weapons.asSequence().map { TreeNode(it) }.associateBy { it.value.id }
+        modelMap = models.asSequence().map { TreeNode(it) }.associateBy { it.value.entityId }
 
         //Add child relationships
-        for (weapon in weaponMap) {
-            val parentId = weapon.value.value.previous_weapon_id
+        for ((id, modelNode) in modelMap) {
+            val parentId = modelNode.value.parentId
             if (parentId != null) {
-                weaponMap[parentId]?.addChild(weapon.value)
+                modelMap[parentId]?.addChild(modelNode)
             }
         }
 
         // Extract all root nodes and then all leaves
-        roots = weaponMap.filter { it.value.isRoot }.values.toList()
+        roots = modelMap.filter { it.value.isRoot }.values.toList()
         leaves = roots.map { it.leaves }.flatten()
     }
 
     /**
      * Method used to
      */
-    fun getWeapon(weaponId: Int) = weaponMap[weaponId]
+    fun getModel(weaponId: Int) = modelMap[weaponId]
 }

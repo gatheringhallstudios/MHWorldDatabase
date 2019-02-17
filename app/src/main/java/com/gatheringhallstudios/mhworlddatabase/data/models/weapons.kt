@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import androidx.room.Ignore
-import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 
 /**
@@ -12,10 +11,12 @@ open class WeaponBase(
         val id: Int,
         val name: String,
         val rarity: Int,
-        val weapon_type: WeaponType
-) : MHEntity {
+        val weapon_type: WeaponType,
+        val previous_weapon_id: Int?
+) : MHParentedModel {
     override val entityId get() = id
     override val entityType get() = DataType.WEAPON
+    override val parentId get() = previous_weapon_id
 }
 
 class Weapon(
@@ -23,6 +24,7 @@ class Weapon(
         name: String,
         rarity: Int,
         weapon_type: WeaponType,
+        previous_weapon_id: Int?,
 
         val attack: Int,
         val attack_true: Int,
@@ -34,7 +36,6 @@ class Weapon(
         val element2_attack: Int?,
         val element_hidden: Boolean,
         val defense: Int,
-        val previous_weapon_id: Int?,
 
         val craftable: Boolean,
         val kinsect_bonus: KinsectBonus,
@@ -46,7 +47,7 @@ class Weapon(
         val notes: String?,
         val special_ammo: String?
 
-) : WeaponBase(id, name, rarity, weapon_type) {
+) : WeaponBase(id, name, rarity, weapon_type, previous_weapon_id) {
     @Embedded
     lateinit var slots: WeaponSlots
 
@@ -171,7 +172,7 @@ class WeaponFull(
         val melodies: List<WeaponMelody>,
         val recipe: Map<String?, List<ItemQuantity>>,
         val skills: List<SkillLevel>
-) : MHEntity {
+) : MHModel {
     override val entityId get() = weapon.id
     override val entityType get() = DataType.WEAPON
 }
