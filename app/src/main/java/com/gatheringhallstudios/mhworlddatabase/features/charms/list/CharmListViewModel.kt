@@ -1,0 +1,53 @@
+package com.gatheringhallstudios.mhworlddatabase.features.charms.list
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.common.MHModelTreeFilter
+import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
+import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
+import kotlinx.coroutines.*
+
+/**
+ * Viewmodel for the charm list.
+ * Loaded synchronously to
+ */
+class CharmListViewModel(application: Application) : AndroidViewModel(application) {
+    private val dao = MHWDatabase.getDatabase(application).charmDao()
+
+    /**
+     * Encapsulates the charm tree and performs filtering on it
+     */
+    private val filter = MHModelTreeFilter<Charm>()
+
+    /**
+     * Transport of result data to the view.
+     */
+    val charmData = MutableLiveData<List<Charm>>()
+
+    init {
+        GlobalScope.launch(Dispatchers.Main) {
+            val charmList = withContext(Dispatchers.IO) {
+                dao.loadCharmsSync(AppSettings.dataLocale)
+            }
+
+            filter.tree = MHModelTree(charmList)
+            updateCharmData()
+        }
+    }
+
+    fun setShowFinal(final: Boolean) {
+        filter.finalOnly = final
+        updateCharmData()
+    }
+
+    /**
+     * Internal helper called to update the charm data sent back to the client
+     */
+    private fun updateCharmData() {
+        charmData.value = filter.renderResults().map { it.value }
+    }
+}

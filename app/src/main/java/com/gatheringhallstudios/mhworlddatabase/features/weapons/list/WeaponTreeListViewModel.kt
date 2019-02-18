@@ -10,6 +10,10 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Viewmodel used to contain data for the Weapon Tree.
@@ -19,12 +23,14 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
     private lateinit var currentWeaponType: WeaponType
 
     /**
+     * Encapsulates the charm tree and performs filtering on it
+     */
+    private val filter: MHModelTreeFilter<Weapon> = MHModelTreeFilter()
+
+    /**
      * A list of nodes for the tree to display.
      */
     val nodeListData = MutableLiveData<List<RenderedTreeNode<Weapon>>>()
-
-    lateinit var weaponTree: MHModelTree<Weapon>
-    private var filter: MHModelTreeFilter<Weapon>? = null
 
     fun setWeaponType(weaponType: WeaponType) {
         if (::currentWeaponType.isInitialized && currentWeaponType == weaponType) {
@@ -32,10 +38,14 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
         }
 
         currentWeaponType = weaponType
-        weaponTree = dao.loadWeaponTrees(AppSettings.dataLocale, weaponType)
-        filter = MHModelTreeFilter(weaponTree)
 
-        updateNodeList()
+        GlobalScope.launch(Dispatchers.Main) {
+            val weaponTree = withContext(Dispatchers.IO) {
+                dao.loadWeaponTrees(AppSettings.dataLocale, weaponType)
+            }
+            filter.tree = weaponTree
+            updateNodeList()
+        }
     }
 
     /**
@@ -44,12 +54,12 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
      * Otherwise nodeListData will contain the entire tree.
      */
     fun setShowFinal(final: Boolean) {
-        filter?.finalOnly = final
+        filter.finalOnly = final
         updateNodeList()
     }
 
     private fun updateNodeList() {
-        nodeListData.value = filter?.renderResults() ?: emptyList()
+        nodeListData.value = filter.renderResults()
     }
 }
 

@@ -10,11 +10,13 @@ import com.gatheringhallstudios.mhworlddatabase.features.weapons.createTreeRende
  * Filters can be applied and results can be requested
  */
 class MHModelTreeFilter<T: MHParentedModel>(
-        var tree: MHModelTree<T>
+        var tree: MHModelTree<T>? = null
 ) {
     var finalOnly = false
 
     fun renderResults(): List<RenderedTreeNode<T>> {
+        val tree = this.tree ?: return emptyList()
+
         return when {
             finalOnly -> {
                 tree.leaves.map {
