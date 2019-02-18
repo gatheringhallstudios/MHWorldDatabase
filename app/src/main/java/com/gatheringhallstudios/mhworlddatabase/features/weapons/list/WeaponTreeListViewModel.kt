@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.common.MHModelTreeFilter
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.createTreeRenderList
 
 /**
  * Viewmodel used to contain data for the Weapon Tree.
@@ -17,7 +17,6 @@ import com.gatheringhallstudios.mhworlddatabase.features.weapons.createTreeRende
 class WeaponTreeListViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = MHWDatabase.getDatabase(application).weaponDao()
     private lateinit var currentWeaponType: WeaponType
-    private var finalOnly = false
 
     /**
      * A list of nodes for the tree to display.
@@ -25,6 +24,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
     val nodeListData = MutableLiveData<List<RenderedTreeNode<Weapon>>>()
 
     lateinit var weaponTree: MHModelTree<Weapon>
+    private var filter: MHModelTreeFilter<Weapon>? = null
 
     fun setWeaponType(weaponType: WeaponType) {
         if (::currentWeaponType.isInitialized && currentWeaponType == weaponType) {
@@ -33,6 +33,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
 
         currentWeaponType = weaponType
         weaponTree = dao.loadWeaponTrees(AppSettings.dataLocale, weaponType)
+        filter = MHModelTreeFilter(weaponTree)
 
         updateNodeList()
     }
@@ -43,24 +44,12 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
      * Otherwise nodeListData will contain the entire tree.
      */
     fun setShowFinal(final: Boolean) {
-        finalOnly = final
+        filter?.finalOnly = final
         updateNodeList()
     }
 
     private fun updateNodeList() {
-        nodeListData.value = when {
-            finalOnly -> {
-                weaponTree.leaves.map {
-                    RenderedTreeNode(it.value)
-                }
-            }
-            else -> {
-                // Render all root nodes and their children
-                weaponTree.roots.flatMap {
-                    createTreeRenderList(it)
-                }
-            }
-        }
+        nodeListData.value = filter?.renderResults() ?: emptyList()
     }
 }
 
