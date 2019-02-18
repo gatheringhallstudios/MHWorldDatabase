@@ -3,6 +3,9 @@ package com.gatheringhallstudios.mhworlddatabase.features.charms.list
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.CharmAdapterDelegate
@@ -21,6 +24,11 @@ class CharmListFragment : RecyclerViewFragment() {
         getRouter().navigateCharmDetail(it.id)
     })
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
 
@@ -33,9 +41,25 @@ class CharmListFragment : RecyclerViewFragment() {
         })
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_charm_tree, menu)
+        menu.findItem(R.id.final_toggle).isChecked = viewModel.isFinal
+    }
 
-        activity?.title = getString(R.string.title_charms)
+    /**
+     * Handled when a menu item is clicked. True is returned if handled.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.final_toggle -> {
+                val newSetting = !item.isChecked
+                viewModel.setShowFinal(newSetting)
+                item.isChecked = newSetting
+                true
+            }
+
+            // fallback to parent behavior if unhandled
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

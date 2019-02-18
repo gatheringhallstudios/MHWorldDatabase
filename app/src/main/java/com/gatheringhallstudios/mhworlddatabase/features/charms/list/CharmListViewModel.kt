@@ -28,6 +28,11 @@ class CharmListViewModel(application: Application) : AndroidViewModel(applicatio
      */
     val charmData = MutableLiveData<List<Charm>>()
 
+    /**
+     * Returns the current filter state for final only
+     */
+    val isFinal get() = filter.finalOnly
+
     init {
         GlobalScope.launch(Dispatchers.Main) {
             val charmList = withContext(Dispatchers.IO) {
