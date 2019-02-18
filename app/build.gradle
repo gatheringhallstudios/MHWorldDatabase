@@ -5,6 +5,10 @@ apply plugin: 'kotlin-android-extensions'
 // This handles both kotlin and java. Use kapt instead of annotationProcessor
 apply plugin: 'kotlin-kapt'
 
+// Update this to update the database on the next build
+// This is also used to populate populate MHWDatabase.java configuration
+def DATABASE_VERSION = 24
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -22,6 +26,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("int", "DB_VERSION", "${DATABASE_VERSION}")
+        }
+        debug {
+            buildConfigField("int", "DB_VERSION", "${DATABASE_VERSION}")
         }
     }
     compileOptions {
@@ -132,3 +140,18 @@ dependencies {
 
 }
 
+apply plugin: 'de.undercouch.download'
+
+/**
+ * Download the database every time the app is assembled if it hasn't been done already.
+ */
+gradle.projectsEvaluated {
+    preBuild.dependsOn('downloadDatabase')
+}
+
+task downloadDatabase(type: Download){
+    src "https://github.com/gatheringhallstudios/MHWorldData/releases/download/V${DATABASE_VERSION}/mhw.db"
+    dest "src/main/assets/databases/mhw.db"
+    overwrite true
+    onlyIfNewer true
+}

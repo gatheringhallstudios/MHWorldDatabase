@@ -1,16 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.data;
 
 import android.app.Application;
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
 import android.content.Context;
 
+import com.gatheringhallstudios.mhworlddatabase.BuildConfig;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ArmorDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.BulkLoaderDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.CharmDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.DecorationDao;
-import com.gatheringhallstudios.mhworlddatabase.data.dao.BulkLoaderDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MetaDao;
@@ -61,6 +58,11 @@ import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHel
 
 import java.util.List;
 
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
+
 /**
  * DO NOT CONVERT TO KOTLIN YET.
  * we don't really gain anything from the conversion,
@@ -68,7 +70,7 @@ import java.util.List;
  * Created by Carlos on 3/4/2018.
  */
 @Database(
-        version = 24,
+        version = BuildConfig.DB_VERSION,
         exportSchema = false,
 
         entities = {
