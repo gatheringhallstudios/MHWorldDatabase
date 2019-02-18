@@ -18,7 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 
 /**
- * Fragment that displays the WeaponTreeCollection object.
+ * Fragment that displays the MHModelTree object.
  * This displays the weapons of a particular weapon type as a tree.
  */
 class WeaponTreeListFragment : RecyclerViewFragment() {
@@ -59,6 +59,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_weapon_tree, menu)
+        menu.findItem(R.id.final_toggle).isChecked = viewModel.isFinal
     }
 
     /**
@@ -66,7 +67,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.weapon_final_toggle -> {
+            R.id.final_toggle -> {
                 val newSetting = !item.isChecked
                 viewModel.setShowFinal(newSetting)
                 item.isChecked = newSetting

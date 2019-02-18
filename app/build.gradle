@@ -63,6 +63,8 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0-alpha01'
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1"
+
     /*
      * Leak Canary
      * https://github.com/square/leakcanary
@@ -71,7 +73,6 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
     // Optional, if you use support library fragments:
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
-
 
     /*
      * Android Kotlin Extensions

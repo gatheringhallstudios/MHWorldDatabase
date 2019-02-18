@@ -18,7 +18,7 @@ class WeaponDetailViewModel(application: Application) : AndroidViewModel(applica
         private set
 
     lateinit var weapon: LiveData<WeaponFull>
-    lateinit var weaponTrees: LiveData<WeaponTreeCollection>
+    lateinit var weaponTrees: LiveData<MHModelTree<Weapon>>
 
     fun loadWeapon(weaponId: Int) {
         if (this.weaponId == weaponId) return

@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemSubcategory
@@ -16,7 +15,7 @@ open class ItemBase(
         val icon_name: String?,
         val icon_color: String?,
         val category: ItemCategory
-) : MHEntity {
+) : MHModel {
     override val entityId get() = id
     override val entityType get() = DataType.ITEM
 }

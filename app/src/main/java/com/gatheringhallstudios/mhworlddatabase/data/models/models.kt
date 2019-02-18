@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
-import com.gatheringhallstudios.mhworlddatabase.common.MHEntity
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
 /*
@@ -19,7 +18,7 @@ open class DecorationBase(
         val name: String?,
         val slot: Int,
         val icon_color: String?
-) : MHEntity {
+) : MHModel {
     override val entityId get() = id
     override val entityType get() = DataType.DECORATION
 }

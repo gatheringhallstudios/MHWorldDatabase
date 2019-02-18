@@ -158,8 +158,8 @@ abstract class WeaponDao {
     /**
      * Loads all weapons of a particular type, contained as a collection of weapon trees.
      */
-    fun loadWeaponTrees(langId: String, weaponType: WeaponType): WeaponTreeCollection {
+    fun loadWeaponTrees(langId: String, weaponType: WeaponType): MHModelTree<Weapon> {
         // todo: cache it
-        return WeaponTreeCollection(loadWeapons(langId, weaponType))
+        return MHModelTree(loadWeapons(langId, weaponType))
     }
 }

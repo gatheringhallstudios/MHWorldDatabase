@@ -1,6 +1,5 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
@@ -37,7 +36,7 @@ class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): androidx.recyclerview.wid
 
     /**
      * Binds the list of items to this adapter.
-     * TODO: Consider making it take the WeaponTreeCollection and doing the logic currently in the WeaponTreeListViewModel
+     * TODO: Consider making it take the MHModelTree and doing the logic currently in the WeaponTreeListViewModel
      */
     fun setItems(items: List<RenderedTreeNode<Weapon>>) {
         this.sourceItems = items

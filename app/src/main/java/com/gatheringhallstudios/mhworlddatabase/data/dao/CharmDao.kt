@@ -8,6 +8,9 @@ import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 @Dao
 abstract class CharmDao {
+    /**
+     * Synchronously loads charms
+     */
     @Query("""
         SELECT c.*, ct.name
         FROM charm c
@@ -15,7 +18,7 @@ abstract class CharmDao {
                 ON ct.id = c.id
                 AND ct.lang_id = :langId
         ORDER BY ct.name""")
-    abstract fun loadCharms(langId: String): LiveData<List<Charm>>
+    abstract fun loadCharmsSync(langId: String): List<Charm>
 
     /**
      * Loads full data for a charm asynchronously.
