@@ -28,6 +28,6 @@ class AppConverters {
     @TypeConverter fun dataTypeFromString(value: String?) = DataTypeConverter.deserialize(value)
     @TypeConverter fun fromDataType(type: DataType?) = DataTypeConverter.serialize(type)
 
-    @TypeConverter fun dateFromString(value: String?) = SimpleDateFormat("MMM dd yyyy HH:mma").parse(value)
-    @TypeConverter fun StringfromDate(type: Date) = SimpleDateFormat("MMM dd yyyy HH:mma").format(type)
+    @TypeConverter fun dateFromString(value: String?) = SimpleDateFormat("MMM dd yyyy HH:mma", Locale.US).parse(value)
+    @TypeConverter fun stringfromDate(type: Date) = SimpleDateFormat("MMM dd yyyy HH:mma", Locale.US).format(type)
 }
