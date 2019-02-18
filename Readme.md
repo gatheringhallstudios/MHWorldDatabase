@@ -10,12 +10,9 @@ If you wish to chat with us, we also have a [discord server](https://discord.gg/
 
 ## Build instructions
 
-This project depends on the [MHWorldData](https://github.com/CarlosFdez/MHWorldData) project. Clone it and run the build command to get the latest version of the database. The file will appear in the root directory of that project as `mhw.db`.
-
 - Install Android Studio, and use it to open this project directory
-- Copy the mhw.db file to `app\src\main\assets\databases`
 - Install the version 28 Android SDK via the SDK manager
-- Compile and run the project. You may need to create an emulator using the AVD
+- Compile and run the project via Android Studio. You may need to create an emulator using the AVD
 
 ## Contributing
 
