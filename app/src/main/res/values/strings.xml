@@ -302,10 +302,6 @@
 
     <!-- General Strings -->
     <string name="title_skill_level">Level</string>
-    <plurals name="skill_level">
-        <item quantity="one">level</item>
-        <item quantity="other">levels</item>
-    </plurals>
     <string name="skill_level_qty">Level %1$d</string> <!-- Example: Level 1 -->
     <string name="skill_level_short_qty">Lv %1$d</string> <!-- Example: Lv 2 -->
 
