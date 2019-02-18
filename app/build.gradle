@@ -38,6 +38,10 @@ android {
     }
     lintOptions {
         abortOnError false
+
+        // this application is open source, so we can't force translators to always translate.
+        // disable it so we can at least fallback to english without explicit errors.
+        disable 'MissingTranslation'
     }
 }
 
