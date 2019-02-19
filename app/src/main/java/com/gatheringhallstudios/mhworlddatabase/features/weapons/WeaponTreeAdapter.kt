@@ -11,7 +11,7 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
  */
 class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
-    protected var delegatesManager = AdapterDelegatesManager<List<RenderedTreeNode<Weapon>>>()
+    protected var delegatesManager = AdapterDelegatesManager<List<Any>>()
 
     init {
         delegatesManager.addDelegate(WeaponTreeListAdapterDelegate(

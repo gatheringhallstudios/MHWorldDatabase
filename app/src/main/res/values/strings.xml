@@ -164,6 +164,7 @@
     <!-- ################# -->
 
     <string name="weapon_final_only">Final Only</string>
+    <string name="weapon_final_upgrades">Final</string>
 
     <!-- Weapon List Entries -->
     <string name="title_weapons">Weapons</string>
