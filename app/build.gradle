@@ -15,8 +15,8 @@ android {
         applicationId "com.gatheringhallstudios.mhworlddatabase"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 7
-        versionName "1.2"
+        versionCode 8
+        versionName "1.2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // We set this to false so vectors get rastered at buildtime.
