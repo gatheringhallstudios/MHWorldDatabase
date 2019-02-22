@@ -1,5 +1,17 @@
 <changelog>
     <release
+        versionCode="8"
+        versionName="Version 1.2.1">
+        <info>&#9;- Added Teostra/Kushala/Zora/Xeno/Lunastra gamma sets.
+            [br]&#9;- Added French Translation (thanks Andy Flores!).
+            [br]&#9;- Added Weapon final upgrades to family tab.
+            [br]&#9;- Added Final Only filter to Charms overflow menu.
+            [br]&#9;- Fixed Legiana LR rewards.
+            [br]&#9;- Added PRO color melodies (thanks Lyssandrios).
+            [br]&#9;- Fixed scroll position not being remembered when hitting back on certain screens.
+        </info>
+    </release>
+    <release
         versionCode="7"
         versionName="Version 1.2">
         <info>&#9;- BOOKMARKS! Save your favorite monsters, weapons, armor, and items for easy lookup later.
