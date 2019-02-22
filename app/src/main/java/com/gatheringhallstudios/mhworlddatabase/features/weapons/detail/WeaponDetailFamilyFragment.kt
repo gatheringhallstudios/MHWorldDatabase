@@ -42,7 +42,9 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
             val finalNodes = data.finalWeapons.map { RenderedTreeNode(it) }
 
             adapter.addSection(familyNodes)
-            adapter.addSection(getString(R.string.weapon_final_upgrades), finalNodes)
+            if (finalNodes.isNotEmpty()) {
+                adapter.addSection(getString(R.string.weapon_final_upgrades), finalNodes)
+            }
         })
     }
 }
