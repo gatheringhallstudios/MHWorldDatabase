@@ -55,12 +55,12 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.weapon.observe(this, Observer(::populateWeapon))
+        viewModel.weaponData.observe(this, Observer(::populateWeapon))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_bookmarkable, menu)
-        val weaponData = viewModel.weapon.value
+        val weaponData = viewModel.weaponData.value
         if (weaponData != null && BookmarksFeature.isBookmarked(weaponData)) {
             menu.findItem(action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
         }
@@ -71,7 +71,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         val id = item.itemId
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_bookmark) {
-            BookmarksFeature.toggleBookmark(viewModel.weapon.value)
+            BookmarksFeature.toggleBookmark(viewModel.weaponData.value)
             activity!!.invalidateOptionsMenu()
             true
         } else false

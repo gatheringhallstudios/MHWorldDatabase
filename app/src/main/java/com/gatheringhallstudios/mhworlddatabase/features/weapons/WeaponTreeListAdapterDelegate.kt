@@ -35,12 +35,13 @@ const val INDENT_SIZE = 16 //This value corresponds to the measured width of eac
 class WeaponTreeListAdapterDelegate(
         private val onSelected: (Weapon) -> Unit,
         private val onLongSelect: ((Weapon) -> Unit)?
-) : AdapterDelegate<List<RenderedTreeNode<Weapon>>>() {
+) : AdapterDelegate<List<Any>>() {
 
     constructor(onSelected: (Weapon) -> Unit) : this(onSelected, null)
 
-    override fun isForViewType(items: List<RenderedTreeNode<Weapon>>, position: Int): Boolean {
-        return items[position] is RenderedTreeNode<Weapon>
+    override fun isForViewType(items: List<Any>, position: Int): Boolean {
+        val node = items[position] as? RenderedTreeNode<*>
+        return node?.value is Weapon
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
@@ -50,11 +51,12 @@ class WeaponTreeListAdapterDelegate(
         return WeaponBaseHolder(v)
     }
 
-    override fun onBindViewHolder(items: List<RenderedTreeNode<Weapon>>,
+    override fun onBindViewHolder(items: List<Any>,
                                   position: Int,
                                   holder: androidx.recyclerview.widget.RecyclerView.ViewHolder,
                                   payloads: List<Any>) {
-        val weaponBaseTreeNode = items[position]
+        @Suppress("UNCHECKED_CAST")
+        val weaponBaseTreeNode = items[position] as RenderedTreeNode<Weapon>
 
         val vh = holder as WeaponBaseHolder
         vh.bind(weaponBaseTreeNode)

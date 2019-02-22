@@ -4,10 +4,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
+import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
-import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.WeaponTreeListAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -17,7 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
  * Weapon families are used to figure out the crafting path.
  */
 class WeaponDetailFamilyFragment : RecyclerViewFragment() {
-    val adapter = BasicListDelegationAdapter(
+    val adapter = CategoryAdapter(
             WeaponTreeListAdapterDelegate { getRouter().navigateWeaponDetail(it.id) }
     )
 
@@ -32,14 +33,18 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
         super.onViewCreated(view, savedInstanceState)
         setAdapter(adapter)
 
-        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
+        recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.weaponTrees.observe(this, Observer { tree ->
-            if (tree == null) return@Observer
+        viewModel.weaponFamilyData.observe(this, Observer { data ->
+            if (data == null) return@Observer
 
-            val familyPath = tree.getModel(viewModel.weaponId)?.path
-            adapter.items = familyPath?.map { RenderedTreeNode(it.value) } ?: emptyList()
-            adapter.notifyDataSetChanged()
+            val familyNodes = data.familyPath.map { RenderedTreeNode(it) }
+            val finalNodes = data.finalWeapons.map { RenderedTreeNode(it) }
+
+            adapter.addSection(familyNodes)
+            if (finalNodes.isNotEmpty()) {
+                adapter.addSection(getString(R.string.weapon_final_upgrades), finalNodes)
+            }
         })
     }
 }

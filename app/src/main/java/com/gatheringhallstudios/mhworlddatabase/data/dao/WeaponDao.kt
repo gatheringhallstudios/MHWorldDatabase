@@ -144,9 +144,9 @@ abstract class WeaponDao {
      * Loads extended detail weapon for a particular weapon.
      * Equivalent to calling loadWeapon with additional bundled information.
      */
-    fun loadWeaponFull(langId: String, weaponId: Int) = createLiveData {
+    fun loadWeaponFullSync(langId: String, weaponId: Int): WeaponFull {
         val weapon = loadWeapon(langId, weaponId)
-        WeaponFull(
+        return WeaponFull(
                 weapon = weapon,
                 recipe = queryRecipeComponents(langId, weaponId),
                 ammo = loadWeaponAmmoData(langId, weaponId),
