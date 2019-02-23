@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data
 
+import android.util.Log
 import androidx.room.TypeConverter
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.util.Converter
@@ -28,6 +29,18 @@ class AppConverters {
     @TypeConverter fun dataTypeFromString(value: String?) = DataTypeConverter.deserialize(value)
     @TypeConverter fun fromDataType(type: DataType?) = DataTypeConverter.serialize(type)
 
-    @TypeConverter fun dateFromString(value: String?) = SimpleDateFormat("MMM dd yyyy HH:mma", Locale.US).parse(value)
-    @TypeConverter fun stringfromDate(type: Date) = SimpleDateFormat("MMM dd yyyy HH:mma", Locale.US).format(type)
+    @TypeConverter fun dateFromString(value: String?) =
+        try {
+            SimpleDateFormat("MMM dd yyyy HH:mma", Locale.US).parse(value)
+        } catch (ex: Exception) {
+            try {
+                // this may be an old date instance before locale was hardcoded. Try that.
+                SimpleDateFormat("MMM dd yyyy HH:mma").parse(value)
+            } catch (ex: Exception) {
+                Log.e("AppConverters", "Failed to convert date $value, falling back to new date object")
+                Date()
+            }
+        }
+
+    @TypeConverter fun stringFromDate(type: Date) = SimpleDateFormat("MMM dd yyyy HH:mma", Locale.US).format(type)
 }
