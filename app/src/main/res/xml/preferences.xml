@@ -9,4 +9,10 @@
         android:summary="@string/preference_data_language_description"
         android:icon="@drawable/ic_ui_hunter_notes_white"/>
 
+    <ListPreference
+        android:key="ATTACK_VALUE_TYPE"
+        android:title="@string/preference_weapons_attack_values"
+        android:summary="@string/preference_weapons_attack_values_description"
+        android:icon="@drawable/ic_equipment_charge_blade_white"/>
+
 </PreferenceScreen>

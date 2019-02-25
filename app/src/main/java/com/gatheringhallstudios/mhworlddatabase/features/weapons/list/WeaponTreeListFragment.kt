@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
@@ -40,7 +41,8 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
 
         setActivityTitle(AssetLoader.getNameFor(type))
 
-        val adapter = WeaponTreeAdapter {
+        val adapter = WeaponTreeAdapter(
+                AppSettings.configuredAttackValueType == getString(R.string.preference_weapons_attack_values_enabled)) {
             getRouter().navigateWeaponDetail(it.id)
         }
         setAdapter(adapter)

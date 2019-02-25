@@ -104,9 +104,19 @@
     <string name="label_rate_app">RATE OUR APP!</string>
     <string name="action_ok">OK</string>
     <string name="preference_data_language">Data Language (BETA / INCOMPLETE)</string>
+    <string name="preference_weapons_attack_values">Weapon attack values</string>
     <string name="preference_data_language_description">
         Show names and descriptions using %s.
         \nChanging this will restart the app.
+    </string>
+    <string name="preference_weapons_attack_values_description">
+        Show the bloated weapon attack values in the weapons tree instead of true attack values.
+    </string>
+    <string name="preference_weapons_attack_values_enabled">
+        Enabled
+    </string>
+    <string name="preference_weapons_attack_values_disabled">
+        Disabled
     </string>
     <string name="preference_language_default">Default</string>
 
@@ -189,6 +199,7 @@
 
     <!-- General Strings -->
     <string name="weapon_attack">Attack</string>
+    <string name="weapon_attack_true">Attack (True)</string>
     <string name="weapon_sharpness">Sharpness</string>
     <string name="weapon_element">Element</string>
     <string name="weapon_element_none">None</string>

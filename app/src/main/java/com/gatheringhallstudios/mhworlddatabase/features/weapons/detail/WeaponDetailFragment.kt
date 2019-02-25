@@ -103,6 +103,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         weapon_header.setSubtitleColor(AssetLoader.loadRarityColor(weapon.rarity))
 
         attack_value.text = weapon.attack.toString()
+        attack_value_true.text = weapon.attack_true.toString()
 
         // Affinity
         affinity_value.text = getString(when {

@@ -34,6 +34,7 @@ class PreferencesFragment : PreferenceFragmentCompat() {
 
         setPreferencesFromResource(R.xml.preferences, rootKey)
         initDataLanguages()
+        initWeaponValues()
     }
 
     private fun initDataLanguages() {
@@ -48,6 +49,17 @@ class PreferencesFragment : PreferenceFragmentCompat() {
         localePref.entryValues = languageCodes.toTypedArray()
         localePref.entries = languageNames.toTypedArray()
         localePref.value = AppSettings.configuredDataLocale // ensure a value is set
+    }
+
+    private fun initWeaponValues() {
+        val attackValuePref = findPreference(AppSettings.PROP_ATTACK_VALUE_TYPE) as ListPreference
+
+        // Get the list of languages. Add a "default" language to the front
+        val options = listOf(getString(R.string.preference_weapons_attack_values_enabled), getString(R.string.preference_weapons_attack_values_disabled))
+
+        attackValuePref.entryValues = options.toTypedArray()
+        attackValuePref.entries = options.toTypedArray()
+        attackValuePref.value = AppSettings.configuredAttackValueType // ensure a value is set
     }
 
     /**

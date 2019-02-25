@@ -57,6 +57,30 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
+                    app:srcCompat="@drawable/ic_ui_attack" />
+
+                <TextView
+                    style="@style/TextSubHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:text="@string/weapon_attack_true" />
+
+                <TextView
+                    android:id="@+id/attack_value_true"
+                    style="@style/TextSubHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:gravity="end"
+                    tools:text="56-68" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/EquipmentRow">
+
+                <ImageView
+                    style="@style/IconXSmall"
+                    android:layout_marginStart="@dimen/margin_large"
                     app:srcCompat="@drawable/ic_ui_affinity" />
 
                 <TextView

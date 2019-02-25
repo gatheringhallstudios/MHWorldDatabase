@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.util.Log
 import android.view.ViewGroup
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
@@ -9,14 +10,15 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
  * Adapter to display a weapon tree. Takes a list of RenderedTreeNodes and displays them.
  * Items added to this list can be collapsed and expanded.
  */
-class WeaponTreeAdapter(onSelected: (Weapon) -> Unit): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class WeaponTreeAdapter(showTrueAttackValues: Boolean, onSelected: (Weapon) -> Unit): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     protected var delegatesManager = AdapterDelegatesManager<List<Any>>()
 
     init {
         delegatesManager.addDelegate(WeaponTreeListAdapterDelegate(
                 onSelected=onSelected,
-                onLongSelect=this::onToggle))
+                onLongSelect=this::onToggle,
+                showTrueAttackValues = showTrueAttackValues))
     }
 
     /**

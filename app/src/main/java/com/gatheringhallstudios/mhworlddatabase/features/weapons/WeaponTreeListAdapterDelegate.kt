@@ -34,10 +34,11 @@ const val INDENT_SIZE = 16 //This value corresponds to the measured width of eac
  */
 class WeaponTreeListAdapterDelegate(
         private val onSelected: (Weapon) -> Unit,
-        private val onLongSelect: ((Weapon) -> Unit)?
+        private val onLongSelect: ((Weapon) -> Unit)?,
+        private val showTrueAttackValues: Boolean?
 ) : AdapterDelegate<List<Any>>() {
 
-    constructor(onSelected: (Weapon) -> Unit) : this(onSelected, null)
+    constructor(onSelected: (Weapon) -> Unit) : this(onSelected, null, null)
 
     override fun isForViewType(items: List<Any>, position: Int): Boolean {
         val node = items[position] as? RenderedTreeNode<*>
@@ -99,7 +100,9 @@ class WeaponTreeListAdapterDelegate(
         }
 
         private fun populateStaticStats(weapon: Weapon) {
-            view.attack_value.setLabelText(weapon.attack.toString())
+            view.attack_value.setLabelText(
+                    if (showTrueAttackValues == true) weapon.attack_true.toString()
+                    else weapon.attack.toString())
 
             //Render sharpness data if it exists, else hide the bars
             val sharpnessData = weapon.sharpnessData

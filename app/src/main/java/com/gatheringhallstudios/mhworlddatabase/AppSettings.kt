@@ -47,6 +47,13 @@ class AppSettings {
             get() = sharedPreferences.getString(PROP_DATA_LOCALE, "") ?: ""
 
         /**
+         * Returns the configured attack value type. This is the attack value type the user has set, which may be an empty string.
+         */
+        @JvmStatic
+        val configuredAttackValueType: String
+            get() = sharedPreferences.getString(PROP_ATTACK_VALUE_TYPE, "") ?: ""
+
+        /**
          * Returns the data locale that would be resolved
          */
         @JvmStatic
@@ -78,6 +85,6 @@ class AppSettings {
          * Settings key for data locale language
          */
         val PROP_DATA_LOCALE = "DATA_LOCALE"
-
+        val PROP_ATTACK_VALUE_TYPE = "ATTACK_VALUE_TYPE"
     }
 }
