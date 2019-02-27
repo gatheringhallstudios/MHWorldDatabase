@@ -99,6 +99,15 @@ enum class WeaponType {
 }
 
 /**
+ * Defines the categorization of the weapon.
+ * Use Regular for crafted weapons.
+ */
+enum class WeaponCategory {
+    REGULAR,
+    KULVE
+}
+
+/**
  * Represents an object type.
  * Currently only used by search results for identification reasons.
  */
