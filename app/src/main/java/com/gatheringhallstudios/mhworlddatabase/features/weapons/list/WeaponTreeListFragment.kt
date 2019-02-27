@@ -17,38 +17,28 @@ import com.gatheringhallstudios.mhworlddatabase.features.weapons.WeaponTreeAdapt
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 
+
 /**
  * Fragment that displays the MHModelTree object.
  * This displays the weapons of a particular weapon type as a tree.
  */
 class WeaponTreeListFragment : RecyclerViewFragment() {
-    companion object {
-        const val ARG_WEAPON_TREE_TYPE = "WEAPON_TREE_TYPE"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(WeaponTreeListViewModel::class.java)
+        ViewModelProviders.of(parentFragment!!).get(WeaponTreeListViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val type = arguments?.getSerializable(ARG_WEAPON_TREE_TYPE) as WeaponType
-
-        setActivityTitle(AssetLoader.getNameFor(type))
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         val adapter = WeaponTreeAdapter {
             getRouter().navigateWeaponDetail(it.id)
         }
         setAdapter(adapter)
-
-        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
-
-        // Load data
-        viewModel.setWeaponType(type)
 
         viewModel.nodeListData.observe(this, Observer {
             adapter.setItems(it ?: emptyList())

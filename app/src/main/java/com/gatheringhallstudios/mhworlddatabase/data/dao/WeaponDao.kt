@@ -3,19 +3,19 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponCategory
 
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 
 @Dao
 abstract class WeaponDao {
 
     /**
-     * Loads all weapons for a provided weapon type
+     * Loads all weapons for a provided weapon type and category
      */
     @Query("""
-        SELECT w.id, w.weapon_type, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
+        SELECT w.id, w.weapon_type, w.category, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
             w.element2, w.element2_attack, w.element_hidden, w.sharpness, w.sharpness_maxed, w.previous_weapon_id, w.craftable, w.kinsect_bonus,
             w.elderseal, w.phial, w.phial_power, w.shelling, w.shelling_level, w.coating_close, w.coating_power, w.coating_poison, w.coating_paralysis, w.coating_sleep, w.coating_blast,
             w.notes, wa.special_ammo, wt.name
@@ -26,13 +26,13 @@ abstract class WeaponDao {
             AND w.weapon_type = :weaponType
         ORDER BY w.id ASC
           """)
-    abstract fun loadWeapons(langId: String, weaponType: WeaponType): List<Weapon>
+    abstract fun loadWeaponsSync(langId: String, weaponType: WeaponType): List<Weapon>
 
     /**
      * Loads a single weapon by id
      */
     @Query("""
-        SELECT w.id, w.weapon_type, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
+        SELECT w.id, w.weapon_type, w.category, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
             w.element2, w.element2_attack, w.element_hidden, w.sharpness, w.sharpness_maxed, w.previous_weapon_id, w.craftable, w.kinsect_bonus,
             w.elderseal, w.phial, w.phial_power, w.shelling, w.shelling_level, w.coating_close, w.coating_power, w.coating_poison, w.coating_paralysis, w.coating_sleep, w.coating_blast,
             w.notes, wt.name
@@ -42,7 +42,7 @@ abstract class WeaponDao {
         WHERE w.id = :weaponId
         AND wt.lang_id = :langId
         """)
-    abstract fun loadWeapon(langId: String, weaponId: Int): Weapon
+    abstract fun loadWeaponSync(langId: String, weaponId: Int): Weapon
 
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
@@ -142,10 +142,10 @@ abstract class WeaponDao {
 
     /**
      * Loads extended detail weapon for a particular weapon.
-     * Equivalent to calling loadWeapon with additional bundled information.
+     * Equivalent to calling loadWeaponSync with additional bundled information.
      */
     fun loadWeaponFullSync(langId: String, weaponId: Int): WeaponFull {
-        val weapon = loadWeapon(langId, weaponId)
+        val weapon = loadWeaponSync(langId, weaponId)
         return WeaponFull(
                 weapon = weapon,
                 recipe = queryRecipeComponents(langId, weaponId),
@@ -160,6 +160,6 @@ abstract class WeaponDao {
      */
     fun loadWeaponTrees(langId: String, weaponType: WeaponType): MHModelTree<Weapon> {
         // todo: cache it
-        return MHModelTree(loadWeapons(langId, weaponType))
+        return MHModelTree(loadWeaponsSync(langId, weaponType))
     }
 }

@@ -3,7 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase
 import androidx.navigation.NavController
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment
@@ -12,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.Locati
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailPagerFragment
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreeListFragment.Companion.ARG_WEAPON_TREE_TYPE
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.ARG_WEAPON_TREE_TYPE
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 
 /**

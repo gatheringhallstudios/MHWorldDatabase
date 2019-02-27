@@ -9,6 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponCategory
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -31,6 +32,11 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
      * A list of nodes for the tree to display.
      */
     val nodeListData = MutableLiveData<List<RenderedTreeNode<Weapon>>>()
+
+    /**
+     * A list of nodes for the tree to display under the Kulve tab.
+     */
+    val kulveNodeData = MutableLiveData<List<RenderedTreeNode<Weapon>>>()
 
     /**
      * Returns the current filter state for final only
@@ -64,7 +70,9 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
     }
 
     private fun updateNodeList() {
-        nodeListData.value = filter.renderResults()
+        val results = filter.renderResults()
+        nodeListData.value = results.filter { it.value.category == WeaponCategory.REGULAR }
+        kulveNodeData.value = results.filter { it.value.category == WeaponCategory.KULVE }
     }
 }
 

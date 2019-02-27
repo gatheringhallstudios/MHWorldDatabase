@@ -7,7 +7,7 @@ apply plugin: 'kotlin-kapt'
 
 // Update this to update the database on the next build
 // This is also used to populate populate MHWDatabase.java configuration
-def DATABASE_VERSION = 25
+def DATABASE_VERSION = 26
 
 android {
     compileSdkVersion 28
@@ -89,10 +89,10 @@ dependencies {
     def architecture_version = "1.1.1"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
-    implementation 'androidx.room:room-runtime:2.1.0-alpha03'
-    kapt 'androidx.room:room-compiler:2.1.0-alpha03'
+    implementation 'androidx.room:room-runtime:2.1.0-alpha04'
+    kapt 'androidx.room:room-compiler:2.1.0-alpha04'
     testImplementation 'androidx.arch.core:core-testing:2.0.0'
-    testImplementation 'androidx.room:room-testing:2.1.0-alpha03'
+    testImplementation 'androidx.room:room-testing:2.1.0-alpha04'
 
     /*
      * Android Navigation Component

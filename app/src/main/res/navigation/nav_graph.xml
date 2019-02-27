@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/weaponTreeDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreeListFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment"
         tools:layout="@layout/list_generic" />
     <action
         android:id="@+id/openWeaponTreeAction"

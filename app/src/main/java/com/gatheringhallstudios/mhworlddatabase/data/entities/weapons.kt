@@ -4,6 +4,8 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.gatheringhallstudios.mhworlddatabase.data.types.ReloadType
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponCategory
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 
 // note: final is a java keyword which causes problems. Find some way to add it back later
 
@@ -11,7 +13,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.ReloadType
 data class WeaponEntity(
         @PrimaryKey
         val id: Int,
-        val weapon_type: String,
+        val weapon_type: WeaponType,
+        val category: WeaponCategory,
         val rarity: Int,
         val attack: Int,
         val attack_true: Int?,
