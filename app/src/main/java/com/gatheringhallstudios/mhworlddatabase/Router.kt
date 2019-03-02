@@ -47,7 +47,7 @@ class Router(private val navController: NavController) {
 
     fun navigateMonsterDetail(monsterId: Int) {
         navController.navigate(
-                R.id.openMonsterDetailAction,
+                R.id.action_monsterListDestination_to_monsterDetailDestination,
                 BundleBuilder().putInt(MonsterDetailPagerFragment.ARG_MONSTER_ID, monsterId).build())
     }
 
