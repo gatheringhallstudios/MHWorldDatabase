@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Checkable
+import android.widget.CompoundButton
 import android.widget.FrameLayout
 
 /**
@@ -22,14 +23,23 @@ class CheckedFrameLayout : FrameLayout, Checkable {
     constructor(ctx: Context, attrs: AttributeSet): super(ctx, attrs)
     constructor(ctx: Context, attrs: AttributeSet, defStyle: Int): super(ctx, attrs, defStyle)
 
+    init {
+        // by default, the click should toggle the checked state
+        setOnClickListener { this.toggle() }
+    }
+
+    /**
+     * Register a callback to be invoked when the checked state of this button
+     * changes.
+     */
+    var onCheckedChangeListener: ((checkable: Checkable, isChecked: Boolean) -> Unit)? = null
+
     override fun isChecked() = checked
     override fun setChecked(checked: Boolean) {
         this.checked = checked
         refreshDrawableState()
 
-//        if (mOnCheckedChangeListener != null) {
-//            mOnCheckedChangeListener.onCheckedChanged(this, mChecked);
-//        }
+        onCheckedChangeListener?.invoke(this, this.isChecked)
     }
 
     override fun toggle() {
