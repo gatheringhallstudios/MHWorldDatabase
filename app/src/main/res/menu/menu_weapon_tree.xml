@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/final_toggle"
-        android:title="@string/weapon_final_only"
-        android:checkable="true"/>
+        android:id="@+id/action_filter"
+        android:title="@string/action_filter"
+        android:icon="@drawable/ic_element_fire"
+        app:showAsAction="ifRoom" />
 </menu>

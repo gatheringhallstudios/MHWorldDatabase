@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:variablePadding="false">
+
+    <item
+        android:drawable="@drawable/button_toggle_unchecked"
+        android:state_checked="false"/>
+
+    <item
+        android:drawable="@drawable/button_toggle_checked"
+        android:state_checked="true"/>
+
+    <item
+        android:drawable="@drawable/button_toggle_checked"
+        android:state_activated="true"/>
+</selector>

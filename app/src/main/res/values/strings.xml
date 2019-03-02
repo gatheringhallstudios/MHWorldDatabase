@@ -10,6 +10,10 @@
 
     <string name="action_search">Search</string>
     <string name="action_bookmark">Bookmark</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_apply">Apply</string>
 
     <string name="general_no_data">Nothing here, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
     <string name="general_none">None</string> <!-- Empty message for skill/charms subsections -->
@@ -168,7 +172,7 @@
     <!-- ## WEAPON MENU ## -->
     <!-- ################# -->
 
-    <string name="weapon_final_only">Final Only</string>
+    <string name="weapon_final_only">Final</string>
     <string name="weapon_final_upgrades">Final</string>
 
     <!-- Weapon List Entries -->
@@ -193,6 +197,9 @@
     <string name="tab_weapon_kulve">Kulve</string>
     <string name="tab_weapon_detail">Detail</string>
     <string name="tab_weapon_tree">Family</string>
+
+    <string name="filter_title_show_only">Show Only</string>
+    <string name="filter_title_sort_by">Sort By</string>
 
     <!-- General Strings -->
     <string name="weapon_attack">Attack</string>

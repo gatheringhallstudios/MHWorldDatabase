@@ -24,11 +24,6 @@ import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
  * This displays the weapons of a particular weapon type as a tree.
  */
 class WeaponTreeListFragment : RecyclerViewFragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     private val viewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(WeaponTreeListViewModel::class.java)
     }
@@ -46,27 +41,5 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
             adapter.notifyDataSetChanged()
         })
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_weapon_tree, menu)
-        menu.findItem(R.id.final_toggle).isChecked = viewModel.isFinal
-    }
-
-    /**
-     * Handled when a menu item is clicked. True is returned if handled.
-     */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.final_toggle -> {
-                val newSetting = !item.isChecked
-                viewModel.setShowFinal(newSetting)
-                item.isChecked = newSetting
-                true
-            }
-
-            // fallback to parent behavior if unhandled
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }
