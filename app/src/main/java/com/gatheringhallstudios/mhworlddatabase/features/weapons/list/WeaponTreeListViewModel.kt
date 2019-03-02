@@ -39,9 +39,13 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
     val kulveNodeData = MutableLiveData<List<RenderedTreeNode<Weapon>>>()
 
     /**
-     * Returns the current filter state for final only
+     * Returns the current filter state
      */
-    val isFinal get() = filter.finalOnly
+    var filterState = FilterState.default
+        set(value) {
+            field = value
+            updateNodeList()
+        }
 
     fun setWeaponType(weaponType: WeaponType) {
         if (::currentWeaponType.isInitialized && currentWeaponType == weaponType) {
