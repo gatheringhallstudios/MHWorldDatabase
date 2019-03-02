@@ -142,7 +142,7 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
-    fun loadElementIcon(element: String?): Drawable? {
+    fun loadElementIcon(element: ElementStatus?): Drawable? {
         return ctx.getDrawableCompat(ElementRegistry(element))
     }
 
@@ -185,6 +185,22 @@ object AssetLoader {
         WeaponType.LIGHT_BOWGUN -> ctx.getString(R.string.title_light_bowgun)
         WeaponType.HEAVY_BOWGUN -> ctx.getString(R.string.title_heavy_bowgun)
         WeaponType.BOW -> ctx.getString(R.string.title_bow)
+    }
+
+    /**
+     * Returns the localized element or status name.
+     */
+    fun localizeElementStatus(elementStatus: ElementStatus?): String = when(elementStatus) {
+        null -> ""
+        ElementStatus.FIRE -> ctx.getString(R.string.element_fire)
+        ElementStatus.WATER -> ctx.getString(R.string.element_water)
+        ElementStatus.THUNDER -> ctx.getString(R.string.element_thunder)
+        ElementStatus.ICE -> ctx.getString(R.string.element_ice)
+        ElementStatus.DRAGON -> ctx.getString(R.string.element_dragon)
+        ElementStatus.POISON -> ctx.getString(R.string.status_poison)
+        ElementStatus.SLEEP -> ctx.getString(R.string.status_sleep)
+        ElementStatus.PARALYSIS -> ctx.getString(R.string.status_paralysis)
+        ElementStatus.BLAST -> ctx.getString(R.string.status_blast)
     }
 
     /**

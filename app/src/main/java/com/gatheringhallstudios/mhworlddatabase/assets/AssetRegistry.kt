@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
 
 private fun <T, K> createRegistry(vararg pairs: Pair<T, K>): (T) -> K? {
@@ -96,16 +97,16 @@ val VectorRegistry = createRegistry(
         "Wing" to R.xml.ic_items_wing_base
 )
 
-val ElementRegistry = fun(element: String?) = when (element) {
-    "Fire" -> R.drawable.ic_element_fire
-    "Dragon" -> R.drawable.ic_element_dragon
-    "Poison" -> R.drawable.ic_status_poison
-    "Water" -> R.drawable.ic_element_water
-    "Thunder" -> R.drawable.ic_element_thunder
-    "Ice" -> R.drawable.ic_element_ice
-    "Blast" -> R.drawable.ic_status_blast
-    "Paralysis" -> R.drawable.ic_status_paralysis
-    "Sleep" -> R.drawable.ic_status_sleep
+val ElementRegistry = fun(element: ElementStatus?) = when (element) {
+    ElementStatus.FIRE -> R.drawable.ic_element_fire
+    ElementStatus.WATER -> R.drawable.ic_element_water
+    ElementStatus.THUNDER -> R.drawable.ic_element_thunder
+    ElementStatus.ICE -> R.drawable.ic_element_ice
+    ElementStatus.DRAGON -> R.drawable.ic_element_dragon
+    ElementStatus.POISON -> R.drawable.ic_status_poison
+    ElementStatus.SLEEP -> R.drawable.ic_status_sleep
+    ElementStatus.PARALYSIS -> R.drawable.ic_status_paralysis
+    ElementStatus.BLAST -> R.drawable.ic_status_blast
     else -> R.drawable.ic_ui_slot_none
 }
 

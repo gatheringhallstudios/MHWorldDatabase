@@ -70,6 +70,17 @@
     <string name="extract_white_abbr">WHT</string>
     <string name="extract_green_abbr">GRN</string>
 
+    <!-- Elements and statuses -->
+    <string name="element_fire">Fire</string>
+    <string name="element_water">Water</string>
+    <string name="element_thunder">Thunder</string>
+    <string name="element_ice">Ice</string>
+    <string name="element_dragon">Dragon</string>
+    <string name="status_poison">Poison</string>
+    <string name="status_sleep">Sleep</string>
+    <string name="status_paralysis">Paralysis</string>
+    <string name="status_blast">Blast</string>
+
     <!-- Section Headers -->
     <!-- These aren't tied to a particular screen so they can be used anywhere -->
     <string name="header_habitat">Habitat</string>

@@ -65,6 +65,19 @@ private val ElderSealLevelConverter = Converter(
         "high" to ElderSealLevel.HIGH
 )
 
+private val ElementStatusConverter = Converter(
+        null to null,
+        "Fire" to ElementStatus.FIRE,
+        "Water" to ElementStatus.WATER,
+        "Thunder" to ElementStatus.THUNDER,
+        "Ice" to ElementStatus.ICE,
+        "Dragon" to ElementStatus.DRAGON,
+        "Poison" to ElementStatus.POISON,
+        "Sleep" to ElementStatus.SLEEP,
+        "Paralysis" to ElementStatus.PARALYSIS,
+        "Blast" to ElementStatus.BLAST
+)
+
 private val WeaponTypeConverter = Converter(
         "great-sword" to WeaponType.GREAT_SWORD,
         "long-sword" to WeaponType.LONG_SWORD,
@@ -155,6 +168,9 @@ class Converters {
 
     @TypeConverter fun armorTypefromString(value: String) = ArmorTypeConverter.deserialize(value)
     @TypeConverter fun fromArmorType(type: ArmorType?) = ArmorTypeConverter.serialize(type)
+
+    @TypeConverter fun elementStatusFromString(value: String?) = ElementStatusConverter.deserialize(value)
+    @TypeConverter fun fromElementStatus(value: ElementStatus?) = ElementStatusConverter.serialize(value)
 
     @TypeConverter fun weaponTypeFromString(value: String) = WeaponTypeConverter.deserialize(value)
     @TypeConverter fun fromWeaponType(type: WeaponType?) = WeaponTypeConverter.serialize(type)

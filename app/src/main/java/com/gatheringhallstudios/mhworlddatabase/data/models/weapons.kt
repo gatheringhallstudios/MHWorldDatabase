@@ -32,9 +32,9 @@ class Weapon(
         val attack_true: Int,
         val affinity: Int,
 
-        val element1: String?,
+        val element1: ElementStatus?,
         val element1_attack: Int?,
-        val element2: String?,
+        val element2: ElementStatus?,
         val element2_attack: Int?,
         val element_hidden: Boolean,
         val defense: Int,

@@ -131,7 +131,8 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
             true -> "($elementAttackStr)"
             false -> elementAttackStr
         }
-        element_type_value.text = weapon.element1 //TODO: This element string needs to be localized in the DB
+
+        element_type_value.text = AssetLoader.localizeElementStatus(weapon.element1)
         element_layout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
 
         //Slot information
