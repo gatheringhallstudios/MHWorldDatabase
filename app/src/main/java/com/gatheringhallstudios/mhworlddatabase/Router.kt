@@ -3,7 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase
 import androidx.navigation.NavController
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment
@@ -47,7 +46,7 @@ class Router(private val navController: NavController) {
 
     fun navigateMonsterDetail(monsterId: Int) {
         navController.navigate(
-                R.id.action_monsterListDestination_to_monsterDetailDestination,
+                R.id.openMonsterDetailAction,
                 BundleBuilder().putInt(MonsterDetailPagerFragment.ARG_MONSTER_ID, monsterId).build())
     }
 

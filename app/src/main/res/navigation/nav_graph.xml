@@ -15,13 +15,6 @@
         android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListPagerFragment"
         android:label="@string/title_monster_list"
         tools:layout="@layout/fragment_generic_pager">
-        <action
-            android:id="@+id/action_monsterListDestination_to_monsterDetailDestination"
-            app:destination="@id/monsterDetailDestination"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <action
         android:id="@+id/monsterListAction"
@@ -206,13 +199,13 @@
         android:id="@+id/monsterDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment"
         tools:layout="@layout/fragment_generic_pager" />
-    <!--<action-->
-    <!--android:id="@+id/openMonsterDetailAction"-->
-    <!--app:destination="@id/monsterDetailDestination"-->
-    <!--app:enterAnim="@anim/nav_enter_right"-->
-    <!--app:exitAnim="@anim/nav_exit_left"-->
-    <!--app:popEnterAnim="@anim/nav_enter_left"-->
-    <!--app:popExitAnim="@anim/nav_exit_right" />-->
+    <action
+        android:id="@+id/openMonsterDetailAction"
+        app:destination="@id/monsterDetailDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
 
     <fragment
         android:id="@+id/itemDetailDestination"
