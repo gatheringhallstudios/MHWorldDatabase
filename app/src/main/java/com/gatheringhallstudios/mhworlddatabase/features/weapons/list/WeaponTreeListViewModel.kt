@@ -11,6 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
+import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponCategory
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,12 @@ import kotlinx.coroutines.withContext
 class WeaponElementFilter(private val elements: Set<ElementStatus>): Filter<Weapon> {
     override fun runFilter(obj: Weapon): Boolean {
         return (obj.element1 in elements || obj.element2 in elements)
+    }
+}
+
+class WeaponPhialFilter(private val phialTypes: Set<PhialType>): Filter<Weapon> {
+    override fun runFilter(obj: Weapon): Boolean {
+        return (obj.phial in phialTypes)
     }
 }
 
@@ -68,6 +75,9 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
 
             if (value.elements.isNotEmpty()) {
                 filter.addFilter(WeaponElementFilter(value.elements))
+            }
+            if (value.phials.isNotEmpty()) {
+                filter.addFilter(WeaponPhialFilter(value.phials))
             }
 
             updateNodeList()
