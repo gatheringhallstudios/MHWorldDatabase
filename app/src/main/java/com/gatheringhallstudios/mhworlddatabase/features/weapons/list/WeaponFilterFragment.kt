@@ -10,10 +10,7 @@ import android.widget.ToggleButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.components.CheckedFrameLayout
-import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
-import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import kotlinx.android.synthetic.main.fragment_weapon_filter.*
 import kotlinx.android.synthetic.main.fragment_weapon_filter_body.*
@@ -129,6 +126,8 @@ class WeaponFilterFragment : DialogFragment() {
     lateinit var elementGroup: CheckedGroup<ElementStatus>
     lateinit var phialGroupCB: CheckedGroup<PhialType>
     lateinit var phialGroupSWAXE: CheckedGroup<PhialType>
+    lateinit var kinsectGroup: CheckedGroup<KinsectBonus>
+    lateinit var shellingGroup: CheckedGroup<ShellingType>
     lateinit var sortGroup: CheckedGroup<FilterSortCondition>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -177,6 +176,23 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(phial_toggle_dragon, PhialType.DRAGON)
         }
 
+        kinsectGroup = CheckedGroup()
+        kinsectGroup.apply {
+            addBinding(kinsect_toggle_speed, KinsectBonus.SPEED)
+            addBinding(kinsect_toggle_stamina, KinsectBonus.STAMINA)
+            addBinding(kinsect_toggle_health, KinsectBonus.HEALTH)
+            addBinding(kinsect_toggle_element, KinsectBonus.ELEMENT)
+            addBinding(kinsect_toggle_sever, KinsectBonus.SEVER)
+            addBinding(kinsect_toggle_blunt, KinsectBonus.BLUNT)
+        }
+
+        shellingGroup = CheckedGroup()
+        shellingGroup.apply {
+            addBinding(shelling_toggle_normal, ShellingType.NORMAL)
+            addBinding(shelling_toggle_long, ShellingType.LONG)
+            addBinding(shelling_toggle_wide, ShellingType.WIDE)
+        }
+
         // define sort group
         sortGroup = CheckedGroup(singleOnly = true)
         sortGroup.addBinding(sort_attack_toggle, FilterSortCondition.ATTACK)
@@ -202,9 +218,16 @@ class WeaponFilterFragment : DialogFragment() {
             WeaponType.LIGHT_BOWGUN, WeaponType.HEAVY_BOWGUN -> false
             else -> true
         }
+
         phial_types_cb.isVisible = (weaponType == WeaponType.CHARGE_BLADE)
         phial_types_swaxe.isVisible = (weaponType == WeaponType.SWITCH_AXE)
         title_phials.isVisible = phial_types_cb.isVisible || phial_types_swaxe.isVisible
+
+        title_kinsect.isVisible = (weaponType == WeaponType.INSECT_GLAIVE)
+        kinsect_toggles.isVisible = (weaponType == WeaponType.INSECT_GLAIVE)
+
+        title_shelling.isVisible = (weaponType == WeaponType.GUNLANCE)
+        shelling_toggles.isVisible = (weaponType == WeaponType.GUNLANCE)
 
         // Apply and config state from bundle
         val state = arguments?.getSerializable(FILTER_STATE) as? FilterState
@@ -217,9 +240,6 @@ class WeaponFilterFragment : DialogFragment() {
      * Returns the current state, received by analyzing the current view state.
      */
     fun calculateState(): FilterState {
-        val elements = mutableSetOf<ElementStatus>()
-        elements.addAll(elementGroup.getValues())
-
         val phials = when (weaponType) {
             WeaponType.CHARGE_BLADE -> phialGroupCB.getValues().toSet()
             WeaponType.SWITCH_AXE -> phialGroupSWAXE.getValues().toSet()
@@ -229,8 +249,11 @@ class WeaponFilterFragment : DialogFragment() {
         return FilterState(
                 isFinalOnly = final_toggle.isChecked,
                 sortBy = sortGroup.getValue() ?: FilterSortCondition.NONE,
-                elements = elements,
-                phials = phials
+                elements = elementGroup.getValues().toSet(),
+                phials = phials,
+                kinsectBonuses = kinsectGroup.getValues().toSet(),
+                shellingTypes = shellingGroup.getValues().toSet(),
+                shellingLevels = emptySet()
         )
     }
 
@@ -243,14 +266,10 @@ class WeaponFilterFragment : DialogFragment() {
 
         // Set the basic group values
         elementGroup.setValues(state.elements)
+        phialGroupCB.setValues(state.phials)
+        phialGroupSWAXE.setValues(state.phials)
+        kinsectGroup.setValues(state.kinsectBonuses)
+        shellingGroup.setValues(state.shellingTypes)
         sortGroup.setValue(state.sortBy)
-
-        // Set phials
-        if (weaponType == WeaponType.CHARGE_BLADE) {
-            phialGroupCB.setValues(state.phials)
-        }
-        if (weaponType == WeaponType.SWITCH_AXE) {
-            phialGroupSWAXE.setValues(state.phials)
-        }
     }
 }

@@ -8,31 +8,14 @@ import com.gatheringhallstudios.mhworlddatabase.common.Filter
 import com.gatheringhallstudios.mhworlddatabase.common.MHModelTreeFilter
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
-import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
-import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponCategory
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * Filter applied to the main filter to filter on an element
- */
-class WeaponElementFilter(private val elements: Set<ElementStatus>): Filter<Weapon> {
-    override fun runFilter(obj: Weapon): Boolean {
-        return (obj.element1 in elements || obj.element2 in elements)
-    }
-}
-
-class WeaponPhialFilter(private val phialTypes: Set<PhialType>): Filter<Weapon> {
-    override fun runFilter(obj: Weapon): Boolean {
-        return (obj.phial in phialTypes)
-    }
-}
 
 /**
  * Viewmodel used to contain data for the Weapon Tree.
@@ -68,16 +51,23 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
             filter.clearFilters()
 
             filter.finalOnly = value.isFinalOnly
-            filter.flatten = when {
-                value.sortBy != FilterSortCondition.NONE -> true
-                else -> false
-            }
+            filter.flatten = (value.sortBy != FilterSortCondition.NONE)
+            // actual sorting is applied after the node list is updated
 
             if (value.elements.isNotEmpty()) {
                 filter.addFilter(WeaponElementFilter(value.elements))
             }
             if (value.phials.isNotEmpty()) {
                 filter.addFilter(WeaponPhialFilter(value.phials))
+            }
+            if (value.kinsectBonuses.isNotEmpty()) {
+                filter.addFilter(WeaponKinsectFilter(value.kinsectBonuses))
+            }
+            if (value.shellingTypes.isNotEmpty()) {
+                filter.addFilter(WeaponShellingFilter(value.shellingTypes))
+            }
+            if (value.shellingLevels.isNotEmpty()) {
+                filter.addFilter(WeaponShellingLevelFilter(value.shellingLevels))
             }
 
             updateNodeList()

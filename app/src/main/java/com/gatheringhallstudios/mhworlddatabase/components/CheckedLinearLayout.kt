@@ -4,14 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Checkable
-import android.widget.CompoundButton
-import android.widget.FrameLayout
+import android.widget.LinearLayout
 
 /**
  * Descendant of FrameLayout which implements the Checkable interface.
  * Use to implement custom toggle buttons.
  */
-class CheckedFrameLayout : FrameLayout, Checkable {
+class CheckedLinearLayout : LinearLayout, Checkable {
     companion object {
         @JvmStatic
         val CheckedStateSet = intArrayOf(android.R.attr.state_checked)
