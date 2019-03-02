@@ -2,23 +2,26 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
 import android.content.Intent
 import android.os.Bundle
-import android.sax.Element
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Checkable
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import kotlinx.android.synthetic.main.fragment_weapon_filter.*
 
 class WeaponFilterFragment : DialogFragment() {
     companion object {
+        const val FILTER_WEAPON_TYPE = "FILTER_WEAPON_TYPE"
         const val FILTER_STATE = "FILTER_STATE"
 
-        @JvmStatic fun newInstance(state: FilterState)
+        @JvmStatic fun newInstance(wtype: WeaponType, state: FilterState)
                 = WeaponFilterFragment().applyArguments {
+                    putSerializable(FILTER_WEAPON_TYPE, wtype)
                     putSerializable(FILTER_STATE, state)
                 }
     }
@@ -66,8 +69,15 @@ class WeaponFilterFragment : DialogFragment() {
             dismiss()
         }
 
-        // Apply state from bundle
+        // Apply and config state from bundle
+        val wtype = arguments?.getSerializable(FILTER_WEAPON_TYPE) as? WeaponType
         val state = arguments?.getSerializable(FILTER_STATE) as? FilterState
+        if (wtype != null) {
+            element_toggles.isVisible = when (wtype) {
+                WeaponType.LIGHT_BOWGUN, WeaponType.HEAVY_BOWGUN -> false
+                else -> true
+            }
+        }
         if (state != null) {
             applyState(state)
         }

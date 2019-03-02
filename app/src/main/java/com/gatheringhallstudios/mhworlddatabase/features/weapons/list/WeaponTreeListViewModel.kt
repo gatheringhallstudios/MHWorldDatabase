@@ -21,7 +21,9 @@ import kotlinx.coroutines.withContext
  */
 class WeaponTreeListViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = MHWDatabase.getDatabase(application).weaponDao()
-    private lateinit var currentWeaponType: WeaponType
+
+    lateinit var currentWeaponType: WeaponType
+        private set
 
     /**
      * Encapsulates the charm tree and performs filtering on it

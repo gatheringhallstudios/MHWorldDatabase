@@ -59,8 +59,9 @@ class WeaponTreePagerFragment : BasePagerFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_filter -> {
+                val wtype = viewModel.currentWeaponType
                 val state = viewModel.filterState
-                val filterFragment = WeaponFilterFragment.newInstance(state)
+                val filterFragment = WeaponFilterFragment.newInstance(wtype, state)
                 filterFragment.setTargetFragment(this, FILTER_RESULT_CODE)
                 filterFragment.show(fragmentManager!!, "Filter")
 
