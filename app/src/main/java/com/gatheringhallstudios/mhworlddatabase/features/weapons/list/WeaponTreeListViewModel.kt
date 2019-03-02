@@ -4,17 +4,28 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.common.Filter
 import com.gatheringhallstudios.mhworlddatabase.common.MHModelTreeFilter
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponCategory
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+/**
+ * Filter applied to the main filter to filter on an element
+ */
+class WeaponElementFilter(private val elements: Set<ElementStatus>): Filter<Weapon> {
+    override fun runFilter(obj: Weapon): Boolean {
+        return (obj.element1 in elements || obj.element2 in elements)
+    }
+}
 
 /**
  * Viewmodel used to contain data for the Weapon Tree.
@@ -41,14 +52,30 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
     val kulveNodeData = MutableLiveData<List<RenderedTreeNode<Weapon>>>()
 
     /**
-     * Returns the current filter state
+     * Returns or updates the current filter state
      */
     var filterState = FilterState.default
         set(value) {
             field = value
+
+            filter.clearFilters()
+
+            filter.finalOnly = value.isFinalOnly
+            filter.flatten = when {
+                value.sortBy != FilterSortCondition.NONE -> true
+                else -> false
+            }
+
+            if (value.elements.isNotEmpty()) {
+                filter.addFilter(WeaponElementFilter(value.elements))
+            }
+
             updateNodeList()
         }
 
+    /**
+     * Sets the weapon type, and triggers the initial load.
+     */
     fun setWeaponType(weaponType: WeaponType) {
         if (::currentWeaponType.isInitialized && currentWeaponType == weaponType) {
             return
@@ -66,17 +93,19 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
     }
 
     /**
-     * Sets whether the weapon node list should show only "final results".
-     * If final is true, nodeListData will be replaced with leaf nodes.
-     * Otherwise nodeListData will contain the entire tree.
+     * Triggers an update to perform the filter, do any post-filter mutations (sorting),
+     * and update the LiveData with the results.
      */
-    fun setShowFinal(final: Boolean) {
-        filter.finalOnly = final
-        updateNodeList()
-    }
-
     private fun updateNodeList() {
-        val results = filter.renderResults()
+        val results = filter.renderResults().toMutableList()
+
+        // Perform any mutations that are "post-filter". In this case, sorting.
+        when (filterState.sortBy) {
+            FilterSortCondition.ATTACK -> results.sortByDescending { it.value.attack_true }
+            FilterSortCondition.AFFINITY -> results.sortByDescending { it.value.affinity }
+            FilterSortCondition.NONE -> {}
+        }
+
         nodeListData.value = results.filter { it.value.category == WeaponCategory.REGULAR }
         kulveNodeData.value = results.filter { it.value.category == WeaponCategory.KULVE }
     }

@@ -52,4 +52,24 @@ class MHModelTree<T: MHParentedModel>(
      * Method used to
      */
     fun getModel(weaponId: Int) = modelMap[weaponId]
+
+    /**
+     * Creates a list that crawls through every node in this list (depth first).
+     * TODO: Make into an iterator once kotlin stops having issues with recursive sequences and iterators
+     */
+    fun flatten() = roots.flatMap { flattenNode(it) }
+
+    /**
+     * Helper that recursively creates a list including the node itself (depth search)
+     */
+    private fun flattenNode(node: TreeNode<T>): List<TreeNode<T>> {
+        val result = mutableListOf<TreeNode<T>>()
+        result.add(node)
+
+        for (child in node.getChildren()) {
+            result.addAll(flattenNode(child))
+        }
+
+        return result
+    }
 }
