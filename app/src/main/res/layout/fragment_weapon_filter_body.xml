@@ -342,9 +342,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:flexDirection="row"
-                app:flexWrap="wrap">
+                app:flexWrap="wrap"
+                android:layout_marginTop="@dimen/margin_large">
 
-                <!-- todo: shelling levels -->
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_1"
+                    style="@style/ButtonToggle"
+                    app:text="Lv 1"
+                    android:layout_marginEnd="@dimen/margin_large"/>
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_2"
+                    style="@style/ButtonToggle"
+                    app:text="Lv 2"
+                    android:layout_marginEnd="@dimen/margin_large"/>
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_3"
+                    style="@style/ButtonToggle"
+                    app:text="Lv 3"
+                    android:layout_marginEnd="@dimen/margin_large"/>
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_4"
+                    style="@style/ButtonToggle"
+                    app:text="Lv 4"/>
 
             </com.google.android.flexbox.FlexboxLayout>
 

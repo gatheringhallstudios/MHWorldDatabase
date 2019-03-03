@@ -144,6 +144,7 @@ class WeaponFilterFragment : DialogFragment() {
     lateinit var phialGroupSWAXE: CheckedGroup<PhialType>
     lateinit var kinsectGroup: CheckedGroup<KinsectBonus>
     lateinit var shellingGroup: CheckedGroup<ShellingType>
+    lateinit var shellingLevelGroup: CheckedGroup<Int>
     lateinit var sortGroup: CheckedGroup<FilterSortCondition>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -209,6 +210,14 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(shelling_toggle_wide, ShellingType.WIDE)
         }
 
+        shellingLevelGroup = CheckedGroup()
+        shellingLevelGroup.apply {
+            addBinding(shelling_toggle_level_1, 1)
+            addBinding(shelling_toggle_level_2, 2)
+            addBinding(shelling_toggle_level_3, 3)
+            addBinding(shelling_toggle_level_4, 4)
+        }
+
         // define sort group
         sortGroup = CheckedGroup(singleOnly = true)
         sortGroup.addBinding(sort_attack_toggle, FilterSortCondition.ATTACK)
@@ -268,7 +277,7 @@ class WeaponFilterFragment : DialogFragment() {
                 phials = phials,
                 kinsectBonuses = kinsectGroup.getValues().toSet(),
                 shellingTypes = shellingGroup.getValues().toSet(),
-                shellingLevels = emptySet()
+                shellingLevels = shellingLevelGroup.getValues().toSet()
         )
     }
 
@@ -285,6 +294,7 @@ class WeaponFilterFragment : DialogFragment() {
         phialGroupSWAXE.setValues(state.phials)
         kinsectGroup.setValues(state.kinsectBonuses)
         shellingGroup.setValues(state.shellingTypes)
+        shellingLevelGroup.setValues(state.shellingLevels)
         sortGroup.setValue(state.sortBy)
     }
 }
