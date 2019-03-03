@@ -103,20 +103,15 @@
     <string name="label_whats_new">What\'s new!</string>
     <string name="label_rate_app">RATE OUR APP!</string>
     <string name="action_ok">OK</string>
-    <string name="preference_data_language">Data Language (BETA / INCOMPLETE)</string>
-    <string name="preference_weapons_attack_values">Weapon attack values</string>
+    <string name="preference_data_language">Data Language</string>
+    <string name="preference_weapons_attack_values">Show Weapon True Attack</string>
     <string name="preference_data_language_description">
         Show names and descriptions using %s.
         \nChanging this will restart the app.
     </string>
     <string name="preference_weapons_attack_values_description">
-       Use bloated weapon attack values in the weapons tree instead of true attack values.
-    </string>
-    <string name="preference_weapons_attack_values_enabled">
-        Enabled
-    </string>
-    <string name="preference_weapons_attack_values_disabled">
-        Disabled
+        The game shows bloated attack values. Enable this to shows
+        true attack values instead, which are what's used in the damage formula.
     </string>
     <string name="preference_language_default">Default</string>
 
