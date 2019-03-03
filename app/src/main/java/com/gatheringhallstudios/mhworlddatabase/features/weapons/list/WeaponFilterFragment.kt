@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Checkable
+import android.widget.CompoundButton
 import android.widget.ToggleButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.components.CheckableNotifier
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import kotlinx.android.synthetic.main.fragment_weapon_filter.*
@@ -30,16 +32,30 @@ class CheckedGroup<T>(val singleOnly: Boolean = false) {
         }
     }
 
-    fun addBinding(item: Checkable, value: T) {
-        map[item] = value
+    /**
+     * Adds a binding to the list.
+     * This version also updates the change listener.
+     */
+    fun addBinding(item: CheckableNotifier, value: T) {
+        addBinding(item as Checkable, value)
+        item.onCheckedChangeListener = ::notifyChanged
     }
 
     /**
-     * Notify that an item has changed. Required as the checkable interface
-     * does not have an event register function.
+     * Adds a binding to the list.
+     * This version also updates the change listener.
      */
-    fun notifyChanged(item: Checkable) {
-        notifyChanged(item, item.isChecked)
+    fun addBinding(item: CompoundButton, value: T) {
+        addBinding(item as Checkable, value)
+        item.setOnCheckedChangeListener(::notifyChanged)
+    }
+
+    /**
+     * Adds a binding to the list.
+     * It is necessary to register the change event to notify the group with this version.
+     */
+    private fun addBinding(item: Checkable, value: T) {
+        map[item] = value
     }
 
     /**
@@ -197,7 +213,6 @@ class WeaponFilterFragment : DialogFragment() {
         sortGroup = CheckedGroup(singleOnly = true)
         sortGroup.addBinding(sort_attack_toggle, FilterSortCondition.ATTACK)
         sortGroup.addBinding(sort_affinity_toggle, FilterSortCondition.AFFINITY)
-        sortGroup.views.forEach { (it as ToggleButton).setOnCheckedChangeListener(sortGroup::notifyChanged) }
 
         // Implement actions
         action_clear.setOnClickListener {

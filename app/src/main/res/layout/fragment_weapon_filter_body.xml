@@ -47,69 +47,49 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_fire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_toggle_statelist"
-                    android:layout_marginEnd="@dimen/margin_medium">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_element_fire"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_fire"/>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_water"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_toggle_statelist"
-                    android:layout_marginEnd="@dimen/margin_medium">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_element_water"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_water"/>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_thunder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_toggle_statelist"
-                    android:layout_marginEnd="@dimen/margin_medium">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_element_thunder"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_thunder"/>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_ice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_toggle_statelist"
-                    android:layout_marginEnd="@dimen/margin_medium">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_element_ice"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_ice"/>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_dragon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_element_dragon"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:background="@drawable/button_toggle_statelist"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_dragon"/>
             </LinearLayout>
 
             <!-- Statuses -->
@@ -117,56 +97,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium">
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_poison"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_toggle_statelist"
-                    android:layout_marginEnd="@dimen/margin_medium">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_status_poison"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_poison"/>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_sleep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_toggle_statelist"
-                    android:layout_marginEnd="@dimen/margin_medium">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_status_sleep"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_sleep"/>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_paralysis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_toggle_statelist"
-                    android:layout_marginEnd="@dimen/margin_medium">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_status_paralysis"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_paralysis"/>
 
-                <com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_blast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_status_blast"
-                        style="@style/IconLarge"/>
-                </com.gatheringhallstudios.mhworlddatabase.components.CheckedLinearLayout>
+                    android:background="@drawable/button_toggle_statelist"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_blast"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -404,19 +368,21 @@
             app:layout_constraintTop_toBottomOf="@id/title_sort_by"
             app:layout_constraintStart_toStartOf="parent">
 
-            <ToggleButton
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                 android:id="@+id/sort_attack_toggle"
                 style="@style/ButtonToggle"
-                android:textOn="@string/weapon_attack"
-                android:textOff="@string/weapon_attack"
+                app:imageSize="@dimen/image_size_small"
+                app:src="@drawable/ic_ui_attack"
+                app:text="@string/weapon_attack"
                 android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"/>
 
-            <ToggleButton
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                 android:id="@+id/sort_affinity_toggle"
                 style="@style/ButtonToggle"
-                android:textOn="@string/weapon_affinity"
-                android:textOff="@string/weapon_affinity"
+                app:imageSize="@dimen/image_size_small"
+                app:src="@drawable/ic_ui_affinity"
+                app:text="@string/weapon_affinity"
                 tools:checked="true"
                 android:layout_marginTop="@dimen/margin_large"/>
         </LinearLayout>
