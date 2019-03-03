@@ -38,7 +38,6 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
 
         viewModel.nodeListData.observe(this, Observer {
             adapter.setItems(it ?: emptyList())
-            adapter.notifyDataSetChanged()
         })
 
     }
