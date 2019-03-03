@@ -12,6 +12,7 @@ open class WeaponBase(
         val name: String,
         val rarity: Int,
         val weapon_type: WeaponType,
+        val category: WeaponCategory,
         val previous_weapon_id: Int?
 ) : MHParentedModel {
     override val entityId get() = id
@@ -24,6 +25,7 @@ class Weapon(
         name: String,
         rarity: Int,
         weapon_type: WeaponType,
+        category: WeaponCategory,
         previous_weapon_id: Int?,
 
         val attack: Int,
@@ -47,7 +49,7 @@ class Weapon(
         val notes: String?,
         val special_ammo: String?
 
-) : WeaponBase(id, name, rarity, weapon_type, previous_weapon_id) {
+) : WeaponBase(id, name, rarity, weapon_type, category, previous_weapon_id) {
     @Embedded
     lateinit var slots: WeaponSlots
 

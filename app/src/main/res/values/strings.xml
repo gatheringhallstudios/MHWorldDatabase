@@ -189,6 +189,8 @@
     <string name="title_bow">Bow</string>
 
     <!-- Tab Headers -->
+    <string name="tab_weapon_regular">Regular</string>
+    <string name="tab_weapon_kulve">Kulve</string>
     <string name="tab_weapon_detail">Detail</string>
     <string name="tab_weapon_tree">Family</string>
 

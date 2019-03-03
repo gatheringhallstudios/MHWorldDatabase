@@ -83,6 +83,11 @@ private val WeaponTypeConverter = Converter(
         null to null
 )
 
+private val WeaponCategoryConverter = Converter(
+        null to WeaponCategory.REGULAR,
+        "Kulve" to WeaponCategory.KULVE
+)
+
 private val PhialTypeConverter = Converter(
         "impact" to PhialType.IMPACT,
         "power element" to PhialType.POWER_ELEMENT,
@@ -153,6 +158,9 @@ class Converters {
 
     @TypeConverter fun weaponTypeFromString(value: String) = WeaponTypeConverter.deserialize(value)
     @TypeConverter fun fromWeaponType(type: WeaponType?) = WeaponTypeConverter.serialize(type)
+
+    @TypeConverter fun weaponCategoryFromString(value: String?) = WeaponCategoryConverter.deserialize(value)
+    @TypeConverter fun fromWeaponCategory(category: WeaponCategory?) = WeaponCategoryConverter.serialize(category ?: WeaponCategory.REGULAR)
 
     @TypeConverter fun elderSealFromString(value: String?) = ElderSealLevelConverter.deserialize(value)
     @TypeConverter fun fromElderSealLevel(type: ElderSealLevel) = ElderSealLevelConverter.serialize(type)

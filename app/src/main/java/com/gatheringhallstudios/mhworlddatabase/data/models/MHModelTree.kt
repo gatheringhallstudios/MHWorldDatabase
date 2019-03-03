@@ -35,7 +35,17 @@ class MHModelTree<T: MHParentedModel>(
 
         // Extract all root nodes and then all leaves
         roots = modelMap.filter { it.value.isRoot }.values.toList()
-        leaves = roots.map { it.leaves }.flatten()
+
+        val leaves = mutableListOf<TreeNode<T>>()
+        for (root in roots) {
+            if (root.isLeaf) {
+                leaves.add(root)
+            } else {
+                leaves.addAll(root.leaves)
+            }
+        }
+
+        this.leaves = leaves
     }
 
     /**
