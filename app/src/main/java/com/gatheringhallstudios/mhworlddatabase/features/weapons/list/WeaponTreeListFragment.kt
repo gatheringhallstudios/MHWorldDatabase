@@ -36,8 +36,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
-        val adapter = WeaponTreeAdapter(
-                AppSettings.showTrueAttackValues) {
+        val adapter = WeaponTreeAdapter(AppSettings.showTrueAttackValues) {
             getRouter().navigateWeaponDetail(it.id)
         }
         setAdapter(adapter)

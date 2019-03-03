@@ -111,7 +111,7 @@
     </string>
     <string name="preference_weapons_attack_values_description">
         The game shows bloated attack values. Enable this to shows
-        true attack values instead, which are what's used in the damage formula.
+        true attack values instead, which are what\'s used in the damage formula.
     </string>
     <string name="preference_language_default">Default</string>
 
