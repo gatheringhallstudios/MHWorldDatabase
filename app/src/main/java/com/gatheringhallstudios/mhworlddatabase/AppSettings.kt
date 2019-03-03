@@ -50,8 +50,8 @@ class AppSettings {
          * Returns the configured attack value type. This is the attack value type the user has set, which may be an empty string.
          */
         @JvmStatic
-        val configuredAttackValueType: String
-            get() = sharedPreferences.getString(PROP_ATTACK_VALUE_TYPE, "") ?: ""
+        val showTrueAttackValues: Boolean
+            get() = sharedPreferences.getBoolean(PROP_ATTACK_VALUE_TYPE, false )
 
         /**
          * Returns the data locale that would be resolved

@@ -2,9 +2,11 @@ package com.gatheringhallstudios.mhworlddatabase.features.app
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Switch
 import androidx.fragment.app.Fragment
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.MainActivity
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -52,14 +54,10 @@ class PreferencesFragment : PreferenceFragmentCompat() {
     }
 
     private fun initWeaponValues() {
-        val attackValuePref = findPreference(AppSettings.PROP_ATTACK_VALUE_TYPE) as ListPreference
+        val attackValuePref = findPreference(AppSettings.PROP_ATTACK_VALUE_TYPE) as SwitchPreference
 
-        // Get the list of languages. Add a "default" language to the front
-        val options = listOf(getString(R.string.preference_weapons_attack_values_enabled), getString(R.string.preference_weapons_attack_values_disabled))
-
-        attackValuePref.entryValues = options.toTypedArray()
-        attackValuePref.entries = options.toTypedArray()
-        attackValuePref.value = AppSettings.configuredAttackValueType // ensure a value is set
+        attackValuePref.switchTextOn = getString(R.string.preference_weapons_attack_values_enabled)
+        attackValuePref.switchTextOff = getString(R.string.preference_weapons_attack_values_disabled)
     }
 
     /**

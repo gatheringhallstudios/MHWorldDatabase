@@ -42,7 +42,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
         setActivityTitle(AssetLoader.getNameFor(type))
 
         val adapter = WeaponTreeAdapter(
-                AppSettings.configuredAttackValueType == getString(R.string.preference_weapons_attack_values_enabled)) {
+                AppSettings.showTrueAttackValues) {
             getRouter().navigateWeaponDetail(it.id)
         }
         setAdapter(adapter)

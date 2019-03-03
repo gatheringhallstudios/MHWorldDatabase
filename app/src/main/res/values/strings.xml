@@ -110,7 +110,7 @@
         \nChanging this will restart the app.
     </string>
     <string name="preference_weapons_attack_values_description">
-        Show the bloated weapon attack values in the weapons tree instead of true attack values.
+       Use bloated weapon attack values in the weapons tree instead of true attack values.
     </string>
     <string name="preference_weapons_attack_values_enabled">
         Enabled
