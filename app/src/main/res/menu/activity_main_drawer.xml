@@ -5,62 +5,62 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/monsterListAction"
+            android:id="@+id/monsterListDestination"
             android:icon="@drawable/ic_ui_hunter_notes_white"
             android:title="@string/title_monster_list" />
         <item
-            android:id="@+id/weaponListAction"
+            android:id="@+id/weaponListDestination"
             android:icon="@drawable/ic_equipment_charge_blade_white"
             android:title="@string/title_weapons" />
         <item
-            android:id="@+id/armorListAction"
+            android:id="@+id/armorListDestination"
             android:icon="@drawable/ic_equipment_armor_set_white"
             android:title="@string/title_armor" />
         <item
-        android:id="@+id/itemListAction"
+        android:id="@+id/itemListDestination"
         android:icon="@drawable/ic_ui_item_box_white"
         android:title="@string/title_item_list" />
         <item
-        android:id="@+id/itemCraftingListAction"
+        android:id="@+id/itemCraftingListDestination"
         android:icon="@drawable/ic_ui_crafting_white"
         android:title="@string/item_crafting_list_title" />
         <item
-            android:id="@+id/skillListAction"
+            android:id="@+id/skillListDestination"
             android:icon="@drawable/ic_ui_armor_skill_white"
             android:title="@string/title_skills" />
         <item
-            android:id="@+id/decorationListAction"
+            android:id="@+id/decorationListDestination"
             android:icon="@drawable/ic_ui_slots_white"
             android:title="@string/title_decorations" />
         <item
-            android:id="@+id/charmListAction"
+            android:id="@+id/charmListDestination"
             android:icon="@xml/ic_equipment_charm_base"
             android:title="@string/title_charms" />
         <item
-            android:id="@+id/locationListAction"
+            android:id="@+id/locationListDestination"
             android:icon="@drawable/ic_ui_map"
             android:title="@string/title_locations" />
         <item
-            android:id="@+id/bookmarksListAction"
+            android:id="@+id/bookmarksListDestination"
             android:icon="@drawable/ic_ui_bookmark"
             android:title="@string/title_bookmarks" />
     </group>
 
-    <item android:title="Other">
+    <group android:title="Other">
         <menu>
             <item
-                android:id="@+id/settingsAction"
+                android:id="@+id/settingsDestination"
                 android:icon="@drawable/ic_ui_settings_white"
                 android:title="@string/title_settings" />
             <item
-                android:id="@+id/changelogAction"
+                android:id="@+id/changelogDestination"
                 android:icon="@xml/ic_items_voucher_base"
                 android:title="@string/title_changelog"/>
             <item
-                android:id="@+id/aboutAction"
+                android:id="@+id/aboutDestination"
                 android:icon="@drawable/ic_ui_mascot"
                 android:title="@string/title_about" />
         </menu>
-    </item>
+    </group>
 
 </menu>

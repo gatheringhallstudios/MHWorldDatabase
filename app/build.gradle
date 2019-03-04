@@ -97,7 +97,7 @@ dependencies {
     /*
      * Android Navigation Component
      */
-    def nav_version = "1.0.0-alpha11"
+    def nav_version = "1.0.0-rc01"
     implementation "android.arch.navigation:navigation-fragment:$nav_version"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui:$nav_version"

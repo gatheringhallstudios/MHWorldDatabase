@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.findNavController
+import androidx.navigation.ui.*
 import com.michaelflisar.changelog.ChangelogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
@@ -27,24 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val TAG = javaClass.simpleName
 
     private var searchView: SearchView? = null
-
-    /*
-     * List of Start Destination IDs. These destinations
-     * will show the menu button instead of back button in the
-     * toolbar.
-     */
-    private val multiStartNavigationUi = MultiStartNavigationUI(listOf(
-            R.id.monsterListDestination,
-            R.id.itemListDestination,
-            R.id.itemCraftingListDestination,
-            R.id.armorListDestination,
-            R.id.skillListDestination,
-            R.id.decorationListDestination,
-            R.id.locationListDestination,
-            R.id.charmListDestination,
-            R.id.weaponListDestination,
-            R.id.bookmarksListDestination
-    ))
+    private lateinit var appBarConfiguration : AppBarConfiguration
 
     val viewModel by lazy {
         ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
@@ -115,16 +98,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        // Replace NavigationUI.setupActionBarWithNavController with the
-        // multiple start destination one
-        multiStartNavigationUi.setupActionBarWithNavController(this,
-                Navigation.findNavController(this, R.id.content_main_frame),
-                this.drawer_layout)
+        appBarConfiguration = AppBarConfiguration(setOf(
+                R.id.monsterListDestination,
+                R.id.itemListDestination,
+                R.id.itemCraftingListDestination,
+                R.id.armorListDestination,
+                R.id.skillListDestination,
+                R.id.decorationListDestination,
+                R.id.locationListDestination,
+                R.id.charmListDestination,
+                R.id.weaponListDestination,
+                R.id.bookmarksListDestination),
+                drawer_layout
+        )
+
+        val navController = findNavController(R.id.content_main_frame)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
         // Hook up navigation drawer items to NavController
-        NavigationUI.setupWithNavController(
-                this.nav_view,
-                Navigation.findNavController(this, R.id.content_main_frame))
+        nav_view.setupWithNavController(navController)
 
         // Remove icon tint from navigation drawer
         this.nav_view.itemIconTintList = null
@@ -140,8 +132,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val controller = Navigation.findNavController(this, R.id.content_main_frame)
-        return multiStartNavigationUi.navigateUp(this.drawer_layout, controller)
+        return findNavController(R.id.content_main_frame).navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -190,7 +181,7 @@ class MainActivity : AppCompatActivity() {
         searchView?.setOnSearchClickListener {
             viewModel.startNewSearch()
 
-            Navigation.findNavController(this, R.id.content_main_frame)
+            findNavController(R.id.content_main_frame)
                     .navigate(R.id.openSearchAction)
         }
 

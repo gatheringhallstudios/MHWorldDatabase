@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/monsterListDestination">
+    app:startDestination="@+id/monsterListDestination">
 
     <!--
        START DESTINATIONS
@@ -14,14 +14,15 @@
         android:id="@+id/monsterListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.list.MonsterListPagerFragment"
         android:label="@string/title_monster_list"
-        tools:layout="@layout/fragment_generic_pager" />
+        tools:layout="@layout/fragment_generic_pager">
+    </fragment>
     <action
         android:id="@+id/monsterListAction"
         app:destination="@id/monsterListDestination"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/itemListDestination"
@@ -34,7 +35,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/itemCraftingListDestination"
@@ -47,7 +48,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/weaponTreeDestination"
@@ -72,7 +73,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/skillListDestination"
@@ -85,7 +86,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/decorationListDestination"
@@ -98,7 +99,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/locationListDestination"
@@ -111,7 +112,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/charmListDestination"
@@ -124,7 +125,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/weaponListDestination"
@@ -137,7 +138,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/bookmarksListDestination"
@@ -150,7 +151,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/aboutDestination"
@@ -163,7 +164,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/settingsDestination"
@@ -176,7 +177,7 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
 
     <!-- REGULAR DESTINATIONS -->
@@ -185,19 +186,19 @@
         android:id="@+id/searchDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.search.UniversalSearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_generic_pager"/>
+        tools:layout="@layout/fragment_generic_pager" />
     <action
         android:id="@+id/openSearchAction"
         app:destination="@id/searchDestination"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
         android:id="@+id/monsterDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment"
-        tools:layout="@layout/fragment_generic_pager"/>
+        tools:layout="@layout/fragment_generic_pager" />
     <action
         android:id="@+id/openMonsterDetailAction"
         app:destination="@id/monsterDetailDestination"
@@ -209,7 +210,7 @@
     <fragment
         android:id="@+id/itemDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment"
-        tools:layout="@layout/fragment_generic_pager"/>
+        tools:layout="@layout/fragment_generic_pager" />
     <action
         android:id="@+id/openItemDetailAction"
         app:destination="@id/itemDetailDestination"
@@ -222,7 +223,7 @@
         android:id="@+id/locationDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment"
         android:label="Location Detail"
-        tools:layout="@layout/fragment_generic_pager"/>
+        tools:layout="@layout/fragment_generic_pager" />
     <action
         android:id="@+id/openLocationDetailAction"
         app:destination="@id/locationDetailDestination"
@@ -234,7 +235,7 @@
     <fragment
         android:id="@+id/skillDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment"
-        tools:layout="@layout/fragment_skill_summary"/>
+        tools:layout="@layout/fragment_skill_summary" />
     <action
         android:id="@+id/openSkillDetailAction"
         app:destination="@id/skillDetailDestination"
@@ -246,7 +247,7 @@
     <fragment
         android:id="@+id/decorationDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment"
-        tools:layout="@layout/fragment_decoration_summary"/>
+        tools:layout="@layout/fragment_decoration_summary" />
     <action
         android:id="@+id/openDecorationDetailAction"
         app:destination="@id/decorationDetailDestination"
@@ -293,7 +294,7 @@
 
     <fragment
         android:id="@+id/changelogDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.ChangelogActivity"/>
+        android:name="com.gatheringhallstudios.mhworlddatabase.ChangelogActivity" />
     <action
         android:id="@+id/changelogAction"
         app:destination="@id/changelogDestination"
