@@ -209,26 +209,15 @@ class WeaponTreeListAdapterDelegate(
                             .inflate(R.layout.section_bow_coating_compact, view.tree_weapon_specific_section, false)
 
                     weapon.weaponCoatings?.iterator()?.forEach {
-                        when (it) {
-                            CoatingType.CLOSE_RANGE -> {
-                                coatingView.close_range_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
-                            }
-                            CoatingType.POWER -> {
-                                coatingView.power_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
-                            }
-                            CoatingType.PARALYSIS -> {
-                                coatingView.paralysis_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
-                            }
-                            CoatingType.POISON -> {
-                                coatingView.poison_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
-                            }
-                            CoatingType.SLEEP -> {
-                                coatingView.sleep_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
-                            }
-                            CoatingType.BLAST -> {
-                                coatingView.blast_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
-                            }
+                        val imageView = when (it) {
+                            CoatingType.CLOSE_RANGE -> coatingView.close_range_coating_icon
+                            CoatingType.POWER -> coatingView.power_coating_icon
+                            CoatingType.PARALYSIS -> coatingView.paralysis_coating_icon
+                            CoatingType.POISON -> coatingView.poison_coating_icon
+                            CoatingType.SLEEP -> coatingView.sleep_coating_icon
+                            CoatingType.BLAST -> coatingView.blast_coating_icon
                         }
+                        imageView.setImageDrawable(AssetLoader.loadIconFor(it))
                     }
 
                     view.tree_weapon_specific_section.addView(coatingView)

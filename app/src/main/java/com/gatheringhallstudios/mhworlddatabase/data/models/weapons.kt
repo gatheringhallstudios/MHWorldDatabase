@@ -320,7 +320,8 @@ data class WeaponAmmoData(
         val tranq_reload: ReloadType
 ) : Iterable<WeaponAmmo> {
     override fun iterator(): Iterator<WeaponAmmo> {
-        val buffer = listOf(WeaponAmmo(AmmoType.NORMAL_AMMO1, normal1_clip, normal1_rapid, normal1_reload, normal1_recoil),
+        val buffer = listOf(
+                WeaponAmmo(AmmoType.NORMAL_AMMO1, normal1_clip, normal1_rapid, normal1_reload, normal1_recoil),
                 WeaponAmmo(AmmoType.NORMAL_AMMO2, normal2_clip, normal2_rapid, normal2_reload, normal2_recoil),
                 WeaponAmmo(AmmoType.NORMAL_AMMO3, normal3_clip, normal3_rapid, normal3_reload, normal3_recoil),
                 WeaponAmmo(AmmoType.PIERCE_AMMO1, pierce1_clip, pierce1_rapid, pierce1_reload, pierce1_recoil),
@@ -339,7 +340,7 @@ data class WeaponAmmoData(
                 WeaponAmmo(AmmoType.RECOVER_AMMO2, recover2_clip, recover2_rapid, recover2_reload, recover2_recoil),
                 WeaponAmmo(AmmoType.POISON_AMMO1, poison1_clip, poison1_rapid, poison1_reload, poison1_recoil),
                 WeaponAmmo(AmmoType.POISON_AMMO2, poison2_clip, poison2_rapid, poison2_reload, poison2_recoil),
-                WeaponAmmo(AmmoType.PARALYSIS_AMMO1, paralysis1_clip, paralysis1_rapid, paralysis1_reload, paralysis2_recoil),
+                WeaponAmmo(AmmoType.PARALYSIS_AMMO1, paralysis1_clip, paralysis1_rapid, paralysis1_reload, paralysis1_recoil),
                 WeaponAmmo(AmmoType.PARALYSIS_AMMO2, paralysis2_clip, paralysis2_rapid, paralysis2_reload, paralysis2_recoil),
                 WeaponAmmo(AmmoType.SLEEP_AMMO1, sleep1_clip, sleep1_rapid, sleep1_reload, sleep1_recoil),
                 WeaponAmmo(AmmoType.SLEEP_AMMO2, sleep2_clip, sleep2_rapid, sleep2_reload, sleep2_recoil),

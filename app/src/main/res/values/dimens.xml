@@ -30,6 +30,7 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="image_size_xxsmall">16dp</dimen>
     <dimen name="image_size_xsmall">24dp</dimen>
     <dimen name="image_size_small">32dp</dimen>
     <dimen name="image_size_medium">40dp</dimen>

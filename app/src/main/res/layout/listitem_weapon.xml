@@ -97,7 +97,7 @@
             android:id="@+id/tree_weapon_specific_section"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="right|end"
+            android:gravity="end"
             android:orientation="vertical" />
 
         <LinearLayout
