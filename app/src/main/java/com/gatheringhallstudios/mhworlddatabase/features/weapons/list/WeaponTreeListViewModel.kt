@@ -72,6 +72,9 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
             if (value.coatingTypes.isNotEmpty()) {
                 filter.addFilter(WeaponCoatingFilter(value.coatingTypes))
             }
+            if (value.specialAmmo != null) {
+                filter.addFilter(WeaponSpecialAmmoFilter(value.specialAmmo))
+            }
 
             updateNodeList()
         }

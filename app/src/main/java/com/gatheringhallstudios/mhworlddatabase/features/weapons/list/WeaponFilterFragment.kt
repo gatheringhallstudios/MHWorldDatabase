@@ -108,8 +108,12 @@ class CheckedGroup<T>(val singleOnly: Boolean = false) {
     /**
      * Updates all registered items to reflect the value (and only the value)
      */
-    fun setValue(value: T) {
-        setValues(listOf(value))
+    fun setValue(value: T?) {
+        if (value == null) {
+            uncheckAll()
+        } else {
+            setValues(listOf(value))
+        }
     }
 
     /**
@@ -151,6 +155,7 @@ class WeaponFilterFragment : DialogFragment() {
     lateinit var shellingGroup: CheckedGroup<ShellingType>
     lateinit var shellingLevelGroup: CheckedGroup<Int>
     lateinit var coatingGroup: CheckedGroup<CoatingType>
+    lateinit var specialAmmoGroup: CheckedGroup<SpecialAmmoType>
     lateinit var sortGroup: CheckedGroup<FilterSortCondition>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -167,6 +172,12 @@ class WeaponFilterFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // NOTE FOR GROUPS: Only singleOnly groups need to be notified (to enable unselections)
         this.weaponType = arguments?.getSerializable(FILTER_WEAPON_TYPE) as WeaponType
+
+
+        // define sort group
+        sortGroup = CheckedGroup(singleOnly = true)
+        sortGroup.addBinding(sort_attack_toggle, FilterSortCondition.ATTACK)
+        sortGroup.addBinding(sort_affinity_toggle, FilterSortCondition.AFFINITY)
 
         // define element group
         elementGroup = CheckedGroup()
@@ -216,6 +227,14 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(shelling_toggle_wide, ShellingType.WIDE)
         }
 
+        shellingLevelGroup = CheckedGroup()
+        shellingLevelGroup.apply {
+            addBinding(shelling_toggle_level_1, 1)
+            addBinding(shelling_toggle_level_2, 2)
+            addBinding(shelling_toggle_level_3, 3)
+            addBinding(shelling_toggle_level_4, 4)
+        }
+
         coatingGroup = CheckedGroup()
         coatingGroup.apply {
             addBinding(coating_power, CoatingType.POWER)
@@ -225,18 +244,11 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(coating_blast, CoatingType.BLAST)
         }
 
-        shellingLevelGroup = CheckedGroup()
-        shellingLevelGroup.apply {
-            addBinding(shelling_toggle_level_1, 1)
-            addBinding(shelling_toggle_level_2, 2)
-            addBinding(shelling_toggle_level_3, 3)
-            addBinding(shelling_toggle_level_4, 4)
+        specialAmmoGroup = CheckedGroup(singleOnly = true)
+        specialAmmoGroup.apply {
+            addBinding(sammo_wyvernheart_toggle, SpecialAmmoType.WYVERNHEART)
+            addBinding(sammo_wyvernsnipe_toggle, SpecialAmmoType.WYVERNSNIPE)
         }
-
-        // define sort group
-        sortGroup = CheckedGroup(singleOnly = true)
-        sortGroup.addBinding(sort_attack_toggle, FilterSortCondition.ATTACK)
-        sortGroup.addBinding(sort_affinity_toggle, FilterSortCondition.AFFINITY)
 
         // Implement actions
         action_clear.setOnClickListener {
@@ -277,6 +289,9 @@ class WeaponFilterFragment : DialogFragment() {
             }
         }
 
+        title_ammo.isVisible = (weaponType == WeaponType.HEAVY_BOWGUN)
+        special_ammo_toggles.isVisible = (weaponType == WeaponType.HEAVY_BOWGUN)
+
         // Apply and config state from bundle
         val state = arguments?.getSerializable(FILTER_STATE) as? FilterState
         if (state != null) {
@@ -302,7 +317,8 @@ class WeaponFilterFragment : DialogFragment() {
                 kinsectBonuses = kinsectGroup.getValues().toSet(),
                 shellingTypes = shellingGroup.getValues().toSet(),
                 shellingLevels = shellingLevelGroup.getValues().toSet(),
-                coatingTypes = coatingGroup.getValues().toSet()
+                coatingTypes = coatingGroup.getValues().toSet(),
+                specialAmmo = specialAmmoGroup.getValue()
         )
     }
 
@@ -314,6 +330,7 @@ class WeaponFilterFragment : DialogFragment() {
         final_toggle.isChecked = state.isFinalOnly
 
         // Set the basic group values
+        sortGroup.setValue(state.sortBy)
         elementGroup.setValues(state.elements)
         phialGroupCB.setValues(state.phials)
         phialGroupSWAXE.setValues(state.phials)
@@ -321,6 +338,6 @@ class WeaponFilterFragment : DialogFragment() {
         shellingGroup.setValues(state.shellingTypes)
         shellingLevelGroup.setValues(state.shellingLevels)
         coatingGroup.setValues(state.coatingTypes)
-        sortGroup.setValue(state.sortBy)
+        specialAmmoGroup.setValue(state.specialAmmo)
     }
 }

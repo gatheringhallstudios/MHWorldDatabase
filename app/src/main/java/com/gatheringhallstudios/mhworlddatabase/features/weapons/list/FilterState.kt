@@ -21,7 +21,8 @@ data class FilterState(
         var kinsectBonuses: Set<KinsectBonus>,
         var shellingTypes: Set<ShellingType>,
         var shellingLevels: Set<Int>,
-        var coatingTypes: Set<CoatingType>
+        var coatingTypes: Set<CoatingType>,
+        var specialAmmo: SpecialAmmoType?
 ): Serializable {
     companion object {
         @JvmStatic
@@ -33,7 +34,8 @@ data class FilterState(
                 kinsectBonuses = emptySet(),
                 shellingTypes = emptySet(),
                 shellingLevels = emptySet(),
-                coatingTypes = emptySet()
+                coatingTypes = emptySet(),
+                specialAmmo = null
         )
     }
 }

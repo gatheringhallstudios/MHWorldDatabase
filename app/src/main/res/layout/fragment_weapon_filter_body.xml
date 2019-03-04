@@ -12,14 +12,51 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/title_sort_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_title_sort_by"
+            style="@style/TextBodyHigh"
+            android:layout_marginTop="@dimen/margin_large"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/sort_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/title_sort_by"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/sort_attack_toggle"
+                style="@style/ButtonToggle"
+                app:imageSize="@dimen/image_size_small"
+                app:src="@drawable/ic_ui_attack"
+                app:text="@string/weapon_attack"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"/>
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/sort_affinity_toggle"
+                style="@style/ButtonToggle"
+                app:imageSize="@dimen/image_size_small"
+                app:src="@drawable/ic_ui_affinity"
+                app:text="@string/weapon_affinity"
+                tools:checked="true"
+                android:layout_marginTop="@dimen/margin_large"/>
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/title_show_only"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filter_title_show_only"
             style="@style/TextBodyHigh"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sort_conditions"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/margin_large"/>
+            android:layout_marginTop="@dimen/margin_section_gap"/>
 
         <ToggleButton
             android:id="@+id/final_toggle"
@@ -397,40 +434,32 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/title_sort_by"
+            android:id="@+id/title_ammo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/filter_title_sort_by"
+            android:text="@string/tab_item_list_ammo"
             style="@style/TextBodyHigh"
             app:layout_constraintTop_toBottomOf="@id/coating_toggles"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="@dimen/margin_section_gap"/>
 
         <LinearLayout
-            android:id="@+id/sort_conditions"
+            android:id="@+id/special_ammo_toggles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/title_sort_by"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/title_ammo"
+            android:layout_marginTop="@dimen/margin_large">
 
             <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
-                android:id="@+id/sort_attack_toggle"
+                android:id="@+id/sammo_wyvernheart_toggle"
                 style="@style/ButtonToggle"
-                app:imageSize="@dimen/image_size_small"
-                app:src="@drawable/ic_ui_attack"
-                app:text="@string/weapon_attack"
-                android:layout_marginTop="@dimen/margin_large"
+                app:text="@string/weapon_bowgun_special_ammo_wyvernheart"
                 android:layout_marginEnd="@dimen/margin_large"/>
-
             <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
-                android:id="@+id/sort_affinity_toggle"
+                android:id="@+id/sammo_wyvernsnipe_toggle"
                 style="@style/ButtonToggle"
-                app:imageSize="@dimen/image_size_small"
-                app:src="@drawable/ic_ui_affinity"
-                app:text="@string/weapon_affinity"
-                tools:checked="true"
-                android:layout_marginTop="@dimen/margin_large"/>
+                app:text="@string/weapon_bowgun_special_ammo_wyvernsnipe"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

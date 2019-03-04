@@ -42,3 +42,9 @@ class WeaponCoatingFilter(private val coatings: Set<CoatingType>): Filter<Weapon
         return coatings.all { obj.weaponCoatings?.contains(it) ?: false }
     }
 }
+
+class WeaponSpecialAmmoFilter(private val specialAmmo: SpecialAmmoType?): Filter<Weapon> {
+    override fun runFilter(obj: Weapon): Boolean {
+        return obj.special_ammo == specialAmmo
+    }
+}
