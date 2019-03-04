@@ -9,102 +9,41 @@
     android:gravity="center_vertical|end"
     android:orientation="horizontal">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/close_range"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/close_range_coating_icon"
+        android:layout_width="@dimen/image_size_xxsmall"
+        android:layout_height="@dimen/image_size_xxsmall"
+        android:src="@drawable/ic_ui_slot_none" />
 
-            <ImageView
-                android:id="@+id/close_range_coating_icon"
-                android:layout_width="@dimen/image_size_xsmall"
-                android:layout_height="@dimen/image_size_xsmall"
+    <ImageView
+        android:id="@+id/power_coating_icon"
+        android:layout_width="@dimen/image_size_xxsmall"
+        android:layout_height="@dimen/image_size_xxsmall"
+        android:src="@drawable/ic_ui_slot_none" />
 
-                app:srcCompat="@drawable/ic_ui_slot_none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/paralysis_coating_icon"
+        android:layout_width="@dimen/image_size_xxsmall"
+        android:layout_height="@dimen/image_size_xxsmall"
+        android:src="@drawable/ic_ui_slot_none" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/power_coating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/poison_coating_icon"
+        android:layout_width="@dimen/image_size_xxsmall"
+        android:layout_height="@dimen/image_size_xxsmall"
+        android:src="@drawable/ic_ui_slot_none" />
 
-            <ImageView
-                android:id="@+id/power_coating_icon"
-                android:layout_width="@dimen/image_size_xsmall"
-                android:layout_height="@dimen/image_size_xsmall"
+    <ImageView
+        android:id="@+id/sleep_coating_icon"
+        android:layout_width="@dimen/image_size_xxsmall"
+        android:layout_height="@dimen/image_size_xxsmall"
+        android:src="@drawable/ic_ui_slot_none" />
 
-                app:srcCompat="@drawable/ic_ui_slot_none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/paralysis_coating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/paralysis_coating_icon"
-                android:layout_width="@dimen/image_size_xsmall"
-                android:layout_height="@dimen/image_size_xsmall"
-
-                app:srcCompat="@drawable/ic_ui_slot_none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/poison_coating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/poison_coating_icon"
-                android:layout_width="@dimen/image_size_xsmall"
-                android:layout_height="@dimen/image_size_xsmall"
-
-                app:srcCompat="@drawable/ic_ui_slot_none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/sleep_coating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/sleep_coating_icon"
-                android:layout_width="@dimen/image_size_xsmall"
-                android:layout_height="@dimen/image_size_xsmall"
-                app:srcCompat="@drawable/ic_ui_slot_none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/blast_coating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/blast_coating_icon"
-                android:layout_width="@dimen/image_size_xsmall"
-                android:layout_height="@dimen/image_size_xsmall"
-                app:srcCompat="@drawable/ic_ui_slot_none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/blast_coating_icon"
+        android:layout_width="@dimen/image_size_xxsmall"
+        android:layout_height="@dimen/image_size_xxsmall"
+        android:src="@drawable/ic_ui_slot_none" />
 
 </LinearLayout>
 
