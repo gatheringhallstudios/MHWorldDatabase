@@ -11,7 +11,9 @@ import android.widget.ToggleButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.CheckableNotifier
+import com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import kotlinx.android.synthetic.main.fragment_weapon_filter.*
@@ -24,7 +26,10 @@ import kotlinx.android.synthetic.main.fragment_weapon_filter_body.*
 class CheckedGroup<T>(val singleOnly: Boolean = false) {
     private val map = mutableMapOf<Checkable, T>()
 
-    val views get() = map.keys.asIterable()
+    /**
+     * Returns a read only map containing all binded views.
+     */
+    val views: Map<Checkable, T> get() = map
 
     fun uncheckAll() {
         for ((view, _) in map) {
@@ -145,6 +150,7 @@ class WeaponFilterFragment : DialogFragment() {
     lateinit var kinsectGroup: CheckedGroup<KinsectBonus>
     lateinit var shellingGroup: CheckedGroup<ShellingType>
     lateinit var shellingLevelGroup: CheckedGroup<Int>
+    lateinit var coatingGroup: CheckedGroup<CoatingType>
     lateinit var sortGroup: CheckedGroup<FilterSortCondition>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -210,6 +216,15 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(shelling_toggle_wide, ShellingType.WIDE)
         }
 
+        coatingGroup = CheckedGroup()
+        coatingGroup.apply {
+            addBinding(coating_power, CoatingType.POWER)
+            addBinding(coating_para, CoatingType.PARALYSIS)
+            addBinding(coating_poison, CoatingType.POISON)
+            addBinding(coating_sleep, CoatingType.SLEEP)
+            addBinding(coating_blast, CoatingType.BLAST)
+        }
+
         shellingLevelGroup = CheckedGroup()
         shellingLevelGroup.apply {
             addBinding(shelling_toggle_level_1, 1)
@@ -253,6 +268,15 @@ class WeaponFilterFragment : DialogFragment() {
         title_shelling.isVisible = (weaponType == WeaponType.GUNLANCE)
         shelling_toggles.isVisible = (weaponType == WeaponType.GUNLANCE)
 
+        title_coatings.isVisible = (weaponType == WeaponType.BOW)
+        coating_toggles.isVisible = (weaponType == WeaponType.BOW)
+        if (coating_toggles.isVisible) {
+            for ((button, value) in coatingGroup.views) {
+                val icon = AssetLoader.loadIconFor(value)
+                (button as? CheckedImageButton)?.setImageDrawable(icon)
+            }
+        }
+
         // Apply and config state from bundle
         val state = arguments?.getSerializable(FILTER_STATE) as? FilterState
         if (state != null) {
@@ -277,7 +301,8 @@ class WeaponFilterFragment : DialogFragment() {
                 phials = phials,
                 kinsectBonuses = kinsectGroup.getValues().toSet(),
                 shellingTypes = shellingGroup.getValues().toSet(),
-                shellingLevels = shellingLevelGroup.getValues().toSet()
+                shellingLevels = shellingLevelGroup.getValues().toSet(),
+                coatingTypes = coatingGroup.getValues().toSet()
         )
     }
 
@@ -295,6 +320,7 @@ class WeaponFilterFragment : DialogFragment() {
         kinsectGroup.setValues(state.kinsectBonuses)
         shellingGroup.setValues(state.shellingTypes)
         shellingLevelGroup.setValues(state.shellingLevels)
+        coatingGroup.setValues(state.coatingTypes)
         sortGroup.setValue(state.sortBy)
     }
 }

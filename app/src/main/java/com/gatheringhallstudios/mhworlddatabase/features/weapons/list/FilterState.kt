@@ -1,9 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
-import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
-import com.gatheringhallstudios.mhworlddatabase.data.types.KinsectBonus
-import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
-import com.gatheringhallstudios.mhworlddatabase.data.types.ShellingType
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import java.io.Serializable
 
 enum class FilterSortCondition {
@@ -23,7 +20,8 @@ data class FilterState(
         var phials: Set<PhialType>,
         var kinsectBonuses: Set<KinsectBonus>,
         var shellingTypes: Set<ShellingType>,
-        var shellingLevels: Set<Int>
+        var shellingLevels: Set<Int>,
+        var coatingTypes: Set<CoatingType>
 ): Serializable {
     companion object {
         @JvmStatic
@@ -34,7 +32,8 @@ data class FilterState(
                 phials = emptySet(),
                 kinsectBonuses = emptySet(),
                 shellingTypes = emptySet(),
-                shellingLevels = emptySet()
+                shellingLevels = emptySet(),
+                coatingTypes = emptySet()
         )
     }
 }

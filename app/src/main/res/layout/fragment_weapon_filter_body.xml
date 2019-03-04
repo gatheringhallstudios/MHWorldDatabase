@@ -49,45 +49,35 @@
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_fire"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     android:layout_marginEnd="@dimen/margin_medium"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_element_fire"/>
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_water"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     android:layout_marginEnd="@dimen/margin_medium"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_element_water"/>
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_thunder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     android:layout_marginEnd="@dimen/margin_medium"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_element_thunder"/>
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_ice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     android:layout_marginEnd="@dimen/margin_medium"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_element_ice"/>
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_dragon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_element_dragon"/>
             </LinearLayout>
@@ -99,36 +89,28 @@
                 android:layout_marginTop="@dimen/margin_medium">
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_poison"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     android:layout_marginEnd="@dimen/margin_medium"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_status_poison"/>
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_sleep"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     android:layout_marginEnd="@dimen/margin_medium"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_status_sleep"/>
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_paralysis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     android:layout_marginEnd="@dimen/margin_medium"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_status_paralysis"/>
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_blast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_toggle_statelist"
+                    style="@style/ButtonToggle.ImageOnly"
                     app:imageSize="@dimen/image_size_large"
                     app:src="@drawable/ic_status_blast"/>
             </LinearLayout>
@@ -370,12 +352,57 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/title_coatings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weapon_bow_coatings"
+            style="@style/TextBodyHigh"
+            app:layout_constraintTop_toBottomOf="@id/shelling_toggles"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/margin_section_gap"/>
+
+        <LinearLayout
+            android:id="@+id/coating_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_large"
+            app:layout_constraintTop_toBottomOf="@id/title_coatings">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_power"
+                style="@style/ButtonToggle.ImageOnly"
+                app:imageSize="@dimen/image_size_large"
+                android:layout_marginEnd="@dimen/margin_large"/>
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_para"
+                style="@style/ButtonToggle.ImageOnly"
+                app:imageSize="@dimen/image_size_large"
+                android:layout_marginEnd="@dimen/margin_large"/>
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_poison"
+                style="@style/ButtonToggle.ImageOnly"
+                app:imageSize="@dimen/image_size_large"
+                android:layout_marginEnd="@dimen/margin_large"/>
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_sleep"
+                style="@style/ButtonToggle.ImageOnly"
+                app:imageSize="@dimen/image_size_large"
+                android:layout_marginEnd="@dimen/margin_large"/>
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_blast"
+                style="@style/ButtonToggle.ImageOnly"
+                app:imageSize="@dimen/image_size_large"
+                android:layout_marginEnd="@dimen/margin_large"/>
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/title_sort_by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filter_title_sort_by"
             style="@style/TextBodyHigh"
-            app:layout_constraintTop_toBottomOf="@id/shelling_toggles"
+            app:layout_constraintTop_toBottomOf="@id/coating_toggles"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="@dimen/margin_section_gap"/>
 

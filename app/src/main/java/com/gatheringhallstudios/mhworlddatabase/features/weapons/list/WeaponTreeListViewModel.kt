@@ -69,6 +69,9 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
             if (value.shellingLevels.isNotEmpty()) {
                 filter.addFilter(WeaponShellingLevelFilter(value.shellingLevels))
             }
+            if (value.coatingTypes.isNotEmpty()) {
+                filter.addFilter(WeaponCoatingFilter(value.coatingTypes))
+            }
 
             updateNodeList()
         }

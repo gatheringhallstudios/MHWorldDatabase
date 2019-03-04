@@ -160,6 +160,12 @@
         <item name="android:background">@drawable/button_toggle_statelist</item>
     </style>
 
+    <style name="ButtonToggle.ImageOnly">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
     <style name="ButtonCancel">
         <item name="android:background">@drawable/button_secondary</item>
     </style>

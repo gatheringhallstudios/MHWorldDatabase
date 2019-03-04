@@ -2,10 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
 import com.gatheringhallstudios.mhworlddatabase.common.Filter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
-import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
-import com.gatheringhallstudios.mhworlddatabase.data.types.KinsectBonus
-import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
-import com.gatheringhallstudios.mhworlddatabase.data.types.ShellingType
+import com.gatheringhallstudios.mhworlddatabase.data.types.*
 
 class WeaponElementFilter(private val elements: Set<ElementStatus>): Filter<Weapon> {
     override fun runFilter(obj: Weapon): Boolean {
@@ -34,5 +31,14 @@ class WeaponShellingFilter(private val shellingTypes: Set<ShellingType>): Filter
 class WeaponShellingLevelFilter(private val levels: Set<Int>): Filter<Weapon> {
     override fun runFilter(obj: Weapon): Boolean {
         return (obj.shelling_level in levels)
+    }
+}
+
+/**
+ * Filter that resolves if every coating type given is a valid one for the weapon
+ */
+class WeaponCoatingFilter(private val coatings: Set<CoatingType>): Filter<Weapon> {
+    override fun runFilter(obj: Weapon): Boolean {
+        return coatings.all { obj.weaponCoatings?.contains(it) ?: false }
     }
 }
