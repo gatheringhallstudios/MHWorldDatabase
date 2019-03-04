@@ -239,4 +239,14 @@ object AssetLoader {
         ShellingType.WIDE -> ctx.getString(R.string.weapon_gunlance_shelling_wide)
         ShellingType.LONG -> ctx.getString(R.string.weapon_gunlance_shelling_long)
     }
+
+    /**
+     * Localizes the special ammo type using the current app language settings.
+     */
+    fun localizeSpecialAmmoType(type: SpecialAmmoType?): String = when (type) {
+        null -> ""
+        SpecialAmmoType.WYVERNBLAST -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernblast)
+        SpecialAmmoType.WYVERNHEART -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernheart)
+        SpecialAmmoType.WYVERNSNIPE -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernsnipe)
+    }
 }

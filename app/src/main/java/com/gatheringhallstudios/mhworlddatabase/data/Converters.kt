@@ -129,6 +129,13 @@ private val ShellingTypeConverter = Converter(
         "wide" to ShellingType.WIDE
 )
 
+private val SpecialAmmoTypeConverter = Converter(
+        null to null,
+        "Wyvernblast" to SpecialAmmoType.WYVERNBLAST,
+        "Wyvernheart" to SpecialAmmoType.WYVERNHEART,
+        "Wyvernsnipe" to SpecialAmmoType.WYVERNSNIPE
+)
+
 private val ReloadTypeConverter = Converter(
         null to ReloadType.NONE,
         "very slow" to ReloadType.VERY_SLOW,
@@ -189,6 +196,9 @@ class Converters {
 
     @TypeConverter fun shellingTypeFromString(value: String?) = ShellingTypeConverter.deserialize(value)
     @TypeConverter fun fromShellingType(type: ShellingType) = ShellingTypeConverter.serialize(type)
+
+    @TypeConverter fun specialAmmoTypeFromString(value: String?) = SpecialAmmoTypeConverter.deserialize(value)
+    @TypeConverter fun fromSpecialAmmoType(type: SpecialAmmoType?) = SpecialAmmoTypeConverter.serialize(type)
 
     @TypeConverter fun reloadTypeFromString(value: String?) = ReloadTypeConverter.deserialize(value)
     @TypeConverter fun fromReloadType(type: ReloadType) = ReloadTypeConverter.serialize(type)

@@ -179,6 +179,12 @@ enum class ShellingType {
     NORMAL
 }
 
+enum class SpecialAmmoType {
+    WYVERNBLAST,
+    WYVERNHEART,
+    WYVERNSNIPE
+}
+
 enum class AmmoType {
     NORMAL_AMMO1,
     NORMAL_AMMO2,

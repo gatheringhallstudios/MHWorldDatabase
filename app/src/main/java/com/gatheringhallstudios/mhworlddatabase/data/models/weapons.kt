@@ -47,7 +47,7 @@ class Weapon(
         val shelling: ShellingType,
         val shelling_level: Int?,
         val notes: String?,
-        val special_ammo: String?
+        val special_ammo: SpecialAmmoType?
 
 ) : WeaponBase(id, name, rarity, weapon_type, category, previous_weapon_id) {
     @Embedded
@@ -182,7 +182,7 @@ class WeaponFull(
 data class WeaponAmmoData(
         val ammo_id: Int,
         val deviation: String?,
-        val special_ammo: String?,
+        val special_ammo: SpecialAmmoType?,
         val normal1_clip: Int,
         val normal1_rapid: Boolean,
         val normal1_recoil: Int,

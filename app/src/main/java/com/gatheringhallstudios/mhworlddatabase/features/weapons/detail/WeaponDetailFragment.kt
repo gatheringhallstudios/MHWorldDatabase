@@ -416,7 +416,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         if (ammo == null) return
 
         deviation_value.text = ammo.deviation
-        special_ammo_value.text = ammo.special_ammo
+        special_ammo_value.text = AssetLoader.localizeSpecialAmmoType(ammo.special_ammo)
 
         ammo.iterator().forEach {
             val view = layoutInflater.inflate(R.layout.listitem_bowgun_ammo, ammo_layout, false)
