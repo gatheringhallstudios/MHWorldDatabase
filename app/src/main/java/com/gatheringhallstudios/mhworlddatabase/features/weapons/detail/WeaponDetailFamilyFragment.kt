@@ -19,14 +19,6 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
  * Weapon families are used to figure out the crafting path.
  */
 class WeaponDetailFamilyFragment : RecyclerViewFragment() {
-    val adapter = CategoryAdapter(
-            WeaponTreeListAdapterDelegate(
-                    showTrueAttackValues = AppSettings.showTrueAttackValues,
-                    onLongSelect = null,
-                    onSelected = { getRouter().navigateWeaponDetail(it.id)}
-            )
-    )
-
     /**
      * Returns the viewmodel owned by the parent fragment
      */
@@ -36,11 +28,20 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adapter = CategoryAdapter(
+                WeaponTreeListAdapterDelegate(
+                        showTrueAttackValues = AppSettings.showTrueAttackValues,
+                        onLongSelect = null,
+                        onSelected = { getRouter().navigateWeaponDetail(it.id)}
+                )
+        )
         setAdapter(adapter)
 
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
         viewModel.weaponFamilyData.observe(this, Observer { data ->
+            adapter.clear()
             if (data == null) return@Observer
 
             val familyNodes = data.familyPath.map { RenderedTreeNode(it) }
