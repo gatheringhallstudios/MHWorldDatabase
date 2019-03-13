@@ -11,6 +11,21 @@ package com.gatheringhallstudios.mhworlddatabase.data.types
  */
 
 /**
+ * Represents an object's type.
+ */
+enum class DataType {
+    LOCATION,
+    ITEM,
+    MONSTER,
+    SKILL,
+    DECORATION,
+    CHARM,
+    ARMOR,
+    WEAPON,
+    NONE
+}
+
+/**
  * Denotes a quest rank. Mapped by the Converters class.
  */
 enum class Rank {
@@ -39,7 +54,6 @@ enum class ItemSubcategory {
 
 /**
  * An enumeration used to represent a monster's size.
- * Created by Carlos on 3/21/2018.
  */
 enum class MonsterSize {
     SMALL,
@@ -67,7 +81,6 @@ enum class Extract {
 
 /**
  * An enumeration that defines where a piece of armor is worn.
- * Created by Carlos on 3/6/2018.
  */
 enum class ArmorType {
     HEAD,
@@ -78,8 +91,23 @@ enum class ArmorType {
 }
 
 /**
+ * Represents an element or a status.
+ * Tied to the same object as a weapon may be either/or.
+ */
+enum class ElementStatus {
+    FIRE,
+    WATER,
+    THUNDER,
+    ICE,
+    DRAGON,
+    POISON,
+    SLEEP,
+    PARALYSIS,
+    BLAST
+}
+
+/**
  * An enumeration that defines the type of weapon.
- * Created by Carlos on 3/20/2018.
  */
 enum class WeaponType {
     GREAT_SWORD,
@@ -105,22 +133,6 @@ enum class WeaponType {
 enum class WeaponCategory {
     REGULAR,
     KULVE
-}
-
-/**
- * Represents an object type.
- * Currently only used by search results for identification reasons.
- */
-enum class DataType {
-    LOCATION,
-    ITEM,
-    MONSTER,
-    SKILL,
-    DECORATION,
-    CHARM,
-    ARMOR,
-    WEAPON,
-    NONE
 }
 
 enum class ElderSealLevel {
@@ -165,6 +177,12 @@ enum class ShellingType {
     WIDE,
     LONG,
     NORMAL
+}
+
+enum class SpecialAmmoType {
+    WYVERNBLAST,
+    WYVERNHEART,
+    WYVERNSNIPE
 }
 
 enum class AmmoType {

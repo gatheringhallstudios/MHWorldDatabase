@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Attributes that share the same name can only be defined once. Subsequent uses should not define 'format' again -->
+    <!-- Attributes that share the same name can only be defined once.
+        Subsequent uses should not define the 'format' attr again -->
 
     <declare-styleable name="DetailHeaderCell">
         <attr name="iconSrc" format="integer" />
@@ -52,5 +53,14 @@
     <declare-styleable name="SkillLevelView">
         <attr name="level" format="integer"/>
         <attr name="maxLevel" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="CheckedImageButton">
+        <attr name="src" format="integer"/>
+        <attr name="text" format="string"/>
+        <attr name="checked" format="boolean"/>
+        <attr name="imageWidth" format="dimension"/>
+        <attr name="imageHeight" format="dimension"/>
+        <attr name="imageSize" format="dimension"/>
     </declare-styleable>
 </resources>

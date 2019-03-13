@@ -190,18 +190,16 @@ class WeaponTreeListAdapterDelegate(
                             shellingValue
                     )
                     view.tree_weapon_specific_section.addView(shellingView)
-
                 }
 
                 WeaponType.LIGHT_BOWGUN, WeaponType.HEAVY_BOWGUN -> {
-                    val specialAmmoValue = weapon.special_ammo.toString()
+                    val specialAmmoValue = AssetLoader.localizeSpecialAmmoType(weapon.special_ammo)
                     val specialAmmoView = CompactStatCell(
                             view.context,
                             R.drawable.ic_ui_special_ammo,
                             specialAmmoValue
                     )
                     view.tree_weapon_specific_section.addView(specialAmmoView)
-
                 }
 
                 WeaponType.BOW -> {

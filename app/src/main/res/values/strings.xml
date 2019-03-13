@@ -10,6 +10,10 @@
 
     <string name="action_search">Search</string>
     <string name="action_bookmark">Bookmark</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_apply">Apply</string>
 
     <string name="general_no_data">Nothing here, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
     <string name="general_none">None</string> <!-- Empty message for skill/charms subsections -->
@@ -65,6 +69,17 @@
     <string name="extract_red_abbr">RED</string>
     <string name="extract_white_abbr">WHT</string>
     <string name="extract_green_abbr">GRN</string>
+
+    <!-- Elements and statuses -->
+    <string name="element_fire">Fire</string>
+    <string name="element_water">Water</string>
+    <string name="element_thunder">Thunder</string>
+    <string name="element_ice">Ice</string>
+    <string name="element_dragon">Dragon</string>
+    <string name="status_poison">Poison</string>
+    <string name="status_sleep">Sleep</string>
+    <string name="status_paralysis">Paralysis</string>
+    <string name="status_blast">Blast</string>
 
     <!-- Section Headers -->
     <!-- These aren't tied to a particular screen so they can be used anywhere -->
@@ -168,7 +183,7 @@
     <!-- ## WEAPON MENU ## -->
     <!-- ################# -->
 
-    <string name="weapon_final_only">Final Only</string>
+    <string name="weapon_final_only">Final</string>
     <string name="weapon_final_upgrades">Final</string>
 
     <!-- Weapon List Entries -->
@@ -193,6 +208,9 @@
     <string name="tab_weapon_kulve">Kulve</string>
     <string name="tab_weapon_detail">Detail</string>
     <string name="tab_weapon_tree">Family</string>
+
+    <string name="filter_title_show_only">Show Only</string>
+    <string name="filter_title_sort_by">Sort By</string>
 
     <!-- General Strings -->
     <string name="weapon_attack">Attack</string>
@@ -248,6 +266,9 @@
 
     <string name="weapon_bowgun_deviation">Deviation</string>
     <string name="weapon_bowgun_special_ammo">Special Ammo</string>
+    <string name="weapon_bowgun_special_ammo_wyvernblast">Wyvernblast</string>
+    <string name="weapon_bowgun_special_ammo_wyvernheart">Wyvernheart</string>
+    <string name="weapon_bowgun_special_ammo_wyvernsnipe">Wyvernsnipe</string>
     <string name="weapon_bowgun_ammo_types">Ammo Types</string>
     <string name="weapon_bowgun_ammo_normal">Normal %1$d</string>
     <string name="weapon_bowgun_ammo_pierce">Pierce %1$d</string>

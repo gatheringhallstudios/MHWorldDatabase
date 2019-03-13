@@ -142,7 +142,7 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
-    fun loadElementIcon(element: String?): Drawable? {
+    fun loadElementIcon(element: ElementStatus?): Drawable? {
         return ctx.getDrawableCompat(ElementRegistry(element))
     }
 
@@ -188,6 +188,22 @@ object AssetLoader {
     }
 
     /**
+     * Returns the localized element or status name.
+     */
+    fun localizeElementStatus(elementStatus: ElementStatus?): String = when(elementStatus) {
+        null -> ""
+        ElementStatus.FIRE -> ctx.getString(R.string.element_fire)
+        ElementStatus.WATER -> ctx.getString(R.string.element_water)
+        ElementStatus.THUNDER -> ctx.getString(R.string.element_thunder)
+        ElementStatus.ICE -> ctx.getString(R.string.element_ice)
+        ElementStatus.DRAGON -> ctx.getString(R.string.element_dragon)
+        ElementStatus.POISON -> ctx.getString(R.string.status_poison)
+        ElementStatus.SLEEP -> ctx.getString(R.string.status_sleep)
+        ElementStatus.PARALYSIS -> ctx.getString(R.string.status_paralysis)
+        ElementStatus.BLAST -> ctx.getString(R.string.status_blast)
+    }
+
+    /**
      * Returns the phial type in the current app language setting
      */
     fun localizePhialType(phialType: PhialType): String = when (phialType) {
@@ -222,5 +238,15 @@ object AssetLoader {
         ShellingType.NORMAL -> ctx.getString(R.string.weapon_gunlance_shelling_normal)
         ShellingType.WIDE -> ctx.getString(R.string.weapon_gunlance_shelling_wide)
         ShellingType.LONG -> ctx.getString(R.string.weapon_gunlance_shelling_long)
+    }
+
+    /**
+     * Localizes the special ammo type using the current app language settings.
+     */
+    fun localizeSpecialAmmoType(type: SpecialAmmoType?): String = when (type) {
+        null -> ""
+        SpecialAmmoType.WYVERNBLAST -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernblast)
+        SpecialAmmoType.WYVERNHEART -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernheart)
+        SpecialAmmoType.WYVERNSNIPE -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernsnipe)
     }
 }

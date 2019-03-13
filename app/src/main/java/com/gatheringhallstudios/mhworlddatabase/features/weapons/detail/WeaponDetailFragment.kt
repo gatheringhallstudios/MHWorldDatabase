@@ -131,7 +131,8 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
             true -> "($elementAttackStr)"
             false -> elementAttackStr
         }
-        element_type_value.text = weapon.element1 //TODO: This element string needs to be localized in the DB
+
+        element_type_value.text = AssetLoader.localizeElementStatus(weapon.element1)
         element_layout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
 
         //Slot information
@@ -415,7 +416,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         if (ammo == null) return
 
         deviation_value.text = ammo.deviation
-        special_ammo_value.text = ammo.special_ammo
+        special_ammo_value.text = AssetLoader.localizeSpecialAmmoType(ammo.special_ammo)
 
         ammo.iterator().forEach {
             val view = layoutInflater.inflate(R.layout.listitem_bowgun_ammo, ammo_layout, false)

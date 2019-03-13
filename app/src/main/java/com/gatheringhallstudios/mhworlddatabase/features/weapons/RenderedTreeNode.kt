@@ -1,6 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHParentedModel
 
 /**
  * Represents the indents and the straight, L and T branches required to draw the tree for each row
@@ -37,6 +39,11 @@ class RenderedTreeNode<T>(
     constructor(value: T): this(value, 0, listOf(TreeFormatter.INDENT), 0)
 }
 
+/**
+ * Creates a render list from a ModelTree object (which is actually a collection of multiple trees).
+ */
+fun <T: MHParentedModel> createTreeRenderList(trees: MHModelTree<T>)
+        = trees.roots.flatMap { createTreeRenderList(it) }
 
 /**
  * Performs a depth first traversal on the weapon tree node and returns a list of RenderedTreeNode objects representing all nodes.
