@@ -4,15 +4,12 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.core.view.marginEnd
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.util.dpToPx
+import com.gatheringhallstudios.mhworlddatabase.util.dp
 
 /**
  * A custom ImageButton object that is checkable.
@@ -96,9 +93,10 @@ class CheckedImageButton  @JvmOverloads constructor(
 
     private fun handleDataChange() {
         if (imageView.isVisible && textView.isVisible) {
-            imageViewParams.marginEnd = dpToPx(4) // default value (todo: make configurable)
+            imageViewParams.marginEnd = 4.dp // default value (todo: make configurable)
         } else {
             imageViewParams.marginEnd = 0
         }
+        this.invalidate()
     }
 }
