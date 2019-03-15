@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="16dp"
     android:height="120dp"
     android:viewportWidth="80"
     android:viewportHeight="600">
-    <group>
-        <path
-            android:fillColor="#4E4E4E"
-            android:pathData="M50 310v290H30V290h50v20z"/>
-        <path
-            android:fillColor="#4E4E4E"
-            android:pathData="M0 310v-20h40v20z"/>
-    </group>
+    <path
+        android:fillColor="#4E4E4E"
+        android:pathData="M30 324.37a26.67 26.67 0 0 0 5.8 0.63H50v275H30V324.37zM79.96 310a12.51 12.51 0 0 0 0.04-1v1h-0.04zM80 291c0-0.34-0.01-0.67-0.04-1H80v1zm-64.96-1a12.51 12.51 0 0 0-0.04 1v18c0 0.34 0.01 0.67 0.04 1H0v-20h15.04z"/>
+    <path
+        android:fillColor="#6B6B6B"
+        android:pathData="M31 285a6 6 0 0 0-6 6v18a6 6 0 0 0 6 6h18a6 6 0 0 0 6-6v-18a6 6 0 0 0-6-6H31z"/>
 </vector>
