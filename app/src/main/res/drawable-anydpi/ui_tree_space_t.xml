@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="16dp"
     android:height="120dp"
     android:viewportWidth="80"
     android:viewportHeight="600">
-    <group>
-        <path
-            android:fillColor="#4E4E4E"
-            android:pathData="M50 290h30v20H30V0h20z"/>
-        <path
-            android:fillColor="#4E4E4E"
-            android:pathData="M50 600H30V300h20z"/>
-    </group>
+    <path
+        android:fillColor="#4E4E4E"
+        android:pathData="M50 290h30v20H30V0h20z"/>
+    <path
+        android:fillColor="#4E4E4E"
+        android:pathData="M50 600H30V300h20z"/>
 </vector>
