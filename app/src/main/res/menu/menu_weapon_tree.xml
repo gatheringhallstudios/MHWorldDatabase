@@ -5,6 +5,6 @@
     <item
         android:id="@+id/action_filter"
         android:title="@string/action_filter"
-        android:icon="@drawable/ic_element_fire"
+        android:icon="@drawable/ic_ui_filter_off_white"
         app:showAsAction="ifRoom" />
 </menu>
