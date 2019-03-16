@@ -16,7 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
  */
 class WeaponKulveListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(WeaponTreeListViewModel::class.java)
+        ViewModelProviders.of(parentFragment!!).get(WeaponTreeViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

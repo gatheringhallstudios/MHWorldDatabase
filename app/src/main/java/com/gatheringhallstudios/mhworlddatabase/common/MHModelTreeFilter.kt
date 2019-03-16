@@ -34,6 +34,11 @@ class MHModelTreeFilter<T: MHParentedModel>(
     var finalOnly = false
 
     /**
+     * Returns true if the filter is in a non-passthrough state.
+     */
+    val isFiltered get() = flatten || finalOnly || filterList.isNotEmpty()
+
+    /**
      * Clears registered filters.
      */
     fun clearFilters() {
@@ -61,7 +66,7 @@ class MHModelTreeFilter<T: MHParentedModel>(
         val needsFlatten = flatten || finalOnly
 
         // Return all root nodes as is if not filtering
-        if (!needsFlatten && filterList.isEmpty()) {
+        if (!isFiltered) {
             return createTreeRenderList(tree)
         }
 

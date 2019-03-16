@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 /**
  * Viewmodel used to contain data for the Weapon Tree.
  */
-class WeaponTreeListViewModel(application: Application) : AndroidViewModel(application) {
+class WeaponTreeViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = MHWDatabase.getDatabase(application).weaponDao()
 
     lateinit var currentWeaponType: WeaponType
@@ -40,6 +40,11 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
      * A list of nodes for the tree to display under the Kulve tab.
      */
     val kulveNodeData = MutableLiveData<List<RenderedTreeNode<Weapon>>>()
+
+    /**
+     * Live event that reflects the current is filtered status
+     */
+    val isFilteredData = MutableLiveData<Boolean>()
 
     /**
      * Returns or updates the current filter state
@@ -77,6 +82,7 @@ class WeaponTreeListViewModel(application: Application) : AndroidViewModel(appli
             }
 
             updateNodeList()
+            isFilteredData.value = filter.isFiltered
         }
 
     /**
