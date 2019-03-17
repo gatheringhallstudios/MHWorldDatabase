@@ -24,6 +24,17 @@ enum class TreeFormatter {
 }
 
 /**
+ * Represents end nodes in the tree that need to be colored
+ */
+enum class TreeNode {
+    START,
+    START_COLLAPSED,
+    MID,
+    MID_COLLAPSED,
+    END
+}
+
+/**
  * Defines a tree node that has been rendered to display as a list item.
  */
 class RenderedTreeNode<T>(

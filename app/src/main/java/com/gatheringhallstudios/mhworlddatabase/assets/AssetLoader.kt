@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine
@@ -126,6 +127,17 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, color)
     }
 
+    fun loadIconFor(node: TreeNode, rarity: Int): Drawable? {
+        val name = when (node) {
+            TreeNode.START -> "NodeStart"
+            TreeNode.START_COLLAPSED -> "NodeStartCollapsed"
+            TreeNode.MID -> "NodeMid"
+            TreeNode.MID_COLLAPSED -> "NodeMidCollapsed"
+            TreeNode.END -> "NodeEnd"
+        }
+        return ctx.getVectorDrawable(name, "rare$rarity")
+    }
+
     fun loadSkillIcon(color: String?): Drawable? {
         return ctx.getVectorDrawable("Skill", color)
     }
@@ -160,7 +172,6 @@ object AssetLoader {
             else -> null
         }
     }
-
 
     fun loadRarityColor(rarity: Int) : Int {
         val colorId = ColorRegistry("rare$rarity") ?: ColorRegistry("rare1")
