@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -25,7 +24,7 @@ class WeaponTreePagerFragment : BasePagerFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(WeaponTreeListViewModel::class.java)
+        ViewModelProviders.of(this).get(WeaponTreeViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +50,14 @@ class WeaponTreePagerFragment : BasePagerFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_weapon_tree, menu)
+        val filterIcon = menu.findItem(R.id.action_filter)
+
+        viewModel.isFilteredData.observe(this, Observer { isFiltered ->
+            filterIcon?.setIcon(when (isFiltered) {
+                true -> R.drawable.ic_ui_filter_on_white
+                false -> R.drawable.ic_ui_filter_off_white
+            })
+        })
     }
 
     /**
