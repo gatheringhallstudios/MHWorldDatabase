@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
@@ -339,7 +340,7 @@ class WeaponTreeListAdapterDelegate(
 
         private fun createImageView(context: Context, drawable: Drawable?): ImageView {
             val imageView = createImageViewBlank(context)
-            imageView.setImageDrawable(drawable)
+            imageView.setImageBitmap(drawable?.toBitmap())
             return imageView
         }
 
