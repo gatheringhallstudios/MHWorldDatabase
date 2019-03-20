@@ -2,8 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,8 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
@@ -94,7 +95,7 @@ class WeaponTreeListAdapterDelegate(
             // Populate stats like element, defense...
             populateComplexStats(weapon)
             // Populate tree lines
-            createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed)
+            createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed, weapon.rarity)
 
             view.invalidate()
         }
@@ -289,55 +290,48 @@ class WeaponTreeListAdapterDelegate(
             }
         }
 
-        private fun createTreeLayout(formatter: List<TreeFormatter>, isCollapsed: Boolean) {
+        private fun createTreeLayout(formatter: List<TreeFormatter>, isCollapsed: Boolean, rarity: Int) {
             val treeView = view.tree_components
 
             if (treeView.childCount != 0) treeView.removeAllViews()
 
             formatter.forEach {
-                when (it) {
-                    TreeFormatter.START -> {
-                        if (!isCollapsed) {
-                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start))
+                val drawable = when (it) {
+                    TreeFormatter.START -> if (!isCollapsed) {
+                            AssetLoader.loadIconFor(TreeNode.START, rarity)
                         } else {
-                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start_collapsed))
+                            AssetLoader.loadIconFor(TreeNode.START_COLLAPSED, rarity)
                         }
+                    TreeFormatter.MID -> if (!isCollapsed) {
+                        AssetLoader.loadIconFor(TreeNode.MID, rarity)
+                    } else {
+                        AssetLoader.loadIconFor(TreeNode.MID_COLLAPSED, rarity)
                     }
-                    TreeFormatter.INDENT -> {
-                        val space = Space(treeView.context)
-                        space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE.px, LinearLayout.LayoutParams.MATCH_PARENT)
-                        treeView.addView(space)
-                    }
-                    TreeFormatter.STRAIGHT_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_line))
-                    }
-                    TreeFormatter.T_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_t))
-                    }
-                    TreeFormatter.MID -> {
-                        if (!isCollapsed) {
-                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid))
-                        } else {
-                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid_collapsed))
-                        }
-                    }
-                    TreeFormatter.L_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_l))
-                    }
-                    TreeFormatter.END -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_end))
-                    }
+                    TreeFormatter.INDENT -> null
+                    TreeFormatter.STRAIGHT_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_line)
+                    TreeFormatter.T_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_t)
+                    TreeFormatter.L_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_l)
+                    TreeFormatter.END -> AssetLoader.loadIconFor(TreeNode.END, rarity)
                 }
+
+                treeView.addView(createImageView(treeView.context, drawable))
             }
         }
 
-        private fun createImageView(context: Context, resource: Int): ImageView {
+        private fun createImageView(context: Context, drawable: Drawable?): View {
             val imageView = ImageView(context)
             imageView.scaleType = ImageView.ScaleType.FIT_XY
             imageView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
             imageView.setPadding(0, 0, 0, 0)
-            imageView.setImageResource(resource)
-            return imageView
+            imageView.setImageBitmap(drawable?.toBitmap()) // TODO raster only the required drawables instead of all of them
+
+            return if (drawable == null) {
+                val space = Space(context)
+                space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE.px, LinearLayout.LayoutParams.MATCH_PARENT)
+                space
+            } else {
+                imageView
+            }
         }
     }
 }
