@@ -296,60 +296,42 @@ class WeaponTreeListAdapterDelegate(
             if (treeView.childCount != 0) treeView.removeAllViews()
 
             formatter.forEach {
-                when (it) {
-                    TreeFormatter.START -> {
-                        if (!isCollapsed) {
-                            treeView.addView(createImageView(treeView.context, AssetLoader.loadIconFor(TreeNode.START, rarity)))
+                val drawable = when (it) {
+                    TreeFormatter.START -> if (!isCollapsed) {
+                            AssetLoader.loadIconFor(TreeNode.START, rarity)
                         } else {
-                            treeView.addView(createImageView(treeView.context, AssetLoader.loadIconFor(TreeNode.START_COLLAPSED, rarity)))
+                            AssetLoader.loadIconFor(TreeNode.START_COLLAPSED, rarity)
                         }
+                    TreeFormatter.MID -> if (!isCollapsed) {
+                        AssetLoader.loadIconFor(TreeNode.MID, rarity)
+                    } else {
+                        AssetLoader.loadIconFor(TreeNode.MID_COLLAPSED, rarity)
                     }
-                    TreeFormatter.INDENT -> {
-                        val space = Space(treeView.context)
-                        space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE.px, LinearLayout.LayoutParams.MATCH_PARENT)
-                        treeView.addView(space)
-                    }
-                    TreeFormatter.STRAIGHT_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_line))
-                    }
-                    TreeFormatter.T_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_t))
-                    }
-                    TreeFormatter.MID -> {
-                        if (!isCollapsed) {
-                            treeView.addView(createImageView(treeView.context, AssetLoader.loadIconFor(TreeNode.MID, rarity)))
-                        } else {
-                            treeView.addView(createImageView(treeView.context, AssetLoader.loadIconFor(TreeNode.MID_COLLAPSED, rarity)))
-                        }
-                    }
-                    TreeFormatter.L_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_l))
-                    }
-                    TreeFormatter.END -> {
-                        treeView.addView(createImageView(treeView.context, AssetLoader.loadIconFor(TreeNode.END, rarity)))
-                    }
+                    TreeFormatter.INDENT -> null
+                    TreeFormatter.STRAIGHT_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_line)
+                    TreeFormatter.T_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_t)
+                    TreeFormatter.L_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_l)
+                    TreeFormatter.END -> AssetLoader.loadIconFor(TreeNode.END, rarity)
                 }
+
+                treeView.addView(createImageView(treeView.context, drawable))
             }
         }
 
-        private fun createImageView(context: Context, resource: Int): ImageView {
-            val imageView = createImageViewBlank(context)
-            imageView.setImageResource(resource)
-            return imageView
-        }
-
-        private fun createImageView(context: Context, drawable: Drawable?): ImageView {
-            val imageView = createImageViewBlank(context)
-            imageView.setImageBitmap(drawable?.toBitmap())
-            return imageView
-        }
-
-        private fun createImageViewBlank(context: Context): ImageView {
+        private fun createImageView(context: Context, drawable: Drawable?): View {
             val imageView = ImageView(context)
             imageView.scaleType = ImageView.ScaleType.FIT_XY
             imageView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
             imageView.setPadding(0, 0, 0, 0)
-            return imageView
+            imageView.setImageBitmap(drawable?.toBitmap()) // TODO raster only the required drawables instead of all of them
+
+            return if (drawable == null) {
+                val space = Space(context)
+                space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE.px, LinearLayout.LayoutParams.MATCH_PARENT)
+                space
+            } else {
+                imageView
+            }
         }
     }
 }
