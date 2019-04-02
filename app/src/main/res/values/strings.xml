@@ -392,6 +392,11 @@
 
     <string name="title_bookmarks">Bookmarks</string>
 
+    <!-- ################# -->
+    <!-- ## ARMOR SET MENU ## -->
+    <!-- ################# -->
+    <string name="title_armor_set_builder">Armor Set Builder</string>
+
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->

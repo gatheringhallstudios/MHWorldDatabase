@@ -44,6 +44,10 @@
             android:id="@+id/bookmarksListDestination"
             android:icon="@drawable/ic_ui_bookmark"
             android:title="@string/title_bookmarks" />
+        <item
+            android:id="@+id/armorSetBuilderDestination"
+            android:icon="@drawable/ic_ui_bookmark"
+            android:title="@string/title_armor_set_builder" />
     </group>
 
     <group android:title="Other">

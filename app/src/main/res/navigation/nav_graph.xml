@@ -179,6 +179,18 @@
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+    <fragment
+        android:id="@+id/armorSetBuilderDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.userArmorSetBuilder.list.UserEquipmentSetListFragment"
+        android:label="@string/title_armor_set_builder"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/armorSetBuilderAction"
+        app:destination="@id/settingsDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <!-- REGULAR DESTINATIONS -->
 

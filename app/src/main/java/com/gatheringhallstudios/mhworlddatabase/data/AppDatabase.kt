@@ -7,8 +7,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.gatheringhallstudios.mhworlddatabase.data.dao.BookmarksDao
 import com.gatheringhallstudios.mhworlddatabase.data.entities.BookmarkEntity
+import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentDecorationEntity
+import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentSetEntity
 
-@Database(entities = [BookmarkEntity::class], version = 1)
+@Database(entities = [BookmarkEntity::class, UserEquipmentSetEntity::class, UserEquipmentDecorationEntity::class], version = 1)
 @TypeConverters(AppConverters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bookmarkDao(): BookmarksDao
