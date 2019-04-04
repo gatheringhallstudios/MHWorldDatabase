@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.userArmorSetBuilder.li
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemAdapterDelegate
@@ -10,6 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetDetailItem
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetHeaderItem
@@ -36,24 +38,23 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)
 
+        viewModel.getEquipmentSetList()
+
         // Add dividers between items
         recyclerView.addItemDecoration(HeaderItemDivider(DashedDividerDrawable(context!!)))
 
-//        if (adapter.itemCount == 0) {
-//
-//            viewModel.getArmorSetList(rank).observe(this, Observer<List<ArmorSet>> {
-//                val items = it?.map {
-//                    val headerItem = ArmorSetHeaderItem(it)
-//                    val bodyItems = it.armor.map { ArmorSetDetailItem(it) }
-//
-//                    return@map ExpandableGroup(headerItem, false).apply {
-//                        addAll(bodyItems)
-//                    }
-//                }
-//
-//                adapter.update(items ?: emptyList())
-//            })
-//        }
+        if (adapter.itemCount == 0) {
+
+            viewModel.userEquipmentSetData.observe(this, Observer<MutableList<UserEquipmentSet>> {
+                val items = it?.map {
+
+                }
+
+                if (it.size == 0) {
+                    showEmptyView()
+                }
+            })
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

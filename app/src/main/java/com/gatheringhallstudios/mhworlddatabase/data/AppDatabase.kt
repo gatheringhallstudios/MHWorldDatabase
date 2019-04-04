@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.gatheringhallstudios.mhworlddatabase.data.dao.BookmarksDao
+import com.gatheringhallstudios.mhworlddatabase.data.dao.UserEquipmentSetDao
 import com.gatheringhallstudios.mhworlddatabase.data.entities.BookmarkEntity
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentDecorationEntity
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentSetEntity
@@ -14,6 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentSetEn
 @TypeConverters(AppConverters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bookmarkDao(): BookmarksDao
+    abstract fun userEquipmentSetDao(): UserEquipmentSetDao
 
     companion object {
         var INSTANCE: AppDatabase? = null

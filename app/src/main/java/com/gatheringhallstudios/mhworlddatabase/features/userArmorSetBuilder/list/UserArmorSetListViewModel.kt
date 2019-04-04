@@ -2,12 +2,15 @@ package com.gatheringhallstudios.mhworlddatabase.features.userArmorSetBuilder.li
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
-import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by Carlos on 3/22/2018.
@@ -15,17 +18,17 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
 
 class UserArmorSetListViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = MHWDatabase.getDatabase(application).armorDao()
+    private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
 
-    private var rank: Rank? = null
-    private lateinit var armorSetData: LiveData<List<ArmorSet>>
+    val userEquipmentSetData = MutableLiveData<MutableList<UserEquipmentSet>>()
 
-    fun getArmorSetList(rank: Rank?): LiveData<List<ArmorSet>> {
-        if (this.rank == rank && ::armorSetData.isInitialized) {
-            return armorSetData
+    fun getEquipmentSetList() {
+        GlobalScope.launch(Dispatchers.Main) {
+            val equipmentSetLists = withContext(Dispatchers.IO) {
+                appDao.loadUserEquipmentSets()
+            }
+
+            userEquipmentSetData.value = equipmentSetLists.toMutableList()
         }
-
-        this.rank = rank
-        this.armorSetData = dao.loadArmorSets(AppSettings.dataLocale, rank)
-        return armorSetData
     }
 }

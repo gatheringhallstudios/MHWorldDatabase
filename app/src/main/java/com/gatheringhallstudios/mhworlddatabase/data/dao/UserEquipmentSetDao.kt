@@ -15,7 +15,7 @@ abstract class UserEquipmentSetDao {
     abstract fun loadUserEquipment(): List<UserEquipmentSetEntity>
 
     @Query("""
-        SELECT u.id, u.dataId, u.decorationId, u.dataType, u.decorationId
+        SELECT u.id, u.dataId, u.decorationId, u.dataType, u.decorationId, u.equipmentSetId
         FROM user_equipment_set_decorations u """)
     abstract fun loadUserEquipmentDecorations(): List<UserEquipmentDecorationEntity>
 
