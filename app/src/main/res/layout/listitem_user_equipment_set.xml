@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    tools:orientation="horizontal"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+    <!-- This layout uses the merge tag so its actual layout is dependent on
+    the class that inflates it. Use parentTag is used to preview the layout in the editor -->
+
+    <ImageView
+        android:id="@+id/generic_icon"
+        style="@style/IconMedium.Decorated"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_set_name"
+        app:srcCompat="@drawable/ic_ui_question_mark_white" />
+
+    <TextView
+        android:id="@+id/equipment_set_name"
+        style="@style/TextBodyHigh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Some Label" />
+
+    <LinearLayout
+        android:id="@+id/complex_stat_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:gravity="left|start"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/generic_icon"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_set_name">
+
+        <!-- These should be removed from this layout and added at runtime -->
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/fire_defense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:minWidth="@dimen/image_size_small"
+            app:iconSrc="@drawable/ic_element_fire"
+            app:labelText="252" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/water_defense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            app:iconSrc="@drawable/ic_element_water"
+            app:labelText="+10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/complex_stat_layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:gravity="left|start"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium"
+        app:layout_constraintBottom_toBottomOf="@+id/complex_stat_layout"
+        app:layout_constraintStart_toEndOf="@+id/complex_stat_layout"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_set_name"
+        app:layout_constraintTop_toTopOf="@+id/complex_stat_layout">
+
+        <!-- These should be removed from this layout and added at runtime -->
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/ice_defense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:minWidth="@dimen/image_size_small"
+            app:iconSrc="@drawable/ic_element_ice"
+            app:labelText="252" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/thunder_defense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            app:iconSrc="@drawable/ic_element_thunder"
+            app:labelText="+10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/complex_stat_layout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:gravity="left|start"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium"
+        app:layout_constraintBottom_toBottomOf="@+id/complex_stat_layout2"
+        app:layout_constraintStart_toEndOf="@+id/complex_stat_layout2"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_set_name"
+        app:layout_constraintTop_toTopOf="@+id/complex_stat_layout2">
+
+        <!-- These should be removed from this layout and added at runtime -->
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/defense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:minWidth="@dimen/image_size_small"
+            app:iconSrc="@drawable/ic_ui_defense"
+            app:labelText="252" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/dragon_defense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            app:iconSrc="@drawable/ic_element_dragon"
+            app:labelText="+10" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

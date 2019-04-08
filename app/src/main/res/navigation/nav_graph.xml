@@ -181,7 +181,7 @@
 
     <fragment
         android:id="@+id/armorSetBuilderDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.userArmorSetBuilder.list.UserEquipmentSetListFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.userEquipmentSetBuilder.list.UserEquipmentSetListFragment"
         android:label="@string/title_armor_set_builder"
         tools:layout="@layout/list_generic" />
     <action
