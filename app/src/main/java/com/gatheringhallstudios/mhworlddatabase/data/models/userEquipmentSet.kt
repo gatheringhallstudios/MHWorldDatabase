@@ -2,7 +2,24 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
-open class UserEquipmentSet (
+class UserEquipmentSetIds(
+        val id: Int,
+        val name: String,
+        val equipmentIds: MutableList<UserEquipmentIds>
+)
+
+class UserEquipmentIds(
+        val dataId: Int,
+        val equipmentSetId: Int,
+        val dataType: DataType,
+        val decorationIds: MutableList<UserDecorationIds>
+)
+
+class UserDecorationIds(
+        val decorationId: Int
+)
+
+class UserEquipmentSet(
         val id: Int,
         val name: String,
         val equipment: MutableList<UserEquipment>
@@ -15,18 +32,35 @@ open class UserEquipmentSet (
     var thunderDefense: Int = 0
     var iceDefense: Int = 0
     var dragonDefense: Int = 0
-    var skills = mutableListOf<SkillLevel>()
+    var skills = mutableMapOf<Int, SkillLevel>()
 }
 
-class UserEquipment (
-        val dataId: Int,
-        val equipmentSetId: Int,
-        val dataType: DataType,
-        val decorations: MutableList<UserDecoration>
-) {
-
+interface UserEquipment {
+    fun getType(): DataType
 }
 
-class UserDecoration (
-        val decorationId: Int
-)
+class UserArmorPiece (
+        val armor : ArmorFull,
+        val decorations: List<Decoration>
+) : UserEquipment {
+    override fun getType(): DataType {
+        return DataType.ARMOR
+    }
+}
+
+class UserWeapon (
+        val weapon : WeaponFull,
+        val decorations : List<Decoration>
+) : UserEquipment {
+    override fun getType(): DataType {
+        return DataType.WEAPON
+    }
+}
+
+class UserCharm (
+        val charm : CharmFull
+) : UserEquipment {
+    override fun getType(): DataType {
+        return DataType.CHARM
+    }
+}

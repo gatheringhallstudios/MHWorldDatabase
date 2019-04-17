@@ -10,6 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSetIds
 
 /**
  * Created by Carlos on 3/22/2018.
@@ -35,11 +36,12 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
 
         if (adapter.itemCount == 0) {
 
-            viewModel.userEquipmentSetData.observe(this, Observer<MutableList<UserEquipmentSet>> {
+            viewModel.userEquipmentSets.observe(this, Observer<MutableList<UserEquipmentSet>> {
                 adapter.items = it.toList()
                 if (it.size == 0) {
                     showEmptyView()
                 }
+                adapter.notifyDataSetChanged()
             })
         }
     }

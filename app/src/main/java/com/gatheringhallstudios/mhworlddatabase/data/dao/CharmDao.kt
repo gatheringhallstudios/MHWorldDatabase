@@ -32,6 +32,15 @@ abstract class CharmDao {
         )
     }
 
+    fun loadCharmFullSync(langId: String, charmId: Int): CharmFull {
+        return CharmFull(
+                charm = loadCharmSync(langId, charmId),
+                skills = loadCharmSkillsSync(langId, charmId),
+                components = loadCharmComponentsSync(langId, charmId)
+        )
+    }
+
+
     @Query("""
         SELECT c.*, ct.name
         FROM charm c JOIN charm_text ct USING (id)

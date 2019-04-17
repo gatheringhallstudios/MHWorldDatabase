@@ -7,53 +7,197 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 /**
  * Created by Carlos on 3/22/2018.
  */
 
 class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel(application) {
-    private val dao = MHWDatabase.getDatabase(application).armorDao()
+    private val decorationDao = MHWDatabase.getDatabase(application).decorationDao()
+    private val charmDao = MHWDatabase.getDatabase(application).charmDao()
+    private val weaponDao = MHWDatabase.getDatabase(application).weaponDao()
+    private val armorDao = MHWDatabase.getDatabase(application).armorDao()
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
 
-    val userEquipmentSetData = MutableLiveData<MutableList<UserEquipmentSet>>()
+    val userEquipmentSetId = MutableLiveData<MutableList<UserEquipmentSetIds>>()
+    val userEquipmentSets = MutableLiveData<MutableList<UserEquipmentSet>>()
 
     fun getEquipmentSetList() {
         GlobalScope.launch(Dispatchers.Main) {
-            val equipmentSetLists = withContext(Dispatchers.IO) {
-                println("Done!")
-                appDao.loadUserEquipmentSets()
+            val equipmentSetIds = withContext(Dispatchers.IO) {
+                //                appDao.createUserEquipmentSet("test")
+//                appDao.createUserEquipmentEequipment(1, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(2, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(3, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(4, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(5, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
+
+                appDao.loadUserEquipmentSetIds()
             }
 
-            withContext(Dispatchers.IO) {
-                println("Done2!")
-
-                equipmentSetLists.forEach {
-                    val equipment = mutableListOf<Armor>()
-                    it.equipment.forEach { userEquipment ->
-                        if (userEquipment.dataType == DataType.ARMOR) {
-                            equipment.add(dao.loadArmorSync(AppSettings.dataLocale, userEquipment.dataId))
-                        }
+            val equipmentSets = withContext(Dispatchers.IO) {
+                val equipmentSets = mutableListOf<UserEquipmentSet>()
+                equipmentSetIds.forEach {
+                    launch {
+                        equipmentSets.add(convertEquipmentSetIdToEquipmentSet(it))
+                        println("Done " + Thread.currentThread().name)
                     }
-                    it.defense_base = equipment.sumBy { armor -> armor.defense_base}
-                    it.defense_max = equipment.sumBy { armor -> armor.defense_max}
-                    it.defense_augment_max = equipment.sumBy { armor -> armor.defense_augment_max}
-                    it.fireDefense = equipment.sumBy { armor -> armor.fire}
-                    it.waterDefense = equipment.sumBy { armor -> armor.water}
-                    it.thunderDefense = equipment.sumBy { armor -> armor.thunder}
-                    it.iceDefense = equipment.sumBy { armor -> armor.ice}
-                    it.dragonDefense = equipment.sumBy { armor -> armor.dragon}
+                }
+
+                equipmentSets
+            }
+
+            userEquipmentSets.value = equipmentSets.toMutableList()
+            userEquipmentSetId.value = equipmentSetIds.toMutableList()
+        }
+    }
+
+
+    private fun convertEquipmentSetIdToEquipmentSet(userEquipmentSetIds: UserEquipmentSetIds): UserEquipmentSet {
+        val userEquipment = mutableListOf<UserEquipment>()
+        userEquipmentSetIds.equipmentIds.forEach { userEquipmentId ->
+            when (userEquipmentId.dataType) {
+                DataType.ARMOR -> {
+                    val decorations = userEquipmentId.decorationIds.map { decorationFull ->
+                        decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationFull.decorationId)
+                    }
+
+                    userEquipment.add(UserArmorPiece(armor = armorDao.loadArmorFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
+                            decorations = decorations))
+                }
+                DataType.WEAPON -> {
+                    val decorations = userEquipmentId.decorationIds.map { decorationFull ->
+                        decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationFull.decorationId)
+                    }
+
+                    userEquipment.add(UserWeapon(weapon = weaponDao.loadWeaponFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
+                            decorations = decorations))
+                }
+                DataType.CHARM -> {
+                    userEquipment.add(UserCharm(charmDao.loadCharmFullSync(AppSettings.dataLocale, userEquipmentId.dataId)))
+                }
+                else -> {
                 }
             }
-            println("Done3!")
-            userEquipmentSetData.value = equipmentSetLists.toMutableList()
         }
+
+        val defense_base = userEquipment.sumBy { item ->
+            if (item.getType() == DataType.ARMOR) {
+                (item as UserArmorPiece).armor.armor.defense_base
+            } else if (item.getType() == DataType.WEAPON) {
+                (item as UserWeapon).weapon.weapon.defense
+            } else 0
+        }
+
+
+        val defense_max = userEquipment.sumBy { item ->
+            if (item.getType() == DataType.ARMOR) {
+                (item as UserArmorPiece).armor.armor.defense_max
+            } else if (item.getType() == DataType.WEAPON) {
+                (item as UserWeapon).weapon.weapon.defense
+            } else 0
+        }
+
+        val defense_augment_max = userEquipment.sumBy {
+            userEquipment.sumBy { item ->
+                if (item.getType() == DataType.ARMOR) {
+                    (item as UserArmorPiece).armor.armor.defense_augment_max
+                } else if (item.getType() == DataType.WEAPON) {
+                    (item as UserWeapon).weapon.weapon.defense
+                } else 0
+            }
+        }
+
+        val fireDefense = userEquipment.sumBy { item ->
+            if (item.getType() == DataType.ARMOR) {
+                (item as UserArmorPiece).armor.armor.fire
+            } else 0
+        }
+
+
+        val waterDefense = userEquipment.sumBy { item ->
+            if (item.getType() == DataType.ARMOR) {
+                (item as UserArmorPiece).armor.armor.water
+            } else 0
+        }
+
+
+        val thunderDefense = userEquipment.sumBy { item ->
+            if (item.getType() == DataType.ARMOR) {
+                (item as UserArmorPiece).armor.armor.thunder
+            } else 0
+        }
+
+
+        val iceDefense = userEquipment.sumBy { item ->
+            if (item.getType() == DataType.ARMOR) {
+                (item as UserArmorPiece).armor.armor.ice
+            } else 0
+        }
+
+        val dragonDefense = userEquipment.sumBy { item ->
+            if (item.getType() == DataType.ARMOR) {
+                (item as UserArmorPiece).armor.armor.dragon
+            } else 0
+        }
+
+        val skillLevels = mutableMapOf<Int, SkillLevel>()
+        userEquipment.forEach { item ->
+            val providedSkills = mutableListOf<SkillLevel>()
+            when (item.getType()) {
+                DataType.ARMOR -> {
+                    (item as UserArmorPiece).decorations.forEach { decoration ->
+                        val skillLevel = SkillLevel(1) //Decorations always only give 1 skill point
+                        skillLevel.skillTree = decoration.skillTree
+                        providedSkills.add(skillLevel)
+                    }
+
+                    providedSkills.addAll(item.armor.skills)
+                }
+
+                DataType.WEAPON -> {
+                    (item as UserWeapon).decorations.forEach { decoration ->
+                        val skillLevel = SkillLevel(1) //Decorations always only give 1 skill point
+                        skillLevel.skillTree = decoration.skillTree
+                        providedSkills.add(skillLevel)
+                    }
+                }
+                DataType.CHARM -> {
+                    providedSkills.addAll((item as UserCharm).charm.skills)
+                }
+                else -> {
+                }
+            }
+
+            providedSkills.forEach {
+                if (skillLevels.containsKey(it.skillTree.id)) {
+                    val level = skillLevels[it.skillTree.id]!!.level + it.level
+                    val skillLevel = SkillLevel(level)
+                    skillLevel.skillTree = it.skillTree
+                    skillLevels[it.skillTree.id] = skillLevel
+                } else {
+                    skillLevels[it.skillTree.id] = it
+                }
+            }
+        }
+
+        return {
+            val set = UserEquipmentSet(userEquipmentSetIds.id, userEquipmentSetIds.name, userEquipment)
+            set.defense_base = defense_base
+            set.defense_max = defense_max
+            set.defense_augment_max = defense_augment_max
+            set.fireDefense = fireDefense
+            set.waterDefense = waterDefense
+            set.thunderDefense = thunderDefense
+            set.iceDefense = iceDefense
+            set.dragonDefense = dragonDefense
+            set.skills = skillLevels
+
+            set
+        }()
     }
 }

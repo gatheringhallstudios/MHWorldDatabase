@@ -11,12 +11,11 @@
     the class that inflates it. Use parentTag is used to preview the layout in the editor -->
 
     <ImageView
-        android:id="@+id/generic_icon"
+        android:id="@+id/equipment_set_icon"
         style="@style/IconMedium.Decorated"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_medium"
-        android:layout_marginBottom="@dimen/margin_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/equipment_set_name"
         app:srcCompat="@drawable/ic_ui_question_mark_white" />
@@ -39,12 +38,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/margin_medium"
-        android:layout_marginBottom="@dimen/margin_medium"
         android:gravity="left|start"
         android:orientation="vertical"
         android:paddingBottom="@dimen/padding_medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/generic_icon"
+        app:layout_constraintStart_toEndOf="@+id/equipment_set_icon"
         app:layout_constraintTop_toBottomOf="@+id/equipment_set_name">
 
         <!-- These should be removed from this layout and added at runtime -->
@@ -125,6 +122,30 @@
             android:layout_height="24dp"
             app:iconSrc="@drawable/ic_element_dragon"
             app:labelText="+10" />
+    </LinearLayout>
+
+    <!-- This section will be filled in by code in the adapter delegate at runtime -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/complex_stat_layout">
+
+        <LinearLayout
+            android:id="@+id/skill_layout_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/skill_layout_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
     </LinearLayout>
 
 

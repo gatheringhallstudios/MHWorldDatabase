@@ -44,7 +44,7 @@
     <dimen name="width_break_value">46dp</dimen>
     <dimen name="margin_damage_value_right">14dp</dimen>
 
-    <!-- dimensions for icon paddings in various decorations -->
+    <!-- dimensions for icon paddings in various decorationIds -->
     <dimen name="padding_icon_decorated">4dp</dimen>
     <dimen name="padding_icon_zembellished">3dp</dimen>
 
