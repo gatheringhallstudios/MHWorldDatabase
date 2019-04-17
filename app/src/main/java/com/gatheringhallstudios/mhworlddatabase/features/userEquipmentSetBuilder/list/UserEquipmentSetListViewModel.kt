@@ -33,22 +33,20 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 //                appDao.createUserEquipmentEequipment(2, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(3, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(4, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(5, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
-
+//                appDao.deleteUserEquipmentEquipment()
                 appDao.loadUserEquipmentSetIds()
             }
 
             val equipmentSets = withContext(Dispatchers.IO) {
-                val equipmentSets = mutableListOf<UserEquipmentSet>()
-                equipmentSetIds.forEach {
-                    launch {
-                        equipmentSets.add(convertEquipmentSetIdToEquipmentSet(it))
-                        println("Done " + Thread.currentThread().name)
+                val deferred = equipmentSetIds.map {
+                    async {
+                        println("Doing on " + Thread.currentThread().name)
+                        convertEquipmentSetIdToEquipmentSet(it)
                     }
                 }
 
-                equipmentSets
+                deferred.map { it.await() }
             }
 
             userEquipmentSets.value = equipmentSets.toMutableList()
@@ -93,7 +91,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
             } else 0
         }
 
-
         val defense_max = userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.defense_max
@@ -102,14 +99,12 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
             } else 0
         }
 
-        val defense_augment_max = userEquipment.sumBy {
-            userEquipment.sumBy { item ->
-                if (item.getType() == DataType.ARMOR) {
-                    (item as UserArmorPiece).armor.armor.defense_augment_max
-                } else if (item.getType() == DataType.WEAPON) {
-                    (item as UserWeapon).weapon.weapon.defense
-                } else 0
-            }
+        val defense_augment_max = userEquipment.sumBy { item ->
+            if (item.getType() == DataType.ARMOR) {
+                (item as UserArmorPiece).armor.armor.defense_augment_max
+            } else if (item.getType() == DataType.WEAPON) {
+                (item as UserWeapon).weapon.weapon.defense
+            } else 0
         }
 
         val fireDefense = userEquipment.sumBy { item ->
@@ -117,7 +112,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 (item as UserArmorPiece).armor.armor.fire
             } else 0
         }
-
 
         val waterDefense = userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
@@ -131,7 +125,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 (item as UserArmorPiece).armor.armor.thunder
             } else 0
         }
-
 
         val iceDefense = userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {

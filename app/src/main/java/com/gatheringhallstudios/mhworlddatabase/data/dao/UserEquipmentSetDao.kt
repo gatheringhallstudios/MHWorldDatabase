@@ -32,10 +32,13 @@ abstract class UserEquipmentSetDao {
         val decorations = loadUserEquipmentDecorations()
 
         return set.map {
-            UserEquipmentSetIds(it.id, it.name, equipment.map { equipment ->
+            UserEquipmentSetIds(it.id, it.name, equipment.filter { userEquipmentEntity ->
+                userEquipmentEntity.equipmentSetId == it.id
+            }.map { equipment ->
                 UserEquipmentIds(equipment.dataId, equipment.equipmentSetId, equipment.dataType,
-                        decorations.filter { decoration -> decoration.dataId == equipment.dataId && decoration.dataType == equipment.dataType && decoration.equipmentSetId == equipment.id }
-                                .map { decoration -> UserDecorationIds(decoration.decorationId) }
+                        decorations.filter { decoration ->
+                            decoration.dataId == equipment.dataId && decoration.dataType == equipment.dataType && decoration.equipmentSetId == equipment.id
+                        }.map { decoration -> UserDecorationIds(decoration.decorationId) }
                                 .toMutableList())
             }.toMutableList())
         }
@@ -45,5 +48,9 @@ abstract class UserEquipmentSetDao {
     abstract fun createUserEquipmentSet(name: String)
 
     @Query("""INSERT INTO user_equipment_set_equipment VALUES (NULL, :id, :type, :equipmentSetId )""")
-    abstract fun createUserEquipmentEequipment(id :Int, type: DataType, equipmentSetId: Int)
+    abstract fun createUserEquipmentEequipment(id: Int, type: DataType, equipmentSetId: Int)
+
+    @Query("""DELETE FROM user_equipment_set_equipment """)
+    abstract fun deleteUserEquipmentEquipment()
+
 }

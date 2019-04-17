@@ -23,32 +23,26 @@ class UserEquipmentSetAdapterDelegate(private val onSelect: (UserEquipmentSet) -
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: UserEquipmentSet) {
-        
+
         viewHolder.equipment_set_name.text = data.name
-        viewHolder.fire_defense_value.setLabelText(data.fireDefense.toString())
-        viewHolder.water_defense_value.setLabelText(data.waterDefense.toString())
-        viewHolder.ice_defense_value.setLabelText(data.iceDefense.toString())
-        viewHolder.thunder_defense_value.setLabelText(data.thunderDefense.toString())
-        viewHolder.dragon_defense_value.setLabelText(data.dragonDefense.toString())
-        viewHolder.fire_defense_value.setLabelText(data.fireDefense.toString())
-        viewHolder.defense_value.setLabelText(viewHolder.resources.getString(
+        viewHolder.fire_value.text = data.fireDefense.toString()
+        viewHolder.water_value.text = data.waterDefense.toString()
+        viewHolder.ice_value.text = data.iceDefense.toString()
+        viewHolder.thunder_value.text = data.thunderDefense.toString()
+        viewHolder.dragon_value.text = data.dragonDefense.toString()
+        viewHolder.fire_value.text = data.fireDefense.toString()
+        viewHolder.defense_value.text = viewHolder.resources.getString(
                 R.string.armor_defense_value,
                 data.defense_base,
                 data.defense_max,
-                data.defense_augment_max))
-        var idx = 1
+                data.defense_augment_max)
         for (skillTree in data.skills) {
             val layout = LayoutInflater.from(viewHolder.context).inflate(R.layout.listitem_skill_level, parent, false)
             layout.icon.setImageDrawable(AssetLoader.loadIconFor(skillTree.value.skillTree))
             layout.label_text.text = skillTree.value.skillTree.name
             layout.skill_level.maxLevel = skillTree.value.skillTree.max_level
             layout.skill_level.level = skillTree.value.level
-            if (idx % 2 != 0) {
-                viewHolder.skill_layout_1.addView(layout)
-            } else {
-                viewHolder.skill_layout_2.addView(layout)
-            }
-            idx++
+            viewHolder.skill_layout_1.addView(layout)
         }
 
         viewHolder.itemView.setOnClickListener { onSelect(data) }
