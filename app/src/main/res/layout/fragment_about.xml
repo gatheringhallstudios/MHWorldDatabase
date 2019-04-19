@@ -127,7 +127,7 @@
         <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:iconSrc="@drawable/ic_element_thunder"
+            app:iconSrc="@drawable/ic_ui_hunter_notes_white"
             app:labelText="Kailackous"
             app:valueText="Data (Past/Various)"/>
 
@@ -138,9 +138,20 @@
         <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:iconSrc="@drawable/ic_element_thunder"
+            app:iconSrc="@drawable/ic_ui_hunter_notes_white"
             app:labelText="Andy Flores"
             app:valueText="French"/>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconSrc="@drawable/ic_ui_hunter_notes_white"
+            app:labelText="Scosciatacchini"
+            app:valueText="Italian"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
@@ -181,7 +192,20 @@
             android:layout_height="wrap_content"
             app:iconSrc="@drawable/ic_ui_attack"
             app:labelText="hexhexhex"
+            app:valueText="MHW Modding Data"
             android:tag="https://twitter.com/MHhexhexhex" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconSrc="@drawable/ic_ui_element"
+            app:labelText="Material"
+            app:valueText="MHW Modding Data"
+            android:tag="https://discordapp.com/invite/gJwMdhK/" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
             android:layout_width="wrap_content"
