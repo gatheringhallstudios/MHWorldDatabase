@@ -37,7 +37,7 @@ abstract class UserEquipmentSetDao {
             }.map { equipment ->
                 UserEquipmentIds(equipment.dataId, equipment.equipmentSetId, equipment.dataType,
                         decorations.filter { decoration ->
-                            decoration.dataId == equipment.dataId && decoration.dataType == equipment.dataType && decoration.equipmentSetId == equipment.id
+                            decoration.dataId == equipment.dataId && decoration.dataType == equipment.dataType && decoration.equipmentSetId == it.id
                         }.map { decoration -> UserDecorationIds(decoration.decorationId) }
                                 .toMutableList())
             }.toMutableList())
@@ -50,7 +50,12 @@ abstract class UserEquipmentSetDao {
     @Query("""INSERT INTO user_equipment_set_equipment VALUES (NULL, :id, :type, :equipmentSetId )""")
     abstract fun createUserEquipmentEequipment(id: Int, type: DataType, equipmentSetId: Int)
 
+    @Query("""DELETE FROM user_equipment_set_equipment  WHERE dataId = :dataId AND dataType = :type AND equipmentSetId = :equipmentSetId""")
+    abstract fun deleteUserEquipmentEquipment(dataId: Int, type: DataType, equipmentSetId: Int)
+
     @Query("""DELETE FROM user_equipment_set_equipment """)
     abstract fun deleteUserEquipmentEquipment()
 
+    @Query("""INSERT INTO user_equipment_set_decorations VALUES (NULL, :equipmentSetId, :dataId, :dataType, :decorationId)""")
+    abstract fun createUserEquipmentDecoration(equipmentSetId: Int, dataId : Int, dataType: DataType, decorationId: Int)
 }

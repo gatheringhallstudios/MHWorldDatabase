@@ -28,11 +28,13 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     fun getEquipmentSetList() {
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {
-                //                appDao.createUserEquipmentSet("test")
+//                appDao.createUserEquipmentSet("test")
 //                appDao.createUserEquipmentEequipment(1, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(2, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(3, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(4, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(526, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentDecoration(1, 526, DataType.ARMOR, 94)
 //                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment()
                 appDao.loadUserEquipmentSetIds()

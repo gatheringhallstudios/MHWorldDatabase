@@ -147,7 +147,12 @@ dependencies {
     Change log extension
      */
     implementation 'com.github.MFlisar:changelog:1.1.2'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
 
+    /*
+    View pager dots extension
+     */
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
 }
 
 apply plugin: 'de.undercouch.download'

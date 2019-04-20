@@ -8,7 +8,6 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSetIds
 import kotlinx.android.synthetic.main.listitem_skill_level_armor.view.*
 import kotlinx.android.synthetic.main.listitem_user_equipment_set.*
 
@@ -36,15 +35,9 @@ class UserEquipmentSetAdapterDelegate(private val onSelect: (UserEquipmentSet) -
                 data.defense_base,
                 data.defense_max,
                 data.defense_augment_max)
-        for (skillTree in data.skills) {
-            val layout = LayoutInflater.from(viewHolder.context).inflate(R.layout.listitem_skill_level, parent, false)
-            layout.icon.setImageDrawable(AssetLoader.loadIconFor(skillTree.value.skillTree))
-            layout.label_text.text = skillTree.value.skillTree.name
-            layout.skill_level.maxLevel = skillTree.value.skillTree.max_level
-            layout.skill_level.level = skillTree.value.level
-            viewHolder.skill_layout_1.addView(layout)
-        }
 
+        viewHolder.skill_pager.adapter = UserEquipmentSetViewPagerAdapter(this.parent!!.context, data.skills.map {it.value})
+        viewHolder.worm_dots_indicator.setViewPager(viewHolder.skill_pager)
         viewHolder.itemView.setOnClickListener { onSelect(data) }
     }
 }
