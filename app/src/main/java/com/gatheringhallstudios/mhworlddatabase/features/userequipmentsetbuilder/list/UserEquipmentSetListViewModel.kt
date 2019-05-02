@@ -34,9 +34,10 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 //                appDao.createUserEquipmentEequipment(3, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(4, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(526, DataType.ARMOR, 1)
+//                                appDao.createUserEquipmentEequipment(1, DataType.CHARM, 1)
 //                appDao.createUserEquipmentDecoration(1, 526, DataType.ARMOR, 94)
 //                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
-//                appDao.deleteUserEquipmentEquipment()
+//                appDao.deleteUserEquipmentEquipment(634, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(200, DataType.WEAPON, 1)
                 appDao.loadUserEquipmentSetIds()
             }
@@ -80,8 +81,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 DataType.CHARM -> {
                     userEquipment.add(UserCharm(charmDao.loadCharmFullSync(AppSettings.dataLocale, userEquipmentId.dataId)))
                 }
-                else -> {
-                }
             }
         }
 
@@ -120,7 +119,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 (item as UserArmorPiece).armor.armor.water
             } else 0
         }
-
 
         val thunderDefense = userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
