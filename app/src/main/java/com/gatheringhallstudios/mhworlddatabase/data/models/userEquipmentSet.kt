@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
+import java.io.Serializable
 
 class UserEquipmentSetIds(
         val id: Int,
@@ -23,7 +24,7 @@ class UserEquipmentSet(
         val id: Int,
         val name: String,
         val equipment: MutableList<UserEquipment>
-) {
+) : Serializable {
     var defense_base: Int = 0
     var defense_max: Int = 0
     var defense_augment_max: Int = 0
@@ -39,8 +40,8 @@ interface UserEquipment {
     fun getType(): DataType
 }
 
-class UserArmorPiece (
-        val armor : ArmorFull,
+class UserArmorPiece(
+        val armor: ArmorFull,
         val decorations: List<Decoration>
 ) : UserEquipment {
     override fun getType(): DataType {
@@ -48,17 +49,17 @@ class UserArmorPiece (
     }
 }
 
-class UserWeapon (
-        val weapon : WeaponFull,
-        val decorations : List<Decoration>
+class UserWeapon(
+        val weapon: WeaponFull,
+        val decorations: List<Decoration>
 ) : UserEquipment {
     override fun getType(): DataType {
         return DataType.WEAPON
     }
 }
 
-class UserCharm (
-        val charm : CharmFull
+class UserCharm(
+        val charm: CharmFull
 ) : UserEquipment {
     override fun getType(): DataType {
         return DataType.CHARM

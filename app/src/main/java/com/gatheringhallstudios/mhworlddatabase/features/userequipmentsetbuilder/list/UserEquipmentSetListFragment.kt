@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userEquipmentSetBuilder.list
+package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSetIds
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
  * Created by Carlos on 3/22/2018.
@@ -23,7 +23,7 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
 
     // Setup recycler list adapter and the on-selected
     private val adapter = BasicListDelegationAdapter(UserEquipmentSetAdapterDelegate {
-//        getRouter().navigateItemDetail(it.id)
+        getRouter().navigateUserEquipmentSetDetail(it)
     })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

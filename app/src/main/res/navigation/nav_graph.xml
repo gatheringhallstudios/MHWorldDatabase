@@ -181,7 +181,7 @@
 
     <fragment
         android:id="@+id/armorSetBuilderDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.userEquipmentSetBuilder.list.UserEquipmentSetListFragment"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListFragment"
         android:label="@string/title_armor_set_builder"
         tools:layout="@layout/list_generic" />
     <action
@@ -299,6 +299,18 @@
     <action
         android:id="@+id/openWeaponDetailAction"
         app:destination="@id/weaponDetailDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
+
+    <fragment
+        android:id="@+id/userEquipmentSetDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment"
+        tools:layout="@layout/fragment_generic_pager" />
+    <action
+        android:id="@+id/openUserEquipmentSetDetailAction"
+        app:destination="@id/userEquipmentSetDetailDestination"
         app:enterAnim="@anim/nav_enter_right"
         app:exitAnim="@anim/nav_exit_left"
         app:popEnterAnim="@anim/nav_enter_left"

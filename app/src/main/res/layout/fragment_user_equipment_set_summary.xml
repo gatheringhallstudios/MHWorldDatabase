@@ -162,19 +162,20 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/armor_set_piece_section"
+            android:id="@+id/weapon_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/margin_section_gap">
+
             <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
-                android:id="@+id/armor_set_piece_header"
+                android:id="@+id/weapon_set_piece_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/header_armor_set_pieces"/>
+                app:labelText="@string/header_weapons"/>
 
             <LinearLayout
-                android:id="@+id/armor_set_piece_list"
+                android:id="@+id/weapon_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@drawable/divider_stroke"
@@ -253,6 +254,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@drawable/divider_stroke"
+                android:orientation="vertical"
+                android:showDividers="middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/armor_set_piece_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:orientation="vertical">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/armor_set_piece_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/header_armor_set_pieces" />
+
+            <LinearLayout
+                android:id="@+id/armor_set_piece_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_stroke"
+
                 android:orientation="vertical"
                 android:showDividers="middle" />
         </LinearLayout>

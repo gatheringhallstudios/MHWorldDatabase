@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import androidx.navigation.NavController
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment
@@ -10,6 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetail
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.ARG_WEAPON_TREE_TYPE
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
@@ -88,5 +90,11 @@ class Router(private val navController: NavController) {
                 R.id.openWeaponDetailAction,
                 BundleBuilder().putInt(WeaponDetailPagerFragment.ARG_WEAPON_ID, weaponId).build()
         )
+    }
+
+    fun navigateUserEquipmentSetDetail(userEquipmentSet: UserEquipmentSet) {
+        navController.navigate(
+                R.id.openUserEquipmentSetDetailAction,
+                BundleBuilder().putSerializable(UserEquipmentSetDetailPagerFragment.ARG_USER_EQUIPMENT_SET, userEquipmentSet).build())
     }
 }

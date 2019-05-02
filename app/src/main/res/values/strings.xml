@@ -396,7 +396,8 @@
     <!-- ## ARMOR SET MENU ## -->
     <!-- ################# -->
     <string name="title_armor_set_builder">Armor Set Builder</string>
-
+    <string name="tab_armor_set_builder_summary">Summary</string>
+    <string name="tab_armor_set_builder_equipment">Equipment</string>
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->

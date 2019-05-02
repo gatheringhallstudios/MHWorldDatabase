@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userEquipmentSetBuilder.list
+package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -28,7 +28,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     fun getEquipmentSetList() {
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {
-//                appDao.createUserEquipmentSet("test")
+                //                appDao.createUserEquipmentSet("test")
 //                appDao.createUserEquipmentEequipment(1, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(2, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(3, DataType.ARMOR, 1)
@@ -37,6 +37,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 //                appDao.createUserEquipmentDecoration(1, 526, DataType.ARMOR, 94)
 //                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment()
+//                appDao.createUserEquipmentEequipment(200, DataType.WEAPON, 1)
                 appDao.loadUserEquipmentSetIds()
             }
 
@@ -55,7 +56,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
             userEquipmentSetId.value = equipmentSetIds.toMutableList()
         }
     }
-
 
     private fun convertEquipmentSetIdToEquipmentSet(userEquipmentSetIds: UserEquipmentSetIds): UserEquipmentSet {
         val userEquipment = mutableListOf<UserEquipment>()
