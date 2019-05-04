@@ -7,5 +7,4 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 
 class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewModel(application) {
     var activeUserEquipmentSet = MutableLiveData<UserEquipmentSet>()
-
 }

@@ -30,7 +30,10 @@ class UserEquipmentSetDetailPagerFragment : BasePagerFragment() {
         val equipmentSet = args!!.getSerializable(ARG_USER_EQUIPMENT_SET) as UserEquipmentSet
 
         viewModel = ViewModelProviders.of(this).get(UserEquipmentSetDetailViewModel::class.java)
-        viewModel.activeUserEquipmentSet.value = equipmentSet
+
+        if (equipmentSet.id != viewModel.activeUserEquipmentSet.value?.id) {
+            viewModel.activeUserEquipmentSet.value = equipmentSet
+        }
 
         this.setActivityTitle(equipmentSet.name)
 

@@ -218,23 +218,14 @@
                 android:id="@+id/armor_set_set_bonus_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:labelText="@string/header_set_bonuses" />
-
-            <TextView
-                android:id="@+id/armor_set_set_bonus_name"
-                style="@style/TextHeadlineHigh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_large"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginEnd="@dimen/margin_large"
-                tools:text="Rathalos Mastery" />
+                app:labelText="@string/header_active_set_bonuses" />
 
             <LinearLayout
                 android:id="@+id/armor_set_set_bonus_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:padding="@dimen/margin_medium" />
         </LinearLayout>
 
         <LinearLayout

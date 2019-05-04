@@ -3,12 +3,14 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -20,10 +22,11 @@ import kotlinx.android.synthetic.main.listitem_armorset_armor.view.armor_icon
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.armor_name
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.rarity_string
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.defense_value
+import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.*
-import kotlinx.android.synthetic.main.listitem_weapon.*
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
+import android.widget.LinearLayout
+import androidx.appcompat.app.ActionBar
 
 class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
 
@@ -45,6 +48,11 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateUserEquipmentSummary(userEquipmentSet: UserEquipmentSet, showTrueAttackValues: Boolean) {
+        armor_set_piece_list.removeAllViews()
+        armor_set_skill_list.removeAllViews()
+        armor_set_set_bonus_list.removeAllViews()
+        weapon_list.removeAllViews()
+
         //Load the icon of the first piece of equipment or no icon if the set is empty
         if (userEquipmentSet.equipment.isNotEmpty()) {
             armor_set_header.setIconDrawable(getIconObject(userEquipmentSet.equipment))
@@ -66,6 +74,10 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         userEquipmentSet.equipment.filter { it.getType() == DataType.WEAPON }.forEach { populateWeapon(it as UserWeapon, showTrueAttackValues) }
         userEquipmentSet.equipment.filter { it.getType() == DataType.ARMOR }.forEach { populateArmorSetPieces(it as UserArmorPiece) }
         userEquipmentSet.skills.forEach { populateArmorSkills(it.value) }
+        userEquipmentSet.setBonuses.forEach {
+            populateArmorSetBonusName(it.key)
+            populateArmorSetBonuses(it.value)
+        }
     }
 
     private fun populateWeapon(userWeapon: UserWeapon, showTrueAttackValues: Boolean) {
@@ -227,6 +239,31 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_skill_list.addView(view)
     }
 
+    private fun populateArmorSetBonusName(setBonusName: String) {
+        val textView = TextView(context)
+        textView.text = setBonusName
+        textView.setTextAppearance(context, R.style.TextHeadlineHigh)
+        armor_set_set_bonus_list.addView(textView)
+    }
+
+    private fun populateArmorSetBonuses(setBonuses: List<ArmorSetBonus>) {
+        for (setBonus in setBonuses) {
+            val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
+            val reqIcon = SetBonusNumberRegistry(setBonus.required)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
+
+            listItem.bonus_skill_icon.setImageDrawable(skillIcon)
+            listItem.bonus_skill_name.text = setBonus.skillTree.name
+            listItem.bonus_requirement.setImageResource(reqIcon)
+
+            listItem.setOnClickListener {
+                getRouter().navigateSkillDetail(setBonus.skillTree.id)
+            }
+
+            armor_set_set_bonus_list.addView(listItem)
+        }
+    }
+
     private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
         val workString = element1_attack ?: "-----"
 
@@ -236,7 +273,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun getIconObject(equipment: MutableList<UserEquipment>) : Drawable? {
+    private fun getIconObject(equipment: MutableList<UserEquipment>): Drawable? {
         val item = equipment.first()
         return when (item.getType()) {
             DataType.WEAPON -> AssetLoader.loadIconFor((item as UserWeapon).weapon.weapon)

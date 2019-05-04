@@ -29,16 +29,23 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {
                 //                appDao.createUserEquipmentSet("test")
-//                appDao.createUserEquipmentEequipment(1, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(2, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(3, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(4, DataType.ARMOR, 1)
+//                                appDao.createUserEquipmentEequipment(629, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(630, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(631, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(632, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(633, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
+//                appDao.deleteUserEquipmentEquipment(526, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(526, DataType.ARMOR, 1)
 //                                appDao.createUserEquipmentEequipment(1, DataType.CHARM, 1)
 //                appDao.createUserEquipmentDecoration(1, 526, DataType.ARMOR, 94)
 //                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment(634, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEequipment(200, DataType.WEAPON, 1)
+//                appDao.deleteUserEquipmentEquipment(630, DataType.ARMOR, 1)
+//                appDao.deleteUserEquipmentEquipment(631, DataType.ARMOR, 1)
+//                appDao.deleteUserEquipmentEquipment(632, DataType.ARMOR, 1)
+//                appDao.deleteUserEquipmentEquipment(633, DataType.ARMOR, 1)
                 appDao.loadUserEquipmentSetIds()
             }
 
@@ -81,63 +88,121 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 DataType.CHARM -> {
                     userEquipment.add(UserCharm(charmDao.loadCharmFullSync(AppSettings.dataLocale, userEquipmentId.dataId)))
                 }
+                else -> {
+                } //Shouldn't happen, so ignore
             }
         }
 
-        val defense_base = userEquipment.sumBy { item ->
+        return {
+            val set = UserEquipmentSet(userEquipmentSetIds.id, userEquipmentSetIds.name, userEquipment)
+            set.defense_base = calculateDefenseBase(userEquipment)
+            set.defense_max = calculateDefenseMax(userEquipment)
+            set.defense_augment_max = calculateDefenseAugMax(userEquipment)
+            set.fireDefense = calculateFireDefense(userEquipment)
+            set.waterDefense = calculateWaterDefense(userEquipment)
+            set.thunderDefense = calculateThunderDefense(userEquipment)
+            set.iceDefense = calculateIceDefense(userEquipment)
+            set.dragonDefense = calculateDragonDefense(userEquipment)
+            set.skills = calculateSkillLevels(userEquipment)
+            set.setBonuses = calculateSetBonuses(userEquipment)
+
+            set
+        }()
+    }
+
+    private fun calculateSetBonuses(userEquipment: List<UserEquipment>): MutableMap<String, List<ArmorSetBonus>> {
+        val setBonuses = mutableMapOf<String, List<ArmorSetBonus>>()
+        val setsPresent = userEquipment
+                .filter { it.getType() == DataType.ARMOR }
+                .groupBy { (it as UserArmorPiece).armor.armor.armorset_id }
+
+        //Set Bonus breakpoints are at 2-pieces, 3-pieces, and 4-pieces
+        setsPresent.forEach {
+            if (it.value.isNotEmpty()) {
+                val userArmorPiece = (it.value.first() as UserArmorPiece)
+                val activeSetBonuses = userArmorPiece.armor.setBonuses
+                        .filter { setBonus -> it.value.size >= setBonus.required }
+
+                if (activeSetBonuses.isNotEmpty()) {
+                    setBonuses[activeSetBonuses.first().name!!] = activeSetBonuses
+                }
+            }
+        }
+
+        return setBonuses
+    }
+
+    private fun calculateDefenseBase(userEquipment: List<UserEquipment>): Int {
+        return userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.defense_base
             } else if (item.getType() == DataType.WEAPON) {
                 (item as UserWeapon).weapon.weapon.defense
             } else 0
         }
+    }
 
-        val defense_max = userEquipment.sumBy { item ->
+    private fun calculateDefenseMax(userEquipment: List<UserEquipment>): Int {
+        return userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.defense_max
             } else if (item.getType() == DataType.WEAPON) {
                 (item as UserWeapon).weapon.weapon.defense
             } else 0
         }
+    }
 
-        val defense_augment_max = userEquipment.sumBy { item ->
+    private fun calculateDefenseAugMax(userEquipment: List<UserEquipment>): Int {
+        return userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.defense_augment_max
             } else if (item.getType() == DataType.WEAPON) {
                 (item as UserWeapon).weapon.weapon.defense
             } else 0
         }
+    }
 
-        val fireDefense = userEquipment.sumBy { item ->
+    private fun calculateFireDefense(userEquipment: List<UserEquipment>): Int {
+        return userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.fire
             } else 0
         }
+    }
 
-        val waterDefense = userEquipment.sumBy { item ->
+    private fun calculateWaterDefense(userEquipment: List<UserEquipment>): Int {
+        return userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.water
             } else 0
         }
+    }
 
-        val thunderDefense = userEquipment.sumBy { item ->
+    private fun calculateThunderDefense(userEquipment: List<UserEquipment>): Int {
+        return userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.thunder
             } else 0
         }
+    }
 
-        val iceDefense = userEquipment.sumBy { item ->
+    private fun calculateIceDefense(userEquipment: List<UserEquipment>): Int {
+        return userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.ice
             } else 0
         }
+    }
 
-        val dragonDefense = userEquipment.sumBy { item ->
+    private fun calculateDragonDefense(userEquipment: List<UserEquipment>): Int {
+        return userEquipment.sumBy { item ->
             if (item.getType() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.dragon
             } else 0
         }
+    }
 
+    private fun calculateSkillLevels(userEquipment: List<UserEquipment>): MutableMap<Int, SkillLevel> {
         val skillLevels = mutableMapOf<Int, SkillLevel>()
         userEquipment.forEach { item ->
             val providedSkills = mutableListOf<SkillLevel>()
@@ -178,19 +243,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
             }
         }
 
-        return {
-            val set = UserEquipmentSet(userEquipmentSetIds.id, userEquipmentSetIds.name, userEquipment)
-            set.defense_base = defense_base
-            set.defense_max = defense_max
-            set.defense_augment_max = defense_augment_max
-            set.fireDefense = fireDefense
-            set.waterDefense = waterDefense
-            set.thunderDefense = thunderDefense
-            set.iceDefense = iceDefense
-            set.dragonDefense = dragonDefense
-            set.skills = skillLevels
-
-            set
-        }()
+        return skillLevels
     }
 }
