@@ -2,9 +2,11 @@ package com.gatheringhallstudios.mhworlddatabase
 
 import androidx.navigation.NavController
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetListPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment
@@ -22,7 +24,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
  * you need to navigate.
  */
 class Router(private val navController: NavController) {
-    fun navigateObject(type: DataType, id: Int) = when(type) {
+    fun navigateObject(type: DataType, id: Int) = when (type) {
         DataType.ITEM -> navigateItemDetail(id)
         DataType.LOCATION -> navigateLocationDetail(id)
         DataType.MONSTER -> navigateMonsterDetail(id)
@@ -96,5 +98,23 @@ class Router(private val navController: NavController) {
         navController.navigate(
                 R.id.openUserEquipmentSetDetailAction,
                 BundleBuilder().putSerializable(UserEquipmentSetDetailPagerFragment.ARG_USER_EQUIPMENT_SET, userEquipmentSet).build())
+    }
+
+    fun navigateUserEquipmentArmorSelector(userEquipmentSetId: Int?, prevId: Int?, filter: ArmorType?) {
+        val bundle = BundleBuilder()
+                .putSerializable(ArmorSetListPagerFragment.ARG_MODE, ArmorSetListPagerFragment.ArmorSetListMode.BUILDER)
+
+        if (userEquipmentSetId != null) bundle.putInt(ArmorSetListPagerFragment.ARG_SET_ID, userEquipmentSetId)
+        if (prevId != null) bundle.putInt(ArmorSetListPagerFragment.ARG_PREV_ID, prevId)
+        if (filter != null) bundle.putSerializable(ArmorSetListPagerFragment.ARG_ITEM_FILTER, filter)
+
+        navController.navigate(
+                R.id.userArmorSelectionListAction,
+                bundle.build()
+        )
+    }
+
+    fun goBack() {
+        navController.popBackStack()
     }
 }

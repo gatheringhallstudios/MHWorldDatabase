@@ -14,13 +14,14 @@ import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import kotlinx.android.synthetic.main.cell_icon_label_text.view.*
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListFragment
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.defense_value
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.armor_icon
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.armor_name
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.rarity_string
-import kotlinx.android.synthetic.main.listitem_armorset_armor.view.slot_section
 import kotlinx.android.synthetic.main.listitem_universal_simple.view.label_text
 import kotlinx.android.synthetic.main.listitem_universal_simple.view.icon
 
@@ -44,14 +45,22 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.isActiveUserEquipmentSetStale()) {
+            val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
+            viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+        }
+    }
+
     private fun populateUserEquipment(userEquipmentSet: UserEquipmentSet, showTrueAttackValues: Boolean) {
         userEquipmentSet.equipment.forEach {
-            when (it.getType()) {
+            when (it.type()) {
                 DataType.WEAPON -> {
                     populateWeapon(it as UserWeapon, showTrueAttackValues)
                 }
                 DataType.ARMOR -> {
-                    populateArmor(it as UserArmorPiece)
+                    populateArmor(it as UserArmorPiece, userEquipmentSet.id)
                 }
                 DataType.CHARM -> {
                     populateCharm(it as UserCharm)
@@ -62,59 +71,38 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun populateArmor(userArmor: UserArmorPiece) {
+    private fun populateArmor(userArmor: UserArmorPiece, userEquipmentSetId: Int) {
         val armor = userArmor.armor
+        val layout: View
         when (armor.armor.armor_type) {
             ArmorType.HEAD -> {
-                user_equipment_head_slot.armor_name.text = armor.armor.name
-                user_equipment_head_slot.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-                user_equipment_head_slot.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-                user_equipment_head_slot.defense_value.text = getString(
-                        R.string.armor_defense_value,
-                        armor.armor.defense_base,
-                        armor.armor.defense_max,
-                        armor.armor.defense_augment_max)
+                layout = user_equipment_head_slot
             }
             ArmorType.CHEST -> {
-                user_equipment_chest_slot.armor_name.text = armor.armor.name
-                user_equipment_chest_slot.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-                user_equipment_chest_slot.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-                user_equipment_chest_slot.defense_value.text = getString(
-                        R.string.armor_defense_value,
-                        armor.armor.defense_base,
-                        armor.armor.defense_max,
-                        armor.armor.defense_augment_max)
+                layout = user_equipment_chest_slot
             }
             ArmorType.ARMS -> {
-                user_equipment_arms_slot.armor_name.text = armor.armor.name
-                user_equipment_arms_slot.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-                user_equipment_arms_slot.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-                user_equipment_arms_slot.defense_value.text = getString(
-                        R.string.armor_defense_value,
-                        armor.armor.defense_base,
-                        armor.armor.defense_max,
-                        armor.armor.defense_augment_max)
+                layout = user_equipment_arms_slot
             }
             ArmorType.WAIST -> {
-                user_equipment_waist_slot.armor_name.text = armor.armor.name
-                user_equipment_waist_slot.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-                user_equipment_waist_slot.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-                user_equipment_waist_slot.defense_value.text = getString(
-                        R.string.armor_defense_value,
-                        armor.armor.defense_base,
-                        armor.armor.defense_max,
-                        armor.armor.defense_augment_max)
+                layout = user_equipment_waist_slot
             }
             ArmorType.LEGS -> {
-                user_equipment_legs_slot.armor_name.text = armor.armor.name
-                user_equipment_legs_slot.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-                user_equipment_legs_slot.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-                user_equipment_legs_slot.defense_value.text = getString(
-                        R.string.armor_defense_value,
-                        armor.armor.defense_base,
-                        armor.armor.defense_max,
-                        armor.armor.defense_augment_max)
+                layout = user_equipment_legs_slot
             }
+        }
+
+        layout.armor_name.text = armor.armor.name
+        layout.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
+        layout.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
+        layout.defense_value.text = getString(
+                R.string.armor_defense_value,
+                armor.armor.defense_base,
+                armor.armor.defense_max,
+                armor.armor.defense_augment_max)
+        layout.setOnClickListener {
+            viewModel.setActiveUserEquipment(userArmor)
+            getRouter().navigateUserEquipmentArmorSelector(userEquipmentSetId, armor.entityId, armor.armor.armor_type)
         }
     }
 
@@ -217,5 +205,4 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             false -> workString.toString()
         }
     }
-
 }

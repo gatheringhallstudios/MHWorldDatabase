@@ -25,8 +25,6 @@ import kotlinx.android.synthetic.main.listitem_armorset_armor.view.defense_value
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
-import android.widget.LinearLayout
-import androidx.appcompat.app.ActionBar
 
 class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
 
@@ -71,8 +69,8 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_ice_value.text = userEquipmentSet.iceDefense.toString()
         armor_set_dragon_value.text = userEquipmentSet.dragonDefense.toString()
 
-        userEquipmentSet.equipment.filter { it.getType() == DataType.WEAPON }.forEach { populateWeapon(it as UserWeapon, showTrueAttackValues) }
-        userEquipmentSet.equipment.filter { it.getType() == DataType.ARMOR }.forEach { populateArmorSetPieces(it as UserArmorPiece) }
+        userEquipmentSet.equipment.filter { it.type() == DataType.WEAPON }.forEach { populateWeapon(it as UserWeapon, showTrueAttackValues) }
+        userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.forEach { populateArmorSetPieces(it as UserArmorPiece) }
         userEquipmentSet.skills.forEach { populateArmorSkills(it.value) }
         userEquipmentSet.setBonuses.forEach {
             populateArmorSetBonusName(it.key)
@@ -275,7 +273,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
 
     private fun getIconObject(equipment: MutableList<UserEquipment>): Drawable? {
         val item = equipment.first()
-        return when (item.getType()) {
+        return when (item.type()) {
             DataType.WEAPON -> AssetLoader.loadIconFor((item as UserWeapon).weapon.weapon)
             DataType.ARMOR -> AssetLoader.loadIconFor((item as UserArmorPiece).armor.armor)
             DataType.CHARM -> AssetLoader.loadIconFor((item as UserCharm).charm.charm)

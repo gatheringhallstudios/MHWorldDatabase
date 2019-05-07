@@ -7,7 +7,7 @@ class UserEquipmentSetIds(
         val id: Int,
         val name: String,
         val equipmentIds: MutableList<UserEquipmentIds>
-)
+) : Serializable
 
 class UserEquipmentIds(
         val dataId: Int,
@@ -38,14 +38,19 @@ class UserEquipmentSet(
 }
 
 interface UserEquipment {
-    fun getType(): DataType
+    fun entityId(): Int
+    fun type(): DataType
 }
 
 class UserArmorPiece(
         val armor: ArmorFull,
         val decorations: List<Decoration>
 ) : UserEquipment {
-    override fun getType(): DataType {
+    override fun entityId(): Int {
+        return armor.armor.id
+    }
+
+    override fun type(): DataType {
         return DataType.ARMOR
     }
 }
@@ -54,7 +59,11 @@ class UserWeapon(
         val weapon: WeaponFull,
         val decorations: List<Decoration>
 ) : UserEquipment {
-    override fun getType(): DataType {
+    override fun entityId(): Int {
+        return weapon.weapon.id
+    }
+
+    override fun type(): DataType {
         return DataType.WEAPON
     }
 }
@@ -62,7 +71,11 @@ class UserWeapon(
 class UserCharm(
         val charm: CharmFull
 ) : UserEquipment {
-    override fun getType(): DataType {
+    override fun entityId(): Int {
+        return charm.charm.id
+    }
+
+    override fun type(): DataType {
         return DataType.CHARM
     }
 }

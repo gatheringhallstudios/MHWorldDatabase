@@ -48,7 +48,7 @@ class UserEquipmentSetAdapterDelegate(private val onSelect: (UserEquipmentSet) -
 
     private fun getIconObject(equipment: MutableList<UserEquipment>) : Drawable? {
         val item = equipment.first()
-        return when (item.getType()) {
+        return when (item.type()) {
             DataType.WEAPON -> AssetLoader.loadIconFor((item as UserWeapon).weapon.weapon)
             DataType.ARMOR -> AssetLoader.loadIconFor((item as UserArmorPiece).armor.armor)
             DataType.CHARM -> AssetLoader.loadIconFor((item as UserCharm).charm.charm)

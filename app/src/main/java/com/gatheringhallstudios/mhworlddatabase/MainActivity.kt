@@ -108,7 +108,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.locationListDestination,
                 R.id.charmListDestination,
                 R.id.weaponListDestination,
-                R.id.bookmarksListDestination),
+                R.id.bookmarksListDestination,
+                R.id.armorSetBuilderDestination),
                 drawer_layout
         )
 

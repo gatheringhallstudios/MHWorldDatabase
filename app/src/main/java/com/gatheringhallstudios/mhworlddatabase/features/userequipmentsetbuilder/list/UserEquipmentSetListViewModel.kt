@@ -22,29 +22,28 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     private val armorDao = MHWDatabase.getDatabase(application).armorDao()
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
 
-    val userEquipmentSetId = MutableLiveData<MutableList<UserEquipmentSetIds>>()
+    val userEquipmentSetIds = MutableLiveData<MutableList<UserEquipmentSetIds>>()
     val userEquipmentSets = MutableLiveData<MutableList<UserEquipmentSet>>()
 
     fun getEquipmentSetList() {
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {
                 //                appDao.createUserEquipmentSet("test")
-//                                appDao.createUserEquipmentEequipment(629, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(630, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(631, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(632, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(633, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
+//                                appDao.createUserEquipmentEquipment(629, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEquipment(630, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEquipment(631, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEquipment(632, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEquipment(633, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEquipment(634, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment(526, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(526, DataType.ARMOR, 1)
-//                                appDao.createUserEquipmentEequipment(1, DataType.CHARM, 1)
+//                appDao.createUserEquipmentEquipment(526, DataType.ARMOR, 1)
+//                                appDao.createUserEquipmentEquipment(1, DataType.CHARM, 1)
 //                appDao.createUserEquipmentDecoration(1, 526, DataType.ARMOR, 94)
-//                appDao.createUserEquipmentEequipment(634, DataType.ARMOR, 1)
+//                appDao.createUserEquipmentEquipment(634, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment(634, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEequipment(200, DataType.WEAPON, 1)
+//                appDao.createUserEquipmentEquipment(200, DataType.WEAPON, 1)
 //                appDao.deleteUserEquipmentEquipment(630, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment(631, DataType.ARMOR, 1)
-//                appDao.deleteUserEquipmentEquipment(632, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment(633, DataType.ARMOR, 1)
                 appDao.loadUserEquipmentSetIds()
             }
@@ -61,7 +60,40 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
             }
 
             userEquipmentSets.value = equipmentSets.toMutableList()
-            userEquipmentSetId.value = equipmentSetIds.toMutableList()
+            userEquipmentSetIds.value = equipmentSetIds.toMutableList()
+        }
+    }
+
+    fun getEquipmentSet(equipmentSetId: Int): UserEquipmentSet {
+        return runBlocking {
+            val equipmentSetIds = withContext(Dispatchers.IO) {
+                appDao.loadUserEquipmentSetIds(equipmentSetId)
+            }
+
+            val equipmentSet = withContext(Dispatchers.IO) {
+                val deferred = async {
+                    println("Doing on " + Thread.currentThread().name)
+                    convertEquipmentSetIdToEquipmentSet(equipmentSetIds)
+                }
+
+                deferred.await()
+            }
+
+            val buffer = userEquipmentSets.value
+            if (buffer != null) {
+                //Update user equipment sets collection in memory if it exists
+                val index = buffer.indexOfFirst {
+                    it.id == equipmentSet.id
+                }
+
+                if (index != -1) {
+                    buffer[index] = equipmentSet
+                }
+
+                userEquipmentSets.value = buffer
+            }
+
+            equipmentSet
         }
     }
 
@@ -113,7 +145,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     private fun calculateSetBonuses(userEquipment: List<UserEquipment>): MutableMap<String, List<ArmorSetBonus>> {
         val setBonuses = mutableMapOf<String, List<ArmorSetBonus>>()
         val setsPresent = userEquipment
-                .filter { it.getType() == DataType.ARMOR }
+                .filter { it.type() == DataType.ARMOR }
                 .groupBy { (it as UserArmorPiece).armor.armor.armorset_id }
 
         //Set Bonus breakpoints are at 2-pieces, 3-pieces, and 4-pieces
@@ -134,9 +166,9 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 
     private fun calculateDefenseBase(userEquipment: List<UserEquipment>): Int {
         return userEquipment.sumBy { item ->
-            if (item.getType() == DataType.ARMOR) {
+            if (item.type() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.defense_base
-            } else if (item.getType() == DataType.WEAPON) {
+            } else if (item.type() == DataType.WEAPON) {
                 (item as UserWeapon).weapon.weapon.defense
             } else 0
         }
@@ -144,9 +176,9 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 
     private fun calculateDefenseMax(userEquipment: List<UserEquipment>): Int {
         return userEquipment.sumBy { item ->
-            if (item.getType() == DataType.ARMOR) {
+            if (item.type() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.defense_max
-            } else if (item.getType() == DataType.WEAPON) {
+            } else if (item.type() == DataType.WEAPON) {
                 (item as UserWeapon).weapon.weapon.defense
             } else 0
         }
@@ -154,9 +186,9 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 
     private fun calculateDefenseAugMax(userEquipment: List<UserEquipment>): Int {
         return userEquipment.sumBy { item ->
-            if (item.getType() == DataType.ARMOR) {
+            if (item.type() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.defense_augment_max
-            } else if (item.getType() == DataType.WEAPON) {
+            } else if (item.type() == DataType.WEAPON) {
                 (item as UserWeapon).weapon.weapon.defense
             } else 0
         }
@@ -164,7 +196,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 
     private fun calculateFireDefense(userEquipment: List<UserEquipment>): Int {
         return userEquipment.sumBy { item ->
-            if (item.getType() == DataType.ARMOR) {
+            if (item.type() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.fire
             } else 0
         }
@@ -172,7 +204,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 
     private fun calculateWaterDefense(userEquipment: List<UserEquipment>): Int {
         return userEquipment.sumBy { item ->
-            if (item.getType() == DataType.ARMOR) {
+            if (item.type() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.water
             } else 0
         }
@@ -180,7 +212,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 
     private fun calculateThunderDefense(userEquipment: List<UserEquipment>): Int {
         return userEquipment.sumBy { item ->
-            if (item.getType() == DataType.ARMOR) {
+            if (item.type() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.thunder
             } else 0
         }
@@ -188,7 +220,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 
     private fun calculateIceDefense(userEquipment: List<UserEquipment>): Int {
         return userEquipment.sumBy { item ->
-            if (item.getType() == DataType.ARMOR) {
+            if (item.type() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.ice
             } else 0
         }
@@ -196,7 +228,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 
     private fun calculateDragonDefense(userEquipment: List<UserEquipment>): Int {
         return userEquipment.sumBy { item ->
-            if (item.getType() == DataType.ARMOR) {
+            if (item.type() == DataType.ARMOR) {
                 (item as UserArmorPiece).armor.armor.dragon
             } else 0
         }
@@ -206,7 +238,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
         val skillLevels = mutableMapOf<Int, SkillLevel>()
         userEquipment.forEach { item ->
             val providedSkills = mutableListOf<SkillLevel>()
-            when (item.getType()) {
+            when (item.type()) {
                 DataType.ARMOR -> {
                     (item as UserArmorPiece).decorations.forEach { decoration ->
                         val skillLevel = SkillLevel(1) //Decorations always only give 1 skill point
