@@ -6,9 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.common.MHModelTreeFilter
+import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
+import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
 import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.*
 
 /**
@@ -17,6 +20,7 @@ import kotlinx.coroutines.*
  */
 class CharmListViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = MHWDatabase.getDatabase(application).charmDao()
+    private val userEquipmentDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
 
     /**
      * Encapsulates the charm tree and performs filtering on it
@@ -54,5 +58,13 @@ class CharmListViewModel(application: Application) : AndroidViewModel(applicatio
      */
     private fun updateCharmData() {
         charmData.value = filter.renderResults().map { it.value }
+    }
+
+    fun updateCharmForArmorSet(newArmor: Charm, userEquipmentSetId: Int, prevId: Int?) {
+        if (prevId != null) {
+            userEquipmentDao.deleteUserEquipmentEquipment(prevId, DataType.CHARM, userEquipmentSetId)
+        }
+
+        userEquipmentDao.createUserEquipmentEquipment(newArmor.id, DataType.CHARM, userEquipmentSetId)
     }
 }

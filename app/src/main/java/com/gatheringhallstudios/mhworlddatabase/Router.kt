@@ -8,6 +8,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetListPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment
+import com.gatheringhallstudios.mhworlddatabase.features.charms.list.CharmListFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
@@ -110,6 +111,19 @@ class Router(private val navController: NavController) {
 
         navController.navigate(
                 R.id.userArmorSelectionListAction,
+                bundle.build()
+        )
+    }
+
+    fun navigateUserEquipmentCharmSelector(userEquipmentSetId: Int?, prevId: Int?) {
+        val bundle = BundleBuilder()
+                .putSerializable(CharmListFragment.ARG_MODE, CharmListFragment.Companion.CharmListMode.BUILDER)
+
+        if (userEquipmentSetId != null) bundle.putInt(CharmListFragment.ARG_SET_ID, userEquipmentSetId)
+        if (prevId != null) bundle.putInt(CharmListFragment.ARG_PREV_ID, prevId)
+
+        navController.navigate(
+                R.id.userCharmSelectionListAction,
                 bundle.build()
         )
     }

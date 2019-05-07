@@ -63,7 +63,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
                     populateArmor(it as UserArmorPiece, userEquipmentSet.id)
                 }
                 DataType.CHARM -> {
-                    populateCharm(it as UserCharm)
+                    populateCharm(it as UserCharm, userEquipmentSet.id)
                 }
                 else -> {
                 } //Skip
@@ -106,9 +106,13 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun populateCharm(userCharm: UserCharm) {
+    private fun populateCharm(userCharm: UserCharm, userEquipmentSetId: Int) {
         user_equipment_charm_slot.label_text.text = userCharm.charm.charm.name
         user_equipment_charm_slot.icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
+        user_equipment_charm_slot.setOnClickListener {
+            viewModel.setActiveUserEquipment(userCharm)
+            getRouter().navigateUserEquipmentCharmSelector(userEquipmentSetId, userCharm.charm.entityId)
+        }
     }
 
     private fun populateWeapon(userWeapon: UserWeapon, showTrueAttackValues: Boolean) {
