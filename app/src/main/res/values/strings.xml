@@ -34,6 +34,8 @@
     <string name="format_plus">%1$+d</string> <!-- Example: +5 -->
     <string name="format_percentage">%1$s%%</string> <!-- Example: 20%-->
     <string name="format_plus_percentage">%1$+d%%</string> <!-- Example: +20%-->
+    <string name="format_element">%1$d (%2$d max)</string>
+    <string name="format_element_hidden">(%1$d) (%2$d max)</string>
 
     <!-- Ailments -->
     <string name="ailment_roar_small">Roar (small)</string>
@@ -397,7 +399,8 @@
     <string name="about_body">
         Gathering Hall Studios is an open source team of designers and developers
         dedicated to building high-quality apps for the Monster Hunter series.
-        If you’d like to join or contribute, we’re always open.
+        \n\nIf you’d like to join or contribute, we’re always open.
         Contact us at contact@gatheringhallstudios.com or visit our Discord.
+        You can also visit the Github for either the app or the data project.
     </string>
 </resources>

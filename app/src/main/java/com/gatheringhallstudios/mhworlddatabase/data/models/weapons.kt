@@ -3,6 +3,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 import androidx.room.Embedded
 import androidx.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 /**
  * The base class for all weapon model types. Contains the basic identifying information
@@ -18,6 +20,17 @@ open class WeaponBase(
     override val entityId get() = id
     override val entityType get() = DataType.WEAPON
     override val parentId get() = previous_weapon_id
+}
+
+/**
+ * Helper to calculate max element value.
+ * TODO: Once we gain a bunch of calculations, move this somewhere maybe.
+ * Perhaps use an extension instead of putting on the weapon
+ */
+fun calculateMaxElement(elementVal: Int): Int {
+    return BigDecimal(elementVal / 10 * 1.3)
+            .setScale(0, RoundingMode.HALF_DOWN)
+            .toInt() * 10
 }
 
 class Weapon(
@@ -58,6 +71,16 @@ class Weapon(
 
     @Embedded
     var sharpnessData: WeaponSharpness? = null
+
+    /**
+     * Return the max possible value for element 1 attack power
+     */
+    val element1_attack_max get() = calculateMaxElement(element1_attack ?: 0)
+
+    /**
+     * Return the max possible value for element 2 attack power
+     */
+    val element2_attack_max get() = calculateMaxElement(element2_attack ?: 0)
 }
 
 /**

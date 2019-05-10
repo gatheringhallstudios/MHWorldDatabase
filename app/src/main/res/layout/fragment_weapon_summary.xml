@@ -124,7 +124,7 @@
                     <ImageView
                         android:id="@+id/element_icon"
                         style="@style/IconXSmall"
-                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginStart="@dimen/margin_medium"
                         app:srcCompat="@drawable/ic_element_thunder" />
 
                     <TextView
@@ -132,7 +132,7 @@
                         style="@style/TextSubHead"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginStart="@dimen/margin_medium"
                         android:gravity="end"
                         tools:text="Thunder" />
 
@@ -147,6 +147,44 @@
                         tools:text="150" />
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/element2_row"
+                style="@style/EquipmentRow">
+
+                <LinearLayout
+                    android:id="@+id/element2_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:gravity="center_vertical|end">
+
+                    <ImageView
+                        android:id="@+id/element2_icon"
+                        style="@style/IconXSmall"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        app:srcCompat="@drawable/ic_element_thunder" />
+
+                    <TextView
+                        android:id="@+id/element2_type_value"
+                        style="@style/TextSubHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:gravity="end"
+                        tools:text="Thunder" />
+
+                    <TextView
+                        android:id="@+id/element2_value"
+                        style="@style/TextSubHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:gravity="end"
+                        android:paddingLeft="@dimen/margin_medium"
+                        tools:text="150" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">

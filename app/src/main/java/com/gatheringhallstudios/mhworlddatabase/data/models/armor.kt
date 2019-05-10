@@ -121,7 +121,13 @@ class ArmorSetBonus(
         val name: String?,
         val required: Int,
         val description: String?
-)
+) {
+    /**
+     * How many points of the skill do you get.
+     * Currently hardcoded to one. It exists as a hook just in case new armor comes out that'll use it.
+     */
+    @Ignore val points: Int = 1
+}
 
 /**
  * The result of fully loading a piece of armor.
