@@ -1,5 +1,14 @@
 <changelog>
     <release
+        versionCode="12"
+        versionName="Version 1.5">
+        <info>&#9;- Show maximum possible element for bladed weapons.
+            [br]&#9;- Kjarr weapons are easier to search.
+            [br]&#9;- Show required armor pieces for set bonuses in skill detail.
+            [br]&#9;- Added Witcher weapons.
+            [br]&#9;- Added Leshen hitzones.</info>
+    </release>
+    <release
         versionCode="11"
         versionName="Version 1.4">
         <info>&#9;- Added Kjarr weapons and armor.
