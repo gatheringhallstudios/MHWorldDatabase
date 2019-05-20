@@ -44,6 +44,12 @@ abstract class UserEquipmentSetDao {
         WHERE u.equipmentSetId = :equipmentSetId""")
     abstract fun loadUserEquipmentDecorations(equipmentSetId: Int): List<UserEquipmentDecorationEntity>
 
+    @Query("""
+        DELETE FROM user_equipment_sets
+        WHERE id = :equipmentSetId
+    """)
+    abstract fun deleteUserEquipmentSet(equipmentSetId: Int)
+
     fun loadUserEquipmentSetIds(): List<UserEquipmentSetIds> {
         val set = loadUserEquipmentSetInfo()
         val equipment = loadUserEquipmentSetEquipment()

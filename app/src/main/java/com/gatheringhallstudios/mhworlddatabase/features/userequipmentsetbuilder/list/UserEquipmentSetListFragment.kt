@@ -5,7 +5,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
@@ -21,33 +20,33 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
         ViewModelProviders.of(this).get(UserEquipmentSetListViewModel::class.java)
     }
 
-    // Setup recycler list adapter and the on-selected
-    private val adapter = BasicListDelegationAdapter(UserEquipmentSetAdapterDelegate {
-        getRouter().navigateUserEquipmentSetDetail(it)
-    })
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        this.setAdapter(adapter)
-
         viewModel.getEquipmentSetList()
 
         // Add dividers between items
         recyclerView.addItemDecoration(HeaderItemDivider(DashedDividerDrawable(context!!)))
 
-        if (adapter.itemCount == 0) {
+        viewModel.userEquipmentSets.observe(this, Observer<MutableList<UserEquipmentSet>> {
+            // Setup recycler list adapter and the on-selected
+            if (!containsEmptyElement(it)) {
+                it.add(UserEquipmentSet.createEmptySet())
+            }
 
-            viewModel.userEquipmentSets.observe(this, Observer<MutableList<UserEquipmentSet>> {
-                adapter.items = it.toList()
-                if (it.size == 0) {
-                    showEmptyView()
-                }
-                adapter.notifyDataSetChanged()
-            })
-        }
+            val adapter = UserEquipmentSetAdapterDelegate(it) {
+                getRouter().navigateUserEquipmentSetDetail(it)
+            }
+
+            this.setAdapter(adapter)
+            adapter.notifyDataSetChanged()
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity?.title = getString(R.string.title_armor_set_builder)
+    }
+
+    private fun containsEmptyElement(list: MutableList<UserEquipmentSet>): Boolean {
+        return list.last().id == 0
     }
 }

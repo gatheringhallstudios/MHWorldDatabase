@@ -45,6 +45,10 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 //                appDao.deleteUserEquipmentEquipment(630, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment(631, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment(633, DataType.ARMOR, 1)
+//                appDao.deleteUserEquipmentSet(2)
+//                appDao.deleteUserEquipmentSet(3)
+//                appDao.deleteUserEquipmentSet(4)
+//                appDao.deleteUserEquipmentSet(5)
                 appDao.loadUserEquipmentSetIds()
             }
 

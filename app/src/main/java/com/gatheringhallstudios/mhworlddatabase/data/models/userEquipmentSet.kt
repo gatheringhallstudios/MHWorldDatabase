@@ -25,6 +25,11 @@ class UserEquipmentSet(
         val name: String,
         val equipment: MutableList<UserEquipment>
 ) : Serializable {
+    companion object {
+        fun createEmptySet() : UserEquipmentSet {
+            return UserEquipmentSet(0, "", mutableListOf())
+        }
+    }
     var defense_base: Int = 0
     var defense_max: Int = 0
     var defense_augment_max: Int = 0
