@@ -25,6 +25,11 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     val userEquipmentSetIds = MutableLiveData<MutableList<UserEquipmentSetIds>>()
     val userEquipmentSets = MutableLiveData<MutableList<UserEquipmentSet>>()
 
+    fun createEquipmentSet() : UserEquipmentSet {
+        val newId = appDao.createUserEquipmentSet("New Set")
+        return convertEquipmentSetIdToEquipmentSet(appDao.loadUserEquipmentSetIds(newId.toInt()))
+    }
+
     fun getEquipmentSetList() {
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {

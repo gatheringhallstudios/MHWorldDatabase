@@ -41,6 +41,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
+            attachLayouts(it)
             populateUserEquipment(it, AppSettings.showTrueAttackValues)
         })
     }
@@ -50,6 +51,32 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         if (viewModel.isActiveUserEquipmentSetStale()) {
             val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
             viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+        }
+    }
+
+    private fun attachLayouts(userEquipmentSet: UserEquipmentSet) {
+        user_equipment_head_slot.setOnClickListener {
+            getRouter().navigateUserEquipmentArmorSelector(userEquipmentSet.id, 0, ArmorType.HEAD)
+        }
+
+        user_equipment_chest_slot.setOnClickListener {
+            getRouter().navigateUserEquipmentArmorSelector(userEquipmentSet.id, 0, ArmorType.CHEST)
+        }
+
+        user_equipment_arms_slot.setOnClickListener {
+            getRouter().navigateUserEquipmentArmorSelector(userEquipmentSet.id, 0, ArmorType.ARMS)
+        }
+
+        user_equipment_waist_slot.setOnClickListener {
+            getRouter().navigateUserEquipmentArmorSelector(userEquipmentSet.id, 0, ArmorType.WAIST)
+        }
+
+        user_equipment_legs_slot.setOnClickListener {
+            getRouter().navigateUserEquipmentArmorSelector(userEquipmentSet.id, 0, ArmorType.LEGS)
+        }
+
+        user_equipment_charm_slot.setOnClickListener {
+            getRouter().navigateUserEquipmentCharmSelector(userEquipmentSet.id, 0)
         }
     }
 

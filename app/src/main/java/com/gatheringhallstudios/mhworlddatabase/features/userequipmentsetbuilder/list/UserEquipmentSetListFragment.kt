@@ -10,6 +10,10 @@ import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by Carlos on 3/22/2018.
@@ -33,7 +37,14 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
             }
 
             val adapter = UserEquipmentSetAdapterDelegate(it) {
-                getRouter().navigateUserEquipmentSetDetail(it)
+                if (it.id == 0) { //Set has not yet been created
+                    GlobalScope.launch(Dispatchers.Main) {
+                        val equipmentSet = withContext(Dispatchers.IO) { viewModel.createEquipmentSet() }
+                        getRouter().navigateUserEquipmentSetDetail(equipmentSet)
+                    }
+                } else {
+                    getRouter().navigateUserEquipmentSetDetail(it)
+                }
             }
 
             this.setAdapter(adapter)

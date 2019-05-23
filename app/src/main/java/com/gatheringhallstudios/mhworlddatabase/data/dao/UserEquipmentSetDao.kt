@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
+import android.database.Cursor
 import androidx.room.*
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentDecorationEntity
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentEntity
@@ -83,7 +84,7 @@ abstract class UserEquipmentSetDao {
     }
 
     @Query("""INSERT INTO user_equipment_sets VALUES (NULL, :name)""")
-    abstract fun createUserEquipmentSet(name: String)
+    abstract fun createUserEquipmentSet(name: String) : Long
 
     @Query("""INSERT INTO user_equipment_set_equipment VALUES (NULL, :id, :type, :equipmentSetId )""")
     abstract fun createUserEquipmentEquipment(id: Int, type: DataType, equipmentSetId: Int)

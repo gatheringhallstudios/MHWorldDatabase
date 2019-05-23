@@ -51,16 +51,8 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
             viewHolder.view.setOnClickListener { onSelect(userEquipmentSet) }
         } else {
             val vh = viewHolder as NewEquipmentSetHolder
-            vh.view.setOnClickListener { onSelect(userEquipmentSet)}
+            vh.view.setOnClickListener { onSelect(userEquipmentSet) }
         }
-    }
-
-    fun appendDataSet(dataSet: List<UserEquipmentSet>) {
-        this.dataSet.addAll(dataSet)
-    }
-
-    fun clearDataSet() {
-        this.dataSet.clear()
     }
 
     private fun getIconObject(equipment: MutableList<UserEquipment>): Drawable? {

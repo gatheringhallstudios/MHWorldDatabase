@@ -53,7 +53,7 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
             } catch (exception: NoSuchElementException) {
                 true //The piece of equipment is no longer present, i.e. the data is stale
             } catch (exception: NullPointerException) {
-                 false //Active equipment Set or Active equipment hasn't been set yet, i.e. the data cannot be stale
+                 true //Active equipment Set or Active equipment hasn't been set yet, i.e. the data is definitely stale
             }
         }
     }
