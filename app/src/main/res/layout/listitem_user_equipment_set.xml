@@ -233,6 +233,7 @@
         card_view:cardPreventCornerOverlap="false">
 
         <LinearLayout
+            android:id="@+id/skill_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#1a1a1a"

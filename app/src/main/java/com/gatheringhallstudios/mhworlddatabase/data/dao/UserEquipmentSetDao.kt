@@ -1,6 +1,5 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
-import android.database.Cursor
 import androidx.room.*
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentDecorationEntity
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentEntity
