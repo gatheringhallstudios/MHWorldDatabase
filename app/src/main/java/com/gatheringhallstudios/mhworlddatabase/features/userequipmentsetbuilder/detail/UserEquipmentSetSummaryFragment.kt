@@ -197,8 +197,8 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         val armorFull = armorPiece.armor
         val view = layoutInflater.inflate(R.layout.listitem_armorset_armor, armor_set_piece_list, false)
 
-        view.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armorFull.armor))
-        view.equipment_name.text = armorFull.armor.name
+        view.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armorFull.armor))
+        view.armor_name.text = armorFull.armor.name
         view.rarity_string.text = getString(R.string.format_rarity, armorFull.armor.rarity)
         view.defense_value.text = view.resources.getString(
                 R.string.armor_defense_value,
