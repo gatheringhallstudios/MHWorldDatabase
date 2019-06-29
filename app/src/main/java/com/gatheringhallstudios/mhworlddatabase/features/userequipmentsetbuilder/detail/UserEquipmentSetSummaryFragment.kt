@@ -18,13 +18,14 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_summary.*
-import kotlinx.android.synthetic.main.listitem_armorset_armor.view.armor_icon
-import kotlinx.android.synthetic.main.listitem_armorset_armor.view.armor_name
-import kotlinx.android.synthetic.main.listitem_armorset_armor.view.rarity_string
+import kotlinx.android.synthetic.main.listitem_armorset_armor.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.defense_value
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 import kotlinx.android.synthetic.main.listitem_weapon.view.*
+import kotlinx.android.synthetic.main.listitem_weapon.view.slot1
+import kotlinx.android.synthetic.main.listitem_weapon.view.slot2
+import kotlinx.android.synthetic.main.listitem_weapon.view.slot3
 
 class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
 
@@ -196,8 +197,8 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         val armorFull = armorPiece.armor
         val view = layoutInflater.inflate(R.layout.listitem_armorset_armor, armor_set_piece_list, false)
 
-        view.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armorFull.armor))
-        view.armor_name.text = armorFull.armor.name
+        view.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armorFull.armor))
+        view.equipment_name.text = armorFull.armor.name
         view.rarity_string.text = getString(R.string.format_rarity, armorFull.armor.rarity)
         view.defense_value.text = view.resources.getString(
                 R.string.armor_defense_value,

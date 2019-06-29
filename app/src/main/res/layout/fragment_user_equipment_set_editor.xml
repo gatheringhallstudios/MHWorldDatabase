@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <include
-        android:id="@+id/user_equipment_weapon_slot"
-        layout="@layout/listitem_weapon" />
-    <include
-        android:id="@+id/user_equipment_head_slot"
-        layout="@layout/listitem_armorset_armor" />
-    <include
-        android:id="@+id/user_equipment_chest_slot"
-        layout="@layout/listitem_armorset_armor" />
-    <include
-        android:id="@+id/user_equipment_arms_slot"
-        layout="@layout/listitem_armorset_armor" />
-    <include
-        android:id="@+id/user_equipment_waist_slot"
-        layout="@layout/listitem_armorset_armor" />
-    <include
-        android:id="@+id/user_equipment_legs_slot"
-        layout="@layout/listitem_armorset_armor" />
-    <include
-        android:id="@+id/user_equipment_charm_slot"
-        layout="@layout/listitem_universal_simple" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_footer_space">
+        <include
+            android:id="@+id/user_equipment_weapon_slot"
+            layout="@layout/cell_expandable_cardview" />
+
+        <include
+            android:id="@+id/user_equipment_head_slot"
+            layout="@layout/cell_expandable_cardview" />
+
+        <include
+            android:id="@+id/user_equipment_chest_slot"
+            layout="@layout/cell_expandable_cardview" />
+
+        <include
+            android:id="@+id/user_equipment_arms_slot"
+            layout="@layout/cell_expandable_cardview" />
+
+        <include
+            android:id="@+id/user_equipment_waist_slot"
+            layout="@layout/cell_expandable_cardview" />
+
+        <include
+            android:id="@+id/user_equipment_legs_slot"
+            layout="@layout/cell_expandable_cardview" />
+
+        <include
+            android:id="@+id/user_equipment_charm_slot"
+            layout="@layout/cell_expandable_cardview" />
+    </LinearLayout>
+
+</ScrollView>
