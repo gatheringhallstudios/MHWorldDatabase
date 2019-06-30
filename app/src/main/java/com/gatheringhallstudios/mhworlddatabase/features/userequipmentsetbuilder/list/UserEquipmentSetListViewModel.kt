@@ -25,7 +25,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     val userEquipmentSetIds = MutableLiveData<MutableList<UserEquipmentSetIds>>()
     val userEquipmentSets = MutableLiveData<MutableList<UserEquipmentSet>>()
 
-    fun createEquipmentSet() : UserEquipmentSet {
+    fun createEquipmentSet(): UserEquipmentSet {
         val newId = appDao.createUserEquipmentSet("New Set")
         return convertEquipmentSetIdToEquipmentSet(appDao.loadUserEquipmentSetIds(newId.toInt()))
     }
@@ -33,8 +33,8 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     fun getEquipmentSetList() {
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {
-                //                appDao.createUserEquipmentSet("test")
-//                                appDao.createUserEquipmentEquipment(629, DataType.ARMOR, 1)
+                //                                appDao.createUserEquipmentSet("test")
+////                                appDao.createUserEquipmentEquipment(629, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEquipment(630, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEquipment(631, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEquipment(632, DataType.ARMOR, 1)
@@ -43,7 +43,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
 //                appDao.deleteUserEquipmentEquipment(526, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEquipment(526, DataType.ARMOR, 1)
 //                                appDao.createUserEquipmentEquipment(1, DataType.CHARM, 1)
-//                appDao.createUserEquipmentDecoration(1, 526, DataType.ARMOR, 94)
+//                appDao.createUserEquipmentDecoration(1, 526, DataType.ARMOR, 94, 1)
 //                appDao.createUserEquipmentEquipment(634, DataType.ARMOR, 1)
 //                appDao.deleteUserEquipmentEquipment(634, DataType.ARMOR, 1)
 //                appDao.createUserEquipmentEquipment(200, DataType.WEAPON, 1)
@@ -111,16 +111,16 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
         userEquipmentSetIds.equipmentIds.forEach { userEquipmentId ->
             when (userEquipmentId.dataType) {
                 DataType.ARMOR -> {
-                    val decorations = userEquipmentId.decorationIds.map { decorationFull ->
-                        decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationFull.decorationId)
+                    val decorations = userEquipmentId.decorationIds.map { decorationIds ->
+                        UserDecoration(decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId), slotNumber = decorationIds.slotNumber)
                     }
 
                     userEquipment.add(UserArmorPiece(armor = armorDao.loadArmorFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
                             decorations = decorations))
                 }
                 DataType.WEAPON -> {
-                    val decorations = userEquipmentId.decorationIds.map { decorationFull ->
-                        decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationFull.decorationId)
+                    val decorations = userEquipmentId.decorationIds.map { decorationIds ->
+                        UserDecoration(decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId), slotNumber = decorationIds.slotNumber)
                     }
 
                     userEquipment.add(UserWeapon(weapon = weaponDao.loadWeaponFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
@@ -249,9 +249,9 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
             val providedSkills = mutableListOf<SkillLevel>()
             when (item.type()) {
                 DataType.ARMOR -> {
-                    (item as UserArmorPiece).decorations.forEach { decoration ->
+                    (item as UserArmorPiece).decorations.forEach { userDecoration ->
                         val skillLevel = SkillLevel(1) //Decorations always only give 1 skill point
-                        skillLevel.skillTree = decoration.skillTree
+                        skillLevel.skillTree = userDecoration.decoration.skillTree
                         providedSkills.add(skillLevel)
                     }
 
@@ -259,9 +259,9 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 }
 
                 DataType.WEAPON -> {
-                    (item as UserWeapon).decorations.forEach { decoration ->
+                    (item as UserWeapon).decorations.forEach { userDecoration ->
                         val skillLevel = SkillLevel(1) //Decorations always only give 1 skill point
-                        skillLevel.skillTree = decoration.skillTree
+                        skillLevel.skillTree = userDecoration.decoration.skillTree
                         providedSkills.add(skillLevel)
                     }
                 }

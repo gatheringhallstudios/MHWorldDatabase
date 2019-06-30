@@ -30,7 +30,7 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
                             it.dataType == activeUserEquipment!!.type()
                 }
 
-                var decorations: List<Decoration> = listOf()
+                var decorations: List<UserDecoration> = listOf()
                 when (activeUserEquipment!!.type()) {
                     DataType.ARMOR -> {
                         decorations = (activeUserEquipment as UserArmorPiece).decorations
@@ -45,7 +45,7 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
 
                 if (decorations.size != updatedUserEquipment.decorationIds.size) true
                 for (i in 1 until decorations.size) {
-                    if (decorations[i].id != updatedUserEquipment.decorationIds[i].decorationId) true //Decorations don't match, i.e. data is stale
+                    if (decorations[i].decoration.id != updatedUserEquipment.decorationIds[i].decorationId) true //Decorations don't match, i.e. data is stale
                 }
 
                 false

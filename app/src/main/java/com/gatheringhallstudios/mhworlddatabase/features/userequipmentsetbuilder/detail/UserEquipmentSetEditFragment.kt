@@ -48,7 +48,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
             attachLayouts(it)
-            populateUserEquipment(it, AppSettings.showTrueAttackValues)
+            populateUserEquipment(it)
         })
     }
 
@@ -108,11 +108,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun populateUserEquipment(userEquipmentSet: UserEquipmentSet, showTrueAttackValues: Boolean) {
+    private fun populateUserEquipment(userEquipmentSet: UserEquipmentSet) {
         userEquipmentSet.equipment.forEach {
             when (it.type()) {
                 DataType.WEAPON -> {
-                    populateWeapon(it as UserWeapon, showTrueAttackValues)
+                    populateWeapon(it as UserWeapon)
                 }
                 DataType.ARMOR -> {
                     populateArmor(it as UserArmorPiece, userEquipmentSet.id)
@@ -134,10 +134,18 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             animateViews(initialHeight,
                     targetHeight - initialHeight,
                     cardState.EXPANDING, cardView)
+            cardView.icon_slots.visibility = View.INVISIBLE
+            cardView.slot1.visibility = View.INVISIBLE
+            cardView.slot2.visibility = View.INVISIBLE
+            cardView.slot3.visibility = View.INVISIBLE
         } else {
             animateViews(initialHeight,
-                     initialHeight - targetHeight,
+                    initialHeight - targetHeight,
                     cardState.COLLAPSING, cardView)
+            cardView.icon_slots.visibility = View.VISIBLE
+            cardView.slot1.visibility = View.VISIBLE
+            cardView.slot2.visibility = View.VISIBLE
+            cardView.slot3.visibility = View.VISIBLE
         }
     }
 
@@ -175,6 +183,13 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             viewModel.setActiveUserEquipment(userArmor)
             getRouter().navigateUserEquipmentArmorSelector(userEquipmentSetId, armor.entityId, armor.armor.armor_type)
         }
+        for (userDecoration in userArmor.decorations) {
+            when (userDecoration.slotNumber) {
+                1 -> populateSlot1(layout, userDecoration.decoration)
+                2 -> populateSlot2(layout, userDecoration.decoration)
+                3 -> populateSlot3(layout, userDecoration.decoration)
+            }
+        }
     }
 
     private fun populateCharm(userCharm: UserCharm, userEquipmentSetId: Int) {
@@ -186,14 +201,37 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             viewModel.setActiveUserEquipment(userCharm)
             getRouter().navigateUserEquipmentCharmSelector(userEquipmentSetId, userCharm.charm.entityId)
         }
+        user_equipment_charm_slot.slot1.visibility = View.INVISIBLE
+        user_equipment_charm_slot.slot2.visibility = View.INVISIBLE
+        user_equipment_charm_slot.slot3.visibility = View.INVISIBLE
+        user_equipment_charm_slot.icon_slots.visibility = View.INVISIBLE
+        user_equipment_charm_slot.icon_defense.visibility = View.INVISIBLE
+        user_equipment_charm_slot.defense_value.visibility = View.INVISIBLE
+        user_equipment_charm_slot.card_arrow.visibility = View.INVISIBLE
     }
 
-    private fun populateWeapon(userWeapon: UserWeapon, showTrueAttackValues: Boolean) {
-        val weapon = userWeapon.weapon
-        user_equipment_weapon_slot.equipment_name.text = weapon.weapon.name
-        user_equipment_weapon_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon.weapon))
-        user_equipment_weapon_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.weapon.rarity))
-        user_equipment_weapon_slot.rarity_string.text = getString(R.string.format_rarity, weapon.weapon.rarity)
+    private fun populateWeapon(userWeapon: UserWeapon) {
+        val weapon = userWeapon.weapon.weapon
+        user_equipment_weapon_slot.equipment_name.text = weapon.name
+        user_equipment_weapon_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
+        user_equipment_weapon_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
+        user_equipment_weapon_slot.rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
+
+        for (userDecoration in userWeapon.decorations) {
+            when (userDecoration.slotNumber) {
+                1 -> populateSlot1(user_equipment_weapon_slot, userDecoration.decoration)
+                2 -> populateSlot2(user_equipment_weapon_slot, userDecoration.decoration)
+                3 -> populateSlot3(user_equipment_weapon_slot, userDecoration.decoration)
+            }
+        }
+
+        if (weapon.defense != 0) {
+            val defenseValue = getString(R.string.format_plus, weapon.defense)
+            user_equipment_weapon_slot.defense_value.text = defenseValue
+        } else {
+            user_equipment_weapon_slot.icon_defense.visibility = View.INVISIBLE
+            user_equipment_weapon_slot.defense_value.visibility = View.INVISIBLE
+        }
 //        user_equipment_weapon_slot.equipment_icon.visibility = when {
 //            weapon.weapon.craftable -> View.VISIBLE
 //            else -> View.GONE
@@ -319,5 +357,23 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             cardState.EXPANDING -> compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more)
             cardState.COLLAPSING -> compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less)
         })
+    }
+
+    private fun populateSlot1(view: View, decoration: Decoration) {
+        view.slot1.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot1_detail.setLabelText(decoration.name)
+        view.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
+    }
+
+    private fun populateSlot2(view: View, decoration: Decoration) {
+        view.slot2.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot2_detail.setLabelText(decoration.name)
+        view.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
+    }
+
+    private fun populateSlot3(view: View, decoration: Decoration) {
+        view.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot3_detail.setLabelText(decoration.name)
+        view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 }

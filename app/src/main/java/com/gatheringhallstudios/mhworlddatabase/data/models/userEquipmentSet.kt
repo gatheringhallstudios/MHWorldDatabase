@@ -17,7 +17,8 @@ class UserEquipmentIds(
 )
 
 class UserDecorationIds(
-        val decorationId: Int
+        val decorationId: Int,
+        val slotNumber: Int
 )
 
 class UserEquipmentSet(
@@ -49,7 +50,7 @@ interface UserEquipment {
 
 class UserArmorPiece(
         val armor: ArmorFull,
-        val decorations: List<Decoration>
+        val decorations: List<UserDecoration>
 ) : UserEquipment {
     override fun entityId(): Int {
         return armor.armor.id
@@ -62,7 +63,7 @@ class UserArmorPiece(
 
 class UserWeapon(
         val weapon: WeaponFull,
-        val decorations: List<Decoration>
+        val decorations: List<UserDecoration>
 ) : UserEquipment {
     override fun entityId(): Int {
         return weapon.weapon.id
@@ -82,5 +83,19 @@ class UserCharm(
 
     override fun type(): DataType {
         return DataType.CHARM
+    }
+}
+
+class UserDecoration(
+        val decoration: Decoration,
+        val slotNumber: Int
+
+) : UserEquipment {
+    override fun entityId(): Int {
+        return decoration.id
+    }
+
+    override fun type(): DataType {
+        return DataType.DECORATION
     }
 }

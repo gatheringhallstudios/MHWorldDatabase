@@ -59,6 +59,9 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
     }
 
     private fun containsEmptyElement(list: MutableList<UserEquipmentSet>): Boolean {
+        if (list.size == 0) {
+            return false
+        }
         return list.last().id == 0
     }
 }

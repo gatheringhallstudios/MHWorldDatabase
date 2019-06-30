@@ -28,7 +28,8 @@ data class UserEquipmentDecorationEntity(
         val equipmentSetId: Int,
         val dataId: Int,
         val dataType: DataType,
-        val decorationId: Int
+        val decorationId: Int,
+        val slotNumber: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
