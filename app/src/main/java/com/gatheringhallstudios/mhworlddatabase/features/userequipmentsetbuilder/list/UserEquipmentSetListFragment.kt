@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.ItemTouchHelper
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
-import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
+import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +28,7 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
         viewModel.getEquipmentSetList()
 
         // Add dividers between items
-        recyclerView.addItemDecoration(HeaderItemDivider(DashedDividerDrawable(context!!)))
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         viewModel.userEquipmentSets.observe(this, Observer<MutableList<UserEquipmentSet>> {
             // Setup recycler list adapter and the on-selected
@@ -37,14 +36,14 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
                 it.add(UserEquipmentSet.createEmptySet())
             }
 
-            val adapter = UserEquipmentSetAdapterDelegate(it) {
-                if (it.id == 0) { //Set has not yet been created
+            val adapter = UserEquipmentSetAdapterDelegate(it) {itr ->
+                if (itr.id == 0) { //Set has not yet been created
                     GlobalScope.launch(Dispatchers.Main) {
                         val equipmentSet = withContext(Dispatchers.IO) { viewModel.createEquipmentSet() }
                         getRouter().navigateUserEquipmentSetDetail(equipmentSet)
                     }
                 } else {
-                    getRouter().navigateUserEquipmentSetDetail(it)
+                    getRouter().navigateUserEquipmentSetDetail(itr)
                 }
             }
 

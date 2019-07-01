@@ -43,10 +43,4 @@ class UserEquipmentSetViewPagerAdapter(private val mContext: Context, private va
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object`
     }
-
-//    override fun getPageTitle(position: Int): CharSequence? {
-//        val customPagerEnum = ModelObject.values()[position]
-//        return mContext.getString(customPagerEnum.titleResId)
-//    }
-
 }

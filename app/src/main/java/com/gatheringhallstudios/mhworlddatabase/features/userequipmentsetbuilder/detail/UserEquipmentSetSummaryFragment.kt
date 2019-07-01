@@ -2,7 +2,9 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer

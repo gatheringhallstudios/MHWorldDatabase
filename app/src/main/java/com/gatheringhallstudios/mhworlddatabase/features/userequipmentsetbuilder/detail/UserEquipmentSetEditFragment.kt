@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 
 import android.graphics.drawable.Animatable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.view.animation.Transformation
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -20,8 +18,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 
 class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     companion object {
@@ -134,18 +132,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             animateViews(initialHeight,
                     targetHeight - initialHeight,
                     cardState.EXPANDING, cardView)
-            cardView.icon_slots.visibility = View.INVISIBLE
-            cardView.slot1.visibility = View.INVISIBLE
-            cardView.slot2.visibility = View.INVISIBLE
-            cardView.slot3.visibility = View.INVISIBLE
+            hideSlots(cardView)
         } else {
             animateViews(initialHeight,
                     initialHeight - targetHeight,
                     cardState.COLLAPSING, cardView)
-            cardView.icon_slots.visibility = View.VISIBLE
-            cardView.slot1.visibility = View.VISIBLE
-            cardView.slot2.visibility = View.VISIBLE
-            cardView.slot3.visibility = View.VISIBLE
+            showSlots(cardView)
         }
     }
 
@@ -173,6 +165,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         layout.equipment_name.text = armor.armor.name
         layout.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
         layout.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
+        layout.rarity_string.visibility = View.VISIBLE
         layout.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
         layout.defense_value.text = getString(
                 R.string.armor_defense_value,
@@ -197,16 +190,13 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         user_equipment_charm_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
         user_equipment_charm_slot.rarity_string.text = getString(R.string.format_rarity, userCharm.charm.charm.rarity)
         user_equipment_charm_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(userCharm.charm.charm.rarity))
+        user_equipment_charm_slot.rarity_string.visibility = View.VISIBLE
         user_equipment_charm_slot.setOnClickListener {
             viewModel.setActiveUserEquipment(userCharm)
             getRouter().navigateUserEquipmentCharmSelector(userEquipmentSetId, userCharm.charm.entityId)
         }
-        user_equipment_charm_slot.slot1.visibility = View.INVISIBLE
-        user_equipment_charm_slot.slot2.visibility = View.INVISIBLE
-        user_equipment_charm_slot.slot3.visibility = View.INVISIBLE
-        user_equipment_charm_slot.icon_slots.visibility = View.INVISIBLE
-        user_equipment_charm_slot.icon_defense.visibility = View.INVISIBLE
-        user_equipment_charm_slot.defense_value.visibility = View.INVISIBLE
+        hideSlots(user_equipment_charm_slot)
+        hideDefense(user_equipment_charm_slot)
         user_equipment_charm_slot.card_arrow.visibility = View.INVISIBLE
     }
 
@@ -216,7 +206,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         user_equipment_weapon_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
         user_equipment_weapon_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
         user_equipment_weapon_slot.rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
-
+        user_equipment_weapon_slot.rarity_string.visibility = View.VISIBLE
         for (userDecoration in userWeapon.decorations) {
             when (userDecoration.slotNumber) {
                 1 -> populateSlot1(user_equipment_weapon_slot, userDecoration.decoration)
@@ -232,96 +222,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             user_equipment_weapon_slot.icon_defense.visibility = View.INVISIBLE
             user_equipment_weapon_slot.defense_value.visibility = View.INVISIBLE
         }
-//        user_equipment_weapon_slot.equipment_icon.visibility = when {
-//            weapon.weapon.craftable -> View.VISIBLE
-//            else -> View.GONE
-//        }
-
-        // Populate static stats like attack, affinity...
-//        populateStaticStats(weapon.weapon, user_equipment_weapon_slot, showTrueAttackValues)
-        // Populate decorationIds
-//        populateDecorations(weapon.weapon, view)
-        // Populate stats like element, defense...
-//        populateComplexStats(weapon.weapon, user_equipment_weapon_slot)
     }
-
-//    private fun populateComplexStats(weapon: Weapon, weaponView: View) {
-//        weaponView.complex_stat_layout.removeAllViews()
-//        // Elemental Stat (added if there's a value)
-//        if (weapon.element1 != null) {
-//            val elementView = CompactStatCell(
-//                    context,
-//                    AssetLoader.loadElementIcon(weapon.element1),
-//                    createElementString(weapon.element1_attack, weapon.element_hidden))
-//
-//            if (weapon.element_hidden) {
-//                elementView.labelView.alpha = 0.5.toFloat()
-//            } else {
-//                elementView.labelView.alpha = 1.0.toFloat()
-//            }
-//
-//            weaponView.complex_stat_layout.addView(elementView)
-//        }
-//
-//        // Affinity (added if there's a value)
-//        if (weapon.affinity != 0) {
-//            val affinityValue = getString(R.string.format_plus_percentage, weapon.affinity)
-//
-//            val affinityView = CompactStatCell(
-//                    context,
-//                    R.drawable.ic_ui_affinity,
-//                    affinityValue)
-//
-//            affinityView.labelView.setTextColor(ContextCompat.getColor(context!!, when {
-//                weapon.affinity > 0 -> R.color.textColorGreen
-//                else -> R.color.textColorRed
-//            }))
-//
-//            weaponView.complex_stat_layout.addView(affinityView)
-//        }
-//
-//        // Defense, added if there's a value
-//        if (weapon.defense != 0) {
-//            val defenseValue = getString(R.string.format_plus, weapon.defense)
-//            val defenseView = CompactStatCell(
-//                    context,
-//                    R.drawable.ic_ui_defense,
-//                    defenseValue
-//            )
-//
-//            defenseView.labelView.setTextColor(ContextCompat.getColor(context!!, when {
-//                weapon.defense > 0 -> R.color.textColorGreen
-//                else -> R.color.textColorRed
-//            }))
-//
-//            weaponView.complex_stat_layout.addView(defenseView)
-//        }
-//    }
-
-//    private fun populateStaticStats(weapon: Weapon, view: View, showTrueAttackValues: Boolean) {
-//        view.attack_value.setLabelText(
-//                if (showTrueAttackValues) weapon.attack_true.toString()
-//                else weapon.attack.toString())
-//
-//        //Render sharpness data if it exists, else hide the bars
-//        val sharpnessData = weapon.sharpnessData
-//        if (sharpnessData != null) {
-//            view.sharpness_container.visibility = View.VISIBLE
-//            view.sharpness_value.drawSharpness(sharpnessData.min)
-//            view.sharpness_max_value.drawSharpness(sharpnessData.max)
-//        } else {
-//            view.sharpness_container.visibility = View.GONE
-//        }
-//    }
-//
-//    private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
-//        val workString = element1_attack ?: "-----"
-//
-//        return when (element_hidden) {
-//            true -> "($workString)"
-//            false -> workString.toString()
-//        }
-//    }
 
     private fun animateViews(initialHeight: Int, distance: Int, animationType: cardState, cardView: View) {
         val expandAnimation = object : Animation() {
@@ -375,5 +276,24 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         view.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
         view.slot3_detail.setLabelText(decoration.name)
         view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
+    }
+
+    private fun hideSlots(view: View) {
+        view.icon_slots.visibility = View.INVISIBLE
+        view.slot1.visibility = View.INVISIBLE
+        view.slot2.visibility = View.INVISIBLE
+        view.slot3.visibility = View.INVISIBLE
+    }
+
+    private fun showSlots(view: View) {
+        view.icon_slots.visibility = View.VISIBLE
+        view.slot1.visibility = View.VISIBLE
+        view.slot2.visibility = View.VISIBLE
+        view.slot3.visibility = View.VISIBLE
+    }
+
+    private fun hideDefense(view: View) {
+        view.icon_defense.visibility = View.INVISIBLE
+        view.defense_value.visibility = View.INVISIBLE
     }
 }

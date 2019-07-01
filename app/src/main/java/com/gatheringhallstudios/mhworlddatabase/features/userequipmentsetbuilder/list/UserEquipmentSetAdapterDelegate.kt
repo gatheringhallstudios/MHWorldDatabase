@@ -3,42 +3,31 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.equipment_set_icon
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.equipment_set_name
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.fire_value
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.water_value
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.ice_value
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.thunder_value
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.dragon_value
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.defense_value
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.skill_pager
-import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.worm_dots_indicator
+import kotlinx.android.synthetic.main.listitem_user_equipment_set.view.*
 
 class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        if (viewType != 0) {
+        return if (viewType != 0) {
             val v = inflater.inflate(R.layout.listitem_user_equipment_set, parent, false)
-            return EquipmentSetHolder(v, parent.context)
+            EquipmentSetHolder(v, parent.context)
         } else {
             val v = inflater.inflate(R.layout.listitem_user_equipment_set_new, parent, false)
-            return NewEquipmentSetHolder(v)
+            NewEquipmentSetHolder(v)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (dataSet[position].id == 0) return 0 else return 1
+        return if (dataSet[position].id == 0) 0 else 1
     }
 
     override fun getItemCount(): Int {
@@ -67,7 +56,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
         }
     }
 
-    internal inner class EquipmentSetHolder(val view: View, val context: Context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    internal inner class EquipmentSetHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
         @SuppressLint("ResourceType")
         fun bind(data: UserEquipmentSet) {
             if (data.equipment.isNotEmpty()) {

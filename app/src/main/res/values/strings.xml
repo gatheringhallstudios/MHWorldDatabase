@@ -404,6 +404,8 @@
 
     <string name="header_active_set_bonuses">Active Set Bonuses</string>
     <string name="user_equipment_set_new_set">+ Create a Set</string>
+    <string name="user_equipment_set_no_equipment">No equipment</string>
+    <string name="user_equipment_set_no_decoration">No decoration</string>
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->

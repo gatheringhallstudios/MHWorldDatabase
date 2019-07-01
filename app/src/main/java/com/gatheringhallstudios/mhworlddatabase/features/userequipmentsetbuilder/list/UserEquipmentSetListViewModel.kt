@@ -33,27 +33,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     fun getEquipmentSetList() {
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {
-                //                                appDao.createUserEquipmentSet("test")
-////                                appDao.createUserEquipmentEquipment(629, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEquipment(630, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEquipment(631, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEquipment(632, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEquipment(633, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEquipment(634, DataType.ARMOR, 1)
-//                appDao.deleteUserEquipmentEquipment(526, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEquipment(526, DataType.ARMOR, 1)
-//                                appDao.createUserEquipmentEquipment(1, DataType.CHARM, 1)
-//                appDao.createUserEquipmentDecoration(1, 526, DataType.ARMOR, 94, 1)
-//                appDao.createUserEquipmentEquipment(634, DataType.ARMOR, 1)
-//                appDao.deleteUserEquipmentEquipment(634, DataType.ARMOR, 1)
-//                appDao.createUserEquipmentEquipment(200, DataType.WEAPON, 1)
-//                appDao.deleteUserEquipmentEquipment(630, DataType.ARMOR, 1)
-//                appDao.deleteUserEquipmentEquipment(631, DataType.ARMOR, 1)
-//                appDao.deleteUserEquipmentEquipment(633, DataType.ARMOR, 1)
-//                appDao.deleteUserEquipmentSet(2)
-//                appDao.deleteUserEquipmentSet(3)
-//                appDao.deleteUserEquipmentSet(4)
-//                appDao.deleteUserEquipmentSet(5)
                 appDao.loadUserEquipmentSetIds()
             }
 
@@ -112,22 +91,28 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
             when (userEquipmentId.dataType) {
                 DataType.ARMOR -> {
                     val decorations = userEquipmentId.decorationIds.map { decorationIds ->
-                        UserDecoration(decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId), slotNumber = decorationIds.slotNumber)
+                        UserDecoration(
+                                decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
+                                slotNumber = decorationIds.slotNumber)
                     }
 
-                    userEquipment.add(UserArmorPiece(armor = armorDao.loadArmorFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
+                    userEquipment.add(UserArmorPiece(
+                            armor = armorDao.loadArmorFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
                             decorations = decorations))
                 }
                 DataType.WEAPON -> {
                     val decorations = userEquipmentId.decorationIds.map { decorationIds ->
-                        UserDecoration(decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId), slotNumber = decorationIds.slotNumber)
+                        UserDecoration(
+                                decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
+                                slotNumber = decorationIds.slotNumber)
                     }
 
-                    userEquipment.add(UserWeapon(weapon = weaponDao.loadWeaponFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
+                    userEquipment.add(UserWeapon(
+                            weapon = weaponDao.loadWeaponFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
                             decorations = decorations))
                 }
                 DataType.CHARM -> {
-                    userEquipment.add(UserCharm(charmDao.loadCharmFullSync(AppSettings.dataLocale, userEquipmentId.dataId)))
+                    userEquipment.add(UserCharm(charm = charmDao.loadCharmFullSync(AppSettings.dataLocale, userEquipmentId.dataId)))
                 }
                 else -> {
                 } //Shouldn't happen, so ignore

@@ -39,12 +39,13 @@
                 app:layout_constraintStart_toEndOf="@id/equipment_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
-                tools:text="Temp text" />
+                android:text="@string/user_equipment_set_no_equipment" />
 
             <TextView
                 android:id="@+id/rarity_string"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginStart="@dimen/margin_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/equipment_icon"
@@ -141,17 +142,20 @@
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/slot1_detail"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/row_height_medium" />
+                android:layout_height="@dimen/row_height_medium"
+                app:labelText="@string/user_equipment_set_no_decoration"/>
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/slot2_detail"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/row_height_medium" />
+                android:layout_height="@dimen/row_height_medium"
+                app:labelText="@string/user_equipment_set_no_decoration" />
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/slot3_detail"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/row_height_medium" />
+                android:layout_height="@dimen/row_height_medium"
+                app:labelText="@string/user_equipment_set_no_decoration" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

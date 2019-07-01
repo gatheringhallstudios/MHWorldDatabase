@@ -4,7 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserArmorPiece
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserWeapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -14,47 +17,40 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
 
     var activeUserEquipmentSet = MutableLiveData<UserEquipmentSet>()
-    private var activeUserEquipment : UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
+    private var activeUserEquipment: UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
 
     fun setActiveUserEquipment(userEquipment: UserEquipment?) {
         this.activeUserEquipment = userEquipment
     }
 
+    //This has to be blocking because the equipment set details screen cannot be rendered until this check is done
     fun isActiveUserEquipmentSetStale(): Boolean {
+        if (activeUserEquipment == null) {
+            return false //There is no active equipment, i.e. the data cannot be stale
+        }
+
         return runBlocking {
-            val updatedIds = withContext(Dispatchers.IO) { appDao.loadUserEquipmentSetIds(activeUserEquipmentSet.value!!.id) }
+            val storedIds = withContext(Dispatchers.IO) {
+                appDao.loadSingleUserEquipmentId(activeUserEquipmentSet.value!!.id, activeUserEquipment!!.entityId(), activeUserEquipment!!.type())
+            } ?: return@runBlocking true
 
-            try {
-                val updatedUserEquipment = updatedIds.equipmentIds.first {
-                    it.dataId == activeUserEquipment!!.entityId() &&
-                            it.dataType == activeUserEquipment!!.type()
+            val decorations = when (activeUserEquipment!!.type()) {
+                DataType.ARMOR -> {
+                    (activeUserEquipment as UserArmorPiece).decorations
                 }
-
-                var decorations: List<UserDecoration> = listOf()
-                when (activeUserEquipment!!.type()) {
-                    DataType.ARMOR -> {
-                        decorations = (activeUserEquipment as UserArmorPiece).decorations
-                    }
-                    DataType.WEAPON -> {
-                        decorations = (activeUserEquipment as UserWeapon).decorations
-                    }
-                    else -> {
-                       false //The piece of equipment is present and it has no decorations, i.e. data is not stale
-                    }
+                DataType.WEAPON -> {
+                    (activeUserEquipment as UserWeapon).decorations
                 }
-
-                if (decorations.size != updatedUserEquipment.decorationIds.size) true
-                for (i in 1 until decorations.size) {
-                    if (decorations[i].decoration.id != updatedUserEquipment.decorationIds[i].decorationId) true //Decorations don't match, i.e. data is stale
+                else -> {
+                    return@runBlocking false //The piece of equipment is present and it has no decorations, i.e. data is not stale
                 }
-
-                false
-
-            } catch (exception: NoSuchElementException) {
-                true //The piece of equipment is no longer present, i.e. the data is stale
-            } catch (exception: NullPointerException) {
-                 true //Active equipment Set or Active equipment hasn't been set yet, i.e. the data is definitely stale
             }
+
+            for (i in 1 until decorations.size) {
+                if (decorations[i].decoration.id != storedIds.decorationIds[i].decorationId) return@runBlocking true //Piece of equipment matches, but Decorations don't match, i.e. data is stale
+            }
+
+            false
         }
     }
 }
