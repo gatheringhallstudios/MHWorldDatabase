@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:gravity="center_vertical"
             android:maxLines="1"
             app:autoSizeMinTextSize="14dp"
@@ -229,14 +229,14 @@
         card_view:cardCornerRadius="0dp"
         android:layout_weight="4"
         android:clipChildren="false"
-        card_view:cardElevation="20dp"
+        card_view:cardElevation="@dimen/elevation_card"
         card_view:cardPreventCornerOverlap="false">
 
         <LinearLayout
             android:id="@+id/skill_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#1a1a1a"
+            android:background="@color/primaryDarkColor"
             android:orientation="vertical">
 
             <androidx.viewpager.widget.ViewPager
