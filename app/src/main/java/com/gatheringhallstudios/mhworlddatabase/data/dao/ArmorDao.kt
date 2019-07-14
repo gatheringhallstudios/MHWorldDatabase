@@ -118,6 +118,18 @@ abstract class ArmorDao {
                 })
     }
 
+    fun loadArmorFullSync(langId: String, armorId: Int) : ArmorFull {
+        val armor = loadArmorSync(langId, armorId)
+        return ArmorFull(
+                armor = armor,
+                recipe = loadArmorComponentsSync(langId, armorId),
+                skills = loadArmorSkillsSync(langId, armorId),
+                setBonuses = when (armor.armorset_bonus_id) {
+                    null -> emptyList()
+                    else -> loadArmorSetBonusSync(langId, armor.armorset_bonus_id)
+                })
+    }
+
     @Query("""
         SELECT st.id as skilltree_id, stt.name as skilltree_name, st.max_level skilltree_max_level,
             st.icon_color as skilltree_icon_color,

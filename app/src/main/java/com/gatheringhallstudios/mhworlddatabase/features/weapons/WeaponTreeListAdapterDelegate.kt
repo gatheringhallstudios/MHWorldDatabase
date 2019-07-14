@@ -90,7 +90,7 @@ class WeaponTreeListAdapterDelegate(
             populateStaticStats(weapon)
             // Populate stats like horn notes, shelling type...
             populateWeaponSpecificStats(weapon)
-            // Populate decorations
+            // Populate decorationIds
             populateDecorations(weapon)
             // Populate stats like element, defense...
             populateComplexStats(weapon)

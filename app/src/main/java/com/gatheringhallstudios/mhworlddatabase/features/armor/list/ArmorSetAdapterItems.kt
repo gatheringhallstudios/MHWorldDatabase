@@ -11,6 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
 import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
+import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -82,7 +83,7 @@ class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
  * Body item for collapsible armor sets.
  * Each one represents a single armor in an armor set.
  */
-class ArmorSetDetailItem(val armor: Armor) : Item() {
+class ArmorSetDetailItem(val armor: Armor, private val onSelected: (Armor) -> Unit) : Item() {
     override fun getLayout() = R.layout.listitem_armorset_armor
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -110,7 +111,7 @@ class ArmorSetDetailItem(val armor: Armor) : Item() {
         viewHolder.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
 
         view.setOnClickListener {
-            Router(Navigation.findNavController(view)).navigateArmorDetail(armor.id)
+            onSelected(armor)
         }
     }
 }
