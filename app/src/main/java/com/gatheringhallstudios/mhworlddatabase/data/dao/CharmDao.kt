@@ -20,6 +20,15 @@ abstract class CharmDao {
         ORDER BY ct.name""")
     abstract fun loadCharmsSync(langId: String): List<Charm>
 
+    @Query("""
+        SELECT c.*, ct.name
+        FROM charm c
+            JOIN charm_text ct
+                ON ct.id = c.id
+                AND ct.lang_id = :langId
+        ORDER BY ct.name""")
+    abstract fun loadCharmList(langId: String): LiveData<List<Charm>>
+
     /**
      * Loads full data for a charm asynchronously.
      * Full data includes all join tables like items and skills

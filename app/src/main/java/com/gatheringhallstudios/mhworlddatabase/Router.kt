@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import androidx.navigation.NavController
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
@@ -15,6 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.Locati
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.ARG_WEAPON_TREE_TYPE
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
@@ -124,6 +126,17 @@ class Router(private val navController: NavController) {
 
         navController.navigate(
                 R.id.userCharmSelectionListAction,
+                bundle.build()
+        )
+    }
+
+    fun navigateUserEquipmentPieceSelector(activeEquipment: UserEquipment, userEquipmentSetId: Int?, filter: ArmorType?) {
+        val bundle = BundleBuilder()
+                .putSerializable(UserEquipmentSetSelectorListFragment.ARG_ACTIVE_EQUIPMENT, activeEquipment)
+        if (userEquipmentSetId != null) bundle.putInt(ArmorSetListPagerFragment.ARG_SET_ID, userEquipmentSetId)
+        if (filter != null) bundle.putSerializable(ArmorSetListPagerFragment.ARG_ITEM_FILTER, filter)
+        navController.navigate(
+                R.id.equipmentSetSelectorAction,
                 bundle.build()
         )
     }

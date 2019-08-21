@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_container"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +9,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@id/card_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -35,18 +35,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
+                android:text="@string/user_equipment_set_no_equipment"
                 app:layout_constraintBottom_toTopOf="@+id/rarity_string"
                 app:layout_constraintStart_toEndOf="@id/equipment_icon"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                android:text="@string/user_equipment_set_no_equipment" />
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/rarity_string"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_marginStart="@dimen/margin_medium"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/equipment_icon"
                 app:layout_constraintTop_toBottomOf="@+id/equipment_name"
@@ -143,7 +143,7 @@
                 android:id="@+id/slot1_detail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_height_medium"
-                app:labelText="@string/user_equipment_set_no_decoration"/>
+                app:labelText="@string/user_equipment_set_no_decoration" />
 
             <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                 android:id="@+id/slot2_detail"

@@ -4,10 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserArmorPiece
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserWeapon
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -52,5 +49,14 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
 
             false
         }
+    }
+
+
+    fun updateArmorPieceForArmorSet(newArmor: Armor, userEquipmentSetId: Int, prevId: Int?) {
+        if (prevId != null) {
+            appDao.deleteUserEquipmentEquipment(prevId, DataType.ARMOR, userEquipmentSetId)
+        }
+
+        appDao.createUserEquipmentEquipment(newArmor.id, DataType.ARMOR, userEquipmentSetId)
     }
 }

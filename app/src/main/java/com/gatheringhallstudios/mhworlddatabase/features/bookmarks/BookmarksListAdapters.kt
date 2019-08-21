@@ -26,7 +26,7 @@ class ItemBookmarkDelegate(private val onSelect: (Item) -> Unit) : SimpleListDel
         viewHolder.itemView.generic_icon.setImageDrawable(icon)
         viewHolder.itemView.label_text.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
-//        viewHolder.itemView.delete_bookmark_button.setOnClickListener {onDelete(data)}
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }
 
@@ -45,7 +45,7 @@ class LocationBookmarkDelegate(private val onSelect: (Location) -> Unit) : Simpl
         viewHolder.itemView.generic_icon.setImageDrawable(icon)
         viewHolder.itemView.label_text.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
-//        viewHolder.itemView.delete_bookmark_button.setOnClickListener {onDelete(data)}
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }
 
@@ -64,7 +64,7 @@ class CharmBookmarkDelegate(private val onSelect: (Charm) -> Unit) : SimpleListD
         viewHolder.itemView.generic_icon.setImageDrawable(icon)
         viewHolder.itemView.label_text.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
-//        viewHolder.itemView.delete_bookmark_button.setOnClickListener {onDelete(data)}
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }
 
@@ -83,7 +83,7 @@ class DecorationBaseBookmarkDelegate(private val onSelect: (DecorationBase) -> U
         viewHolder.itemView.generic_icon.setImageDrawable(icon)
         viewHolder.itemView.label_text.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
-//        viewHolder.itemView.delete_bookmark_button.setOnClickListener {onDelete(data)}
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }
 
@@ -102,7 +102,7 @@ class MonsterBaseBookmarkDelegate(private val onSelect: (MonsterBase) -> Unit) :
         viewHolder.itemView.generic_icon.setImageDrawable(icon)
         viewHolder.itemView.label_text.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
-//        viewHolder.itemView.delete_bookmark_button.setOnClickListener {onDelete(data)}
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }
 
@@ -121,7 +121,7 @@ class SkillTreeBookmarkDelegate(private val onSelect: (SkillTree) -> Unit) : Sim
         viewHolder.itemView.generic_icon.setImageDrawable(icon)
         viewHolder.itemView.label_text.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
-//        viewHolder.itemView.delete_bookmark_button.setOnClickListener {onDelete(data)}
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }
 
@@ -140,7 +140,7 @@ class WeaponBookmarkDelegate(private val onSelect: (Weapon) -> Unit) : SimpleLis
         viewHolder.itemView.generic_icon.setImageDrawable(icon)
         viewHolder.itemView.label_text.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
-//        viewHolder.itemView.delete_bookmark_button.setOnClickListener {onDelete(data)}
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }
 
@@ -159,6 +159,6 @@ class ArmorBookmarkDelegate(private val onSelect: (Armor) -> Unit) : SimpleListD
         viewHolder.itemView.generic_icon.setImageDrawable(icon)
         viewHolder.itemView.label_text.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
-//        viewHolder.itemView.delete_bookmark_button.setOnClickListener {onDelete(data)}
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }

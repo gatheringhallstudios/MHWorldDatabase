@@ -9,33 +9,42 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="@dimen/padding_footer_space">
-        <include
+
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_weapon_slot"
-            layout="@layout/cell_expandable_cardview" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <include
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_head_slot"
-            layout="@layout/cell_expandable_cardview" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <include
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_chest_slot"
-            layout="@layout/cell_expandable_cardview" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <include
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_arms_slot"
-            layout="@layout/cell_expandable_cardview" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <include
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_waist_slot"
-            layout="@layout/cell_expandable_cardview" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <include
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_legs_slot"
-            layout="@layout/cell_expandable_cardview" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <include
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_charm_slot"
-            layout="@layout/cell_expandable_cardview" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </ScrollView>
