@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
 import android.graphics.drawable.Animatable
+import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
@@ -46,6 +47,18 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     fun setOnContract(onContract: () -> Unit) {
         this.onContract = onContract
     }
+
+    fun setHeight(height: Int) {
+        // Gets the layout params that will allow you to resize the layout
+        val params: ViewGroup.LayoutParams = header.layoutParams
+        params.height = height
+        header.layoutParams = params
+    }
+
+//    fun setHeaderView(view: View) {
+//        header.removeAllViews()
+//        header.addView(view)
+//    }
 
     private fun toggle(cardView: View) {
         val initialHeight = cardView.height

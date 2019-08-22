@@ -133,8 +133,8 @@ class Router(private val navController: NavController) {
     fun navigateUserEquipmentPieceSelector(activeEquipment: UserEquipment, userEquipmentSetId: Int?, filter: ArmorType?) {
         val bundle = BundleBuilder()
                 .putSerializable(UserEquipmentSetSelectorListFragment.ARG_ACTIVE_EQUIPMENT, activeEquipment)
-        if (userEquipmentSetId != null) bundle.putInt(ArmorSetListPagerFragment.ARG_SET_ID, userEquipmentSetId)
-        if (filter != null) bundle.putSerializable(ArmorSetListPagerFragment.ARG_ITEM_FILTER, filter)
+        if (userEquipmentSetId != null) bundle.putInt(UserEquipmentSetSelectorListFragment.ARG_SET_ID, userEquipmentSetId)
+        if (filter != null) bundle.putSerializable(UserEquipmentSetSelectorListFragment.ARG_ITEM_FILTER, filter)
         navController.navigate(
                 R.id.equipmentSetSelectorAction,
                 bundle.build()

@@ -20,6 +20,17 @@ abstract class ArmorDao {
             JOIN armorset_text ast
                 ON ast.id = a.armorset_id
                 AND ast.lang_id = at.lang_id
+        WHERE at.lang_id = :langId          
+    """)
+    abstract fun loadArmorListSync(langId: String): List<Armor>
+
+    @Query("""
+        SELECT a.*, at.name, ast.name armorset_name
+        FROM armor a
+            JOIN armor_text at USING (id)
+            JOIN armorset_text ast
+                ON ast.id = a.armorset_id
+                AND ast.lang_id = at.lang_id
         WHERE at.lang_id = :langId
           AND (:rank IS NULL OR a.rank = :rank)
     """)

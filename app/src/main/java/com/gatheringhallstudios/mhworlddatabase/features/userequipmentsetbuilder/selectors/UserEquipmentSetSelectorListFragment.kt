@@ -13,8 +13,13 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserArmorPiece
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetListFragment
+import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class UserEquipmentSetSelectorListFragment : Fragment() {
     companion object {
@@ -32,15 +37,24 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = UserEquipmentSetSelectorAdapter()
         val filter = arguments?.getSerializable(ArmorSetListFragment.ARG_ITEM_FILTER) as? ArmorType
         val activeArmorPiece = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as UserArmorPiece
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
 
+        val adapter = UserEquipmentSetSelectorAdapter {
+            GlobalScope.launch(Dispatchers.Main) {
+                withContext(Dispatchers.IO) {
+                    viewModel.updateArmorPieceForArmorSet(it, activeEquipmentSetId!!, activeArmorPiece.armor.entityId )
+                }
+
+                getRouter().goBack()
+            }
+        }
+
         populateActiveArmor(activeArmorPiece)
         equipment_list.adapter = adapter
+//        filterArmor(filter!!)
 
-        viewModel.init()
         viewModel.armor.observe(this, Observer {
             adapter.items = it
         })
@@ -86,4 +100,11 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         view.slot3_detail.setLabelText(decoration.name)
         view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
+
+    private fun filterArmor(armorType: ArmorType) {
+        viewModel.filterArmor {
+            it.armor_type == armorType
+        }
+    }
+
 }

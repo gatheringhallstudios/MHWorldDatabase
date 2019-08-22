@@ -3,15 +3,22 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.common.MHModelTreeFilter
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
 import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewModel(application) {
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
@@ -19,21 +26,30 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     private val weaponDao = MHWDatabase.getDatabase(application).weaponDao()
     private val armorDao = MHWDatabase.getDatabase(application).armorDao()
 
-    lateinit var armor: LiveData<List<Armor>>
+    var armor = MutableLiveData<List<Armor>>()
     lateinit var weapons: LiveData<List<Weapon>>
     lateinit var charms: LiveData<List<Charm>>
 
-    fun init() {
+    init {
         loadArmor()
         loadCharms()
         loadWeapons()
     }
-    fun loadArmor() {
-        if (::armor.isInitialized) {
-            return
-        }
 
-        this.armor = armorDao.loadArmorList(AppSettings.dataLocale, Rank.HIGH)
+    fun filterArmor(filter: (Armor)-> Boolean) {
+        armor.value = armor.value!!.filter {
+            filter(it)
+        }
+    }
+
+    private fun loadArmor() {
+        GlobalScope.launch(Dispatchers.Main) {
+            val armorList = withContext(Dispatchers.IO) {
+                armorDao.loadArmorListSync(AppSettings.dataLocale)
+            }
+
+            armor.value = armorList
+        }
     }
 
     fun loadWeapons() {
