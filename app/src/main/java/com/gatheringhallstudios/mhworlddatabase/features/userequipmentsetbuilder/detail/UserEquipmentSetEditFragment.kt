@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 
 class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
+    private var isNewFragment = true
+
     /**
      * Returns the viewmodel owned by the parent fragment
      */
@@ -30,15 +32,41 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
+            attachDefaultOnClickListeners(it.id)
             populateUserEquipment(it)
         })
     }
 
     override fun onResume() {
         super.onResume()
-        if (viewModel.isActiveUserEquipmentSetStale()) {
+        //Try to avoid stale check on first round
+        if (!isNewFragment && viewModel.isActiveUserEquipmentSetStale()) {
             val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
             viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+        }
+
+        isNewFragment = false
+    }
+
+    private fun attachDefaultOnClickListeners(userEquipmentSetId: Int) {
+        user_equipment_head_slot.setOnClick {
+            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.HEAD)
+        }
+
+        user_equipment_chest_slot.setOnClick {
+            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.CHEST)
+        }
+
+        user_equipment_arms_slot.setOnClick {
+            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.ARMS)
+        }
+
+        user_equipment_waist_slot.setOnClick {
+            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.WAIST)
+        }
+
+        user_equipment_legs_slot.setOnClick {
+            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.LEGS)
         }
     }
 
@@ -52,30 +80,34 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 //        user_equipment_charm_slot.card_arrow.setOnClick {
 //            toggle(user_equipment_charm_slot)
 //        }
-        viewModel.setActiveUserEquipment(armorPiece)
         when (armorPiece.armor.armor.armor_type) {
             ArmorType.HEAD -> {
                 user_equipment_head_slot.setOnClick {
+                    viewModel.setActiveUserEquipment(armorPiece)
                     getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.HEAD)
                 }
             }
             ArmorType.CHEST -> {
                 user_equipment_chest_slot.setOnClick {
+                    viewModel.setActiveUserEquipment(armorPiece)
                     getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.CHEST)
                 }
             }
             ArmorType.ARMS -> {
                 user_equipment_arms_slot.setOnClick {
+                    viewModel.setActiveUserEquipment(armorPiece)
                     getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.ARMS)
                 }
             }
             ArmorType.WAIST -> {
                 user_equipment_waist_slot.setOnClick {
+                    viewModel.setActiveUserEquipment(armorPiece)
                     getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.WAIST)
                 }
             }
             ArmorType.LEGS -> {
                 user_equipment_legs_slot.setOnClick {
+                    viewModel.setActiveUserEquipment(armorPiece)
                     getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.LEGS)
                 }
             }

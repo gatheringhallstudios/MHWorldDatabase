@@ -12,7 +12,6 @@ import kotlinx.coroutines.withContext
 
 class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewModel(application) {
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
-
     var activeUserEquipmentSet = MutableLiveData<UserEquipmentSet>()
     private var activeUserEquipment: UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
 
@@ -23,7 +22,7 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
     //This has to be blocking because the equipment set details screen cannot be rendered until this check is done
     fun isActiveUserEquipmentSetStale(): Boolean {
         if (activeUserEquipment == null) {
-            return false //There is no active equipment, i.e. the data cannot be stale
+            return true //There is no active equipment, i.e. the data must be stale
         }
 
         return runBlocking {

@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserArmorPiece
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
@@ -25,7 +26,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     companion object {
         const val ARG_ACTIVE_EQUIPMENT = "ACTIVE_EQUIPMENT"
         const val ARG_SET_ID = "ACTIVE_SET_ID" //The equipment set that is currently being handled when in builder mode
-        const val ARG_ITEM_FILTER = "ACTIVE_SET_ITEM_FILTER" //What class armor to limit the selector to
+        const val ARG_ITEM_FILTER = "ACTIVE_ITEM_FILTER" //What class armor to limit the selector to
     }
 
     private val viewModel: UserEquipmentSetSelectorViewModel by lazy {
@@ -37,26 +38,33 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val filter = arguments?.getSerializable(ArmorSetListFragment.ARG_ITEM_FILTER) as? ArmorType
-        val activeArmorPiece = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as UserArmorPiece
+        val filter = arguments?.getSerializable(ARG_ITEM_FILTER) as? ArmorType
+        val activeArmorPiece = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserArmorPiece
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
 
         val adapter = UserEquipmentSetSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
-                    viewModel.updateArmorPieceForArmorSet(it, activeEquipmentSetId!!, activeArmorPiece.armor.entityId )
+                    viewModel.updateArmorPieceForArmorSet(it, activeEquipmentSetId!!, activeArmorPiece?.armor?.entityId)
                 }
 
                 getRouter().goBack()
             }
         }
 
-        populateActiveArmor(activeArmorPiece)
+        //If this is going to be new piece of armor, do not populate the active armor piece
+        if (activeArmorPiece != null) {
+            populateActiveArmor(activeArmorPiece)
+        }
+
         equipment_list.adapter = adapter
-//        filterArmor(filter!!)
 
         viewModel.armor.observe(this, Observer {
-            adapter.items = it
+            if (filter != null) {
+                adapter.items = it.filter { itr -> return@filter itr.armor_type == filter
+            }} else {
+                adapter.items = it
+            }
         })
     }
 
@@ -100,11 +108,4 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         view.slot3_detail.setLabelText(decoration.name)
         view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
-
-    private fun filterArmor(armorType: ArmorType) {
-        viewModel.filterArmor {
-            it.armor_type == armorType
-        }
-    }
-
 }
