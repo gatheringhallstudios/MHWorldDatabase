@@ -8,10 +8,8 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.common.MHModelTreeFilter
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
-import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
-import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
-import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
@@ -26,30 +24,24 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     private val weaponDao = MHWDatabase.getDatabase(application).weaponDao()
     private val armorDao = MHWDatabase.getDatabase(application).armorDao()
 
-    var armor = MutableLiveData<List<Armor>>()
+    lateinit var armor : LiveData<List<ArmorFull>>
     lateinit var weapons: LiveData<List<Weapon>>
     lateinit var charms: LiveData<List<Charm>>
 
-    init {
-        loadArmor()
-        loadCharms()
-        loadWeapons()
-    }
+//    init {
+//        loadArmor()
+//        loadCharms()
+//        loadWeapons()
+//    }
 
-    fun filterArmor(filter: (Armor)-> Boolean) {
-        armor.value = armor.value!!.filter {
-            filter(it)
-        }
-    }
+//    fun filterArmor(filter: (Armor)-> Boolean) {
+//        armor.value = armor.value!!.filter {
+//            filter(it)
+//        }
+//    }
 
-    private fun loadArmor() {
-        GlobalScope.launch(Dispatchers.Main) {
-            val armorList = withContext(Dispatchers.IO) {
-                armorDao.loadArmorListSync(AppSettings.dataLocale)
-            }
-
-            armor.value = armorList
-        }
+   fun loadArmor(langId: String, armorType: ArmorType) {
+        armor = armorDao.loadArmorFullByType(langId, armorType)
     }
 
     fun loadWeapons() {
@@ -60,19 +52,19 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
 //        this.weapons = weaponDao.loadWeaponTrees(AppSettings.dataLocale, WeaponType.BOW)
     }
 
-    fun loadCharms() {
-        if (::charms.isInitialized) {
-            return
-        }
+//    fun loadCharms() {
+//        if (::charms.isInitialized) {
+//            return
+//        }
+//
+//        this.charms = charmDao.loadCharmList(AppSettings.dataLocale)
+//    }
 
-        this.charms = charmDao.loadCharmList(AppSettings.dataLocale)
-    }
-
-    fun updateArmorPieceForArmorSet(newArmor: Armor, userEquipmentSetId: Int, prevId: Int?) {
+    fun updateArmorPieceForArmorSet(newArmor: ArmorFull, userEquipmentSetId: Int, prevId: Int?) {
         if (prevId != null) {
             appDao.deleteUserEquipmentEquipment(prevId, DataType.ARMOR, userEquipmentSetId)
         }
 
-        appDao.createUserEquipmentEquipment(newArmor.id, DataType.ARMOR, userEquipmentSetId)
+        appDao.createUserEquipmentEquipment(newArmor.armor.id, DataType.ARMOR, userEquipmentSetId)
     }
 }

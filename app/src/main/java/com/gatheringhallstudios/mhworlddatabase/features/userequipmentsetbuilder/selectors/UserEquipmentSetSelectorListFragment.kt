@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
@@ -42,6 +43,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val activeArmorPiece = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserArmorPiece
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
 
+        if (filter != null) {
+            viewModel.loadArmor(AppSettings.dataLocale, filter)
+        }
+
         val adapter = UserEquipmentSetSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
@@ -60,11 +65,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         equipment_list.adapter = adapter
 
         viewModel.armor.observe(this, Observer {
-            if (filter != null) {
-                adapter.items = it.filter { itr -> return@filter itr.armor_type == filter
-            }} else {
-                adapter.items = it
-            }
+            adapter.items = it
         })
     }
 

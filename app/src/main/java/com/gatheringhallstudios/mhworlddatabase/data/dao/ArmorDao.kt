@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 /**
@@ -58,6 +59,13 @@ abstract class ArmorDao {
         WHERE at.lang_id = :langId
         AND a.id = :armorId""")
     abstract fun loadArmorSync(langId: String, armorId: Int): Armor
+
+    @Query(""" 
+        SELECT a.id
+        FROM armor a
+        WHERE a.armor_type = :armorType 
+    """)
+    abstract fun loadArmorIdsByArmorType(armorType: ArmorType): LiveData<List<Int>>
 
     fun loadArmor(langId: String, armorId: Int) = createLiveData {
         loadArmorSync(langId, armorId)
@@ -186,4 +194,14 @@ abstract class ArmorDao {
                AND askill.armor_id = :armorId
             ORDER BY askill.skilltree_id ASC""")
     abstract fun loadArmorSkillsSync(langId: String, armorId: Int): List<SkillLevel>
+
+    fun loadArmorFullByType(langId: String, armorType:ArmorType) : LiveData<List<ArmorFull>> {
+        val armorIds = loadArmorIdsByArmorType(armorType)
+
+        return Transformations.map(armorIds) { ids ->
+            ids.map {id ->
+                loadArmorFullSync(langId, id)
+            }
+        }
+    }
 }
