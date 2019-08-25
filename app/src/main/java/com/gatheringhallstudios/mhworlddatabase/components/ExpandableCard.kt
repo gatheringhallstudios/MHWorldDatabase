@@ -11,14 +11,16 @@ import android.graphics.drawable.Animatable
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
+import com.gatheringhallstudios.mhworlddatabase.util.ConvertElevationToAlphaConvert
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 
 
 class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
     private var rowHeight: Int = 189 //Magic height of the row with the margins included
-    private var expandAnimationDuration = 170 //Should be shorter than the 180 of the arrow
+    private var expandAnimationDuration = 100 //Should be shorter than the 180 of the arrow
     private var onExpand : () -> Unit = {hideSlots()}
     private var onContract : () -> Unit = {showSlots()}
+    private var cardElevation: Float = 0f
 
     private enum class cardState {
         EXPANDING,
@@ -31,6 +33,15 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         inflater.inflate(R.layout.cell_expandable_cardview, this, true)
         card_arrow.setOnClickListener {
             toggle(card_container)
+        }
+
+        if (attrs != null) {
+            val attributes = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
+            cardElevation = attributes.getFloat(R.styleable.ExpandableCardView_cardViewElevation, 0f)
+
+            card_container.cardElevation = cardElevation
+            card_overlay.alpha=ConvertElevationToAlphaConvert(cardElevation.toInt())
+            attributes.recycle()
         }
     }
 
@@ -50,9 +61,14 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun setHeight(height: Int) {
         // Gets the layout params that will allow you to resize the layout
-        val params: ViewGroup.LayoutParams = header.layoutParams
+        val params: ViewGroup.LayoutParams = header_layout.layoutParams
         params.height = height
-        header.layoutParams = params
+        header_layout.layoutParams = params
+    }
+
+    fun setCardElevation(cardElevation: Float) {
+        card_container.cardElevation = cardElevation
+        card_overlay.alpha=ConvertElevationToAlphaConvert(cardElevation.toInt())
     }
 
 //    fun setHeaderView(view: View) {

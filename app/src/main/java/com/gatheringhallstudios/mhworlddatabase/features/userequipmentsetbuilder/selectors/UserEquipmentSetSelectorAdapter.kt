@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
+import com.gatheringhallstudios.mhworlddatabase.util.ConvertElevationToAlphaConvert
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.slot1
@@ -30,6 +31,7 @@ class UserEquipmentSetSelectorAdapter(private val onSelected: (Armor) -> Unit): 
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Armor) {
+        (viewHolder.itemView as ExpandableCardView).setCardElevation(ConvertElevationToAlphaConvert(1))
         viewHolder.itemView.equipment_name.text = data.name
         viewHolder.itemView.rarity_string.text = viewHolder.resources.getString(R.string.format_rarity, data.rarity)
         viewHolder.itemView.rarity_string.setTextColor(AssetLoader.loadRarityColor(data.rarity))

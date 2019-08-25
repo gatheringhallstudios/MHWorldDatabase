@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,37 +14,44 @@
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_weapon_slot"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardViewElevation="1"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_head_slot"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardViewElevation="1"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_chest_slot"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_arms_slot"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_waist_slot"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_legs_slot"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_charm_slot"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardViewElevation="1" />
 
     </LinearLayout>
 

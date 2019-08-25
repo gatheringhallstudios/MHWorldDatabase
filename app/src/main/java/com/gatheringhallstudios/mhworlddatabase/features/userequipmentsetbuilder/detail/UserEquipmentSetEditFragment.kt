@@ -4,17 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
+import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.label_text
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
+import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
+import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
+import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
 class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     private var isNewFragment = true
@@ -121,7 +128,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
                     populateWeapon(it as UserWeapon)
                 }
                 DataType.ARMOR -> {
-                    populateArmor(it as UserArmorPiece, userEquipmentSet.id)
+                    populateArmor(it as UserArmorPiece)
                     attachOnClickListeners(it, userEquipmentSet.id)
                 }
                 DataType.CHARM -> {
@@ -133,7 +140,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun populateArmor(userArmor: UserArmorPiece, userEquipmentSetId: Int) {
+    private fun populateArmor(userArmor: UserArmorPiece) {
         val armor = userArmor.armor
         val layout: View
         when (armor.armor.armor_type) {
@@ -171,6 +178,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
                 3 -> populateSlot3(layout, userDecoration.decoration)
             }
         }
+
+        populateSkills(armor.skills, layout.skill_section)
+        populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
     }
 
     private fun populateCharm(userCharm: UserCharm, userEquipmentSetId: Int) {
@@ -233,5 +243,64 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     private fun hideDefense(view: View) {
         view.icon_defense.visibility = View.INVISIBLE
         view.defense_value.visibility = View.INVISIBLE
+    }
+
+    private fun populateSkills(skills: List<SkillLevel>, skillLayout: LinearLayout) {
+        if (skills.isEmpty()) {
+            skillLayout.visibility = View.GONE
+            return
+        }
+
+        skillLayout.visibility = View.VISIBLE
+        skillLayout.skill_list.removeAllViews()
+
+        val inflater = LayoutInflater.from(context)
+
+        for (skill in skills) {
+            //Set the label for the Set name
+            val view = inflater.inflate(R.layout.listitem_skill_level, skillLayout.skill_list, false)
+
+            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
+            view.label_text.text = skill.skillTree.name
+            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            with(view.skill_level) {
+                maxLevel = skill.skillTree.max_level
+                level = skill.level
+            }
+
+            view.setOnClickListener {
+                getRouter().navigateSkillDetail(skill.skillTree.id)
+            }
+
+            skillLayout.skill_list.addView(view)
+        }
+    }
+
+    private fun populateSetBonuses(armorSetBonuses: List<ArmorSetBonus>, setBonusSection: LinearLayout) {
+        if (armorSetBonuses.isEmpty()) {
+            setBonusSection.visibility = View.GONE
+            return
+        }
+
+        // show set bonus section
+        setBonusSection.visibility = View.VISIBLE
+        setBonusSection.set_bonus_list.removeAllViews()
+
+        //Now to set the actual skills
+        for (setBonus in armorSetBonuses) {
+            val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
+            val reqIcon = SetBonusNumberRegistry(setBonus.required)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
+
+            listItem.bonus_skill_icon.setImageDrawable(skillIcon)
+            listItem.bonus_skill_name.text = setBonus.skillTree.name
+            listItem.bonus_requirement.setImageResource(reqIcon)
+
+            listItem.setOnClickListener {
+                getRouter().navigateSkillDetail(setBonus.skillTree.id)
+            }
+
+            setBonusSection.set_bonus_list.addView(listItem)
+        }
     }
 }

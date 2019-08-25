@@ -63,4 +63,8 @@
         <attr name="imageHeight" format="dimension"/>
         <attr name="imageSize" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="ExpandableCardView">
+        <attr name="cardViewElevation" format="float"/>
+    </declare-styleable>
 </resources>
