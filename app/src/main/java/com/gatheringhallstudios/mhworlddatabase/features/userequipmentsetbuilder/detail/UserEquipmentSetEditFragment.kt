@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
@@ -39,7 +40,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
-            attachDefaultOnClickListeners(it.id)
+            populateDefaults(it.id)
             populateUserEquipment(it)
         })
     }
@@ -55,26 +56,35 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         isNewFragment = false
     }
 
-    private fun attachDefaultOnClickListeners(userEquipmentSetId: Int) {
+    private fun populateDefaults(userEquipmentSetId: Int) {
         user_equipment_head_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.HEAD)
+            getRouter().navigateUserEquipmentPieceSelector( UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.HEAD)
         }
-
+        populateSkills(emptyList(), user_equipment_head_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_head_slot.set_bonus_section)
         user_equipment_chest_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.CHEST)
+            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.CHEST)
         }
+        populateSkills(emptyList(), user_equipment_chest_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_chest_slot.set_bonus_section)
 
         user_equipment_arms_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.ARMS)
+            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.ARMS)
         }
+        populateSkills(emptyList(), user_equipment_arms_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_arms_slot.set_bonus_section)
 
         user_equipment_waist_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.WAIST)
+            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.WAIST)
         }
+        populateSkills(emptyList(), user_equipment_waist_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_waist_slot.set_bonus_section)
 
         user_equipment_legs_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(null, userEquipmentSetId, ArmorType.LEGS)
+            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.LEGS)
         }
+        populateSkills(emptyList(), user_equipment_legs_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_legs_slot.set_bonus_section)
     }
 
     private fun attachOnClickListeners(armorPiece: UserArmorPiece, userEquipmentSetId: Int) {
@@ -91,31 +101,31 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             ArmorType.HEAD -> {
                 user_equipment_head_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.HEAD)
+                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.HEAD)
                 }
             }
             ArmorType.CHEST -> {
                 user_equipment_chest_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.CHEST)
+                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.CHEST)
                 }
             }
             ArmorType.ARMS -> {
                 user_equipment_arms_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.ARMS)
+                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.ARMS)
                 }
             }
             ArmorType.WAIST -> {
                 user_equipment_waist_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.WAIST)
+                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR ,armorPiece, userEquipmentSetId, ArmorType.WAIST)
                 }
             }
             ArmorType.LEGS -> {
                 user_equipment_legs_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(armorPiece, userEquipmentSetId, ArmorType.LEGS)
+                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.LEGS)
                 }
             }
         }

@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
     private var rowHeight: Int = 189 //Magic height of the row with the margins included
     private var expandAnimationDuration = 100 //Should be shorter than the 180 of the arrow
-    private var onExpand : () -> Unit = {hideSlots()}
-    private var onContract : () -> Unit = {showSlots()}
+    private var onExpand : () -> Unit = {}
+    private var onContract : () -> Unit = {}
     private var cardElevation: Float = 0f
 
     private enum class cardState {

@@ -5,13 +5,14 @@
     android:id="@+id/card_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/row_height_large"
-    android:layout_margin="@dimen/margin_medium"
     android:orientation="vertical"
-    app:cardBackgroundColor="#121212">
+    app:cardBackgroundColor="#121212"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/card_overlay"

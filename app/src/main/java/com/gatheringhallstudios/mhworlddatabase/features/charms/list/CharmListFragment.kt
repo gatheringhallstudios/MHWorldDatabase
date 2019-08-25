@@ -13,10 +13,6 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegat
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
-import com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetListFragment
-import com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetListPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

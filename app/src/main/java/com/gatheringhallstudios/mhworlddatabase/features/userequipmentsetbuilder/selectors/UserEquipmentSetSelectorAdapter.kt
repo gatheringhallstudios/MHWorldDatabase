@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.view.marginStart
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.Router
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleRecyclerViewAdapter
@@ -65,12 +66,13 @@ class UserEquipmentSetSelectorAdapter(private val onSelected: (ArmorFull) -> Uni
         viewHolder.slot2.setImageDrawable(slotImages[1])
         viewHolder.slot3.setImageDrawable(slotImages[2])
 
-        viewHolder.itemView.setOnClickListener {
+        viewHolder.itemView.setOnClick {
             onSelected(data)
         }
 
-        populateSkills(data.skills, viewHolder.itemView.skill_list)
-        populateSetBonuses(data.setBonuses, viewHolder.itemView.set_bonus_list)
+        viewHolder.itemView.decorations_section.visibility = View.GONE
+        populateSkills(data.skills, viewHolder.itemView.skill_section)
+        populateSetBonuses(data.setBonuses, viewHolder.itemView.set_bonus_section)
     }
 
     private fun populateSkills(skills: List<SkillLevel>, skillLayout: LinearLayout) {
@@ -118,7 +120,7 @@ class UserEquipmentSetSelectorAdapter(private val onSelected: (ArmorFull) -> Uni
         for (setBonus in armorSetBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, setBonusSection.set_bonus_list, false)
 
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name

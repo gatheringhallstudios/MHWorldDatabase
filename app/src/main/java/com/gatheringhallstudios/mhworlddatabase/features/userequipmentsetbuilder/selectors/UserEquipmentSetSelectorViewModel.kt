@@ -60,7 +60,7 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
 //        this.charms = charmDao.loadCharmList(AppSettings.dataLocale)
 //    }
 
-    fun updateArmorPieceForArmorSet(newArmor: ArmorFull, userEquipmentSetId: Int, prevId: Int?) {
+    fun updateEquipmentForEquipmentSet(newArmor: ArmorFull, userEquipmentSetId: Int, prevId: Int?) {
         if (prevId != null) {
             appDao.deleteUserEquipmentEquipment(prevId, DataType.ARMOR, userEquipmentSetId)
         }
