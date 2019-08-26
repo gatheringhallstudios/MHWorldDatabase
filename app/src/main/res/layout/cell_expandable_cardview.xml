@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/row_height_large"
     android:orientation="vertical"
-    app:cardBackgroundColor="#121212"
+    app:cardBackgroundColor="#2C2C2C"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true">
 

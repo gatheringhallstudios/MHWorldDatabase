@@ -49,23 +49,23 @@ fun dpToPx(dp: Int) = (dp * Resources.getSystem().displayMetrics.density).toInt(
  */
 fun ConvertElevationToAlphaConvert(elevation: Int): Float {
     if (elevation >= 24) {
-        return 0.16f
+        return 0.48f
     } else if (elevation >= 16) {
-        return 0.15f
+        return 0.45f
     } else if (elevation >= 12) {
-        return 0.14f
+        return 0.42f
     } else if (elevation >= 8) {
-        return 0.12f
+        return 0.36f
     } else if (elevation >= 6) {
-        return 0.11f
+        return 0.33f
     } else if (elevation > 4) {
-        return 0.09f
+        return 0.27f
     } else if (elevation > 3) {
-        return 0.08f
+        return 0.24f
     } else if (elevation > 2) {
-        return 0.07f
+        return 0.21f
     } else if (elevation > 1) {
-        return 0.05f
+        return 0.15f
     } else {
         return 0f
     }

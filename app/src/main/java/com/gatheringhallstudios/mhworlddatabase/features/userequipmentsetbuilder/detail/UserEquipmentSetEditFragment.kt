@@ -91,12 +91,8 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 //        user_equipment_weapon_slot.card_arrow.setOnClick {
 //            toggle(user_equipment_weapon_slot)
 //        }
-        //        user_equipment_charm_slot.setOnClick {
-//            getRouter().navigateUserEquipmentCharmSelector(userEquipmentSet.id, 0)
-//        }
-//        user_equipment_charm_slot.card_arrow.setOnClick {
-//            toggle(user_equipment_charm_slot)
-//        }
+
+
         when (armorPiece.armor.armor.armor_type) {
             ArmorType.HEAD -> {
                 user_equipment_head_slot.setOnClick {
@@ -143,6 +139,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
                 }
                 DataType.CHARM -> {
                     populateCharm(it as UserCharm, userEquipmentSet.id)
+                    user_equipment_charm_slot.setOnClick {
+                        getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM, it, userEquipmentSet.id, null)
+                    }
                 }
                 else -> {
                 } //Skip

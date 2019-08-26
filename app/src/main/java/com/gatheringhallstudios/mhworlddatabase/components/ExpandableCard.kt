@@ -1,14 +1,15 @@
 package com.gatheringhallstudios.mhworlddatabase.components
 
 import android.content.Context
+import android.graphics.drawable.Animatable
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
-import android.graphics.drawable.Animatable
-import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import com.gatheringhallstudios.mhworlddatabase.util.ConvertElevationToAlphaConvert
@@ -18,8 +19,8 @@ import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
     private var rowHeight: Int = 189 //Magic height of the row with the margins included
     private var expandAnimationDuration = 100 //Should be shorter than the 180 of the arrow
-    private var onExpand : () -> Unit = {}
-    private var onContract : () -> Unit = {}
+    private var onExpand: () -> Unit = {}
+    private var onContract: () -> Unit = {}
     private var cardElevation: Float = 0f
 
     private enum class cardState {
@@ -39,8 +40,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
             cardElevation = attributes.getFloat(R.styleable.ExpandableCardView_cardViewElevation, 0f)
 
-            card_container.cardElevation = cardElevation
-            card_overlay.alpha=ConvertElevationToAlphaConvert(cardElevation.toInt())
+            if(Build.VERSION.SDK_INT < 21 ) {
+                card_container.cardElevation = cardElevation
+            } else {
+                card_container.elevation = cardElevation
+            }
+            card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
             attributes.recycle()
         }
     }
@@ -68,7 +73,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun setCardElevation(cardElevation: Float) {
         card_container.cardElevation = cardElevation
-        card_overlay.alpha=ConvertElevationToAlphaConvert(cardElevation.toInt())
+        card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
     }
 
 //    fun setHeaderView(view: View) {

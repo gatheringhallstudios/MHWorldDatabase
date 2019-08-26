@@ -46,7 +46,7 @@ class UserEquipmentSetSelectorAdapter(private val onSelected: (ArmorFull) -> Uni
 
     override fun bindView(viewHolder: SimpleViewHolder, data: ArmorFull) {
         val armor = data.armor
-        (viewHolder.itemView as ExpandableCardView).setCardElevation(ConvertElevationToAlphaConvert(1))
+        (viewHolder.itemView as ExpandableCardView).setCardElevation(1f)
         viewHolder.itemView.equipment_name.text = armor.name
         viewHolder.itemView.rarity_string.text = viewHolder.resources.getString(R.string.format_rarity, armor.rarity)
         viewHolder.itemView.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
