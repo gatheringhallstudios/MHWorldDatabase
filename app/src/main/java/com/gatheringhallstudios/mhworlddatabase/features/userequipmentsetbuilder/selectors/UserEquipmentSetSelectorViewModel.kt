@@ -26,7 +26,7 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
 
     lateinit var armor : LiveData<List<ArmorFull>>
     lateinit var weapons: LiveData<List<Weapon>>
-    lateinit var charms: LiveData<List<Charm>>
+    lateinit var charms: LiveData<List<CharmFull>>
 
 //    init {
 //        loadArmor()
@@ -42,6 +42,10 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
 
    fun loadArmor(langId: String, armorType: ArmorType) {
         armor = armorDao.loadArmorFullByType(langId, armorType)
+    }
+
+    fun loadCharms(langId: String) {
+        charms = charmDao.loadCharmAndSkillList(langId)
     }
 
     fun loadWeapons() {
@@ -60,11 +64,11 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
 //        this.charms = charmDao.loadCharmList(AppSettings.dataLocale)
 //    }
 
-    fun updateEquipmentForEquipmentSet(newArmor: ArmorFull, userEquipmentSetId: Int, prevId: Int?) {
+    fun updateEquipmentForEquipmentSet(newId: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?) {
         if (prevId != null) {
-            appDao.deleteUserEquipmentEquipment(prevId, DataType.ARMOR, userEquipmentSetId)
+            appDao.deleteUserEquipmentEquipment(prevId, type, userEquipmentSetId)
         }
 
-        appDao.createUserEquipmentEquipment(newArmor.armor.id, DataType.ARMOR, userEquipmentSetId)
+        appDao.createUserEquipmentEquipment(newId, type, userEquipmentSetId)
     }
 }

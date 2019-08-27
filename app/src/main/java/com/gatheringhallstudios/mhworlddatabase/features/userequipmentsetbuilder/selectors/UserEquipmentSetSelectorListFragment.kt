@@ -74,10 +74,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             viewModel.loadArmor(AppSettings.dataLocale, filter)
         }
 
-        val adapter = UserEquipmentSetSelectorAdapter {
+        val adapter = UserEquipmentSetArmorSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
-                    viewModel.updateEquipmentForEquipmentSet(it, activeEquipmentSetId!!, activeArmorPiece?.armor?.entityId)
+                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeArmorPiece?.armor?.entityId)
                 }
 
                 getRouter().goBack()
@@ -92,14 +92,32 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         }
 
         equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(15))
+        equipment_list.addItemDecoration(SpacesItemDecoration(8))
 
         viewModel.armor.observe(this, Observer {
             adapter.items = it
         })
     }
 
-    private fun initCharmSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {}
+    private fun initCharmSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
+        viewModel.loadCharms(AppSettings.dataLocale)
+
+        val adapter = UserEquipmentSetCharmSelectorAdapter {
+            GlobalScope.launch(Dispatchers.Main) {
+                withContext(Dispatchers.IO) {
+                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeArmorPiece?.armor?.entityId)
+                }
+
+                getRouter().goBack()
+            }
+        }
+
+        equipment_list.adapter = adapter
+        equipment_list.addItemDecoration(SpacesItemDecoration(15))
+        viewModel.charms.observe(this, Observer {
+            adapter.items = it
+        })
+    }
     private fun initDecorationSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {}
     private fun initWeaponSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {}
 

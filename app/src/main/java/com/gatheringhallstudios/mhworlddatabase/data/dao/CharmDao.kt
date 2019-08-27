@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -47,6 +48,20 @@ abstract class CharmDao {
                 skills = loadCharmSkillsSync(langId, charmId),
                 components = loadCharmComponentsSync(langId, charmId)
         )
+    }
+
+    fun loadCharmAndSkillList(langId: String): LiveData<List<CharmFull>> {
+        val charms = loadCharmList(langId)
+
+        return Transformations.map(charms) {
+            it.map {
+                CharmFull(
+                        charm = it,
+                        skills= loadCharmSkillsSync(langId, it.id),
+                        components= emptyList()
+                )
+            }
+        }
     }
 
 

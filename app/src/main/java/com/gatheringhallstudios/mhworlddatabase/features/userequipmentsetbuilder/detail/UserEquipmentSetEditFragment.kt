@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             populateDefaults(it.id)
             populateUserEquipment(it)
         })
+
+        Log.e("TAG", view.isHardwareAccelerated.toString())
+
     }
 
     override fun onResume() {
@@ -82,6 +86,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
         user_equipment_legs_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.LEGS)
+        }
+        populateSkills(emptyList(), user_equipment_legs_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_legs_slot.set_bonus_section)
+
+        user_equipment_charm_slot.setOnClick {
+            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM, null, userEquipmentSetId, null)
         }
         populateSkills(emptyList(), user_equipment_legs_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_legs_slot.set_bonus_section)

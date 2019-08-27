@@ -8,7 +8,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="90dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/equipment_list"
@@ -17,8 +17,10 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginEnd="@dimen/margin_medium" />
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:clipChildren="false"
+            android:clipToPadding="false" />
 
     </ScrollView>
 
@@ -29,6 +31,6 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
-        app:cardViewElevation="2" />
+        app:cardViewElevation="10" />
 
 </RelativeLayout>

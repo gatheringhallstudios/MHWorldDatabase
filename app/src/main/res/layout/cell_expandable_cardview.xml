@@ -6,9 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/row_height_large"
     android:orientation="vertical"
+    android:background="#2C2C2C"
     app:cardBackgroundColor="#2C2C2C"
     android:foreground="?android:attr/selectableItemBackground"
-    android:clickable="true">
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="@dimen/margin_medium">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/card_overlay"
-            android:alpha="0.16" />
+            android:alpha="0.16"
+            android:background="@color/icon_white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +39,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/header_layout"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_large"
                     android:layout_weight="1">
 
