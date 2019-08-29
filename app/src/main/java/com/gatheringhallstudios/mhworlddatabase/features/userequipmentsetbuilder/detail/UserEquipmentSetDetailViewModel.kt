@@ -49,13 +49,4 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
             false
         }
     }
-
-
-    fun updateArmorPieceForArmorSet(newArmor: Armor, userEquipmentSetId: Int, prevId: Int?) {
-        if (prevId != null) {
-            appDao.deleteUserEquipmentEquipment(prevId, DataType.ARMOR, userEquipmentSetId)
-        }
-
-        appDao.createUserEquipmentEquipment(newArmor.id, DataType.ARMOR, userEquipmentSetId)
-    }
 }

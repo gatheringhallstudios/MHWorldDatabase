@@ -216,25 +216,29 @@
                         android:layout_height="@dimen/row_height_small"
                         android:paddingStart="@dimen/margin_large"
                         android:paddingTop="@dimen/margin_small"
-                        android:text="@string/header_decorations" />
+                        android:text="@string/header_decorations"
+                        android:visibility="gone"/>
 
                     <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                         android:id="@+id/slot1_detail"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/row_height_medium"
-                        app:labelText="@string/user_equipment_set_no_decoration" />
+                        app:labelText="@string/user_equipment_set_no_decoration"
+                        android:visibility="gone"/>
 
                     <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                         android:id="@+id/slot2_detail"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/row_height_medium"
-                        app:labelText="@string/user_equipment_set_no_decoration" />
+                        app:labelText="@string/user_equipment_set_no_decoration"
+                        android:visibility="gone"/>
 
                     <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
                         android:id="@+id/slot3_detail"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/row_height_medium"
-                        app:labelText="@string/user_equipment_set_no_decoration" />
+                        app:labelText="@string/user_equipment_set_no_decoration"
+                        android:visibility="gone"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

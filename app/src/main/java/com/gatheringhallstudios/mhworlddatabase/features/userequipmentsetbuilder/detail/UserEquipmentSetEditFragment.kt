@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
@@ -44,15 +43,13 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             populateDefaults(it.id)
             populateUserEquipment(it)
         })
-
-        Log.e("TAG", view.isHardwareAccelerated.toString())
-
     }
 
     override fun onResume() {
         super.onResume()
         //Try to avoid stale check on first round
-        if (!isNewFragment && viewModel.isActiveUserEquipmentSetStale()) {
+//        if (!isNewFragment && viewModel.isActiveUserEquipmentSetStale()) {
+        if (!isNewFragment) {
             val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
             viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
         }
@@ -62,36 +59,37 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
     private fun populateDefaults(userEquipmentSetId: Int) {
         user_equipment_head_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector( UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.HEAD)
+            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.HEAD, null)
         }
         populateSkills(emptyList(), user_equipment_head_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_head_slot.set_bonus_section)
+
         user_equipment_chest_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.CHEST)
+            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.CHEST, null)
         }
         populateSkills(emptyList(), user_equipment_chest_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_chest_slot.set_bonus_section)
 
         user_equipment_arms_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.ARMS)
+            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.ARMS, null)
         }
         populateSkills(emptyList(), user_equipment_arms_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_arms_slot.set_bonus_section)
 
         user_equipment_waist_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.WAIST)
+            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.WAIST, null)
         }
         populateSkills(emptyList(), user_equipment_waist_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_waist_slot.set_bonus_section)
 
         user_equipment_legs_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.LEGS)
+            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.LEGS, null)
         }
         populateSkills(emptyList(), user_equipment_legs_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_legs_slot.set_bonus_section)
 
         user_equipment_charm_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM, null, userEquipmentSetId, null)
+            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, null, userEquipmentSetId, null, null)
         }
         populateSkills(emptyList(), user_equipment_legs_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_legs_slot.set_bonus_section)
@@ -101,37 +99,91 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 //        user_equipment_weapon_slot.card_arrow.setOnClick {
 //            toggle(user_equipment_weapon_slot)
 //        }
-
-
-        when (armorPiece.armor.armor.armor_type) {
+        val armor = armorPiece.armor.armor
+        when (armor.armor_type) {
             ArmorType.HEAD -> {
                 user_equipment_head_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.HEAD)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.HEAD, null)
                 }
+                attachDecorationOnClickListeners(armorPiece, armorPiece.decorations, user_equipment_head_slot.decorations_section, userEquipmentSetId)
             }
             ArmorType.CHEST -> {
                 user_equipment_chest_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.CHEST)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.CHEST, null)
                 }
+                attachDecorationOnClickListeners(armorPiece, armorPiece.decorations, user_equipment_chest_slot.decorations_section, userEquipmentSetId)
             }
             ArmorType.ARMS -> {
                 user_equipment_arms_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.ARMS)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.ARMS, null)
                 }
+                attachDecorationOnClickListeners(armorPiece, armorPiece.decorations, user_equipment_arms_slot.decorations_section, userEquipmentSetId)
             }
             ArmorType.WAIST -> {
                 user_equipment_waist_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR ,armorPiece, userEquipmentSetId, ArmorType.WAIST)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.WAIST, null)
                 }
+                attachDecorationOnClickListeners(armorPiece, armorPiece.decorations, user_equipment_waist_slot.decorations_section, userEquipmentSetId)
             }
             ArmorType.LEGS -> {
                 user_equipment_legs_slot.setOnClick {
                     viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.LEGS)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.LEGS, null)
+                }
+                attachDecorationOnClickListeners(armorPiece, armorPiece.decorations, user_equipment_legs_slot.decorations_section, userEquipmentSetId)
+            }
+        }
+    }
+
+    private fun attachDecorationOnClickListeners(userEquipment: UserEquipment, decorations: List<UserDecoration>?, layout: LinearLayout, userEquipmentSetId: Int) {
+        //Set Defaults
+        if (userEquipment.type() == DataType.ARMOR) {
+            val userArmor = userEquipment as UserArmorPiece
+            userArmor.armor.armor.slots.forEachIndexed { slot, idx ->
+                when (idx) {
+                    1 -> layout.slot1_detail.setOnClickListener {
+                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
+                                userEquipmentSetId, null,
+                                Companion.DecorationsConfig(userArmor.entityId(), 1, userArmor.type(), slot))
+                    }
+                    2 -> layout.slot2_detail.setOnClickListener {
+                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
+                                userEquipmentSetId, null,
+                                Companion.DecorationsConfig(userArmor.entityId(), 2, userArmor.type(), slot))
+                    }
+                    3 -> layout.slot3_detail.setOnClickListener {
+                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
+                                userEquipmentSetId, null,
+                                Companion.DecorationsConfig(userArmor.entityId(), 3, userArmor.type(), slot))
+                    }
+                }
+            }
+        }
+
+        decorations?.forEach { userDecoration ->
+            when (userDecoration.slotNumber) {
+                1 -> layout.slot1_detail.setOnClickListener {
+                    viewModel.setActiveUserEquipment(userDecoration)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION,
+                            userDecoration, userEquipmentSetId, null,
+                            Companion.DecorationsConfig(userEquipment.entityId(), 1,
+                                    userEquipment.type(), userDecoration.decoration.slot))
+                }
+                2 -> layout.slot2_detail.setOnClickListener {
+                    viewModel.setActiveUserEquipment(userDecoration)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, userDecoration, userEquipmentSetId, null,
+                            Companion.DecorationsConfig(userEquipment.entityId(), 2,
+                                    userEquipment.type(), userDecoration.decoration.slot))
+                }
+                3 -> layout.slot3_detail.setOnClickListener {
+                    viewModel.setActiveUserEquipment(userDecoration)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, userDecoration, userEquipmentSetId, null,
+                            Companion.DecorationsConfig(userEquipment.entityId(), 3,
+                                    userEquipment.type(), userDecoration.decoration.slot))
                 }
             }
         }
@@ -150,7 +202,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
                 DataType.CHARM -> {
                     populateCharm(it as UserCharm, userEquipmentSet.id)
                     user_equipment_charm_slot.setOnClick {
-                        getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM, it, userEquipmentSet.id, null)
+                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, it, userEquipmentSet.id, null, null)
                     }
                 }
                 else -> {
@@ -185,11 +237,24 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         layout.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
         layout.rarity_string.visibility = View.VISIBLE
         layout.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-        layout.defense_value.text = getString(
-                R.string.armor_defense_value,
-                armor.armor.defense_base,
-                armor.armor.defense_max,
-                armor.armor.defense_augment_max)
+        layout.defense_value.text = getString(R.string.armor_defense_value, armor.armor.defense_base, armor.armor.defense_max, armor.armor.defense_augment_max)
+
+        //Combine the skills from the armor piece and the decorations
+        
+        populateSkills(armor.skills, layout.skill_section)
+        populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
+
+        resetSlots(layout)
+
+        //Populate defaults
+        userArmor.armor.armor.slots.forEachIndexed {_, idx  ->
+            when (idx) {
+                1 -> layout.slot1_detail.visibility = View.VISIBLE
+                2 -> layout.slot2_detail.visibility = View.VISIBLE
+                3 -> layout.slot3_detail.visibility = View.VISIBLE
+            }
+        }
+
         for (userDecoration in userArmor.decorations) {
             when (userDecoration.slotNumber) {
                 1 -> populateSlot1(layout, userDecoration.decoration)
@@ -197,9 +262,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
                 3 -> populateSlot3(layout, userDecoration.decoration)
             }
         }
-
-        populateSkills(armor.skills, layout.skill_section)
-        populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
     }
 
     private fun populateCharm(userCharm: UserCharm, userEquipmentSetId: Int) {
@@ -243,20 +305,43 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
     private fun populateSlot1(view: View, decoration: Decoration) {
         view.slot1.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot1_detail.visibility = View.VISIBLE
         view.slot1_detail.setLabelText(decoration.name)
         view.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSlot2(view: View, decoration: Decoration) {
         view.slot2.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot2_detail.visibility = View.VISIBLE
         view.slot2_detail.setLabelText(decoration.name)
         view.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSlot3(view: View, decoration: Decoration) {
         view.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot3_detail.visibility = View.VISIBLE
         view.slot3_detail.setLabelText(decoration.name)
         view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
+    }
+
+    private fun resetSlots(layout:View) {
+        layout.slot1.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+        layout.slot2.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+        layout.slot3.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+
+        layout.slot1_detail.setLeftIconDrawable(null)
+        layout.slot1_detail.setLabelText("")
+        layout.slot1_detail.setValueText("")
+        layout.slot2_detail.setLeftIconDrawable(null)
+        layout.slot2_detail.setLabelText("")
+        layout.slot2_detail.setValueText("")
+        layout.slot2_detail.setLeftIconDrawable(null)
+        layout.slot2_detail.setLabelText("")
+        layout.slot2_detail.setValueText("")
+
+        layout.slot1_detail.visibility = View.GONE
+        layout.slot2_detail.visibility = View.GONE
+        layout.slot3_detail.visibility = View.GONE
     }
 
     private fun hideDefense(view: View) {
@@ -309,7 +394,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         for (setBonus in armorSetBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, setBonusSection.set_bonus_list, false)
 
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name

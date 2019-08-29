@@ -13,11 +13,9 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.SpacesItemDecoration
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
-import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
-import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserArmorPiece
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
@@ -30,13 +28,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.Serializable
 
 class UserEquipmentSetSelectorListFragment : Fragment() {
     companion object {
         const val ARG_ACTIVE_EQUIPMENT = "ACTIVE_EQUIPMENT"
         const val ARG_SET_ID = "ACTIVE_SET_ID" //The equipment set that is currently being handled when in builder mode
-        const val ARG_ITEM_FILTER = "ACTIVE_ITEM_FILTER" //What class armor to limit the selector to
+        const val ARG_ARMOR_FILTER = "ACTIVE_ARMOR_FILTER" //What class armor to limit the selector to
         const val ARG_SELECTOR_MODE = "SELECTOR_MODE"
+        //        const val ARG_EQUIPMENT_ID = "DECORATION_TARGET_EQUIPMENT_ID" //What equipment id the decoration is to be applied to
+//        const val ARG_EQUIPMENT_TYPE = "DECORATION_TARGET_EQUIPMENT_TYPE" //What equipment type the decoration is to be applied to
+//        const val ARG_DECORATION_FILTER = "DECORATION_FILTER" //What decorations to show
+//        const val ARG_DECORATION_SLOT = "DECORATION_SLOT" //Target decoration slot number
+        const val ARG_DECORATION_CONFIG = "DECORATION_CONFIG"
 
         enum class SelectorMode {
             ARMOR,
@@ -44,6 +48,9 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             CHARM,
             WEAPON
         }
+
+        class DecorationsConfig(val targetEquipmentId: Int, val targetEquipmentSlot: Int,
+                                val targetEquipmentType: DataType, val decorationLevelFilter: Int) : Serializable
     }
 
     private val viewModel: UserEquipmentSetSelectorViewModel by lazy {
@@ -56,15 +63,15 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val mode = arguments?.getSerializable(ARG_SELECTOR_MODE) as? SelectorMode
-        val filter = arguments?.getSerializable(ARG_ITEM_FILTER) as? ArmorType
+        val filter = arguments?.getSerializable(ARG_ARMOR_FILTER) as? ArmorType
         val activeArmorPiece = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserArmorPiece
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
-
+        val decorationsConfig = arguments?.getSerializable(ARG_DECORATION_CONFIG) as? DecorationsConfig
 
         when (mode) {
             SelectorMode.ARMOR -> initArmorSelector(filter, activeArmorPiece, activeEquipmentSetId)
-            SelectorMode.CHARM -> initCharmSelector(filter, activeArmorPiece, activeEquipmentSetId)
-            SelectorMode.DECORATION -> initDecorationSelector(filter, activeArmorPiece, activeEquipmentSetId)
+            SelectorMode.CHARM -> initCharmSelector(activeArmorPiece, activeEquipmentSetId)
+            SelectorMode.DECORATION -> initDecorationSelector(activeArmorPiece, activeEquipmentSetId, decorationsConfig!!)
             SelectorMode.WEAPON -> initWeaponSelector(filter, activeArmorPiece, activeEquipmentSetId)
         }
     }
@@ -99,7 +106,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         })
     }
 
-    private fun initCharmSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
+    private fun initCharmSelector(activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
         viewModel.loadCharms(AppSettings.dataLocale)
 
         val adapter = UserEquipmentSetCharmSelectorAdapter {
@@ -113,12 +120,33 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         }
 
         equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(15))
+        equipment_list.addItemDecoration(SpacesItemDecoration(8))
         viewModel.charms.observe(this, Observer {
             adapter.items = it
         })
     }
-    private fun initDecorationSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {}
+
+    private fun initDecorationSelector(activeUserEquipment: UserEquipment?, activeEquipmentSetId: Int?, decorationsConfig: DecorationsConfig) {
+        viewModel.loadDecorations(AppSettings.dataLocale)
+
+        val adapter = UserEquipmentSetDecorationSelectorAdapter {
+            GlobalScope.launch(Dispatchers.Main) {
+                withContext(Dispatchers.IO) {
+                    viewModel.updateDecorationForEquipmentSet(it.id, decorationsConfig.targetEquipmentId,
+                            decorationsConfig.targetEquipmentSlot, decorationsConfig.targetEquipmentType, activeEquipmentSetId!!, activeUserEquipment?.entityId())
+                }
+                getRouter().goBack()
+            }
+        }
+
+        equipment_list.adapter = adapter
+        equipment_list.addItemDecoration(SpacesItemDecoration(8))
+
+        viewModel.decorations.observe(this, Observer {
+            adapter.items = it
+        })
+    }
+
     private fun initWeaponSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {}
 
     private fun populateActiveArmor(userArmor: UserArmorPiece) {
@@ -149,20 +177,14 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
     private fun populateSlot1(view: View, decoration: Decoration) {
         view.slot1.setImageDrawable(AssetLoader.loadIconFor(decoration))
-        view.slot1_detail.setLabelText(decoration.name)
-        view.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSlot2(view: View, decoration: Decoration) {
         view.slot2.setImageDrawable(AssetLoader.loadIconFor(decoration))
-        view.slot2_detail.setLabelText(decoration.name)
-        view.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSlot3(view: View, decoration: Decoration) {
         view.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
-        view.slot3_detail.setLabelText(decoration.name)
-        view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSkills(skills: List<SkillLevel>, skillLayout: LinearLayout) {

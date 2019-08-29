@@ -45,7 +45,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             } else {
                 card_container.elevation = cardElevation
             }
-//            card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
+            card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
             attributes.recycle()
         }
     }
@@ -73,7 +73,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun setCardElevation(cardElevation: Float) {
         card_container.cardElevation = cardElevation
-//        card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
+        card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
     }
 
 //    fun setHeaderView(view: View) {

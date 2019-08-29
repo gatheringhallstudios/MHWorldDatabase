@@ -47,7 +47,7 @@ class UserEquipmentSetCharmSelectorAdapter(private val onSelected: (CharmFull) -
 
     override fun bindView(viewHolder: SimpleViewHolder, data: CharmFull) {
         val armor = data.charm
-        (viewHolder.itemView as ExpandableCardView).setCardElevation(1f)
+        (viewHolder.itemView as ExpandableCardView).setCardElevation(4f)
         viewHolder.itemView.equipment_name.text = armor.name
         viewHolder.itemView.rarity_string.text = viewHolder.resources.getString(R.string.format_rarity, armor.rarity)
         viewHolder.itemView.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
