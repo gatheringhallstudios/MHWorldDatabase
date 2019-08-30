@@ -75,7 +75,7 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
 
     fun updateDecorationForEquipmentSet(newId: Int, targetDataId: Int, targetSlotNumber: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?) {
         if (prevId != null) {
-            appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, prevId)
+            appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, prevId, targetSlotNumber)
         }
 
         appDao.createUserEquipmentDecoration(userEquipmentSetId, targetDataId, targetSlotNumber, type, newId)

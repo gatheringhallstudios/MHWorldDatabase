@@ -53,6 +53,16 @@ class UserEquipmentSetCharmSelectorAdapter(private val onSelected: (CharmFull) -
         viewHolder.itemView.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
         viewHolder.itemView.rarity_string.visibility = View.VISIBLE
         viewHolder.itemView.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor))
+
+        viewHolder.itemView.defense_value.visibility = View.GONE
+        viewHolder.itemView.icon_defense.visibility = View.GONE
+        viewHolder.itemView.hideSlots()
+        viewHolder.itemView.set_bonus_section.visibility = View.GONE
+        viewHolder.itemView.decorations_section.visibility = View.GONE
+        viewHolder.itemView.slot1_detail.visibility = View.GONE
+        viewHolder.itemView.slot2_detail.visibility = View.GONE
+        viewHolder.itemView.slot3_detail.visibility = View.GONE
+
         viewHolder.itemView.setOnClick {
             onSelected(data)
         }

@@ -34,7 +34,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.cell_expandable_cardview, this, true)
         card_arrow.setOnClickListener {
-            toggle(card_container)
+            toggle()
         }
 
         if (attrs != null) {
@@ -80,19 +80,19 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
     }
 
-    private fun toggle(cardView: View) {
-        val initialHeight = cardView.height
-        cardView.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        val targetHeight: Int = if (initialHeight == rowHeight) cardView.measuredHeight else rowHeight
+    fun toggle() {
+        val initialHeight = card_container.height
+        card_container.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        val targetHeight: Int = if (initialHeight == rowHeight) card_container.measuredHeight else rowHeight
         if (targetHeight - initialHeight > 0) {
             animateViews(initialHeight,
                     targetHeight - initialHeight,
-                    cardState.EXPANDING, cardView)
+                    cardState.EXPANDING, card_container)
             onExpand()
         } else {
             animateViews(initialHeight,
                     initialHeight - targetHeight,
-                    cardState.COLLAPSING, cardView)
+                    cardState.COLLAPSING, card_container)
             onContract()
         }
     }

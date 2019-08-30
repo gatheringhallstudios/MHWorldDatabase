@@ -114,7 +114,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 getRouter().goBack()
             }
         }
-
+        //If this is going to be new piece of armor, do not populate the active armor piece
+        if (activeCharm != null) {
+            populateActiveCharm(activeCharm)
+        }
         equipment_list.adapter = adapter
         equipment_list.addItemDecoration(SpacesItemDecoration(8))
         viewModel.charms.observe(this, Observer {
@@ -184,6 +187,25 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun populateActiveCharm(userCharm: UserCharm) {
+        val charm = userCharm.charm.charm
+
+        active_equipment_slot.equipment_name.text = charm.name
+        active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, charm.rarity)
+        active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(charm.rarity))
+        active_equipment_slot.rarity_string.visibility = View.VISIBLE
+        active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(charm))
+        active_equipment_slot.defense_value.visibility = View.GONE
+        active_equipment_slot.icon_defense.visibility = View.GONE
+        active_equipment_slot.hideSlots()
+        populateSkills(userCharm.charm.skills, active_equipment_slot.skill_section)
+        populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
+        active_equipment_slot.decorations_section.visibility = View.GONE
+        active_equipment_slot.slot1_detail.visibility = View.GONE
+        active_equipment_slot.slot2_detail.visibility = View.GONE
+        active_equipment_slot.slot3_detail.visibility = View.GONE
     }
 
     private fun populateSlot1(view: View, decoration: Decoration) {

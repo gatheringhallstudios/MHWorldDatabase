@@ -49,4 +49,8 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
             false
         }
     }
+
+    fun deleteDecorationForEquipment(decorationId: Int, targetDataId: Int, targetSlotNumber: Int, type: DataType, userEquipmentSetId: Int) {
+        appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, decorationId, targetSlotNumber)
+    }
 }

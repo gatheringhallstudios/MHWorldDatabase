@@ -10,17 +10,23 @@ import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
+import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import kotlinx.android.synthetic.main.cell_expandable_cardview.*
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     private var isNewFragment = true
@@ -141,7 +147,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         //Set Defaults
         if (userEquipment.type() == DataType.ARMOR) {
             val userArmor = userEquipment as UserArmorPiece
-            userArmor.armor.armor.slots.active.forEachIndexed { idx , slot ->
+            userArmor.armor.armor.slots.active.forEachIndexed { idx, slot ->
                 when (idx + 1) {
                     1 -> layout.slot1_detail.setOnClickListener {
                         getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
@@ -194,7 +200,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
                     populateWeapon(it as UserWeapon)
                 }
                 DataType.ARMOR -> {
-                    populateArmor(it as UserArmorPiece)
+                    populateArmor(it as UserArmorPiece, userEquipmentSet.id)
                     attachOnClickListeners(it, userEquipmentSet.id)
                 }
                 DataType.CHARM -> {
@@ -209,7 +215,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun populateArmor(userArmor: UserArmorPiece) {
+    private fun populateArmor(userArmor: UserArmorPiece, userEquipmentSetId: Int) {
         val armor = userArmor.armor
         val layout: View
         when (armor.armor.armor_type) {
@@ -237,14 +243,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         layout.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
         layout.defense_value.text = getString(R.string.armor_defense_value, armor.armor.defense_base, armor.armor.defense_max, armor.armor.defense_augment_max)
 
-        //Combine the skills from the armor piece and the decorations
-        populateSkills(armor.skills, layout.skill_section)
-        populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
-
         resetSlots(layout)
-
         //Populate defaults
-        if(!armor.armor.slots.isEmpty()) {
+        if (!armor.armor.slots.isEmpty()) {
             layout.decorations_section.visibility = View.VISIBLE
             userArmor.armor.armor.slots.active.forEachIndexed { idx, _ ->
                 when (idx + 1) {
@@ -256,12 +257,66 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
             for (userDecoration in userArmor.decorations) {
                 when (userDecoration.slotNumber) {
-                    1 -> populateSlot1(layout, userDecoration.decoration)
-                    2 -> populateSlot2(layout, userDecoration.decoration)
-                    3 -> populateSlot3(layout, userDecoration.decoration)
+                    1 -> {
+                        populateSlot1(layout, userDecoration.decoration)
+                        layout.decorations_section.slot1_detail.setClickFunction {
+                            GlobalScope.launch(Dispatchers.Main) {
+                                withContext(Dispatchers.IO) {
+                                    viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userArmor.entityId(), userDecoration.slotNumber, userArmor.type(), userEquipmentSetId)
+                                }
+                                withContext(Dispatchers.Main) {
+                                    val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
+                                    viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+                                    layout.toggle()
+                                }
+                            }
+                        }
+                    }
+                    2 -> {
+                        populateSlot2(layout, userDecoration.decoration)
+                        layout.decorations_section.slot2_detail.setClickFunction {
+                            GlobalScope.launch(Dispatchers.Main) {
+                                withContext(Dispatchers.IO) {
+                                    viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userArmor.entityId(), userDecoration.slotNumber, userArmor.type(), userEquipmentSetId)
+                                }
+                                withContext(Dispatchers.Main) {
+                                    val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
+                                    viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+                                    layout.toggle()
+                                }
+                            }
+                        }
+                    }
+                    3 -> {
+                        populateSlot3(layout, userDecoration.decoration)
+                        layout.decorations_section.slot3_detail.setClickFunction {
+                            GlobalScope.launch(Dispatchers.Main) {
+                                withContext(Dispatchers.IO) {
+                                    viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userArmor.entityId(), userDecoration.slotNumber, userArmor.type(), userEquipmentSetId)
+                                }
+                                withContext(Dispatchers.Main) {
+                                    val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
+                                    viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+                                    layout.toggle()
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
+
+        //Combine the skills from the armor piece and the decorations
+        val skillsList: MutableList<SkillLevel> = ArrayList()
+        skillsList.addAll(armor.skills)
+        skillsList.addAll(userArmor.decorations.map {
+            val skillLevel = SkillLevel(level = 1)
+            skillLevel.skillTree = it.decoration.skillTree
+            skillLevel
+        })
+
+        populateSkills(skillsList, layout.skill_section)
+        populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
     }
 
     private fun populateCharm(userCharm: UserCharm, userEquipmentSetId: Int) {
@@ -324,7 +379,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
-    private fun resetSlots(layout:View) {
+    private fun resetSlots(layout: View) {
 
         layout.slot1.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
         layout.slot2.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
@@ -332,13 +387,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
         layout.slot1_detail.setLeftIconDrawable(null)
         layout.slot1_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-        layout.slot1_detail.setValueText("")
+
         layout.slot2_detail.setLeftIconDrawable(null)
         layout.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-        layout.slot2_detail.setValueText("")
+
         layout.slot2_detail.setLeftIconDrawable(null)
         layout.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-        layout.slot2_detail.setValueText("")
 
         layout.decorations_section.visibility = View.GONE
         layout.slot1_detail.visibility = View.GONE
