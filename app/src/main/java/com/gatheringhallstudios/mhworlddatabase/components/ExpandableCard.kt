@@ -22,6 +22,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var onExpand: () -> Unit = {}
     private var onContract: () -> Unit = {}
     private var cardElevation: Float = 0f
+    private var showRipple: Boolean = true
 
     private enum class cardState {
         EXPANDING,
@@ -39,6 +40,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         if (attrs != null) {
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
             cardElevation = attributes.getFloat(R.styleable.ExpandableCardView_cardViewElevation, 0f)
+            showRipple = attributes.getBoolean(R.styleable.ExpandableCardView_clickable, true)
 
             if(Build.VERSION.SDK_INT < 21 ) {
                 card_container.cardElevation = cardElevation
@@ -46,6 +48,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                 card_container.elevation = cardElevation
             }
             card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
+            card_container.isClickable = showRipple
+            card_container.isFocusable = showRipple
             attributes.recycle()
         }
     }
@@ -75,11 +79,6 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         card_container.cardElevation = cardElevation
         card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
     }
-
-//    fun setHeaderView(view: View) {
-//        header.removeAllViews()
-//        header.addView(view)
-//    }
 
     private fun toggle(cardView: View) {
         val initialHeight = cardView.height

@@ -17,8 +17,6 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
-import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.label_text
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
@@ -143,8 +141,8 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         //Set Defaults
         if (userEquipment.type() == DataType.ARMOR) {
             val userArmor = userEquipment as UserArmorPiece
-            userArmor.armor.armor.slots.forEachIndexed { slot, idx ->
-                when (idx) {
+            userArmor.armor.armor.slots.active.forEachIndexed { idx , slot ->
+                when (idx + 1) {
                     1 -> layout.slot1_detail.setOnClickListener {
                         getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
                                 userEquipmentSetId, null,
@@ -240,26 +238,28 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         layout.defense_value.text = getString(R.string.armor_defense_value, armor.armor.defense_base, armor.armor.defense_max, armor.armor.defense_augment_max)
 
         //Combine the skills from the armor piece and the decorations
-        
         populateSkills(armor.skills, layout.skill_section)
         populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
 
         resetSlots(layout)
 
         //Populate defaults
-        userArmor.armor.armor.slots.forEachIndexed {_, idx  ->
-            when (idx) {
-                1 -> layout.slot1_detail.visibility = View.VISIBLE
-                2 -> layout.slot2_detail.visibility = View.VISIBLE
-                3 -> layout.slot3_detail.visibility = View.VISIBLE
+        if(!armor.armor.slots.isEmpty()) {
+            layout.decorations_section.visibility = View.VISIBLE
+            userArmor.armor.armor.slots.active.forEachIndexed { idx, _ ->
+                when (idx + 1) {
+                    1 -> layout.slot1_detail.visibility = View.VISIBLE
+                    2 -> layout.slot2_detail.visibility = View.VISIBLE
+                    3 -> layout.slot3_detail.visibility = View.VISIBLE
+                }
             }
-        }
 
-        for (userDecoration in userArmor.decorations) {
-            when (userDecoration.slotNumber) {
-                1 -> populateSlot1(layout, userDecoration.decoration)
-                2 -> populateSlot2(layout, userDecoration.decoration)
-                3 -> populateSlot3(layout, userDecoration.decoration)
+            for (userDecoration in userArmor.decorations) {
+                when (userDecoration.slotNumber) {
+                    1 -> populateSlot1(layout, userDecoration.decoration)
+                    2 -> populateSlot2(layout, userDecoration.decoration)
+                    3 -> populateSlot3(layout, userDecoration.decoration)
+                }
             }
         }
     }
@@ -325,20 +325,22 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun resetSlots(layout:View) {
+
         layout.slot1.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
         layout.slot2.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
         layout.slot3.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
 
         layout.slot1_detail.setLeftIconDrawable(null)
-        layout.slot1_detail.setLabelText("")
+        layout.slot1_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
         layout.slot1_detail.setValueText("")
         layout.slot2_detail.setLeftIconDrawable(null)
-        layout.slot2_detail.setLabelText("")
+        layout.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
         layout.slot2_detail.setValueText("")
         layout.slot2_detail.setLeftIconDrawable(null)
-        layout.slot2_detail.setLabelText("")
+        layout.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
         layout.slot2_detail.setValueText("")
 
+        layout.decorations_section.visibility = View.GONE
         layout.slot1_detail.visibility = View.GONE
         layout.slot2_detail.visibility = View.GONE
         layout.slot3_detail.visibility = View.GONE

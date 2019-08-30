@@ -36,10 +36,6 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         const val ARG_SET_ID = "ACTIVE_SET_ID" //The equipment set that is currently being handled when in builder mode
         const val ARG_ARMOR_FILTER = "ACTIVE_ARMOR_FILTER" //What class armor to limit the selector to
         const val ARG_SELECTOR_MODE = "SELECTOR_MODE"
-        //        const val ARG_EQUIPMENT_ID = "DECORATION_TARGET_EQUIPMENT_ID" //What equipment id the decoration is to be applied to
-//        const val ARG_EQUIPMENT_TYPE = "DECORATION_TARGET_EQUIPMENT_TYPE" //What equipment type the decoration is to be applied to
-//        const val ARG_DECORATION_FILTER = "DECORATION_FILTER" //What decorations to show
-//        const val ARG_DECORATION_SLOT = "DECORATION_SLOT" //Target decoration slot number
         const val ARG_DECORATION_CONFIG = "DECORATION_CONFIG"
 
         enum class SelectorMode {
@@ -64,15 +60,15 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val mode = arguments?.getSerializable(ARG_SELECTOR_MODE) as? SelectorMode
         val filter = arguments?.getSerializable(ARG_ARMOR_FILTER) as? ArmorType
-        val activeArmorPiece = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserArmorPiece
+        val activeEquipment = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserEquipment
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
         val decorationsConfig = arguments?.getSerializable(ARG_DECORATION_CONFIG) as? DecorationsConfig
 
         when (mode) {
-            SelectorMode.ARMOR -> initArmorSelector(filter, activeArmorPiece, activeEquipmentSetId)
-            SelectorMode.CHARM -> initCharmSelector(activeArmorPiece, activeEquipmentSetId)
-            SelectorMode.DECORATION -> initDecorationSelector(activeArmorPiece, activeEquipmentSetId, decorationsConfig!!)
-            SelectorMode.WEAPON -> initWeaponSelector(filter, activeArmorPiece, activeEquipmentSetId)
+            SelectorMode.ARMOR -> initArmorSelector(filter, activeEquipment as UserArmorPiece, activeEquipmentSetId)
+            SelectorMode.CHARM -> initCharmSelector(activeEquipment as UserCharm, activeEquipmentSetId)
+            SelectorMode.DECORATION -> initDecorationSelector(activeEquipment, activeEquipmentSetId, decorationsConfig!!)
+            SelectorMode.WEAPON -> initWeaponSelector(filter, activeEquipment, activeEquipmentSetId)
         }
     }
 
@@ -106,13 +102,13 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         })
     }
 
-    private fun initCharmSelector(activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
+    private fun initCharmSelector(activeCharm: UserCharm?, activeEquipmentSetId: Int?) {
         viewModel.loadCharms(AppSettings.dataLocale)
 
         val adapter = UserEquipmentSetCharmSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
-                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeArmorPiece?.armor?.entityId)
+                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeCharm?.entityId())
                 }
 
                 getRouter().goBack()
@@ -147,7 +143,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         })
     }
 
-    private fun initWeaponSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {}
+    private fun initWeaponSelector(filter: ArmorType?, activeEquipment: UserEquipment?, activeEquipmentSetId: Int?) {}
 
     private fun populateActiveArmor(userArmor: UserArmorPiece) {
         val armor = userArmor.armor
@@ -163,28 +159,52 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 armor.armor.defense_max,
                 armor.armor.defense_augment_max)
 
-        for (userDecoration in userArmor.decorations) {
-            when (userDecoration.slotNumber) {
-                1 -> populateSlot1(active_equipment_slot, userDecoration.decoration)
-                2 -> populateSlot2(active_equipment_slot, userDecoration.decoration)
-                3 -> populateSlot3(active_equipment_slot, userDecoration.decoration)
-            }
-        }
-
         populateSkills(armor.skills, active_equipment_slot.skill_section)
         populateSetBonuses(armor.setBonuses, active_equipment_slot.set_bonus_section)
+        active_equipment_slot.decorations_section.visibility = View.GONE
+        active_equipment_slot.slot1_detail.visibility = View.GONE
+        active_equipment_slot.slot2_detail.visibility = View.GONE
+        active_equipment_slot.slot3_detail.visibility = View.GONE
+
+        if(!armor.armor.slots.isEmpty()) {
+            active_equipment_slot.decorations_section.visibility = View.VISIBLE
+            userArmor.armor.armor.slots.active.forEachIndexed {idx, _  ->
+                when (idx + 1) {
+                    1 -> active_equipment_slot.slot1_detail.visibility = View.VISIBLE
+                    2 -> active_equipment_slot.slot2_detail.visibility = View.VISIBLE
+                    3 -> active_equipment_slot.slot3_detail.visibility = View.VISIBLE
+                }
+            }
+
+            for (userDecoration in userArmor.decorations) {
+                when (userDecoration.slotNumber) {
+                    1 -> populateSlot1(active_equipment_slot, userDecoration.decoration)
+                    2 -> populateSlot2(active_equipment_slot, userDecoration.decoration)
+                    3 -> populateSlot3(active_equipment_slot, userDecoration.decoration)
+                }
+            }
+        }
     }
 
     private fun populateSlot1(view: View, decoration: Decoration) {
         view.slot1.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot1_detail.visibility = View.VISIBLE
+        view.slot1_detail.setLabelText(decoration.name)
+        view.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSlot2(view: View, decoration: Decoration) {
         view.slot2.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot2_detail.visibility = View.VISIBLE
+        view.slot2_detail.setLabelText(decoration.name)
+        view.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSlot3(view: View, decoration: Decoration) {
         view.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        view.slot3_detail.visibility = View.VISIBLE
+        view.slot3_detail.setLabelText(decoration.name)
+        view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSkills(skills: List<SkillLevel>, skillLayout: LinearLayout) {

@@ -66,5 +66,6 @@
 
     <declare-styleable name="ExpandableCardView">
         <attr name="cardViewElevation" format="float"/>
+        <attr name="clickable" format="boolean"/>
     </declare-styleable>
 </resources>
