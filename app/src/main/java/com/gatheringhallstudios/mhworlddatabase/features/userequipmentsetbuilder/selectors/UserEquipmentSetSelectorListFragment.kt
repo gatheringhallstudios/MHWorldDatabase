@@ -65,9 +65,9 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val decorationsConfig = arguments?.getSerializable(ARG_DECORATION_CONFIG) as? DecorationsConfig
 
         when (mode) {
-            SelectorMode.ARMOR -> initArmorSelector(filter, activeEquipment as UserArmorPiece, activeEquipmentSetId)
-            SelectorMode.CHARM -> initCharmSelector(activeEquipment as UserCharm, activeEquipmentSetId)
-            SelectorMode.DECORATION -> initDecorationSelector(activeEquipment, activeEquipmentSetId, decorationsConfig!!)
+            SelectorMode.ARMOR -> initArmorSelector(filter, activeEquipment as? UserArmorPiece, activeEquipmentSetId)
+            SelectorMode.CHARM -> initCharmSelector(activeEquipment as? UserCharm, activeEquipmentSetId)
+            SelectorMode.DECORATION -> initDecorationSelector(activeEquipment as? UserDecoration, activeEquipmentSetId, decorationsConfig!!)
             SelectorMode.WEAPON -> initWeaponSelector(filter, activeEquipment, activeEquipmentSetId)
         }
     }
@@ -125,14 +125,14 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         })
     }
 
-    private fun initDecorationSelector(activeUserEquipment: UserEquipment?, activeEquipmentSetId: Int?, decorationsConfig: DecorationsConfig) {
+    private fun initDecorationSelector(activeDecoration: UserDecoration?, activeEquipmentSetId: Int?, decorationsConfig: DecorationsConfig) {
         viewModel.loadDecorations(AppSettings.dataLocale)
 
         val adapter = UserEquipmentSetDecorationSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
                     viewModel.updateDecorationForEquipmentSet(it.id, decorationsConfig.targetEquipmentId,
-                            decorationsConfig.targetEquipmentSlot, decorationsConfig.targetEquipmentType, activeEquipmentSetId!!, activeUserEquipment?.entityId())
+                            decorationsConfig.targetEquipmentSlot, decorationsConfig.targetEquipmentType, activeEquipmentSetId!!, activeDecoration?.entityId())
                 }
                 getRouter().goBack()
             }
@@ -141,8 +141,14 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         equipment_list.adapter = adapter
         equipment_list.addItemDecoration(SpacesItemDecoration(8))
 
+        if (activeDecoration != null) {
+            populateActiveDecoration(activeDecoration)
+        }
+
         viewModel.decorations.observe(this, Observer {
-            adapter.items = it
+            adapter.items = it.filter { decoration ->
+                decoration.slot <= decorationsConfig.decorationLevelFilter
+            }
         })
     }
 
@@ -201,6 +207,27 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         active_equipment_slot.icon_defense.visibility = View.GONE
         active_equipment_slot.hideSlots()
         populateSkills(userCharm.charm.skills, active_equipment_slot.skill_section)
+        populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
+        active_equipment_slot.decorations_section.visibility = View.GONE
+        active_equipment_slot.slot1_detail.visibility = View.GONE
+        active_equipment_slot.slot2_detail.visibility = View.GONE
+        active_equipment_slot.slot3_detail.visibility = View.GONE
+    }
+
+    private fun populateActiveDecoration(userDecoration: UserDecoration) {
+        val decoration = userDecoration.decoration
+
+        active_equipment_slot.equipment_name.text = decoration.name
+        active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, decoration.rarity)
+        active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(decoration.rarity))
+        active_equipment_slot.rarity_string.visibility = View.VISIBLE
+        active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        active_equipment_slot.defense_value.visibility = View.GONE
+        active_equipment_slot.icon_defense.visibility = View.GONE
+        active_equipment_slot.hideSlots()
+        val skill = SkillLevel(level = 1)
+        skill.skillTree = decoration.skillTree
+        populateSkills(listOf(skill), active_equipment_slot.skill_section)
         populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
         active_equipment_slot.decorations_section.visibility = View.GONE
         active_equipment_slot.slot1_detail.visibility = View.GONE

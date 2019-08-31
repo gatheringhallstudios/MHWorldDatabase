@@ -10,14 +10,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
-import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.cell_expandable_cardview.*
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -67,36 +65,42 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
         populateSkills(emptyList(), user_equipment_head_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_head_slot.set_bonus_section)
+        hideDecorations(user_equipment_head_slot.decorations_section)
 
         user_equipment_chest_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.CHEST, null)
         }
         populateSkills(emptyList(), user_equipment_chest_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_chest_slot.set_bonus_section)
+        hideDecorations(user_equipment_chest_slot.decorations_section)
 
         user_equipment_arms_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.ARMS, null)
         }
         populateSkills(emptyList(), user_equipment_arms_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_arms_slot.set_bonus_section)
+        hideDecorations(user_equipment_arms_slot.decorations_section)
 
         user_equipment_waist_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.WAIST, null)
         }
         populateSkills(emptyList(), user_equipment_waist_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_waist_slot.set_bonus_section)
+        hideDecorations(user_equipment_waist_slot.decorations_section)
 
         user_equipment_legs_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.LEGS, null)
         }
         populateSkills(emptyList(), user_equipment_legs_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_legs_slot.set_bonus_section)
+        hideDecorations(user_equipment_legs_slot.decorations_section)
 
         user_equipment_charm_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, null, userEquipmentSetId, null, null)
         }
-        populateSkills(emptyList(), user_equipment_legs_slot.skill_section)
-        populateSetBonuses(emptyList(), user_equipment_legs_slot.set_bonus_section)
+        populateSkills(emptyList(), user_equipment_charm_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_charm_slot.set_bonus_section)
+        hideDecorations(user_equipment_charm_slot.decorations_section)
     }
 
     private fun attachOnClickListeners(armorPiece: UserArmorPiece, userEquipmentSetId: Int) {
@@ -331,7 +335,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
         user_equipment_charm_slot.hideSlots()
         hideDefense(user_equipment_charm_slot)
-        user_equipment_charm_slot.card_arrow.visibility = View.INVISIBLE
+        populateSkills(userCharm.charm.skills, user_equipment_charm_slot.skill_section)
     }
 
     private fun populateWeapon(userWeapon: UserWeapon) {
@@ -462,5 +466,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
             setBonusSection.set_bonus_list.addView(listItem)
         }
+    }
+
+    private fun hideDecorations(layout: LinearLayout) {
+        layout.decorations_section.visibility = View.GONE
+        layout.slot1_detail.visibility = View.GONE
+        layout.slot2_detail.visibility = View.GONE
+        layout.slot3_detail.visibility = View.GONE
     }
 }
