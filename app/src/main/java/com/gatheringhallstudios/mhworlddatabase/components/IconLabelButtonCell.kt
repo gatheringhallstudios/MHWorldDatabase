@@ -90,7 +90,7 @@ class IconLabelButtonCell : ConstraintLayout {
         label_text.text = labelText
     }
 
-    fun setClickFunction(clickFunction: ()-> Unit) {
+    fun setButtonClickFunction(clickFunction: ()-> Unit) {
         cell_button.setOnClickListener {
             clickFunction()
         }
