@@ -16,6 +16,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
 
 
 class UserEquipmentSetDecorationSelectorAdapter(private val onSelected: (Decoration) -> Unit) : SimpleRecyclerViewAdapter<Decoration>() {
@@ -24,6 +26,7 @@ class UserEquipmentSetDecorationSelectorAdapter(private val onSelected: (Decorat
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var context: Context
     private lateinit var router: Router
+    private lateinit var viewGroup : ViewGroup
 
     override fun onCreateView(parent: ViewGroup): View {
         return ExpandableCardView(parent.context)
@@ -33,11 +36,15 @@ class UserEquipmentSetDecorationSelectorAdapter(private val onSelected: (Decorat
         layoutInflater = LayoutInflater.from(parent.context)
         context = parent.context
         router = parent.getRouter()
+        viewGroup = parent
+
         return super.onCreateViewHolder(parent, viewType)
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Decoration) {
-        (viewHolder.itemView as ExpandableCardView).setCardElevation(4f)
+        (viewHolder.itemView as ExpandableCardView).setCardElevation(1f)
+        viewHolder.itemView.setHeader(R.layout.view_base_header_expandable_cardview)
+        viewHolder.itemView.setBody(R.layout.view_base_body_expandable_cardview)
         viewHolder.itemView.equipment_name.text = data.name
         viewHolder.itemView.rarity_string.text = viewHolder.resources.getString(R.string.format_rarity, data.rarity)
         viewHolder.itemView.rarity_string.setTextColor(AssetLoader.loadRarityColor(data.rarity))

@@ -22,9 +22,13 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.ConvertElevationToAlphaConvert
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
+import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
 import kotlinx.android.synthetic.main.listitem_armorset_armor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
 
 
 class UserEquipmentSetCharmSelectorAdapter(private val onSelected: (CharmFull) -> Unit) : SimpleRecyclerViewAdapter<CharmFull>() {
@@ -33,6 +37,7 @@ class UserEquipmentSetCharmSelectorAdapter(private val onSelected: (CharmFull) -
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var context: Context
     private lateinit var router : Router
+    private lateinit var viewGroup : ViewGroup
 
     override fun onCreateView(parent: ViewGroup): View {
         return ExpandableCardView(parent.context)
@@ -42,12 +47,16 @@ class UserEquipmentSetCharmSelectorAdapter(private val onSelected: (CharmFull) -
         layoutInflater = LayoutInflater.from(parent.context)
         context = parent.context
         router = parent.getRouter()
+        viewGroup = parent
         return super.onCreateViewHolder(parent, viewType)
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: CharmFull) {
         val armor = data.charm
-        (viewHolder.itemView as ExpandableCardView).setCardElevation(4f)
+
+        (viewHolder.itemView as ExpandableCardView).setCardElevation(1f)
+        viewHolder.itemView.setHeader(R.layout.view_base_header_expandable_cardview)
+        viewHolder.itemView.setBody(R.layout.view_base_body_expandable_cardview)
         viewHolder.itemView.equipment_name.text = armor.name
         viewHolder.itemView.rarity_string.text = viewHolder.resources.getString(R.string.format_rarity, armor.rarity)
         viewHolder.itemView.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
@@ -56,7 +65,10 @@ class UserEquipmentSetCharmSelectorAdapter(private val onSelected: (CharmFull) -
 
         viewHolder.itemView.defense_value.visibility = View.GONE
         viewHolder.itemView.icon_defense.visibility = View.GONE
-        viewHolder.itemView.hideSlots()
+        viewHolder.itemView.icon_slots.visibility = View.GONE
+        viewHolder.itemView.slot1.visibility = View.GONE
+        viewHolder.itemView.slot2.visibility = View.GONE
+        viewHolder.itemView.slot3.visibility = View.GONE
         viewHolder.itemView.set_bonus_section.visibility = View.GONE
         viewHolder.itemView.decorations_section.visibility = View.GONE
         viewHolder.itemView.slot1_detail.visibility = View.GONE

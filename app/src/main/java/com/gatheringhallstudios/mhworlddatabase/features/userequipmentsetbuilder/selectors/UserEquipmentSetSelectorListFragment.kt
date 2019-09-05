@@ -20,10 +20,13 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.label_text
+import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -68,7 +71,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             SelectorMode.ARMOR -> initArmorSelector(filter, activeEquipment as? UserArmorPiece, activeEquipmentSetId)
             SelectorMode.CHARM -> initCharmSelector(activeEquipment as? UserCharm, activeEquipmentSetId)
             SelectorMode.DECORATION -> initDecorationSelector(activeEquipment as? UserDecoration, activeEquipmentSetId, decorationsConfig!!)
-            SelectorMode.WEAPON -> initWeaponSelector(filter, activeEquipment, activeEquipmentSetId)
+            SelectorMode.WEAPON -> initWeaponSelector(activeEquipment as? UserWeapon, activeEquipmentSetId)
         }
     }
 
@@ -152,7 +155,32 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         })
     }
 
-    private fun initWeaponSelector(filter: ArmorType?, activeEquipment: UserEquipment?, activeEquipmentSetId: Int?) {}
+    private fun initWeaponSelector(activeWeapon: UserWeapon?, activeEquipmentSetId: Int?) {
+        viewModel.loadWeapons(AppSettings.dataLocale)
+
+//        val adapter = UserEquipmentSetDecorationSelectorAdapter {
+//            GlobalScope.launch(Dispatchers.Main) {
+//                withContext(Dispatchers.IO) {
+//                    viewModel.updateDecorationForEquipmentSet(it.id, decorationsConfig.targetEquipmentId,
+//                            decorationsConfig.targetEquipmentSlot, decorationsConfig.targetEquipmentType, activeEquipmentSetId!!, activeDecoration?.entityId())
+//                }
+//                getRouter().goBack()
+//            }
+//        }
+//
+//        equipment_list.adapter = adapter
+//        equipment_list.addItemDecoration(SpacesItemDecoration(8))
+//
+//        if (activeWeapon != null) {
+////            populateActiveDecoration(activeDecoration)
+//        }
+//
+//        viewModel.decorations.observe(this, Observer {
+//            adapter.items = it.filter { decoration ->
+//                decoration.slot <= decorationsConfig.decorationLevelFilter
+//            }
+//        })
+    }
 
     private fun populateActiveArmor(userArmor: UserArmorPiece) {
         val armor = userArmor.armor
@@ -205,9 +233,12 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(charm))
         active_equipment_slot.defense_value.visibility = View.GONE
         active_equipment_slot.icon_defense.visibility = View.GONE
-        active_equipment_slot.hideSlots()
         populateSkills(userCharm.charm.skills, active_equipment_slot.skill_section)
         populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
+        active_equipment_slot.icon_slots.visibility = View.GONE
+        active_equipment_slot.slot1.visibility = View.GONE
+        active_equipment_slot.slot2.visibility = View.GONE
+        active_equipment_slot.slot3.visibility = View.GONE
         active_equipment_slot.decorations_section.visibility = View.GONE
         active_equipment_slot.slot1_detail.visibility = View.GONE
         active_equipment_slot.slot2_detail.visibility = View.GONE
@@ -224,15 +255,18 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
         active_equipment_slot.defense_value.visibility = View.GONE
         active_equipment_slot.icon_defense.visibility = View.GONE
-        active_equipment_slot.hideSlots()
         val skill = SkillLevel(level = 1)
         skill.skillTree = decoration.skillTree
         populateSkills(listOf(skill), active_equipment_slot.skill_section)
         populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
         active_equipment_slot.decorations_section.visibility = View.GONE
+        active_equipment_slot.icon_slots.visibility = View.GONE
         active_equipment_slot.slot1_detail.visibility = View.GONE
         active_equipment_slot.slot2_detail.visibility = View.GONE
         active_equipment_slot.slot3_detail.visibility = View.GONE
+        active_equipment_slot.slot1.visibility = View.GONE
+        active_equipment_slot.slot2.visibility = View.GONE
+        active_equipment_slot.slot3.visibility = View.GONE
     }
 
     private fun populateSlot1(view: View, decoration: Decoration) {

@@ -5,10 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
-import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
@@ -20,7 +17,7 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     private val decorationDao = MHWDatabase.getDatabase(application).decorationDao()
 
     lateinit var armor: LiveData<List<ArmorFull>>
-    lateinit var weapons: LiveData<List<Weapon>>
+    lateinit var weapons: LiveData<List<WeaponFull>>
     lateinit var decorations: LiveData<List<Decoration>>
     lateinit var charms: LiveData<List<CharmFull>>
 
@@ -48,12 +45,8 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
         decorations = decorationDao.loadDecorationsWithSkills(langId)
     }
 
-    fun loadWeapons() {
-//        if (::weapons.isInitialized) {
-//            return
-//        }
-//
-//        this.weapons = weaponDao.loadWeaponTrees(AppSettings.dataLocale, WeaponType.BOW)
+    fun loadWeapons(langId: String) {
+        this.weapons = weaponDao.loadWeaponsWithSkillsSync(langId)
     }
 
 //    fun loadCharms() {

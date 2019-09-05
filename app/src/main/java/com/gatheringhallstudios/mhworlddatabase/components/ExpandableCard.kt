@@ -22,6 +22,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var onExpand: () -> Unit = {}
     private var onContract: () -> Unit = {}
     private var cardElevation: Float = 0f
+    private var headerLayout: Int = 0
+    private var bodyLayout: Int = 0
     private var showRipple: Boolean = true
 
     private enum class cardState {
@@ -41,6 +43,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
             cardElevation = attributes.getFloat(R.styleable.ExpandableCardView_cardViewElevation, 0f)
             showRipple = attributes.getBoolean(R.styleable.ExpandableCardView_clickable, true)
+            headerLayout = attributes.getInt(R.styleable.ExpandableCardView_cardHeaderLayout, R.layout.view_base_header_expandable_cardview)
+            bodyLayout = attributes.getInt(R.styleable.ExpandableCardView_cardBodyLayout, R.layout.view_base_body_expandable_cardview)
+
 
             if(Build.VERSION.SDK_INT < 21 ) {
                 card_container.cardElevation = cardElevation
@@ -50,8 +55,24 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
             card_container.isClickable = showRipple
             card_container.isFocusable = showRipple
+            setHeader(headerLayout)
+            setBody(bodyLayout)
             attributes.recycle()
         }
+    }
+
+    fun setHeader(layout: Int) {
+        val inflater = getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        card_header.removeAllViews()
+        card_header.addView(inflater.inflate(layout, this, false))
+    }
+
+    fun setBody(layout: Int) {
+        val inflater = getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        card_body.removeAllViews()
+        card_body.addView(inflater.inflate(layout, this, false))
     }
 
     fun setOnClick(onClick: () -> Unit) {
@@ -68,12 +89,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         this.onContract = onContract
     }
 
-    fun setHeight(height: Int) {
-        // Gets the layout params that will allow you to resize the layout
-        val params: ViewGroup.LayoutParams = header_layout.layoutParams
-        params.height = height
-        header_layout.layoutParams = params
-    }
+//    fun setHeight(height: Int) {
+//        // Gets the layout params that will allow you to resize the layout
+//        val params: ViewGroup.LayoutParams = header_layout.layoutParams
+//        params.height = height
+//        header_layout.layoutParams = params
+//    }
 
     fun setCardElevation(cardElevation: Float) {
         card_container.cardElevation = cardElevation
@@ -131,19 +152,5 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             cardState.EXPANDING -> compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more)
             cardState.COLLAPSING -> compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less)
         })
-    }
-
-    fun hideSlots() {
-        icon_slots.visibility = View.INVISIBLE
-        slot1.visibility = View.INVISIBLE
-        slot2.visibility = View.INVISIBLE
-        slot3.visibility = View.INVISIBLE
-    }
-
-    fun showSlots() {
-        icon_slots.visibility = View.VISIBLE
-        slot1.visibility = View.VISIBLE
-        slot2.visibility = View.VISIBLE
-        slot3.visibility = View.VISIBLE
     }
 }

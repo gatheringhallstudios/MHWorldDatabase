@@ -1,15 +1,30 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponCategory
-
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 
 @Dao
 abstract class WeaponDao {
+    /**
+     * Loads all weapons
+     */
+    @Query("""
+        SELECT w.id, w.weapon_type, w.category, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
+            w.element2, w.element2_attack, w.element_hidden, w.sharpness, w.sharpness_maxed, w.previous_weapon_id, w.craftable, w.kinsect_bonus,
+            w.elderseal, w.phial, w.phial_power, w.shelling, w.shelling_level, w.coating_close, w.coating_power, w.coating_poison, w.coating_paralysis, w.coating_sleep, w.coating_blast,
+            w.notes, wa.special_ammo, wt.name
+        FROM weapon w
+            JOIN weapon_text wt USING (id)
+            LEFT JOIN weapon_ammo wa ON w.ammo_id = wa.id
+        WHERE wt.lang_id = :langId            
+        ORDER BY w.id ASC
+          """)
+    abstract fun loadWeaponsSync(langId: String): List<Weapon>
 
     /**
      * Loads all weapons for a provided weapon type and category
@@ -155,6 +170,21 @@ abstract class WeaponDao {
         )
     }
 
+    fun loadWeaponsWithSkillsSync(langId: String): LiveData<List<WeaponFull>> = createLiveData {
+        val weapons = loadWeaponsSync(langId)
+        val buf = weapons.map {
+            WeaponFull(
+                    weapon = it,
+                    skills = queryWeaponSkillsSync(langId, it.id)
+            )
+        }
+
+        buf
+    }
+
+    /**
+     * Loads all weapons of a particular type, contained as a collection of weapon trees.
+     */
     /**
      * Loads all weapons of a particular type, contained as a collection of weapon trees.
      */

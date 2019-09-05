@@ -17,7 +17,7 @@
             android:id="@+id/user_equipment_weapon_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="4"
+            app:cardViewElevation="1"
             android:clipToPadding="false"
             android:clipChildren="false" />
 
@@ -25,7 +25,7 @@
             android:id="@+id/user_equipment_head_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="4"
+            app:cardViewElevation="1"
             android:clipToPadding="false"
             android:clipChildren="false" />
 
@@ -33,7 +33,7 @@
             android:id="@+id/user_equipment_chest_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="4"
+            app:cardViewElevation="1"
             android:clipToPadding="false"
             android:clipChildren="false"/>
 
@@ -41,7 +41,7 @@
             android:id="@+id/user_equipment_arms_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="4"
+            app:cardViewElevation="1"
             android:clipToPadding="false"
             android:clipChildren="false"
              />
@@ -50,7 +50,7 @@
             android:id="@+id/user_equipment_waist_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="4"
+            app:cardViewElevation="1"
             android:clipToPadding="false"
             android:clipChildren="false" />
 
@@ -58,7 +58,7 @@
             android:id="@+id/user_equipment_legs_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="4"
+            app:cardViewElevation="1"
             android:clipToPadding="false"
             android:clipChildren="false" />
 
@@ -66,7 +66,7 @@
             android:id="@+id/user_equipment_charm_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="4"
+            app:cardViewElevation="1"
             android:clipToPadding="false"
             android:clipChildren="false" />
     </LinearLayout>

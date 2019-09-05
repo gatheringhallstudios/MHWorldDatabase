@@ -200,6 +200,8 @@ class WeaponFull(
 ) : MHModel {
     override val entityId get() = weapon.id
     override val entityType get() = DataType.WEAPON
+
+    constructor(weapon: Weapon, skills: List<SkillLevel>) : this(weapon, null, emptyList(), emptyMap(), skills)
 }
 
 data class WeaponAmmoData(

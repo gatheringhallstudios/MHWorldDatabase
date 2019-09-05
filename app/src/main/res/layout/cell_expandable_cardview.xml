@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/row_height_large"
     android:orientation="vertical"
-    android:background="#2C2C2C"
-    app:cardBackgroundColor="#2C2C2C"
     android:foreground="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
     app:cardCornerRadius="5dp"
-    android:layout_margin="@dimen/margin_medium">
+    android:layout_margin="@dimen/margin_medium"
+    android:clickable="true"
+    android:focusable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#2C2C2C">
 
         <ImageView
             android:id="@+id/card_overlay"
@@ -37,106 +35,11 @@
                 android:orientation="horizontal"
                 android:gravity="bottom">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/header_layout"
+                <FrameLayout
+                    android:id="@+id/card_header"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/row_height_large"
-                    android:layout_weight="1">
-
-                    <!-- Main Label -->
-
-                    <ImageView
-                        android:id="@+id/icon_defense"
-                        style="@style/IconXSmall"
-                        app:layout_constraintBottom_toTopOf="@+id/icon_slots"
-                        app:layout_constraintEnd_toEndOf="@+id/barrier_values"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed"
-                        app:srcCompat="@drawable/ic_ui_defense" />
-
-                    <!-- Right Side -->
-
-                    <ImageView
-                        android:id="@+id/icon_slots"
-                        style="@style/IconXSmall"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/slot_section"
-                        app:layout_constraintTop_toBottomOf="@+id/icon_defense"
-                        app:srcCompat="@drawable/ic_ui_slots" />
-
-                    <ImageView
-                        android:id="@+id/equipment_icon"
-                        style="@style/IconMedium.Decorated"
-                        android:layout_marginStart="@dimen/margin_large"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/ic_ui_armor_skill_white" />
-
-                    <LinearLayout
-                        android:id="@+id/slot_section"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="@id/icon_slots"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/icon_slots">
-
-                        <ImageView
-                            android:id="@+id/slot1"
-                            style="@style/IconXSmall"
-                            app:srcCompat="@drawable/ic_ui_slot_none" />
-
-                        <ImageView
-                            android:id="@+id/slot2"
-                            style="@style/IconXSmall"
-                            app:srcCompat="@drawable/ic_ui_slot_none" />
-
-                        <ImageView
-                            android:id="@+id/slot3"
-                            style="@style/IconXSmall"
-                            app:srcCompat="@drawable/ic_ui_slot_none" />
-                    </LinearLayout>
-
-                    <androidx.constraintlayout.widget.Barrier
-                        android:id="@+id/barrier_values"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:barrierDirection="start"
-                        app:constraint_referenced_ids="defense_value,slot_section" />
-
-                    <TextView
-                        android:id="@+id/defense_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="@id/icon_defense"
-                        app:layout_constraintStart_toEndOf="@+id/icon_defense"
-                        app:layout_constraintTop_toTopOf="@id/icon_defense"
-                        tools:text="68~120" />
-
-                    <TextView
-                        android:id="@+id/equipment_name"
-                        style="@style/TextBodyHigh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:text="@string/user_equipment_set_no_equipment"
-                        app:layout_constraintBottom_toTopOf="@+id/rarity_string"
-                        app:layout_constraintStart_toEndOf="@id/equipment_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/rarity_string"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/equipment_icon"
-                        app:layout_constraintTop_toBottomOf="@+id/equipment_name"
-                        tools:text="Rare 8" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_weight="1" />
 
                 <ImageButton
                     android:id="@+id/card_arrow"
@@ -151,92 +54,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/card_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/margin_large">
+                android:paddingBottom="@dimen/margin_large" />
 
-                <LinearLayout
-                    android:id="@+id/skill_section"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextBodyHigh"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/row_height_small"
-                        android:paddingStart="@dimen/margin_large"
-                        android:paddingTop="@dimen/margin_small"
-                        android:text="@string/header_skills" />
-                    <!--To be populated dynamically from fragment onViewCreated -->
-
-                    <LinearLayout
-                        android:id="@+id/skill_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/set_bonus_section"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextBodyHigh"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/row_height_small"
-                        android:paddingStart="@dimen/margin_large"
-                        android:paddingTop="@dimen/margin_small"
-                        android:text="@string/header_set_bonuses" />
-                    <!--To be populated dynamically from fragment onViewCreated -->
-
-                    <LinearLayout
-                        android:id="@+id/set_bonus_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/decorations_section"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextBodyHigh"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/row_height_small"
-                        android:paddingStart="@dimen/margin_large"
-                        android:paddingTop="@dimen/margin_small"
-                        android:text="@string/header_decorations" />
-
-                    <com.gatheringhallstudios.mhworlddatabase.components.IconLabelButtonCell
-                        android:id="@+id/slot1_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/row_height_medium"
-                        app:labelText="@string/user_equipment_set_no_decoration" />
-
-                    <com.gatheringhallstudios.mhworlddatabase.components.IconLabelButtonCell
-                        android:id="@+id/slot2_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/row_height_medium"
-                        app:labelText="@string/user_equipment_set_no_decoration" />
-
-                    <com.gatheringhallstudios.mhworlddatabase.components.IconLabelButtonCell
-                        android:id="@+id/slot3_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/row_height_medium"
-                        app:labelText="@string/user_equipment_set_no_decoration" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

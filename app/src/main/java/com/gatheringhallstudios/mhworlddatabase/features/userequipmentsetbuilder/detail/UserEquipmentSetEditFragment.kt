@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -22,6 +23,8 @@ import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -60,8 +63,8 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateUserEquipment(userEquipmentSet: UserEquipmentSet) {
+        populateDefaults(userEquipmentSet.id)
         userEquipmentSet.equipment.forEach {
-            populateDefaults(userEquipmentSet.id)
             when (it.type()) {
                 DataType.WEAPON -> {
                     populateWeapon(it as UserWeapon)
@@ -102,12 +105,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
             }
         }
 
-        layout.equipment_name.text = armor.armor.name
-        layout.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-        layout.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
-        layout.rarity_string.visibility = View.VISIBLE
-        layout.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-        layout.defense_value.text = getString(R.string.armor_defense_value, armor.armor.defense_base, armor.armor.defense_max, armor.armor.defense_augment_max)
+        layout.card_header.equipment_name.text = armor.armor.name
+        layout.card_header.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
+        layout.card_header.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
+        layout.card_header.rarity_string.visibility = View.VISIBLE
+        layout.card_header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
+        layout.card_header.defense_value.text = getString(R.string.armor_defense_value, armor.armor.defense_base, armor.armor.defense_max, armor.armor.defense_augment_max)
 
         //Combine the skills from the armor piece and the decorations
         val skillsList: MutableList<SkillLevel> = ArrayList()
@@ -121,21 +124,22 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         populateSkills(skillsList, layout.skill_section)
         populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
         populateDecorations(userArmor, userEquipmentSetId, layout)
-        attachOnClickListeners(userArmor, userEquipmentSetId)
+        attachOnClickListeners(userArmor, userEquipmentSetId, layout)
     }
 
     private fun populateCharm(userCharm: UserCharm, userEquipmentSetId: Int) {
-        user_equipment_charm_slot.equipment_name.text = userCharm.charm.charm.name
-        user_equipment_charm_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
-        user_equipment_charm_slot.rarity_string.text = getString(R.string.format_rarity, userCharm.charm.charm.rarity)
-        user_equipment_charm_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(userCharm.charm.charm.rarity))
-        user_equipment_charm_slot.rarity_string.visibility = View.VISIBLE
+        user_equipment_charm_slot.card_header.equipment_name.text = userCharm.charm.charm.name
+        user_equipment_charm_slot.card_header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
+        user_equipment_charm_slot.card_header.rarity_string.text = getString(R.string.format_rarity, userCharm.charm.charm.rarity)
+        user_equipment_charm_slot.card_header.rarity_string.setTextColor(AssetLoader.loadRarityColor(userCharm.charm.charm.rarity))
+        user_equipment_charm_slot.card_header.rarity_string.visibility = View.VISIBLE
         user_equipment_charm_slot.setOnClick {
             viewModel.setActiveUserEquipment(userCharm)
             getRouter().navigateUserEquipmentCharmSelector(userEquipmentSetId, userCharm.charm.entityId)
         }
-        user_equipment_charm_slot.hideSlots()
+
         hideDefense(user_equipment_charm_slot)
+        hideSlots(user_equipment_charm_slot)
         populateSkills(userCharm.charm.skills, user_equipment_charm_slot.skill_section)
     }
 
@@ -163,51 +167,58 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun populateSlot1(view: View, decoration: Decoration?) {
+    private fun populateSlot1(layout: View, decoration: Decoration?) {
         if (decoration != null) {
-            view.slot1.setImageDrawable(AssetLoader.loadIconFor(decoration))
-            view.slot1_detail.visibility = View.VISIBLE
-            view.slot1_detail.setLabelText(decoration.name)
-            view.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_header.slot1.setImageDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_body.slot1_detail.visibility = View.VISIBLE
+            layout.card_body.slot1_detail.setLabelText(decoration.name)
+            layout.card_body.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
         } else {
-            view.slot1.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
-            view.slot1_detail.setLeftIconDrawable(null)
-            view.slot1_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-            view.slot1_detail.visibility = View.GONE
+            layout.card_header.slot1.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+            layout.card_body.slot1_detail.setLeftIconDrawable(null)
+            layout.card_body.slot1_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
+            layout.card_body.slot1_detail.visibility = View.GONE
         }
     }
 
-    private fun populateSlot2(view: View, decoration: Decoration?) {
+    private fun populateSlot2(layout: View, decoration: Decoration?) {
         if (decoration != null) {
-            view.slot2.setImageDrawable(AssetLoader.loadIconFor(decoration))
-            view.slot2_detail.visibility = View.VISIBLE
-            view.slot2_detail.setLabelText(decoration.name)
-            view.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_header.slot2.setImageDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_body.slot2_detail.visibility = View.VISIBLE
+            layout.card_body.slot2_detail.setLabelText(decoration.name)
+            layout.card_body.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
         } else {
-            view.slot2.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
-            view.slot2_detail.setLeftIconDrawable(null)
-            view.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-            view.slot2_detail.visibility = View.GONE
+            layout.card_header.slot2.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+            layout.card_body.slot2_detail.setLeftIconDrawable(null)
+            layout.card_body.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
+            layout.card_body.slot2_detail.visibility = View.GONE
         }
     }
 
-    private fun populateSlot3(view: View, decoration: Decoration?) {
+    private fun populateSlot3(layout: View, decoration: Decoration?) {
         if (decoration != null) {
-            view.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
-            view.slot3_detail.visibility = View.VISIBLE
-            view.slot3_detail.setLabelText(decoration.name)
-            view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_header.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_body.slot3_detail.visibility = View.VISIBLE
+            layout.card_body.slot3_detail.setLabelText(decoration.name)
+            layout.card_body.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
         } else {
-            view.slot3.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
-            view.slot2_detail.setLeftIconDrawable(null)
-            view.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-            view.slot3_detail.visibility = View.GONE
+            layout.card_header.slot3.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+            layout.card_body.slot3_detail.setLeftIconDrawable(null)
+            layout.card_body.slot3_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
+            layout.card_body.slot3_detail.visibility = View.GONE
         }
     }
 
     private fun hideDefense(view: View) {
         view.icon_defense.visibility = View.INVISIBLE
         view.defense_value.visibility = View.INVISIBLE
+    }
+
+    private fun hideSlots(view: View) {
+        view.icon_slots.visibility = View.GONE
+        view.slot1.visibility = View.GONE
+        view.slot2.visibility = View.GONE
+        view.slot3.visibility = View.GONE
     }
 
     private fun populateSkills(skills: List<SkillLevel>, skillLayout: LinearLayout) {
@@ -429,39 +440,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         populateDecorations(null, userEquipmentSetId, user_equipment_charm_slot)
     }
 
-    private fun attachOnClickListeners(armorPiece: UserArmorPiece, userEquipmentSetId: Int) {
+    private fun attachOnClickListeners(armorPiece: UserArmorPiece, userEquipmentSetId: Int, layout: ExpandableCardView) {
         val armor = armorPiece.armor.armor
-        when (armor.armor_type) {
-            ArmorType.HEAD -> {
-                user_equipment_head_slot.setOnClick {
-                    viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.HEAD, null)
-                }
-            }
-            ArmorType.CHEST -> {
-                user_equipment_chest_slot.setOnClick {
-                    viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.CHEST, null)
-                }
-            }
-            ArmorType.ARMS -> {
-                user_equipment_arms_slot.setOnClick {
-                    viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.ARMS, null)
-                }
-            }
-            ArmorType.WAIST -> {
-                user_equipment_waist_slot.setOnClick {
-                    viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.WAIST, null)
-                }
-            }
-            ArmorType.LEGS -> {
-                user_equipment_legs_slot.setOnClick {
-                    viewModel.setActiveUserEquipment(armorPiece)
-                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, ArmorType.LEGS, null)
-                }
-            }
+        layout.setOnClick {
+            viewModel.setActiveUserEquipment(armorPiece)
+            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, armor.armor_type, null)
         }
     }
 }

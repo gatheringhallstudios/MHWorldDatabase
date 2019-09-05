@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.core.view.marginStart
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.Router
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleRecyclerViewAdapter
@@ -18,12 +17,13 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorFull
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.util.ConvertElevationToAlphaConvert
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_armor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
 
 
 class UserEquipmentSetArmorSelectorAdapter(private val onSelected: (ArmorFull) -> Unit) : SimpleRecyclerViewAdapter<ArmorFull>() {
@@ -32,6 +32,8 @@ class UserEquipmentSetArmorSelectorAdapter(private val onSelected: (ArmorFull) -
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var context: Context
     private lateinit var router : Router
+    private lateinit var viewGroup : ViewGroup
+
 
     override fun onCreateView(parent: ViewGroup): View {
         return ExpandableCardView(parent.context)
@@ -41,12 +43,17 @@ class UserEquipmentSetArmorSelectorAdapter(private val onSelected: (ArmorFull) -
         layoutInflater = LayoutInflater.from(parent.context)
         context = parent.context
         router = parent.getRouter()
+        viewGroup = parent
+
         return super.onCreateViewHolder(parent, viewType)
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: ArmorFull) {
         val armor = data.armor
-        (viewHolder.itemView as ExpandableCardView).setCardElevation(4f)
+
+        (viewHolder.itemView as ExpandableCardView).setCardElevation(1f)
+        viewHolder.itemView.setHeader(R.layout.view_base_header_expandable_cardview)
+        viewHolder.itemView.setBody(R.layout.view_base_body_expandable_cardview)
         viewHolder.itemView.equipment_name.text = armor.name
         viewHolder.itemView.rarity_string.text = viewHolder.resources.getString(R.string.format_rarity, armor.rarity)
         viewHolder.itemView.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
