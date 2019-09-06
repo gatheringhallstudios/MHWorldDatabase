@@ -31,7 +31,7 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
-        app:cardViewElevation="4"
+        app:cardViewElevation="2"
         app:clickable="false"/>
 
 </RelativeLayout>

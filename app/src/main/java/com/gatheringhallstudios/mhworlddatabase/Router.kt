@@ -80,25 +80,6 @@ class Router(private val navController: NavController) {
         navController.navigate(R.id.openUserEquipmentSetDetailAction, BundleBuilder().putSerializable(UserEquipmentSetDetailPagerFragment.ARG_USER_EQUIPMENT_SET, userEquipmentSet).build())
     }
 
-    fun navigateUserEquipmentArmorSelector(userEquipmentSetId: Int?, prevId: Int?, filter: ArmorType?) {
-        val bundle = BundleBuilder().putSerializable(ArmorSetListPagerFragment.ARG_MODE, ArmorSetListPagerFragment.ArmorSetListMode.BUILDER)
-
-        if (userEquipmentSetId != null) bundle.putInt(ArmorSetListPagerFragment.ARG_SET_ID, userEquipmentSetId)
-        if (prevId != null) bundle.putInt(ArmorSetListPagerFragment.ARG_PREV_ID, prevId)
-        if (filter != null) bundle.putSerializable(ArmorSetListPagerFragment.ARG_ITEM_FILTER, filter)
-
-        navController.navigate(R.id.userArmorSelectionListAction, bundle.build())
-    }
-
-    fun navigateUserEquipmentCharmSelector(userEquipmentSetId: Int?, prevId: Int?) {
-        val bundle = BundleBuilder().putSerializable(CharmListFragment.ARG_MODE, CharmListFragment.Companion.CharmListMode.BUILDER)
-
-        if (userEquipmentSetId != null) bundle.putInt(CharmListFragment.ARG_SET_ID, userEquipmentSetId)
-        if (prevId != null) bundle.putInt(CharmListFragment.ARG_PREV_ID, prevId)
-
-        navController.navigate(R.id.userCharmSelectionListAction, bundle.build())
-    }
-
     fun navigateUserEquipmentPieceSelector(selectorMode: Companion.SelectorMode?, activeEquipment: UserEquipment?, userEquipmentSetId: Int?, filter: ArmorType?, decorationsConfig: Companion.DecorationsConfig?) {
         val bundle = BundleBuilder()
         if (selectorMode != null) bundle.putSerializable(UserEquipmentSetSelectorListFragment.ARG_SELECTOR_MODE, selectorMode)

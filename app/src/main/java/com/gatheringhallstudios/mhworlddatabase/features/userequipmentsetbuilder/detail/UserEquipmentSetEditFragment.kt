@@ -17,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -70,6 +71,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateUserEquipment(userEquipmentSet: UserEquipmentSet) {
+        setActivityTitle(userEquipmentSet.name)
         populateDefaults(userEquipmentSet.id)
         userEquipmentSet.equipment.forEach {
             when (it.type()) {
@@ -142,7 +144,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         user_equipment_charm_slot.card_header.rarity_string.visibility = View.VISIBLE
         user_equipment_charm_slot.setOnClick {
             viewModel.setActiveUserEquipment(userCharm)
-            getRouter().navigateUserEquipmentCharmSelector(userEquipmentSetId, userCharm.charm.entityId)
+            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, userCharm, userEquipmentSetId, null, null)
         }
 
         hideDefense(user_equipment_charm_slot)

@@ -17,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.label_text
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
@@ -74,6 +75,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun initArmorSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
+        setActivityTitle(getString(R.string.title_armor_set_armor_selector))
+
         if (filter != null) {
             viewModel.loadArmor(AppSettings.dataLocale, filter)
         }
@@ -104,6 +107,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun initCharmSelector(activeCharm: UserCharm?, activeEquipmentSetId: Int?) {
+        setActivityTitle(getString(R.string.title_armor_set_charm_selector))
         viewModel.loadCharms(AppSettings.dataLocale)
 
         val adapter = UserEquipmentSetCharmSelectorAdapter {
@@ -127,6 +131,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun initDecorationSelector(activeDecoration: UserDecoration?, activeEquipmentSetId: Int?, decorationsConfig: DecorationsConfig) {
+        setActivityTitle(getString(R.string.title_armor_set_decoration_selector))
         viewModel.loadDecorations(AppSettings.dataLocale)
 
         val adapter = UserEquipmentSetDecorationSelectorAdapter {
@@ -154,6 +159,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun initWeaponSelector(activeWeapon: UserWeapon?, activeEquipmentSetId: Int?) {
+        setActivityTitle(getString(R.string.title_armor_set_weapon_selector))
         viewModel.loadWeapons(AppSettings.dataLocale)
 
         val adapter = UserEquipmentSetWeaponSelectorAdapter {
