@@ -64,7 +64,7 @@ class Weapon(
 
 ) : WeaponBase(id, name, rarity, weapon_type, category, previous_weapon_id) {
     @Embedded
-    lateinit var slots: WeaponSlots
+    lateinit var slots: EquipmentSlots
 
     @Embedded
     var weaponCoatings: WeaponCoatings? = null
@@ -87,7 +87,7 @@ class Weapon(
  * An embedded class representing the available slots on a weapon
  * Can be iterated on.
  */
-data class WeaponSlots(
+data class EquipmentSlots(
         val slot_1: Int,
         val slot_2: Int,
         val slot_3: Int

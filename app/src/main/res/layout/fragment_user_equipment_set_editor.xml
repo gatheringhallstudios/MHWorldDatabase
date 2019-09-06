@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardViewElevation="1"
+            app:cardHeaderLayout="@layout/view_weapon_header_expandable_cardview"
             android:clipToPadding="false"
             android:clipChildren="false" />
 

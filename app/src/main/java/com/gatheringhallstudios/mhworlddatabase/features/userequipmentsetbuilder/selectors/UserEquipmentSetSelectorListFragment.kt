@@ -17,10 +17,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.label_text
-import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
@@ -158,28 +156,62 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     private fun initWeaponSelector(activeWeapon: UserWeapon?, activeEquipmentSetId: Int?) {
         viewModel.loadWeapons(AppSettings.dataLocale)
 
-//        val adapter = UserEquipmentSetDecorationSelectorAdapter {
-//            GlobalScope.launch(Dispatchers.Main) {
-//                withContext(Dispatchers.IO) {
-//                    viewModel.updateDecorationForEquipmentSet(it.id, decorationsConfig.targetEquipmentId,
-//                            decorationsConfig.targetEquipmentSlot, decorationsConfig.targetEquipmentType, activeEquipmentSetId!!, activeDecoration?.entityId())
-//                }
-//                getRouter().goBack()
-//            }
-//        }
-//
-//        equipment_list.adapter = adapter
-//        equipment_list.addItemDecoration(SpacesItemDecoration(8))
-//
-//        if (activeWeapon != null) {
-////            populateActiveDecoration(activeDecoration)
-//        }
-//
-//        viewModel.decorations.observe(this, Observer {
-//            adapter.items = it.filter { decoration ->
-//                decoration.slot <= decorationsConfig.decorationLevelFilter
-//            }
-//        })
+        val adapter = UserEquipmentSetWeaponSelectorAdapter {
+            GlobalScope.launch(Dispatchers.Main) {
+                withContext(Dispatchers.IO) {
+                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeWeapon?.entityId())
+                }
+                getRouter().goBack()
+            }
+        }
+
+        equipment_list.adapter = adapter
+        equipment_list.addItemDecoration(SpacesItemDecoration(8))
+
+        if (activeWeapon != null) {
+            populateActiveWeapon(activeWeapon)
+        }
+
+        viewModel.weapons.observe(this, Observer {
+            adapter.items = it
+        })
+    }
+
+    private fun populateActiveWeapon(userWeapon: UserWeapon) {
+        val weapon = userWeapon.weapon.weapon
+        val skills = userWeapon.weapon.skills
+        val slots = userWeapon.weapon.weapon.slots
+        active_equipment_slot.setHeader(R.layout.view_weapon_header_expandable_cardview)
+        active_equipment_slot.equipment_name.text = weapon.name
+        active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
+        active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
+        active_equipment_slot.rarity_string.visibility = View.VISIBLE
+        active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
+
+        populateSkills(skills, active_equipment_slot.skill_section)
+        active_equipment_slot.decorations_section.visibility = View.GONE
+        active_equipment_slot.slot1_detail.visibility = View.GONE
+        active_equipment_slot.slot2_detail.visibility = View.GONE
+        active_equipment_slot.slot3_detail.visibility = View.GONE
+
+        if (!slots.isEmpty()) {
+            active_equipment_slot.decorations_section.visibility = View.VISIBLE
+            slots.active.forEachIndexed { idx, _ ->
+                when (idx + 1) {
+                    1 -> active_equipment_slot.slot1_detail.visibility = View.VISIBLE
+                    2 -> active_equipment_slot.slot2_detail.visibility = View.VISIBLE
+                    3 -> active_equipment_slot.slot3_detail.visibility = View.VISIBLE
+                }
+            }
+
+            for (userDecoration in userWeapon.decorations) {
+                when (userDecoration.slotNumber) {
+                    1 -> populateSlot1(active_equipment_slot, userDecoration.decoration)
+                    2 -> populateSlot2(active_equipment_slot, userDecoration.decoration)
+                    3 -> populateSlot3(active_equipment_slot, userDecoration.decoration)
+                }
+            }
+        }
     }
 
     private fun populateActiveArmor(userArmor: UserArmorPiece) {
@@ -203,9 +235,9 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         active_equipment_slot.slot2_detail.visibility = View.GONE
         active_equipment_slot.slot3_detail.visibility = View.GONE
 
-        if(!armor.armor.slots.isEmpty()) {
+        if (!armor.armor.slots.isEmpty()) {
             active_equipment_slot.decorations_section.visibility = View.VISIBLE
-            userArmor.armor.armor.slots.active.forEachIndexed {idx, _  ->
+            userArmor.armor.armor.slots.active.forEachIndexed { idx, _ ->
                 when (idx + 1) {
                     1 -> active_equipment_slot.slot1_detail.visibility = View.VISIBLE
                     2 -> active_equipment_slot.slot2_detail.visibility = View.VISIBLE

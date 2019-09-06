@@ -71,7 +71,7 @@
     <declare-styleable name="ExpandableCardView">
         <attr name="cardViewElevation" format="float"/>
         <attr name="clickable" format="boolean"/>
-        <attr name="cardHeaderLayout" format="integer" />
-        <attr name="cardBodyLayout" format="integer" />
+        <attr name="cardHeaderLayout" format="reference" />
+        <attr name="cardBodyLayout" format="reference" />
     </declare-styleable>
 </resources>

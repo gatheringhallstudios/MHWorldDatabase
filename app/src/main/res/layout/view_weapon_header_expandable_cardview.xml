@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    app:cardCornerRadius="5dp"
+    android:id="@+id/header_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/row_height_large"
+    >
+    <!-- Right Side -->
+    <ImageView
+        android:id="@+id/icon_attack"
+        style="@style/IconXSmall"
+        app:layout_constraintBottom_toTopOf="@+id/icon_slots"
+        app:layout_constraintEnd_toEndOf="@+id/barrier_values"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/ic_ui_attack" />
+
+
+    <ImageView
+        android:id="@+id/icon_slots"
+        style="@style/IconXSmall"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/slot_section"
+        app:layout_constraintTop_toBottomOf="@+id/icon_attack"
+        app:srcCompat="@drawable/ic_ui_slots" />
+
+    <ImageView
+        android:id="@+id/equipment_icon"
+        style="@style/IconMedium.Decorated"
+        android:layout_marginStart="@dimen/margin_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_ui_armor_skill_white" />
+
+    <LinearLayout
+        android:id="@+id/slot_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/icon_slots"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon_slots">
+
+        <ImageView
+            android:id="@+id/slot1"
+            style="@style/IconXSmall"
+            app:srcCompat="@drawable/ic_ui_slot_none" />
+
+        <ImageView
+            android:id="@+id/slot2"
+            style="@style/IconXSmall"
+            app:srcCompat="@drawable/ic_ui_slot_none" />
+
+        <ImageView
+            android:id="@+id/slot3"
+            style="@style/IconXSmall"
+            app:srcCompat="@drawable/ic_ui_slot_none" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_values"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="attack_value,slot_section" />
+
+    <TextView
+        android:id="@+id/attack_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/icon_attack"
+        app:layout_constraintStart_toEndOf="@+id/icon_attack"
+        app:layout_constraintTop_toTopOf="@id/icon_attack"
+        tools:text="68~120" />
+
+    <TextView
+        android:id="@+id/equipment_name"
+        style="@style/TextBodyHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:text="@string/user_equipment_set_no_equipment"
+        app:layout_constraintBottom_toTopOf="@+id/rarity_string"
+        app:layout_constraintStart_toEndOf="@id/equipment_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/rarity_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/equipment_icon"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_name"
+        tools:text="Rare 8" />
+</androidx.constraintlayout.widget.ConstraintLayout>

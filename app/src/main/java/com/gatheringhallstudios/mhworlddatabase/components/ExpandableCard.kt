@@ -43,8 +43,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
             cardElevation = attributes.getFloat(R.styleable.ExpandableCardView_cardViewElevation, 0f)
             showRipple = attributes.getBoolean(R.styleable.ExpandableCardView_clickable, true)
-            headerLayout = attributes.getInt(R.styleable.ExpandableCardView_cardHeaderLayout, R.layout.view_base_header_expandable_cardview)
-            bodyLayout = attributes.getInt(R.styleable.ExpandableCardView_cardBodyLayout, R.layout.view_base_body_expandable_cardview)
+            headerLayout = attributes.getResourceId(R.styleable.ExpandableCardView_cardHeaderLayout, R.layout.view_base_header_expandable_cardview)
+            bodyLayout = attributes.getResourceId(R.styleable.ExpandableCardView_cardBodyLayout, R.layout.view_base_body_expandable_cardview)
 
 
             if(Build.VERSION.SDK_INT < 21 ) {
