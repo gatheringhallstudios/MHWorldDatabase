@@ -109,6 +109,8 @@
     <string name="header_components">Components</string>
     <string name="header_armor_set_pieces">Armor Set Pieces</string>
     <string name="header_armor_set_skills">Armor Set Skills</string>
+    <string name="header_active_set_bonuses">Active Set Bonuses</string>
+    <string name="header_active_skills">Active Skills</string>
 
     <!-- ####################### -->
     <!-- ## Settings and Meta ## -->
@@ -404,10 +406,10 @@
     <string name="tab_armor_set_builder_summary">Summary</string>
     <string name="tab_armor_set_builder_equipment">Equipment</string>
 
-    <string name="header_active_set_bonuses">Active Set Bonuses</string>
     <string name="user_equipment_set_new_set">+ Create a Set</string>
     <string name="user_equipment_set_no_equipment">No equipment</string>
     <string name="user_equipment_set_no_decoration">No decoration</string>
+    <string name="user_equipment_delete_set">Delete set</string>
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->

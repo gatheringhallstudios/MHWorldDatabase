@@ -103,8 +103,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun toggle() {
         val initialHeight = card_container.height
-        card_container.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        val targetHeight: Int = if (initialHeight == rowHeight) card_container.measuredHeight else rowHeight
+        card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        val targetHeight: Int = if (initialHeight == rowHeight) card_layout.measuredHeight else rowHeight
         if (targetHeight - initialHeight > 0) {
             animateViews(initialHeight,
                     targetHeight - initialHeight,

@@ -20,11 +20,14 @@
             android:id="@+id/card_overlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/card_overlay"
+            android:layout_alignTop="@+id/card_layout"
+            android:layout_alignBottom="@+id/card_layout"
             android:alpha="0.16"
-            android:background="@color/icon_white" />
+            android:background="@color/icon_white"
+            android:src="@drawable/card_overlay" />
 
         <LinearLayout
+            android:id="@+id/card_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -58,7 +61,7 @@
                 android:id="@+id/card_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/margin_large" />
+                android:layout_marginBottom="@dimen/margin_large" />
 
         </LinearLayout>
     </RelativeLayout>

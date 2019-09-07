@@ -27,9 +27,6 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.getEquipmentSetList()
 
-        // Add dividers between items
-        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
-
         viewModel.userEquipmentSets.observe(this, Observer<MutableList<UserEquipmentSet>> {
             // Setup recycler list adapter and the on-selected
             if (!containsEmptyElement(it)) {

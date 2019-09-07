@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="@dimen/margin_medium"
-    android:paddingBottom="@dimen/margin_large"
+    android:layout_marginBottom="@dimen/margin_large"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout

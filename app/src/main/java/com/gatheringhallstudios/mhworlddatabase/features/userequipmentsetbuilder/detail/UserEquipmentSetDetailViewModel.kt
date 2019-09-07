@@ -4,7 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserArmorPiece
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserWeapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -52,5 +55,13 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
 
     fun deleteDecorationForEquipment(decorationId: Int, targetDataId: Int, targetSlotNumber: Int, type: DataType, userEquipmentSetId: Int) {
         appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, decorationId, targetSlotNumber)
+    }
+
+    fun deleteEquipmentSet(userEquipmentSetId: Int) {
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                appDao.deleteUserEquipmentSet(userEquipmentSetId)
+            }
+        }
     }
 }

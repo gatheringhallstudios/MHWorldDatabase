@@ -1,9 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -48,6 +46,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         ViewModelProviders.of(parentFragment!!).get(UserEquipmentSetDetailViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_user_equipment_set_editor, parent, false)
     }
@@ -68,6 +71,20 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
         }
 
         isNewFragment = false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_user_equipment_set_editor, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        super.onOptionsItemSelected(item)
+        return if (id == R.id.action_delete_set) {
+            viewModel.deleteEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+            getRouter().goBack()
+            true
+        } else false
     }
 
     private fun populateUserEquipment(userEquipmentSet: UserEquipmentSet) {
