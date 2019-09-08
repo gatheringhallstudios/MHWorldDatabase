@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -16,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
+import kotlinx.android.synthetic.main.activity_main_content.*
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -49,6 +51,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        (activity as? AppCompatActivity)?.setSupportActionBar(R.menu.app)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,6 +59,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
             populateUserEquipment(it)
         })
@@ -63,8 +67,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //Try to avoid stale check on first round
-//        if (!isNewFragment && viewModel.isActiveUserEquipmentSetStale()) {
         if (!isNewFragment) {
             val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
             viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)

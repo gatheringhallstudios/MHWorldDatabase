@@ -22,37 +22,6 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
         this.activeUserEquipment = userEquipment
     }
 
-    //This has to be blocking because the equipment set details screen cannot be rendered until this check is done
-    fun isActiveUserEquipmentSetStale(): Boolean {
-        if (activeUserEquipment == null) {
-            return true //There is no active equipment, i.e. the data must be stale
-        }
-
-        return runBlocking {
-            val storedIds = withContext(Dispatchers.IO) {
-                appDao.loadSingleUserEquipmentId(activeUserEquipmentSet.value!!.id, activeUserEquipment!!.entityId(), activeUserEquipment!!.type())
-            } ?: return@runBlocking true
-
-            val decorations = when (activeUserEquipment!!.type()) {
-                DataType.ARMOR -> {
-                    (activeUserEquipment as UserArmorPiece).decorations
-                }
-                DataType.WEAPON -> {
-                    (activeUserEquipment as UserWeapon).decorations
-                }
-                else -> {
-                    return@runBlocking false //The piece of equipment is present and it has no decorations, i.e. data is not stale
-                }
-            }
-
-            for (i in 1 until decorations.size) {
-                if (decorations[i].decoration.id != storedIds.decorationIds[i].decorationId) return@runBlocking true //Piece of equipment matches, but Decorations don't match, i.e. data is stale
-            }
-
-            false
-        }
-    }
-
     fun deleteDecorationForEquipment(decorationId: Int, targetDataId: Int, targetSlotNumber: Int, type: DataType, userEquipmentSetId: Int) {
         appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, decorationId, targetSlotNumber)
     }
