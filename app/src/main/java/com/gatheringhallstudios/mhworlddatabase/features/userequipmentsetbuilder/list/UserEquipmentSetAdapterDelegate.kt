@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
@@ -18,6 +19,8 @@ import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_user_equipment_set_body_expandable_cardview.view.*
+
+
 
 class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -81,13 +84,27 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
             view.card_header.defense_value.visibility = View.GONE
             view.card_body.skill_section.visibility = if (data.skills.isNotEmpty()) View.VISIBLE else View.GONE
             view.card_body.set_bonus_section.visibility = if (data.setBonuses.isNotEmpty()) View.VISIBLE else View.GONE
-            view.skill_pager.adapter = UserEquipmentSetViewPagerAdapter(view.context, data.skills.map {it.value})
-            view.worm_dots_indicator.setViewPager(view.skill_pager)
+            val adapter = UserEquipmentSetViewPagerAdapter(view.context, data.skills.map {it.value})
+            view.skill_pager.adapter = adapter
+            view.skill_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+
+                    //Adjust height
+                    val pageSize = adapter.getMaxPageSize(position) * view.resources.getDimension(R.dimen.row_height_medium)
+                    val layoutParams = view.skill_pager.layoutParams
+                    layoutParams.height = pageSize.toInt()
+                }
+            })
+
+            view.worm_dots_indicator.setViewPager2(view.skill_pager)
             data.setBonuses.forEach {
                 populateArmorSetBonusName(it.key)
                 populateArmorSetBonuses(it.value)
             }
         }
+
+
 
         private fun populateArmorSetBonusName(setBonusName: String) {
             val textView = TextView(view.context)

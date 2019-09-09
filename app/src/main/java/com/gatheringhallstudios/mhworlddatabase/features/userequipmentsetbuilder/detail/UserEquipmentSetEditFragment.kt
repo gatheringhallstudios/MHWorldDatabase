@@ -51,7 +51,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        (activity as? AppCompatActivity)?.setSupportActionBar(R.menu.app)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {

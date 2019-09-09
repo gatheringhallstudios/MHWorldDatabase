@@ -136,6 +136,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                     val drawable = cardView.card_arrow.drawable
                     if (drawable is Animatable) {
                         drawable.start()
+                        val params = card_container.layoutParams
+                        params.height = LayoutParams.WRAP_CONTENT
+                        card_container.layoutParams = params
                     }
                 } else {
                     val drawable = cardView.card_arrow.drawable
