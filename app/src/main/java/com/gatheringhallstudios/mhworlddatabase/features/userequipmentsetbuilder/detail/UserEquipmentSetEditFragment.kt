@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -17,7 +17,6 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
-import kotlinx.android.synthetic.main.activity_main_content.*
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -38,7 +37,28 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
+class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.RenameDialogListener {
+    fun showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        val dialog = RenameSetDialog()
+        dialog.setTargetFragment(this, 0)
+        dialog.show(fragmentManager!!, "RenameDialogFragment")
+    }
+
+    // The dialog fragment receives a reference to this Activity through the
+    // Fragment.onAttach() callback, which it uses to call the following methods
+    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    override fun onDialogPositiveClick(dialog: RenameSetDialog) {
+        // User touched the dialog's positive button
+        viewModel.renameEquipmentSet(dialog.resultName, viewModel.activeUserEquipmentSet.value!!.id)
+        val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
+        viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+    }
+
+    override fun onDialogNegativeClick(dialog: RenameSetDialog) {
+        // User touched the dialog's negative button
+    }
+
     private var isNewFragment = true
 
     /**
@@ -81,11 +101,18 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         super.onOptionsItemSelected(item)
-        return if (id == R.id.action_delete_set) {
-            viewModel.deleteEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
-            getRouter().goBack()
-            true
-        } else false
+        return when (id) {
+            R.id.action_delete_set -> {
+                viewModel.deleteEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+                getRouter().goBack()
+                true
+            }
+            R.id.action_rename_set -> {
+                showNoticeDialog()
+                true
+            }
+            else -> false
+        }
     }
 
     private fun populateUserEquipment(userEquipmentSet: UserEquipmentSet) {

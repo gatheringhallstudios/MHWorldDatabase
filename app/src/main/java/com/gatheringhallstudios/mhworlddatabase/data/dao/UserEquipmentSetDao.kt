@@ -69,6 +69,9 @@ abstract class UserEquipmentSetDao {
     @Query("""INSERT INTO user_equipment_sets VALUES (NULL, :name)""")
     abstract fun createUserEquipmentSet(name: String): Long
 
+    @Query("""UPDATE user_equipment_sets SET name=:name WHERE id = :equipmentSetId""")
+    abstract fun renameUserEquipmentSet(name: String, equipmentSetId: Int)
+
     @Query("""INSERT INTO user_equipment_set_equipment VALUES (NULL, :id, :type, :equipmentSetId )""")
     abstract fun createUserEquipmentEquipment(id: Int, type: DataType, equipmentSetId: Int)
 

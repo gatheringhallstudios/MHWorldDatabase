@@ -96,8 +96,8 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
                     layoutParams.height = pageSize.toInt()
                 }
             })
-
             view.worm_dots_indicator.setViewPager2(view.skill_pager)
+
             data.setBonuses.forEach {
                 populateArmorSetBonusName(it.key)
                 populateArmorSetBonuses(it.value)

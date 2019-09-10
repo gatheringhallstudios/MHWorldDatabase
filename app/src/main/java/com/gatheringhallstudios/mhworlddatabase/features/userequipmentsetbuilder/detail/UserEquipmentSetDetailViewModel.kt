@@ -33,4 +33,12 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
             }
         }
     }
+
+    fun renameEquipmentSet(name: String, userEquipmentSetId: Int) {
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                appDao.renameUserEquipmentSet(name, userEquipmentSetId)
+            }
+        }
+    }
 }
