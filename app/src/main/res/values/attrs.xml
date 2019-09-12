@@ -21,6 +21,11 @@
         <attr name="valueText" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="IconLabelButtonCell">
+        <attr name="iconSrc" />
+        <attr name="labelText2" format="string" />
+    </declare-styleable>
+
     <declare-styleable name="CompactStatCell">
         <attr name="iconSrc" />
         <attr name="labelText" />
@@ -30,7 +35,6 @@
         <attr name="iconSrc" />
         <attr name="labelText" />
     </declare-styleable>
-
 
     <declare-styleable name="SectionHeaderCell">
         <attr name="labelText" />
@@ -62,5 +66,12 @@
         <attr name="imageWidth" format="dimension"/>
         <attr name="imageHeight" format="dimension"/>
         <attr name="imageSize" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="ExpandableCardView">
+        <attr name="cardViewElevation" format="float"/>
+        <attr name="clickable" format="boolean"/>
+        <attr name="cardHeaderLayout" format="reference" />
+        <attr name="cardBodyLayout" format="reference" />
     </declare-styleable>
 </resources>

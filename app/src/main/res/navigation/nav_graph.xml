@@ -353,4 +353,15 @@
         app:popEnterAnim="@anim/nav_enter_left"
         app:popExitAnim="@anim/nav_exit_right" />
 
+    <fragment
+        android:id="@+id/equipmentSetSelectorDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment" />
+    <action
+        android:id="@+id/equipmentSetSelectorAction"
+        app:destination="@id/equipmentSetSelectorDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
+
 </navigation>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/margin_large"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/skill_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextBodyHigh"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_small"
+            android:paddingStart="@dimen/margin_large"
+            android:paddingTop="@dimen/margin_small"
+            android:text="@string/header_skills" />
+        <!--To be populated dynamically from fragment onViewCreated -->
+
+        <LinearLayout
+            android:id="@+id/skill_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/set_bonus_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextBodyHigh"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_small"
+            android:paddingStart="@dimen/margin_large"
+            android:paddingTop="@dimen/margin_small"
+            android:text="@string/header_set_bonuses" />
+        <!--To be populated dynamically from fragment onViewCreated -->
+
+        <LinearLayout
+            android:id="@+id/set_bonus_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/decorations_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextBodyHigh"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_small"
+            android:paddingStart="@dimen/margin_large"
+            android:paddingTop="@dimen/margin_small"
+            android:text="@string/header_decorations" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.IconLabelButtonCell
+            android:id="@+id/slot1_detail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_medium"
+            app:labelText="@string/user_equipment_set_no_decoration" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.IconLabelButtonCell
+            android:id="@+id/slot2_detail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_medium"
+            app:labelText="@string/user_equipment_set_no_decoration" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.IconLabelButtonCell
+            android:id="@+id/slot3_detail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_medium"
+            app:labelText="@string/user_equipment_set_no_decoration" />
+    </LinearLayout>
+</LinearLayout>

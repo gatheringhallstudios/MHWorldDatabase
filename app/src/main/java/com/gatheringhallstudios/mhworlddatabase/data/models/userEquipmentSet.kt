@@ -43,7 +43,7 @@ class UserEquipmentSet(
     var setBonuses = mutableMapOf<String, List<ArmorSetBonus>>()
 }
 
-interface UserEquipment {
+interface UserEquipment : Serializable {
     fun entityId(): Int
     fun type(): DataType
 }

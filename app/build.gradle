@@ -152,7 +152,8 @@ dependencies {
     /*
     View pager dots extension
      */
-    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-beta03'
 }
 
 apply plugin: 'de.undercouch.download'

@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentDecorationEntity
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentEntity
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentSetEntity
@@ -68,6 +69,9 @@ abstract class UserEquipmentSetDao {
     @Query("""INSERT INTO user_equipment_sets VALUES (NULL, :name)""")
     abstract fun createUserEquipmentSet(name: String): Long
 
+    @Query("""UPDATE user_equipment_sets SET name=:name WHERE id = :equipmentSetId""")
+    abstract fun renameUserEquipmentSet(name: String, equipmentSetId: Int)
+
     @Query("""INSERT INTO user_equipment_set_equipment VALUES (NULL, :id, :type, :equipmentSetId )""")
     abstract fun createUserEquipmentEquipment(id: Int, type: DataType, equipmentSetId: Int)
 
@@ -78,7 +82,13 @@ abstract class UserEquipmentSetDao {
     abstract fun deleteUserEquipmentEquipment()
 
     @Query("""INSERT INTO user_equipment_set_decorations VALUES (NULL, :equipmentSetId, :dataId, :dataType, :decorationId, :slotNumber)""")
-    abstract fun createUserEquipmentDecoration(equipmentSetId: Int, dataId: Int, dataType: DataType, decorationId: Int, slotNumber: Int)
+    abstract fun createUserEquipmentDecoration(equipmentSetId: Int, dataId: Int, slotNumber: Int, dataType: DataType, decorationId: Int)
+
+    @Query("""DELETE FROM user_equipment_set_decorations WHERE dataId = :dataId AND dataType = :type AND equipmentSetId = :equipmentSetId AND decorationId = :decorationId AND slotNumber = :targetSlot""")
+    abstract fun deleteUserEquipmentDecoration(equipmentSetId: Int, dataId: Int, type: DataType, decorationId: Int, targetSlot: Int)
+
+    @Query("""DELETE FROM user_equipment_set_decorations WHERE dataId = :dataId AND dataType = :type AND equipmentSetId = :equipmentSetId""")
+    abstract fun deleteUserEquipmentDecorations(equipmentSetId: Int, dataId: Int, type: DataType)
 
     fun loadUserEquipmentSetIds(): List<UserEquipmentSetIds> {
         val set = loadUserEquipmentSetInfo()
@@ -89,7 +99,8 @@ abstract class UserEquipmentSetDao {
         return set.map {
             UserEquipmentSetIds(it.id, it.name, equipment.filter { userEquipmentEntity ->
                 userEquipmentEntity.equipmentSetId == it.id //Find all of the equipment entities belonging to this set
-            }.map { equipment ->    //Convert all of the equipment entities into UserEquipmentIds by including the decoration Ids that have been associated with this piece of equipment
+            }.map { equipment ->
+                //Convert all of the equipment entities into UserEquipmentIds by including the decoration Ids that have been associated with this piece of equipment
                 UserEquipmentIds(
                         dataId = equipment.dataId,
                         equipmentSetId = equipment.equipmentSetId,

@@ -94,7 +94,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                         UserDecoration(
                                 decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
                                 slotNumber = decorationIds.slotNumber)
-                    }
+                    }.sortedWith(compareBy(UserDecoration::slotNumber))
 
                     userEquipment.add(UserArmorPiece(
                             armor = armorDao.loadArmorFullSync(AppSettings.dataLocale, userEquipmentId.dataId),

@@ -109,6 +109,8 @@
     <string name="header_components">Components</string>
     <string name="header_armor_set_pieces">Armor Set Pieces</string>
     <string name="header_armor_set_skills">Armor Set Skills</string>
+    <string name="header_active_set_bonuses">Active Set Bonuses</string>
+    <string name="header_active_skills">Active Skills</string>
 
     <!-- ####################### -->
     <!-- ## Settings and Meta ## -->
@@ -393,19 +395,24 @@
     <string name="title_bookmarks">Bookmarks</string>
 
     <!-- ################# -->
-    <!-- ## ARMOR SET MENU ## -->
+    <!-- ## USER EQUIPMENT SET MENU ## -->
     <!-- ################# -->
     <string name="title_armor_set_builder">Armor Set Builder</string>
     <string name="title_armor_set_armor_selector">Armor Selector</string>
     <string name="title_armor_set_charm_selector">Charm Selector</string>
+    <string name="title_armor_set_weapon_selector">Weapon Selector</string>
+    <string name="title_armor_set_decoration_selector">Decoration Selector</string>
 
     <string name="tab_armor_set_builder_summary">Summary</string>
     <string name="tab_armor_set_builder_equipment">Equipment</string>
 
-    <string name="header_active_set_bonuses">Active Set Bonuses</string>
     <string name="user_equipment_set_new_set">+ Create a Set</string>
     <string name="user_equipment_set_no_equipment">No equipment</string>
     <string name="user_equipment_set_no_decoration">No decoration</string>
+    <string name="user_equipment_delete_set">Delete set</string>
+    <string name="user_equipment_new_set_name">New set name</string>
+    <string name="user_equipment_apply">Apply</string>
+    <string name="user_equipment_cancel">Cancel</string>
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->

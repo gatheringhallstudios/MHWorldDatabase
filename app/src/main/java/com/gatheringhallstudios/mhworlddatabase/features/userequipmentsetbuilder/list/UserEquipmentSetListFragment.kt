@@ -6,8 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
-import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
-import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.coroutines.Dispatchers
@@ -26,9 +24,6 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.getEquipmentSetList()
-
-        // Add dividers between items
-        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         viewModel.userEquipmentSets.observe(this, Observer<MutableList<UserEquipmentSet>> {
             // Setup recycler list adapter and the on-selected

@@ -15,7 +15,6 @@ import kotlinx.coroutines.withContext
 
 class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewModel(application) {
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
-
     var activeUserEquipmentSet = MutableLiveData<UserEquipmentSet>()
     private var activeUserEquipment: UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
 
@@ -23,34 +22,23 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
         this.activeUserEquipment = userEquipment
     }
 
-    //This has to be blocking because the equipment set details screen cannot be rendered until this check is done
-    fun isActiveUserEquipmentSetStale(): Boolean {
-        if (activeUserEquipment == null) {
-            return false //There is no active equipment, i.e. the data cannot be stale
+    fun deleteDecorationForEquipment(decorationId: Int, targetDataId: Int, targetSlotNumber: Int, type: DataType, userEquipmentSetId: Int) {
+        appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, decorationId, targetSlotNumber)
+    }
+
+    fun deleteEquipmentSet(userEquipmentSetId: Int) {
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                appDao.deleteUserEquipmentSet(userEquipmentSetId)
+            }
         }
+    }
 
-        return runBlocking {
-            val storedIds = withContext(Dispatchers.IO) {
-                appDao.loadSingleUserEquipmentId(activeUserEquipmentSet.value!!.id, activeUserEquipment!!.entityId(), activeUserEquipment!!.type())
-            } ?: return@runBlocking true
-
-            val decorations = when (activeUserEquipment!!.type()) {
-                DataType.ARMOR -> {
-                    (activeUserEquipment as UserArmorPiece).decorations
-                }
-                DataType.WEAPON -> {
-                    (activeUserEquipment as UserWeapon).decorations
-                }
-                else -> {
-                    return@runBlocking false //The piece of equipment is present and it has no decorations, i.e. data is not stale
-                }
+    fun renameEquipmentSet(name: String, userEquipmentSetId: Int) {
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                appDao.renameUserEquipmentSet(name, userEquipmentSetId)
             }
-
-            for (i in 1 until decorations.size) {
-                if (decorations[i].decoration.id != storedIds.decorationIds[i].decorationId) return@runBlocking true //Piece of equipment matches, but Decorations don't match, i.e. data is stale
-            }
-
-            false
         }
     }
 }
