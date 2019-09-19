@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextBodyHigh"
+            style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
             android:paddingStart="@dimen/margin_large"
@@ -35,7 +35,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextBodyHigh"
+            style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
             android:paddingStart="@dimen/margin_large"
@@ -58,7 +58,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextBodyHigh"
+            style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
             android:paddingStart="@dimen/margin_large"

@@ -17,6 +17,7 @@
         app:layout_constraintEnd_toEndOf="@+id/barrier_values"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginBottom="@dimen/margin_small"
         app:srcCompat="@drawable/ic_ui_defense" />
 
 
@@ -73,6 +74,7 @@
         android:id="@+id/defense_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="@id/icon_defense"
         app:layout_constraintStart_toEndOf="@+id/icon_defense"
         app:layout_constraintTop_toTopOf="@id/icon_defense"

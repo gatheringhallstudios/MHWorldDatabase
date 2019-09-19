@@ -15,6 +15,7 @@
         style="@style/IconXSmall"
         app:layout_constraintBottom_toTopOf="@+id/icon_slots"
         app:layout_constraintEnd_toEndOf="@+id/barrier_values"
+        android:layout_marginBottom="@dimen/margin_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/ic_ui_attack" />
@@ -76,6 +77,7 @@
         app:layout_constraintBottom_toBottomOf="@id/icon_attack"
         app:layout_constraintStart_toEndOf="@+id/icon_attack"
         app:layout_constraintTop_toTopOf="@id/icon_attack"
+        android:layout_marginBottom="@dimen/margin_small"
         tools:text="68~120" />
 
     <TextView
