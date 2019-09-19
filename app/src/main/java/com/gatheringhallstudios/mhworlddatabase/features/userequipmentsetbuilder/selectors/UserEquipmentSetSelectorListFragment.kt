@@ -99,7 +99,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         }
 
         equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(8))
+        equipment_list.addItemDecoration(SpacesItemDecoration(32))
 
         viewModel.armor.observe(this, Observer {
             adapter.items = it

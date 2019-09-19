@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="5dp"
-    android:layout_margin="@dimen/margin_medium"
     android:clickable="true"
     android:focusable="true">
 

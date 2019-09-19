@@ -6,7 +6,8 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
@@ -17,8 +18,7 @@ import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 
 
 class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
-    private var rowHeight: Int = 189 //Magic height of the row with the margins included
-    private var expandAnimationDuration = 100 //Should be shorter than the 180 of the arrow
+    private var expandAnimationDuration = 300 //Should be shorter than the 180 of the arrow
     private var onExpand: () -> Unit = {}
     private var onContract: () -> Unit = {}
     private var cardElevation: Float = 0f
@@ -38,6 +38,16 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         card_arrow.setOnClickListener {
             toggle()
         }
+        card_body.addOnLayoutChangeListener(object: OnLayoutChangeListener {
+            override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+                card_body.measure(MATCH_PARENT, WRAP_CONTENT)
+                if (card_body.measuredHeight <= 0) {
+                    card_arrow.visibility = View.INVISIBLE
+                } else {
+                    card_arrow.visibility = View.VISIBLE
+                }
+            }
+        })
 
         if (attrs != null) {
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
@@ -46,8 +56,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             headerLayout = attributes.getResourceId(R.styleable.ExpandableCardView_cardHeaderLayout, R.layout.view_base_header_expandable_cardview)
             bodyLayout = attributes.getResourceId(R.styleable.ExpandableCardView_cardBodyLayout, R.layout.view_base_body_expandable_cardview)
 
-
-            if(Build.VERSION.SDK_INT < 21 ) {
+            if (Build.VERSION.SDK_INT < 21) {
                 card_container.cardElevation = cardElevation
             } else {
                 card_container.elevation = cardElevation
@@ -89,22 +98,19 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         this.onContract = onContract
     }
 
-//    fun setHeight(height: Int) {
-//        // Gets the layout params that will allow you to resize the layout
-//        val params: ViewGroup.LayoutParams = header_layout.layoutParams
-//        params.height = height
-//        header_layout.layoutParams = params
-//    }
-
     fun setCardElevation(cardElevation: Float) {
         card_container.cardElevation = cardElevation
         card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
     }
 
     fun toggle() {
+        card_body.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        if (card_body.measuredHeight == 0) return
+
         val initialHeight = card_container.height
+        val headerHeight = card_header.height
         card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        val targetHeight: Int = if (initialHeight == rowHeight) card_layout.measuredHeight else rowHeight
+        val targetHeight: Int = if (initialHeight == headerHeight) card_layout.measuredHeight else headerHeight
         if (targetHeight - initialHeight > 0) {
             animateViews(initialHeight,
                     targetHeight - initialHeight,
@@ -120,31 +126,17 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     private fun animateViews(initialHeight: Int, distance: Int, animationType: cardState, cardView: View) {
         val expandAnimation = object : Animation() {
+            var arrowStarted = false
             override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
                 cardView.layoutParams.height = if (animationType == cardState.EXPANDING)
                     (initialHeight + distance * interpolatedTime).toInt()
                 else
                     (initialHeight - distance * interpolatedTime).toInt()
 
-                cardView.layoutParams.height = if (animationType == cardState.EXPANDING)
-                    (initialHeight + distance * interpolatedTime).toInt()
-                else
-                    (initialHeight - distance * interpolatedTime).toInt()
                 cardView.requestLayout()
-
-                if (animationType == cardState.EXPANDING) {
-                    val drawable = cardView.card_arrow.drawable
-                    if (drawable is Animatable) {
-                        drawable.start()
-                        val params = card_container.layoutParams
-                        params.height = LayoutParams.WRAP_CONTENT
-                        card_container.layoutParams = params
-                    }
-                } else {
-                    val drawable = cardView.card_arrow.drawable
-                    if (drawable is Animatable) {
-                        drawable.start()
-                    }
+                if (!arrowStarted) {
+                    arrowStarted = true
+                    (cardView.card_arrow.drawable as Animatable).start()
                 }
             }
         }

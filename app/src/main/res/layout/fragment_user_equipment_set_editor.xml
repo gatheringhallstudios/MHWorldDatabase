@@ -20,6 +20,7 @@
             app:cardViewElevation="1"
             app:cardHeaderLayout="@layout/view_weapon_header_expandable_cardview"
             android:clipToPadding="false"
+            android:layout_margin="@dimen/margin_medium"
             android:clipChildren="false" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             app:cardViewElevation="1"
             android:clipToPadding="false"
+            android:layout_margin="@dimen/margin_medium"
             android:clipChildren="false" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
@@ -36,6 +38,7 @@
             android:layout_height="wrap_content"
             app:cardViewElevation="1"
             android:clipToPadding="false"
+            android:layout_margin="@dimen/margin_medium"
             android:clipChildren="false"/>
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
@@ -44,6 +47,7 @@
             android:layout_height="wrap_content"
             app:cardViewElevation="1"
             android:clipToPadding="false"
+            android:layout_margin="@dimen/margin_medium"
             android:clipChildren="false"
              />
 
@@ -53,6 +57,7 @@
             android:layout_height="wrap_content"
             app:cardViewElevation="1"
             android:clipToPadding="false"
+            android:layout_margin="@dimen/margin_medium"
             android:clipChildren="false" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
@@ -61,6 +66,7 @@
             android:layout_height="wrap_content"
             app:cardViewElevation="1"
             android:clipToPadding="false"
+            android:layout_margin="@dimen/margin_medium"
             android:clipChildren="false" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
@@ -69,7 +75,7 @@
             android:layout_height="wrap_content"
             app:cardViewElevation="1"
             android:clipToPadding="false"
+            android:layout_margin="@dimen/margin_medium"
             android:clipChildren="false" />
     </LinearLayout>
-
 </ScrollView>

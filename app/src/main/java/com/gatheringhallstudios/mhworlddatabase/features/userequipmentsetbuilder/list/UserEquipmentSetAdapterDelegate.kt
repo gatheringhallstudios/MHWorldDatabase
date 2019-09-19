@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,10 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
         val inflater = LayoutInflater.from(parent.context)
         return if (viewType != 0) {
             val view = ExpandableCardView(parent.context)
+            val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            val marginSize = parent.context.resources.getDimension(R.dimen.margin_medium).toInt()
+            layoutParams.setMargins(marginSize, marginSize, marginSize, 0)
+            view.layoutParams = layoutParams
             EquipmentSetHolder(view)
         } else {
             val v = inflater.inflate(R.layout.listitem_user_equipment_set_new, parent, false)
@@ -47,6 +52,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
         val userEquipmentSet = dataSet[position]
 
         if (viewHolder is EquipmentSetHolder) {
+            viewHolder.view.layoutParams 
             (viewHolder.view as ExpandableCardView).setOnClick { onSelect(userEquipmentSet) }
             viewHolder.view.setHeader(R.layout.view_base_header_expandable_cardview)
             viewHolder.view.setBody(R.layout.view_user_equipment_set_body_expandable_cardview)

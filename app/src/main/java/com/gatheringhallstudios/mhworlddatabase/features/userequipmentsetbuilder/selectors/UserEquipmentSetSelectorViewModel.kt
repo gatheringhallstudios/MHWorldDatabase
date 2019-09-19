@@ -24,18 +24,6 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     lateinit var decorations: LiveData<List<Decoration>>
     lateinit var charms: LiveData<List<CharmFull>>
 
-//    init {
-//        loadArmor()
-//        loadCharms()
-//        loadWeapons()
-//    }
-
-//    fun filterArmor(filter: (Armor)-> Boolean) {
-//        armor.value = armor.value!!.filter {
-//            filter(it)
-//        }
-//    }
-
     fun loadArmor(langId: String, armorType: ArmorType) {
         armor = armorDao.loadArmorFullByType(langId, armorType)
     }
@@ -51,14 +39,6 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     fun loadWeapons(langId: String) {
         this.weapons = weaponDao.loadWeaponsWithSkillsSync(langId)
     }
-
-//    fun loadCharms() {
-//        if (::charms.isInitialized) {
-//            return
-//        }
-//
-//        this.charms = charmDao.loadCharmList(AppSettings.dataLocale)
-//    }
 
     fun updateEquipmentForEquipmentSet(newId: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?) {
         if (prevId != null) {
