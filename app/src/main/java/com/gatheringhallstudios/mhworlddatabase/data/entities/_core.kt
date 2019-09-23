@@ -15,3 +15,11 @@ data class Language(
          */
         val name: String
 )
+
+@Entity(tableName = "recipe_item",
+        primaryKeys = ["recipe_id", "item_id"])
+data class RecipeItemEntity(
+        val recipe_id: Int,
+        val item_id: Int,
+        val quantity: Int
+)

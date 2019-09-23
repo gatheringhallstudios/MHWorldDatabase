@@ -76,13 +76,15 @@ abstract class CharmDao {
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
             i.category item_category, i.icon_color item_icon_color, cr.quantity
-        FROM charm_recipe cr
+        FROM charm c
+            JOIN recipe_item cr
+                ON cr.recipe_id = c.recipe_id
             JOIN item i
                 ON i.id = cr.item_id
             JOIN item_text it
                 ON it.id = i.id
-        WHERE it.lang_id = :langId
-          AND cr.charm_id = :charmId
+                AND it.lang_id = :langId
+        WHERE c.id = :charmId
     """)
     protected abstract fun loadCharmComponentsSync(langId: String, charmId: Int): List<ItemQuantity>
 

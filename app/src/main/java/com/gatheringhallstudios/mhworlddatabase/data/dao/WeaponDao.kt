@@ -61,15 +61,22 @@ abstract class WeaponDao {
 
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
-            i.category item_category, i.icon_color item_icon_color, w.quantity, w.recipe_type
-         FROM weapon_recipe w
-            JOIN item i
-                ON w.item_id = i.id
-            JOIN item_text it
-                ON it.id = i.id
-                AND it.lang_id = :langId
-        WHERE it.lang_id = :langId
-        AND w.weapon_id= :weaponId
+                    i.category item_category, i.icon_color item_icon_color, ri.quantity, ri.recipe_type
+        FROM
+        (
+            SELECT 'Create' recipe_type, item_id, quantity
+            FROM recipe_item
+            WHERE recipe_id = (SELECT create_recipe_id FROM weapon WHERE id = :weaponId)
+            UNION
+            SELECT 'Upgrade' recipe_type, item_id, quantity
+            FROM recipe_item
+            WHERE recipe_id = (SELECT upgrade_recipe_id FROM weapon WHERE id = :weaponId)
+        ) ri
+        JOIN item i
+          ON i.id = ri.item_id
+        JOIN item_text it
+          ON it.id = i.id
+          AND it.lang_id = :langId
         ORDER BY i.id
     """)
     abstract fun loadWeaponComponents(langId: String, weaponId: Int): List<ItemQuantity>

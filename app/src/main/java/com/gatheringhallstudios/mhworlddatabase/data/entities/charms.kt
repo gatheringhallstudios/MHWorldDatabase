@@ -9,7 +9,8 @@ import androidx.room.PrimaryKey
 data class CharmEntity(
         @PrimaryKey val id: Int,
         val previous_id: Int?,
-        val rarity: Int
+        val rarity: Int,
+        val recipe_id: Int?
 )
 
 @Entity(tableName = "charm_text",
@@ -40,12 +41,4 @@ data class CharmSkill(
         val charm_id: Int,
         val skilltree_id: Int,
         val level: Int
-)
-
-@Entity(tableName = "charm_recipe",
-        primaryKeys = ["charm_id", "item_id"])
-data class CharmRecipe(
-        val charm_id: Int,
-        val item_id: Int,
-        val quantity: Int
 )
