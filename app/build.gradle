@@ -7,7 +7,7 @@ apply plugin: 'kotlin-kapt'
 
 // Update this to update the database on the next build
 // This is also used to populate populate MHWDatabase.java configuration
-def DATABASE_VERSION = 30
+def DATABASE_VERSION = 31
 
 android {
     compileSdkVersion 28

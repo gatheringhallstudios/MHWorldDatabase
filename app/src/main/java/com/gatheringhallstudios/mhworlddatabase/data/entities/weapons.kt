@@ -16,6 +16,11 @@ data class WeaponEntity(
         val weapon_type: WeaponType,
         val category: WeaponCategory,
         val rarity: Int,
+
+        val previous_weapon_id: Int?,
+        val create_recipe_id: Int?,
+        val upgrade_recipe_id: Int?,
+
         val attack: Int,
         val attack_true: Int?,
         val affinity: Int,
@@ -30,7 +35,6 @@ data class WeaponEntity(
         val element_hidden: Int,
         val sharpness: String,
         val sharpness_maxed: Int,
-        val previous_weapon_id: Int?,
         val craftable: Boolean,
         val kinsect_bonus: String?,
         val elderseal: String?,
@@ -52,16 +56,7 @@ data class WeaponEntity(
 data class WeaponText(
         val id: Int,
         val lang_id: String,
-
         val name: String?
-)
-
-@Entity(tableName = "weapon_recipe")
-data class WeaponRecipe(
-        @PrimaryKey val weapon_id: Int,
-        val item_id: Int,
-        val quantity: Int,
-        val recipe_type: String
 )
 
 @Entity(tableName = "weapon_ammo")
