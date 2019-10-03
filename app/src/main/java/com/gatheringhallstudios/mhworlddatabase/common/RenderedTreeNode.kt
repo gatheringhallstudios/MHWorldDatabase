@@ -1,6 +1,5 @@
-package com.gatheringhallstudios.mhworlddatabase.features.weapons
+package com.gatheringhallstudios.mhworlddatabase.common
 
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHParentedModel
 
@@ -43,7 +42,7 @@ enum class TreeFormatter {
 /**
  * Represents end nodes in the tree that need to be colored
  */
-enum class TreeNode {
+enum class TreeNodeType {
     START,
     START_COLLAPSED,
     MID,
