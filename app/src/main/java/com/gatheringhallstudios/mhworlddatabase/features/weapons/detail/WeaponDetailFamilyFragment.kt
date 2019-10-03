@@ -12,6 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.WeaponTreeListAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.common.RenderedTreeNode
+import com.gatheringhallstudios.mhworlddatabase.common.createTreeRenderList
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
@@ -44,7 +45,7 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
             adapter.clear()
             if (data == null) return@Observer
 
-            val familyNodes = data.familyPath.map { RenderedTreeNode(it) }
+            val familyNodes = createTreeRenderList(data.familyPath)
             val finalNodes = data.finalWeapons.map { RenderedTreeNode(it) }
 
             adapter.addSection(familyNodes)
