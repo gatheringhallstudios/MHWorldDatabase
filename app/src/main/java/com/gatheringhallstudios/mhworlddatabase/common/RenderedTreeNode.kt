@@ -59,7 +59,13 @@ enum class TreeNode {
  */
 class RenderedTreeNode<T>(
         val value: T,
+
+        /**
+         * The depth level of this node.
+         * Note that this is the true depth, and not the rendered depth
+         */
         val depth: Int,
+
         val formatter: List<TreeFormatter>,
         val numChildren: Int,
         var isCollapsed: Boolean = false
@@ -83,6 +89,7 @@ fun <T: MHParentedModel> createTreeRenderList(trees: MHModelTree<T>)
 fun <T> createTreeRenderList(node: TreeNode<T>, depth: Int = 0, prefix: List<TreeFormatter> = listOf(), isTail: Boolean = true): List<RenderedTreeNode<T>> {
     val isRoot = node.parent == null
     val isLeaf = node.getChildren().isEmpty()
+    val isOnlyChild = node.parent?.getChildren()?.size == 1
 
     if (isRoot && isLeaf) {
         return listOf(RenderedTreeNode(node.value))
@@ -90,9 +97,6 @@ fun <T> createTreeRenderList(node: TreeNode<T>, depth: Int = 0, prefix: List<Tre
 
     val paths: MutableList<RenderedTreeNode<T>> = mutableListOf()
     val formatter = mutableListOf<TreeFormatter>()
-
-    val isOnlyChild = node.parent?.getChildren()?.size == 1
-    val hasMultipleChildren = node.getChildren().size > 1
 
     formatter.addAll(prefix)
 
@@ -121,22 +125,17 @@ fun <T> createTreeRenderList(node: TreeNode<T>, depth: Int = 0, prefix: List<Tre
     val resultNode = RenderedTreeNode(node.value, depth, formatter, node.nestedChildrenCount)
     paths.add(resultNode)
 
-    val newDepth = when (hasMultipleChildren) {
-        false -> depth
-        true -> depth + 1
-    }
-
     node.getChildren().forEachIndexed { index, it ->
         val nextPrefix = prefix.toMutableList()
 
-        if (depth > 0 && isTail && !isOnlyChild) {
+        if (!isRoot && isTail && !isOnlyChild) {
             nextPrefix.add(TreeFormatter.INDENT)
         } else if (!isRoot && !isOnlyChild) {
             nextPrefix.add(TreeFormatter.STRAIGHT_BRANCH)
         }
 
         val nextIsTail = index == node.getChildren().size - 1
-        val pathLists = createTreeRenderList(it, newDepth, nextPrefix, nextIsTail)
+        val pathLists = createTreeRenderList(it, depth + 1, nextPrefix, nextIsTail)
         paths.addAll(pathLists)
     }
 
