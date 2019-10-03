@@ -133,7 +133,10 @@ object AssetLoader {
             TreeNode.START_COLLAPSED -> "NodeStartCollapsed"
             TreeNode.MID -> "NodeMid"
             TreeNode.MID_COLLAPSED -> "NodeMidCollapsed"
+            TreeNode.THROUGH -> "NodeThrough"
+            TreeNode.THROUGH_COLLAPSED -> "NodeThroughCollapsed"
             TreeNode.END -> "NodeEnd"
+            TreeNode.END_INDENTED -> "NodeEndIndented"
         }
         return ctx.getVectorDrawable(name, "rare$rarity")
     }

@@ -307,11 +307,17 @@ class WeaponTreeListAdapterDelegate(
                     } else {
                         AssetLoader.loadIconFor(TreeNode.MID_COLLAPSED, rarity)
                     }
+                    TreeFormatter.THROUGH -> if (!isCollapsed) {
+                        AssetLoader.loadIconFor(TreeNode.THROUGH, rarity)
+                    } else {
+                        AssetLoader.loadIconFor(TreeNode.THROUGH_COLLAPSED, rarity)
+                    }
                     TreeFormatter.INDENT -> null
                     TreeFormatter.STRAIGHT_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_line)
                     TreeFormatter.T_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_t)
                     TreeFormatter.L_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_l)
                     TreeFormatter.END -> AssetLoader.loadIconFor(TreeNode.END, rarity)
+                    TreeFormatter.END_INDENTED -> AssetLoader.loadIconFor(TreeNode.END_INDENTED, rarity)
                 }
 
                 treeView.addView(createImageView(treeView.context, drawable))
