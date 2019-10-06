@@ -317,7 +317,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         for (setBonus in armorSetBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, setBonusSection.set_bonus_list, false)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null, false)
 
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name

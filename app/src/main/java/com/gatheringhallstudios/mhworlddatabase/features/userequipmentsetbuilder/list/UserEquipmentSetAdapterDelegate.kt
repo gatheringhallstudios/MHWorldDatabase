@@ -110,8 +110,6 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
             }
         }
 
-
-
         private fun populateArmorSetBonusName(setBonusName: String) {
             val textView = TextView(view.context)
             textView.text = setBonusName
@@ -124,7 +122,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
                 val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
                 val reqIcon = SetBonusNumberRegistry(setBonus.required)
                 val inflater = LayoutInflater.from(view.context)
-                val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, view.card_body.set_bonus_list, false)
+                val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, null, false)
 
                 listItem.bonus_skill_icon.setImageDrawable(skillIcon)
                 listItem.bonus_skill_name.text = setBonus.skillTree.name
