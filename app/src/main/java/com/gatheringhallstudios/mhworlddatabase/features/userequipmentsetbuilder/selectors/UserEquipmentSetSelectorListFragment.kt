@@ -82,6 +82,14 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        val listState = equipment_list.layoutManager?.onSaveInstanceState()
+        if (listState != null) {
+            viewModel.listState = listState
+        }
+    }
+
     private fun initArmorSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
         setActivityTitle(getString(R.string.title_armor_set_armor_selector))
 
@@ -108,9 +116,11 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
         equipment_list.adapter = adapter
         equipment_list.addItemDecoration(SpacesItemDecoration(32))
-
         viewModel.armor.observe(this, Observer {
             adapter.items = it
+            if (viewModel.islistStateInitialized()) {
+                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
         })
     }
 
@@ -127,14 +137,15 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 getRouter().goBack()
             }
         }
-        //If this is going to be new piece of armor, do not populate the active armor piece
-        if (activeCharm != null) {
-            populateActiveCharm(activeCharm)
-        }
+
         equipment_list.adapter = adapter
         equipment_list.addItemDecoration(SpacesItemDecoration(32))
+
         viewModel.charms.observe(this, Observer {
             adapter.items = it
+            if (viewModel.islistStateInitialized()) {
+                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
         })
     }
 
@@ -152,16 +163,19 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
         }
 
-        equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(32))
-
         if (activeDecoration != null) {
             populateActiveDecoration(activeDecoration)
         }
 
+        equipment_list.adapter = adapter
+        equipment_list.addItemDecoration(SpacesItemDecoration(32))
+
         viewModel.decorations.observe(this, Observer {
             adapter.items = it.filter { decoration ->
                 decoration.slot <= decorationsConfig.decorationLevelFilter
+            }
+            if (viewModel.islistStateInitialized()) {
+                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
         })
     }
@@ -179,16 +193,19 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
         }
 
-        equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(32))
         active_equipment_slot.setHeader(R.layout.view_weapon_header_expandable_cardview)
-
         if (activeWeapon != null) {
             populateActiveWeapon(activeWeapon)
         }
 
+        equipment_list.adapter = adapter
+        equipment_list.addItemDecoration(SpacesItemDecoration(32))
+
         viewModel.weapons.observe(this, Observer {
             adapter.items = it
+            if (viewModel.islistStateInitialized()) {
+                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
         })
     }
 

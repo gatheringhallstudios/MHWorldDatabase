@@ -1,6 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
 
 import android.app.Application
+import android.os.Parcelable
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
@@ -23,7 +25,16 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     lateinit var weapons: LiveData<List<WeaponFull>>
     lateinit var decorations: LiveData<List<Decoration>>
     lateinit var charms: LiveData<List<CharmFull>>
+    lateinit var listState: Parcelable
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.i("UserEquipmentSet", "CLEARED")
+    }
+
+    fun islistStateInitialized(): Boolean {
+        return ::listState.isInitialized
+    }
     fun loadArmor(langId: String, armorType: ArmorType) {
         armor = armorDao.loadArmorFullByType(langId, armorType)
     }

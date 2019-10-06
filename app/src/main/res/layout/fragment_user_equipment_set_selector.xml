@@ -5,24 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/equipment_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/equipment_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingStart="@dimen/margin_medium"
-            android:paddingEnd="@dimen/margin_medium"
-            android:clipChildren="false"
-            android:clipToPadding="false" />
-
-    </ScrollView>
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="80dp"
+        android:paddingStart="@dimen/margin_medium"
+        android:paddingEnd="@dimen/margin_medium"
+        android:clipChildren="false"
+        android:clipToPadding="false" />
 
     <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
         android:id="@+id/active_equipment_slot"
@@ -32,6 +26,6 @@
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
         app:cardViewElevation="2"
-        app:clickable="false"/>
+        app:clickable="false" />
 
 </RelativeLayout>
