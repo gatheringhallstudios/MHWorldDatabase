@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.view_user_equipment_set_body_expandable_ca
 class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
         return if (viewType != 0) {
             val view = ExpandableCardView(parent.context)
             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -84,7 +83,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
             view.card_header.defense_value.visibility = View.GONE
             view.card_body.skill_section.visibility = if (data.skills.isNotEmpty()) View.VISIBLE else View.GONE
             view.card_body.set_bonus_section.visibility = if (data.setBonuses.isNotEmpty()) View.VISIBLE else View.GONE
-            val adapter = UserEquipmentSetViewPagerAdapter(view.context, data.skills.map {it.value})
+            val adapter = UserEquipmentSetViewPagerAdapter(view.context, data.skills)
             view.skill_pager.adapter = adapter
             view.skill_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

@@ -39,7 +39,7 @@ class UserEquipmentSet(
     var thunderDefense: Int = 0
     var iceDefense: Int = 0
     var dragonDefense: Int = 0
-    var skills = mutableMapOf<Int, SkillLevel>()
+    var skills = listOf<SkillLevel>()
     var setBonuses = mutableMapOf<String, List<ArmorSetBonus>>()
 }
 

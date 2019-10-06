@@ -72,7 +72,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
 
         userEquipmentSet.equipment.filter { it.type() == DataType.WEAPON }.forEach { populateWeapon(it as UserWeapon, showTrueAttackValues) }
         userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.forEach { populateArmorSetPieces(it as UserArmorPiece) }
-        userEquipmentSet.skills.forEach { populateArmorSkills(it.value) }
+        populateArmorSkills(userEquipmentSet.skills)
         userEquipmentSet.setBonuses.forEach {
             populateArmorSetBonusName(it.key)
             populateArmorSetBonuses(it.value)
@@ -220,22 +220,24 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_piece_list.addView(view)
     }
 
-    private fun populateArmorSkills(skill: SkillLevel) {
-        //Set the label for the Set name
-        val view = layoutInflater.inflate(R.layout.listitem_skill_level, armor_skill_section, false)
-        view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
-        view.label_text.text = skill.skillTree.name
-        view.level_text.text = getString(R.string.skill_level_qty, skill.level)
-        with(view.skill_level) {
-            maxLevel = skill.skillTree.max_level
-            level = skill.level
-        }
+    private fun populateArmorSkills(skills: List<SkillLevel>) {
+        for (skill in skills) {
+            //Set the label for the Set name
+            val view = layoutInflater.inflate(R.layout.listitem_skill_level, armor_skill_section, false)
+            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
+            view.label_text.text = skill.skillTree.name
+            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            with(view.skill_level) {
+                maxLevel = skill.skillTree.max_level
+                level = skill.level
+            }
 
-        view.setOnClickListener {
-            getRouter().navigateSkillDetail(skill.skillTree.id)
-        }
+            view.setOnClickListener {
+                getRouter().navigateSkillDetail(skill.skillTree.id)
+            }
 
-        armor_set_skill_list.addView(view)
+            armor_set_skill_list.addView(view)
+        }
     }
 
     private fun populateArmorSetBonusName(setBonusName: String) {
