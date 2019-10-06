@@ -16,6 +16,7 @@
             style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
+            android:gravity="center_vertical"
             android:paddingStart="@dimen/margin_large"
             android:paddingTop="@dimen/margin_small"
             android:text="@string/header_active_skills"
@@ -61,6 +62,7 @@
             style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
+            android:gravity="center_vertical"
             android:paddingStart="@dimen/margin_large"
             android:paddingTop="@dimen/margin_small"
             android:text="@string/header_active_set_bonuses" />
