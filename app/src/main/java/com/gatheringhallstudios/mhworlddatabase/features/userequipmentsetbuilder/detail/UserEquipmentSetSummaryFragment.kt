@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
@@ -54,10 +55,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_set_bonus_list.removeAllViews()
         weapon_list.removeAllViews()
 
-        //Load the icon of the first piece of equipment or no icon if the set is empty
-        if (userEquipmentSet.equipment.isNotEmpty()) {
-            armor_set_header.setIconDrawable(getIconObject(userEquipmentSet.equipment))
-        }
+        armor_set_header.setIconDrawable(context!!.getVectorDrawable("ArmorChest", "rare1"))
 
         armor_set_header.setTitleText(userEquipmentSet.name)
         armor_set_defense_value.text = getString(
@@ -271,16 +269,6 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         return when (element_hidden) {
             true -> "($workString)"
             false -> workString.toString()
-        }
-    }
-
-    private fun getIconObject(equipment: MutableList<UserEquipment>): Drawable? {
-        val item = equipment.first()
-        return when (item.type()) {
-            DataType.WEAPON -> AssetLoader.loadIconFor((item as UserWeapon).weapon.weapon)
-            DataType.ARMOR -> AssetLoader.loadIconFor((item as UserArmorPiece).armor.armor)
-            DataType.CHARM -> AssetLoader.loadIconFor((item as UserCharm).charm.charm)
-            else -> null
         }
     }
 }

@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
@@ -69,22 +70,10 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
         }
     }
 
-    private fun getIconObject(equipment: MutableList<UserEquipment>): Drawable? {
-        val item = equipment.first()
-        return when (item.type()) {
-            DataType.WEAPON -> AssetLoader.loadIconFor((item as UserWeapon).weapon.weapon)
-            DataType.ARMOR -> AssetLoader.loadIconFor((item as UserArmorPiece).armor.armor)
-            DataType.CHARM -> AssetLoader.loadIconFor((item as UserCharm).charm.charm)
-            else -> null
-        }
-    }
-
     internal inner class EquipmentSetHolder(val view: View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("ResourceType")
         fun bind(data: UserEquipmentSet) {
-            if (data.equipment.isNotEmpty()) {
-                view.card_header.equipment_icon.setImageDrawable(getIconObject(data.equipment))
-            }
+            view.card_header.equipment_icon.setImageDrawable(view.context!!.getVectorDrawable("ArmorChest", "rare1"))
 
             view.card_header.equipment_name.text = data.name
             view.card_header.icon_slots.visibility = View.GONE
