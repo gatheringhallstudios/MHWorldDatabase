@@ -17,7 +17,8 @@
             android:strokeWidth="12"
             android:pathData="M75.27 207.8l52 86A12 12 0 0 1 117 312H13a12 12 0 0 1-10.27-18.2l52-86a12 12 0 0 1 20.54 0z"/>
         <path
-            android:fillColor="#000000"
+            android:name="base"
+            android:fillColor="#FFFFFF"
             android:strokeColor="#000000"
             android:strokeWidth="12"
             android:pathData="M65 214l-52 86h104z"/>
@@ -47,7 +48,7 @@
             android:strokeWidth="12"
             android:pathData="M246.65 102.53l-53 102a12 12 0 0 1-21.3 0l-53-102a12 12 0 0 1 0.47-11.88l53-85a12 12 0 0 1 20.36 0l53 85a12 12 0 0 1 0.47 11.88z"/>
         <path
-            android:fillColor="#000000"
+            android:fillColor="#FFFFFF"
             android:strokeColor="#000000"
             android:strokeWidth="12"
             android:pathData="M236 97l-53-85-53 85 53 102z"/>

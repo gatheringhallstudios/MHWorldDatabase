@@ -19,7 +19,8 @@
         android:translateX="62"
         android:translateY="101">
         <path
-            android:fillColor="#000000"
+            android:name="base"
+            android:fillColor="#FFFFFF"
             android:pathData="M76 214l-52 86h104z"/>
         <path
             android:fillColor="#000000"
@@ -45,7 +46,7 @@
             android:fillAlpha="0.25"
             android:pathData="M257.65 102.53l-53 102a12 12 0 0 1-21.3 0l-53-102a12 12 0 0 1 0.47-11.88l53-85a12 12 0 0 1 20.36 0l53 85a12 12 0 0 1 0.47 11.88z"/>
         <path
-            android:fillColor="#000000"
+            android:fillColor="#FFFFFF"
             android:pathData="M247 97l-53-85-53 85 53 102z"/>
     </group>
 </vector>

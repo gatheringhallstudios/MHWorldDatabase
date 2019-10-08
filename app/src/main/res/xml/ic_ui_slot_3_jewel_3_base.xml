@@ -19,33 +19,20 @@
         android:translateX="62"
         android:translateY="101">
         <path
-            android:fillColor="#000000"
+            android:fillColor="#FFFFFF"
             android:pathData="M76 214l-52 86h104z"/>
         <path
-            android:fillColor="#000000"
+            android:fillColor="#FFFFFF"
             android:pathData="M195 214l-52 86h104z"/>
         <path
-            android:fillColor="#000000"
+            android:fillColor="#FFFFFF"
             android:pathData="M314 214l-52 86h104z"/>
         <path
             android:fillColor="#DCDCDC"
             android:pathData="M384.95 104.99l-91 102A12 12 0 0 1 285 211H103a12 12 0 0 1-8.95-4.01l-91-102a12 12 0 0 1-1.23-14.34l53-85A12 12 0 0 1 65 0h258a12 12 0 0 1 10.18 5.65l53 85a12 12 0 0 1-1.23 14.34z"/>
         <path
-            android:fillColor="#000000"
+            android:name="base"
+            android:fillColor="#FFFFFF"
             android:pathData="M376 97l-53-85H65L12 97l91 102h182z"/>
-        <path
-            android:fillColor="#FFFFFF"
-            android:fillAlpha="0.25"
-            android:pathData="M324.13 104.79l-87 102A12 12 0 0 1 228 211h-68a12 12 0 0 1-9.13-4.21l-87-102a12 12 0 0 1-1.53-13.3l44-85A12 12 0 0 1 117 0h154a12 12 0 0 1 10.66 6.48l44 85a12 12 0 0 1-1.53 13.3z"/>
-        <path
-            android:fillColor="#000000"
-            android:pathData="M315 97l-44-85H117L73 97l87 102h68z"/>
-        <path
-            android:fillColor="#FFFFFF"
-            android:fillAlpha="0.25"
-            android:pathData="M257.65 102.53l-53 102a12 12 0 0 1-21.3 0l-53-102a12 12 0 0 1 0.47-11.88l53-85a12 12 0 0 1 20.36 0l53 85a12 12 0 0 1 0.47 11.88z"/>
-        <path
-            android:fillColor="#000000"
-            android:pathData="M247 97l-53-85-53 85 53 102z"/>
     </group>
 </vector>

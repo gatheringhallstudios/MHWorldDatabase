@@ -16,6 +16,8 @@ data class ArmorEntity(
         val armor_type: ArmorType,
         val armorset_id: Int,
         val armorset_bonus_id: Int?,
+        val recipe_id: Int?,
+
         val male: Boolean,
         val female: Boolean,
 
@@ -92,11 +94,4 @@ data class ArmorSkill(
         val armor_id: Int,
         val skilltree_id: Int,
         val level: Int
-)
-
-@Entity(tableName = "armor_recipe")
-data class ArmorRecipeEntity(
-        @PrimaryKey val armor_id: Int,
-        val item_id: Int,
-        val quantity: Int
 )

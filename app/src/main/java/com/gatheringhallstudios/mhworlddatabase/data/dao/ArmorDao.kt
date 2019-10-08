@@ -167,15 +167,17 @@ abstract class ArmorDao {
 
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
-            i.category item_category, i.icon_color item_icon_color, a.quantity
-         FROM armor_recipe a
+            i.category item_category, i.icon_color item_icon_color, ri.quantity
+         FROM armor a
+            JOIN recipe_item ri
+                ON a.recipe_id = ri.recipe_id
             JOIN item i
-                ON a.item_id = i.id
+                ON ri.item_id = i.id
             JOIN item_text it
                 ON it.id = i.id
                 AND it.lang_id = :langId
         WHERE it.lang_id = :langId
-        AND a.armor_id= :armorId
+        AND a.id= :armorId
         ORDER BY i.id
     """)
     abstract fun loadArmorComponentsSync(langId: String, armorId: Int): List<ItemQuantity>
