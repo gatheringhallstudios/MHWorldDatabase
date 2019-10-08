@@ -49,6 +49,21 @@ val VectorRegistry = createRegistry(
         "Decoration2" to R.xml.ic_ui_decoration_2_base,
         "Decoration3" to R.xml.ic_ui_decoration_3_base,
 
+        "Slot1" to R.xml.ic_ui_slot_1_filled_base,
+        "Slot2" to R.xml.ic_ui_slot_2_filled_base,
+        "Slot3" to R.xml.ic_ui_slot_3_filled_base,
+
+        "Slot1Jewel1" to R.xml.ic_ui_slot_1_jewel_1_base,
+        "Slot2Jewel1" to R.xml.ic_ui_slot_2_jewel_1_base,
+        "Slot2Jewel2" to R.xml.ic_ui_slot_2_jewel_2_base,
+        "Slot3Jewel1" to R.xml.ic_ui_slot_3_jewel_1_base,
+        "Slot3Jewel2" to R.xml.ic_ui_slot_3_jewel_2_base,
+        "Slot3Jewel3" to R.xml.ic_ui_slot_3_jewel_3_base,
+        "Slot4Jewel1" to R.xml.ic_ui_slot_4_jewel_1_base,
+        "Slot4Jewel2" to R.xml.ic_ui_slot_4_jewel_2_base,
+        "Slot4Jewel3" to R.xml.ic_ui_slot_4_jewel_3_base,
+        "Slot4Jewel4" to R.xml.ic_ui_slot_4_jewel_4_base,
+
         "NodeStart" to R.xml.ui_tree_node_start_base,
         "NodeStartCollapsed" to R.xml.ui_tree_node_start_collapsed_base,
         "NodeMid" to R.xml.ui_tree_node_mid_base,

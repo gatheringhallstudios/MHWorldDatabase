@@ -1,6 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
 
 import android.app.Application
+import android.os.Parcelable
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
@@ -23,19 +25,16 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     lateinit var weapons: LiveData<List<WeaponFull>>
     lateinit var decorations: LiveData<List<Decoration>>
     lateinit var charms: LiveData<List<CharmFull>>
+    lateinit var listState: Parcelable
 
-//    init {
-//        loadArmor()
-//        loadCharms()
-//        loadWeapons()
-//    }
+    override fun onCleared() {
+        super.onCleared()
+        Log.i("UserEquipmentSet", "CLEARED")
+    }
 
-//    fun filterArmor(filter: (Armor)-> Boolean) {
-//        armor.value = armor.value!!.filter {
-//            filter(it)
-//        }
-//    }
-
+    fun islistStateInitialized(): Boolean {
+        return ::listState.isInitialized
+    }
     fun loadArmor(langId: String, armorType: ArmorType) {
         armor = armorDao.loadArmorFullByType(langId, armorType)
     }
@@ -51,14 +50,6 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     fun loadWeapons(langId: String) {
         this.weapons = weaponDao.loadWeaponsWithSkillsSync(langId)
     }
-
-//    fun loadCharms() {
-//        if (::charms.isInitialized) {
-//            return
-//        }
-//
-//        this.charms = charmDao.loadCharmList(AppSettings.dataLocale)
-//    }
 
     fun updateEquipmentForEquipmentSet(newId: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?) {
         if (prevId != null) {

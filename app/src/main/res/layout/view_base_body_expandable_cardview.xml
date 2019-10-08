@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginBottom="@dimen/margin_large"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -13,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextBodyHigh"
+            style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
             android:paddingStart="@dimen/margin_large"
@@ -36,7 +35,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextBodyHigh"
+            style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
             android:paddingStart="@dimen/margin_large"
@@ -59,7 +58,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextBodyHigh"
+            style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
             android:paddingStart="@dimen/margin_large"

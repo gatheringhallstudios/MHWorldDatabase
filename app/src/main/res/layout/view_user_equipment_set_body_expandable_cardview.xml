@@ -13,9 +13,10 @@
 
         <TextView
             android:id="@+id/textView"
-            style="@style/TextBodyHigh"
+            style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
+            android:gravity="center_vertical"
             android:paddingStart="@dimen/margin_large"
             android:paddingTop="@dimen/margin_small"
             android:text="@string/header_active_skills"
@@ -58,9 +59,10 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextBodyHigh"
+            style="@style/TextBodyMedium"
             android:layout_width="match_parent"
             android:layout_height="@dimen/row_height_small"
+            android:gravity="center_vertical"
             android:paddingStart="@dimen/margin_large"
             android:paddingTop="@dimen/margin_small"
             android:text="@string/header_active_set_bonuses" />

@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
@@ -54,10 +55,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_set_bonus_list.removeAllViews()
         weapon_list.removeAllViews()
 
-        //Load the icon of the first piece of equipment or no icon if the set is empty
-        if (userEquipmentSet.equipment.isNotEmpty()) {
-            armor_set_header.setIconDrawable(getIconObject(userEquipmentSet.equipment))
-        }
+        armor_set_header.setIconDrawable(context!!.getVectorDrawable("ArmorChest", "rare1"))
 
         armor_set_header.setTitleText(userEquipmentSet.name)
         armor_set_defense_value.text = getString(
@@ -74,7 +72,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
 
         userEquipmentSet.equipment.filter { it.type() == DataType.WEAPON }.forEach { populateWeapon(it as UserWeapon, showTrueAttackValues) }
         userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.forEach { populateArmorSetPieces(it as UserArmorPiece) }
-        userEquipmentSet.skills.forEach { populateArmorSkills(it.value) }
+        populateArmorSkills(userEquipmentSet.skills)
         userEquipmentSet.setBonuses.forEach {
             populateArmorSetBonusName(it.key)
             populateArmorSetBonuses(it.value)
@@ -222,22 +220,24 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_piece_list.addView(view)
     }
 
-    private fun populateArmorSkills(skill: SkillLevel) {
-        //Set the label for the Set name
-        val view = layoutInflater.inflate(R.layout.listitem_skill_level, armor_skill_section, false)
-        view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
-        view.label_text.text = skill.skillTree.name
-        view.level_text.text = getString(R.string.skill_level_qty, skill.level)
-        with(view.skill_level) {
-            maxLevel = skill.skillTree.max_level
-            level = skill.level
-        }
+    private fun populateArmorSkills(skills: List<SkillLevel>) {
+        for (skill in skills) {
+            //Set the label for the Set name
+            val view = layoutInflater.inflate(R.layout.listitem_skill_level, armor_skill_section, false)
+            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
+            view.label_text.text = skill.skillTree.name
+            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            with(view.skill_level) {
+                maxLevel = skill.skillTree.max_level
+                level = skill.level
+            }
 
-        view.setOnClickListener {
-            getRouter().navigateSkillDetail(skill.skillTree.id)
-        }
+            view.setOnClickListener {
+                getRouter().navigateSkillDetail(skill.skillTree.id)
+            }
 
-        armor_set_skill_list.addView(view)
+            armor_set_skill_list.addView(view)
+        }
     }
 
     private fun populateArmorSetBonusName(setBonusName: String) {
@@ -271,16 +271,6 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         return when (element_hidden) {
             true -> "($workString)"
             false -> workString.toString()
-        }
-    }
-
-    private fun getIconObject(equipment: MutableList<UserEquipment>): Drawable? {
-        val item = equipment.first()
-        return when (item.type()) {
-            DataType.WEAPON -> AssetLoader.loadIconFor((item as UserWeapon).weapon.weapon)
-            DataType.ARMOR -> AssetLoader.loadIconFor((item as UserArmorPiece).armor.armor)
-            DataType.CHARM -> AssetLoader.loadIconFor((item as UserCharm).charm.charm)
-            else -> null
         }
     }
 }

@@ -13,10 +13,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * Created by Carlos on 3/22/2018.
- */
-
 class UserEquipmentSetListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(UserEquipmentSetListViewModel::class.java)

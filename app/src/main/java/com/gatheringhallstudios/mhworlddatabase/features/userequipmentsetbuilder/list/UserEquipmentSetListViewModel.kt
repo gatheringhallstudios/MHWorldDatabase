@@ -228,7 +228,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
         }
     }
 
-    private fun calculateSkillLevels(userEquipment: List<UserEquipment>): MutableMap<Int, SkillLevel> {
+    private fun calculateSkillLevels(userEquipment: List<UserEquipment>): List<SkillLevel> {
         val skillLevels = mutableMapOf<Int, SkillLevel>()
         userEquipment.forEach { item ->
             val providedSkills = mutableListOf<SkillLevel>()
@@ -268,7 +268,8 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 }
             }
         }
-
-        return skillLevels
+        val list = skillLevels.map {it.value}.toMutableList()
+        list.sortWith(compareByDescending<SkillLevel> {it.level}.thenBy {it.skillTree.id})
+        return list
     }
 }

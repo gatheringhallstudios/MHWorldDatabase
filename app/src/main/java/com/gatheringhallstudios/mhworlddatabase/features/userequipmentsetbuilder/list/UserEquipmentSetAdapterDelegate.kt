@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
@@ -25,13 +27,20 @@ import kotlinx.android.synthetic.main.view_user_equipment_set_body_expandable_ca
 class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
         return if (viewType != 0) {
             val view = ExpandableCardView(parent.context)
+            val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            val marginSize = parent.context.resources.getDimension(R.dimen.margin_medium).toInt()
+            layoutParams.setMargins(marginSize, marginSize, marginSize, 0)
+            view.layoutParams = layoutParams
             EquipmentSetHolder(view)
         } else {
-            val v = inflater.inflate(R.layout.listitem_user_equipment_set_new, parent, false)
-            NewEquipmentSetHolder(v)
+            val view = ExpandableCardView(parent.context)
+            val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            val marginSize = parent.context.resources.getDimension(R.dimen.margin_medium).toInt()
+            layoutParams.setMargins(marginSize, marginSize, marginSize, 0)
+            view.layoutParams = layoutParams
+            NewEquipmentSetHolder(view)
         }
     }
 
@@ -54,26 +63,16 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
             viewHolder.bind(userEquipmentSet)
         } else {
             val vh = viewHolder as NewEquipmentSetHolder
-            vh.view.setOnClickListener { onSelect(userEquipmentSet) }
-        }
-    }
-
-    private fun getIconObject(equipment: MutableList<UserEquipment>): Drawable? {
-        val item = equipment.first()
-        return when (item.type()) {
-            DataType.WEAPON -> AssetLoader.loadIconFor((item as UserWeapon).weapon.weapon)
-            DataType.ARMOR -> AssetLoader.loadIconFor((item as UserArmorPiece).armor.armor)
-            DataType.CHARM -> AssetLoader.loadIconFor((item as UserCharm).charm.charm)
-            else -> null
+            (vh.view as ExpandableCardView).setHeader(R.layout.view_new_set_header_expandable_cardview)
+            vh.view.setCardElevation(1f)
+            vh.view.setOnClick { onSelect(userEquipmentSet) }
         }
     }
 
     internal inner class EquipmentSetHolder(val view: View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("ResourceType")
         fun bind(data: UserEquipmentSet) {
-            if (data.equipment.isNotEmpty()) {
-                view.card_header.equipment_icon.setImageDrawable(getIconObject(data.equipment))
-            }
+            view.card_header.equipment_icon.setImageDrawable(view.context!!.getVectorDrawable("ArmorChest", "rare1"))
 
             view.card_header.equipment_name.text = data.name
             view.card_header.icon_slots.visibility = View.GONE
@@ -84,7 +83,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
             view.card_header.defense_value.visibility = View.GONE
             view.card_body.skill_section.visibility = if (data.skills.isNotEmpty()) View.VISIBLE else View.GONE
             view.card_body.set_bonus_section.visibility = if (data.setBonuses.isNotEmpty()) View.VISIBLE else View.GONE
-            val adapter = UserEquipmentSetViewPagerAdapter(view.context, data.skills.map {it.value})
+            val adapter = UserEquipmentSetViewPagerAdapter(view.context, data.skills)
             view.skill_pager.adapter = adapter
             view.skill_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
@@ -104,8 +103,6 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
             }
         }
 
-
-
         private fun populateArmorSetBonusName(setBonusName: String) {
             val textView = TextView(view.context)
             textView.text = setBonusName
@@ -118,7 +115,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
                 val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
                 val reqIcon = SetBonusNumberRegistry(setBonus.required)
                 val inflater = LayoutInflater.from(view.context)
-                val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, view.card_body.set_bonus_list, false)
+                val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, null, false)
 
                 listItem.bonus_skill_icon.setImageDrawable(skillIcon)
                 listItem.bonus_skill_name.text = setBonus.skillTree.name
