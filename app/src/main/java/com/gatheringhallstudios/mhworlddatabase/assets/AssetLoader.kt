@@ -260,4 +260,9 @@ object AssetLoader {
         SpecialAmmoType.WYVERNHEART -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernheart)
         SpecialAmmoType.WYVERNSNIPE -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernsnipe)
     }
+
+    fun loadColoredSlotIcon(decoration: DecorationBase): Drawable? {
+        val assetName = "Slot${decoration.slot}"
+        return ctx.getVectorDrawable(assetName, decoration.icon_color)
+    }
 }

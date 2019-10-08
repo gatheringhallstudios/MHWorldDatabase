@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
@@ -17,6 +19,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -174,6 +177,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             skillLevel.skillTree = it.decoration.skillTree
             skillLevel
         })
+        skillsList.sortWith(compareByDescending<SkillLevel> {it.level}.thenBy {it.skillTree.id})
 
         populateSkills(skillsList, layout.skill_section)
         populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
@@ -220,12 +224,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
     private fun populateSlot1(layout: View, decoration: Decoration?) {
         if (decoration != null) {
-            layout.card_header.slot1.setImageDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_header.slot1.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration))
             layout.card_body.slot1_detail.visibility = View.VISIBLE
             layout.card_body.slot1_detail.setLabelText(decoration.name)
             layout.card_body.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
         } else {
-            layout.card_header.slot1.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+            layout.card_header.slot1.setImageDrawable(context!!.getDrawableCompat(R.drawable.ic_ui_slot_none))
             layout.card_body.slot1_detail.setLeftIconDrawable(null)
             layout.card_body.slot1_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot1_detail.visibility = View.GONE
@@ -234,12 +238,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
     private fun populateSlot2(layout: View, decoration: Decoration?) {
         if (decoration != null) {
-            layout.card_header.slot2.setImageDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_header.slot2.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration))
             layout.card_body.slot2_detail.visibility = View.VISIBLE
             layout.card_body.slot2_detail.setLabelText(decoration.name)
             layout.card_body.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
         } else {
-            layout.card_header.slot2.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+            layout.card_header.slot2.setImageDrawable(context!!.getDrawableCompat(R.drawable.ic_ui_slot_none))
             layout.card_body.slot2_detail.setLeftIconDrawable(null)
             layout.card_body.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot2_detail.visibility = View.GONE
@@ -248,12 +252,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
     private fun populateSlot3(layout: View, decoration: Decoration?) {
         if (decoration != null) {
-            layout.card_header.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
+            layout.card_header.slot3.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration))
             layout.card_body.slot3_detail.visibility = View.VISIBLE
             layout.card_body.slot3_detail.setLabelText(decoration.name)
             layout.card_body.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
         } else {
-            layout.card_header.slot3.setImageDrawable(context!!.getDrawable(R.drawable.ic_ui_slot_none))
+            layout.card_header.slot3.setImageDrawable(context!!.getDrawableCompat(R.drawable.ic_ui_slot_none))
             layout.card_body.slot3_detail.setLeftIconDrawable(null)
             layout.card_body.slot3_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot3_detail.visibility = View.GONE

@@ -24,8 +24,7 @@ class UserEquipmentSetDetailPagerFragment : BasePagerFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onAddTabs(tabs: BasePagerFragment.TabAdder) {
-        // Retrieve MonsterID from args (required!)
+    override fun onAddTabs(tabs: TabAdder) {
         val args = arguments
         val equipmentSet = args!!.getSerializable(ARG_USER_EQUIPMENT_SET) as UserEquipmentSet
 
