@@ -5,17 +5,18 @@ import android.graphics.drawable.Animatable
 import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import com.gatheringhallstudios.mhworlddatabase.util.ConvertElevationToAlphaConvert
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
-
 
 class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
     private var expandAnimationDuration = 300 //Should be shorter than the 180 of the arrow
@@ -25,6 +26,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var headerLayout: Int = 0
     private var bodyLayout: Int = 0
     private var showRipple: Boolean = true
+    private var onSwipeLeft: () -> Unit = {}
+    private var onSwipeRight: () -> Unit = {}
+    private var onClick: () -> Unit = {}
 
     private enum class cardState {
         EXPANDING,
@@ -38,7 +42,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         card_arrow.setOnClickListener {
             toggle()
         }
-        card_body.addOnLayoutChangeListener(object: OnLayoutChangeListener {
+        card_body.addOnLayoutChangeListener(object : OnLayoutChangeListener {
             override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
                 card_body.measure(MATCH_PARENT, WRAP_CONTENT)
                 if (card_body.measuredHeight <= 0) {
@@ -68,6 +72,10 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             setBody(bodyLayout)
             attributes.recycle()
         }
+
+        //Swipe/onclick handler
+        card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
+                onSwipeLeft, onSwipeRight, onClick))
     }
 
     fun setHeader(layout: Int) {
@@ -85,9 +93,24 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
     fun setOnClick(onClick: () -> Unit) {
-        card_container.setOnClickListener {
-            onClick()
-        }
+        this.onClick = onClick
+        //Update Swipe/onclick handler
+        card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
+                this.onSwipeLeft, this.onSwipeRight, this.onClick))
+    }
+
+    fun setOnSwipeLeft(onSwipeLeft: () -> Unit) {
+        this.onSwipeLeft = onSwipeLeft
+        //Update Swipe/onclick handler
+        card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
+                this.onSwipeLeft, this.onSwipeRight, this.onClick))
+    }
+
+    fun setOnSwipeRight(onSwipeRight: () -> Unit) {
+        this.onSwipeRight = onSwipeRight
+        //Update Swipe/onclick handler
+        card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
+                this.onSwipeLeft, this.onSwipeRight, this.onClick))
     }
 
     fun setOnExpand(onExpand: () -> Unit) {
@@ -148,4 +171,88 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             cardState.COLLAPSING -> compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less)
         })
     }
+
+    class OnSwipeTouchListener(val view: LinearLayout, val left_view: LinearLayout, val right_view: LinearLayout, val ctx: Context, val onSwipeLeft: () -> Unit, val onSwipeRight: () -> Unit, val onClick: () -> Unit) : OnTouchListener {
+        var initialX = 0f
+        var viewWidth = 0
+        var dx = 0f
+        var x = 0f
+
+        override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    initialX = event.x
+                    viewWidth = view.width
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    dx = event.x - initialX
+                    if (dx > 0 && dx < 225) {
+                        val layoutParams = left_view.layoutParams
+                        layoutParams.width = dx.toInt()
+                        left_view.layoutParams = layoutParams
+
+                        val layoutParams2 = view.layoutParams as RelativeLayout.LayoutParams
+                        layoutParams2.width = (viewWidth - dx).toInt()
+                        layoutParams2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT)
+                        layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
+                        view.layoutParams = layoutParams2
+                    } else if (dx < 0 && dx > -225) {
+                        val layoutParams = right_view.layoutParams
+                        layoutParams.width = -1 * dx.toInt()
+                        right_view.layoutParams = layoutParams
+
+                        val layoutParams2 = view.layoutParams as RelativeLayout.LayoutParams
+                        layoutParams2.width = (viewWidth - dx).toInt()
+                        layoutParams2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT)
+                        layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_LEFT)
+                        view.layoutParams = layoutParams2
+                    }
+                }
+                MotionEvent.ACTION_UP -> {
+                    val layoutParams = left_view.layoutParams
+                    layoutParams.width = 0
+                    left_view.layoutParams = layoutParams
+
+                    val layoutParams2 = view.layoutParams
+                    layoutParams2.width = MATCH_PARENT
+                    view.layoutParams = layoutParams2
+
+                    val layoutParams3 = right_view.layoutParams
+                    layoutParams3.width = 0
+                    right_view.layoutParams = layoutParams3
+
+                    if (dx > 175) {
+                        onSwipeRight()
+                    } else if (dx == 0f) {
+                        onClick()
+                    }
+
+                    dx = 0f
+                    initialX = 0f
+                    x = 0f
+                    viewWidth = 0
+                }
+                MotionEvent.ACTION_CANCEL -> {
+                    val layoutParams = left_view.layoutParams
+                    layoutParams.width = 0
+                    left_view.layoutParams = layoutParams
+
+                    val layoutParams2 = view.layoutParams
+                    layoutParams2.width = MATCH_PARENT
+                    view.layoutParams = layoutParams2
+
+                    val layoutParams3 = right_view.layoutParams
+                    layoutParams3.width = 0
+                    right_view.layoutParams = layoutParams3
+
+                    dx = 0f
+                    initialX = 0f
+                    x = 0f
+                    viewWidth = 0
+                }
+            }
+            return false
+        }
+    }
 }
+

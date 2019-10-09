@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.view_user_equipment_set_body_expandable_ca
 
 
 
-class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit, private val onSwipeRight: (UserEquipmentSet) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType != 0) {
@@ -57,6 +57,10 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
 
         if (viewHolder is EquipmentSetHolder) {
             (viewHolder.view as ExpandableCardView).setOnClick { onSelect(userEquipmentSet) }
+            viewHolder.view.setOnSwipeRight {
+                onSwipeRight(userEquipmentSet)
+                notifyItemRemoved(position)
+            }
             viewHolder.view.setHeader(R.layout.view_base_header_expandable_cardview)
             viewHolder.view.setBody(R.layout.view_user_equipment_set_body_expandable_cardview)
             viewHolder.view.setCardElevation(1f)

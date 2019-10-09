@@ -30,6 +30,8 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
         runBlocking {
             withContext(Dispatchers.IO) {
                 appDao.deleteUserEquipmentSet(userEquipmentSetId)
+                appDao.deleteUserEquipmentSetEquipment(userEquipmentSetId)
+                appDao.deleteUserEquipmentSetDecorations(userEquipmentSetId)
             }
         }
     }

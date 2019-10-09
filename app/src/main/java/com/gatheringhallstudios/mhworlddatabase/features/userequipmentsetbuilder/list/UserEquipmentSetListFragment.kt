@@ -27,16 +27,20 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
                 it.add(UserEquipmentSet.createEmptySet())
             }
 
-            val adapter = UserEquipmentSetAdapterDelegate(it) {itr ->
-                if (itr.id == 0) { //Set has not yet been created
-                    GlobalScope.launch(Dispatchers.Main) {
-                        val equipmentSet = withContext(Dispatchers.IO) { viewModel.createEquipmentSet() }
-                        getRouter().navigateUserEquipmentSetDetail(equipmentSet)
-                    }
-                } else {
-                    getRouter().navigateUserEquipmentSetDetail(itr)
-                }
-            }
+            val adapter = UserEquipmentSetAdapterDelegate(it,
+                    { itr ->
+                        if (itr.id == 0) { //Set has not yet been created
+                            GlobalScope.launch(Dispatchers.Main) {
+                                val equipmentSet = withContext(Dispatchers.IO) { viewModel.createEquipmentSet() }
+                                getRouter().navigateUserEquipmentSetDetail(equipmentSet)
+                            }
+                        } else {
+                            getRouter().navigateUserEquipmentSetDetail(itr)
+                        }
+                    },
+                    { itr ->
+                        viewModel.deleteEquipmentSet(itr)
+                    })
 
             this.setAdapter(adapter)
             adapter.notifyDataSetChanged()
