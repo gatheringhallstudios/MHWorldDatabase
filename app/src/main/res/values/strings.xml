@@ -14,6 +14,7 @@
     <string name="action_clear">Clear</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_apply">Apply</string>
+    <string name="action_undo">Undo</string>
 
     <string name="general_no_data">Nothing here, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
     <string name="general_none">None</string> <!-- Empty message for skill/charms subsections -->
@@ -410,6 +411,7 @@
     <string name="user_equipment_set_no_equipment">No equipment</string>
     <string name="user_equipment_set_no_decoration">No decoration</string>
     <string name="user_equipment_delete_set">Delete set</string>
+    <string name="user_equipment_set_deleted">Set deleted</string>
     <string name="user_equipment_new_set_name">New set name</string>
     <string name="user_equipment_apply">Apply</string>
     <string name="user_equipment_cancel">Cancel</string>

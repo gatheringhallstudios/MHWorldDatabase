@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.components
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Animatable
 import android.os.Build
 import android.util.AttributeSet
@@ -12,23 +13,35 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import com.gatheringhallstudios.mhworlddatabase.util.ConvertElevationToAlphaConvert
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
+import android.text.Selection.moveDown
+
+
 
 class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
-    private var expandAnimationDuration = 300 //Should be shorter than the 180 of the arrow
-    private var onExpand: () -> Unit = {}
-    private var onContract: () -> Unit = {}
+    private var expandAnimationDuration = 300
+    private var swipeReboundAnimationDuration = 200
+
     private var cardElevation: Float = 0f
     private var headerLayout: Int = 0
     private var bodyLayout: Int = 0
     private var showRipple: Boolean = true
+    private var swipeLeftEnabled = false
+    private var swipeRightEnabled = false
+    private var swipeLeftIcon: Int = android.R.drawable.ic_menu_delete
+    private var swipeRightIcon: Int = android.R.drawable.ic_input_add
+    private var swipeLeftBackground: Int = Color.parseColor("#FF1744")
+    private var swipeRightBackground: Int = Color.parseColor("#00E676")
+
     private var onSwipeLeft: () -> Unit = {}
     private var onSwipeRight: () -> Unit = {}
     private var onClick: () -> Unit = {}
+    private var onExpand: () -> Unit = {}
+    private var onContract: () -> Unit = {}
 
     private enum class cardState {
         EXPANDING,
@@ -59,6 +72,16 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             showRipple = attributes.getBoolean(R.styleable.ExpandableCardView_clickable, true)
             headerLayout = attributes.getResourceId(R.styleable.ExpandableCardView_cardHeaderLayout, R.layout.view_base_header_expandable_cardview)
             bodyLayout = attributes.getResourceId(R.styleable.ExpandableCardView_cardBodyLayout, R.layout.view_base_body_expandable_cardview)
+            expandAnimationDuration = attributes.getInt(R.styleable.ExpandableCardView_expandAnimationDuration, 300)
+            swipeReboundAnimationDuration = attributes.getInt(R.styleable.ExpandableCardView_swipeReboundDuration, 200)
+            swipeLeftIcon = attributes.getResourceId(R.styleable.ExpandableCardView_swipeLeftIcon, android.R.drawable.ic_menu_delete)
+            swipeLeftBackground = attributes.getColor(R.styleable.ExpandableCardView_swipeLeftBackground, Color.parseColor("#FF1744"))
+            swipeRightIcon = attributes.getResourceId(R.styleable.ExpandableCardView_swipeRightIcon, android.R.drawable.ic_input_add)
+            swipeRightBackground = attributes.getColor(R.styleable.ExpandableCardView_swipeRightBackground, Color.parseColor("#00E676"))
+
+            val swipeMode = attributes.getInt(R.styleable.ExpandableCardView_swipeMode, 0)
+            swipeLeftEnabled = swipeMode == 1 || swipeMode ==3
+            swipeRightEnabled = swipeMode == 2 || swipeMode ==3
 
             if (Build.VERSION.SDK_INT < 21) {
                 card_container.cardElevation = cardElevation
@@ -68,6 +91,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             card_overlay.alpha = ConvertElevationToAlphaConvert(cardElevation.toInt())
             card_container.isClickable = showRipple
             card_container.isFocusable = showRipple
+            setLeftLayout(swipeLeftIcon, swipeLeftBackground)
+            setRightLayout(swipeRightIcon, swipeRightBackground)
             setHeader(headerLayout)
             setBody(bodyLayout)
             attributes.recycle()
@@ -75,7 +100,17 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
         //Swipe/onclick handler
         card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
-                onSwipeLeft, onSwipeRight, onClick))
+                this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
+    }
+
+    fun setLeftLayout(reference: Int?, color: Int?) {
+        if (reference != null) left_icon.setImageDrawable(context.getDrawableCompat(reference))
+        if (color != null) left_icon_layout.setBackgroundColor(color)
+    }
+
+    fun setRightLayout(reference: Int?, color: Int?) {
+        if (reference != null) right_icon.setImageDrawable(context.getDrawableCompat(reference))
+        if (color != null) right_icon_layout.setBackgroundColor(color)
     }
 
     fun setHeader(layout: Int) {
@@ -96,21 +131,35 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         this.onClick = onClick
         //Update Swipe/onclick handler
         card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
-                this.onSwipeLeft, this.onSwipeRight, this.onClick))
+                this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
     }
 
     fun setOnSwipeLeft(onSwipeLeft: () -> Unit) {
         this.onSwipeLeft = onSwipeLeft
+        this.swipeLeftEnabled = true
         //Update Swipe/onclick handler
         card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
-                this.onSwipeLeft, this.onSwipeRight, this.onClick))
+                this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
     }
 
     fun setOnSwipeRight(onSwipeRight: () -> Unit) {
         this.onSwipeRight = onSwipeRight
+        this.swipeRightEnabled = true
         //Update Swipe/onclick handler
         card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
-                this.onSwipeLeft, this.onSwipeRight, this.onClick))
+                this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
+    }
+
+   fun resetState() {
+        val layoutParams = left_icon_layout.layoutParams
+        layoutParams.width = 0
+        left_icon_layout.layoutParams = layoutParams
+
+        card_layout.x = 0f
+
+        val layoutParams3 = right_icon_layout.layoutParams
+        layoutParams3.width = 0
+        right_icon_layout.layoutParams = layoutParams3
     }
 
     fun setOnExpand(onExpand: () -> Unit) {
@@ -172,87 +221,74 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         })
     }
 
-    class OnSwipeTouchListener(val view: LinearLayout, val left_view: LinearLayout, val right_view: LinearLayout, val ctx: Context, val onSwipeLeft: () -> Unit, val onSwipeRight: () -> Unit, val onClick: () -> Unit) : OnTouchListener {
+    class OnSwipeTouchListener(val view: LinearLayout, val left_view: LinearLayout,
+                               val right_view: LinearLayout, val ctx: Context,
+                               val onSwipeLeft: () -> Unit, val onSwipeRight: () -> Unit,
+                               val onClick: () -> Unit,
+                               val reboundAnimationDuration: Int,
+                               val swipeLeftEnabled: Boolean, val swipeRightEnabled: Boolean) : OnTouchListener {
         var initialX = 0f
-        var viewWidth = 0
         var dx = 0f
-        var x = 0f
 
         override fun onTouch(v: View?, event: MotionEvent?): Boolean {
             when (event?.action) {
                 MotionEvent.ACTION_DOWN -> {
                     initialX = event.x
-                    viewWidth = view.width
+                    dx = 0f
                 }
                 MotionEvent.ACTION_MOVE -> {
                     dx = event.x - initialX
-                    if (dx > 0 && dx < 225) {
+                    if (dx > 0 && dx < 225 && swipeRightEnabled) {
                         val layoutParams = left_view.layoutParams
                         layoutParams.width = dx.toInt()
                         left_view.layoutParams = layoutParams
-
-                        val layoutParams2 = view.layoutParams as RelativeLayout.LayoutParams
-                        layoutParams2.width = (viewWidth - dx).toInt()
-                        layoutParams2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT)
-                        layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
-                        view.layoutParams = layoutParams2
-                    } else if (dx < 0 && dx > -225) {
+                        view.x = dx
+                    } else if (dx < 0 && dx > -225 && swipeLeftEnabled) {
                         val layoutParams = right_view.layoutParams
                         layoutParams.width = -1 * dx.toInt()
                         right_view.layoutParams = layoutParams
-
-                        val layoutParams2 = view.layoutParams as RelativeLayout.LayoutParams
-                        layoutParams2.width = (viewWidth - dx).toInt()
-                        layoutParams2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT)
-                        layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_LEFT)
-                        view.layoutParams = layoutParams2
+                        view.x = dx
                     }
                 }
                 MotionEvent.ACTION_UP -> {
-                    val layoutParams = left_view.layoutParams
-                    layoutParams.width = 0
-                    left_view.layoutParams = layoutParams
+                    if (swipeLeftEnabled || swipeRightEnabled) animateViews(dx.toInt(), (-1 * dx).toInt())
 
-                    val layoutParams2 = view.layoutParams
-                    layoutParams2.width = MATCH_PARENT
-                    view.layoutParams = layoutParams2
-
-                    val layoutParams3 = right_view.layoutParams
-                    layoutParams3.width = 0
-                    right_view.layoutParams = layoutParams3
-
-                    if (dx > 175) {
+                    if (swipeRightEnabled && dx > 175) {
                         onSwipeRight()
+                    } else if (swipeLeftEnabled && dx < -175) {
+                        onSwipeLeft()
                     } else if (dx == 0f) {
                         onClick()
                     }
 
-                    dx = 0f
-                    initialX = 0f
-                    x = 0f
-                    viewWidth = 0
                 }
                 MotionEvent.ACTION_CANCEL -> {
-                    val layoutParams = left_view.layoutParams
-                    layoutParams.width = 0
-                    left_view.layoutParams = layoutParams
-
-                    val layoutParams2 = view.layoutParams
-                    layoutParams2.width = MATCH_PARENT
-                    view.layoutParams = layoutParams2
-
-                    val layoutParams3 = right_view.layoutParams
-                    layoutParams3.width = 0
-                    right_view.layoutParams = layoutParams3
-
-                    dx = 0f
-                    initialX = 0f
-                    x = 0f
-                    viewWidth = 0
+                    if (swipeLeftEnabled || swipeRightEnabled) animateViews(dx.toInt(), (-1 * dx).toInt())
                 }
             }
             return false
         }
+
+        private fun animateViews(initialX: Int, distance: Int) {
+            val reboundAnimation = object : Animation() {
+                override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
+                    if (distance < 0 && swipeRightEnabled) {
+                        view.x = initialX + distance * interpolatedTime
+                        left_view.layoutParams.width = (initialX + distance * interpolatedTime).toInt()
+                    } else if (distance > 0 && swipeLeftEnabled){
+                        view.x = initialX + distance * interpolatedTime
+                        right_view.layoutParams.width = -1 * (initialX + distance * interpolatedTime).toInt()
+                    }
+                    left_view.requestLayout()
+                    right_view.requestLayout()
+                }
+            }
+
+            reboundAnimation.duration = reboundAnimationDuration.toLong()
+            left_view.startAnimation(reboundAnimation)
+        }
+
+
     }
 }
 

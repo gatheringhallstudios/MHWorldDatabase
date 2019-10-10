@@ -31,7 +31,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
     }
 
     fun deleteEquipmentSet(userEquipmentSet: UserEquipmentSet) {
-        userEquipmentSets.value?.remove(userEquipmentSet)
         GlobalScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
                 appDao.deleteUserEquipmentSet(userEquipmentSet.id)

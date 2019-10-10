@@ -8,6 +8,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -38,8 +39,21 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
                             getRouter().navigateUserEquipmentSetDetail(itr)
                         }
                     },
-                    { itr ->
-                        viewModel.deleteEquipmentSet(itr)
+                    { itr, idx, adapter ->
+                        viewModel.userEquipmentSets.value?.remove(itr)
+                        val snackBar = Snackbar.make(view, R.string.user_equipment_set_deleted, Snackbar.LENGTH_LONG).setAction(R.string.action_undo) {
+                            viewModel.userEquipmentSets.value?.add(idx, itr)
+                            adapter.notifyItemInserted(idx)
+                        }
+                        snackBar.addCallback(object: Snackbar.Callback() {
+                            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                                //If snackbar was dismissed by anything other than the undo button
+                                if (event != DISMISS_EVENT_ACTION) {
+                                    viewModel.deleteEquipmentSet(itr)
+                                }
+                            }
+                        })
+                        snackBar.show()
                     })
 
             this.setAdapter(adapter)

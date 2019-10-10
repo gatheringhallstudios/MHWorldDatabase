@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
@@ -24,7 +22,7 @@ import kotlinx.android.synthetic.main.view_user_equipment_set_body_expandable_ca
 
 
 
-class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit, private val onSwipeRight: (UserEquipmentSet) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit, private val onDelete: (UserEquipmentSet, pos: Int, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType != 0) {
@@ -57,10 +55,12 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
 
         if (viewHolder is EquipmentSetHolder) {
             (viewHolder.view as ExpandableCardView).setOnClick { onSelect(userEquipmentSet) }
+            viewHolder.view.resetState()
             viewHolder.view.setOnSwipeRight {
-                onSwipeRight(userEquipmentSet)
+                onDelete(userEquipmentSet, position, this)
                 notifyItemRemoved(position)
             }
+
             viewHolder.view.setHeader(R.layout.view_base_header_expandable_cardview)
             viewHolder.view.setBody(R.layout.view_user_equipment_set_body_expandable_cardview)
             viewHolder.view.setCardElevation(1f)
