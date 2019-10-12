@@ -15,6 +15,9 @@ import androidx.core.graphics.drawable.toBitmap
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.common.RenderedTreeNode
+import com.gatheringhallstudios.mhworlddatabase.common.TreeFormatter
+import com.gatheringhallstudios.mhworlddatabase.common.TreeNodeType
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatIconLayoutCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
@@ -298,20 +301,26 @@ class WeaponTreeListAdapterDelegate(
             formatter.forEach {
                 val drawable = when (it) {
                     TreeFormatter.START -> if (!isCollapsed) {
-                            AssetLoader.loadIconFor(TreeNode.START, rarity)
+                            AssetLoader.loadIconFor(TreeNodeType.START, rarity)
                         } else {
-                            AssetLoader.loadIconFor(TreeNode.START_COLLAPSED, rarity)
+                            AssetLoader.loadIconFor(TreeNodeType.START_COLLAPSED, rarity)
                         }
                     TreeFormatter.MID -> if (!isCollapsed) {
-                        AssetLoader.loadIconFor(TreeNode.MID, rarity)
+                        AssetLoader.loadIconFor(TreeNodeType.MID, rarity)
                     } else {
-                        AssetLoader.loadIconFor(TreeNode.MID_COLLAPSED, rarity)
+                        AssetLoader.loadIconFor(TreeNodeType.MID_COLLAPSED, rarity)
+                    }
+                    TreeFormatter.THROUGH -> if (!isCollapsed) {
+                        AssetLoader.loadIconFor(TreeNodeType.THROUGH, rarity)
+                    } else {
+                        AssetLoader.loadIconFor(TreeNodeType.THROUGH_COLLAPSED, rarity)
                     }
                     TreeFormatter.INDENT -> null
                     TreeFormatter.STRAIGHT_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_line)
                     TreeFormatter.T_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_t)
                     TreeFormatter.L_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_l)
-                    TreeFormatter.END -> AssetLoader.loadIconFor(TreeNode.END, rarity)
+                    TreeFormatter.END -> AssetLoader.loadIconFor(TreeNodeType.END, rarity)
+                    TreeFormatter.END_INDENTED -> AssetLoader.loadIconFor(TreeNodeType.END_INDENTED, rarity)
                 }
 
                 treeView.addView(createImageView(treeView.context, drawable))

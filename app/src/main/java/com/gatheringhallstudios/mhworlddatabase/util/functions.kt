@@ -47,26 +47,17 @@ fun dpToPx(dp: Int) = (dp * Resources.getSystem().displayMetrics.density).toInt(
 /**
  * Converts an elevation to an alpha value for a material design card overlay
  */
-fun ConvertElevationToAlphaConvert(elevation: Int): Float {
-    if (elevation >= 24) {
-        return 0.48f
-    } else if (elevation >= 16) {
-        return 0.45f
-    } else if (elevation >= 12) {
-        return 0.42f
-    } else if (elevation >= 8) {
-        return 0.36f
-    } else if (elevation >= 6) {
-        return 0.33f
-    } else if (elevation > 4) {
-        return 0.27f
-    } else if (elevation > 3) {
-        return 0.24f
-    } else if (elevation > 2) {
-        return 0.21f
-    } else if (elevation > 1) {
-        return 0.15f
-    } else {
-        return 0f
+fun elevationToAlpha(elevation: Int): Float {
+    return when {
+        elevation >= 24 -> 0.48f
+        elevation >= 16 -> 0.45f
+        elevation >= 12 -> 0.42f
+        elevation >= 8 -> 0.36f
+        elevation >= 6 -> 0.33f
+        elevation > 4 -> 0.27f
+        elevation > 3 -> 0.24f
+        elevation > 2 -> 0.21f
+        elevation > 1 -> 0.15f
+        else -> 0f
     }
 }

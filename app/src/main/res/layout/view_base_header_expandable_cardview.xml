@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
         app:srcCompat="@drawable/ic_ui_defense" />
 
 
@@ -27,6 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/slot_section"
         app:layout_constraintTop_toBottomOf="@+id/icon_defense"
+        android:layout_marginEnd="@dimen/margin_small"
         app:srcCompat="@drawable/ic_ui_slots" />
 
     <ImageView
