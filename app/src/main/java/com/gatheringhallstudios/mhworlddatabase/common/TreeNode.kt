@@ -70,4 +70,22 @@ class TreeNode<T>(val value: T) {
             return parent.path + listOf(this)
         }
     }
+
+    /**
+     * Creates a new TreeNodeType subtree linking up to the path,
+     * returning the root node of that subtree.
+     */
+    fun getPathSubtree(): TreeNode<T> {
+        val path = this.path
+        val root = TreeNode(path[0].value)
+
+        var currentNode = root
+        for (child in path.drop(1)) {
+            val newNode = TreeNode(child.value)
+            currentNode.addChild(newNode)
+            currentNode = newNode
+        }
+
+        return root
+    }
 }

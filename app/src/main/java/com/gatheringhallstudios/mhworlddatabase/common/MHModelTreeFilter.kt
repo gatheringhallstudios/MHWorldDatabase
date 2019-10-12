@@ -2,8 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.common
 
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHParentedModel
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.createTreeRenderList
 
 /**
  * Interface that defines a basic sub filter to the main filter object

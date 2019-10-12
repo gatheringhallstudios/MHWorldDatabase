@@ -1,6 +1,5 @@
-package com.gatheringhallstudios.mhworlddatabase.features.weapons
+package com.gatheringhallstudios.mhworlddatabase.common
 
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHParentedModel
 
@@ -10,28 +9,48 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.MHParentedModel
  */
 enum class TreeFormatter {
     INDENT,
+
+    /** A straight line with no connector. */
+
     STRAIGHT_BRANCH,
     L_BRANCH,
     T_BRANCH,
+
     START,
+
+    /**
+     * A special type of mid node used for entries with the same idepth level as the parent
+     */
+    THROUGH,
 
     /**
      * Added when this branch has children. This is visually replaced when the node is collapsed
      */
     MID,
 
-    END
+    /**
+     * End node used for entries at the same depth level
+     */
+    END,
+
+    /**
+     * End node used when this entry is indented.
+     */
+    END_INDENTED
 }
 
 /**
  * Represents end nodes in the tree that need to be colored
  */
-enum class TreeNode {
+enum class TreeNodeType {
     START,
     START_COLLAPSED,
     MID,
     MID_COLLAPSED,
-    END
+    THROUGH,
+    THROUGH_COLLAPSED,
+    END,
+    END_INDENTED
 }
 
 /**
@@ -39,7 +58,13 @@ enum class TreeNode {
  */
 class RenderedTreeNode<T>(
         val value: T,
+
+        /**
+         * The depth level of this node.
+         * Note that this is the true depth, and not the rendered depth
+         */
         val depth: Int,
+
         val formatter: List<TreeFormatter>,
         val numChildren: Int,
         var isCollapsed: Boolean = false
@@ -61,35 +86,40 @@ fun <T: MHParentedModel> createTreeRenderList(trees: MHModelTree<T>)
  * to find all possible routes and creates the enum representing the tree component structure to be drawn
  */
 fun <T> createTreeRenderList(node: TreeNode<T>, depth: Int = 0, prefix: List<TreeFormatter> = listOf(), isTail: Boolean = true): List<RenderedTreeNode<T>> {
-    if (depth == 0 && node.getChildren().isEmpty()) {
+    val isRoot = node.parent == null
+    val isLeaf = node.getChildren().isEmpty()
+    val isOnlyChild = node.parent?.getChildren()?.size == 1
+
+    if (isRoot && isLeaf) {
         return listOf(RenderedTreeNode(node.value))
     }
 
     val paths: MutableList<RenderedTreeNode<T>> = mutableListOf()
     val formatter = mutableListOf<TreeFormatter>()
 
+    formatter.addAll(prefix)
+
     //The root node gets a special enum to show it is the start node
     val newFormatter = when {
-        depth == 0 -> TreeFormatter.START
+        isRoot -> TreeFormatter.START
+        isOnlyChild -> when {
+            isLeaf -> TreeFormatter.END
+            else -> TreeFormatter.THROUGH
+        }
         isTail -> TreeFormatter.L_BRANCH
         else -> TreeFormatter.T_BRANCH
     }
 
-    formatter.addAll(prefix)
     formatter.add(newFormatter)
 
-    // Complete if this is a leaf.
-    if (node.getChildren().isEmpty()) {
-        if (depth != 0) {
-            formatter.add(TreeFormatter.END)
+    // If the last formatter was an L or T branch, it needs to be followed up
+    if (newFormatter == TreeFormatter.L_BRANCH || newFormatter == TreeFormatter.T_BRANCH) {
+        if (isLeaf) {
+            formatter.add(TreeFormatter.END_INDENTED)
+        } else  {
+            formatter.add(TreeFormatter.MID)
         }
-        paths.add(RenderedTreeNode(node.value, depth, formatter, node.nestedChildrenCount))
-        return paths
     }
-
-    //Root nodes are treated specially because of the way they are to be drawn on the UI
-    //They do not receive mid nodes (even though they obviously have children)
-    if (depth > 0) formatter.add(TreeFormatter.MID)
 
     val resultNode = RenderedTreeNode(node.value, depth, formatter, node.nestedChildrenCount)
     paths.add(resultNode)
@@ -97,11 +127,9 @@ fun <T> createTreeRenderList(node: TreeNode<T>, depth: Int = 0, prefix: List<Tre
     node.getChildren().forEachIndexed { index, it ->
         val nextPrefix = prefix.toMutableList()
 
-        if (isTail) {
-            if (depth != 0) { //Only add the indent if this is not a root tree element
-                nextPrefix.add(TreeFormatter.INDENT)
-            }
-        } else {
+        if (!isRoot && isTail && !isOnlyChild) {
+            nextPrefix.add(TreeFormatter.INDENT)
+        } else if (!isRoot && !isOnlyChild) {
             nextPrefix.add(TreeFormatter.STRAIGHT_BRANCH)
         }
 
