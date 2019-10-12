@@ -64,6 +64,14 @@
                 android:id="@+id/aboutDestination"
                 android:icon="@drawable/ic_ui_mascot"
                 android:title="@string/title_about" />
+
+            <!-- TEST DESTINATIONS
+            <item
+                android:id="@+id/testDestination"
+                android:icon="@drawable/ic_ui_mascot"
+                android:title="Test Decos" />
+            -->
+
         </menu>
     </group>
 

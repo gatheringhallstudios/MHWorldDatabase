@@ -364,4 +364,19 @@
         app:popEnterAnim="@anim/nav_enter_left"
         app:popExitAnim="@anim/nav_exit_right" />
 
+    <!-- TEST DESTINATIONS -->
+
+    <fragment
+        android:id="@+id/testDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.test.DecorationTestFragment"
+        android:label="About"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/testAction"
+        app:destination="@id/testDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
 </navigation>

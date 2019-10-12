@@ -48,10 +48,12 @@ val VectorRegistry = createRegistry(
         "Decoration1" to R.xml.ic_ui_decoration_1_base,
         "Decoration2" to R.xml.ic_ui_decoration_2_base,
         "Decoration3" to R.xml.ic_ui_decoration_3_base,
+        "Decoration4" to R.xml.ic_ui_decoration_4_base,
 
-        "Slot1" to R.xml.ic_ui_slot_1_filled_base,
-        "Slot2" to R.xml.ic_ui_slot_2_filled_base,
-        "Slot3" to R.xml.ic_ui_slot_3_filled_base,
+        "Slot1" to R.drawable.ic_ui_slot_1_empty,
+        "Slot2" to R.drawable.ic_ui_slot_2_empty,
+        "Slot3" to R.drawable.ic_ui_slot_3_empty,
+        "Slot4" to R.drawable.ic_ui_slot_4_empty,
 
         "Slot1Jewel1" to R.xml.ic_ui_slot_1_jewel_1_base,
         "Slot2Jewel1" to R.xml.ic_ui_slot_2_jewel_1_base,
