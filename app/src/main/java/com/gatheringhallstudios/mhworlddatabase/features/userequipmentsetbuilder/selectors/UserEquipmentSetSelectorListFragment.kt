@@ -12,12 +12,15 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.SpacesItemDecoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.label_text
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
@@ -233,20 +236,20 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         active_equipment_slot.slot3_detail.visibility = View.GONE
 
         if (!slots.isEmpty()) {
-            active_equipment_slot.decorations_section.visibility = View.VISIBLE
-            slots.active.forEachIndexed { idx, _ ->
+            slots.active.forEachIndexed { idx, value ->
                 when (idx + 1) {
-                    1 -> active_equipment_slot.slot1_detail.visibility = View.VISIBLE
-                    2 -> active_equipment_slot.slot2_detail.visibility = View.VISIBLE
-                    3 -> active_equipment_slot.slot3_detail.visibility = View.VISIBLE
-                }
-            }
-
-            for (userDecoration in userWeapon.decorations) {
-                when (userDecoration.slotNumber) {
-                    1 -> populateSlot1(active_equipment_slot, userDecoration.decoration)
-                    2 -> populateSlot2(active_equipment_slot, userDecoration.decoration)
-                    3 -> populateSlot3(active_equipment_slot, userDecoration.decoration)
+                    1 -> {
+                        active_equipment_slot.slot1.visibility = View.VISIBLE
+                        active_equipment_slot.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                    }
+                    2 -> {
+                        active_equipment_slot.slot2.visibility = View.VISIBLE
+                        active_equipment_slot.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                    }
+                    3 -> {
+                        active_equipment_slot.slot3.visibility = View.VISIBLE
+                        active_equipment_slot.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                    }
                 }
             }
         }
@@ -254,6 +257,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
     private fun populateActiveArmor(userArmor: UserArmorPiece) {
         val armor = userArmor.armor
+        val slots = userArmor.armor.armor.slots
+
         active_equipment_slot.equipment_name.text = armor.armor.name
         active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
         active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
@@ -273,20 +278,20 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         active_equipment_slot.slot3_detail.visibility = View.GONE
 
         if (!armor.armor.slots.isEmpty()) {
-            active_equipment_slot.decorations_section.visibility = View.VISIBLE
-            userArmor.armor.armor.slots.active.forEachIndexed { idx, _ ->
+            slots.active.forEachIndexed { idx, value ->
                 when (idx + 1) {
-                    1 -> active_equipment_slot.slot1_detail.visibility = View.VISIBLE
-                    2 -> active_equipment_slot.slot2_detail.visibility = View.VISIBLE
-                    3 -> active_equipment_slot.slot3_detail.visibility = View.VISIBLE
-                }
-            }
-
-            for (userDecoration in userArmor.decorations) {
-                when (userDecoration.slotNumber) {
-                    1 -> populateSlot1(active_equipment_slot, userDecoration.decoration)
-                    2 -> populateSlot2(active_equipment_slot, userDecoration.decoration)
-                    3 -> populateSlot3(active_equipment_slot, userDecoration.decoration)
+                    1 -> {
+                        active_equipment_slot.slot1.visibility = View.VISIBLE
+                        active_equipment_slot.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                    }
+                    2 -> {
+                        active_equipment_slot.slot2.visibility = View.VISIBLE
+                        active_equipment_slot.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                    }
+                    3 -> {
+                        active_equipment_slot.slot3.visibility = View.VISIBLE
+                        active_equipment_slot.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                    }
                 }
             }
         }
@@ -336,27 +341,6 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         active_equipment_slot.slot1.visibility = View.GONE
         active_equipment_slot.slot2.visibility = View.GONE
         active_equipment_slot.slot3.visibility = View.GONE
-    }
-
-    private fun populateSlot1(view: View, decoration: Decoration) {
-        view.slot1.setImageDrawable(AssetLoader.loadIconFor(decoration))
-        view.slot1_detail.visibility = View.VISIBLE
-        view.slot1_detail.setLabelText(decoration.name)
-        view.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
-    }
-
-    private fun populateSlot2(view: View, decoration: Decoration) {
-        view.slot2.setImageDrawable(AssetLoader.loadIconFor(decoration))
-        view.slot2_detail.visibility = View.VISIBLE
-        view.slot2_detail.setLabelText(decoration.name)
-        view.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
-    }
-
-    private fun populateSlot3(view: View, decoration: Decoration) {
-        view.slot3.setImageDrawable(AssetLoader.loadIconFor(decoration))
-        view.slot3_detail.visibility = View.VISIBLE
-        view.slot3_detail.setLabelText(decoration.name)
-        view.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
     }
 
     private fun populateSkills(skills: List<SkillLevel>, skillLayout: LinearLayout) {
