@@ -10,6 +10,14 @@ apply plugin: 'kotlin-kapt'
 def DATABASE_VERSION = 31
 
 android {
+    signingConfigs {
+        release {
+            storeFile file(GHSStoreFile)
+            storePassword GHSStorePW
+            keyAlias = GHSKeyAlias
+            keyPassword GHSKeyPW
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.gatheringhallstudios.mhworlddatabase"
@@ -27,9 +35,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("int", "DB_VERSION", "${DATABASE_VERSION}")
+
+            // Debug flag usable through R.bool.DEBUG
+            resValue "bool", "DEBUG", "false"
+
+            signingConfig signingConfigs.release
         }
         debug {
             buildConfigField("int", "DB_VERSION", "${DATABASE_VERSION}")
+
+            // Debug flag usable through R.bool.DEBUG
+            resValue "bool", "DEBUG", "true"
         }
     }
     compileOptions {
