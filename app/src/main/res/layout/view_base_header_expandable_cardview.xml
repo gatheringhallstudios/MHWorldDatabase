@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     app:cardCornerRadius="5dp"
     android:id="@+id/header_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/row_height_large"
-    >
+    android:layout_height="@dimen/row_height_large">
     <!-- Right Side -->
     <ImageView
         android:id="@+id/icon_defense"
@@ -33,8 +31,10 @@
 
     <ImageView
         android:id="@+id/equipment_icon"
-        style="@style/IconMedium.Decorated"
+        style="@style/IconLarge.Decorated"
         android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
