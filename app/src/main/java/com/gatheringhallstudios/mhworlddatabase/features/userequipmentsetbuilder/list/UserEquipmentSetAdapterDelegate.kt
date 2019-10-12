@@ -55,7 +55,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
 
         if (viewHolder is EquipmentSetHolder) {
             (viewHolder.view as ExpandableCardView).setOnClick { onSelect(userEquipmentSet) }
-            viewHolder.view.resetState()
+//            viewHolder.view.resetState()
             viewHolder.view.setOnSwipeRight {
                 onDelete(userEquipmentSet, position, this)
                 notifyItemRemoved(position)
