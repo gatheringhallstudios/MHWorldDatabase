@@ -109,8 +109,6 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
         }
 
-        populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
-        populateSkills(emptyList(), active_equipment_slot.skill_section)
         //If this is going to be new piece of armor, do not populate the active armor piece
         if (activeArmorPiece != null) {
             populateActiveArmor(activeArmorPiece)
@@ -199,7 +197,6 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
         }
 
-        active_equipment_slot.setHeader(R.layout.view_weapon_header_expandable_cardview)
         if (activeWeapon != null) {
             populateActiveWeapon(activeWeapon)
         }
@@ -220,6 +217,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val skills = userWeapon.weapon.skills
         val slots = userWeapon.weapon.weapon.slots
         active_equipment_slot.setHeader(R.layout.view_weapon_header_expandable_cardview)
+        active_equipment_slot.setBody(R.layout.view_base_body_expandable_cardview)
         active_equipment_slot.equipment_name.text = weapon.name
         active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
         active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
@@ -258,6 +256,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val armor = userArmor.armor
         val slots = userArmor.armor.armor.slots
 
+        active_equipment_slot.setHeader(R.layout.view_base_header_expandable_cardview)
+        active_equipment_slot.setBody(R.layout.view_base_body_expandable_cardview)
         active_equipment_slot.equipment_name.text = armor.armor.name
         active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
         active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
@@ -298,6 +298,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
     private fun populateActiveCharm(userCharm: UserCharm) {
         val charm = userCharm.charm.charm
+        active_equipment_slot.setHeader(R.layout.view_base_header_expandable_cardview)
+        active_equipment_slot.setBody(R.layout.view_base_body_expandable_cardview)
 
         active_equipment_slot.equipment_name.text = charm.name
         active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, charm.rarity)
@@ -320,6 +322,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
     private fun populateActiveDecoration(userDecoration: UserDecoration) {
         val decoration = userDecoration.decoration
+        active_equipment_slot.setHeader(R.layout.view_base_header_expandable_cardview)
+        active_equipment_slot.setBody(R.layout.view_base_body_expandable_cardview)
 
         active_equipment_slot.equipment_name.text = decoration.name
         active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, decoration.rarity)

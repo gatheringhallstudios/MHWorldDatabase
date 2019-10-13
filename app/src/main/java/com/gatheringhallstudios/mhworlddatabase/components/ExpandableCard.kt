@@ -135,6 +135,11 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
     fun setBody(layout: Int) {
+        if(layout == 0) {
+            card_body.removeAllViews()
+            return
+        }
+
         val inflater = context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         card_body.removeAllViews()
