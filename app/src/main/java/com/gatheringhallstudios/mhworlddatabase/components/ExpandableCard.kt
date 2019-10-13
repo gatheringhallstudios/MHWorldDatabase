@@ -266,25 +266,17 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                     }
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (swipeLeftEnabled || swipeRightEnabled) animateViews(dx.toInt(), (-1 * dx).toInt())
-
-                    if (swipeRightEnabled && dx > 175) {
-                        onSwipeRight()
-                    } else if (swipeLeftEnabled && dx < -175) {
-                        onSwipeLeft()
-                    } else if (dx == 0f) {
-                        onClick()
-                    }
-
+                    if (dx == 0f) onClick()
+                    else if (swipeLeftEnabled || swipeRightEnabled) animateViews(dx.toInt(), (-1 * dx).toInt(), onSwipeLeft, onSwipeRight)
                 }
                 MotionEvent.ACTION_CANCEL -> {
-                    if (swipeLeftEnabled || swipeRightEnabled) animateViews(dx.toInt(), (-1 * dx).toInt())
+                    if (swipeLeftEnabled || swipeRightEnabled) animateViews(dx.toInt(), (-1 * dx).toInt(), onSwipeLeft, onSwipeRight)
                 }
             }
             return false
         }
 
-        private fun animateViews(initialX: Int, distance: Int) {
+        private fun animateViews(initialX: Int, distance: Int, onSwipeLeft: () -> Unit, onSwipeRight: () -> Unit) {
             val reboundAnimation = object : Animation() {
                 override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
                     if (distance < 0 && swipeRightEnabled) {
@@ -298,6 +290,24 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                     right_view.requestLayout()
                 }
             }
+
+            reboundAnimation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    if (distance < -175 && swipeRightEnabled) {
+                        onSwipeRight()
+                    } else if (distance > 175 && swipeLeftEnabled) {
+                        onSwipeLeft()
+                    }
+                }
+            })
 
             reboundAnimation.duration = reboundAnimationDuration.toLong()
             left_view.startAnimation(reboundAnimation)

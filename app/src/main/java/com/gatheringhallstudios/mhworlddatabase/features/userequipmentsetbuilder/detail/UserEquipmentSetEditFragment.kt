@@ -18,6 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -189,6 +190,15 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         user_equipment_charm_slot.setOnClick {
             viewModel.setActiveUserEquipment(userCharm)
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, userCharm, userEquipmentSetId, null, null)
+        }
+        user_equipment_charm_slot.setOnSwipeRight {
+            viewModel.activeUserEquipmentSet.value?.equipment?.remove(userCharm)
+            viewModel.deleteUserEquipment(userCharm.entityId(), userEquipmentSetId, userCharm.type())
+//            val currentFragment = activity!!.supportFragmentManager.
+//            val fragmentTransaction = fragmentManager!!.beginTransaction()
+//            fragmentTransaction.detach(currentFragment!!)
+//            fragmentTransaction.attach(currentFragment)
+//            fragmentTransaction.commit()
         }
 
         hideDefense(user_equipment_charm_slot)
@@ -476,6 +486,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         user_equipment_weapon_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, null, userEquipmentSetId, null, null)
         }
+
         populateSkills(emptyList(), user_equipment_weapon_slot.skill_section)
         populateSetBonuses(emptyList(), user_equipment_weapon_slot.set_bonus_section)
         populateDecorations(null, userEquipmentSetId, user_equipment_weapon_slot)
@@ -529,12 +540,30 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             viewModel.setActiveUserEquipment(armorPiece)
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, armor.armor_type, null)
         }
+        layout.setOnSwipeRight {
+            viewModel.activeUserEquipmentSet.value?.equipment?.remove(armorPiece)
+            viewModel.deleteUserEquipment(armorPiece.entityId(), userEquipmentSetId, armorPiece.type())
+            val currentFragment = this
+            val fragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.detach(currentFragment)
+            fragmentTransaction.attach(currentFragment)
+            fragmentTransaction.commit()
+        }
     }
 
     private fun attachWeaponOnClickListeners(userWeapon: UserWeapon, userEquipmentSetId: Int, layout: ExpandableCardView) {
         layout.setOnClick {
             viewModel.setActiveUserEquipment(userWeapon)
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, userWeapon, userEquipmentSetId, null, null)
+        }
+        layout.setOnSwipeRight {
+            viewModel.activeUserEquipmentSet.value?.equipment?.remove(userWeapon)
+            viewModel.deleteUserEquipment(userWeapon.entityId(), userEquipmentSetId, userWeapon.type())
+            val currentFragment = this
+            val fragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.detach(currentFragment)
+            fragmentTransaction.attach(currentFragment)
+            fragmentTransaction.commit()
         }
     }
 

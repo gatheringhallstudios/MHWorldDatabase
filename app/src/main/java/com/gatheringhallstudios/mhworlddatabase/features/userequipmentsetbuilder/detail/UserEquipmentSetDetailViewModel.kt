@@ -4,14 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserArmorPiece
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserWeapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewModel(application) {
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
@@ -40,6 +36,15 @@ class UserEquipmentSetDetailViewModel(application: Application) : AndroidViewMod
         runBlocking {
             withContext(Dispatchers.IO) {
                 appDao.renameUserEquipmentSet(name, userEquipmentSetId)
+            }
+        }
+    }
+
+    fun deleteUserEquipment(userEquipmentId: Int, userEquipmentSetId: Int, type: DataType) {
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                appDao.deleteUserEquipmentEquipment(userEquipmentId, type, userEquipmentSetId)
+                appDao.deleteUserEquipmentDecorations(userEquipmentSetId, userEquipmentId, type)
             }
         }
     }
