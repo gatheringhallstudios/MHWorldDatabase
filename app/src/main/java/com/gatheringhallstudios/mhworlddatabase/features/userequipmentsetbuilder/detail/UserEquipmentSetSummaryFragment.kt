@@ -1,6 +1,5 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -71,7 +70,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_dragon_value.text = userEquipmentSet.dragonDefense.toString()
 
         userEquipmentSet.equipment.filter { it.type() == DataType.WEAPON }.forEach { populateWeapon(it as UserWeapon, showTrueAttackValues) }
-        userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.forEach { populateArmorSetPieces(it as UserArmorPiece) }
+        userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.sortedWith(compareBy { (it as UserArmorPiece).armor.armor.armor_type }).forEach { populateArmorSetPieces(it as UserArmorPiece) }
         populateArmorSkills(userEquipmentSet.skills)
         userEquipmentSet.setBonuses.forEach {
             populateArmorSetBonusName(it.key)

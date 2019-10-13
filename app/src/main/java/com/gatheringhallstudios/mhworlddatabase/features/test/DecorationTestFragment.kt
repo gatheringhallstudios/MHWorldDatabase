@@ -26,19 +26,19 @@ class DecorationTestFragment : Fragment() {
         view.deco4.setImageDrawable(AssetLoader.loadIconFor(DecorationBase(4, "Test", 4, "Green")))
 
         // Add variations of slots
-        view.slot1_deco1.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 1, "Green"), 1))
-        view.slot2_deco1.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 1, "Green"), 2))
-        view.slot3_deco1.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 1, "Green"), 3))
-        view.slot4_deco1.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 1, "Green"), 4))
+        view.slot1_deco1.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 1, "Green"), 1))
+        view.slot2_deco1.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 1, "Green"), 2))
+        view.slot3_deco1.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 1, "Green"), 3))
+        view.slot4_deco1.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 1, "Green"), 4))
 
-        view.slot2_deco2.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 2, "Green"), 2))
-        view.slot3_deco2.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 2, "Green"), 3))
-        view.slot4_deco2.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 2, "Green"), 4))
+        view.slot2_deco2.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 2, "Green"), 2))
+        view.slot3_deco2.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 2, "Green"), 3))
+        view.slot4_deco2.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 2, "Green"), 4))
 
-        view.slot3_deco3.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 3, "Green"), 3))
-        view.slot4_deco3.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 3, "Green"), 4))
+        view.slot3_deco3.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 3, "Green"), 3))
+        view.slot4_deco3.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 3, "Green"), 4))
 
-        view.slot4_deco4.setImageDrawable(AssetLoader.loadColoredSlotIcon(DecorationBase(0, "", 4, "Green"), 4))
+        view.slot4_deco4.setImageDrawable(AssetLoader.loadFilledSlotIcon(DecorationBase(0, "", 4, "Green"), 4))
 
         return view
     }

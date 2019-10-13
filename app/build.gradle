@@ -166,10 +166,12 @@ dependencies {
     implementation 'androidx.viewpager:viewpager:1.0.0'
 
     /*
-    View pager dots extension
+    View pager extension
      */
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
     implementation 'androidx.viewpager2:viewpager2:1.0.0-beta05'
+
+    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
 }
 
 apply plugin: 'de.undercouch.download'

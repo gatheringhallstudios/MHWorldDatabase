@@ -3,14 +3,12 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
-import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
@@ -20,6 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -131,9 +130,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 }
                 DataType.CHARM -> {
                     populateCharm(it as UserCharm, userEquipmentSet.id)
-                    user_equipment_charm_slot.setOnClick {
-                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, it, userEquipmentSet.id, null, null)
-                    }
                 }
                 else -> {
                 } //Skip
@@ -162,6 +158,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             }
         }
 
+        layout.setHeader(R.layout.view_base_header_expandable_cardview)
+        layout.setBody(R.layout.view_base_body_expandable_cardview)
+        populateSkills(emptyList(), layout.skill_section)
+        populateSetBonuses(emptyList(), layout.set_bonus_section)
+        populateDecorations(null, userEquipmentSetId, layout)
+
         layout.card_header.equipment_name.text = armor.armor.name
         layout.card_header.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
         layout.card_header.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
@@ -170,14 +172,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         layout.card_header.defense_value.text = getString(R.string.armor_defense_value, armor.armor.defense_base, armor.armor.defense_max, armor.armor.defense_augment_max)
 
         //Combine the skills from the armor piece and the decorations
-        val skillsList: MutableList<SkillLevel> = ArrayList()
-        skillsList.addAll(armor.skills)
-        skillsList.addAll(userArmor.decorations.map {
+        val skillsList = combineEquipmentSkillsWithDecorationSkills(armor.skills, userArmor.decorations.map {
             val skillLevel = SkillLevel(level = 1)
             skillLevel.skillTree = it.decoration.skillTree
             skillLevel
         })
-        skillsList.sortWith(compareByDescending<SkillLevel> {it.level}.thenBy {it.skillTree.id})
 
         populateSkills(skillsList, layout.skill_section)
         populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
@@ -186,6 +185,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     }
 
     private fun populateCharm(userCharm: UserCharm, userEquipmentSetId: Int) {
+        (user_equipment_charm_slot as ExpandableCardView).setHeader(R.layout.view_base_header_expandable_cardview)
+        user_equipment_charm_slot.setBody(R.layout.view_base_body_expandable_cardview)
+        populateSkills(emptyList(), user_equipment_charm_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_charm_slot.set_bonus_section)
+        populateDecorations(null, userEquipmentSetId, user_equipment_charm_slot)
+
         user_equipment_charm_slot.card_header.equipment_name.text = userCharm.charm.charm.name
         user_equipment_charm_slot.card_header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
         user_equipment_charm_slot.card_header.rarity_string.text = getString(R.string.format_rarity, userCharm.charm.charm.rarity)
@@ -195,6 +200,15 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             viewModel.setActiveUserEquipment(userCharm)
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, userCharm, userEquipmentSetId, null, null)
         }
+        user_equipment_charm_slot.setOnSwipeRight {
+            viewModel.activeUserEquipmentSet.value?.equipment?.remove(userCharm)
+            viewModel.deleteUserEquipment(userCharm.entityId(), userEquipmentSetId, userCharm.type())
+            val currentFragment = this
+            val fragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.detach(currentFragment)
+            fragmentTransaction.attach(currentFragment)
+            fragmentTransaction.commit()
+        }
 
         hideDefense(user_equipment_charm_slot)
         hideSlots(user_equipment_charm_slot)
@@ -202,16 +216,20 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     }
 
     private fun populateWeapon(userWeapon: UserWeapon, userEquipmentSetId: Int) {
+        (user_equipment_weapon_slot as ExpandableCardView).setHeader(R.layout.view_weapon_header_expandable_cardview)
+        user_equipment_weapon_slot.setBody(R.layout.view_base_body_expandable_cardview)
+        populateSkills(emptyList(), user_equipment_weapon_slot.skill_section)
+        populateSetBonuses(emptyList(), user_equipment_weapon_slot.set_bonus_section)
+        populateDecorations(null, userEquipmentSetId, user_equipment_weapon_slot)
+
         val weapon = userWeapon.weapon.weapon
         user_equipment_weapon_slot.card_header.equipment_name.text = weapon.name
         user_equipment_weapon_slot.card_header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
         user_equipment_weapon_slot.card_header.rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
         user_equipment_weapon_slot.card_header.rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
+        user_equipment_weapon_slot.card_header.rarity_string.visibility = View.VISIBLE
         user_equipment_weapon_slot.card_header.attack_value.text = weapon.attack.toString()
-
-        val skillsList: MutableList<SkillLevel> = ArrayList()
-        skillsList.addAll(userWeapon.weapon.skills)
-        skillsList.addAll(userWeapon.decorations.map {
+        val skillsList = combineEquipmentSkillsWithDecorationSkills(userWeapon.weapon.skills, userWeapon.decorations.map {
             val skillLevel = SkillLevel(level = 1)
             skillLevel.skillTree = it.decoration.skillTree
             skillLevel
@@ -222,52 +240,49 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         attachWeaponOnClickListeners(userWeapon, userEquipmentSetId, user_equipment_weapon_slot)
     }
 
-    private fun populateSlot1(layout: View, decoration: Decoration?, slot: Int?) {
-        if (decoration != null && slot != null) {
-            layout.card_header.slot1.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+    private fun populateSlot1(layout: View, decoration: Decoration?, slot: Int) {
+        layout.card_body.slot1_detail.removeDecorator()
+
+        if (decoration != null) {
+            layout.card_header.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
             layout.card_body.slot1_detail.visibility = View.VISIBLE
             layout.card_body.slot1_detail.setLabelText(decoration.name)
-            layout.card_body.slot1_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
-        } else if (slot != null) {
-            layout.card_header.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(slot))
-            layout.card_body.slot1_detail.visibility = View.VISIBLE
+            layout.card_body.slot1_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
         } else {
-            layout.card_header.slot1.setImageDrawable(context!!.getDrawableCompat(R.drawable.ic_ui_slot_none))
-            layout.card_body.slot1_detail.setLeftIconDrawable(null)
+            layout.card_header.slot1.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
+            layout.card_body.slot1_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot1_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot1_detail.visibility = View.GONE
         }
     }
 
-    private fun populateSlot2(layout: View, decoration: Decoration?, slot: Int?) {
-        if (decoration != null && slot != null) {
-            layout.card_header.slot2.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+    private fun populateSlot2(layout: View, decoration: Decoration?, slot: Int) {
+        layout.card_body.slot2_detail.removeDecorator()
+
+        if (decoration != null) {
+            layout.card_header.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
             layout.card_body.slot2_detail.visibility = View.VISIBLE
             layout.card_body.slot2_detail.setLabelText(decoration.name)
-            layout.card_body.slot2_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
-        } else if (slot != null) {
-            layout.card_header.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(slot))
-            layout.card_body.slot2_detail.visibility = View.VISIBLE
+            layout.card_body.slot2_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
         } else {
-            layout.card_header.slot2.setImageDrawable(context!!.getDrawableCompat(R.drawable.ic_ui_slot_none))
-            layout.card_body.slot2_detail.setLeftIconDrawable(null)
+            layout.card_header.slot2.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
+            layout.card_body.slot2_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot2_detail.visibility = View.GONE
         }
     }
 
-    private fun populateSlot3(layout: View, decoration: Decoration?, slot: Int?) {
-        if (decoration != null && slot != null) {
-            layout.card_header.slot3.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+    private fun populateSlot3(layout: View, decoration: Decoration?, slot: Int) {
+        layout.card_body.slot3_detail.removeDecorator()
+
+        if (decoration != null) {
+            layout.card_header.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
             layout.card_body.slot3_detail.visibility = View.VISIBLE
             layout.card_body.slot3_detail.setLabelText(decoration.name)
-            layout.card_body.slot3_detail.setLeftIconDrawable(AssetLoader.loadIconFor(decoration))
-        } else if (slot != null) {
-            layout.card_header.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(slot))
-            layout.card_body.slot3_detail.visibility = View.VISIBLE
+            layout.card_body.slot3_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
         } else {
-            layout.card_header.slot3.setImageDrawable(context!!.getDrawableCompat(R.drawable.ic_ui_slot_none))
-            layout.card_body.slot3_detail.setLeftIconDrawable(null)
+            layout.card_header.slot3.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
+            layout.card_body.slot3_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot3_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot3_detail.visibility = View.GONE
         }
@@ -346,10 +361,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
     private fun populateDecorations(userEquipment: UserEquipment?, userEquipmentSetId: Int, layout: View) {
         layout.decorations_section.visibility = View.GONE
-        populateSlot1(layout, null, null)
-        populateSlot2(layout, null, null)
-        populateSlot3(layout, null, null)
-
+        layout.decorations_section.slot1_detail.visibility = View.GONE
+        layout.decorations_section.slot2_detail.visibility = View.GONE
+        layout.decorations_section.slot3_detail.visibility = View.GONE
         val slots = if ((userEquipment as? UserArmorPiece) != null) {
             userEquipment.armor.armor.slots
         } else if ((userEquipment as? UserWeapon) != null) {
@@ -487,51 +501,30 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         user_equipment_weapon_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, null, userEquipmentSetId, null, null)
         }
-        populateSkills(emptyList(), user_equipment_weapon_slot.skill_section)
-        populateSetBonuses(emptyList(), user_equipment_weapon_slot.set_bonus_section)
-        populateDecorations(null, userEquipmentSetId, user_equipment_weapon_slot)
 
         user_equipment_head_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.HEAD, null)
         }
-        populateSkills(emptyList(), user_equipment_head_slot.skill_section)
-        populateSetBonuses(emptyList(), user_equipment_head_slot.set_bonus_section)
-        populateDecorations(null, userEquipmentSetId, user_equipment_head_slot)
 
         user_equipment_chest_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.CHEST, null)
         }
-        populateSkills(emptyList(), user_equipment_chest_slot.skill_section)
-        populateSetBonuses(emptyList(), user_equipment_chest_slot.set_bonus_section)
-        populateDecorations(null, userEquipmentSetId, user_equipment_chest_slot)
 
         user_equipment_arms_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.ARMS, null)
         }
-        populateSkills(emptyList(), user_equipment_arms_slot.skill_section)
-        populateSetBonuses(emptyList(), user_equipment_arms_slot.set_bonus_section)
-        populateDecorations(null, userEquipmentSetId, user_equipment_arms_slot)
 
         user_equipment_waist_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.WAIST, null)
         }
-        populateSkills(emptyList(), user_equipment_waist_slot.skill_section)
-        populateSetBonuses(emptyList(), user_equipment_waist_slot.set_bonus_section)
-        populateDecorations(null, userEquipmentSetId, user_equipment_waist_slot)
 
         user_equipment_legs_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.LEGS, null)
         }
-        populateSkills(emptyList(), user_equipment_legs_slot.skill_section)
-        populateSetBonuses(emptyList(), user_equipment_legs_slot.set_bonus_section)
-        populateDecorations(null, userEquipmentSetId, user_equipment_legs_slot)
 
         user_equipment_charm_slot.setOnClick {
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, null, userEquipmentSetId, null, null)
         }
-        populateSkills(emptyList(), user_equipment_charm_slot.skill_section)
-        populateSetBonuses(emptyList(), user_equipment_charm_slot.set_bonus_section)
-        populateDecorations(null, userEquipmentSetId, user_equipment_charm_slot)
     }
 
     private fun attachArmorOnClickListeners(armorPiece: UserArmorPiece, userEquipmentSetId: Int, layout: ExpandableCardView) {
@@ -540,6 +533,15 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             viewModel.setActiveUserEquipment(armorPiece)
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armorPiece, userEquipmentSetId, armor.armor_type, null)
         }
+        layout.setOnSwipeRight {
+            viewModel.activeUserEquipmentSet.value?.equipment?.remove(armorPiece)
+            viewModel.deleteUserEquipment(armorPiece.entityId(), userEquipmentSetId, armorPiece.type())
+            val currentFragment = this
+            val fragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.detach(currentFragment)
+            fragmentTransaction.attach(currentFragment)
+            fragmentTransaction.commit()
+        }
     }
 
     private fun attachWeaponOnClickListeners(userWeapon: UserWeapon, userEquipmentSetId: Int, layout: ExpandableCardView) {
@@ -547,5 +549,31 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             viewModel.setActiveUserEquipment(userWeapon)
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, userWeapon, userEquipmentSetId, null, null)
         }
+        layout.setOnSwipeRight {
+            viewModel.activeUserEquipmentSet.value?.equipment?.remove(userWeapon)
+            viewModel.deleteUserEquipment(userWeapon.entityId(), userEquipmentSetId, userWeapon.type())
+            val currentFragment = this
+            val fragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.detach(currentFragment)
+            fragmentTransaction.attach(currentFragment)
+            fragmentTransaction.commit()
+        }
+    }
+
+    private fun combineEquipmentSkillsWithDecorationSkills(armorSkills: List<SkillLevel>, decorationSkills: List<SkillLevel>): List<SkillLevel> {
+        val skills = armorSkills.associateBy({ it.skillTree.id }, { it }).toMutableMap()
+        for (skill in decorationSkills) {
+            if (skills.containsKey(skill.skillTree.id)) {
+                val level = skills.getValue(skill.skillTree.id).level + skill.level
+                val skillLevel = SkillLevel(level)
+                skillLevel.skillTree = skill.skillTree
+                skills[skill.skillTree.id] = skillLevel
+            } else {
+                skills[skill.skillTree.id] = skill
+            }
+        }
+        val result = skills.values.toMutableList()
+        result.sortWith(compareByDescending<SkillLevel> { it.level }.thenBy { it.skillTree.id })
+        return result
     }
 }

@@ -26,6 +26,8 @@
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
         app:cardViewElevation="2"
-        app:clickable="false" />
+        app:clickable="false"
+        app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
+        app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview" />
 
 </RelativeLayout>

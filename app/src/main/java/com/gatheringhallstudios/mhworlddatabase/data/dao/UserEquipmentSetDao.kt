@@ -66,6 +66,18 @@ abstract class UserEquipmentSetDao {
     """)
     abstract fun deleteUserEquipmentSet(equipmentSetId: Int)
 
+    @Query("""
+        DELETE FROM user_equipment_set_equipment
+        WHERE equipmentSetId = :equipmentSetId
+    """)
+    abstract fun deleteUserEquipmentSetEquipment(equipmentSetId: Int)
+
+    @Query("""
+        DELETE FROM user_equipment_set_decorations
+        WHERE equipmentSetId = :equipmentSetId
+    """)
+    abstract fun deleteUserEquipmentSetDecorations(equipmentSetId: Int)
+
     @Query("""INSERT INTO user_equipment_sets VALUES (NULL, :name)""")
     abstract fun createUserEquipmentSet(name: String): Long
 
@@ -77,9 +89,6 @@ abstract class UserEquipmentSetDao {
 
     @Query("""DELETE FROM user_equipment_set_equipment WHERE dataId = :dataId AND dataType = :type AND equipmentSetId = :equipmentSetId""")
     abstract fun deleteUserEquipmentEquipment(dataId: Int, type: DataType, equipmentSetId: Int)
-
-    @Query("""DELETE FROM user_equipment_set_equipment """)
-    abstract fun deleteUserEquipmentEquipment()
 
     @Query("""INSERT INTO user_equipment_set_decorations VALUES (NULL, :equipmentSetId, :dataId, :dataType, :decorationId, :slotNumber)""")
     abstract fun createUserEquipmentDecoration(equipmentSetId: Int, dataId: Int, slotNumber: Int, dataType: DataType, decorationId: Int)
