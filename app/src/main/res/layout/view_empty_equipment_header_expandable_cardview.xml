@@ -10,22 +10,21 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/new_equipment_set_label"
-        style="@style/TextHeadlineHigh"
+        style="@style/TextBodyMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:layout_marginBottom="@dimen/margin_medium"
         android:gravity="center_vertical"
         android:maxLines="1"
-        android:text="@string/user_equipment_set_new_set"
+        android:text="@string/user_equipment_set_no_equipment"
         app:autoSizeMinTextSize="14dp"
         app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/equipment_set_icon2"
-        app:layout_constraintTop_toTopOf="@+id/equipment_set_icon2"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="+ Create a Set" />
+        tools:text="No Equipment" />
 
     <ImageView
         android:id="@+id/equipment_set_icon2"

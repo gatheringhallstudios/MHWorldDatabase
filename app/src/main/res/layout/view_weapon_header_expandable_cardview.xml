@@ -31,8 +31,10 @@
 
     <ImageView
         android:id="@+id/equipment_icon"
-        style="@style/IconMedium.Decorated"
+        style="@style/IconLarge.Decorated"
         android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -80,17 +82,23 @@
         android:layout_marginBottom="@dimen/margin_small"
         tools:text="68~120" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/equipment_name"
         style="@style/TextBodyHigh"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
+        android:gravity="center_vertical"
+        android:maxLines="2"
         android:text="@string/user_equipment_set_no_equipment"
+        app:autoSizeMinTextSize="14dp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/rarity_string"
+        app:layout_constraintEnd_toStartOf="@+id/icon_attack"
         app:layout_constraintStart_toEndOf="@id/equipment_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Azure Rathalos Long Text Wrap gfsfgsfdgsfgsfdg" />
 
     <TextView
         android:id="@+id/rarity_string"

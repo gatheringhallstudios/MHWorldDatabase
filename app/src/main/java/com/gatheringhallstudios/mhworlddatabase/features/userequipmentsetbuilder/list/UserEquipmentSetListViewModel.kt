@@ -30,6 +30,16 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
         return convertEquipmentSetIdToEquipmentSet(appDao.loadUserEquipmentSetIds(newId.toInt()))
     }
 
+    fun deleteEquipmentSet(userEquipmentSet: UserEquipmentSet) {
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                appDao.deleteUserEquipmentSet(userEquipmentSet.id)
+                appDao.deleteUserEquipmentSetEquipment(userEquipmentSet.id)
+                appDao.deleteUserEquipmentSetDecorations(userEquipmentSet.id)
+            }
+        }
+    }
+
     fun getEquipmentSetList() {
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {

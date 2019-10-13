@@ -73,5 +73,19 @@
         <attr name="clickable" format="boolean"/>
         <attr name="cardHeaderLayout" format="reference" />
         <attr name="cardBodyLayout" format="reference" />
+        <attr name="swipeMode" />
+        <attr name="expandAnimationDuration" format="integer" />
+        <attr name="swipeReboundDuration" format="integer" />
+        <attr name="swipeLeftIcon" format="reference" />
+        <attr name="swipeLeftBackground" format="color" />
+        <attr name="swipeRightIcon" format="reference" />
+        <attr name="swipeRightBackground" format="color" />
     </declare-styleable>
+
+    <attr name="swipeMode" format="enum">
+        <enum name="none" value="0"/>
+        <enum name="left" value="1"/>
+        <enum name="right" value="2"/>
+        <enum name="leftAndRight" value="3"/>
+    </attr>
 </resources>
