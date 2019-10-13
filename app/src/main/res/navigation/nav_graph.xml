@@ -318,7 +318,9 @@
 
     <fragment
         android:id="@+id/changelogDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.ChangelogActivity" />
+        android:name="com.gatheringhallstudios.mhworlddatabase.ChangelogActivity"
+        android:label="@string/title_changelog"
+        tools:layout="@layout/list_generic" />
     <action
         android:id="@+id/changelogAction"
         app:destination="@id/changelogDestination"

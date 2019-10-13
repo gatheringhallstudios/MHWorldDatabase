@@ -18,7 +18,7 @@
         android:text="@string/user_equipment_set_new_set"
         app:autoSizeMinTextSize="14dp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="@+id/equipment_set_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/equipment_set_icon2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/equipment_set_icon2"
         app:layout_constraintTop_toTopOf="@+id/equipment_set_icon2"
