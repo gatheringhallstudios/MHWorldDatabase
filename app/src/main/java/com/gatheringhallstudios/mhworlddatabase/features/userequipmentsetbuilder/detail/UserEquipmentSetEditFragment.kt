@@ -20,7 +20,6 @@ import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
-import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
@@ -169,14 +168,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         layout.card_header.defense_value.text = getString(R.string.armor_defense_value, armor.armor.defense_base, armor.armor.defense_max, armor.armor.defense_augment_max)
 
         //Combine the skills from the armor piece and the decorations
-        val skillsList: MutableList<SkillLevel> = ArrayList()
-        skillsList.addAll(armor.skills)
-        skillsList.addAll(userArmor.decorations.map {
+        val skillsList = combineEquipmentSkillsWithDecorationSkills(armor.skills, userArmor.decorations.map {
             val skillLevel = SkillLevel(level = 1)
             skillLevel.skillTree = it.decoration.skillTree
             skillLevel
         })
-        skillsList.sortWith(compareByDescending<SkillLevel> { it.level }.thenBy { it.skillTree.id })
 
         populateSkills(skillsList, layout.skill_section)
         populateSetBonuses(armor.setBonuses, layout.set_bonus_section)
@@ -206,11 +202,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         user_equipment_weapon_slot.card_header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
         user_equipment_weapon_slot.card_header.rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
         user_equipment_weapon_slot.card_header.rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
+        user_equipment_weapon_slot.card_header.rarity_string.visibility = View.VISIBLE
         user_equipment_weapon_slot.card_header.attack_value.text = weapon.attack.toString()
-
-        val skillsList: MutableList<SkillLevel> = ArrayList()
-        skillsList.addAll(userWeapon.weapon.skills)
-        skillsList.addAll(userWeapon.decorations.map {
+        val skillsList = combineEquipmentSkillsWithDecorationSkills(userWeapon.weapon.skills, userWeapon.decorations.map {
             val skillLevel = SkillLevel(level = 1)
             skillLevel.skillTree = it.decoration.skillTree
             skillLevel
@@ -241,12 +235,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         layout.card_body.slot2_detail.removeDecorator()
 
         if (decoration != null) {
-            layout.card_header.slot2.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+            layout.card_header.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
             layout.card_body.slot2_detail.visibility = View.VISIBLE
             layout.card_body.slot2_detail.setLabelText(decoration.name)
-            layout.card_body.slot2_detail.setLeftIconDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+            layout.card_body.slot2_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
         } else {
-            layout.card_header.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(slot))
+            layout.card_header.slot2.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot2_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot2_detail.visibility = View.GONE
@@ -257,12 +251,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         layout.card_body.slot3_detail.removeDecorator()
 
         if (decoration != null) {
-            layout.card_header.slot3.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+            layout.card_header.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
             layout.card_body.slot3_detail.visibility = View.VISIBLE
             layout.card_body.slot3_detail.setLabelText(decoration.name)
-            layout.card_body.slot3_detail.setLeftIconDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+            layout.card_body.slot3_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
         } else {
-            layout.card_header.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(slot))
+            layout.card_header.slot3.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot3_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot3_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot3_detail.visibility = View.GONE
@@ -542,5 +536,22 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             viewModel.setActiveUserEquipment(userWeapon)
             getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, userWeapon, userEquipmentSetId, null, null)
         }
+    }
+
+    private fun combineEquipmentSkillsWithDecorationSkills(armorSkills: List<SkillLevel>, decorationSkills: List<SkillLevel>): List<SkillLevel> {
+        val skills = armorSkills.associateBy({ it.skillTree.id }, { it }).toMutableMap()
+        for (skill in decorationSkills) {
+            if (skills.containsKey(skill.skillTree.id)) {
+                val level = skills.getValue(skill.skillTree.id).level + skill.level
+                val skillLevel = SkillLevel(level)
+                skillLevel.skillTree = skill.skillTree
+                skills[skill.skillTree.id] = skillLevel
+            } else {
+                skills[skill.skillTree.id] = skill
+            }
+        }
+        val result = skills.values.toMutableList()
+        result.sortWith(compareByDescending<SkillLevel> { it.level }.thenBy { it.skillTree.id })
+        return result
     }
 }
