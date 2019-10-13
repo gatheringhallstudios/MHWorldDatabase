@@ -20,7 +20,6 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.label_text
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
@@ -240,15 +239,15 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 when (idx + 1) {
                     1 -> {
                         active_equipment_slot.slot1.visibility = View.VISIBLE
-                        active_equipment_slot.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                        active_equipment_slot.slot1.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
                     }
                     2 -> {
                         active_equipment_slot.slot2.visibility = View.VISIBLE
-                        active_equipment_slot.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                        active_equipment_slot.slot2.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
                     }
                     3 -> {
                         active_equipment_slot.slot3.visibility = View.VISIBLE
-                        active_equipment_slot.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                        active_equipment_slot.slot3.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
                     }
                 }
             }
@@ -282,15 +281,15 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 when (idx + 1) {
                     1 -> {
                         active_equipment_slot.slot1.visibility = View.VISIBLE
-                        active_equipment_slot.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                        active_equipment_slot.slot1.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
                     }
                     2 -> {
                         active_equipment_slot.slot2.visibility = View.VISIBLE
-                        active_equipment_slot.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                        active_equipment_slot.slot2.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
                     }
                     3 -> {
                         active_equipment_slot.slot3.visibility = View.VISIBLE
-                        active_equipment_slot.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(value))
+                        active_equipment_slot.slot3.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
                     }
                 }
             }

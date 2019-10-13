@@ -225,12 +225,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         layout.card_body.slot1_detail.removeDecorator()
 
         if (decoration != null) {
-            layout.card_header.slot1.setImageDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+            layout.card_header.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
             layout.card_body.slot1_detail.visibility = View.VISIBLE
             layout.card_body.slot1_detail.setLabelText(decoration.name)
-            layout.card_body.slot1_detail.setLeftIconDrawable(AssetLoader.loadColoredSlotIcon(decoration, slot))
+            layout.card_body.slot1_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
         } else {
-            layout.card_header.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(slot))
+            layout.card_header.slot1.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot1_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
             layout.card_body.slot1_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
             layout.card_body.slot1_detail.visibility = View.GONE
