@@ -2,9 +2,11 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -63,6 +65,16 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
     private val viewModel: UserEquipmentSetSelectorViewModel by lazy {
         ViewModelProviders.of(this).get(UserEquipmentSetSelectorViewModel::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.action_search).isVisible = false
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
