@@ -41,7 +41,7 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Un
             view.reward_name.text = reward.item.name
             view.reward_stack.text = "x ${reward.stack}"
             view.reward_percent.text = when (reward.percentage) {
-                0 -> "??%"
+                0 -> view.context.getString(R.string.format_percentage_unknown)
                 else -> "${reward.percentage}%"
             }
 

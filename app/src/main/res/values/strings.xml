@@ -34,6 +34,7 @@
     <string name="format_rarity">Rarity %1$d</string> <!-- Example: Rarity 2 -->
     <string name="format_plus">%1$+d</string> <!-- Example: +5 -->
     <string name="format_percentage">%1$s%%</string> <!-- Example: 20%-->
+    <string name="format_percentage_unknown">\??%</string>
     <string name="format_plus_percentage">%1$+d%%</string> <!-- Example: +20%-->
     <string name="format_element">%1$d (%2$d max)</string>
     <string name="format_element_hidden">(%1$d) (%2$d max)</string>

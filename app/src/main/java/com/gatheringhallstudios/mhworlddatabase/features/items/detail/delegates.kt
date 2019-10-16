@@ -73,7 +73,7 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward>() {
         viewHolder.label_text.text = data.monster.name
         viewHolder.sublabel_text.text = source
         viewHolder.value_text.text = when (data.percentage) {
-            0 -> "??%"
+            0 -> viewHolder.resources.getString(R.string.format_percentage_unknown)
             else -> viewHolder.resources.getString(R.string.format_percentage, data.percentage)
         }
 
