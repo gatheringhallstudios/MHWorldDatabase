@@ -72,7 +72,11 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward>() {
         viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.monster))
         viewHolder.label_text.text = data.monster.name
         viewHolder.sublabel_text.text = source
-        viewHolder.value_text.text = viewHolder.resources.getString(R.string.format_percentage, data.percentage)
+        viewHolder.value_text.text = when (data.percentage) {
+            0 -> "??%"
+            else -> viewHolder.resources.getString(R.string.format_percentage, data.percentage)
+        }
+
         viewHolder.subvalue_text.text = viewHolder.resources.getString(R.string.format_quantity_none, data.stack)
 
         viewHolder.itemView.setOnClickListener {
