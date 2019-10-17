@@ -3,8 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase
 import android.content.Context
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
-import androidx.core.content.ContextCompat
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gatheringhallstudios.mhworlddatabase.assets.getAssetDrawable
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import org.junit.Rule

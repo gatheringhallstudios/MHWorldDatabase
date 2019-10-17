@@ -29,6 +29,18 @@ android {
 
         // We set this to false so vectors get rastered at buildtime.
         vectorDrawables.useSupportLibrary = false
+
+        // Export schemas for databases (important for testing)
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+        // Import exported schemas into tests
+        sourceSets {
+            androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        }
     }
     buildTypes {
         release {
@@ -86,6 +98,15 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
 
     /*
+     * Testing
+     */
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation "androidx.test:runner:1.2.0"
+    androidTestImplementation 'androidx.test:rules:1.3.0-alpha02'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+    androidTestImplementation "androidx.test.ext:junit:1.1.1"
+
+    /*
      * Flexbox layout
      */
     implementation 'com.google.android:flexbox:1.1.0'
@@ -114,6 +135,7 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.2.0'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
     testImplementation 'androidx.room:room-testing:2.2.0'
+    androidTestImplementation 'android.arch.persistence.room:testing:2.2.0'
 
     /*
      * Android Navigation Component
@@ -150,14 +172,6 @@ dependencies {
      * https://github.com/harjot-oberai/VectorMaster
      */
     implementation 'com.sdsmdg.harjot:vectormaster:1.1.3'
-
-    /*
-     * Testing
-     */
-    testImplementation "junit:junit:4.12"
-    androidTestImplementation "androidx.test:runner:1.3.0-alpha02"
-    androidTestImplementation 'androidx.test:rules:1.3.0-alpha02'
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0-alpha02"
 
     /*
     Change log extension
