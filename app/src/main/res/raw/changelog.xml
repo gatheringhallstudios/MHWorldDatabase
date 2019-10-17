@@ -1,11 +1,11 @@
 <changelog>
     <release
-        versionCode="13"
-        versionName="Version 1.5.1">
+        versionCode="14"
+        versionName="Version 1.5.2">
         <info>
             &#9;- Added Nergigante Gamma armor.
             [br]&#9;- Updated Weapon Tree display to be more compact.
-            [br]&#9;- Bug fixes and prep work for ICEBORNE!
+            [br]&#9;- Bug fixes and database prep for ICEBORNE!
         </info>
         <info>
             [br]Unfortunately ICEBORNE data won't be available to us until after the PC launch. Thank you for your patience!
