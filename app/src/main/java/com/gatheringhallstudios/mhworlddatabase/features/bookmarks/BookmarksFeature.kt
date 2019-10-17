@@ -3,11 +3,11 @@ package com.gatheringhallstudios.mhworlddatabase.features.bookmarks
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import com.gatheringhallstudios.mhworlddatabase.data.models.MHModel
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.BookmarksDao
 import com.gatheringhallstudios.mhworlddatabase.data.entities.BookmarkEntity
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.Bookmark
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHModel
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -25,9 +25,9 @@ import java.util.*
 object BookmarksFeature {
     //For the sake of setting a cap
     private val BOOKMARKS_MAX = 200
-    lateinit private var ctx: Context
-    lateinit private var bookmarksList: MutableList<Bookmark>
-    lateinit private var dao: BookmarksDao
+    private lateinit var ctx: Context
+    private lateinit var bookmarksList: MutableList<Bookmark>
+    private lateinit var dao: BookmarksDao
 
     fun bindApplication(app: Application) {
         this.ctx = app.applicationContext
