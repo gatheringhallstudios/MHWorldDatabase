@@ -1,10 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.adapters
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterReward
@@ -42,7 +40,11 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Un
             view.reward_icon.setImageDrawable(icon)
             view.reward_name.text = reward.item.name
             view.reward_stack.text = "x ${reward.stack}"
-            view.reward_percent.text = "${reward.percentage}%"
+            view.reward_percent.text = when (reward.percentage) {
+                0 -> view.context.getString(R.string.format_percentage_unknown)
+                else -> "${reward.percentage}%"
+            }
+
         }
     }
 }
