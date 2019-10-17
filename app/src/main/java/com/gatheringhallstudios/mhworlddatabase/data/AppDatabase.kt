@@ -14,12 +14,14 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentDecor
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentEntity
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentSetEntity
 
-@Database(entities = [
-    BookmarkEntity::class,
-    UserEquipmentEntity::class,
-    UserEquipmentSetEntity::class,
-    UserEquipmentDecorationEntity::class],
-        version = 2)
+@Database(
+        version = 2,
+        exportSchema = true,
+        entities = [
+            BookmarkEntity::class,
+            UserEquipmentEntity::class, UserEquipmentSetEntity::class, UserEquipmentDecorationEntity::class
+        ]
+)
 @TypeConverters(AppConverters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bookmarkDao(): BookmarksDao
@@ -29,20 +31,20 @@ abstract class AppDatabase : RoomDatabase() {
         var INSTANCE: AppDatabase? = null
 
         fun getAppDataBase(context: Context): AppDatabase? {
-            if (INSTANCE == null){
+            if (INSTANCE == null) {
                 synchronized(AppDatabase::class){
                     INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
                             AppDatabase::class.java,
                             "ApplicationDatabase")
-                            .addMigrations(MIGRATION_1_2)
+                            .addMigrations(*AppDatabase_MIGRATIONS)
                             .build()
                 }
             }
             return INSTANCE
         }
 
-        fun destroyDataBase(){
+        fun destroyDataBase() {
             INSTANCE = null
         }
     }
@@ -71,3 +73,5 @@ val MIGRATION_1_2 = object: Migration(1, 2) {
         """.trimIndent())
     }
 }
+
+val AppDatabase_MIGRATIONS = arrayOf(MIGRATION_1_2)
