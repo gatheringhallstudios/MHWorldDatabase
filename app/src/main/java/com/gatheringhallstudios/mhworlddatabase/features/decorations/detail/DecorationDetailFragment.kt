@@ -1,9 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase.features.decorations.detail
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
@@ -42,7 +42,7 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val decorationData = viewModel.decorationData.value
         if (decorationData != null && BookmarksFeature.isBookmarked(decorationData)) {
-            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
         }
     }
 

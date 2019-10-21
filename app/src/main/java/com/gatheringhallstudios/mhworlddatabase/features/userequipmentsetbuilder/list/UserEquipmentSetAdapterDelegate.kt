@@ -14,7 +14,8 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
+import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
@@ -76,7 +77,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
     internal inner class EquipmentSetHolder(val view: View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("ResourceType")
         fun bind(data: UserEquipmentSet) {
-            view.card_header.equipment_icon.setImageDrawable(view.context!!.getVectorDrawable("ArmorChest", "rare1"))
+            view.card_header.equipment_icon.setImageDrawable(view.context!!.getVectorDrawable("ArmorSet", "rare1"))
 
             view.card_header.equipment_name.text = data.name
             view.card_header.icon_slots.visibility = View.GONE

@@ -68,7 +68,7 @@
         <menu>
             <item
                 android:id="@+id/armorSetBuilderDestination"
-                android:icon="@drawable/ic_ui_bookmark"
+                android:icon="@drawable/ic_ui_buildable_white"
                 android:title="@string/title_armor_set_builder" />
             <item
                 android:id="@+id/testDestination"

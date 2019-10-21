@@ -413,7 +413,7 @@
     <string name="user_equipment_set_no_decoration">No decoration</string>
     <string name="user_equipment_delete_set">Delete set</string>
     <string name="user_equipment_set_deleted">%1$s was deleted</string>
-    <string name="user_equipment_new_set_name">New set name</string>
+    <string name="user_equipment_new_set_name">Rename Set</string>
     <string name="user_equipment_apply">Apply</string>
     <string name="user_equipment_cancel">Cancel</string>
     <!-- ################ -->

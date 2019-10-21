@@ -35,7 +35,7 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val monsterData = viewModel.monster.value
         if (monsterData != null && BookmarksFeature.isBookmarked(monsterData)) {
-            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
         }
     }
 

@@ -36,17 +36,13 @@
 
     <ImageButton
         android:id="@+id/cell_button"
-        style="@style/TextBodyHigh"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/button_size_medium"
+        android:layout_height="@dimen/button_size_medium"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:layout_marginEnd="@dimen/margin_large"
-        android:gravity="end"
-        android:src="@android:drawable/ic_delete"
-        android:textAlignment="textEnd"
+        android:src="@drawable/ic_sys_close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Some value" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </merge>
