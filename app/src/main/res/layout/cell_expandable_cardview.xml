@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:background="#2C2C2C">
 
-        <!-- Not Enabled -->
         <ImageView
             android:id="@+id/card_overlay"
             android:layout_width="match_parent"
@@ -39,6 +38,7 @@
                 android:layout_width="@dimen/image_size_small"
                 android:layout_height="@dimen/image_size_small"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_large"
                 app:srcCompat="@drawable/ic_sys_delete" />
         </LinearLayout>
 
@@ -49,12 +49,14 @@
             android:layout_alignParentEnd="true"
             android:background="#00E676"
             android:orientation="horizontal">
+            <!-- Not Enabled -->
 
             <ImageView
                 android:id="@+id/right_icon"
-                android:layout_width="@dimen/image_size_medium"
-                android:layout_height="@dimen/image_size_medium"
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_large"
                 app:srcCompat="@android:drawable/ic_input_add" />
         </LinearLayout>
 

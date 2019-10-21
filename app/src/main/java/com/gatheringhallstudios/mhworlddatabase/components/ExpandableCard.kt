@@ -258,12 +258,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                 }
                 MotionEvent.ACTION_MOVE -> {
                     dx = event.x - initialX
-                    if (dx > 0 && dx < 225 && swipeRightEnabled) {
+                    if (dx > 0 && dx < 400 && swipeRightEnabled) {
                         val layoutParams = left_view.layoutParams
                         layoutParams.width = dx.toInt()
                         left_view.layoutParams = layoutParams
                         view.x = dx
-                    } else if (dx < 0 && dx > -225 && swipeLeftEnabled) {
+                    } else if (dx < 0 && dx > -400 && swipeLeftEnabled) {
                         val layoutParams = right_view.layoutParams
                         layoutParams.width = -1 * dx.toInt()
                         right_view.layoutParams = layoutParams
