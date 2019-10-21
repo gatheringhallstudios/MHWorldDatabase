@@ -35,7 +35,7 @@ class LocationSummaryFragment : RecyclerViewFragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val locationData = viewModel.location.value
         if (locationData != null && BookmarksFeature.isBookmarked(locationData)) {
-            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
         }
     }
 

@@ -5,14 +5,14 @@
         android:id="@+id/action_rename_set"
         android:checkable="false"
         android:enabled="true"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/user_equipment_delete_set"
+        android:icon="@drawable/ic_sys_edit"
+        android:title="@string/user_equipment_new_set_name"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_delete_set"
         android:checkable="false"
         android:enabled="true"
-        android:icon="@android:drawable/ic_menu_delete"
+        android:icon="@drawable/ic_sys_delete"
         android:title="@string/user_equipment_delete_set"
         app:showAsAction="ifRoom" />
 </menu>
