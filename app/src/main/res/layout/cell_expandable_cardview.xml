@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/row_height_large"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2C2C2C">
+
+        <ImageView
+            android:id="@+id/card_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/card_layout"
+            android:layout_alignBottom="@+id/card_layout"
+            android:alpha="0.16"
+            android:background="@color/icon_white"
+            android:src="@drawable/card_overlay" />
+
+        <LinearLayout
+            android:id="@+id/left_icon_layout"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@color/icon_red"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/left_icon"
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_large"
+                app:srcCompat="@drawable/ic_sys_delete" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/right_icon_layout"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="#00E676"
+            android:orientation="horizontal">
+            <!-- Not Enabled -->
+
+            <ImageView
+                android:id="@+id/right_icon"
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:srcCompat="@android:drawable/ic_input_add" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/card_header"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/row_height_large"
+                    android:layout_weight="1">
+
+                </FrameLayout>
+
+                <ImageButton
+                    android:id="@+id/card_arrow"
+                    android:layout_width="@dimen/image_size_xsmall"
+                    android:layout_height="@dimen/image_size_xsmall"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:background="@null"
+                    android:contentDescription="Expandable Card Body"
+                    android:src="@drawable/ic_expand_less_animated" />
+            </LinearLayout>
+
+            <com.gatheringhallstudios.mhworlddatabase.components.DashedDividerView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <FrameLayout
+                android:id="@+id/card_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

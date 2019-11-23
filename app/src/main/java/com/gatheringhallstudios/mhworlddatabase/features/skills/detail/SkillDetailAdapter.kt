@@ -8,12 +8,14 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import kotlinx.android.synthetic.main.listitem_armorset_bonus.*
 import kotlinx.android.synthetic.main.listitem_skill_level_armor.*
 
 /**
@@ -201,15 +203,15 @@ class ArmorSetBonusSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSetBonus>(
 
     override fun onCreateView(parent: ViewGroup): View {
         val inflater = LayoutInflater.from(parent.context)
-        return inflater.inflate(R.layout.listitem_skill_level_other, parent, false)
+        return inflater.inflate(R.layout.listitem_skill_level_bonus, parent, false)
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: ArmorSetBonus) {
         viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data))
         viewHolder.label_text.text = data.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
-        viewHolder.skill_level.level = 1 // todo: don't hardcode?
-        viewHolder.level_text.text = viewHolder.context.getString(R.string.skill_level_qty, 1)
+        viewHolder.skill_level.level = data.points
+        viewHolder.bonus_requirement.setImageResource(SetBonusNumberRegistry(data.required))
 
         // todo: allow clicking
     }

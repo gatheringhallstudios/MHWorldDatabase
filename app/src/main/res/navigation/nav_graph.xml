@@ -179,6 +179,18 @@
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+    <fragment
+        android:id="@+id/armorSetBuilderDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListFragment"
+        android:label="@string/title_armor_set_builder"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/armorSetBuilderAction"
+        app:destination="@id/settingsDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <!-- REGULAR DESTINATIONS -->
 
@@ -293,8 +305,22 @@
         app:popExitAnim="@anim/nav_exit_right" />
 
     <fragment
+        android:id="@+id/userEquipmentSetDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment"
+        tools:layout="@layout/fragment_generic_pager" />
+    <action
+        android:id="@+id/openUserEquipmentSetDetailAction"
+        app:destination="@id/userEquipmentSetDetailDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
+
+    <fragment
         android:id="@+id/changelogDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.ChangelogActivity" />
+        android:name="com.gatheringhallstudios.mhworlddatabase.ChangelogActivity"
+        android:label="@string/title_changelog"
+        tools:layout="@layout/list_generic" />
     <action
         android:id="@+id/changelogAction"
         app:destination="@id/changelogDestination"
@@ -302,5 +328,31 @@
         app:exitAnim="@anim/nav_exit_left"
         app:popEnterAnim="@anim/nav_enter_left"
         app:popExitAnim="@anim/nav_exit_right" />
+
+    <fragment
+        android:id="@+id/equipmentSetSelectorDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment" />
+    <action
+        android:id="@+id/equipmentSetSelectorAction"
+        app:destination="@id/equipmentSetSelectorDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
+
+    <!-- TEST DESTINATIONS -->
+
+    <fragment
+        android:id="@+id/testDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.test.DecorationTestFragment"
+        android:label="About"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/testAction"
+        app:destination="@id/testDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
 </navigation>

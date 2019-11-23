@@ -10,6 +10,8 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.GroupAdapter
 
+
+
 /**
  * Defines a base divider for vertical RecyclerViews.
  */
@@ -134,6 +136,21 @@ class ChildDivider(private val drawable: Drawable?): BaseVerticalDivider() {
         super.getItemOffsets(outRect, view, parent, state)
         drawable?.let {
             outRect.bottom = drawable.intrinsicHeight
+        }
+    }
+}
+
+class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
+
+    override fun getItemOffsets(outRect: Rect, view: View,
+                                parent: RecyclerView, state: RecyclerView.State) {
+        outRect.bottom = space
+
+        // Add top margin only for the first item to avoid double space between items
+        if (parent.getChildLayoutPosition(view) == 0) {
+            outRect.top = space
+        } else {
+            outRect.top = 0
         }
     }
 }

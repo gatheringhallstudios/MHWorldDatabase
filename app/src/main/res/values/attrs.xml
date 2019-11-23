@@ -21,6 +21,11 @@
         <attr name="valueText" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="IconLabelButtonCell">
+        <attr name="iconSrc" />
+        <attr name="labelText2" format="string" />
+    </declare-styleable>
+
     <declare-styleable name="CompactStatCell">
         <attr name="iconSrc" />
         <attr name="labelText" />
@@ -30,7 +35,6 @@
         <attr name="iconSrc" />
         <attr name="labelText" />
     </declare-styleable>
-
 
     <declare-styleable name="SectionHeaderCell">
         <attr name="labelText" />
@@ -63,4 +67,25 @@
         <attr name="imageHeight" format="dimension"/>
         <attr name="imageSize" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="ExpandableCardView">
+        <attr name="cardViewElevation" format="float"/>
+        <attr name="clickable" format="boolean"/>
+        <attr name="cardHeaderLayout" format="reference" />
+        <attr name="cardBodyLayout" format="reference" />
+        <attr name="swipeMode" />
+        <attr name="expandAnimationDuration" format="integer" />
+        <attr name="swipeReboundDuration" format="integer" />
+        <attr name="swipeLeftIcon" format="reference" />
+        <attr name="swipeLeftBackground" format="color" />
+        <attr name="swipeRightIcon" format="reference" />
+        <attr name="swipeRightBackground" format="color" />
+    </declare-styleable>
+
+    <attr name="swipeMode" format="enum">
+        <enum name="none" value="0"/>
+        <enum name="left" value="1"/>
+        <enum name="right" value="2"/>
+        <enum name="leftAndRight" value="3"/>
+    </attr>
 </resources>

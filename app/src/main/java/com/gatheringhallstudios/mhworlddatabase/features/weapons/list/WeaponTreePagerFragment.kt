@@ -54,8 +54,8 @@ class WeaponTreePagerFragment : BasePagerFragment() {
 
         viewModel.isFilteredData.observe(this, Observer { isFiltered ->
             filterIcon?.setIcon(when (isFiltered) {
-                true -> R.drawable.ic_ui_filter_on_white
-                false -> R.drawable.ic_ui_filter_off_white
+                true -> R.drawable.ic_sys_filter_on
+                false -> R.drawable.ic_sys_filter_off
             })
         })
     }

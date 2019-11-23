@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyState
 import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.common.RenderedTreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 

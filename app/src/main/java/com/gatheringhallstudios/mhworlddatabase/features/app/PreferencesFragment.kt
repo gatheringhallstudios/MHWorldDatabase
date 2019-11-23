@@ -2,11 +2,8 @@ package com.gatheringhallstudios.mhworlddatabase.features.app
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Switch
-import androidx.fragment.app.Fragment
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.MainActivity
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -39,7 +36,7 @@ class PreferencesFragment : PreferenceFragmentCompat() {
     }
 
     private fun initDataLanguages() {
-        val localePref = findPreference(AppSettings.PROP_DATA_LOCALE) as ListPreference
+        val localePref = findPreference(AppSettings.PROP_DATA_LOCALE) as ListPreference?
 
         // Get the list of languages. Add a "default" language to the front
         val defaultLanguage = Language("", getString(R.string.preference_language_default))
@@ -47,9 +44,9 @@ class PreferencesFragment : PreferenceFragmentCompat() {
         val languageCodes = languages.map { it.id }
         val languageNames = languages.map { it.name }
 
-        localePref.entryValues = languageCodes.toTypedArray()
-        localePref.entries = languageNames.toTypedArray()
-        localePref.value = AppSettings.configuredDataLocale // ensure a value is set
+        localePref?.entryValues = languageCodes.toTypedArray()
+        localePref?.entries = languageNames.toTypedArray()
+        localePref?.value = AppSettings.configuredDataLocale // ensure a value is set
     }
 
     /**

@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.dao
 
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao
@@ -13,7 +12,9 @@ import org.junit.runner.RunWith
 
 import com.gatheringhallstudios.mhworlddatabase.data.types.MonsterSize
 import com.gatheringhallstudios.mhworlddatabase.getResult
+import com.gatheringhallstudios.mhworlddatabase.initMHWDatabase
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 
 @RunWith(AndroidJUnit4::class)
 class MonsterDaoTest {
@@ -25,8 +26,7 @@ class MonsterDaoTest {
         @BeforeClass @JvmStatic
         fun initDatabase() {
             // this is read only, so its ok to use the actual database
-            val ctx = InstrumentationRegistry.getTargetContext()
-            db = MHWDatabase.getDatabase(ctx)
+            db = initMHWDatabase()
             dao = db.monsterDao()
         }
 
@@ -45,9 +45,10 @@ class MonsterDaoTest {
     @Test
     fun Can_Query_MonsterBreaks() {
         val largeMonsters = dao.loadMonsters("en", MonsterSize.LARGE).getResult()
-        val firstMonster = largeMonsters.first()
+        val monster = largeMonsters.find { it.name == "Rathalos" }
+        assertNotNull("Expected Rathalos to exist", monster)
 
-        val breaks = dao.loadBreaks("en", firstMonster.id).getResult()
+        val breaks = dao.loadBreaks("en", monster!!.id).getResult()
         assertFalse("Expected results", breaks.isEmpty())
     }
 

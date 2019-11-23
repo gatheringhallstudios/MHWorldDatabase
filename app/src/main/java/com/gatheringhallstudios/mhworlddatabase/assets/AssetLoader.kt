@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.TreeNode
+import com.gatheringhallstudios.mhworlddatabase.common.TreeNodeType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine
@@ -127,13 +127,16 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, color)
     }
 
-    fun loadIconFor(node: TreeNode, rarity: Int): Drawable? {
+    fun loadIconFor(node: TreeNodeType, rarity: Int): Drawable? {
         val name = when (node) {
-            TreeNode.START -> "NodeStart"
-            TreeNode.START_COLLAPSED -> "NodeStartCollapsed"
-            TreeNode.MID -> "NodeMid"
-            TreeNode.MID_COLLAPSED -> "NodeMidCollapsed"
-            TreeNode.END -> "NodeEnd"
+            TreeNodeType.START -> "NodeStart"
+            TreeNodeType.START_COLLAPSED -> "NodeStartCollapsed"
+            TreeNodeType.MID -> "NodeMid"
+            TreeNodeType.MID_COLLAPSED -> "NodeMidCollapsed"
+            TreeNodeType.THROUGH -> "NodeThrough"
+            TreeNodeType.THROUGH_COLLAPSED -> "NodeThroughCollapsed"
+            TreeNodeType.END -> "NodeEnd"
+            TreeNodeType.END_INDENTED -> "NodeEndIndented"
         }
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
@@ -259,5 +262,10 @@ object AssetLoader {
         SpecialAmmoType.WYVERNBLAST -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernblast)
         SpecialAmmoType.WYVERNHEART -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernheart)
         SpecialAmmoType.WYVERNSNIPE -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernsnipe)
+    }
+
+    fun loadFilledSlotIcon(decoration: DecorationBase, slotNumber: Int): Drawable? {
+        val assetName = "Slot${slotNumber}Jewel${decoration.slot}"
+        return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 }

@@ -5,36 +5,36 @@ import androidx.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 
-/**
- * An embedded class representing the available slots on a piece of armor.
- * Can be iterated on.
- */
-data class ArmorSlots(
-        val slot_1: Int,
-        val slot_2: Int,
-        val slot_3: Int
-): Iterable<Int> {
-    /**
-     * Returns a list containing only active (non-zero) slots
-     */
-    @Ignore val active = this.asSequence().filter { it > 0 }.toList()
-
-    /**
-     * Returns true if the armor contains slots, false otherwise
-     */
-    @Ignore fun isEmpty() = active.isEmpty()
-
-    override fun iterator(): Iterator<Int> {
-        return listOf(slot_1, slot_2, slot_3).iterator()
-    }
-
-    operator fun get(i: Int) = when(i) {
-        0 -> slot_1
-        1 -> slot_2
-        2 -> slot_3
-        else -> throw IndexOutOfBoundsException("Slot must be from 0-2")
-    }
-}
+///**
+// * An embedded class representing the available slots on a piece of armor.
+// * Can be iterated on.
+// */
+//data class ArmorSlots(
+//        val slot_1: Int,
+//        val slot_2: Int,
+//        val slot_3: Int
+//): Iterable<Int> {
+//    /**
+//     * Returns a list containing only active (non-zero) slots
+//     */
+//    @Ignore val active = this.asSequence().filter { it > 0 }.toList()
+//
+//    /**
+//     * Returns true if the armor contains slots, false otherwise
+//     */
+//    @Ignore fun isEmpty() = active.isEmpty()
+//
+//    override fun iterator(): Iterator<Int> {
+//        return listOf(slot_1, slot_2, slot_3).iterator()
+//    }
+//
+//    operator fun get(i: Int) = when(i) {
+//        0 -> slot_1
+//        1 -> slot_2
+//        2 -> slot_3
+//        else -> throw IndexOutOfBoundsException("Slot must be from 0-2")
+//    }
+//}
 
 /**
  * The base model for a armor containing the basic identifying information
@@ -54,7 +54,7 @@ open class ArmorBase(
     /**
      * A list of slot level values (0-3) that can be iterated on.
      */
-    @Embedded lateinit var slots: ArmorSlots
+    @Embedded lateinit var slots: EquipmentSlots
 }
 
 /**
@@ -121,7 +121,13 @@ class ArmorSetBonus(
         val name: String?,
         val required: Int,
         val description: String?
-)
+) {
+    /**
+     * How many points of the skill do you get.
+     * Currently hardcoded to one. It exists as a hook just in case new armor comes out that'll use it.
+     */
+    @Ignore val points: Int = 1
+}
 
 /**
  * The result of fully loading a piece of armor.

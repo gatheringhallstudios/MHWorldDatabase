@@ -108,9 +108,9 @@ abstract class ItemDao {
 
     @Query("""
         SELECT c.id, c.rarity, c.previous_id, ctext.name, cr.quantity
-        FROM charm_recipe cr
+        FROM recipe_item cr
             JOIN charm c
-                ON c.id = cr.charm_id
+                ON c.recipe_id = cr.recipe_id
             JOIN charm_text ctext
                 ON ctext.id = c.id
         WHERE cr.item_id = :itemId
@@ -119,10 +119,10 @@ abstract class ItemDao {
     abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<ItemUsageCharm>
 
     @Query("""
-        SELECT armor_id id, name, armor_type, rarity, slot_1, slot_2, slot_3, ar.quantity
-        FROM armor_recipe ar
+        SELECT a.id id, name, armor_type, rarity, slot_1, slot_2, slot_3, ar.quantity
+        FROM recipe_item ar
             JOIN armor a
-                ON ar.armor_id = a.id
+                ON a.recipe_id = ar.recipe_id
             JOIN armor_text atext
                 ON a.id = atext.id
         WHERE ar.item_id = :itemId
@@ -139,7 +139,8 @@ abstract class ItemDao {
             wt.*, wr.quantity
         FROM weapon w
             JOIN weapon_text wt USING (id)
-            JOIN weapon_recipe wr ON w.id = wr.weapon_id
+            JOIN recipe_item wr 
+				ON (w.create_recipe_id = wr.recipe_id OR w.upgrade_recipe_id = wr.recipe_id)
         WHERE wt.lang_id = :langId
             AND wr.item_id = :itemId
     """)

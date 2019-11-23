@@ -14,6 +14,7 @@
     <string name="action_clear">Clear</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_apply">Apply</string>
+    <string name="action_undo">Undo</string>
 
     <string name="general_no_data">Nothing here, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
     <string name="general_none">None</string> <!-- Empty message for skill/charms subsections -->
@@ -33,7 +34,10 @@
     <string name="format_rarity">Rarity %1$d</string> <!-- Example: Rarity 2 -->
     <string name="format_plus">%1$+d</string> <!-- Example: +5 -->
     <string name="format_percentage">%1$s%%</string> <!-- Example: 20%-->
+    <string name="format_percentage_unknown">\??%</string>
     <string name="format_plus_percentage">%1$+d%%</string> <!-- Example: +20%-->
+    <string name="format_element">%1$d (%2$d max)</string>
+    <string name="format_element_hidden">(%1$d) (%2$d max)</string>
 
     <!-- Ailments -->
     <string name="ailment_roar_small">Roar (small)</string>
@@ -107,6 +111,8 @@
     <string name="header_components">Components</string>
     <string name="header_armor_set_pieces">Armor Set Pieces</string>
     <string name="header_armor_set_skills">Armor Set Skills</string>
+    <string name="header_active_set_bonuses">Active Set Bonuses</string>
+    <string name="header_active_skills">Active Skills</string>
 
     <!-- ####################### -->
     <!-- ## Settings and Meta ## -->
@@ -390,6 +396,26 @@
 
     <string name="title_bookmarks">Bookmarks</string>
 
+    <!-- ################# -->
+    <!-- ## USER EQUIPMENT SET MENU ## -->
+    <!-- ################# -->
+    <string name="title_armor_set_builder">Armor Set Builder</string>
+    <string name="title_armor_set_armor_selector">Armor Selector</string>
+    <string name="title_armor_set_charm_selector">Charm Selector</string>
+    <string name="title_armor_set_weapon_selector">Weapon Selector</string>
+    <string name="title_armor_set_decoration_selector">Decoration Selector</string>
+
+    <string name="tab_armor_set_builder_summary">Summary</string>
+    <string name="tab_armor_set_builder_equipment">Equipment</string>
+
+    <string name="user_equipment_set_new_set">+ Create a Set</string>
+    <string name="user_equipment_set_no_equipment">No equipment</string>
+    <string name="user_equipment_set_no_decoration">No decoration</string>
+    <string name="user_equipment_delete_set">Delete set</string>
+    <string name="user_equipment_set_deleted">%1$s was deleted</string>
+    <string name="user_equipment_new_set_name">Rename Set</string>
+    <string name="user_equipment_apply">Apply</string>
+    <string name="user_equipment_cancel">Cancel</string>
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->
@@ -397,7 +423,8 @@
     <string name="about_body">
         Gathering Hall Studios is an open source team of designers and developers
         dedicated to building high-quality apps for the Monster Hunter series.
-        If you’d like to join or contribute, we’re always open.
+        \n\nIf you’d like to join or contribute, we’re always open.
         Contact us at contact@gatheringhallstudios.com or visit our Discord.
+        You can also visit the Github for either the app or the data project.
     </string>
 </resources>

@@ -29,7 +29,7 @@ class ItemDetailPagerFragment : BasePagerFragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val itemData = viewModel.item.value
         if (itemData != null && BookmarksFeature.isBookmarked(itemData)) {
-            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
         }
     }
 
