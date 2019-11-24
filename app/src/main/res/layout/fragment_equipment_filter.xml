@@ -40,9 +40,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
+    <!--        layout="@layout/fragment_weapon_filter_body"-->
+    <ViewStub
         android:id="@+id/scroll_body"
-        layout="@layout/fragment_weapon_filter_body"
+        android:inflatedId="@+id/scroll_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/margin_large"

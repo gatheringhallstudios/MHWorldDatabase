@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_large">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title_show_only"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/filter_title_show_only"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_name_filter"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/user_equipment_set_filter_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_show_only" />
+
+        <LinearLayout
+            android:id="@+id/name_filter_entries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_name_filter">
+
+            <EditText
+                android:id="@+id/name_filter_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/weapon_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_filter_entries">
+
+            <!-- Weapons -->
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:flexDirection="row"
+                app:flexWrap="wrap">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:id="@+id/toggle_great_sword"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_charge_blade_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:id="@+id/toggle_long_sword"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_longsword_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:id="@+id/toggle_sword_and_shield"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_sword_and_shield_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:id="@+id/toggle_dual_blades"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_dual_blades_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_hammer"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_hammer_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_hunting_horn"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_hunting_horn_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_lance"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_lance_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_gunlance"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_gunlance_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_switch_axe"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_switch_axe_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_charge_blade"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_charge_blade_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_insect_glaive"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_insect_glaive_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_light_bowgun"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_light_bowgun_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_heavy_bowgun"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_heavy_bowgun_base" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:id="@+id/toggle_bow"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_equipment_bow_base" />
+            </com.google.android.flexbox.FlexboxLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/element_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weapon_toggles">
+
+            <!-- Elements -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_fire"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_fire" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_water"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_water" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_thunder"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_thunder" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_ice"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_ice" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_dragon"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_dragon" />
+            </LinearLayout>
+
+            <!-- Statuses -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_poison"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_poison" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_sleep"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_sleep" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_paralysis"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_paralysis" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_blast"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_blast" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_slot_level"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/user_equipment_set_filter_slot_level"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/element_toggles" />
+
+        <LinearLayout
+            android:id="@+id/slot_level_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/title_slot_level">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                app:flexDirection="row"
+                app:flexWrap="wrap">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/slot_level_toggle_level_1"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 1" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/slot_level_toggle_level_2"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 2" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/slot_level_toggle_level_3"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 3" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/slot_level_toggle_level_4"
+                    style="@style/ButtonToggle"
+                    app:text="Lv 4" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_rank"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/rank_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/slot_level_toggles" />
+
+        <LinearLayout
+            android:id="@+id/rank_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/title_rank">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                app:flexDirection="row"
+                app:flexWrap="wrap">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/rank_toggle_low_rank"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="@string/rank_full_low" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/rank_toggle_high_rank"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="@string/rank_full_high" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

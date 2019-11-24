@@ -11,7 +11,7 @@
         <item name="android:textColorSecondary">@color/textColorMedium</item>
         <item name="android:listDivider">@drawable/divider_solid</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
         <!-- changes ripple accent color..and selected item background color. -->
         <!-- <item name="colorControlHighlight">@color/colorAccent</item> -->
     </style>
@@ -20,8 +20,10 @@
     <style name="AppTheme" parent="BaseAppTheme"/>
 
     <style name="AppTheme.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">default</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -193,4 +195,8 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
+    <style name="MyAnimation.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/nav_enter_right</item>
+        <item name="android:windowExitAnimation">@anim/nav_exit_right</item>
+    </style>
 </resources>

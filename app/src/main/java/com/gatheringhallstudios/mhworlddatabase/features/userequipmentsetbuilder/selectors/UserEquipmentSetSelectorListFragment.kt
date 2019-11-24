@@ -1,12 +1,8 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.SpacesItemDecoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -67,14 +64,54 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         ViewModelProviders.of(this).get(UserEquipmentSetSelectorViewModel::class.java)
     }
 
+    private var mode: SelectorMode? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.findItem(R.id.action_search).isVisible = false
+        inflater.inflate(R.menu.menu_weapon_tree, menu)
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.action_search).isVisible = false
+//        val filterIcon = menu.findItem(R.id.action_filter)
+//        viewModel.isFilteredData.observe(this, Observer { isFiltered ->
+//            filterIcon?.setIcon(when (isFiltered) {
+//                true -> R.drawable.ic_sys_filter_on
+//                false -> R.drawable.ic_sys_filter_off
+//            })
+//        })
+    }
+
+    /**
+     * Handled when a menu item is clicked. True is returned if handled.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_filter -> {
+//                val wtype = viewModel.currentWeaponType
+//                val state = viewModel.filterState
+                val filterFragment = EquipmentFilterFragment.newInstance(this.mode!!, null)
+                filterFragment.setTargetFragment(this, FILTER_RESULT_CODE)
+                filterFragment.show(fragmentManager!!, "Filter")
+                true
+            }
+//                    val transaction = fragmentManager!!.beginTransaction()
+//                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//                    transaction.add(filterFragment, "Filter")
+//                            .addToBackStack(null)
+//                            .commit()
+//                }
+
+
+            // fallback to parent behavior if unhandled
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -82,7 +119,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val mode = arguments?.getSerializable(ARG_SELECTOR_MODE) as? SelectorMode
+        this.mode = arguments?.getSerializable(ARG_SELECTOR_MODE) as? SelectorMode
         val filter = arguments?.getSerializable(ARG_ARMOR_FILTER) as? ArmorType
         val activeEquipment = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserEquipment
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)

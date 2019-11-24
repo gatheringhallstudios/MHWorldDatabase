@@ -20,6 +20,7 @@
     <string name="general_none">None</string> <!-- Empty message for skill/charms subsections -->
 
     <!-- Rank -->
+    <string name="rank_title">Rank</string>
     <string name="rank_short_low">LR</string>
     <string name="rank_short_high">HR</string>
     <string name="rank_short_all">ANY</string> <!-- null rank -->
@@ -416,6 +417,11 @@
     <string name="user_equipment_new_set_name">Rename Set</string>
     <string name="user_equipment_apply">Apply</string>
     <string name="user_equipment_cancel">Cancel</string>
+
+    <string name="user_equipment_set_filter_name">Name</string>
+    <string name="user_equipment_set_filter_slot_level">Slot Level</string>
+    <string name="user_equipment_set_filter_elemental_defense">Elemental Defense</string>
+    <string name="user_equipment_set_filter_add_skill">Add a new skill</string>
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->
