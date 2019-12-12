@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
@@ -53,7 +54,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             ARMOR,
             DECORATION,
             CHARM,
-            WEAPON
+            WEAPON,
+            NONE
         }
 
         class DecorationsConfig(val targetEquipmentId: Int, val targetEquipmentSlot: Int,
@@ -79,13 +81,13 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-//        val filterIcon = menu.findItem(R.id.action_filter)
-//        viewModel.isFilteredData.observe(this, Observer { isFiltered ->
-//            filterIcon?.setIcon(when (isFiltered) {
-//                true -> R.drawable.ic_sys_filter_on
-//                false -> R.drawable.ic_sys_filter_off
-//            })
-//        })
+        val filterIcon = menu.findItem(R.id.action_filter)
+        viewModel.isFilterActive.observe(this, Observer { isFiltered ->
+            filterIcon?.setIcon(when (isFiltered) {
+                true -> R.drawable.ic_sys_filter_on
+                false -> R.drawable.ic_sys_filter_off
+            })
+        })
     }
 
     /**
@@ -95,19 +97,12 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         return when (item.itemId) {
             R.id.action_filter -> {
 //                val wtype = viewModel.currentWeaponType
-//                val state = viewModel.filterState
-                val filterFragment = EquipmentFilterFragment.newInstance(this.mode!!, null)
+                val state = viewModel.filterState
+                val filterFragment = EquipmentFilterFragment.newInstance(this.mode!!, state)
                 filterFragment.setTargetFragment(this, FILTER_RESULT_CODE)
                 filterFragment.show(fragmentManager!!, "Filter")
                 true
             }
-//                    val transaction = fragmentManager!!.beginTransaction()
-//                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//                    transaction.add(filterFragment, "Filter")
-//                            .addToBackStack(null)
-//                            .commit()
-//                }
-
 
             // fallback to parent behavior if unhandled
             else -> super.onOptionsItemSelected(item)
@@ -141,11 +136,25 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         }
     }
 
-    private fun initArmorSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
+    /**
+     * Receives a dialog result. Currently the only supported dialog is the filter fragment.
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode != FILTER_RESULT_CODE) {
+            return
+        }
+
+        val state = data?.getSerializableExtra(EquipmentFilterFragment.FILTER_STATE) as? EquipmentFilterState
+        if (state != null) {
+            viewModel.filterState = state
+        }
+    }
+
+    private fun initArmorSelector(armorType: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
         setActivityTitle(getString(R.string.title_armor_set_armor_selector))
 
-        if (filter != null) {
-            viewModel.loadArmor(AppSettings.dataLocale, filter)
+        if (armorType != null) {
+            viewModel.loadArmor(AppSettings.dataLocale, armorType)
         }
 
         val adapter = UserEquipmentSetArmorSelectorAdapter {

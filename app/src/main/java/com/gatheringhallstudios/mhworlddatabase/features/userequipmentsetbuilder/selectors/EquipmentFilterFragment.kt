@@ -1,18 +1,63 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion.SelectorMode
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.CheckedGroup
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.FilterSortCondition
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.FilterState
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.*
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.name_filter_edittext
+import kotlinx.android.synthetic.main.fragment_decoration_filter_body.*
 import kotlinx.android.synthetic.main.fragment_equipment_filter.*
+import java.io.Serializable
+
+class EquipmentFilterState(
+        var selectorMode: SelectorMode,
+//    var isFinalOnly: Boolean,
+//    var sortBy: FilterSortCondition,
+        var nameFilter: String?,
+        var rank: Set<Rank>?,
+        var elementalDefense: Set<ElementStatus>?,
+        var slotLevels: Set<Int>?
+//    var phials: Set<PhialType>,
+//    var kinsectBonuses: Set<KinsectBonus>,
+//    var shellingTypes: Set<ShellingType>,
+//    var shellingLevels: Set<Int>,
+//    var coatingTypes: Set<CoatingType>,
+//    var specialAmmo: SpecialAmmoType?
+) : Serializable {
+    companion object {
+        @JvmStatic
+        val default = EquipmentFilterState(
+                selectorMode = SelectorMode.NONE,
+//                isFinalOnly = false,
+//                sortBy = FilterSortCondition.NONE,
+                nameFilter = "",
+                rank = emptySet(),
+                elementalDefense = emptySet(),
+                slotLevels = emptySet()
+//                phials = emptySet(),
+//                kinsectBonuses = emptySet(),
+//                shellingTypes = emptySet(),
+//                shellingLevels = emptySet(),
+//                coatingTypes = emptySet(),
+//                specialAmmo = null
+        )
+    }
+
+    fun isEmpty(): Boolean {
+        return this.nameFilter.isNullOrEmpty() && this.rank.isNullOrEmpty() &&
+                this.elementalDefense.isNullOrEmpty() && this.slotLevels.isNullOrEmpty()
+    }
+}
+
 
 /**
  * Main fragment that manages the selector filter dialog
@@ -25,7 +70,7 @@ class EquipmentFilterFragment : DialogFragment() {
         const val FILTER_STATE = "FILTER_STATE"
 
         @JvmStatic
-        fun newInstance(selectorMode: SelectorMode, state: FilterState?) = EquipmentFilterFragment().applyArguments {
+        fun newInstance(selectorMode: SelectorMode, state: EquipmentFilterState?) = EquipmentFilterFragment().applyArguments {
             putSerializable(SELECTOR_MODE, selectorMode)
             putSerializable(FILTER_STATE, state)
         }
@@ -34,15 +79,16 @@ class EquipmentFilterFragment : DialogFragment() {
     //Decides what mode to put the selector fragment
     private lateinit var selectorMode: SelectorMode
 
-    lateinit var elementGroup: CheckedGroup<ElementStatus>
-    lateinit var phialGroupCB: CheckedGroup<PhialType>
-    lateinit var phialGroupSWAXE: CheckedGroup<PhialType>
-    lateinit var kinsectGroup: CheckedGroup<KinsectBonus>
-    lateinit var shellingGroup: CheckedGroup<ShellingType>
-    lateinit var shellingLevelGroup: CheckedGroup<Int>
-    lateinit var coatingGroup: CheckedGroup<CoatingType>
-    lateinit var specialAmmoGroup: CheckedGroup<SpecialAmmoType>
-    lateinit var sortGroup: CheckedGroup<FilterSortCondition>
+    //Shared
+    private lateinit var nameFilter: String
+
+    //Armor specific
+    private lateinit var rankGroup: CheckedGroup<Rank>
+    private lateinit var elementalDefGroup: CheckedGroup<ElementStatus>
+    //TODO: skill filter
+
+    //Decoration specific
+    private lateinit var slotLevelToggles: CheckedGroup<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +106,23 @@ class EquipmentFilterFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         when (selectorMode) {
             SelectorMode.ARMOR -> {
+                nameFilter = ""
                 scroll_body.layoutResource = R.layout.fragment_armor_filter_body
                 scroll_body.inflate()
+                rankGroup = CheckedGroup()
+                rankGroup.apply {
+                    rankGroup.addBinding(rank_toggle_low_rank, Rank.LOW)
+                    rankGroup.addBinding(rank_toggle_high_rank, Rank.HIGH)
+                }
+
+                elementalDefGroup = CheckedGroup()
+                elementalDefGroup.apply {
+                    elementalDefGroup.addBinding(toggle_fire, ElementStatus.FIRE)
+                    elementalDefGroup.addBinding(toggle_water, ElementStatus.WATER)
+                    elementalDefGroup.addBinding(toggle_thunder, ElementStatus.THUNDER)
+                    elementalDefGroup.addBinding(toggle_ice, ElementStatus.ICE)
+                    elementalDefGroup.addBinding(toggle_dragon, ElementStatus.DRAGON)
+                }
             }
             SelectorMode.CHARM -> {
                 scroll_body.layoutResource = R.layout.fragment_charm_filter_body
@@ -74,97 +135,80 @@ class EquipmentFilterFragment : DialogFragment() {
             SelectorMode.DECORATION -> {
                 scroll_body.layoutResource = R.layout.fragment_decoration_filter_body
                 scroll_body.inflate()
+
+                nameFilter = ""
+                slotLevelToggles = CheckedGroup()
+                slotLevelToggles.apply {
+                    slotLevelToggles.addBinding(slot_level_toggle_level_1, 1)
+                    slotLevelToggles.addBinding(slot_level_toggle_level_2, 2)
+                    slotLevelToggles.addBinding(slot_level_toggle_level_3, 3)
+                    slotLevelToggles.addBinding(slot_level_toggle_level_4, 4)
+                }
             }
         }
 
         // Implement actions
         action_clear.setOnClickListener {
-            //            applyState(FilterState.default)
+            applyState(EquipmentFilterState.default)
         }
         action_cancel.setOnClickListener {
             dismiss()
         }
         action_apply.setOnClickListener {
-            //            val data = Intent()
-//            data.putExtra(FILTER_STATE, calculateState())
-//            targetFragment?.onActivityResult(targetRequestCode, 0, data)
-//            dismiss()
+            val data = Intent()
+            data.putExtra(FILTER_STATE, calculateState())
+            targetFragment?.onActivityResult(targetRequestCode, 0, data)
+            dismiss()
         }
-//
-//        // Enable visibility of elements based on weapon type
-//        element_toggles.isVisible = when (weaponType) {
-//            WeaponType.LIGHT_BOWGUN, WeaponType.HEAVY_BOWGUN -> false
-//            else -> true
-//        }
-//
-//        phial_types_cb.isVisible = (weaponType == WeaponType.CHARGE_BLADE)
-//        phial_types_swaxe.isVisible = (weaponType == WeaponType.SWITCH_AXE)
-//        title_phials.isVisible = phial_types_cb.isVisible || phial_types_swaxe.isVisible
-//
-//        title_kinsect.isVisible = (weaponType == WeaponType.INSECT_GLAIVE)
-//        kinsect_toggles.isVisible = (weaponType == WeaponType.INSECT_GLAIVE)
-//
-//        title_shelling.isVisible = (weaponType == WeaponType.GUNLANCE)
-//        shelling_toggles.isVisible = (weaponType == WeaponType.GUNLANCE)
-//
-//        title_coatings.isVisible = (weaponType == WeaponType.BOW)
-//        coating_toggles.isVisible = (weaponType == WeaponType.BOW)
-//        if (coating_toggles.isVisible) {
-//            for ((button, value) in coatingGroup.views) {
-//                val icon = AssetLoader.loadIconFor(value)
-//                (button as? CheckedImageButton)?.setImageDrawable(icon)
-//            }
-//        }
-//
-//        title_ammo.isVisible = (weaponType == WeaponType.HEAVY_BOWGUN)
-//        special_ammo_toggles.isVisible = (weaponType == WeaponType.HEAVY_BOWGUN)
-//
-//        // Apply and config state from bundle
-//        val state = arguments?.getSerializable(FILTER_STATE) as? FilterState
-//        if (state != null) {
-//            applyState(state)
-//        }
+
+        // Apply and config state from bundle
+        val state = arguments?.getSerializable(FILTER_STATE) as? EquipmentFilterState
+        if (state != null) {
+            applyState(state)
+        }
     }
 
     /**
      * Returns the current state, received by analyzing the current view state.
      */
-//    fun calculateState(): FilterState {
-//        val phials = when (weaponType) {
-//            WeaponType.CHARGE_BLADE -> phialGroupCB.getValues().toSet()
-//            WeaponType.SWITCH_AXE -> phialGroupSWAXE.getValues().toSet()
-//            else -> emptySet()
-//        }
-//
-//        return FilterState(
-//                isFinalOnly = final_toggle.isChecked,
-//                sortBy = sortGroup.getValue() ?: FilterSortCondition.NONE,
-//                elements = elementGroup.getValues().toSet(),
-//                phials = phials,
-//                kinsectBonuses = kinsectGroup.getValues().toSet(),
-//                shellingTypes = shellingGroup.getValues().toSet(),
-//                shellingLevels = shellingLevelGroup.getValues().toSet(),
-//                coatingTypes = coatingGroup.getValues().toSet(),
-//                specialAmmo = specialAmmoGroup.getValue()
-//        )
-//    }
-//
-//    /**
-//     * Applies a FilterState to the current UI.
-//     */
-//    fun applyState(state: FilterState) {
-//        // handle final
-//        final_toggle.isChecked = state.isFinalOnly
-//
-//        // Set the basic group values
-//        sortGroup.setValue(state.sortBy)
-//        elementGroup.setValues(state.elements)
-//        phialGroupCB.setValues(state.phials)
-//        phialGroupSWAXE.setValues(state.phials)
-//        kinsectGroup.setValues(state.kinsectBonuses)
-//        shellingGroup.setValues(state.shellingTypes)
-//        shellingLevelGroup.setValues(state.shellingLevels)
-//        coatingGroup.setValues(state.coatingTypes)
-//        specialAmmoGroup.setValue(state.specialAmmo)
-//    }
+    fun calculateState(): EquipmentFilterState? {
+        when (selectorMode) {
+            SelectorMode.ARMOR -> {
+                return EquipmentFilterState(
+                        selectorMode = selectorMode,
+                        nameFilter = name_filter_edittext.text.toString(),
+                        elementalDefense = elementalDefGroup.getValues().toSet(),
+                        rank = rankGroup.getValues().toSet(),
+                        slotLevels = null
+                )
+            }
+            SelectorMode.DECORATION -> {
+                return EquipmentFilterState(
+                        selectorMode = selectorMode,
+                        nameFilter = name_filter_edittext.text.toString(),
+                        elementalDefense = null,
+                        rank = null,
+                        slotLevels = slotLevelToggles.getValues().toSet()
+                )
+            }
+        }
+        return null
+    }
+
+    /**
+     * Applies a FilterState to the current UI.
+     */
+    fun applyState(state: EquipmentFilterState) {
+        when (selectorMode) {
+            SelectorMode.ARMOR -> {
+                name_filter_edittext.setText(state.nameFilter)
+                elementalDefGroup.setValues(state.elementalDefense!!)
+                rankGroup.setValues(state.rank!!)
+            }
+            SelectorMode.DECORATION -> {
+                name_filter_edittext.setText(state.nameFilter)
+                slotLevelToggles.setValues(state.slotLevels!!)
+            }
+        }
+    }
 }

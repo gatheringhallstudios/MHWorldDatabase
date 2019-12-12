@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.common
 
 class EquipmentFilter<T>(
-        var list: List<T>
+        var equipmentList: List<T>?
 ) {
     private val filterList = mutableListOf<Filter<T>>()
 
@@ -21,8 +21,7 @@ class EquipmentFilter<T>(
     }
 
     fun renderResults(): List<T> {
-        if (list.isEmpty()) return emptyList()
-
-        return list.filter { listItem -> filterList.all{ it.runFilter(listItem)} }
+        if (equipmentList.isNullOrEmpty()) return emptyList()
+        return equipmentList!!.filter { listItem -> filterList.all{ it.runFilter(listItem)} }
     }
 }
