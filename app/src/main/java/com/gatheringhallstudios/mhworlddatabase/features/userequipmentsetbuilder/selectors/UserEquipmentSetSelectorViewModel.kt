@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.common.EquipmentFilter
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
@@ -29,9 +28,9 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     private val decorationDao = MHWDatabase.getDatabase(application).decorationDao()
 
     val armor: MutableLiveData<List<ArmorFull>> = MutableLiveData()
-    lateinit var weapons: LiveData<List<WeaponFull>>
+    val weapons: MutableLiveData<List<WeaponFull>> = MutableLiveData()
     val decorations: MutableLiveData<List<Decoration>> = MutableLiveData()
-    lateinit var charms: LiveData<List<CharmFull>>
+    val charms: MutableLiveData<List<CharmFull>> = MutableLiveData()
     lateinit var listState: Parcelable
     private var armorFilters = EquipmentFilter<ArmorFull>(null)
     private var decorationFilters = EquipmentFilter<Decoration>(null)
@@ -75,8 +74,35 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
 
                     decorations.value = decorationFilters.renderResults()
                 }
-                SelectorMode.CHARM -> charmFilters.clearFilters()
-                SelectorMode.WEAPON -> charmFilters.clearFilters()
+                SelectorMode.CHARM -> {
+                    charmFilters.clearFilters()
+                    if (!value.nameFilter.isNullOrEmpty()) {
+                        charmFilters.addFilter((CharmNameFilter(value.nameFilter!!)))
+                    }
+
+                    charms.value = charmFilters.renderResults()
+                }
+                SelectorMode.WEAPON -> {
+                    weaponFilters.clearFilters()
+
+                    if (!value.nameFilter.isNullOrEmpty()) {
+                        weaponFilters.addFilter(WeaponNameFilter(value.nameFilter!!))
+                    }
+
+                    if (!value.slotLevels.isNullOrEmpty()) {
+                        weaponFilters.addFilter(WeaponSlotFilter(value.slotLevels!!))
+                    }
+
+                    if (!value.weaponTypes.isNullOrEmpty()) {
+                        weaponFilters.addFilter(WeaponTypeFilter(value.weaponTypes!!))
+                    }
+
+                    if (!value.elements.isNullOrEmpty()) {
+                        weaponFilters.addFilter(WeaponElementFilter(value.elements!!))
+                    }
+
+                    weapons.value = weaponFilters.renderResults()
+                }
             }
         }
     /**
@@ -104,7 +130,13 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     }
 
     fun loadCharms(langId: String) {
-        charms = charmDao.loadCharmAndSkillList(langId)
+        GlobalScope.launch(Dispatchers.Main) {
+            val charmList = withContext(Dispatchers.IO) {
+                charmDao.loadCharmAndSkillList(langId)
+            }
+            charmFilters.equipmentList = charmList
+            charms.value = charmFilters.renderResults()
+        }
     }
 
     fun loadDecorations(langId: String) {
@@ -118,7 +150,13 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     }
 
     fun loadWeapons(langId: String) {
-        this.weapons = weaponDao.loadWeaponsWithSkillsSync(langId)
+        GlobalScope.launch(Dispatchers.Main) {
+            val weaponList = withContext(Dispatchers.IO) {
+                weaponDao.loadWeaponsWithSkillsSync(langId)
+            }
+            weaponFilters.equipmentList = weaponList
+            weapons.value = weaponFilters.renderResults()
+        }
     }
 
     fun updateEquipmentForEquipmentSet(newId: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?) {

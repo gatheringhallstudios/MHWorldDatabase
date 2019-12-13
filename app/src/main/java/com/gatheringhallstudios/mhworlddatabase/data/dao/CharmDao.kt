@@ -1,10 +1,12 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import androidx.room.Dao
 import androidx.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
+import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
 import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 @Dao
@@ -30,6 +32,15 @@ abstract class CharmDao {
         ORDER BY ct.name""")
     abstract fun loadCharmList(langId: String): LiveData<List<Charm>>
 
+    @Query("""
+        SELECT c.*, ct.name
+        FROM charm c
+            JOIN charm_text ct
+                ON ct.id = c.id
+                AND ct.lang_id = :langId
+        ORDER BY ct.name""")
+    abstract fun loadCharmListSync(langId: String): List<Charm>
+
     /**
      * Loads full data for a charm asynchronously.
      * Full data includes all join tables like items and skills
@@ -50,20 +61,17 @@ abstract class CharmDao {
         )
     }
 
-    fun loadCharmAndSkillList(langId: String): LiveData<List<CharmFull>> {
-        val charms = loadCharmList(langId)
+    fun loadCharmAndSkillList(langId: String): List<CharmFull> {
+        val charms = loadCharmListSync(langId)
 
-        return Transformations.map(charms) {
-            it.map {
-                CharmFull(
-                        charm = it,
-                        skills= loadCharmSkillsSync(langId, it.id),
-                        components= emptyList()
-                )
-            }
+        return charms.map {
+            CharmFull(
+                    charm = it,
+                    skills = loadCharmSkillsSync(langId, it.id),
+                    components = emptyList()
+            )
         }
     }
-
 
     @Query("""
         SELECT c.*, ct.name

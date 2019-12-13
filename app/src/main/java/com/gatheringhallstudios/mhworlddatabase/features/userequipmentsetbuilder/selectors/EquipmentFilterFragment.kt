@@ -9,46 +9,45 @@ import androidx.fragment.app.DialogFragment
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
+import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion.SelectorMode
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.CheckedGroup
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.*
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.name_filter_edittext
-import kotlinx.android.synthetic.main.fragment_decoration_filter_body.*
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.rank_toggle_high_rank
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.rank_toggle_low_rank
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_dragon
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_fire
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_ice
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_thunder
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_water
+import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_1
+import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_2
+import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_3
+import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_4
 import kotlinx.android.synthetic.main.fragment_equipment_filter.*
+import kotlinx.android.synthetic.main.fragment_weapon_filter2_body.*
 import java.io.Serializable
 
 class EquipmentFilterState(
         var selectorMode: SelectorMode,
-//    var isFinalOnly: Boolean,
-//    var sortBy: FilterSortCondition,
         var nameFilter: String?,
         var rank: Set<Rank>?,
         var elementalDefense: Set<ElementStatus>?,
-        var slotLevels: Set<Int>?
-//    var phials: Set<PhialType>,
-//    var kinsectBonuses: Set<KinsectBonus>,
-//    var shellingTypes: Set<ShellingType>,
-//    var shellingLevels: Set<Int>,
-//    var coatingTypes: Set<CoatingType>,
-//    var specialAmmo: SpecialAmmoType?
+        var slotLevels: Set<Int>?,
+        var weaponTypes: Set<WeaponType>?,
+        var elements: Set<ElementStatus>?
 ) : Serializable {
     companion object {
         @JvmStatic
         val default = EquipmentFilterState(
                 selectorMode = SelectorMode.NONE,
-//                isFinalOnly = false,
-//                sortBy = FilterSortCondition.NONE,
                 nameFilter = "",
                 rank = emptySet(),
                 elementalDefense = emptySet(),
-                slotLevels = emptySet()
-//                phials = emptySet(),
-//                kinsectBonuses = emptySet(),
-//                shellingTypes = emptySet(),
-//                shellingLevels = emptySet(),
-//                coatingTypes = emptySet(),
-//                specialAmmo = null
+                slotLevels = emptySet(),
+                weaponTypes = emptySet(),
+                elements = emptySet()
         )
     }
 
@@ -57,7 +56,6 @@ class EquipmentFilterState(
                 this.elementalDefense.isNullOrEmpty() && this.slotLevels.isNullOrEmpty()
     }
 }
-
 
 /**
  * Main fragment that manages the selector filter dialog
@@ -87,6 +85,9 @@ class EquipmentFilterFragment : DialogFragment() {
     private lateinit var elementalDefGroup: CheckedGroup<ElementStatus>
     //TODO: skill filter
 
+    //Weapon specific
+    private lateinit var weaponTypeGroup: CheckedGroup<WeaponType>
+    private lateinit var elementGroup: CheckedGroup<ElementStatus>
     //Decoration specific
     private lateinit var slotLevelToggles: CheckedGroup<Int>
 
@@ -131,6 +132,51 @@ class EquipmentFilterFragment : DialogFragment() {
             SelectorMode.WEAPON -> {
                 scroll_body.layoutResource = R.layout.fragment_weapon_filter2_body
                 scroll_body.inflate()
+
+                weaponTypeGroup = CheckedGroup()
+                weaponTypeGroup.apply {
+                    weaponTypeGroup.addBinding(toggle_great_sword, WeaponType.GREAT_SWORD)
+                    weaponTypeGroup.addBinding(toggle_long_sword, WeaponType.LONG_SWORD)
+                    weaponTypeGroup.addBinding(toggle_sword_and_shield, WeaponType.SWORD_AND_SHIELD)
+                    weaponTypeGroup.addBinding(toggle_dual_blades, WeaponType.DUAL_BLADES)
+                    weaponTypeGroup.addBinding(toggle_hammer, WeaponType.HAMMER)
+                    weaponTypeGroup.addBinding(toggle_hunting_horn, WeaponType.HUNTING_HORN)
+                    weaponTypeGroup.addBinding(toggle_lance, WeaponType.LANCE)
+                    weaponTypeGroup.addBinding(toggle_gunlance, WeaponType.GUNLANCE)
+                    weaponTypeGroup.addBinding(toggle_switch_axe, WeaponType.SWITCH_AXE)
+                    weaponTypeGroup.addBinding(toggle_charge_blade, WeaponType.CHARGE_BLADE)
+                    weaponTypeGroup.addBinding(toggle_insect_glaive, WeaponType.INSECT_GLAIVE)
+                    weaponTypeGroup.addBinding(toggle_light_bowgun, WeaponType.LIGHT_BOWGUN)
+                    weaponTypeGroup.addBinding(toggle_heavy_bowgun, WeaponType.HEAVY_BOWGUN)
+                    weaponTypeGroup.addBinding(toggle_bow, WeaponType.BOW)
+                }
+
+                elementGroup = CheckedGroup()
+                elementGroup.apply {
+                    addBinding(toggle_fire, ElementStatus.FIRE)
+                    addBinding(toggle_water, ElementStatus.WATER)
+                    addBinding(toggle_thunder, ElementStatus.THUNDER)
+                    addBinding(toggle_ice, ElementStatus.ICE)
+                    addBinding(toggle_dragon, ElementStatus.DRAGON)
+                    addBinding(toggle_poison, ElementStatus.POISON)
+                    addBinding(toggle_sleep, ElementStatus.SLEEP)
+                    addBinding(toggle_paralysis, ElementStatus.PARALYSIS)
+                    addBinding(toggle_blast, ElementStatus.BLAST)
+                }
+
+                slotLevelToggles = CheckedGroup()
+                slotLevelToggles.apply {
+                    slotLevelToggles.addBinding(slot_level_toggle_level_1, 1)
+                    slotLevelToggles.addBinding(slot_level_toggle_level_2, 2)
+                    slotLevelToggles.addBinding(slot_level_toggle_level_3, 3)
+                    slotLevelToggles.addBinding(slot_level_toggle_level_4, 4)
+                }
+
+                rankGroup = CheckedGroup()
+                rankGroup.apply {
+                    rankGroup.addBinding(rank_toggle_low_rank, Rank.LOW)
+                    rankGroup.addBinding(rank_toggle_high_rank, Rank.HIGH)
+                }
             }
             SelectorMode.DECORATION -> {
                 scroll_body.layoutResource = R.layout.fragment_decoration_filter_body
@@ -179,7 +225,9 @@ class EquipmentFilterFragment : DialogFragment() {
                         nameFilter = name_filter_edittext.text.toString(),
                         elementalDefense = elementalDefGroup.getValues().toSet(),
                         rank = rankGroup.getValues().toSet(),
-                        slotLevels = null
+                        slotLevels = null,
+                        elements = null,
+                        weaponTypes = null
                 )
             }
             SelectorMode.DECORATION -> {
@@ -188,7 +236,30 @@ class EquipmentFilterFragment : DialogFragment() {
                         nameFilter = name_filter_edittext.text.toString(),
                         elementalDefense = null,
                         rank = null,
-                        slotLevels = slotLevelToggles.getValues().toSet()
+                        slotLevels = slotLevelToggles.getValues().toSet(),
+                        elements = null,
+                        weaponTypes = null
+                )
+            }
+            SelectorMode.CHARM -> {
+                return EquipmentFilterState(
+                        selectorMode = selectorMode,
+                        nameFilter = name_filter_edittext.text.toString(),
+                        elementalDefense = null,
+                        rank = null,
+                        slotLevels = null,
+                        elements = null,
+                        weaponTypes = null)
+            }
+            SelectorMode.WEAPON -> {
+                return EquipmentFilterState(
+                        selectorMode = selectorMode,
+                        nameFilter = name_filter_edittext.text.toString(),
+                        elementalDefense = null,
+                        rank = null,
+                        slotLevels = slotLevelToggles.getValues().toSet(),
+                        elements = elementGroup.getValues().toSet(),
+                        weaponTypes = weaponTypeGroup.getValues().toSet()
                 )
             }
         }
@@ -207,6 +278,15 @@ class EquipmentFilterFragment : DialogFragment() {
             }
             SelectorMode.DECORATION -> {
                 name_filter_edittext.setText(state.nameFilter)
+                slotLevelToggles.setValues(state.slotLevels!!)
+            }
+            SelectorMode.CHARM -> {
+                name_filter_edittext.setText(state.nameFilter)
+            }
+            SelectorMode.WEAPON -> {
+                name_filter_edittext.setText(state.nameFilter)
+                weaponTypeGroup.setValues(state.weaponTypes!!)
+                elementGroup.setValues(state.elements!!)
                 slotLevelToggles.setValues(state.slotLevels!!)
             }
         }
