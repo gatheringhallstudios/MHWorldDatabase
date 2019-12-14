@@ -53,7 +53,8 @@ class EquipmentFilterState(
 
     fun isEmpty(): Boolean {
         return this.nameFilter.isNullOrEmpty() && this.rank.isNullOrEmpty() &&
-                this.elementalDefense.isNullOrEmpty() && this.slotLevels.isNullOrEmpty()
+                this.elementalDefense.isNullOrEmpty() && this.slotLevels.isNullOrEmpty() &&
+                this.weaponTypes.isNullOrEmpty() && this.elements.isNullOrEmpty()
     }
 }
 
@@ -256,7 +257,7 @@ class EquipmentFilterFragment : DialogFragment() {
                         selectorMode = selectorMode,
                         nameFilter = name_filter_edittext.text.toString(),
                         elementalDefense = null,
-                        rank = null,
+                        rank = rankGroup.getValues().toSet(),
                         slotLevels = slotLevelToggles.getValues().toSet(),
                         elements = elementGroup.getValues().toSet(),
                         weaponTypes = weaponTypeGroup.getValues().toSet()
@@ -285,6 +286,7 @@ class EquipmentFilterFragment : DialogFragment() {
             }
             SelectorMode.WEAPON -> {
                 name_filter_edittext.setText(state.nameFilter)
+                rankGroup.setValues(state.rank!!)
                 weaponTypeGroup.setValues(state.weaponTypes!!)
                 elementGroup.setValues(state.elements!!)
                 slotLevelToggles.setValues(state.slotLevels!!)

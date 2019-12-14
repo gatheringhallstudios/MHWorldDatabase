@@ -101,6 +101,10 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
                         weaponFilters.addFilter(WeaponElementFilter(value.elements!!))
                     }
 
+                    if (!value.rank.isNullOrEmpty()) {
+                        weaponFilters.addFilter(WeaponRankFilter(value.rank!!))
+                    }
+
                     weapons.value = weaponFilters.renderResults()
                 }
             }

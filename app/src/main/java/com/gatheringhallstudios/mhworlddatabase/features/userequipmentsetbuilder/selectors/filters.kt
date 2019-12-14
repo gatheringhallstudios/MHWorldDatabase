@@ -90,3 +90,20 @@ class WeaponElementFilter(private val elements: Set<ElementStatus>) : Filter<Wea
         return elements.contains(obj.weapon.element1) || elements.contains(obj.weapon.element2)
     }
 }
+
+class WeaponRankFilter(private val ranks: Set<Rank>) : Filter<WeaponFull> {
+    override fun runFilter(obj: WeaponFull): Boolean {
+        ranks.forEach {
+            return when (it) {
+                Rank.HIGH -> {
+                    obj.weapon.rarity in 5..8
+                }
+                Rank.LOW -> {
+                    obj.weapon.rarity in 1..4
+                }
+            }
+        }
+
+        return false
+    }
+}
