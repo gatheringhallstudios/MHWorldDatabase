@@ -179,6 +179,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
+
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
+            }
         })
     }
 
@@ -207,6 +211,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
+
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
             }
         })
     }
@@ -239,6 +247,9 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
+            }
         })
     }
 
@@ -266,6 +277,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
+
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
             }
         })
     }
