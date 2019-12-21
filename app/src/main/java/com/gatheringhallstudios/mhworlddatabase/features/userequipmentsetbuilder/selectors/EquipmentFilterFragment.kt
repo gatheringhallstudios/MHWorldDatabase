@@ -157,12 +157,6 @@ class EquipmentFilterFragment : DialogFragment() {
                     elementalDefGroup.addBinding(toggle_dragon, ElementStatus.DRAGON)
                 }
 
-                skillGroup = SkillGroup()
-                skillGroup.apply {
-                    skillGroup.addBinding(armor_skill_1)
-                    skillGroup.addBinding(armor_skill_2)
-                }
-
                 armor_skill_1.setOnClickListener {
                     val skillFragment = SkillSelectorFragment.newInstance(0)
                     skillFragment.setTargetFragment(this, FILTER_RESULT_CODE)
@@ -180,14 +174,18 @@ class EquipmentFilterFragment : DialogFragment() {
                 armor_skill_2.setButtonClickFunction {
                     skillGroup.removeValue(1)
                 }
+
+                skillGroup = SkillGroup()
+                skillGroup.apply {
+                    skillGroup.addBinding(armor_skill_1)
+                    skillGroup.addBinding(armor_skill_2)
+                }
             }
             SelectorMode.CHARM -> {
                 scroll_body.layoutResource = R.layout.fragment_charm_filter_body
                 scroll_body.inflate()
-
-                skillGroup = SkillGroup()
-                skillGroup.addBinding(charm_skill_1)
                 charm_skill_1.setLabelText(getString(R.string.user_equipment_set_no_skill))
+
                 charm_skill_1.setOnClickListener {
                     val skillFragment = SkillSelectorFragment.newInstance(0)
                     skillFragment.setTargetFragment(this, FILTER_RESULT_CODE)
@@ -195,6 +193,9 @@ class EquipmentFilterFragment : DialogFragment() {
                 }
                 charm_skill_1.setButtonClickFunction {
                     skillGroup.removeValue(0)
+                skillGroup = SkillGroup()
+                skillGroup.addBinding(charm_skill_1)
+
                 }
             }
             SelectorMode.WEAPON -> {

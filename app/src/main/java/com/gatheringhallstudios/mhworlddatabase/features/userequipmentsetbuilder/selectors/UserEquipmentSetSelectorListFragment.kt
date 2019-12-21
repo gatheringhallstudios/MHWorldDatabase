@@ -96,7 +96,6 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_filter -> {
-//                val wtype = viewModel.currentWeaponType
                 val state = viewModel.filterState
                 val filterFragment = EquipmentFilterFragment.newInstance(this.mode!!, state)
                 filterFragment.setTargetFragment(this, FILTER_RESULT_CODE)

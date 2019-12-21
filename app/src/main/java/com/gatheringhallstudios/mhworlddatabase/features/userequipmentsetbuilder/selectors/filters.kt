@@ -20,35 +20,34 @@ class ArmorRankFilter(private val ranks: Set<Rank>) : Filter<ArmorFull> {
 
 class ArmorElementalDefenseFilter(private val elementDefs: Set<ElementStatus>) : Filter<ArmorFull> {
     override fun runFilter(obj: ArmorFull): Boolean {
-        elementDefs.forEach {
-            when (it) {
+        return elementDefs.all {
+            return when (it) {
                 ElementStatus.FIRE -> {
-                    if (obj.armor.fire > 0) return true
+                    obj.armor.fire > 0
                 }
                 ElementStatus.WATER -> {
-                    if (obj.armor.water > 0) return true
+                    obj.armor.water > 0
                 }
                 ElementStatus.THUNDER -> {
-                    if (obj.armor.thunder > 0) return true
+                    obj.armor.thunder > 0
                 }
                 ElementStatus.ICE -> {
-                    if (obj.armor.ice > 0) return true
+                    obj.armor.ice > 0
                 }
                 ElementStatus.DRAGON -> {
-                    if (obj.armor.dragon > 0) return true
+                    obj.armor.dragon > 0
                 }
                 else -> {
+                    return false
                 }
             }
         }
-
-        return false
     }
 }
 
 class ArmorSkillsFilter(private val skills: Set<SkillTree>) : Filter<ArmorFull> {
     override fun runFilter(obj: ArmorFull): Boolean {
-        return obj.skills.map {it.skillTree.id}.containsAll(skills.map{it.id})
+        return obj.skills.map { it.skillTree.id }.containsAll(skills.map { it.id })
     }
 }
 
@@ -72,7 +71,9 @@ class CharmNameFilter(private val name: String) : Filter<CharmFull> {
 
 class CharmSkillsFilter(private val skills: Set<SkillTree>) : Filter<CharmFull> {
     override fun runFilter(obj: CharmFull): Boolean {
-        return obj.skills.map {it.skillTree.id}.containsAll(skills.map{it.id})
+        return skills.all { searchSkill ->
+            obj.skills.find { it.skillTree.id == searchSkill.id } == null
+        }
     }
 }
 
