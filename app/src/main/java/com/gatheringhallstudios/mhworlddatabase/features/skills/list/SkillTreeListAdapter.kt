@@ -12,7 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 /**
  * A RecyclerView adapter for a homogeneous SkillTree list
  */
-class SkillTreeListAdapter: SimpleRecyclerViewAdapter<SkillTree>() {
+class SkillTreeListAdapter(private val onSelected: (SkillTree) -> Unit): SimpleRecyclerViewAdapter<SkillTree>() {
     override fun onCreateView(parent: ViewGroup): IconLabelTextCell {
         return IconLabelTextCell(parent.context)
     }
@@ -26,6 +26,6 @@ class SkillTreeListAdapter: SimpleRecyclerViewAdapter<SkillTree>() {
             removeDecorator()
         }
 
-        viewHolder.itemView.setOnClickListener { it.getRouter().navigateSkillDetail(data.id) }
+        viewHolder.itemView.setOnClickListener { onSelected(data) }
     }
 }

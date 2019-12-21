@@ -182,6 +182,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
             if (it.isEmpty()) {
                 empty_view.visibility = View.VISIBLE
+            } else {
+                empty_view.visibility = View.GONE
             }
         })
     }
@@ -215,6 +217,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
             if (it.isEmpty()) {
                 empty_view.visibility = View.VISIBLE
+            } else {
+                empty_view.visibility = View.GONE
             }
         })
     }
@@ -249,6 +253,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
             if (it.isEmpty()) {
                 empty_view.visibility = View.VISIBLE
+            } else {
+                empty_view.visibility = View.GONE
             }
         })
     }

@@ -4,14 +4,12 @@ import android.app.Application
 import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.common.EquipmentFilter
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion.SelectorMode
@@ -26,11 +24,13 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
     private val weaponDao = MHWDatabase.getDatabase(application).weaponDao()
     private val armorDao = MHWDatabase.getDatabase(application).armorDao()
     private val decorationDao = MHWDatabase.getDatabase(application).decorationDao()
+    private val skillDao = MHWDatabase.getDatabase(application).skillDao()
 
     val armor: MutableLiveData<List<ArmorFull>> = MutableLiveData()
     val weapons: MutableLiveData<List<WeaponFull>> = MutableLiveData()
     val decorations: MutableLiveData<List<Decoration>> = MutableLiveData()
     val charms: MutableLiveData<List<CharmFull>> = MutableLiveData()
+    lateinit var skills: LiveData<List<SkillTree>>
     lateinit var listState: Parcelable
     private var armorFilters = EquipmentFilter<ArmorFull>(null)
     private var decorationFilters = EquipmentFilter<Decoration>(null)
@@ -58,6 +58,10 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
                         armorFilters.addFilter(ArmorRankFilter(value.rank!!))
                     }
 
+                    if (!value.skills.isNullOrEmpty()) {
+                        armorFilters.addFilter(ArmorSkillsFilter(value.skills!!))
+                    }
+
                     armor.value = armorFilters.renderResults()
 
                 }
@@ -78,6 +82,10 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
                     charmFilters.clearFilters()
                     if (!value.nameFilter.isNullOrEmpty()) {
                         charmFilters.addFilter((CharmNameFilter(value.nameFilter!!)))
+                    }
+
+                    if (!value.skills.isNullOrEmpty()) {
+                        charmFilters.addFilter(CharmSkillsFilter(value.skills!!))
                     }
 
                     charms.value = charmFilters.renderResults()
@@ -161,6 +169,10 @@ class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewM
             weaponFilters.equipmentList = weaponList
             weapons.value = weaponFilters.renderResults()
         }
+    }
+
+    fun loadSkills(langId: String) {
+        skills = skillDao.loadSkillTrees(langId);
     }
 
     fun updateEquipmentForEquipmentSet(newId: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?) {

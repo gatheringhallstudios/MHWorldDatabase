@@ -412,6 +412,7 @@
     <string name="user_equipment_set_new_set">+ Create a Set</string>
     <string name="user_equipment_set_no_equipment">No equipment</string>
     <string name="user_equipment_set_no_decoration">No decoration</string>
+    <string name="user_equipment_set_no_skill">No skill</string>
     <string name="user_equipment_delete_set">Delete set</string>
     <string name="user_equipment_set_deleted">%1$s was deleted</string>
     <string name="user_equipment_new_set_name">Rename Set</string>

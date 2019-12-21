@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
+import com.gatheringhallstudios.mhworlddatabase.components.IconLabelButtonCell
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTree
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion.SelectorMode
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.CheckedGroup
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.name_filter_edittext
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.rank_toggle_high_rank
@@ -28,6 +32,9 @@ import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level
 import kotlinx.android.synthetic.main.fragment_equipment_filter.*
 import kotlinx.android.synthetic.main.fragment_weapon_filter2_body.*
 import java.io.Serializable
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.skill_1 as armor_skill_1
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.skill_2 as armor_skill_2
+import kotlinx.android.synthetic.main.fragment_charm_filter_body.skill_1 as charm_skill_1
 
 class EquipmentFilterState(
         var selectorMode: SelectorMode,
@@ -36,7 +43,8 @@ class EquipmentFilterState(
         var elementalDefense: Set<ElementStatus>?,
         var slotLevels: Set<Int>?,
         var weaponTypes: Set<WeaponType>?,
-        var elements: Set<ElementStatus>?
+        var elements: Set<ElementStatus>?,
+        var skills: Set<SkillTree>?
 ) : Serializable {
     companion object {
         @JvmStatic
@@ -47,7 +55,8 @@ class EquipmentFilterState(
                 elementalDefense = emptySet(),
                 slotLevels = emptySet(),
                 weaponTypes = emptySet(),
-                elements = emptySet()
+                elements = emptySet(),
+                skills = emptySet()
         )
     }
 
@@ -55,6 +64,7 @@ class EquipmentFilterState(
         return this.nameFilter.isNullOrEmpty() && this.rank.isNullOrEmpty() &&
                 this.elementalDefense.isNullOrEmpty() && this.slotLevels.isNullOrEmpty() &&
                 this.weaponTypes.isNullOrEmpty() && this.elements.isNullOrEmpty()
+                && this.skills.isNullOrEmpty()
     }
 }
 
@@ -80,17 +90,19 @@ class EquipmentFilterFragment : DialogFragment() {
 
     //Shared
     private lateinit var nameFilter: String
+    private lateinit var skillGroup: SkillGroup
 
     //Armor specific
     private lateinit var rankGroup: CheckedGroup<Rank>
     private lateinit var elementalDefGroup: CheckedGroup<ElementStatus>
-    //TODO: skill filter
 
     //Weapon specific
     private lateinit var weaponTypeGroup: CheckedGroup<WeaponType>
     private lateinit var elementGroup: CheckedGroup<ElementStatus>
+
     //Decoration specific
     private lateinit var slotLevelToggles: CheckedGroup<Int>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,12 +117,31 @@ class EquipmentFilterFragment : DialogFragment() {
         return inflater.inflate(R.layout.fragment_equipment_filter, container, false)
     }
 
+    /**
+     * Receives a dialog result. Currently the only supported dialog is the filter fragment.
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode != FILTER_RESULT_CODE) {
+            return
+        }
+
+        val skillTree = data?.getSerializableExtra(SkillSelectorFragment.SELECTED_SKILL) as? SkillTree
+        val skillNumber = data?.getSerializableExtra(SkillSelectorFragment.SKILL_NUMBER) as? Int
+        if (skillTree != null && skillNumber != null) {
+            skillGroup.setValue(skillTree, skillNumber)
+        }
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         when (selectorMode) {
             SelectorMode.ARMOR -> {
                 nameFilter = ""
                 scroll_body.layoutResource = R.layout.fragment_armor_filter_body
                 scroll_body.inflate()
+                armor_skill_1.setLabelText(getString(R.string.user_equipment_set_no_skill))
+                armor_skill_2.setLabelText(getString(R.string.user_equipment_set_no_skill))
+
                 rankGroup = CheckedGroup()
                 rankGroup.apply {
                     rankGroup.addBinding(rank_toggle_low_rank, Rank.LOW)
@@ -125,10 +156,46 @@ class EquipmentFilterFragment : DialogFragment() {
                     elementalDefGroup.addBinding(toggle_ice, ElementStatus.ICE)
                     elementalDefGroup.addBinding(toggle_dragon, ElementStatus.DRAGON)
                 }
+
+                skillGroup = SkillGroup()
+                skillGroup.apply {
+                    skillGroup.addBinding(armor_skill_1)
+                    skillGroup.addBinding(armor_skill_2)
+                }
+
+                armor_skill_1.setOnClickListener {
+                    val skillFragment = SkillSelectorFragment.newInstance(0)
+                    skillFragment.setTargetFragment(this, FILTER_RESULT_CODE)
+                    skillFragment.show(fragmentManager!!, "Filter")
+                }
+                armor_skill_1.setButtonClickFunction {
+                    skillGroup.removeValue(0)
+                }
+
+                armor_skill_2.setOnClickListener {
+                    val skillFragment = SkillSelectorFragment.newInstance(1)
+                    skillFragment.setTargetFragment(this, FILTER_RESULT_CODE)
+                    skillFragment.show(fragmentManager!!, "Filter")
+                }
+                armor_skill_2.setButtonClickFunction {
+                    skillGroup.removeValue(1)
+                }
             }
             SelectorMode.CHARM -> {
                 scroll_body.layoutResource = R.layout.fragment_charm_filter_body
                 scroll_body.inflate()
+
+                skillGroup = SkillGroup()
+                skillGroup.addBinding(charm_skill_1)
+                charm_skill_1.setLabelText(getString(R.string.user_equipment_set_no_skill))
+                charm_skill_1.setOnClickListener {
+                    val skillFragment = SkillSelectorFragment.newInstance(0)
+                    skillFragment.setTargetFragment(this, FILTER_RESULT_CODE)
+                    skillFragment.show(fragmentManager!!, "Filter")
+                }
+                charm_skill_1.setButtonClickFunction {
+                    skillGroup.removeValue(0)
+                }
             }
             SelectorMode.WEAPON -> {
                 scroll_body.layoutResource = R.layout.fragment_weapon_filter2_body
@@ -182,7 +249,6 @@ class EquipmentFilterFragment : DialogFragment() {
             SelectorMode.DECORATION -> {
                 scroll_body.layoutResource = R.layout.fragment_decoration_filter_body
                 scroll_body.inflate()
-
                 nameFilter = ""
                 slotLevelToggles = CheckedGroup()
                 slotLevelToggles.apply {
@@ -228,7 +294,8 @@ class EquipmentFilterFragment : DialogFragment() {
                         rank = rankGroup.getValues().toSet(),
                         slotLevels = null,
                         elements = null,
-                        weaponTypes = null
+                        weaponTypes = null,
+                        skills = skillGroup.getValues().toSet()
                 )
             }
             SelectorMode.DECORATION -> {
@@ -239,7 +306,8 @@ class EquipmentFilterFragment : DialogFragment() {
                         rank = null,
                         slotLevels = slotLevelToggles.getValues().toSet(),
                         elements = null,
-                        weaponTypes = null
+                        weaponTypes = null,
+                        skills = null
                 )
             }
             SelectorMode.CHARM -> {
@@ -250,7 +318,8 @@ class EquipmentFilterFragment : DialogFragment() {
                         rank = null,
                         slotLevels = null,
                         elements = null,
-                        weaponTypes = null)
+                        weaponTypes = null,
+                        skills = skillGroup.getValues().toSet())
             }
             SelectorMode.WEAPON -> {
                 return EquipmentFilterState(
@@ -260,7 +329,8 @@ class EquipmentFilterFragment : DialogFragment() {
                         rank = rankGroup.getValues().toSet(),
                         slotLevels = slotLevelToggles.getValues().toSet(),
                         elements = elementGroup.getValues().toSet(),
-                        weaponTypes = weaponTypeGroup.getValues().toSet()
+                        weaponTypes = weaponTypeGroup.getValues().toSet(),
+                        skills = null
                 )
             }
         }
@@ -276,6 +346,7 @@ class EquipmentFilterFragment : DialogFragment() {
                 name_filter_edittext.setText(state.nameFilter)
                 elementalDefGroup.setValues(state.elementalDefense!!)
                 rankGroup.setValues(state.rank!!)
+                skillGroup.setValues(state.skills!!)
             }
             SelectorMode.DECORATION -> {
                 name_filter_edittext.setText(state.nameFilter)
@@ -283,6 +354,7 @@ class EquipmentFilterFragment : DialogFragment() {
             }
             SelectorMode.CHARM -> {
                 name_filter_edittext.setText(state.nameFilter)
+                skillGroup.setValues(state.skills!!)
             }
             SelectorMode.WEAPON -> {
                 name_filter_edittext.setText(state.nameFilter)
@@ -291,6 +363,100 @@ class EquipmentFilterFragment : DialogFragment() {
                 elementGroup.setValues(state.elements!!)
                 slotLevelToggles.setValues(state.slotLevels!!)
             }
+        }
+    }
+}
+
+/**
+ * Helper class to manage a list of skills, including updating and receiving
+ * the selected value.
+ */
+class SkillGroup {
+    private var list = mutableListOf<Pair<IconLabelButtonCell, SkillTree?>>()
+
+    /**
+     * Returns a read only map containing all binded views.
+     */
+    val views: List<Pair<IconLabelButtonCell, SkillTree?>> get() = list
+
+    fun emptyList() {
+        this.list = list.map {
+            it.copy(second = null)
+        }.toMutableList()
+    }
+
+    /**
+     * Adds a binding to the list.
+     * It is necessary to register the change event to notify the group with this version.
+     */
+    fun addBinding(item: IconLabelButtonCell) {
+        list.add(Pair(item, null))
+    }
+
+    /**
+     * Returns the value of the checked item, or null if none are selected
+     */
+    fun getValue(skillNumber: Int): SkillTree? {
+        return if (skillNumber < list.size) {
+            list[skillNumber].second
+        } else {
+            null
+        }
+    }
+
+    /**
+     * Returns the values of all checked items.
+     */
+    fun getValues(): List<SkillTree> {
+        val buf = mutableListOf<SkillTree>()
+        list.forEach { if (it.second != null) buf.add(it.second!!) }
+        return buf
+    }
+
+    fun setValue(value: SkillTree, skillNumber: Int) {
+        if (skillNumber < list.size) {
+            val pair = list[skillNumber]
+            val buf = pair.copy(second = value)
+            list[skillNumber] = buf
+
+            val registered = buf.first
+            val skill = buf.second
+            val icon = if (skill != null) AssetLoader.loadIconFor(skill) else null
+            registered.setLeftIconDrawable(icon)
+            registered.setLabelText(skill?.name)
+        }
+    }
+
+    /**
+     * Updates the registered items to reflect the list of values
+     */
+    fun setValues(values: Iterable<SkillTree>) {
+        emptyList()
+        values.forEachIndexed { idx, value ->
+            if (idx < list.size) {
+                val pair = list[idx]
+                val buf = pair.copy(second = value)
+                list[idx] = buf
+            }
+        }
+
+        for (pair in list) {
+            val registered = pair.first
+            val skill = pair.second
+            val icon = if (skill != null) AssetLoader.loadIconFor(skill) else null
+            registered.setLeftIconDrawable(icon)
+            registered.setLabelText(skill?.name)
+        }
+    }
+
+    fun removeValue(skillNumber: Int) {
+        if (skillNumber < list.size) {
+            val pair = list[skillNumber]
+            val buf = pair.copy(second = null)
+            list[skillNumber] = buf
+
+            buf.first.setLeftIconDrawable(null)
+            buf.first.setLabelText(null)
         }
     }
 }

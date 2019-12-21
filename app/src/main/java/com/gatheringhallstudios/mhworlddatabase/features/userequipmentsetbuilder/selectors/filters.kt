@@ -1,10 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
 
 import com.gatheringhallstudios.mhworlddatabase.common.Filter
-import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
-import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
-import com.gatheringhallstudios.mhworlddatabase.data.models.WeaponFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
@@ -49,6 +46,12 @@ class ArmorElementalDefenseFilter(private val elementDefs: Set<ElementStatus>) :
     }
 }
 
+class ArmorSkillsFilter(private val skills: Set<SkillTree>) : Filter<ArmorFull> {
+    override fun runFilter(obj: ArmorFull): Boolean {
+        return obj.skills.map {it.skillTree.id}.containsAll(skills.map{it.id})
+    }
+}
+
 class DecorationNameFilter(private val name: String) : Filter<Decoration> {
     override fun runFilter(obj: Decoration): Boolean {
         return obj.name?.contains(name, ignoreCase = true) ?: false
@@ -64,6 +67,12 @@ class DecorationSlotLevelFilter(private val slotLevels: Set<Int>) : Filter<Decor
 class CharmNameFilter(private val name: String) : Filter<CharmFull> {
     override fun runFilter(obj: CharmFull): Boolean {
         return obj.charm.name?.contains(name, ignoreCase = true) ?: false
+    }
+}
+
+class CharmSkillsFilter(private val skills: Set<SkillTree>) : Filter<CharmFull> {
+    override fun runFilter(obj: CharmFull): Boolean {
+        return obj.skills.map {it.skillTree.id}.containsAll(skills.map{it.id})
     }
 }
 

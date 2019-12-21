@@ -172,7 +172,13 @@
                 android:id="@+id/skill_1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_height_medium"
-                app:labelText="@string/user_equipment_set_no_equipment" />
+                app:labelText="No skill" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.IconLabelButtonCell
+                android:id="@+id/skill_2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_height_medium"
+                app:labelText="No skill" />
 
         </LinearLayout>
 
