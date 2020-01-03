@@ -410,6 +410,9 @@
     <string name="tab_armor_set_builder_equipment">Equipment</string>
 
     <string name="user_equipment_set_new_set">+ Create a Set</string>
+    <string name="user_equipment_set_no_weapon">No weapon</string>
+    <string name="user_equipment_set_no_armor">No armor</string>
+    <string name="user_equipment_set_no_charm">No charm</string>
     <string name="user_equipment_set_no_equipment">No equipment</string>
     <string name="user_equipment_set_no_decoration">No decoration</string>
     <string name="user_equipment_set_no_skill">No skill</string>
