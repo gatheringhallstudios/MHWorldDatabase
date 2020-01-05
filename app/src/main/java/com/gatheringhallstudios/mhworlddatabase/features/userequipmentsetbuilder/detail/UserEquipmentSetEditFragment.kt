@@ -72,7 +72,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
             populateUserEquipment(it)
         })
@@ -411,32 +410,53 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     }
 
     private fun populateDefaults(userEquipmentSetId: Int) {
-        user_equipment_weapon_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, null, userEquipmentSetId, null, null)
+        with (UserEquipmentCard(user_equipment_weapon_slot)) {
+            bindEmptyWeapon()
+            setOnClick {
+                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, null, userEquipmentSetId, null, null)
+            }
         }
 
-        user_equipment_head_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.HEAD, null)
+        with(UserEquipmentCard(user_equipment_head_slot)) {
+            bindEmptyArmor(ArmorType.HEAD)
+            setOnClick {
+                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.HEAD, null)
+            }
         }
 
-        user_equipment_chest_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.CHEST, null)
+        with(UserEquipmentCard(user_equipment_chest_slot)) {
+            bindEmptyArmor(ArmorType.CHEST)
+            setOnClick {
+                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.CHEST, null)
+            }
         }
 
-        user_equipment_arms_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.ARMS, null)
+        with(UserEquipmentCard(user_equipment_arms_slot)) {
+            bindEmptyArmor(ArmorType.ARMS)
+            setOnClick {
+                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.ARMS, null)
+            }
         }
 
-        user_equipment_waist_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.WAIST, null)
+        with(UserEquipmentCard(user_equipment_waist_slot)) {
+            bindEmptyArmor(ArmorType.WAIST)
+            setOnClick {
+                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.WAIST, null)
+            }
         }
 
-        user_equipment_legs_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.LEGS, null)
+        with(UserEquipmentCard(user_equipment_legs_slot)) {
+            bindEmptyArmor(ArmorType.LEGS)
+            setOnClick {
+                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, null, userEquipmentSetId, ArmorType.LEGS, null)
+            }
         }
 
-        user_equipment_charm_slot.setOnClick {
-            getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, null, userEquipmentSetId, null, null)
+        with(UserEquipmentCard(user_equipment_charm_slot)) {
+            bindEmptyCharm()
+            setOnClick {
+                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, null, userEquipmentSetId, null, null)
+            }
         }
     }
 

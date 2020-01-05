@@ -55,6 +55,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         ViewModelProviders.of(this).get(UserEquipmentSetSelectorViewModel::class.java)
     }
 
+    private lateinit var card: UserEquipmentCard
     private var mode: SelectorMode? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,6 +109,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
         val decorationsConfig = arguments?.getSerializable(ARG_DECORATION_CONFIG) as? DecorationsConfig
 
+        card = UserEquipmentCard(active_equipment_slot)
+
         when (mode) {
             SelectorMode.ARMOR -> initArmorSelector(filter, activeEquipment as? UserArmorPiece, activeEquipmentSetId)
             SelectorMode.CHARM -> initCharmSelector(activeEquipment as? UserCharm, activeEquipmentSetId)
@@ -158,6 +161,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         //If this is going to be new piece of armor, do not populate the active armor piece
         if (activeArmorPiece != null) {
             populateActiveArmor(activeArmorPiece)
+        } else {
+            card.bindEmptyArmor(armorType)
         }
 
         equipment_list.adapter = adapter
@@ -192,6 +197,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
         if (activeCharm != null) {
             populateActiveCharm(activeCharm)
+        } else {
+            card.bindEmptyCharm()
         }
 
         equipment_list.adapter = adapter
@@ -227,6 +234,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
         if (activeDecoration != null) {
             populateActiveDecoration(activeDecoration)
+        } else {
+            card.bindEmptyDecoration()
         }
 
         equipment_list.adapter = adapter
@@ -262,6 +271,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
         if (activeWeapon != null) {
             populateActiveWeapon(activeWeapon)
+        } else {
+            card.bindEmptyWeapon()
         }
 
         equipment_list.adapter = adapter
@@ -283,9 +294,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val skills = userWeapon.weapon.skills
         val slots = userWeapon.weapon.weapon.slots
 
-        val card = UserEquipmentCard(active_equipment_slot)
         card.bindWeapon(userWeapon)
-
         card.populateSkills(skills)
         card.populateSetBonuses(emptyList())
 
@@ -318,9 +327,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val armor = userArmor.armor
         val slots = userArmor.armor.armor.slots
 
-        val card = UserEquipmentCard(active_equipment_slot)
         card.bindArmor(userArmor)
-
         card.populateSkills(armor.skills)
         card.populateSetBonuses(armor.setBonuses)
 
@@ -352,9 +359,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun populateActiveCharm(userCharm: UserCharm) {
-        val card = UserEquipmentCard(active_equipment_slot)
         card.bindCharm(userCharm)
-
         card.populateSkills(userCharm.charm.skills)
         card.populateSetBonuses(emptyList())
 
@@ -369,13 +374,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun populateActiveDecoration(userDecoration: UserDecoration) {
-        val decoration = userDecoration.decoration
-
-        val card = UserEquipmentCard(active_equipment_slot)
-        card.bindDecoration(userDecoration)
-
         val skill = SkillLevel(level = 1)
-        skill.skillTree = decoration.skillTree
+        skill.skillTree = userDecoration.decoration.skillTree
+
+        card.bindDecoration(userDecoration)
         card.populateSkills(listOf(skill))
         card.populateSetBonuses(emptyList())
 

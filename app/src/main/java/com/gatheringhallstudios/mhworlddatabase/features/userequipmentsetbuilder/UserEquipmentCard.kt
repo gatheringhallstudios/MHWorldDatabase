@@ -9,18 +9,24 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_empty_equipment_header_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
 
-class UserEquipmentCard(val card: ExpandableCardView) {
+/**
+ * Wrapper over the ExpandableCardView used to display equipment data.
+ * Used to
+ */
+class UserEquipmentCard(private val card: ExpandableCardView) {
     private fun getString(@StringRes resId: Int, vararg formatArgs: Any?): String {
         return card.resources.getString(resId, *formatArgs)
     }
@@ -93,6 +99,31 @@ class UserEquipmentCard(val card: ExpandableCardView) {
         }
     }
 
+    private fun setEmptyView(@StringRes title: Int) {
+        card.setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
+        card.setBody(R.layout.view_empty_equipment_body_expandable_cardview)
+        card.new_equipment_set_label.text = getString(title)
+    }
+
+    fun bindEmptyWeapon() {
+        setEmptyView(R.string.user_equipment_set_no_weapon)
+    }
+
+    fun bindEmptyArmor(type: ArmorType?) {
+        setEmptyView(R.string.user_equipment_set_no_armor)
+    }
+
+    fun bindEmptyCharm() {
+        setEmptyView(R.string.user_equipment_set_no_charm)
+    }
+
+    fun bindEmptyDecoration() {
+        setEmptyView(R.string.user_equipment_set_no_decoration)
+    }
+
+    fun setOnClick(onClick: () -> Unit) {
+        card.setOnClick(onClick)
+    }
 
     fun populateSkills(skills: List<SkillLevel>) {
         val skillLayout = card.skill_section
