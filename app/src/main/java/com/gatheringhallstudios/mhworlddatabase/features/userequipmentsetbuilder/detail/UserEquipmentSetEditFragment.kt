@@ -211,54 +211,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         attachWeaponOnClickListeners(userWeapon, userEquipmentSetId, user_equipment_weapon_slot)
     }
 
-    private fun populateSlot1(layout: View, decoration: Decoration?, slot: Int) {
-        layout.card_body.slot1_detail.removeDecorator()
-
-        if (decoration != null) {
-            layout.card_header.slot1.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
-            layout.card_body.slot1_detail.visibility = View.VISIBLE
-            layout.card_body.slot1_detail.setLabelText(decoration.name)
-            layout.card_body.slot1_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
-        } else {
-            layout.card_header.slot1.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
-            layout.card_body.slot1_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
-            layout.card_body.slot1_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-            layout.card_body.slot1_detail.visibility = View.GONE
-        }
-    }
-
-    private fun populateSlot2(layout: View, decoration: Decoration?, slot: Int) {
-        layout.card_body.slot2_detail.removeDecorator()
-
-        if (decoration != null) {
-            layout.card_header.slot2.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
-            layout.card_body.slot2_detail.visibility = View.VISIBLE
-            layout.card_body.slot2_detail.setLabelText(decoration.name)
-            layout.card_body.slot2_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
-        } else {
-            layout.card_header.slot2.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
-            layout.card_body.slot2_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
-            layout.card_body.slot2_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-            layout.card_body.slot2_detail.visibility = View.GONE
-        }
-    }
-
-    private fun populateSlot3(layout: View, decoration: Decoration?, slot: Int) {
-        layout.card_body.slot3_detail.removeDecorator()
-
-        if (decoration != null) {
-            layout.card_header.slot3.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
-            layout.card_body.slot3_detail.visibility = View.VISIBLE
-            layout.card_body.slot3_detail.setLabelText(decoration.name)
-            layout.card_body.slot3_detail.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slot))
-        } else {
-            layout.card_header.slot3.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
-            layout.card_body.slot3_detail.setLeftIconDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(slot)))
-            layout.card_body.slot3_detail.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-            layout.card_body.slot3_detail.visibility = View.GONE
-        }
-    }
-
     private fun hideDefense(view: View) {
         view.icon_defense.visibility = View.INVISIBLE
         view.defense_value.visibility = View.INVISIBLE
@@ -284,12 +236,14 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             return
         }
 
+        val card = UserEquipmentCard(layout as ExpandableCardView)
+
         //Populate defaults
         layout.decorations_section.visibility = if (slots.isEmpty()) View.GONE else View.VISIBLE
         slots.active.forEachIndexed { idx, slot ->
+            card.populateSlot(idx + 1, null, slots[idx])
             when (idx + 1) {
                 1 -> {
-                    populateSlot1(layout, null, slots[0])
                     layout.slot1_detail.visibility = View.VISIBLE
                     layout.slot1_detail.setOnClickListener {
                         getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
@@ -298,7 +252,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                     }
                 }
                 2 -> {
-                    populateSlot2(layout, null, slots[1])
                     layout.slot2_detail.visibility = View.VISIBLE
                     layout.slot2_detail.setOnClickListener {
                         getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
@@ -307,7 +260,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                     }
                 }
                 3 -> {
-                    populateSlot3(layout, null, slots[2])
                     layout.slot3_detail.visibility = View.VISIBLE
                     layout.slot3_detail.setOnClickListener {
                         getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
@@ -339,10 +291,13 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             return
         }
 
+        val card = UserEquipmentCard(layout as ExpandableCardView)
+
         for (userDecoration in decorations) {
+            card.populateSlot(userDecoration.slotNumber, userDecoration.decoration, slots[userDecoration.slotNumber - 1])
+
             when (userDecoration.slotNumber) {
                 1 -> {
-                    populateSlot1(layout, userDecoration.decoration, slots[0])
                     layout.slot1_detail.setOnClickListener {
                         viewModel.setActiveUserEquipment(userDecoration)
                         getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION,
@@ -364,7 +319,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                     }
                 }
                 2 -> {
-                    populateSlot2(layout, userDecoration.decoration, slots[1])
                     layout.slot2_detail.setOnClickListener {
                         viewModel.setActiveUserEquipment(userDecoration)
                         getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, userDecoration, userEquipmentSetId, null,
@@ -385,7 +339,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                     }
                 }
                 3 -> {
-                    populateSlot3(layout, userDecoration.decoration, slots[2])
                     layout.slot3_detail.setOnClickListener {
                         viewModel.setActiveUserEquipment(userDecoration)
                         getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, userDecoration, userEquipmentSetId, null,

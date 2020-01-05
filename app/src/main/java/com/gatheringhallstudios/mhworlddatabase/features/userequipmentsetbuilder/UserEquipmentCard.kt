@@ -2,15 +2,16 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
+import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
@@ -21,6 +22,9 @@ import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.vie
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
 
 /**
  * Wrapper over the ExpandableCardView used to display equipment data.
@@ -186,6 +190,40 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             }
 
             setBonusSection.set_bonus_list.addView(listItem)
+        }
+    }
+
+    /**
+     * Binds a decoration to a slot.
+     * @param slotIdx a 1-index position from 1 to 3.
+     */
+    fun populateSlot(slotNumber: Int, decoration: Decoration?, slotSize: Int) {
+        val imageView = when (slotNumber) {
+            1 -> card.slot1
+            2 -> card.slot2
+            3 -> card.slot3
+            else -> throw IndexOutOfBoundsException("SlotIdx is out of range 1-3: $slotNumber")
+        }
+
+        val detailView = when (slotNumber) {
+            1 -> card.slot1_detail
+            2 -> card.slot2_detail
+            3 -> card.slot3_detail
+            else -> throw IndexOutOfBoundsException("SlotIdx is out of range 1-3: $slotNumber")
+        }
+
+        detailView.removeDecorator()
+
+        if (decoration != null) {
+            imageView.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slotSize))
+            detailView.visibility = View.VISIBLE
+            detailView.setLabelText(decoration.name)
+            detailView.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slotSize))
+        } else {
+            imageView.setImageDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
+            detailView.setLeftIconDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
+            detailView.setLabelText(getString(R.string.user_equipment_set_no_decoration))
+            detailView.visibility = View.GONE
         }
     }
 }
