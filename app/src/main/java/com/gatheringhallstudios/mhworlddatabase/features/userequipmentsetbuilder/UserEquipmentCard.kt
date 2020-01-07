@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
@@ -103,26 +104,40 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         }
     }
 
-    private fun setEmptyView(@StringRes title: Int) {
+    private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
         card.setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
         card.setBody(R.layout.view_empty_equipment_body_expandable_cardview)
         card.new_equipment_set_label.text = getString(title)
+        card.equipment_set_icon2.setImageResource(icon)
     }
 
     fun bindEmptyWeapon() {
-        setEmptyView(R.string.user_equipment_set_no_weapon)
+        setEmptyView(R.string.user_equipment_set_no_weapon, R.drawable.ic_equipment_weapon_empty)
     }
 
     fun bindEmptyArmor(type: ArmorType?) {
-        setEmptyView(R.string.user_equipment_set_no_armor)
+        setEmptyView(R.string.user_equipment_set_no_armor, when (type) {
+            ArmorType.HEAD -> R.drawable.ic_equipment_head_empty
+            ArmorType.CHEST -> R.drawable.ic_equipment_chest_empty
+            ArmorType.ARMS -> R.drawable.ic_equipment_arm_empty
+            ArmorType.WAIST -> R.drawable.ic_equipment_waist_empty
+            ArmorType.LEGS -> R.drawable.ic_equipment_leg_empty
+            else -> R.drawable.ic_equipment_armor_set_empty
+        })
     }
 
     fun bindEmptyCharm() {
-        setEmptyView(R.string.user_equipment_set_no_charm)
+        setEmptyView(R.string.user_equipment_set_no_charm, R.drawable.ic_equipment_armor_set_empty)
     }
 
-    fun bindEmptyDecoration() {
-        setEmptyView(R.string.user_equipment_set_no_decoration)
+    fun bindEmptyDecoration(slotSize: Int) {
+        setEmptyView(R.string.user_equipment_set_no_decoration, when (slotSize) {
+            1 -> R.drawable.ic_ui_slot_1_empty
+            2 -> R.drawable.ic_ui_slot_2_empty
+            3 -> R.drawable.ic_ui_slot_3_empty
+            4 -> R.drawable.ic_ui_slot_4_empty
+            else -> R.drawable.ic_ui_slot_none
+        })
     }
 
     fun setOnClick(onClick: () -> Unit) {

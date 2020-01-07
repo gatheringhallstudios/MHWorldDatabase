@@ -235,7 +235,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         if (activeDecoration != null) {
             populateActiveDecoration(activeDecoration)
         } else {
-            card.bindEmptyDecoration()
+            card.bindEmptyDecoration(decorationsConfig.decorationLevelFilter)
         }
 
         equipment_list.adapter = adapter
