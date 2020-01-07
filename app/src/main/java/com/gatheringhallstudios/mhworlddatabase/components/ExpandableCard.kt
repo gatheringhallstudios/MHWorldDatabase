@@ -18,6 +18,11 @@ import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitch
 import com.gatheringhallstudios.mhworlddatabase.util.elevationToAlpha
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
+import kotlin.math.abs
+import kotlin.math.absoluteValue
+
+private const val clickThreshold = 100
+private const val threshold = 400
 
 /**
  * A CardView with a space for a static header and expandable body.
@@ -258,12 +263,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                 }
                 MotionEvent.ACTION_MOVE -> {
                     dx = event.x - initialX
-                    if (dx > 0 && dx < 400 && swipeRightEnabled) {
+                    if (dx > 0 && dx < threshold && swipeRightEnabled) {
                         val layoutParams = left_view.layoutParams
                         layoutParams.width = dx.toInt()
                         left_view.layoutParams = layoutParams
                         view.x = dx
-                    } else if (dx < 0 && dx > -400 && swipeLeftEnabled) {
+                    } else if (dx < 0 && dx > -threshold && swipeLeftEnabled) {
                         val layoutParams = right_view.layoutParams
                         layoutParams.width = -1 * dx.toInt()
                         right_view.layoutParams = layoutParams
@@ -271,7 +276,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                     }
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (dx == 0f) onClick()
+                    if (abs(dx) < clickThreshold) onClick()
                     else if (swipeLeftEnabled || swipeRightEnabled) animateViews(dx.toInt(), (-1 * dx).toInt(), onSwipeLeft, onSwipeRight)
                 }
                 MotionEvent.ACTION_CANCEL -> {

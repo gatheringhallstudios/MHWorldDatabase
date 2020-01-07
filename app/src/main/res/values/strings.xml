@@ -20,6 +20,7 @@
     <string name="general_none">None</string> <!-- Empty message for skill/charms subsections -->
 
     <!-- Rank -->
+    <string name="rank_title">Rank</string>
     <string name="rank_short_low">LR</string>
     <string name="rank_short_high">HR</string>
     <string name="rank_short_all">ANY</string> <!-- null rank -->
@@ -409,13 +410,22 @@
     <string name="tab_armor_set_builder_equipment">Equipment</string>
 
     <string name="user_equipment_set_new_set">+ Create a Set</string>
+    <string name="user_equipment_set_no_weapon">No weapon</string>
+    <string name="user_equipment_set_no_armor">No armor</string>
+    <string name="user_equipment_set_no_charm">No charm</string>
     <string name="user_equipment_set_no_equipment">No equipment</string>
     <string name="user_equipment_set_no_decoration">No decoration</string>
+    <string name="user_equipment_set_no_skill">No skill</string>
     <string name="user_equipment_delete_set">Delete set</string>
     <string name="user_equipment_set_deleted">%1$s was deleted</string>
     <string name="user_equipment_new_set_name">Rename Set</string>
     <string name="user_equipment_apply">Apply</string>
     <string name="user_equipment_cancel">Cancel</string>
+
+    <string name="user_equipment_set_filter_name">Name</string>
+    <string name="user_equipment_set_filter_slot_level">Slot Level</string>
+    <string name="user_equipment_set_filter_elemental_defense">Elemental Defense</string>
+    <string name="user_equipment_set_filter_add_skill">Add a new skill</string>
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->

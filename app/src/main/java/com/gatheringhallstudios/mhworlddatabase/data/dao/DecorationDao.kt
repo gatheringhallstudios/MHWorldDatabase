@@ -3,7 +3,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
+import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationBase
 
 @Dao
 abstract class DecorationDao {
@@ -29,6 +30,20 @@ abstract class DecorationDao {
                 AND stext.lang_id = dtext.lang_id        
           AND dtext.lang_id = :langId""")
     abstract fun loadDecorationsWithSkills(langId: String): LiveData<List<Decoration>>
+
+    @Query("""
+        SELECT d.*, dtext.name,
+            s.id skill_id, stext.name skill_name, s.max_level skill_max_level, s.icon_color skill_icon_color
+        FROM decoration d
+            JOIN decoration_text dtext
+                ON dtext.id = d.id
+            JOIN skilltree s
+                ON s.id = d.skilltree_id
+            JOIN skilltree_text stext
+                ON stext.id = s.id
+                AND stext.lang_id = dtext.lang_id        
+          AND dtext.lang_id = :langId""")
+    abstract fun loadDecorationsWithSkillsSync(langId: String): List<Decoration>
 
     @Query("""
         SELECT d.*, dtext.name,

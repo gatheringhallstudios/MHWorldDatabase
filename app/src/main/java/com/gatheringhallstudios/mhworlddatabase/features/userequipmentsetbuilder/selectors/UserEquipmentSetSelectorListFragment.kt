@@ -1,43 +1,30 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.SpacesItemDecoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentCard
+import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.icon
-import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.label_text
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
-import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
-import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
-import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.equipment_icon
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.equipment_name
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.icon_slots
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.rarity_string
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -56,7 +43,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             ARMOR,
             DECORATION,
             CHARM,
-            WEAPON
+            WEAPON,
+            NONE
         }
 
         class DecorationsConfig(val targetEquipmentId: Int, val targetEquipmentSlot: Int,
@@ -67,14 +55,47 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         ViewModelProviders.of(this).get(UserEquipmentSetSelectorViewModel::class.java)
     }
 
+    private lateinit var card: UserEquipmentCard
+    private var mode: SelectorMode? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.findItem(R.id.action_search).isVisible = false
+        inflater.inflate(R.menu.menu_weapon_tree, menu)
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.action_search).isVisible = false
+        val filterIcon = menu.findItem(R.id.action_filter)
+        viewModel.isFilterActive.observe(this, Observer { isFiltered ->
+            filterIcon?.setIcon(when (isFiltered) {
+                true -> R.drawable.ic_sys_filter_on
+                false -> R.drawable.ic_sys_filter_off
+            })
+        })
+    }
+
+    /**
+     * Handled when a menu item is clicked. True is returned if handled.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                val state = viewModel.filterState
+                val filterFragment = EquipmentFilterFragment.newInstance(this.mode!!, state)
+                filterFragment.setTargetFragment(this, FILTER_RESULT_CODE)
+                filterFragment.show(fragmentManager!!, "Filter")
+                true
+            }
+
+            // fallback to parent behavior if unhandled
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -82,11 +103,13 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val mode = arguments?.getSerializable(ARG_SELECTOR_MODE) as? SelectorMode
+        this.mode = arguments?.getSerializable(ARG_SELECTOR_MODE) as? SelectorMode
         val filter = arguments?.getSerializable(ARG_ARMOR_FILTER) as? ArmorType
         val activeEquipment = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserEquipment
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
         val decorationsConfig = arguments?.getSerializable(ARG_DECORATION_CONFIG) as? DecorationsConfig
+
+        card = UserEquipmentCard(active_equipment_slot)
 
         when (mode) {
             SelectorMode.ARMOR -> initArmorSelector(filter, activeEquipment as? UserArmorPiece, activeEquipmentSetId)
@@ -104,11 +127,25 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         }
     }
 
-    private fun initArmorSelector(filter: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
+    /**
+     * Receives a dialog result. Currently the only supported dialog is the filter fragment.
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode != FILTER_RESULT_CODE) {
+            return
+        }
+
+        val state = data?.getSerializableExtra(EquipmentFilterFragment.FILTER_STATE) as? EquipmentFilterState
+        if (state != null) {
+            viewModel.filterState = state
+        }
+    }
+
+    private fun initArmorSelector(armorType: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
         setActivityTitle(getString(R.string.title_armor_set_armor_selector))
 
-        if (filter != null) {
-            viewModel.loadArmor(AppSettings.dataLocale, filter)
+        if (armorType != null) {
+            viewModel.loadArmor(AppSettings.dataLocale, armorType)
         }
 
         val adapter = UserEquipmentSetArmorSelectorAdapter {
@@ -124,6 +161,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         //If this is going to be new piece of armor, do not populate the active armor piece
         if (activeArmorPiece != null) {
             populateActiveArmor(activeArmorPiece)
+        } else {
+            card.bindEmptyArmor(armorType)
         }
 
         equipment_list.adapter = adapter
@@ -132,6 +171,12 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
+
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
+            } else {
+                empty_view.visibility = View.GONE
             }
         })
     }
@@ -152,6 +197,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
         if (activeCharm != null) {
             populateActiveCharm(activeCharm)
+        } else {
+            card.bindEmptyCharm()
         }
 
         equipment_list.adapter = adapter
@@ -161,6 +208,12 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
+
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
+            } else {
+                empty_view.visibility = View.GONE
             }
         })
     }
@@ -181,6 +234,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
         if (activeDecoration != null) {
             populateActiveDecoration(activeDecoration)
+        } else {
+            card.bindEmptyDecoration()
         }
 
         equipment_list.adapter = adapter
@@ -192,6 +247,11 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
+            } else {
+                empty_view.visibility = View.GONE
             }
         })
     }
@@ -211,6 +271,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
         if (activeWeapon != null) {
             populateActiveWeapon(activeWeapon)
+        } else {
+            card.bindEmptyWeapon()
         }
 
         equipment_list.adapter = adapter
@@ -221,24 +283,21 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
+
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
+            }
         })
     }
 
     private fun populateActiveWeapon(userWeapon: UserWeapon) {
-        val weapon = userWeapon.weapon.weapon
         val skills = userWeapon.weapon.skills
         val slots = userWeapon.weapon.weapon.slots
-        active_equipment_slot.setHeader(R.layout.view_weapon_header_expandable_cardview)
-        active_equipment_slot.setBody(R.layout.view_base_body_expandable_cardview)
-        active_equipment_slot.equipment_name.text = weapon.name
-        active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
-        active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
-        active_equipment_slot.rarity_string.visibility = View.VISIBLE
-        active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
-        active_equipment_slot.attack_value.text = weapon.attack.toString()
 
-        populateSkills(skills, active_equipment_slot.skill_section)
-        populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
+        card.bindWeapon(userWeapon)
+        card.populateSkills(skills)
+        card.populateSetBonuses(emptyList())
+
         active_equipment_slot.decorations_section.visibility = View.GONE
         active_equipment_slot.slot1_detail.visibility = View.GONE
         active_equipment_slot.slot2_detail.visibility = View.GONE
@@ -268,25 +327,16 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val armor = userArmor.armor
         val slots = userArmor.armor.armor.slots
 
-        active_equipment_slot.setHeader(R.layout.view_base_header_expandable_cardview)
-        active_equipment_slot.setBody(R.layout.view_base_body_expandable_cardview)
-        active_equipment_slot.equipment_name.text = armor.armor.name
-        active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-        active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
-        active_equipment_slot.rarity_string.visibility = View.VISIBLE
-        active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-        active_equipment_slot.defense_value.text = getString(
-                R.string.armor_defense_value,
-                armor.armor.defense_base,
-                armor.armor.defense_max,
-                armor.armor.defense_augment_max)
+        card.bindArmor(userArmor)
+        card.populateSkills(armor.skills)
+        card.populateSetBonuses(armor.setBonuses)
 
-        populateSkills(armor.skills, active_equipment_slot.skill_section)
-        populateSetBonuses(armor.setBonuses, active_equipment_slot.set_bonus_section)
-        active_equipment_slot.decorations_section.visibility = View.GONE
-        active_equipment_slot.slot1_detail.visibility = View.GONE
-        active_equipment_slot.slot2_detail.visibility = View.GONE
-        active_equipment_slot.slot3_detail.visibility = View.GONE
+        with(active_equipment_slot) {
+            decorations_section.visibility = View.GONE
+            slot1_detail.visibility = View.GONE
+            slot2_detail.visibility = View.GONE
+            slot3_detail.visibility = View.GONE
+        }
 
         if (!armor.armor.slots.isEmpty()) {
             slots.active.forEachIndexed { idx, value ->
@@ -309,19 +359,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun populateActiveCharm(userCharm: UserCharm) {
-        val charm = userCharm.charm.charm
-        active_equipment_slot.setHeader(R.layout.view_base_header_expandable_cardview)
-        active_equipment_slot.setBody(R.layout.view_base_body_expandable_cardview)
+        card.bindCharm(userCharm)
+        card.populateSkills(userCharm.charm.skills)
+        card.populateSetBonuses(emptyList())
 
-        active_equipment_slot.equipment_name.text = charm.name
-        active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, charm.rarity)
-        active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(charm.rarity))
-        active_equipment_slot.rarity_string.visibility = View.VISIBLE
-        active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(charm))
-        active_equipment_slot.defense_value.visibility = View.GONE
-        active_equipment_slot.icon_defense.visibility = View.GONE
-        populateSkills(userCharm.charm.skills, active_equipment_slot.skill_section)
-        populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
         active_equipment_slot.icon_slots.visibility = View.GONE
         active_equipment_slot.slot1.visibility = View.GONE
         active_equipment_slot.slot2.visibility = View.GONE
@@ -333,21 +374,13 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun populateActiveDecoration(userDecoration: UserDecoration) {
-        val decoration = userDecoration.decoration
-        active_equipment_slot.setHeader(R.layout.view_base_header_expandable_cardview)
-        active_equipment_slot.setBody(R.layout.view_base_body_expandable_cardview)
-
-        active_equipment_slot.equipment_name.text = decoration.name
-        active_equipment_slot.rarity_string.text = getString(R.string.format_rarity, decoration.rarity)
-        active_equipment_slot.rarity_string.setTextColor(AssetLoader.loadRarityColor(decoration.rarity))
-        active_equipment_slot.rarity_string.visibility = View.VISIBLE
-        active_equipment_slot.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
-        active_equipment_slot.defense_value.visibility = View.GONE
-        active_equipment_slot.icon_defense.visibility = View.GONE
         val skill = SkillLevel(level = 1)
-        skill.skillTree = decoration.skillTree
-        populateSkills(listOf(skill), active_equipment_slot.skill_section)
-        populateSetBonuses(emptyList(), active_equipment_slot.set_bonus_section)
+        skill.skillTree = userDecoration.decoration.skillTree
+
+        card.bindDecoration(userDecoration)
+        card.populateSkills(listOf(skill))
+        card.populateSetBonuses(emptyList())
+
         active_equipment_slot.decorations_section.visibility = View.GONE
         active_equipment_slot.icon_slots.visibility = View.GONE
         active_equipment_slot.slot1_detail.visibility = View.GONE
@@ -356,64 +389,5 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         active_equipment_slot.slot1.visibility = View.GONE
         active_equipment_slot.slot2.visibility = View.GONE
         active_equipment_slot.slot3.visibility = View.GONE
-    }
-
-    private fun populateSkills(skills: List<SkillLevel>, skillLayout: LinearLayout) {
-        if (skills.isEmpty()) {
-            skillLayout.visibility = View.GONE
-            return
-        }
-
-        skillLayout.visibility = View.VISIBLE
-        skillLayout.skill_list.removeAllViews()
-
-        val inflater = LayoutInflater.from(context)
-
-        for (skill in skills) {
-            //Set the label for the Set name
-            val view = inflater.inflate(R.layout.listitem_skill_level, skillLayout.skill_list, false)
-
-            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
-            view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
-            with(view.skill_level) {
-                maxLevel = skill.skillTree.max_level
-                level = skill.level
-            }
-
-            view.setOnClickListener {
-                getRouter().navigateSkillDetail(skill.skillTree.id)
-            }
-
-            skillLayout.skill_list.addView(view)
-        }
-    }
-
-    private fun populateSetBonuses(armorSetBonuses: List<ArmorSetBonus>, setBonusSection: LinearLayout) {
-        if (armorSetBonuses.isEmpty()) {
-            setBonusSection.visibility = View.GONE
-            return
-        }
-
-        // show set bonus section
-        setBonusSection.visibility = View.VISIBLE
-        setBonusSection.set_bonus_list.removeAllViews()
-
-        //Now to set the actual skills
-        for (setBonus in armorSetBonuses) {
-            val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
-            val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null, false)
-
-            listItem.bonus_skill_icon.setImageDrawable(skillIcon)
-            listItem.bonus_skill_name.text = setBonus.skillTree.name
-            listItem.bonus_requirement.setImageResource(reqIcon)
-
-            listItem.setOnClickListener {
-                getRouter().navigateSkillDetail(setBonus.skillTree.id)
-            }
-
-            setBonusSection.set_bonus_list.addView(listItem)
-        }
     }
 }

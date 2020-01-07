@@ -33,7 +33,7 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
             }
 
             val adapter = UserEquipmentSetAdapterDelegate(it,
-                    { itr ->
+                    onSelect = { itr ->
                         if (itr.id == 0) { //Set has not yet been created
                             GlobalScope.launch(Dispatchers.Main) {
                                 val equipmentSet = withContext(Dispatchers.IO) { viewModel.createEquipmentSet() }
@@ -43,7 +43,7 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
                             getRouter().navigateUserEquipmentSetDetail(itr)
                         }
                     },
-                    { itr, idx, adapter ->
+                    onDelete = { itr, idx, adapter ->
                         viewModel.userEquipmentSets.value?.remove(itr)
                         val snackBar = Snackbar.make(view, getString(R.string.user_equipment_set_deleted, itr.name), Snackbar.LENGTH_LONG).setAction(R.string.action_undo) {
                             viewModel.userEquipmentSets.value?.add(idx, itr)

@@ -1,11 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 
 @Dao
@@ -177,16 +175,14 @@ abstract class WeaponDao {
         )
     }
 
-    fun loadWeaponsWithSkillsSync(langId: String): LiveData<List<WeaponFull>> = createLiveData {
+    fun loadWeaponsWithSkillsSync(langId: String): List<WeaponFull> {
         val weapons = loadWeaponsSync(langId)
-        val buf = weapons.map {
+        return weapons.map {
             WeaponFull(
                     weapon = it,
                     skills = queryWeaponSkillsSync(langId, it.id)
             )
         }
-
-        buf
     }
 
     /**

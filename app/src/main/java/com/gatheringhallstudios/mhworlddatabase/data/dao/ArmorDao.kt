@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.room.Dao
 import androidx.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 /**
@@ -65,7 +65,7 @@ abstract class ArmorDao {
         FROM armor a
         WHERE a.armor_type = :armorType 
     """)
-    abstract fun loadArmorIdsByArmorType(armorType: ArmorType): LiveData<List<Int>>
+    abstract fun loadArmorIdsByArmorTypeSync(armorType: ArmorType): List<Int>
 
     fun loadArmor(langId: String, armorId: Int) = createLiveData {
         loadArmorSync(langId, armorId)
@@ -137,7 +137,7 @@ abstract class ArmorDao {
                 })
     }
 
-    fun loadArmorFullSync(langId: String, armorId: Int) : ArmorFull {
+    fun loadArmorFullSync(langId: String, armorId: Int): ArmorFull {
         val armor = loadArmorSync(langId, armorId)
         return ArmorFull(
                 armor = armor,
@@ -197,13 +197,11 @@ abstract class ArmorDao {
             ORDER BY askill.skilltree_id ASC""")
     abstract fun loadArmorSkillsSync(langId: String, armorId: Int): List<SkillLevel>
 
-    fun loadArmorFullByType(langId: String, armorType:ArmorType) : LiveData<List<ArmorFull>> {
-        val armorIds = loadArmorIdsByArmorType(armorType)
+    fun loadArmorFullByType(langId: String, armorType: ArmorType): List<ArmorFull> {
+        val armorIds = loadArmorIdsByArmorTypeSync(armorType)
 
-        return Transformations.map(armorIds) { ids ->
-            ids.map {id ->
-                loadArmorFullSync(langId, id)
-            }
+        return armorIds.map { id ->
+            loadArmorFullSync(langId, id)
         }
     }
 }

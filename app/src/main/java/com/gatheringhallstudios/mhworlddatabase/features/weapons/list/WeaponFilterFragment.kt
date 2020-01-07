@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Checkable
 import android.widget.CompoundButton
-import android.widget.ToggleButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -16,7 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.components.CheckableNotifier
 import com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import kotlinx.android.synthetic.main.fragment_weapon_filter.*
+import kotlinx.android.synthetic.main.fragment_equipment_filter.*
 import kotlinx.android.synthetic.main.fragment_weapon_filter_body.*
 
 /**
@@ -166,10 +165,13 @@ class WeaponFilterFragment : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_weapon_filter, container, false)
+        return inflater.inflate(R.layout.fragment_equipment_filter, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        scroll_body.layoutResource = R.layout.fragment_weapon_filter_body
+        scroll_body.inflate()
+
         // NOTE FOR GROUPS: Only singleOnly groups need to be notified (to enable unselections)
         this.weaponType = arguments?.getSerializable(FILTER_WEAPON_TYPE) as WeaponType
 

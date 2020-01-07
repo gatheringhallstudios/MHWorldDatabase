@@ -6,13 +6,9 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.gatheringhallstudios.mhworlddatabase.R
 import kotlinx.android.synthetic.main.cell_icon_label_button.view.*
 
@@ -57,14 +53,11 @@ class IconLabelButtonCell : ConstraintLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.cell_icon_label_button, this, true)
 
-        ButterKnife.bind(this)
-
         setLeftIconDrawable(drawable)
         setLabelText(labelText)
 
-
         layoutParams = ViewGroup.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         // makes this cell have touch feedback...since the xml is a merge tag, we can't do this in xml
         val highlightBackground = TypedValue()
@@ -90,7 +83,7 @@ class IconLabelButtonCell : ConstraintLayout {
         label_text.text = labelText
     }
 
-    fun setButtonClickFunction(clickFunction: ()-> Unit) {
+    fun setButtonClickFunction(clickFunction: () -> Unit) {
         cell_button.setOnClickListener {
             clickFunction()
         }
