@@ -224,10 +224,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     }
 
     private fun populateDecorations(userEquipment: UserEquipment?, userEquipmentSetId: Int, layout: View) {
-        layout.decorations_section.visibility = View.GONE
-        layout.decorations_section.slot1_detail.visibility = View.GONE
-        layout.decorations_section.slot2_detail.visibility = View.GONE
-        layout.decorations_section.slot3_detail.visibility = View.GONE
         val slots = if ((userEquipment as? UserArmorPiece) != null) {
             userEquipment.armor.armor.slots
         } else if ((userEquipment as? UserWeapon) != null) {
@@ -236,44 +232,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             return
         }
 
-        val card = UserEquipmentCard(layout as ExpandableCardView)
-
-        //Populate defaults
-        layout.decorations_section.visibility = if (slots.isEmpty()) View.GONE else View.VISIBLE
-        slots.active.forEachIndexed { idx, slot ->
-            card.populateSlot(idx + 1, null, slots[idx])
-            when (idx + 1) {
-                1 -> {
-                    layout.slot1_detail.visibility = View.VISIBLE
-                    layout.slot1_detail.setOnClickListener {
-                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
-                                userEquipmentSetId, null,
-                                Companion.DecorationsConfig(userEquipment.entityId(), 1, userEquipment.type(), slot))
-                    }
-                }
-                2 -> {
-                    layout.slot2_detail.visibility = View.VISIBLE
-                    layout.slot2_detail.setOnClickListener {
-                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
-                                userEquipmentSetId, null,
-                                Companion.DecorationsConfig(userEquipment.entityId(), 2, userEquipment.type(), slot))
-                    }
-                }
-                3 -> {
-                    layout.slot3_detail.visibility = View.VISIBLE
-                    layout.slot3_detail.setOnClickListener {
-                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
-                                userEquipmentSetId, null,
-                                Companion.DecorationsConfig(userEquipment.entityId(), 3, userEquipment.type(), slot))
-                    }
-                }
-            }
-        }
-
-        populateSavedDecorations(layout, userEquipment, userEquipmentSetId)
-    }
-
-    private fun populateSavedDecorations(layout: View, userEquipment: UserEquipment, userEquipmentSetId: Int) {
         val decorations = if ((userEquipment as? UserArmorPiece) != null) {
             userEquipment.decorations
         } else if ((userEquipment as? UserWeapon) != null) {
@@ -282,84 +240,35 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             emptyList()
         }
 
-        //Maximum slot values, not the slot number on the equipment
-        val slots = if ((userEquipment as? UserArmorPiece) != null) {
-            userEquipment.armor.armor.slots
-        } else if ((userEquipment as? UserWeapon) != null) {
-            userEquipment.weapon.weapon.slots
-        } else {
-            return
-        }
-
         val card = UserEquipmentCard(layout as ExpandableCardView)
+        card.populateDecorations(slots, decorations,
+                onEmptyClick = { slotNumber ->
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
+                            userEquipmentSetId, null,
+                            Companion.DecorationsConfig(userEquipment.entityId(), slotNumber, userEquipment.type(), slots[slotNumber - 1]))
+                },
+                onClick = { userDecoration ->
+                    viewModel.setActiveUserEquipment(userDecoration)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION,
+                            userDecoration, userEquipmentSetId, null,
+                            Companion.DecorationsConfig(
+                                    userEquipment.entityId(), userDecoration.slotNumber,
+                                    userEquipment.type(), userDecoration.decoration.slot))
 
-        for (userDecoration in decorations) {
-            card.populateSlot(userDecoration.slotNumber, userDecoration.decoration, slots[userDecoration.slotNumber - 1])
-
-            when (userDecoration.slotNumber) {
-                1 -> {
-                    layout.slot1_detail.setOnClickListener {
-                        viewModel.setActiveUserEquipment(userDecoration)
-                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION,
-                                userDecoration, userEquipmentSetId, null,
-                                Companion.DecorationsConfig(userEquipment.entityId(), 1,
-                                        userEquipment.type(), userDecoration.decoration.slot))
-                    }
-                    layout.decorations_section.slot1_detail.setButtonClickFunction {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            withContext(Dispatchers.IO) {
-                                viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
-                            }
-                            withContext(Dispatchers.Main) {
-                                val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
-                                viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
-                                (layout as ExpandableCardView).toggle()
-                            }
+                },
+                onDelete = { userDecoration ->
+                    GlobalScope.launch(Dispatchers.Main) {
+                        withContext(Dispatchers.IO) {
+                            viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
+                        }
+                        withContext(Dispatchers.Main) {
+                            val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
+                            viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+                            (layout as ExpandableCardView).toggle()
                         }
                     }
                 }
-                2 -> {
-                    layout.slot2_detail.setOnClickListener {
-                        viewModel.setActiveUserEquipment(userDecoration)
-                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, userDecoration, userEquipmentSetId, null,
-                                Companion.DecorationsConfig(userEquipment.entityId(), 2,
-                                        userEquipment.type(), userDecoration.decoration.slot))
-                    }
-                    layout.decorations_section.slot2_detail.setButtonClickFunction {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            withContext(Dispatchers.IO) {
-                                viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
-                            }
-                            withContext(Dispatchers.Main) {
-                                val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
-                                viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
-                                (layout as ExpandableCardView).toggle()
-                            }
-                        }
-                    }
-                }
-                3 -> {
-                    layout.slot3_detail.setOnClickListener {
-                        viewModel.setActiveUserEquipment(userDecoration)
-                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, userDecoration, userEquipmentSetId, null,
-                                Companion.DecorationsConfig(userEquipment.entityId(), 3,
-                                        userEquipment.type(), userDecoration.decoration.slot))
-                    }
-                    layout.decorations_section.slot3_detail.setButtonClickFunction {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            withContext(Dispatchers.IO) {
-                                viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
-                            }
-                            withContext(Dispatchers.Main) {
-                                val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
-                                viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
-                                (layout as ExpandableCardView).toggle()
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        )
     }
 
     private fun populateDefaults(userEquipmentSetId: Int) {

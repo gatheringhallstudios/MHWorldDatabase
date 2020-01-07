@@ -194,36 +194,65 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     /**
-     * Binds a decoration to a slot.
-     * @param slotIdx a 1-index position from 1 to 3.
+     * Populates the decoration section for most equipment pieces.
+     * For each callback, it will either return the UserDecoration that was clicked, or
+     * the slot number (1-indexed) of the clicked slot.
      */
-    fun populateSlot(slotNumber: Int, decoration: Decoration?, slotSize: Int) {
-        val imageView = when (slotNumber) {
-            1 -> card.slot1
-            2 -> card.slot2
-            3 -> card.slot3
-            else -> throw IndexOutOfBoundsException("SlotIdx is out of range 1-3: $slotNumber")
+    fun populateDecorations(slots: EquipmentSlots, decorations: List<UserDecoration>,
+                            onEmptyClick: ((Int) -> Unit)?,
+                            onClick: ((UserDecoration) -> Unit)?,
+                            onDelete: ((UserDecoration) -> Unit)?) {
+        with (card.decorations_section) {
+            visibility = if (slots.isEmpty()) View.GONE else View.VISIBLE
+            slot1_detail.visibility = View.GONE
+            slot2_detail.visibility = View.GONE
+            slot3_detail.visibility = View.GONE
         }
 
-        val detailView = when (slotNumber) {
-            1 -> card.slot1_detail
-            2 -> card.slot2_detail
-            3 -> card.slot3_detail
-            else -> throw IndexOutOfBoundsException("SlotIdx is out of range 1-3: $slotNumber")
-        }
+        // Bind decorations that exist first
+        slots.active.forEachIndexed { idx, slotSize ->
+            val slotNumber = idx + 1
+            val userDecoration = decorations.find { it.slotNumber == slotNumber }
+            val decoration = userDecoration?.decoration
 
-        detailView.removeDecorator()
+            val imageView = when (slotNumber) {
+                1 -> card.slot1
+                2 -> card.slot2
+                3 -> card.slot3
+                else -> throw IndexOutOfBoundsException("SlotIdx is out of range 1-3: $slotNumber")
+            }
 
-        if (decoration != null) {
-            imageView.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slotSize))
+            val detailView = when (slotNumber) {
+                1 -> card.slot1_detail
+                2 -> card.slot2_detail
+                3 -> card.slot3_detail
+                else -> throw IndexOutOfBoundsException("SlotIdx is out of range 1-3: $slotNumber")
+            }
+
             detailView.visibility = View.VISIBLE
-            detailView.setLabelText(decoration.name)
-            detailView.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slotSize))
-        } else {
-            imageView.setImageDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
-            detailView.setLeftIconDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
-            detailView.setLabelText(getString(R.string.user_equipment_set_no_decoration))
-            detailView.visibility = View.GONE
+            detailView.removeDecorator()
+
+            if (decoration != null) {
+                imageView.setImageDrawable(AssetLoader.loadFilledSlotIcon(decoration, slotSize))
+                detailView.setLabelText(decoration.name)
+                detailView.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slotSize))
+
+                detailView.setOnClickListener {
+                    onClick?.invoke(userDecoration)
+                }
+
+                detailView.setButtonClickFunction {
+                    onDelete?.invoke(userDecoration)
+                }
+            } else {
+                imageView.setImageDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
+                detailView.setLeftIconDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
+                detailView.setLabelText(getString(R.string.user_equipment_set_no_decoration))
+
+                detailView.setOnClickListener {
+                    onEmptyClick?.invoke(slotNumber)
+                }
+            }
         }
     }
 }
