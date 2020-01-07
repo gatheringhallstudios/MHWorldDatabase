@@ -3,13 +3,11 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.SpacesItemDecoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
@@ -18,13 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
-import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
-import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.icon_slots
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -291,86 +283,25 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun populateActiveWeapon(userWeapon: UserWeapon) {
-        val skills = userWeapon.weapon.skills
-        val slots = userWeapon.weapon.weapon.slots
-
         card.bindWeapon(userWeapon)
-        card.populateSkills(skills)
+        card.populateSkills(userWeapon.weapon.skills)
         card.populateSetBonuses(emptyList())
-
-        active_equipment_slot.decorations_section.visibility = View.GONE
-        active_equipment_slot.slot1_detail.visibility = View.GONE
-        active_equipment_slot.slot2_detail.visibility = View.GONE
-        active_equipment_slot.slot3_detail.visibility = View.GONE
-
-        if (!slots.isEmpty()) {
-            slots.active.forEachIndexed { idx, value ->
-                when (idx + 1) {
-                    1 -> {
-                        active_equipment_slot.slot1.visibility = View.VISIBLE
-                        active_equipment_slot.slot1.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
-                    }
-                    2 -> {
-                        active_equipment_slot.slot2.visibility = View.VISIBLE
-                        active_equipment_slot.slot2.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
-                    }
-                    3 -> {
-                        active_equipment_slot.slot3.visibility = View.VISIBLE
-                        active_equipment_slot.slot3.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
-                    }
-                }
-            }
-        }
+        card.populateSlots(userWeapon.weapon.weapon.slots)
     }
 
     private fun populateActiveArmor(userArmor: UserArmorPiece) {
         val armor = userArmor.armor
-        val slots = userArmor.armor.armor.slots
 
         card.bindArmor(userArmor)
         card.populateSkills(armor.skills)
         card.populateSetBonuses(armor.setBonuses)
-
-        with(active_equipment_slot) {
-            decorations_section.visibility = View.GONE
-            slot1_detail.visibility = View.GONE
-            slot2_detail.visibility = View.GONE
-            slot3_detail.visibility = View.GONE
-        }
-
-        if (!armor.armor.slots.isEmpty()) {
-            slots.active.forEachIndexed { idx, value ->
-                when (idx + 1) {
-                    1 -> {
-                        active_equipment_slot.slot1.visibility = View.VISIBLE
-                        active_equipment_slot.slot1.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
-                    }
-                    2 -> {
-                        active_equipment_slot.slot2.visibility = View.VISIBLE
-                        active_equipment_slot.slot2.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
-                    }
-                    3 -> {
-                        active_equipment_slot.slot3.visibility = View.VISIBLE
-                        active_equipment_slot.slot3.setImageDrawable(context!!.getDrawableCompat(SlotEmptyRegistry(value)))
-                    }
-                }
-            }
-        }
+        card.populateSlots(userArmor.armor.armor.slots)
     }
 
     private fun populateActiveCharm(userCharm: UserCharm) {
         card.bindCharm(userCharm)
         card.populateSkills(userCharm.charm.skills)
         card.populateSetBonuses(emptyList())
-
-        active_equipment_slot.icon_slots.visibility = View.GONE
-        active_equipment_slot.slot1.visibility = View.GONE
-        active_equipment_slot.slot2.visibility = View.GONE
-        active_equipment_slot.slot3.visibility = View.GONE
-        active_equipment_slot.decorations_section.visibility = View.GONE
-        active_equipment_slot.slot1_detail.visibility = View.GONE
-        active_equipment_slot.slot2_detail.visibility = View.GONE
-        active_equipment_slot.slot3_detail.visibility = View.GONE
     }
 
     private fun populateActiveDecoration(userDecoration: UserDecoration) {
@@ -380,14 +311,5 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         card.bindDecoration(userDecoration)
         card.populateSkills(listOf(skill))
         card.populateSetBonuses(emptyList())
-
-        active_equipment_slot.decorations_section.visibility = View.GONE
-        active_equipment_slot.icon_slots.visibility = View.GONE
-        active_equipment_slot.slot1_detail.visibility = View.GONE
-        active_equipment_slot.slot2_detail.visibility = View.GONE
-        active_equipment_slot.slot3_detail.visibility = View.GONE
-        active_equipment_slot.slot1.visibility = View.GONE
-        active_equipment_slot.slot2.visibility = View.GONE
-        active_equipment_slot.slot3.visibility = View.GONE
     }
 }

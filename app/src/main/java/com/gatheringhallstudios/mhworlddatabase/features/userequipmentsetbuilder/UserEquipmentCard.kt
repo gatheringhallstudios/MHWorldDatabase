@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.vie
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.icon_slots
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
@@ -48,6 +49,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
             rarity_string.visibility = View.VISIBLE
             attack_value.text = weapon.attack.toString()
+
+            decorations_section.visibility = View.GONE
         }
     }
 
@@ -68,6 +71,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                     armor.armor.defense_base,
                     armor.armor.defense_max,
                     armor.armor.defense_augment_max)
+
+            decorations_section.visibility = View.GONE
         }
     }
     
@@ -84,6 +89,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
 
             defense_value.visibility = View.GONE
             icon_defense.visibility = View.GONE
+            hideSlots()
             decorations_section.visibility = View.GONE
         }
     }
@@ -111,6 +117,13 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         card.setBody(R.layout.view_empty_equipment_body_expandable_cardview)
         card.new_equipment_set_label.text = getString(title)
         card.equipment_set_icon2.setImageResource(icon)
+    }
+
+    private fun hideSlots() {
+        card.icon_slots.visibility = View.GONE
+        card.slot1.visibility = View.GONE
+        card.slot2.visibility = View.GONE
+        card.slot3.visibility = View.GONE
     }
 
     fun bindEmptyWeapon() {
@@ -211,14 +224,23 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     /**
+     * Populates the slot icons, but hides the decorations section.
+     * If you want decorations to be selectable, use populateDecorations instead.
+     */
+    fun populateSlots(slots: EquipmentSlots) {
+        this.populateDecorations(slots, emptyList())
+        card.decorations_section.visibility = View.GONE
+    }
+
+    /**
      * Populates the decoration section for most equipment pieces.
      * For each callback, it will either return the UserDecoration that was clicked, or
      * the slot number (1-indexed) of the clicked slot.
      */
     fun populateDecorations(slots: EquipmentSlots, decorations: List<UserDecoration>,
-                            onEmptyClick: ((Int) -> Unit)?,
-                            onClick: ((UserDecoration) -> Unit)?,
-                            onDelete: ((UserDecoration) -> Unit)?) {
+                            onEmptyClick: ((Int) -> Unit)? = null,
+                            onClick: ((UserDecoration) -> Unit)? = null,
+                            onDelete: ((UserDecoration) -> Unit)? = null) {
         with (card.decorations_section) {
             visibility = if (slots.isEmpty()) View.GONE else View.VISIBLE
             slot1_detail.visibility = View.GONE

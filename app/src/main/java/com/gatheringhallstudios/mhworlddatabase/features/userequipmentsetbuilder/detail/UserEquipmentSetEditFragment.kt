@@ -2,12 +2,9 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 
 import android.os.Bundle
 import android.view.*
-import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
@@ -17,15 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
-import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
-import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.icon_slots
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -168,8 +157,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     private fun populateCharm(userCharm: UserCharm, userEquipmentSetId: Int) {
         val card = UserEquipmentCard(user_equipment_charm_slot)
         card.bindCharm(userCharm)
-
-        card.populateSkills(emptyList())
+        card.populateSkills(userCharm.charm.skills)
         card.populateSetBonuses(emptyList())
         populateDecorations(null, userEquipmentSetId, user_equipment_charm_slot)
 
@@ -186,10 +174,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             fragmentTransaction.attach(currentFragment)
             fragmentTransaction.commit()
         }
-
-        hideDefense(user_equipment_charm_slot)
-        hideSlots(user_equipment_charm_slot)
-        card.populateSkills(userCharm.charm.skills)
     }
 
     private fun populateWeapon(userWeapon: UserWeapon, userEquipmentSetId: Int) {
@@ -209,18 +193,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         card.populateSkills(skillsList)
         populateDecorations(userWeapon, userEquipmentSetId, user_equipment_weapon_slot)
         attachWeaponOnClickListeners(userWeapon, userEquipmentSetId, user_equipment_weapon_slot)
-    }
-
-    private fun hideDefense(view: View) {
-        view.icon_defense.visibility = View.INVISIBLE
-        view.defense_value.visibility = View.INVISIBLE
-    }
-
-    private fun hideSlots(view: View) {
-        view.icon_slots.visibility = View.GONE
-        view.slot1.visibility = View.GONE
-        view.slot2.visibility = View.GONE
-        view.slot3.visibility = View.GONE
     }
 
     private fun populateDecorations(userEquipment: UserEquipment?, userEquipmentSetId: Int, layout: View) {
