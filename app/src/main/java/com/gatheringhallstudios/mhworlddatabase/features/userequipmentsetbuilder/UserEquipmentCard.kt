@@ -84,6 +84,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
 
             defense_value.visibility = View.GONE
             icon_defense.visibility = View.GONE
+            decorations_section.visibility = View.GONE
         }
     }
     
@@ -95,10 +96,11 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             setBody(R.layout.view_base_body_expandable_cardview)
 
             equipment_name.text = decoration.name
+            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
             rarity_string.text = getString(R.string.format_rarity, decoration.rarity)
             rarity_string.setTextColor(AssetLoader.loadRarityColor(decoration.rarity))
             rarity_string.visibility = View.VISIBLE
-            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
+
             defense_value.visibility = View.GONE
             icon_defense.visibility = View.GONE
         }

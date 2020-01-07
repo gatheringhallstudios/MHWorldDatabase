@@ -264,7 +264,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                         withContext(Dispatchers.Main) {
                             val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
                             viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
-                            (layout as ExpandableCardView).toggle()
                         }
                     }
                 }
