@@ -2,16 +2,19 @@ package com.gatheringhallstudios.mhworlddatabase.components
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Rect
 import android.graphics.drawable.Animatable
 import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
@@ -63,9 +66,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         val inflater = getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.cell_expandable_cardview, this, true)
-        card_arrow.setOnClickListener {
-            toggle()
-        }
+
         card_body.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             card_body.measure(MATCH_PARENT, WRAP_CONTENT)
             if (card_body.measuredHeight <= 0) {
@@ -107,9 +108,27 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             attributes.recycle()
         }
 
-        //Swipe/onclick handler
+//        //Swipe/onclick handler
         card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
                 this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
+
+        findViewById<LinearLayout>(R.id.card_layout).post {
+            val delegateTouchArea = Rect()
+            val cardArrow = findViewById<ImageButton>(R.id.card_arrow).apply {
+                setOnClickListener {
+                    toggle()
+                }
+                getHitRect(delegateTouchArea)
+            }
+
+            delegateTouchArea.right += 100
+            delegateTouchArea.left -= 100
+            delegateTouchArea.top -= 100
+            delegateTouchArea.bottom += 100
+            (cardArrow.parent as? View)?.apply {
+                touchDelegate = TouchDelegate(delegateTouchArea, cardArrow)
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
@@ -140,7 +159,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
     fun setBody(layout: Int) {
-        if(layout == 0) {
+        if (layout == 0) {
             card_body.removeAllViews()
             return
         }

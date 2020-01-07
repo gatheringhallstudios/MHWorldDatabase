@@ -50,8 +50,9 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_large"
-        app:layout_constraintBottom_toTopOf="@id/action_cancel"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_filter" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_filter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/action_cancel"
@@ -62,7 +63,7 @@
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_large"
         android:text="@string/action_cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scroll_body"
         app:layout_constraintEnd_toStartOf="@id/action_apply"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -74,7 +75,7 @@
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_large"
         android:text="@string/action_apply"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scroll_body"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/action_cancel" />
 

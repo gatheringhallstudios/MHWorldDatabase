@@ -193,9 +193,11 @@ class EquipmentFilterFragment : DialogFragment() {
                 }
                 charm_skill_1.setButtonClickFunction {
                     skillGroup.removeValue(0)
-                skillGroup = SkillGroup()
-                skillGroup.addBinding(charm_skill_1)
+                }
 
+                skillGroup = SkillGroup()
+                skillGroup.apply {
+                    skillGroup.addBinding(charm_skill_1)
                 }
             }
             SelectorMode.WEAPON -> {

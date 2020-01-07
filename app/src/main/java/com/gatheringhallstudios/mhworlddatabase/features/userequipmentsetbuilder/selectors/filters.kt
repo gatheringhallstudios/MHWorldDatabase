@@ -71,9 +71,7 @@ class CharmNameFilter(private val name: String) : Filter<CharmFull> {
 
 class CharmSkillsFilter(private val skills: Set<SkillTree>) : Filter<CharmFull> {
     override fun runFilter(obj: CharmFull): Boolean {
-        return skills.all { searchSkill ->
-            obj.skills.find { it.skillTree.id == searchSkill.id } == null
-        }
+        return obj.skills.map { it.skillTree.id }.containsAll(skills.map { it.id })
     }
 }
 
