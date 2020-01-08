@@ -219,13 +219,13 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                             userEquipmentSetId, null,
                             Companion.DecorationsConfig(userEquipment.entityId(), slotNumber, userEquipment.type(), slots[slotNumber - 1]))
                 },
-                onClick = { userDecoration ->
+                onClick = { slotNumber, userDecoration ->
                     viewModel.setActiveUserEquipment(userDecoration)
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION,
                             userDecoration, userEquipmentSetId, null,
                             Companion.DecorationsConfig(
                                     userEquipment.entityId(), userDecoration.slotNumber,
-                                    userEquipment.type(), userDecoration.decoration.slot))
+                                    userEquipment.type(), slots[slotNumber - 1]))
 
                 },
                 onDelete = { userDecoration ->

@@ -239,7 +239,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
      */
     fun populateDecorations(slots: EquipmentSlots, decorations: List<UserDecoration>,
                             onEmptyClick: ((Int) -> Unit)? = null,
-                            onClick: ((UserDecoration) -> Unit)? = null,
+                            onClick: ((Int, UserDecoration) -> Unit)? = null,
                             onDelete: ((UserDecoration) -> Unit)? = null) {
         with (card.decorations_section) {
             visibility = if (slots.isEmpty()) View.GONE else View.VISIBLE
@@ -277,7 +277,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 detailView.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slotSize))
 
                 detailView.setOnClickListener {
-                    onClick?.invoke(userDecoration)
+                    onClick?.invoke(slotNumber, userDecoration)
                 }
 
                 detailView.setButtonClickFunction {

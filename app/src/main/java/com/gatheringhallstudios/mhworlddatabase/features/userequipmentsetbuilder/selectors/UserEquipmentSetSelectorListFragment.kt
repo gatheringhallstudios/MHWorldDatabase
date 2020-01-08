@@ -234,13 +234,15 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         equipment_list.addItemDecoration(SpacesItemDecoration(32))
 
         viewModel.decorations.observe(this, Observer {
-            adapter.items = it.filter { decoration ->
+            val filteredCollection = it.filter { decoration ->
                 decoration.slot <= decorationsConfig.decorationLevelFilter
             }
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
-            if (it.isEmpty()) {
+
+            adapter.items = filteredCollection
+            if (filteredCollection.isEmpty()) {
                 empty_view.visibility = View.VISIBLE
             } else {
                 empty_view.visibility = View.GONE
