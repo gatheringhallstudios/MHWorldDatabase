@@ -39,7 +39,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
 
     fun bindWeapon(userWeapon: UserWeapon) {
         val weapon = userWeapon.weapon.weapon
-        with (card) {
+        card.run {
             setHeader(R.layout.view_weapon_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
 
@@ -57,7 +57,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     fun bindArmor(userArmor: UserArmorPiece) {
         val armor = userArmor.armor
 
-        with(card) {
+        card.run {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
 
@@ -77,7 +77,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
     
     fun bindCharm(userCharm: UserCharm) {
-        with (card) {
+        card.run {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
 
@@ -97,7 +97,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     fun bindDecoration(userDecoration: UserDecoration) {
         val decoration = userDecoration.decoration
 
-        with (card) {
+        card.run {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
 

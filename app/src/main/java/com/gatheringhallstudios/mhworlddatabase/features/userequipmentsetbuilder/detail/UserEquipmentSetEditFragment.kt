@@ -243,7 +243,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     }
 
     private fun populateDefaults(userEquipmentSetId: Int) {
-        with (UserEquipmentCard(user_equipment_weapon_slot)) {
+        with(UserEquipmentCard(user_equipment_weapon_slot)) {
             bindEmptyWeapon()
             setOnClick {
                 getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, null, userEquipmentSetId, null, null)
