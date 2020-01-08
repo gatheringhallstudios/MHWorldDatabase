@@ -96,6 +96,10 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         // Populate stats like element, defense...
         populateComplexStats(weapon.weapon, view)
 
+        view.setOnClickListener {
+            getRouter().navigateWeaponDetail(weapon.weapon.id)
+        }
+
         weapon_list.addView(view)
     }
 
