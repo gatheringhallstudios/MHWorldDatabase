@@ -75,7 +75,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             decorations_section.visibility = View.GONE
         }
     }
-    
+
     fun bindCharm(userCharm: UserCharm) {
         card.run {
             setHeader(R.layout.view_base_header_expandable_cardview)
@@ -93,7 +93,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             decorations_section.visibility = View.GONE
         }
     }
-    
+
     fun bindDecoration(userDecoration: UserDecoration) {
         val decoration = userDecoration.decoration
 
@@ -113,17 +113,21 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
-        card.setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
-        card.setBody(R.layout.view_empty_equipment_body_expandable_cardview)
-        card.new_equipment_set_label.text = getString(title)
-        card.equipment_set_icon2.setImageResource(icon)
+        card.run {
+            setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
+            setBody(R.layout.view_empty_equipment_body_expandable_cardview)
+            new_equipment_set_label.text = getString(title)
+            equipment_set_icon2.setImageResource(icon)
+        }
     }
 
     private fun hideSlots() {
-        card.icon_slots.visibility = View.GONE
-        card.slot1.visibility = View.GONE
-        card.slot2.visibility = View.GONE
-        card.slot3.visibility = View.GONE
+        card.run {
+            icon_slots.visibility = View.GONE
+            slot1.visibility = View.GONE
+            slot2.visibility = View.GONE
+            slot3.visibility = View.GONE
+        }
     }
 
     fun bindEmptyWeapon() {
@@ -241,7 +245,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                             onEmptyClick: ((Int) -> Unit)? = null,
                             onClick: ((Int, UserDecoration) -> Unit)? = null,
                             onDelete: ((UserDecoration) -> Unit)? = null) {
-        with (card.decorations_section) {
+        with(card.decorations_section) {
             visibility = if (slots.isEmpty()) View.GONE else View.VISIBLE
             slot1_detail.visibility = View.GONE
             slot2_detail.visibility = View.GONE

@@ -108,7 +108,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             attributes.recycle()
         }
 
-//        //Swipe/onclick handler
+        //Swipe/onclick handler
         card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
                 this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
 

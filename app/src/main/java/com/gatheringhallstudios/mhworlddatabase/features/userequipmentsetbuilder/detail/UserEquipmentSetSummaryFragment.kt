@@ -42,8 +42,10 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         return inflater.inflate(R.layout.fragment_user_equipment_set_summary, parent, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.activeUserEquipmentSet.observe(viewLifecycleOwner, Observer<UserEquipmentSet> {
             populateUserEquipmentSummary(it, AppSettings.showTrueAttackValues)
         })
     }

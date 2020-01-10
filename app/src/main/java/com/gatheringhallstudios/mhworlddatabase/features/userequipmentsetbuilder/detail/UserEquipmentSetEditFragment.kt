@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -42,8 +43,6 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         // User touched the dialog's negative button
     }
 
-    private var isNewFragment = true
-
     /**
      * Returns the viewmodel owned by the parent fragment
      */
@@ -60,20 +59,12 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         return inflater.inflate(R.layout.fragment_user_equipment_set_editor, parent, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.activeUserEquipmentSet.observe(viewLifecycleOwner, Observer<UserEquipmentSet> {
             populateUserEquipment(it)
         })
-    }
 
-    override fun onResume() {
-        super.onResume()
-        if (!isNewFragment) {
-            val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
-            viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
-        }
-
-        isNewFragment = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -307,6 +298,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             fragmentTransaction.detach(currentFragment)
             fragmentTransaction.attach(currentFragment)
             fragmentTransaction.commit()
+        }
+
+        layout.setOnSwipeLeft {
+            val toast = Toast.makeText(context, "SWIPED LEFT!", Toast.LENGTH_LONG)
+            toast.show()
         }
     }
 

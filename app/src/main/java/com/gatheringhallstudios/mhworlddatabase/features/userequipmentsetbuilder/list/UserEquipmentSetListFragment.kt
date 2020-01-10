@@ -37,10 +37,10 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
                         if (itr.id == 0) { //Set has not yet been created
                             GlobalScope.launch(Dispatchers.Main) {
                                 val equipmentSet = withContext(Dispatchers.IO) { viewModel.createEquipmentSet() }
-                                getRouter().navigateUserEquipmentSetDetail(equipmentSet)
+                                getRouter().navigateUserEquipmentSetDetail(equipmentSet.id)
                             }
                         } else {
-                            getRouter().navigateUserEquipmentSetDetail(itr)
+                            getRouter().navigateUserEquipmentSetDetail(itr.id)
                         }
                     },
                     onDelete = { itr, idx, adapter ->
