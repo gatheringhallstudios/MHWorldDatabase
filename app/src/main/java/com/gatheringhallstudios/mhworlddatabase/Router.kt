@@ -76,6 +76,10 @@ class Router(private val navController: NavController) {
         navController.navigate(R.id.openWeaponDetailAction, BundleBuilder().putInt(WeaponDetailPagerFragment.ARG_WEAPON_ID, weaponId).build())
     }
 
+    fun navigateQuestDetail(questId: Int) {
+        // todo: implement quest detail
+    }
+
     fun navigateUserEquipmentSetDetail(userEquipmentSet: UserEquipmentSet) {
         navController.navigate(R.id.openUserEquipmentSetDetailAction, BundleBuilder().putSerializable(UserEquipmentSetDetailPagerFragment.ARG_USER_EQUIPMENT_SET, userEquipmentSet).build())
     }

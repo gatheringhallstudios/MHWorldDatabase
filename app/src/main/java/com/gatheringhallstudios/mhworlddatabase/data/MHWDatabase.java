@@ -42,6 +42,10 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHitzoneText
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardConditionText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.QuestEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.QuestMonster;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.QuestReward;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.QuestText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.RecipeItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
@@ -105,7 +109,9 @@ import androidx.room.TypeConverters;
 
                 // Weapon Classes
                 WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class,
-                WeaponMelodyEntity.class, WeaponMelodyTextEntity.class, WeaponSkill.class
+                WeaponMelodyEntity.class, WeaponMelodyTextEntity.class, WeaponSkill.class,
+
+                QuestEntity.class, QuestText.class, QuestMonster.class, QuestReward.class
         })
 
 @TypeConverters({Converters.class})

@@ -56,10 +56,16 @@ class ItemLocation(
         val nodes: Int
 )
 
-class ItemReward(
+class ItemMonsterReward(
         @Embedded(prefix="monster_") val monster: MonsterBase,
         val rank: Rank,
         val condition_name: String?,
+        val stack: Int,
+        val percentage: Int
+)
+
+class ItemQuestReward(
+        @Embedded(prefix="quest_") val quest: QuestBase,
         val stack: Int,
         val percentage: Int
 )
@@ -87,9 +93,13 @@ class ItemUsages(
 class ItemSources(
         val craftRecipes: List<ItemCombination>,
         val locations: List<ItemLocation>,
-        val rewards: List<ItemReward>
+        val monsterRewards: List<ItemMonsterReward>,
+        val questRewards: List<ItemQuestReward>
 ) {
-    fun isEmpty() = craftRecipes.isEmpty() && locations.isEmpty() && rewards.isEmpty()
+    fun isEmpty() = craftRecipes.isEmpty()
+            && locations.isEmpty()
+            && monsterRewards.isEmpty()
+            && questRewards.isEmpty()
 }
 
 /**

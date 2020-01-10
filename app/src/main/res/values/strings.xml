@@ -96,7 +96,8 @@
     <string name="header_break">Breaks</string>
     <string name="header_crafting">Crafting</string>
     <string name="header_gathering">Gathering</string>
-    <string name="header_rewards">Rewards</string>
+    <string name="header_rewards">Monster Rewards</string>
+    <string name="header_quest_rewards">Quest Rewards</string>
     <string name="header_armor">Armor</string>
     <string name="header_charms">Charms</string>
     <string name="header_weapons">Weapons</string>
@@ -310,6 +311,14 @@
     <string name="weapon_bowgun_capacity">CAP</string>
     <string name="weapon_bowgun_reload">Reload</string>
     <string name="weapon_bowgun_recoil">RCL</string>
+
+    <string name="quest_category_assigned">Assigned</string>
+    <string name="quest_category_optional">Optional</string>
+    <string name="quest_category_event">Event</string>
+    <string name="quest_category_arena">Arena</string>
+    <string name="quest_category_special">Special Assignment</string>
+
+    <string name="quest_category_combined">%s %d★</string>
 
 
     <!-- ################ -->

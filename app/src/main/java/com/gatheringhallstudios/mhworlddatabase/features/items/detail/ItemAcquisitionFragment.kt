@@ -24,7 +24,8 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
     val adapter = CategoryAdapter(
             ItemCraftingAdapterDelegate(),
             ItemLocationAdapterDelegate(),
-            MonsterRewardSourceAdapterDelegate())
+            MonsterRewardSourceAdapterDelegate(),
+            QuestRewardSourceAdapterDelegate())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter(adapter)
@@ -62,8 +63,12 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
             adapter.addSection(getString(R.string.header_gathering), groups)
         }
 
-        if (data.rewards.isNotEmpty()) {
-            adapter.addSection(getString(R.string.header_rewards), data.rewards)
+        if (data.monsterRewards.isNotEmpty()) {
+            adapter.addSection(getString(R.string.header_rewards), data.monsterRewards)
+        }
+
+        if (data.questRewards.isNotEmpty()) {
+            adapter.addSection(getString(R.string.header_quest_rewards), data.questRewards)
         }
     }
 }

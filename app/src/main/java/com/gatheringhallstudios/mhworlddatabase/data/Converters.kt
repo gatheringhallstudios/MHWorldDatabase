@@ -145,7 +145,21 @@ private val ReloadTypeConverter = Converter(
         "very fast" to ReloadType.VERY_FAST
 )
 
+private val QuestCategoryConverter = Converter(
+        null to QuestCategory.OPTIONAL,
+        "assigned" to QuestCategory.ASSIGNED,
+        "optional" to QuestCategory.OPTIONAL,
+        "arena" to QuestCategory.ARENA,
+        "event" to QuestCategory.EVENT,
+        "special" to QuestCategory.SPECIAL
+)
 
+private val QuestTypeConverter = Converter(
+        null to QuestType.HUNT,
+        "hunt" to QuestType.HUNT,
+        "deliver" to QuestType.DELIVER,
+        "capture" to QuestType.CAPTURE
+)
 
 /**
  * Type conversions for things like enumerations.
@@ -202,4 +216,10 @@ class Converters {
 
     @TypeConverter fun reloadTypeFromString(value: String?) = ReloadTypeConverter.deserialize(value)
     @TypeConverter fun fromReloadType(type: ReloadType) = ReloadTypeConverter.serialize(type)
+
+    @TypeConverter fun questCategoryFromString(value: String?) = QuestCategoryConverter.deserialize(value)
+    @TypeConverter fun fromQuestCategory(category: QuestCategory) = QuestCategoryConverter.serialize(category)
+
+    @TypeConverter fun questTypeFromString(value: String?) = QuestTypeConverter.deserialize(value)
+    @TypeConverter fun fromQuestType(type: QuestType) = QuestTypeConverter.serialize(type)
 }
