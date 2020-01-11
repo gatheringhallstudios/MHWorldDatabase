@@ -146,19 +146,19 @@ private val ReloadTypeConverter = Converter(
 )
 
 private val QuestCategoryConverter = Converter(
-        null to QuestCategory.OPTIONAL,
-        "assigned" to QuestCategory.ASSIGNED,
         "optional" to QuestCategory.OPTIONAL,
+        "assigned" to QuestCategory.ASSIGNED,
         "arena" to QuestCategory.ARENA,
         "event" to QuestCategory.EVENT,
-        "special" to QuestCategory.SPECIAL
+        "special" to QuestCategory.SPECIAL,
+        null to QuestCategory.OPTIONAL
 )
 
 private val QuestTypeConverter = Converter(
-        null to QuestType.HUNT,
         "hunt" to QuestType.HUNT,
         "deliver" to QuestType.DELIVER,
-        "capture" to QuestType.CAPTURE
+        "capture" to QuestType.CAPTURE,
+        null to QuestType.HUNT
 )
 
 /**

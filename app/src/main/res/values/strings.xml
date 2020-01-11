@@ -312,15 +312,6 @@
     <string name="weapon_bowgun_reload">Reload</string>
     <string name="weapon_bowgun_recoil">RCL</string>
 
-    <string name="quest_category_assigned">Assigned</string>
-    <string name="quest_category_optional">Optional</string>
-    <string name="quest_category_event">Event</string>
-    <string name="quest_category_arena">Arena</string>
-    <string name="quest_category_special">Special Assignment</string>
-
-    <string name="quest_category_combined">%s %d★</string>
-
-
     <!-- ################ -->
     <!-- ## ARMOR MENU ## -->
     <!-- ################ -->
@@ -378,6 +369,19 @@
     <!-- Section Headers -->
     <string name="header_location_area">Area %1$d</string>
     <string name="header_location_base_camps">Base Camps</string>
+
+    <!-- ################ -->
+    <!-- ## QUEST MENU ## -->
+    <!-- ################ -->
+
+    <string name="title_quests">Quests</string>
+    <string name="quest_category_assigned">Assigned</string>
+    <string name="quest_category_optional">Optional</string>
+    <string name="quest_category_event">Event</string>
+    <string name="quest_category_arena">Arena</string>
+    <string name="quest_category_special">Special Assignment</string>
+
+    <string name="quest_category_combined">%s %d★</string>
 
     <!-- ################# -->
     <!-- ## SEARCH MENU ## -->

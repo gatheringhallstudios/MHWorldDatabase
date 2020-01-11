@@ -12,6 +12,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MetaDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.QuestDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SearchDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.WeaponDao;
@@ -164,6 +165,8 @@ public abstract class MHWDatabase extends RoomDatabase {
     public abstract DecorationDao decorationDao();
 
     public abstract WeaponDao weaponDao();
+
+    public abstract QuestDao questDao();
 
     public abstract BulkLoaderDao bookmarksSearchDao();
 

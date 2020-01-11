@@ -141,6 +141,19 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
+        android:id="@+id/questListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.quests.list.QuestListPagerFragment"
+        android:label="@string/title_quests"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/questListAction"
+        app:destination="@id/questListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <fragment
         android:id="@+id/bookmarksListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksListFragment"
         android:label="@string/title_bookmarks"
