@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import android.util.Log
-import com.gatheringhallstudios.mhworlddatabase.common.ThrottledExecutor
+import com.gatheringhallstudios.mhworlddatabase.util.ThrottledExecutor
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import kotlin.system.measureTimeMillis

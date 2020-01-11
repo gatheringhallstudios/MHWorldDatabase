@@ -5,12 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.adapters.ItemCraftingAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase

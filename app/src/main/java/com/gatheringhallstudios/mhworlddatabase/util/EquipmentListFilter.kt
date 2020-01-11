@@ -1,4 +1,6 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase.util
+
+import com.gatheringhallstudios.mhworlddatabase.util.tree.Filter
 
 class EquipmentFilter<T>(
         var equipmentList: List<T>?

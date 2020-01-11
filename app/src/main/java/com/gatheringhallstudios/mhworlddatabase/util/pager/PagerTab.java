@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common;
+package com.gatheringhallstudios.mhworlddatabase.util.pager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

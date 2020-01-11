@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.util
+package com.gatheringhallstudios.mhworlddatabase.data
 
 
 /**

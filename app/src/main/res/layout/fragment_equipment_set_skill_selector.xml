@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.gatheringhallstudios.mhworlddatabase.common.DetachingRecyclerView
+        <com.gatheringhallstudios.mhworlddatabase.util.DetachingRecyclerView
             android:id="@+id/skills_recycler_view"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"

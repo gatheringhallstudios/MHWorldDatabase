@@ -1,12 +1,10 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
+import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_generic_pager.*

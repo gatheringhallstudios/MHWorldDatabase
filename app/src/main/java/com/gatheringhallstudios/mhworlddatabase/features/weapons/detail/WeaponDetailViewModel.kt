@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import kotlinx.coroutines.Dispatchers

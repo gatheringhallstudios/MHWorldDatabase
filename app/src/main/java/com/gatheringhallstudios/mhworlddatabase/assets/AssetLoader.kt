@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNodeType
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNodeType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine

@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase.util
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase.util.tree
 
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHParentedModel

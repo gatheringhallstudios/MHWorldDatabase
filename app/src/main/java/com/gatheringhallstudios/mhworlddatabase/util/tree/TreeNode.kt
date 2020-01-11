@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase.util.tree
 
 // note: could be made more efficient by enforcing immutable and caching results
 // do so if this runs into performance issues (it likely won't, data set is too small)

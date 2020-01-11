@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
 
-import com.gatheringhallstudios.mhworlddatabase.common.Filter
+import com.gatheringhallstudios.mhworlddatabase.util.tree.Filter
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank

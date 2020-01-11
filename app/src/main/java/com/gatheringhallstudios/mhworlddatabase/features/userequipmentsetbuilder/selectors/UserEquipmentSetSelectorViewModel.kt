@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.gatheringhallstudios.mhworlddatabase.common.EquipmentFilter
+import com.gatheringhallstudios.mhworlddatabase.util.EquipmentFilter
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*

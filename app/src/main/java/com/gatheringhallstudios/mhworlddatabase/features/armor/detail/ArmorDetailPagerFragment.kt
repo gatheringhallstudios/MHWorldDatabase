@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
+import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorFull
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle

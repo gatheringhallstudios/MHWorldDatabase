@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.data
 
 import androidx.room.TypeConverter
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.util.Converter
 
 private val RankConverter = Converter(
         "LR" to Rank.LOW,
@@ -89,7 +88,7 @@ private val WeaponTypeConverter = Converter(
         "gunlance" to WeaponType.GUNLANCE,
         "switch-axe" to WeaponType.SWITCH_AXE,
         "charge-blade" to WeaponType.CHARGE_BLADE,
-        "insect-glaive" to WeaponType.INSECT_GLAIVE ,
+        "insect-glaive" to WeaponType.INSECT_GLAIVE,
         "bow" to WeaponType.BOW,
         "light-bowgun" to WeaponType.LIGHT_BOWGUN,
         "heavy-bowgun" to WeaponType.HEAVY_BOWGUN,

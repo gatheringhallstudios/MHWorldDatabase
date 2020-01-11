@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
-import com.gatheringhallstudios.mhworlddatabase.common.CachedValue
+import com.gatheringhallstudios.mhworlddatabase.util.CachedValue
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.features.search.SearchFilter
 

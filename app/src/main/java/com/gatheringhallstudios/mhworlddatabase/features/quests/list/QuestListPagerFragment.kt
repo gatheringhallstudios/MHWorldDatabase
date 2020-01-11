@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.quests.list
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
+import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.types.QuestCategory
 
 class QuestListPagerFragment : BasePagerFragment() {

@@ -3,12 +3,10 @@ package com.gatheringhallstudios.mhworlddatabase.features.charms.list
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
-import com.gatheringhallstudios.mhworlddatabase.common.MHModelTreeFilter
+import com.gatheringhallstudios.mhworlddatabase.util.tree.MHModelTreeFilter
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
-import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
 import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModelTree
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
