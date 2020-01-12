@@ -292,11 +292,14 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun populateActiveArmor(userArmor: UserArmorPiece) {
-        val armor = userArmor.armor
+        when (userArmor.armor.armor.armor_type) {
+            ArmorType.HEAD -> card.bindHeadArmor(userArmor)
+            ArmorType.ARMS -> card.bindArmArmor(userArmor)
+            ArmorType.CHEST -> card.bindChestArmor(userArmor)
+            ArmorType.WAIST -> card.bindWaistArmor(userArmor)
+            ArmorType.LEGS -> card.bindLegArmor(userArmor)
+        }
 
-        card.bindArmor(userArmor)
-        card.populateSkills(armor.skills)
-        card.populateSetBonuses(armor.setBonuses)
         card.populateSlots(userArmor.armor.armor.slots)
     }
 

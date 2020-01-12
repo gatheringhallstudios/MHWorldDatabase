@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import java.io.Serializable
 
@@ -27,10 +28,11 @@ class UserEquipmentSet(
         val equipment: MutableList<UserEquipment>
 ) : Serializable {
     companion object {
-        fun createEmptySet() : UserEquipmentSet {
+        fun createEmptySet(): UserEquipmentSet {
             return UserEquipmentSet(0, "", mutableListOf())
         }
     }
+
     var defense_base: Int = 0
     var defense_max: Int = 0
     var defense_augment_max: Int = 0
@@ -41,17 +43,62 @@ class UserEquipmentSet(
     var dragonDefense: Int = 0
     var skills = listOf<SkillLevel>()
     var setBonuses = mutableMapOf<String, List<ArmorSetBonus>>()
+
+    fun getWeapon(): UserWeapon? {
+        return equipment.find { it.type() == DataType.WEAPON } as? UserWeapon
+    }
+
+    fun getHeadArmor(): UserArmorPiece? {
+        return equipment.filter { it.type() == DataType.ARMOR }.find {
+            (it as? UserArmorPiece)?.armor?.armor?.armor_type == ArmorType.HEAD
+        } as? UserArmorPiece
+    }
+
+    fun getArmArmor(): UserArmorPiece? {
+        return equipment.filter { it.type() == DataType.ARMOR }.find {
+            (it as UserArmorPiece).armor.armor.armor_type == ArmorType.ARMS
+        } as? UserArmorPiece
+    }
+
+    fun getChestArmor(): UserArmorPiece? {
+        return equipment.filter { it.type() == DataType.ARMOR }.find {
+            (it as UserArmorPiece).armor.armor.armor_type == ArmorType.CHEST
+        } as? UserArmorPiece
+    }
+
+    fun getWaistArmor(): UserArmorPiece? {
+        return equipment.filter { it.type() == DataType.ARMOR }.find {
+            (it as UserArmorPiece).armor.armor.armor_type == ArmorType.WAIST
+        } as? UserArmorPiece
+    }
+
+
+    fun getLegArmor(): UserArmorPiece? {
+        return equipment.filter { it.type() == DataType.ARMOR }.find {
+            (it as UserArmorPiece).armor.armor.armor_type == ArmorType.LEGS
+        } as? UserArmorPiece
+    }
+
+    fun getCharm(): UserCharm? {
+        return equipment.find { it.type() == DataType.CHARM } as? UserCharm
+    }
 }
 
 interface UserEquipment : Serializable {
+    fun setId(): Int
     fun entityId(): Int
     fun type(): DataType
 }
 
 class UserArmorPiece(
+        val equipmentSetId: Int,
         val armor: ArmorFull,
         val decorations: List<UserDecoration>
 ) : UserEquipment {
+    override fun setId(): Int {
+        return equipmentSetId
+    }
+
     override fun entityId(): Int {
         return armor.armor.id
     }
@@ -62,9 +109,14 @@ class UserArmorPiece(
 }
 
 class UserWeapon(
+        val equipmentSetId: Int,
         val weapon: WeaponFull,
         val decorations: List<UserDecoration>
 ) : UserEquipment {
+    override fun setId(): Int {
+        return equipmentSetId
+    }
+
     override fun entityId(): Int {
         return weapon.weapon.id
     }
@@ -75,8 +127,13 @@ class UserWeapon(
 }
 
 class UserCharm(
+        val equipmentSetId: Int,
         val charm: CharmFull
 ) : UserEquipment {
+    override fun setId(): Int {
+        return equipmentSetId
+    }
+
     override fun entityId(): Int {
         return charm.charm.id
     }
@@ -87,10 +144,14 @@ class UserCharm(
 }
 
 class UserDecoration(
+        val equipmentSetId: Int,
         val decoration: Decoration,
         val slotNumber: Int
-
 ) : UserEquipment {
+    override fun setId(): Int {
+        return equipmentSetId
+    }
+
     override fun entityId(): Int {
         return decoration.id
     }

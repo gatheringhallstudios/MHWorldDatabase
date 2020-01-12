@@ -102,27 +102,33 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 DataType.ARMOR -> {
                     val decorations = userEquipmentId.decorationIds.map { decorationIds ->
                         UserDecoration(
+                                equipmentSetId = userEquipmentSetIds.id,
                                 decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
                                 slotNumber = decorationIds.slotNumber)
                     }.sortedWith(compareBy(UserDecoration::slotNumber))
 
                     userEquipment.add(UserArmorPiece(
+                            equipmentSetId = userEquipmentSetIds.id,
                             armor = armorDao.loadArmorFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
                             decorations = decorations))
                 }
                 DataType.WEAPON -> {
                     val decorations = userEquipmentId.decorationIds.map { decorationIds ->
                         UserDecoration(
+                                equipmentSetId = userEquipmentSetIds.id,
                                 decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
                                 slotNumber = decorationIds.slotNumber)
                     }
 
                     userEquipment.add(UserWeapon(
+                            equipmentSetId = userEquipmentSetIds.id,
                             weapon = weaponDao.loadWeaponFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
                             decorations = decorations))
                 }
                 DataType.CHARM -> {
-                    userEquipment.add(UserCharm(charm = charmDao.loadCharmFullSync(AppSettings.dataLocale, userEquipmentId.dataId)))
+                    userEquipment.add(UserCharm(
+                            equipmentSetId = userEquipmentSetIds.id,
+                            charm = charmDao.loadCharmFullSync(AppSettings.dataLocale, userEquipmentId.dataId)))
                 }
                 else -> {
                 } //Shouldn't happen, so ignore
@@ -278,8 +284,8 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 }
             }
         }
-        val list = skillLevels.map {it.value}.toMutableList()
-        list.sortWith(compareByDescending<SkillLevel> {it.level}.thenBy {it.skillTree.id})
+        val list = skillLevels.map { it.value }.toMutableList()
+        list.sortWith(compareByDescending<SkillLevel> { it.level }.thenBy { it.skillTree.id })
         return list
     }
 }

@@ -11,6 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -37,70 +38,173 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         return card.resources.getString(resId, *formatArgs)
     }
 
-    fun bindWeapon(userWeapon: UserWeapon) {
-        val weapon = userWeapon.weapon.weapon
-        card.run {
-            setHeader(R.layout.view_weapon_header_expandable_cardview)
-            setBody(R.layout.view_base_body_expandable_cardview)
+    fun bindWeapon(userWeapon: UserWeapon?) {
+        if (userWeapon != null) {
+            val weapon = userWeapon.weapon.weapon
+            with(card) {
+                setHeader(R.layout.view_weapon_header_expandable_cardview)
+                setBody(R.layout.view_base_body_expandable_cardview)
 
-            equipment_name.text = weapon.name
-            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
-            rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
-            rarity_string.visibility = View.VISIBLE
-            attack_value.text = weapon.attack.toString()
+                equipment_name.text = weapon.name
+                equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
+                rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
+                rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
+                rarity_string.visibility = View.VISIBLE
+                attack_value.text = weapon.attack.toString()
 
-            decorations_section.visibility = View.GONE
+                decorations_section.visibility = View.GONE
+            }
+
+            val skillsList = combineEquipmentSkillsWithDecorationSkills(userWeapon.weapon.skills, userWeapon.decorations.map {
+                val skillLevel = SkillLevel(level = 1)
+                skillLevel.skillTree = it.decoration.skillTree
+                skillLevel
+            })
+
+            populateSkills(skillsList)
+            populateSetBonuses(emptyList())
+        } else {
+            bindEmptyWeapon()
         }
     }
 
-    fun bindArmor(userArmor: UserArmorPiece) {
-        val armor = userArmor.armor
+    fun bindWeapon(userWeapon: UserWeapon?, setId: Int) {
+        if (userWeapon != null) {
+            val weapon = userWeapon.weapon.weapon
+            with(card) {
+                setHeader(R.layout.view_weapon_header_expandable_cardview)
+                setBody(R.layout.view_base_body_expandable_cardview)
 
-        card.run {
-            setHeader(R.layout.view_base_header_expandable_cardview)
-            setBody(R.layout.view_base_body_expandable_cardview)
+                equipment_name.text = weapon.name
+                equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
+                rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
+                rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
+                rarity_string.visibility = View.VISIBLE
+                attack_value.text = weapon.attack.toString()
 
-            equipment_name.text = armor.armor.name
-            rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
-            rarity_string.visibility = View.VISIBLE
-            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-            defense_value.text = getString(
-                    R.string.armor_defense_value,
-                    armor.armor.defense_base,
-                    armor.armor.defense_max,
-                    armor.armor.defense_augment_max)
+                decorations_section.visibility = View.GONE
+            }
 
-            decorations_section.visibility = View.GONE
+            val skillsList = combineEquipmentSkillsWithDecorationSkills(userWeapon.weapon.skills, userWeapon.decorations.map {
+                val skillLevel = SkillLevel(level = 1)
+                skillLevel.skillTree = it.decoration.skillTree
+                skillLevel
+            })
+
+            populateSkills(skillsList)
+            populateSetBonuses(emptyList())
+        } else {
+            with(card) {
+                bindEmptyWeapon()
+                setOnClick {
+                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.WEAPON,
+                            null, setId, null, null)
+                }
+            }
         }
     }
 
-    fun bindCharm(userCharm: UserCharm) {
-        card.run {
-            setHeader(R.layout.view_base_header_expandable_cardview)
-            setBody(R.layout.view_base_body_expandable_cardview)
+    fun bindHeadArmor(userArmor: UserArmorPiece?) {
+        bindArmor(userArmor, ArmorType.HEAD)
+    }
 
-            equipment_name.text = userCharm.charm.charm.name
-            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
-            rarity_string.text = getString(R.string.format_rarity, userCharm.charm.charm.rarity)
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(userCharm.charm.charm.rarity))
-            rarity_string.visibility = View.VISIBLE
+    fun bindHeadArmor(userArmor: UserArmorPiece?, setId: Int) {
+        bindArmor(userArmor, ArmorType.HEAD, setId)
+    }
 
-            defense_value.visibility = View.GONE
-            icon_defense.visibility = View.GONE
-            hideSlots()
-            decorations_section.visibility = View.GONE
+    fun bindArmArmor(userArmor: UserArmorPiece?) {
+        bindArmor(userArmor, ArmorType.ARMS)
+    }
+
+    fun bindArmArmor(userArmor: UserArmorPiece?, setId: Int) {
+        bindArmor(userArmor, ArmorType.ARMS, setId)
+    }
+
+    fun bindChestArmor(userArmor: UserArmorPiece?) {
+        bindArmor(userArmor, ArmorType.CHEST)
+    }
+
+    fun bindChestArmor(userArmor: UserArmorPiece?, setId: Int) {
+        bindArmor(userArmor, ArmorType.CHEST, setId)
+    }
+
+    fun bindLegArmor(userArmor: UserArmorPiece?) {
+        bindArmor(userArmor, ArmorType.LEGS)
+    }
+
+    fun bindLegArmor(userArmor: UserArmorPiece?, setId: Int) {
+        bindArmor(userArmor, ArmorType.LEGS, setId)
+    }
+
+    fun bindWaistArmor(userArmor: UserArmorPiece?) {
+        bindArmor(userArmor, ArmorType.WAIST)
+    }
+
+    fun bindWaistArmor(userArmor: UserArmorPiece?, setId: Int) {
+        bindArmor(userArmor, ArmorType.WAIST, setId)
+    }
+
+    fun bindCharm(userCharm: UserCharm?) {
+        if (userCharm != null) {
+            with(card) {
+                setHeader(R.layout.view_base_header_expandable_cardview)
+                setBody(R.layout.view_base_body_expandable_cardview)
+
+                equipment_name.text = userCharm.charm.charm.name
+                equipment_icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
+                rarity_string.text = getString(R.string.format_rarity, userCharm.charm.charm.rarity)
+                rarity_string.setTextColor(AssetLoader.loadRarityColor(userCharm.charm.charm.rarity))
+                rarity_string.visibility = View.VISIBLE
+
+                defense_value.visibility = View.GONE
+                icon_defense.visibility = View.GONE
+                hideSlots()
+                decorations_section.visibility = View.GONE
+            }
+
+            populateSkills(userCharm.charm.skills)
+            populateSetBonuses(emptyList())
+        } else {
+            bindEmptyCharm()
+        }
+    }
+
+    fun bindCharm(userCharm: UserCharm?, setId: Int) {
+        if (userCharm != null) {
+            card.run {
+                setHeader(R.layout.view_base_header_expandable_cardview)
+                setBody(R.layout.view_base_body_expandable_cardview)
+
+                equipment_name.text = userCharm.charm.charm.name
+                equipment_icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
+                rarity_string.text = getString(R.string.format_rarity, userCharm.charm.charm.rarity)
+                rarity_string.setTextColor(AssetLoader.loadRarityColor(userCharm.charm.charm.rarity))
+                rarity_string.visibility = View.VISIBLE
+
+                defense_value.visibility = View.GONE
+                icon_defense.visibility = View.GONE
+                hideSlots()
+                decorations_section.visibility = View.GONE
+            }
+            populateSkills(userCharm.charm.skills)
+            populateSetBonuses(emptyList())
+        } else {
+            bindEmptyCharm()
+            with(card) {
+                setOnClick {
+                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM,
+                            null, setId, null, null)
+                }
+            }
         }
     }
 
     fun bindDecoration(userDecoration: UserDecoration) {
         val decoration = userDecoration.decoration
 
-        card.run {
+        with(card) {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
-
             equipment_name.text = decoration.name
             equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
             rarity_string.text = getString(R.string.format_rarity, decoration.rarity)
@@ -112,10 +216,51 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         }
     }
 
+    private fun bindArmor(userArmor: UserArmorPiece?, armorType: ArmorType, setId: Int? = null) {
+        if (userArmor != null) {
+            val armor = userArmor.armor
+            with(card) {
+                setHeader(R.layout.view_base_header_expandable_cardview)
+                setBody(R.layout.view_base_body_expandable_cardview)
+                equipment_name.text = armor.armor.name
+                rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
+                rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
+                rarity_string.visibility = View.VISIBLE
+                equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
+                defense_value.text = getString(
+                        R.string.armor_defense_value,
+                        armor.armor.defense_base,
+                        armor.armor.defense_max,
+                        armor.armor.defense_augment_max)
+
+                decorations_section.visibility = View.GONE
+                populateSetBonuses(armor.setBonuses)
+
+                val skillsList = combineEquipmentSkillsWithDecorationSkills(armor.skills, userArmor.decorations.map {
+                    val skillLevel = SkillLevel(level = 1)
+                    skillLevel.skillTree = it.decoration.skillTree
+                    skillLevel
+                })
+
+                populateSkills(skillsList)
+            }
+        } else {
+            with(card) {
+                bindEmptyArmor(armorType)
+                setOnClick {
+                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR,
+                            null, setId, armorType, null)
+                }
+            }
+        }
+    }
+
     private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
         card.run {
             setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
             setBody(R.layout.view_empty_equipment_body_expandable_cardview)
+        }
+        card.run {
             new_equipment_set_label.text = getString(title)
             equipment_set_icon2.setImageResource(icon)
         }
@@ -163,21 +308,24 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         card.setOnClick(onClick)
     }
 
+    fun setOnSwipeRight(onSwipeRight: () -> Unit) {
+        card.setOnSwipeRight(onSwipeRight)
+    }
+
+    fun setOnSwipeLeft(onSwipeLeft: () -> Unit) {
+        card.setOnSwipeLeft { onSwipeLeft }
+    }
+
     fun populateSkills(skills: List<SkillLevel>) {
-        val skillLayout = card.skill_section
-        if (skills.isEmpty()) {
-            skillLayout.visibility = View.GONE
-            return
+        with(card.skill_section) {
+            skill_list.removeAllViews()
+            visibility = if (skills.isEmpty()) View.GONE else View.VISIBLE
         }
 
-        skillLayout.visibility = View.VISIBLE
-        skillLayout.skill_list.removeAllViews()
-
         val inflater = LayoutInflater.from(card.context)
-
         for (skill in skills) {
             //Set the label for the Set name
-            val view = inflater.inflate(R.layout.listitem_skill_level, skillLayout.skill_list, false)
+            val view = inflater.inflate(R.layout.listitem_skill_level, card.skill_list, false)
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
@@ -191,29 +339,23 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 card.getRouter().navigateSkillDetail(skill.skillTree.id)
             }
 
-            skillLayout.skill_list.addView(view)
+            card.skill_list.addView(view)
         }
     }
 
-    fun populateSetBonuses(armorSetBonuses: List<ArmorSetBonus>) {
-        val setBonusSection = card.set_bonus_section
-
-        if (armorSetBonuses.isEmpty()) {
-            setBonusSection.visibility = View.GONE
-            return
+    fun populateSetBonuses(setBonuses: List<ArmorSetBonus>) {
+        with(card.set_bonus_section) {
+            set_bonus_list.removeAllViews()
+            visibility = if (setBonuses.isEmpty()) View.GONE else View.VISIBLE
         }
-
-        // show set bonus section
-        setBonusSection.visibility = View.VISIBLE
-        setBonusSection.set_bonus_list.removeAllViews()
 
         val inflater = LayoutInflater.from(card.context)
 
         //Now to set the actual skills
-        for (setBonus in armorSetBonuses) {
+        for (setBonus in setBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, null, false)
+            val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, card.set_bonus_list, false)
 
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name
@@ -223,7 +365,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 card.getRouter().navigateSkillDetail(setBonus.skillTree.id)
             }
 
-            setBonusSection.set_bonus_list.addView(listItem)
+            card.set_bonus_list.addView(listItem)
         }
     }
 
@@ -297,5 +439,22 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 }
             }
         }
+    }
+
+    private fun combineEquipmentSkillsWithDecorationSkills(equipmentSkills: List<SkillLevel>, decorationSkills: List<SkillLevel>): List<SkillLevel> {
+        val skills = equipmentSkills.associateBy({ it.skillTree.id }, { it }).toMutableMap()
+        for (skill in decorationSkills) {
+            if (skills.containsKey(skill.skillTree.id)) {
+                val level = skills.getValue(skill.skillTree.id).level + skill.level
+                val skillLevel = SkillLevel(level)
+                skillLevel.skillTree = skill.skillTree
+                skills[skill.skillTree.id] = skillLevel
+            } else {
+                skills[skill.skillTree.id] = skill
+            }
+        }
+        val result = skills.values.toMutableList()
+        result.sortWith(compareByDescending<SkillLevel> { it.level }.thenBy { it.skillTree.id })
+        return result
     }
 }
