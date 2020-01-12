@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.Deco
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
@@ -77,7 +78,7 @@ class Router(private val navController: NavController) {
     }
 
     fun navigateQuestDetail(questId: Int) {
-        // todo: implement quest detail
+        navController.navigate(R.id.openQuestDetailAction, BundleBuilder().putInt(QuestDetailPagerFragment.ARG_QUEST_ID, questId).build())
     }
 
     fun navigateUserEquipmentSetDetail(userEquipmentSet: UserEquipmentSet) {

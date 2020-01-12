@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
+import androidx.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.QuestCategory
 import com.gatheringhallstudios.mhworlddatabase.data.types.QuestType
@@ -18,3 +19,10 @@ open class QuestBase(
     override val entityId get() = id
     override val entityType get() = DataType.QUEST
 }
+
+class QuestReward(
+        @Embedded("item_") val item: ItemBase,
+        val group: String,
+        val stack: Int,
+        val percentage: Int?
+)

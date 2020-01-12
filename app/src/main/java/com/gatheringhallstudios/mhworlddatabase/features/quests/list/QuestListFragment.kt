@@ -38,7 +38,7 @@ class QuestListFragment : RecyclerViewFragment() {
         recyclerView.addItemDecoration(HeaderItemDivider(DashedDividerDrawable(context!!)))
 
         val categories = arguments?.getSerializable(ARG_QUEST_CATEGORY) as? Array<QuestCategory> ?: emptyArray()
-        viewModel.setCategories(categories).observe(viewLifecycleOwner, Observer { quests ->
+        viewModel.getQuests(categories).observe(viewLifecycleOwner, Observer { quests ->
             quests ?: return@Observer
 
             // Group by category first (so that if we have multiple categories, last one is last

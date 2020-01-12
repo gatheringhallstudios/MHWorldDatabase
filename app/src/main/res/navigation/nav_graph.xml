@@ -318,6 +318,18 @@
         app:popExitAnim="@anim/nav_exit_right" />
 
     <fragment
+        android:id="@+id/questDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment"
+        tools:layout="@layout/fragment_generic_pager" />
+    <action
+        android:id="@+id/openQuestDetailAction"
+        app:destination="@id/questDetailDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
+
+    <fragment
         android:id="@+id/userEquipmentSetDetailDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment"
         tools:layout="@layout/fragment_generic_pager" />

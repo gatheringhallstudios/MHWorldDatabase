@@ -39,7 +39,7 @@ data class QuestText(
 
 
 @Entity(tableName = "quest_monster", primaryKeys = ["quest_id", "monster_id"])
-data class QuestMonster(
+data class QuestMonsterEntity(
         val quest_id: Int,
         val monster_id: Int,
         val quantity: Int,
@@ -47,7 +47,7 @@ data class QuestMonster(
 )
 
 @Entity(tableName = "quest_reward")
-data class QuestReward(
+data class QuestRewardEntity(
         @PrimaryKey val id: Int,
         val quest_id: Int,
         val group: Char,

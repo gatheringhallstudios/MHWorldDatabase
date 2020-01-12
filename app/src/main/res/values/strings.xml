@@ -380,8 +380,12 @@
     <string name="quest_category_event">Event</string>
     <string name="quest_category_arena">Arena</string>
     <string name="quest_category_special">Special Assignment</string>
-
     <string name="quest_category_combined">%s %d★</string>
+
+    <string name="tab_quest_summary">Summary</string>
+    <string name="tab_quest_rewards">Rewards</string>
+
+    <string name="quest_group">Group %s</string>
 
     <!-- ################# -->
     <!-- ## SEARCH MENU ## -->
