@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase.util
 
 import com.gatheringhallstudios.mhworlddatabase.util.ThrottledExecutor
 import org.junit.Test

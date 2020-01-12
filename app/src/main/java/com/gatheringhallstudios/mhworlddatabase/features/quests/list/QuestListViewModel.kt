@@ -9,22 +9,15 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.QuestBase
 import com.gatheringhallstudios.mhworlddatabase.data.types.QuestCategory
+import com.gatheringhallstudios.mhworlddatabase.util.tree.MemoizedValue
 
 class QuestListViewModel(app: Application) : AndroidViewModel(app) {
     val db = MHWDatabase.getDatabase(app)
-    private var questData: LiveData<List<QuestBase>>? = null
-    private val selectedCategories = mutableSetOf<String>()
+    private var questData = MemoizedValue<Set<QuestCategory>, LiveData<List<QuestBase>>>()
 
     fun setCategories(categories: Array<QuestCategory>): LiveData<List<QuestBase>> {
-        val newCategories = mutableSetOf<String>()
-        if (newCategories == selectedCategories && questData != null) {
-            return questData!!
+        return questData.get(setOf(*categories)) {
+            db.questDao().getQuests(AppSettings.dataLocale, categories)
         }
-
-        selectedCategories.clear()
-        selectedCategories.addAll(newCategories)
-        val newData = db.questDao().getQuests(AppSettings.dataLocale, categories)
-        questData = newData
-        return newData
     }
 }
