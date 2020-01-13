@@ -6,21 +6,24 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentCard
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.runBlocking
 
 class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.RenameDialogListener {
+    private lateinit var weaponCard: UserEquipmentCard
+    private lateinit var headArmorCard: UserEquipmentCard
+    private lateinit var armArmorCard: UserEquipmentCard
+    private lateinit var chestArmorCard: UserEquipmentCard
+    private lateinit var waistArmorCard: UserEquipmentCard
+    private lateinit var legArmorCard: UserEquipmentCard
+    private lateinit var charmCard: UserEquipmentCard
+
     fun showNoticeDialog() {
         // Create an instance of the dialog fragment and show it
         val dialog = RenameSetDialog()
@@ -86,139 +89,118 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        this.weaponCard = UserEquipmentCard(user_equipment_weapon_slot)
+        this.headArmorCard = UserEquipmentCard(user_equipment_head_slot)
+        this.armArmorCard = UserEquipmentCard(user_equipment_arms_slot)
+        this.chestArmorCard = UserEquipmentCard(user_equipment_chest_slot)
+        this.waistArmorCard = UserEquipmentCard(user_equipment_waist_slot)
+        this.legArmorCard = UserEquipmentCard(user_equipment_legs_slot)
+        this.charmCard = UserEquipmentCard(user_equipment_charm_slot)
+    }
+
     private fun populateUserEquipmentSet(userEquipmentSet: UserEquipmentSet) {
         setActivityTitle(userEquipmentSet.name)
 
         val weapon = userEquipmentSet.getWeapon()
-        var card = UserEquipmentCard(user_equipment_weapon_slot)
-        card.bindWeapon(weapon, userEquipmentSet.id)
+        weaponCard.bindWeapon(weapon, userEquipmentSet.id)
         if (weapon != null) {
-            card.setOnClick {
+            weaponCard.setOnClick {
                 viewModel.setActiveUserEquipment(weapon)
                 getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, weapon,
                         userEquipmentSet.id, null, null)
             }
-            card.setOnSwipeRight {
+            weaponCard.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(weapon)
                 viewModel.deleteUserEquipment(weapon.entityId(), userEquipmentSet.id, weapon.type())
                 refreshFragment()
             }
-            populateDecorations(weapon, userEquipmentSet.id, card)
+            populateDecorations(weapon, userEquipmentSet.id, weaponCard)
         }
 
         val headArmor = userEquipmentSet.getHeadArmor()
-        card = UserEquipmentCard(user_equipment_head_slot)
-        card.bindHeadArmor(headArmor, userEquipmentSet.id)
+        headArmorCard.bindHeadArmor(headArmor, userEquipmentSet.id)
         if (headArmor != null) {
-            populateDecorations(headArmor, userEquipmentSet.id, card)
-            card.setOnClick {
+            populateDecorations(headArmor, userEquipmentSet.id, headArmorCard)
+            headArmorCard.setOnClick {
                 viewModel.setActiveUserEquipment(headArmor)
                 getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, headArmor,
                         userEquipmentSet.id, headArmor.armor.armor.armor_type, null)
             }
-            card.setOnSwipeRight {
+            headArmorCard.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(headArmor)
                 viewModel.deleteUserEquipment(headArmor.entityId(), userEquipmentSet.id, headArmor.type())
                 refreshFragment()
             }
-
-            card.setOnSwipeLeft {
-                val toast = Toast.makeText(context, "SWIPED LEFT!", Toast.LENGTH_LONG)
-                toast.show()
-            }
         }
 
         val armArmor = userEquipmentSet.getArmArmor()
-        card = UserEquipmentCard(user_equipment_arms_slot)
-        card.bindArmArmor(armArmor, userEquipmentSet.id)
+        armArmorCard.bindArmArmor(armArmor, userEquipmentSet.id)
         if (armArmor != null) {
-            populateDecorations(armArmor, userEquipmentSet.id, card)
-            card.setOnClick {
+            populateDecorations(armArmor, userEquipmentSet.id, armArmorCard)
+            armArmorCard.setOnClick {
                 viewModel.setActiveUserEquipment(armArmor)
                 getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armArmor,
                         userEquipmentSet.id, armArmor.armor.armor.armor_type, null)
             }
-            card.setOnSwipeRight {
+            armArmorCard.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(armArmor)
                 viewModel.deleteUserEquipment(armArmor.entityId(), userEquipmentSet.id, armArmor.type())
                 refreshFragment()
             }
-
-            card.setOnSwipeLeft {
-                val toast = Toast.makeText(context, "SWIPED LEFT!", Toast.LENGTH_LONG)
-                toast.show()
-            }
         }
 
         val chestArmor = userEquipmentSet.getChestArmor()
-        card = UserEquipmentCard(user_equipment_chest_slot)
-        card.bindChestArmor(chestArmor, userEquipmentSet.id)
+        chestArmorCard.bindChestArmor(chestArmor, userEquipmentSet.id)
         if (chestArmor != null) {
-            populateDecorations(chestArmor, userEquipmentSet.id, card)
-            card.setOnClick {
+            populateDecorations(chestArmor, userEquipmentSet.id, chestArmorCard)
+            chestArmorCard.setOnClick {
                 viewModel.setActiveUserEquipment(chestArmor)
                 getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, chestArmor,
                         userEquipmentSet.id, chestArmor.armor.armor.armor_type, null)
             }
-            card.setOnSwipeRight {
+            chestArmorCard.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(chestArmor)
                 viewModel.deleteUserEquipment(chestArmor.entityId(), userEquipmentSet.id, chestArmor.type())
                 refreshFragment()
             }
-
-            card.setOnSwipeLeft {
-                val toast = Toast.makeText(context, "SWIPED LEFT!", Toast.LENGTH_LONG)
-                toast.show()
-            }
         }
 
         val legArmor = userEquipmentSet.getLegArmor()
-        card = UserEquipmentCard(user_equipment_legs_slot)
-        card.bindLegArmor(legArmor, userEquipmentSet.id)
+        legArmorCard.bindLegArmor(legArmor, userEquipmentSet.id)
         if (legArmor != null) {
-            populateDecorations(legArmor, userEquipmentSet.id, card)
-            card.setOnClick {
+            populateDecorations(legArmor, userEquipmentSet.id, legArmorCard)
+            legArmorCard.setOnClick {
                 viewModel.setActiveUserEquipment(legArmor)
                 getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, legArmor,
                         userEquipmentSet.id, legArmor.armor.armor.armor_type, null)
             }
-            card.setOnSwipeRight {
+            legArmorCard.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor)
                 viewModel.deleteUserEquipment(legArmor.entityId(), userEquipmentSet.id, legArmor.type())
                 refreshFragment()
             }
-
-            card.setOnSwipeLeft {
-                val toast = Toast.makeText(context, "SWIPED LEFT!", Toast.LENGTH_LONG)
-                toast.show()
-            }
         }
 
         val waistArmor = userEquipmentSet.getWaistArmor()
-        card = UserEquipmentCard(user_equipment_waist_slot)
-        card.bindWaistArmor(waistArmor, userEquipmentSet.id)
+        waistArmorCard.bindWaistArmor(waistArmor, userEquipmentSet.id)
         if (waistArmor != null) {
-            populateDecorations(waistArmor, userEquipmentSet.id, card)
-            card.setOnClick {
+            populateDecorations(waistArmor, userEquipmentSet.id, waistArmorCard)
+            waistArmorCard.setOnClick {
                 viewModel.setActiveUserEquipment(waistArmor)
                 getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, waistArmor,
                         userEquipmentSet.id, waistArmor.armor.armor.armor_type, null)
             }
-            card.setOnSwipeRight {
+            waistArmorCard.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(waistArmor)
                 viewModel.deleteUserEquipment(waistArmor.entityId(), userEquipmentSet.id, waistArmor.type())
                 refreshFragment()
             }
-
-            card.setOnSwipeLeft {
-                val toast = Toast.makeText(context, "SWIPED LEFT!", Toast.LENGTH_LONG)
-                toast.show()
-            }
         }
 
         val charm = userEquipmentSet.getCharm()
-        card = UserEquipmentCard(user_equipment_charm_slot)
-        card.bindCharm(charm, userEquipmentSet.id)
+        charmCard.bindCharm(charm, userEquipmentSet.id)
         if (charm != null) {
             user_equipment_charm_slot.setOnClick {
                 viewModel.setActiveUserEquipment(charm)
@@ -247,7 +229,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         } else if ((userEquipment as? UserWeapon) != null) {
             userEquipment.decorations
         } else {
-            emptyList()
+            mutableListOf()
         }
 
         card.populateDecorations(slots, decorations,
@@ -266,7 +248,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
                 },
                 onDelete = { userDecoration ->
-                    viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
+                    runBlocking {
+                        viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
+                    }
                     val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
                     viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
                 }

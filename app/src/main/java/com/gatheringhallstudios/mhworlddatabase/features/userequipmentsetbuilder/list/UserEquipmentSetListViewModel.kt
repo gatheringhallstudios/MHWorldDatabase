@@ -118,7 +118,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                                 equipmentSetId = userEquipmentSetIds.id,
                                 decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
                                 slotNumber = decorationIds.slotNumber)
-                    }
+                    }.toMutableList()
 
                     userEquipment.add(UserWeapon(
                             equipmentSetId = userEquipmentSetIds.id,

@@ -234,16 +234,17 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                         armor.armor.defense_augment_max)
 
                 decorations_section.visibility = View.GONE
-                populateSetBonuses(armor.setBonuses)
-
-                val skillsList = combineEquipmentSkillsWithDecorationSkills(armor.skills, userArmor.decorations.map {
-                    val skillLevel = SkillLevel(level = 1)
-                    skillLevel.skillTree = it.decoration.skillTree
-                    skillLevel
-                })
-
-                populateSkills(skillsList)
             }
+
+            val skillsList = combineEquipmentSkillsWithDecorationSkills(armor.skills, userArmor.decorations.map {
+                val skillLevel = SkillLevel(level = 1)
+                skillLevel.skillTree = it.decoration.skillTree
+                skillLevel
+            })
+
+            populateSkills(skillsList)
+            populateSetBonuses(armor.setBonuses)
+
         } else {
             with(card) {
                 bindEmptyArmor(armorType)

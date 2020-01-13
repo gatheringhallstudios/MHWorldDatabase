@@ -176,7 +176,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         val inflater = context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         card_header.removeAllViews()
-        card_header.addView(inflater.inflate(layout, this, false))
+        card_header.addView(inflater.inflate(layout, card_layout, false))
     }
 
     fun setBody(layout: Int) {
@@ -188,7 +188,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         val inflater = context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         card_body.removeAllViews()
-        card_body.addView(inflater.inflate(layout, this, false))
+        card_body.addView(inflater.inflate(layout, card_layout, false))
     }
 
     fun setOnClick(onClick: () -> Unit) {
