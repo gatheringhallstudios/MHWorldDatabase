@@ -101,7 +101,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             card.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(weapon)
                 viewModel.deleteUserEquipment(weapon.entityId(), userEquipmentSet.id, weapon.type())
-
+                refreshFragment()
             }
             populateDecorations(weapon, userEquipmentSet.id, card)
         }
@@ -119,7 +119,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             card.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(headArmor)
                 viewModel.deleteUserEquipment(headArmor.entityId(), userEquipmentSet.id, headArmor.type())
-
+                refreshFragment()
             }
 
             card.setOnSwipeLeft {
@@ -141,7 +141,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             card.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(armArmor)
                 viewModel.deleteUserEquipment(armArmor.entityId(), userEquipmentSet.id, armArmor.type())
-
+                refreshFragment()
             }
 
             card.setOnSwipeLeft {
@@ -163,7 +163,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             card.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(chestArmor)
                 viewModel.deleteUserEquipment(chestArmor.entityId(), userEquipmentSet.id, chestArmor.type())
-
+                refreshFragment()
             }
 
             card.setOnSwipeLeft {
@@ -185,7 +185,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             card.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor)
                 viewModel.deleteUserEquipment(legArmor.entityId(), userEquipmentSet.id, legArmor.type())
-
+                refreshFragment()
             }
 
             card.setOnSwipeLeft {
@@ -207,7 +207,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             card.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(waistArmor)
                 viewModel.deleteUserEquipment(waistArmor.entityId(), userEquipmentSet.id, waistArmor.type())
-
+                refreshFragment()
             }
 
             card.setOnSwipeLeft {
@@ -228,7 +228,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             user_equipment_charm_slot.setOnSwipeRight {
                 viewModel.activeUserEquipmentSet.value?.equipment?.remove(charm)
                 viewModel.deleteUserEquipment(charm.entityId(), userEquipmentSet.id, charm.type())
-
+                refreshFragment()
             }
         }
     }
@@ -266,15 +266,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
                 },
                 onDelete = { userDecoration ->
-                    GlobalScope.launch(Dispatchers.Main) {
-                        withContext(Dispatchers.IO) {
-                            viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
-                        }
-                        withContext(Dispatchers.Main) {
-                            val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
-                            viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
-                        }
-                    }
+                    viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
+                    val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
+                    viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
                 }
         )
     }

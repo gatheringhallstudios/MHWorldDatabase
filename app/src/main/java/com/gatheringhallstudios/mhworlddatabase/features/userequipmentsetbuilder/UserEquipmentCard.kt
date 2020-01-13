@@ -313,7 +313,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     fun setOnSwipeLeft(onSwipeLeft: () -> Unit) {
-        card.setOnSwipeLeft { onSwipeLeft }
+        card.setOnSwipeLeft(onSwipeLeft)
     }
 
     fun populateSkills(skills: List<SkillLevel>) {
