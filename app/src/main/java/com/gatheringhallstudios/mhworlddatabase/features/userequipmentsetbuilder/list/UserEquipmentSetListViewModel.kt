@@ -49,7 +49,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
             val equipmentSets = withContext(Dispatchers.IO) {
                 val deferred = equipmentSetIds.map {
                     async {
-                        println("Doing on " + Thread.currentThread().name)
                         convertEquipmentSetIdToEquipmentSet(it)
                     }
                 }

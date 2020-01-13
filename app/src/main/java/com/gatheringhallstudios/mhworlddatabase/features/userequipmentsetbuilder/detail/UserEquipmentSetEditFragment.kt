@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -13,7 +14,9 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.RenameDialogListener {
     private lateinit var weaponCard: UserEquipmentCard
@@ -249,10 +252,13 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 },
                 onDelete = { userDecoration ->
                     runBlocking {
-                        viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
+                        withContext(Dispatchers.IO) {
+                            viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
+                        }
+                        val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
+                        val set = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
+                        viewModel.activeUserEquipmentSet.value = set
                     }
-                    val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
-                    viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
                 }
         )
     }

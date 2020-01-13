@@ -29,7 +29,7 @@
     <ImageView
         android:id="@+id/equipment_set_icon2"
         style="@style/IconLarge.Decorated"
-        android:src="@drawable/ic_equipment_armor_set_empty"
+        android:src="@drawable/ic_equipment_bow_base"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_large"

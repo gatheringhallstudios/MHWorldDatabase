@@ -40,15 +40,14 @@ class UserEquipmentSetDetailPagerFragment : BasePagerFragment() {
         val parentViewModel = ViewModelProviders.of(this.parentFragment!!).get(UserEquipmentSetListViewModel::class.java)
         val equipmentSet = parentViewModel.getEquipmentSet(equipmentSetId)
         viewModel.activeUserEquipmentSet.value = equipmentSet
-
         this.setActivityTitle(equipmentSet.name)
 
         // Now add our tabs
         tabs.addTab(getString(R.string.tab_armor_set_builder_equipment)) {
             UserEquipmentSetEditFragment()
         }
-        tabs.addTab(getString(R.string.tab_armor_set_builder_summary)) {
-            UserEquipmentSetSummaryFragment()
-        }
+//        tabs.addTab(getString(R.string.tab_armor_set_builder_summary)) {
+//            UserEquipmentSetSummaryFragment()
+//        }
     }
 }
