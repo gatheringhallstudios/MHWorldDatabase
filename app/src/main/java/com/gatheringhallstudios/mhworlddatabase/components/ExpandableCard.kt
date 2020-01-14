@@ -69,34 +69,6 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.cell_expandable_cardview, this, true)
 
-        card_body.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            card_body.measure(MATCH_PARENT, WRAP_CONTENT)
-            if (card_body.measuredHeight <= 0) {
-                card_arrow.visibility = View.INVISIBLE
-            } else {
-                card_arrow.visibility = View.VISIBLE
-            }
-
-            if (cardState == CardState.EXPANDED) {
-                val initialHeight = card_container.height
-                card_body.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-                val targetHeight: Int = card_layout.measuredHeight
-
-                if (targetHeight == initialHeight) {
-                } else if (targetHeight - initialHeight > 0) {
-                    cardState = CardState.EXPANDING
-                    animateViews(initialHeight,
-                            targetHeight - initialHeight,
-                            CardAnimation.EXPANDING, card_container)
-                } else {
-                    cardState = CardState.COLLAPSING
-                    animateViews(initialHeight,
-                            initialHeight - targetHeight,
-                            CardAnimation.COLLAPSING, card_container)
-                }
-            }
-        }
-
         if (attrs != null) {
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
             cardElevation = attributes.getFloat(R.styleable.ExpandableCardView_cardViewElevation, 0f)
@@ -127,6 +99,34 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             setHeader(headerLayout)
             setBody(bodyLayout)
             attributes.recycle()
+        }
+
+        card_body.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            card_body.measure(MATCH_PARENT, WRAP_CONTENT)
+            if (card_body.measuredHeight <= 0) {
+                card_arrow.visibility = View.INVISIBLE
+            } else {
+                card_arrow.visibility = View.VISIBLE
+            }
+
+            if (cardState == CardState.EXPANDED) {
+                val initialHeight = card_container.height
+                card_body.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                val targetHeight: Int = card_layout.measuredHeight
+
+                if (targetHeight == initialHeight) {
+                } else if (targetHeight - initialHeight > 0) {
+                    cardState = CardState.EXPANDING
+                    animateViews(initialHeight,
+                            targetHeight - initialHeight,
+                            CardAnimation.EXPANDING, card_container)
+                } else {
+                    cardState = CardState.COLLAPSING
+                    animateViews(initialHeight,
+                            initialHeight - targetHeight,
+                            CardAnimation.COLLAPSING, card_container)
+                }
+            }
         }
 
         //Swipe/onclick handler
@@ -245,11 +245,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                     targetHeight - initialHeight,
                     CardAnimation.EXPANDING, card_container)
             onExpand()
+            card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more))
         } else {
             animateViews(initialHeight,
                     initialHeight - targetHeight,
                     CardAnimation.COLLAPSING, card_container)
             onContract()
+            card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
         }
     }
 
@@ -286,10 +288,6 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
         expandAnimation.duration = expandAnimationDuration.toLong()
         cardView.startAnimation(expandAnimation)
-        cardView.card_arrow.setImageResource(when (animationType) {
-            CardAnimation.EXPANDING -> compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more)
-            CardAnimation.COLLAPSING -> compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less)
-        })
     }
 
     class OnSwipeTouchListener(val view: LinearLayout, val left_view: LinearLayout,

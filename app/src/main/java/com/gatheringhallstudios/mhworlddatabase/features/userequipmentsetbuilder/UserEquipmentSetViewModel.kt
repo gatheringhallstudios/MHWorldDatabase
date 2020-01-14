@@ -1,33 +1,94 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list
+package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
-
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.*
 
-/**
- * Created by Carlos on 3/22/2018.
- */
-
-class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel(application) {
+class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(application) {
+    private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
     private val decorationDao = MHWDatabase.getDatabase(application).decorationDao()
     private val charmDao = MHWDatabase.getDatabase(application).charmDao()
     private val weaponDao = MHWDatabase.getDatabase(application).weaponDao()
     private val armorDao = MHWDatabase.getDatabase(application).armorDao()
-    private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
 
-    val userEquipmentSetIds = MutableLiveData<MutableList<UserEquipmentSetIds>>()
-    val userEquipmentSets = MutableLiveData<MutableList<UserEquipmentSet>>()
 
+    private var _activeUserEquipmentSet = MutableLiveData<UserEquipmentSet>()
+    private var activeUserEquipment: UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
+    private var _userEquipmentSets = MutableLiveData<MutableList<UserEquipmentSet>>()
+
+    val activeUserEquipmentSet: LiveData<UserEquipmentSet> = _activeUserEquipmentSet
+    val userEquipmentSets: LiveData<MutableList<UserEquipmentSet>> = _userEquipmentSets
+
+    fun setActiveUserEquipment(userEquipment: UserEquipment?) {
+        this.activeUserEquipment = userEquipment
+    }
+
+    fun setActiveUserEquipmentSet(id: Int) {
+        runBlocking {
+            val set = async { getEquipmentSet(id) }
+            _activeUserEquipmentSet.value = set.await()
+        }
+    }
+
+    fun deleteDecorationForEquipment(decorationId: Int, targetDataId: Int, targetSlotNumber: Int, type: DataType, userEquipmentSetId: Int) {
+        runBlocking {
+            val set = withContext(Dispatchers.IO) {
+                async {
+                    appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, decorationId, targetSlotNumber)
+                    getEquipmentSet(userEquipmentSetId)
+                }
+            }
+            _activeUserEquipmentSet.value = set.await()
+        }
+    }
+
+    fun deleteEquipmentSet(userEquipmentSetId: Int) {
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                appDao.deleteUserEquipmentSet(userEquipmentSetId)
+                appDao.deleteUserEquipmentSetEquipment(userEquipmentSetId)
+                appDao.deleteUserEquipmentSetDecorations(userEquipmentSetId)
+            }
+        }
+    }
+
+    fun renameEquipmentSet(name: String, userEquipmentSetId: Int) {
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                appDao.renameUserEquipmentSet(name, userEquipmentSetId)
+            }
+            _activeUserEquipmentSet.value = getEquipmentSet(userEquipmentSetId)
+        }
+    }
+
+    fun deleteUserEquipment(userEquipmentId: Int, userEquipmentSetId: Int, type: DataType) {
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                appDao.deleteUserEquipmentEquipment(userEquipmentId, type, userEquipmentSetId)
+                appDao.deleteUserEquipmentDecorations(userEquipmentSetId, userEquipmentId, type)
+            }
+        }
+    }
+
+    /*
+    Creates a new equipment set and sets that as the active equipment set
+     */
     fun createEquipmentSet(): UserEquipmentSet {
-        val newId = appDao.createUserEquipmentSet("New Set")
-        return convertEquipmentSetIdToEquipmentSet(appDao.loadUserEquipmentSetIds(newId.toInt()))
+        return runBlocking {
+            val set = withContext(Dispatchers.IO) {
+                val newId = appDao.createUserEquipmentSet("New Set")
+                convertEquipmentSetIdToEquipmentSet(appDao.loadUserEquipmentSetIds(newId.toInt()))
+            }
+            _activeUserEquipmentSet.value = set
+            set
+        }
     }
 
     fun deleteEquipmentSet(userEquipmentSet: UserEquipmentSet) {
@@ -40,7 +101,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
         }
     }
 
-    fun getEquipmentSetList() {
+    fun getEquipmentSets() {
         GlobalScope.launch(Dispatchers.Main) {
             val equipmentSetIds = withContext(Dispatchers.IO) {
                 appDao.loadUserEquipmentSetIds()
@@ -56,8 +117,7 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 deferred.map { it.await() }
             }
 
-            userEquipmentSets.value = equipmentSets.toMutableList()
-            userEquipmentSetIds.value = equipmentSetIds.toMutableList()
+            _userEquipmentSets.value = equipmentSets.toMutableList()
         }
     }
 
@@ -74,20 +134,6 @@ class UserEquipmentSetListViewModel(application: Application) : AndroidViewModel
                 }
 
                 deferred.await()
-            }
-
-            val buffer = userEquipmentSets.value
-            if (buffer != null) {
-                //Update user equipment sets collection in memory if it exists
-                val index = buffer.indexOfFirst {
-                    it.id == equipmentSet.id
-                }
-
-                if (index != -1) {
-                    buffer[index] = equipmentSet
-                }
-
-                userEquipmentSets.value = buffer
             }
 
             equipmentSet

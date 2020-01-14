@@ -1,15 +1,13 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentCard
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
@@ -19,6 +17,10 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.RenameDialogListener {
+    private val viewModel by lazy {
+        ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
+    }
+
     private lateinit var weaponCard: UserEquipmentCard
     private lateinit var headArmorCard: UserEquipmentCard
     private lateinit var armArmorCard: UserEquipmentCard
@@ -40,19 +42,10 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     override fun onDialogPositiveClick(dialog: RenameSetDialog) {
         // User touched the dialog's positive button
         viewModel.renameEquipmentSet(dialog.resultName, viewModel.activeUserEquipmentSet.value!!.id)
-        val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
-        viewModel.activeUserEquipmentSet.value = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
     }
 
     override fun onDialogNegativeClick(dialog: RenameSetDialog) {
         // User touched the dialog's negative button
-    }
-
-    /**
-     * Returns the viewmodel owned by the parent fragment
-     */
-    private val viewModel: UserEquipmentSetDetailViewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(UserEquipmentSetDetailViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,115 +100,116 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         setActivityTitle(userEquipmentSet.name)
 
         val weapon = userEquipmentSet.getWeapon()
-        weaponCard.bindWeapon(weapon, userEquipmentSet.id)
+        weaponCard.bindWeapon(weapon, userEquipmentSet.id,
+                onClick = {
+                    viewModel.setActiveUserEquipment(weapon)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, weapon,
+                            userEquipmentSet.id, null, null)
+                },
+                onSwipeRight = {
+                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(weapon!!)
+                    viewModel.deleteUserEquipment(weapon!!.entityId(), userEquipmentSet.id, weapon.type())
+                    refreshFragment()
+                })
         if (weapon != null) {
-            weaponCard.setOnClick {
-                viewModel.setActiveUserEquipment(weapon)
-                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, weapon,
-                        userEquipmentSet.id, null, null)
-            }
-            weaponCard.setOnSwipeRight {
-                viewModel.activeUserEquipmentSet.value?.equipment?.remove(weapon)
-                viewModel.deleteUserEquipment(weapon.entityId(), userEquipmentSet.id, weapon.type())
-                refreshFragment()
-            }
             populateDecorations(weapon, userEquipmentSet.id, weaponCard)
         }
 
-        val headArmor = userEquipmentSet.getHeadArmor()
-        headArmorCard.bindHeadArmor(headArmor, userEquipmentSet.id)
-        if (headArmor != null) {
-            populateDecorations(headArmor, userEquipmentSet.id, headArmorCard)
-            headArmorCard.setOnClick {
-                viewModel.setActiveUserEquipment(headArmor)
-                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, headArmor,
-                        userEquipmentSet.id, headArmor.armor.armor.armor_type, null)
-            }
-            headArmorCard.setOnSwipeRight {
-                viewModel.activeUserEquipmentSet.value?.equipment?.remove(headArmor)
-                viewModel.deleteUserEquipment(headArmor.entityId(), userEquipmentSet.id, headArmor.type())
-                refreshFragment()
-            }
-        }
 
-        val armArmor = userEquipmentSet.getArmArmor()
-        armArmorCard.bindArmArmor(armArmor, userEquipmentSet.id)
-        if (armArmor != null) {
-            populateDecorations(armArmor, userEquipmentSet.id, armArmorCard)
-            armArmorCard.setOnClick {
-                viewModel.setActiveUserEquipment(armArmor)
-                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armArmor,
-                        userEquipmentSet.id, armArmor.armor.armor.armor_type, null)
-            }
-            armArmorCard.setOnSwipeRight {
-                viewModel.activeUserEquipmentSet.value?.equipment?.remove(armArmor)
-                viewModel.deleteUserEquipment(armArmor.entityId(), userEquipmentSet.id, armArmor.type())
-                refreshFragment()
-            }
-        }
+//        val headArmor = userEquipmentSet.getHeadArmor()
+//        headArmorCard.bindHeadArmor(headArmor, userEquipmentSet.id,
+//                onClick = {
+//                    viewModel.setActiveUserEquipment(headArmor)
+//                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, headArmor,
+//                            userEquipmentSet.id, headArmor!!.armor.armor.armor_type, null)
+//                },
+//                onSwipeRight = {
+//                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(headArmor!!)
+//                    viewModel.deleteUserEquipment(headArmor!!.entityId(), userEquipmentSet.id, headArmor!!.type())
+//                    refreshFragment()
+//                })
+//        if (headArmor != null) {
+//            populateDecorations(headArmor, userEquipmentSet.id, headArmorCard)
+//        }
 
-        val chestArmor = userEquipmentSet.getChestArmor()
-        chestArmorCard.bindChestArmor(chestArmor, userEquipmentSet.id)
-        if (chestArmor != null) {
-            populateDecorations(chestArmor, userEquipmentSet.id, chestArmorCard)
-            chestArmorCard.setOnClick {
-                viewModel.setActiveUserEquipment(chestArmor)
-                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, chestArmor,
-                        userEquipmentSet.id, chestArmor.armor.armor.armor_type, null)
-            }
-            chestArmorCard.setOnSwipeRight {
-                viewModel.activeUserEquipmentSet.value?.equipment?.remove(chestArmor)
-                viewModel.deleteUserEquipment(chestArmor.entityId(), userEquipmentSet.id, chestArmor.type())
-                refreshFragment()
-            }
-        }
+//        val armArmor = userEquipmentSet.getArmArmor()
+//        armArmorCard.bindArmArmor(armArmor, userEquipmentSet.id,
+//                onClick = {
+//                    viewModel.setActiveUserEquipment(armArmor)
+//                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armArmor,
+//                            userEquipmentSet.id, armArmor!!.armor.armor.armor_type, null)
+//                },
+//                onSwipeRight = {
+//                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(armArmor!!)
+//                    viewModel.deleteUserEquipment(armArmor!!.entityId(), userEquipmentSet.id, armArmor.type())
+//                    refreshFragment()
+//                })
+//        if (armArmor != null) {
+//            populateDecorations(armArmor, userEquipmentSet.id, armArmorCard)
+//        }
+//
+//        val chestArmor = userEquipmentSet.getChestArmor()
+//        chestArmorCard.bindChestArmor(chestArmor, userEquipmentSet.id,
+//                onClick = {
+//                    viewModel.setActiveUserEquipment(chestArmor)
+//                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, chestArmor,
+//                            userEquipmentSet.id, chestArmor!!.armor.armor.armor_type, null)
+//                },
+//                onSwipeRight = {
+//                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(chestArmor!!)
+//                    viewModel.deleteUserEquipment(chestArmor!!.entityId(), userEquipmentSet.id, chestArmor.type())
+//                    refreshFragment()
+//                })
+//        if (chestArmor != null) {
+//            populateDecorations(chestArmor, userEquipmentSet.id, chestArmorCard)
+//        }
+//
+//        val legArmor = userEquipmentSet.getLegArmor()
+//        legArmorCard.bindLegArmor(legArmor, userEquipmentSet.id,
+//                onClick = {
+//                    viewModel.setActiveUserEquipment(legArmor)
+//                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, legArmor,
+//                            userEquipmentSet.id, legArmor!!.armor.armor.armor_type, null)
+//                },
+//                onSwipeRight = {
+//                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor!!)
+//                    viewModel.deleteUserEquipment(legArmor!!.entityId(), userEquipmentSet.id, legArmor.type())
+//                    refreshFragment()
+//                })
+//        if (legArmor != null) {
+//            populateDecorations(legArmor, userEquipmentSet.id, legArmorCard)
+//        }
+//
+//        val waistArmor = userEquipmentSet.getWaistArmor()
+//        waistArmorCard.bindWaistArmor(waistArmor, userEquipmentSet.id,
+//                onClick = {
+//                    viewModel.setActiveUserEquipment(waistArmor)
+//                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, waistArmor,
+//                            userEquipmentSet.id, waistArmor!!.armor.armor.armor_type, null)
+//                },
+//                onSwipeRight = {
+//                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(waistArmor!!)
+//                    viewModel.deleteUserEquipment(waistArmor!!.entityId(), userEquipmentSet.id, waistArmor.type())
+//                    refreshFragment()
+//                })
+//        if (waistArmor != null) {
+//            populateDecorations(waistArmor, userEquipmentSet.id, waistArmorCard)
+//        }
 
-        val legArmor = userEquipmentSet.getLegArmor()
-        legArmorCard.bindLegArmor(legArmor, userEquipmentSet.id)
-        if (legArmor != null) {
-            populateDecorations(legArmor, userEquipmentSet.id, legArmorCard)
-            legArmorCard.setOnClick {
-                viewModel.setActiveUserEquipment(legArmor)
-                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, legArmor,
-                        userEquipmentSet.id, legArmor.armor.armor.armor_type, null)
-            }
-            legArmorCard.setOnSwipeRight {
-                viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor)
-                viewModel.deleteUserEquipment(legArmor.entityId(), userEquipmentSet.id, legArmor.type())
-                refreshFragment()
-            }
-        }
-
-        val waistArmor = userEquipmentSet.getWaistArmor()
-        waistArmorCard.bindWaistArmor(waistArmor, userEquipmentSet.id)
-        if (waistArmor != null) {
-            populateDecorations(waistArmor, userEquipmentSet.id, waistArmorCard)
-            waistArmorCard.setOnClick {
-                viewModel.setActiveUserEquipment(waistArmor)
-                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, waistArmor,
-                        userEquipmentSet.id, waistArmor.armor.armor.armor_type, null)
-            }
-            waistArmorCard.setOnSwipeRight {
-                viewModel.activeUserEquipmentSet.value?.equipment?.remove(waistArmor)
-                viewModel.deleteUserEquipment(waistArmor.entityId(), userEquipmentSet.id, waistArmor.type())
-                refreshFragment()
-            }
-        }
-
-        val charm = userEquipmentSet.getCharm()
-        charmCard.bindCharm(charm, userEquipmentSet.id)
-        if (charm != null) {
-            user_equipment_charm_slot.setOnClick {
-                viewModel.setActiveUserEquipment(charm)
-                getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, charm, userEquipmentSet.id,
-                        null, null)
-            }
-            user_equipment_charm_slot.setOnSwipeRight {
-                viewModel.activeUserEquipmentSet.value?.equipment?.remove(charm)
-                viewModel.deleteUserEquipment(charm.entityId(), userEquipmentSet.id, charm.type())
-                refreshFragment()
-            }
-        }
+//        val charm = userEquipmentSet.getCharm()
+//        charmCard.bindCharm(charm, userEquipmentSet.id,
+//                onClick = {
+//                    user_equipment_charm_slot.setOnClick {
+//                        viewModel.setActiveUserEquipment(charm)
+//                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, charm, userEquipmentSet.id,
+//                                null, null)
+//                    }
+//                },
+//                onSwipeRight = {
+//                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(charm!!)
+//                    viewModel.deleteUserEquipment(charm!!.entityId(), userEquipmentSet.id, charm.type())
+//                    refreshFragment()
+//                })
     }
 
     private fun populateDecorations(userEquipment: UserEquipment?, userEquipmentSetId: Int, card: UserEquipmentCard) {
@@ -251,14 +245,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
                 },
                 onDelete = { userDecoration ->
-                    runBlocking {
-                        withContext(Dispatchers.IO) {
-                            viewModel.deleteDecorationForEquipment(userDecoration.decoration.id, userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
-                        }
-                        val buffer = ViewModelProviders.of(activity!!).get(UserEquipmentSetListViewModel::class.java)
-                        val set = buffer.getEquipmentSet(viewModel.activeUserEquipmentSet.value!!.id)
-                        viewModel.activeUserEquipmentSet.value = set
-                    }
+                    viewModel.deleteDecorationForEquipment(userDecoration.decoration.id,
+                            userEquipment.entityId(), userDecoration.slotNumber, userEquipment.type(), userEquipmentSetId)
+
                 }
         )
     }

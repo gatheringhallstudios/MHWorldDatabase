@@ -1,14 +1,11 @@
 package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListViewModel
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_generic_pager.*
 
@@ -18,6 +15,10 @@ import kotlinx.android.synthetic.main.fragment_generic_pager.*
  */
 
 class UserEquipmentSetDetailPagerFragment : BasePagerFragment() {
+    private val viewModel by lazy {
+        ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
+    }
+
     companion object {
         const val ARG_USER_EQUIPMENT_SET_ID = "USER_EQUIPMENT_SET_ID"
     }
@@ -35,12 +36,7 @@ class UserEquipmentSetDetailPagerFragment : BasePagerFragment() {
     override fun onAddTabs(tabs: TabAdder) {
         val args = arguments
         val equipmentSetId = args!!.getInt(ARG_USER_EQUIPMENT_SET_ID)
-
-        val viewModel = ViewModelProviders.of(this).get(UserEquipmentSetDetailViewModel::class.java)
-        val parentViewModel = ViewModelProviders.of(this.parentFragment!!).get(UserEquipmentSetListViewModel::class.java)
-        val equipmentSet = parentViewModel.getEquipmentSet(equipmentSetId)
-        viewModel.activeUserEquipmentSet.value = equipmentSet
-        this.setActivityTitle(equipmentSet.name)
+        viewModel.setActiveUserEquipmentSet(equipmentSetId)
 
         // Now add our tabs
         tabs.addTab(getString(R.string.tab_armor_set_builder_equipment)) {
