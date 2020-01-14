@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.QuestBase
+import com.gatheringhallstudios.mhworlddatabase.data.models.QuestMonster
 import com.gatheringhallstudios.mhworlddatabase.data.models.QuestReward
 import com.gatheringhallstudios.mhworlddatabase.data.types.QuestCategory
 
@@ -45,4 +46,17 @@ abstract class QuestDao {
     """)
     abstract fun loadQuestRewards(langId: String, questId: Int): LiveData<List<QuestReward>>
 
+    @Query("""
+        SELECT qm.monster_id, mtext.name monster_name, m.size monster_size,
+            qm.quantity, qm.is_objective
+        FROM quest_monster qm
+            JOIN monster m
+                ON m.id = qm.monster_id
+            JOIN monster_text mtext
+                ON mtext.id = m.id
+                AND mtext.lang_id = :langId
+        WHERE qm.quest_id = :questId
+        ORDER BY is_objective DESC, m.order_id ASC
+    """)
+    abstract fun loadQuestMonsters(langId: String, questId: Int): LiveData<List<QuestMonster>>
 }

@@ -8,6 +8,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
+import com.gatheringhallstudios.mhworlddatabase.components.VerboseIconLabelTextCellBinder
 import com.gatheringhallstudios.mhworlddatabase.components.applyIconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemMonsterReward
@@ -94,8 +95,6 @@ class QuestRewardSourceAdapterDelegate: SimpleListDelegate<ItemQuestReward>() {
     override fun isForViewType(obj: Any) = obj is ItemQuestReward
 
     override fun onCreateView(parent: ViewGroup): View {
-        // todo: decide if we want to make this into a standalone view class or not
-        // an alternative option is to upgrade the normal one to support sublabels and sub-values
         val inflater = LayoutInflater.from(parent.context)
         return inflater.inflate(R.layout.cell_icon_verbose_label_text, parent, false)
     }
@@ -106,15 +105,16 @@ class QuestRewardSourceAdapterDelegate: SimpleListDelegate<ItemQuestReward>() {
                 R.string.quest_category_combined, categoryText, data.quest.stars
         )
 
-        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.quest))
-        viewHolder.label_text.text = data.quest.name
-        viewHolder.sublabel_text.text = categoryCombined
-        viewHolder.value_text.text = when (data.percentage) {
-            0 -> viewHolder.resources.getString(R.string.format_percentage_unknown)
-            else -> viewHolder.resources.getString(R.string.format_percentage, data.percentage)
+        with (VerboseIconLabelTextCellBinder(viewHolder.itemView)) {
+            setIconDrawable(AssetLoader.loadIconFor(data.quest))
+            setLabelText(data.quest.name)
+            setSubLabelText(categoryCombined)
+            setValueText(when (data.percentage) {
+                0 -> viewHolder.resources.getString(R.string.format_percentage_unknown)
+                else -> viewHolder.resources.getString(R.string.format_percentage, data.percentage)
+            })
+            setSubValueText(viewHolder.resources.getString(R.string.format_quantity_none, data.stack))
         }
-
-        viewHolder.subvalue_text.text = viewHolder.resources.getString(R.string.format_quantity_none, data.stack)
 
         viewHolder.itemView.setOnClickListener {
             it.getRouter().navigateQuestDetail(data.quest.id)

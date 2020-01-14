@@ -1,5 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.util.tree
 
+import androidx.lifecycle.LiveData
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.read
 import kotlin.concurrent.write
@@ -10,7 +11,7 @@ import kotlin.concurrent.write
  * as a previous run, the results of the previous run will be returned.
  * Otherwise it will create a new run.
  */
-class MemoizedValue<K, T> {
+open class MemoizedValue<K, T> {
     private val lock = ReentrantReadWriteLock()
 
     private var hasValue = false
@@ -38,3 +39,8 @@ class MemoizedValue<K, T> {
         }
     }
 }
+
+/**
+ * A MemoizedValue that shortcuts to live data. Simplifies object declaration.
+ */
+class LiveMemoizedValue<K, T>: MemoizedValue<K, LiveData<T>>()

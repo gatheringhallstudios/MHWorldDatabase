@@ -115,6 +115,7 @@
     <string name="header_armor_set_skills">Armor Set Skills</string>
     <string name="header_active_set_bonuses">Active Set Bonuses</string>
     <string name="header_active_skills">Active Skills</string>
+    <string name="header_description">Description</string>
 
     <!-- ####################### -->
     <!-- ## Settings and Meta ## -->
@@ -386,6 +387,7 @@
     <string name="tab_quest_rewards">Rewards</string>
 
     <string name="quest_group">Group %s</string>
+    <string name="quest_label_objective">Objective</string>
 
     <!-- ################# -->
     <!-- ## SEARCH MENU ## -->

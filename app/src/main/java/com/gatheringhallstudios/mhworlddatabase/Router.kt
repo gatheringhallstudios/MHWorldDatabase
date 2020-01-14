@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import androidx.navigation.NavController
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHModel
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
@@ -38,7 +39,12 @@ class Router(private val navController: NavController) {
         DataType.CHARM -> navigateCharmDetail(id)
         DataType.DECORATION -> navigateDecorationDetail(id)
         DataType.WEAPON -> navigateWeaponDetail(id)
+        DataType.QUEST -> navigateQuestDetail(id)
         else -> Unit
+    }
+
+    fun navigateObject(entity: MHModel) {
+        navigateObject(entity.entityType, entity.entityId)
     }
 
     fun navigateItemDetail(itemId: Int) {

@@ -21,6 +21,14 @@
         <attr name="valueText" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="VerboseIconLabelTextCell">
+        <attr name="iconSrc" />
+        <attr name="labelText"/>
+        <attr name="subLabelText" format="string" />
+        <attr name="valueText" />
+        <attr name="subValueText" format="string" />
+    </declare-styleable>
+
     <declare-styleable name="IconLabelButtonCell">
         <attr name="iconSrc" />
         <attr name="labelText2" format="string" />

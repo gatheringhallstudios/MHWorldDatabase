@@ -20,8 +20,14 @@ open class QuestBase(
     override val entityType get() = DataType.QUEST
 }
 
+data class QuestMonster(
+        @Embedded(prefix = "monster_") val monster: MonsterBase,
+        val quantity: Int,
+        val is_objective: Boolean
+)
+
 class QuestReward(
-        @Embedded("item_") val item: ItemBase,
+        @Embedded(prefix = "item_") val item: ItemBase,
         val group: String,
         val stack: Int,
         val percentage: Int?
