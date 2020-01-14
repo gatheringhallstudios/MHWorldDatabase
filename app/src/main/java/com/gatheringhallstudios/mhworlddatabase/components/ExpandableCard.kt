@@ -79,7 +79,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
             if (cardState == CardState.EXPANDED) {
                 val initialHeight = card_container.height
-                card_container.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                card_body.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                 val targetHeight: Int = card_layout.measuredHeight
 
                 if (targetHeight == initialHeight) {
@@ -174,15 +174,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun setHeader(layout: Int) {
         card_header.removeAllViews()
-        card_header.addView(LayoutInflater.from(this.context).inflate(layout, card_header, false))
-        card_header.visibility = View.VISIBLE
+        LayoutInflater.from(this.context).inflate(layout, card_header, true)
     }
 
     fun setBody(layout: Int) {
         card_body.removeAllViews()
         if (layout == 0) return
-        card_body.addView(LayoutInflater.from(this.context).inflate(layout, card_body, false))
-        card_body.visibility = View.VISIBLE
+        LayoutInflater.from(this.context).inflate(layout, card_body, true)
     }
 
     fun setOnClick(onClick: () -> Unit) {

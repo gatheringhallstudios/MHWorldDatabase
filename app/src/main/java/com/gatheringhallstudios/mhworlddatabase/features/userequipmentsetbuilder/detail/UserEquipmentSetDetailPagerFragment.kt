@@ -46,8 +46,8 @@ class UserEquipmentSetDetailPagerFragment : BasePagerFragment() {
         tabs.addTab(getString(R.string.tab_armor_set_builder_equipment)) {
             UserEquipmentSetEditFragment()
         }
-//        tabs.addTab(getString(R.string.tab_armor_set_builder_summary)) {
-//            UserEquipmentSetSummaryFragment()
-//        }
+        tabs.addTab(getString(R.string.tab_armor_set_builder_summary)) {
+            UserEquipmentSetSummaryFragment()
+        }
     }
 }
