@@ -31,7 +31,6 @@
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Some Label" />
 
-
     <TextView
         android:id="@+id/sublabel_text"
         style="@style/TextBodyMedium"

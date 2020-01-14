@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
@@ -21,8 +22,15 @@ class SimpleUniversalBinding(
         val value: String?,
         val iconType: IconType,
         val icon: Drawable?,
+        val subLabel: String?,
         val clickFn: (v: View) -> Unit
-)
+) {
+    constructor(label: String?,
+        value: String?,
+        iconType: IconType,
+        icon: Drawable?,
+        clickFn: (v: View) -> Unit): this(label, value, iconType, icon, null, clickFn)
+}
 
 /**
  * Defines an interface used to create a binding given a context
@@ -63,6 +71,8 @@ class SimpleUniversalBinderAdapterDelegate: SimpleListDelegate<SimpleUniversalBi
 
         viewHolder.label_text.text = result.label
         viewHolder.value_text.text = result.value
+        viewHolder.sublabel_text.isVisible = !result.subLabel.isNullOrEmpty()
+        viewHolder.sublabel_text.text = result.subLabel
 
         viewHolder.itemView.setOnClickListener { result.clickFn(viewHolder.itemView) }
     }
