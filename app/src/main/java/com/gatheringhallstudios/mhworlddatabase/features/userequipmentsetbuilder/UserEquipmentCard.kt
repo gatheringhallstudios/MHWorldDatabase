@@ -38,8 +38,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         return card.resources.getString(resId, *formatArgs)
     }
 
-    /*
-        Binds a view only weapon card to the encapsulated card
+    /**
+    Binds a view only weapon card to the encapsulated card
      */
     fun bindWeapon(userWeapon: UserWeapon?) {
         if (userWeapon != null) {
@@ -71,8 +71,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         }
     }
 
-    /*
-        Binds a clickable weapon card to the encapsulated card
+    /**
+    Binds a clickable weapon card to the encapsulated card
      */
     fun bindWeapon(userWeapon: UserWeapon?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         if (userWeapon != null) {
@@ -108,52 +108,80 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 onSwipeRight.invoke()
             }
         } else {
-            with(card) {
-                bindEmptyWeapon()
-                setOnClick {
-                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.WEAPON,
-                            null, setId, null, null)
-                }
+            bindEmptyWeapon()
+            card.setOnClick {
+                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.WEAPON,
+                        null, setId, null, null)
             }
+
         }
     }
-
+    /**
+    Binds a view only head armor card to the encapsulated card
+     */
     fun bindHeadArmor(userArmor: UserArmorPiece?) {
         bindArmor(userArmor, ArmorType.HEAD)
     }
 
+    /**
+    Binds a clickable head armor card to the encapsulated card
+     */
     fun bindHeadArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         bindArmor(userArmor, ArmorType.HEAD, setId, onClick, onSwipeRight)
     }
 
+    /**
+    Binds a view only arm armor card to the encapsulated card
+     */
     fun bindArmArmor(userArmor: UserArmorPiece?) {
         bindArmor(userArmor, ArmorType.ARMS)
     }
 
-    fun bindArmArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit ) {
+    /**
+    Binds a clickable arm armor card to the encapsulated card
+     */
+    fun bindArmArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         bindArmor(userArmor, ArmorType.ARMS, setId, onClick, onSwipeRight)
     }
 
+    /**
+    Binds a view only chest armor card to the encapsulated card
+     */
     fun bindChestArmor(userArmor: UserArmorPiece?) {
         bindArmor(userArmor, ArmorType.CHEST)
     }
 
+    /**
+    Binds a clickable chest armor card to the encapsulated card
+     */
     fun bindChestArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         bindArmor(userArmor, ArmorType.CHEST, setId, onClick, onSwipeRight)
     }
 
+    /**
+    Binds a view only leg armor card to the encapsulated card
+     */
     fun bindLegArmor(userArmor: UserArmorPiece?) {
         bindArmor(userArmor, ArmorType.LEGS)
     }
 
+    /**
+    Binds a clickable leg armor card to the encapsulated card
+     */
     fun bindLegArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         bindArmor(userArmor, ArmorType.LEGS, setId, onClick, onSwipeRight)
     }
 
+    /**
+    Binds a clickable waist armor card to the encapsulated card
+     */
     fun bindWaistArmor(userArmor: UserArmorPiece?) {
         bindArmor(userArmor, ArmorType.WAIST)
     }
 
+    /**
+    Binds a view only waist armor card to the encapsulated card
+     */
     fun bindWaistArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         bindArmor(userArmor, ArmorType.WAIST, setId, onClick, onSwipeRight)
     }
@@ -185,7 +213,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
 
     fun bindCharm(userCharm: UserCharm?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         if (userCharm != null) {
-            card.run {
+            with(card) {
                 setHeader(R.layout.view_base_header_expandable_cardview)
                 setBody(R.layout.view_base_body_expandable_cardview)
 
@@ -212,12 +240,11 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             }
         } else {
             bindEmptyCharm()
-            with(card) {
-                setOnClick {
-                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM,
-                            null, setId, null, null)
-                }
+            card.setOnClick {
+                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM,
+                        null, setId, null, null)
             }
+
         }
     }
 
@@ -275,29 +302,25 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 onSwipeRight?.invoke()
             }
         } else {
-            with(card) {
-                bindEmptyArmor(armorType)
-                setOnClick {
-                    getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR,
-                            null, setId, armorType, null)
-                }
+            bindEmptyArmor(armorType)
+            card.setOnClick {
+                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR,
+                        null, setId, armorType, null)
             }
         }
     }
 
     private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
-        card.run {
+        with(card) {
             setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
             setBody(R.layout.view_empty_equipment_body_expandable_cardview)
-        }
-        card.run {
             new_equipment_set_label.text = getString(title)
             equipment_set_icon2.setImageResource(icon)
         }
     }
 
     private fun hideSlots() {
-        card.run {
+        with(card) {
             icon_slots.visibility = View.GONE
             slot1.visibility = View.GONE
             slot2.visibility = View.GONE
@@ -332,18 +355,6 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             4 -> R.drawable.ic_ui_slot_4_empty
             else -> R.drawable.ic_ui_slot_none
         })
-    }
-
-    fun setOnClick(onClick: () -> Unit) {
-        card.setOnClick(onClick)
-    }
-
-    fun setOnSwipeRight(onSwipeRight: () -> Unit) {
-        card.setOnSwipeRight(onSwipeRight)
-    }
-
-    fun setOnSwipeLeft(onSwipeLeft: () -> Unit) {
-        card.setOnSwipeLeft(onSwipeLeft)
     }
 
     fun populateSkills(skills: List<SkillLevel>) {

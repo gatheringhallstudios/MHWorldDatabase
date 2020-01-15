@@ -253,7 +253,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         for (setBonus in setBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, armor_set_set_bonus_list, false)
 
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name

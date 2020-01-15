@@ -114,17 +114,16 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                 card_body.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                 val targetHeight: Int = card_layout.measuredHeight
 
-                if (targetHeight == initialHeight) {
-                } else if (targetHeight - initialHeight > 0) {
+                if (targetHeight - initialHeight > 0) {
                     cardState = CardState.EXPANDING
                     animateViews(initialHeight,
                             targetHeight - initialHeight,
-                            CardAnimation.EXPANDING, card_container)
-                } else {
+                            CardAnimation.EXPANDING, card_container, false)
+                } else if (targetHeight - initialHeight < 0){
                     cardState = CardState.COLLAPSING
                     animateViews(initialHeight,
                             initialHeight - targetHeight,
-                            CardAnimation.COLLAPSING, card_container)
+                            CardAnimation.COLLAPSING, card_container, false)
                 }
             }
         }
@@ -255,7 +254,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
     }
 
-    private fun animateViews(initialHeight: Int, distance: Int, animationType: CardAnimation, cardView: View) {
+    private fun animateViews(initialHeight: Int, distance: Int, animationType: CardAnimation, cardView: View, animateArrow: Boolean = true) {
         val expandAnimation = object : Animation() {
             var arrowStarted = false
             override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
@@ -265,7 +264,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                     (initialHeight - distance * interpolatedTime).toInt()
 
                 cardView.requestLayout()
-                if (!arrowStarted) {
+                if (!arrowStarted && animateArrow) {
                     arrowStarted = true
                     (cardView.card_arrow.drawable as Animatable).start()
                 }
@@ -273,14 +272,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
 
         expandAnimation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {
-
-            }
-
-            override fun onAnimationRepeat(animation: Animation?) {
-
-            }
-
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
                 cardState = if (cardState == CardState.EXPANDING) CardState.EXPANDED else CardState.COLLAPSED
             }
@@ -298,7 +291,6 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                                val swipeLeftEnabled: Boolean, val swipeRightEnabled: Boolean) : OnTouchListener {
         var initialX = 0f
         var dx = 0f
-
         override fun onTouch(v: View?, event: MotionEvent?): Boolean {
             when (event?.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -346,14 +338,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             }
 
             reboundAnimation.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation?) {
-
-                }
-
-                override fun onAnimationRepeat(animation: Animation?) {
-
-                }
-
+                override fun onAnimationStart(animation: Animation?) {}
+                override fun onAnimationRepeat(animation: Animation?) {}
                 override fun onAnimationEnd(animation: Animation?) {
                     if (distance < -175 && swipeRightEnabled) {
                         onSwipeRight()

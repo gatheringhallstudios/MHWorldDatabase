@@ -38,14 +38,16 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
     }
 
     fun deleteDecorationForEquipment(decorationId: Int, targetDataId: Int, targetSlotNumber: Int, type: DataType, userEquipmentSetId: Int) {
-        runBlocking {
-            val set = withContext(Dispatchers.IO) {
-                async {
-                    appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, decorationId, targetSlotNumber)
-                    getEquipmentSet(userEquipmentSetId)
-                }
+        val deferredResult = GlobalScope.async {
+            withContext(Dispatchers.IO) {
+                appDao.deleteUserEquipmentDecoration(userEquipmentSetId, targetDataId, type, decorationId, targetSlotNumber)
+                val equipmentSetIds = appDao.loadUserEquipmentSetIds(userEquipmentSetId)
+                convertEquipmentSetIdToEquipmentSet(equipmentSetIds)
             }
-            _activeUserEquipmentSet.value = set.await()
+        }
+
+        runBlocking {
+            _activeUserEquipmentSet.value = deferredResult.await()
         }
     }
 
@@ -92,7 +94,7 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
     }
 
     fun deleteEquipmentSet(userEquipmentSet: UserEquipmentSet) {
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch {
             withContext(Dispatchers.IO) {
                 appDao.deleteUserEquipmentSet(userEquipmentSet.id)
                 appDao.deleteUserEquipmentSetEquipment(userEquipmentSet.id)
@@ -102,7 +104,7 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
     }
 
     fun getEquipmentSets() {
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch {
             val equipmentSetIds = withContext(Dispatchers.IO) {
                 appDao.loadUserEquipmentSetIds()
             }
@@ -117,25 +119,18 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
                 deferred.map { it.await() }
             }
 
-            _userEquipmentSets.value = equipmentSets.toMutableList()
+            withContext(Dispatchers.Main) {
+                _userEquipmentSets.value = equipmentSets.toMutableList()
+            }
         }
     }
 
     fun getEquipmentSet(equipmentSetId: Int): UserEquipmentSet {
         return runBlocking {
-            val equipmentSetIds = withContext(Dispatchers.IO) {
-                appDao.loadUserEquipmentSetIds(equipmentSetId)
-            }
-
             val equipmentSet = withContext(Dispatchers.IO) {
-                val deferred = async {
-                    println("Doing on " + Thread.currentThread().name)
-                    convertEquipmentSetIdToEquipmentSet(equipmentSetIds)
-                }
-
-                deferred.await()
+                val equipmentSetIds = appDao.loadUserEquipmentSetIds(equipmentSetId)
+                convertEquipmentSetIdToEquipmentSet(equipmentSetIds)
             }
-
             equipmentSet
         }
     }
