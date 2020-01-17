@@ -116,11 +116,12 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
 
         }
     }
+
     /**
-    Binds a view only head armor card to the encapsulated card
+     * Bind armor to the card as view only.
      */
-    fun bindHeadArmor(userArmor: UserArmorPiece?) {
-        bindArmor(userArmor, ArmorType.HEAD)
+    fun bindArmor(userArmor: UserArmorPiece?, armorType: ArmorType) {
+        bindArmor(userArmor, armorType, null, null,  null)
     }
 
     /**
@@ -131,24 +132,10 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     /**
-    Binds a view only arm armor card to the encapsulated card
-     */
-    fun bindArmArmor(userArmor: UserArmorPiece?) {
-        bindArmor(userArmor, ArmorType.ARMS)
-    }
-
-    /**
     Binds a clickable arm armor card to the encapsulated card
      */
     fun bindArmArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         bindArmor(userArmor, ArmorType.ARMS, setId, onClick, onSwipeRight)
-    }
-
-    /**
-    Binds a view only chest armor card to the encapsulated card
-     */
-    fun bindChestArmor(userArmor: UserArmorPiece?) {
-        bindArmor(userArmor, ArmorType.CHEST)
     }
 
     /**
@@ -159,24 +146,10 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     /**
-    Binds a view only leg armor card to the encapsulated card
-     */
-    fun bindLegArmor(userArmor: UserArmorPiece?) {
-        bindArmor(userArmor, ArmorType.LEGS)
-    }
-
-    /**
     Binds a clickable leg armor card to the encapsulated card
      */
     fun bindLegArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
         bindArmor(userArmor, ArmorType.LEGS, setId, onClick, onSwipeRight)
-    }
-
-    /**
-    Binds a clickable waist armor card to the encapsulated card
-     */
-    fun bindWaistArmor(userArmor: UserArmorPiece?) {
-        bindArmor(userArmor, ArmorType.WAIST)
     }
 
     /**
