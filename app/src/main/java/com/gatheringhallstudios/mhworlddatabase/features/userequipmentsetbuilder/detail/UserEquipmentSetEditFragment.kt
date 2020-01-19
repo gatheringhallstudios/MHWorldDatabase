@@ -199,11 +199,9 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         val charm = userEquipmentSet.getCharm()
         charmCard.bindCharm(charm, userEquipmentSet.id,
                 onClick = {
-                    user_equipment_charm_slot.setOnClick {
-                        viewModel.setActiveUserEquipment(charm)
-                        getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, charm, userEquipmentSet.id,
-                                null, null)
-                    }
+                    viewModel.setActiveUserEquipment(charm)
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, charm, userEquipmentSet.id,
+                            null, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(charm!!)

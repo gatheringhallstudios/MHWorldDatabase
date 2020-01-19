@@ -119,7 +119,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                     animateViews(initialHeight,
                             targetHeight - initialHeight,
                             CardAnimation.EXPANDING, card_container, false)
-                } else if (targetHeight - initialHeight < 0){
+                } else if (targetHeight - initialHeight < 0) {
                     cardState = CardState.COLLAPSING
                     animateViews(initialHeight,
                             initialHeight - targetHeight,
@@ -275,7 +275,11 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             override fun onAnimationStart(animation: Animation?) {}
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
-                cardState = if (cardState == CardState.EXPANDING) CardState.EXPANDED else CardState.COLLAPSED
+                if (!animateArrow) {
+                    cardState = if (cardState == CardState.EXPANDING) CardState.COLLAPSED else CardState.EXPANDED
+                } else {
+                    cardState = if (cardState == CardState.EXPANDING) CardState.EXPANDED else CardState.COLLAPSED
+                }
             }
         })
 
