@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
@@ -87,6 +88,10 @@ class IconLabelButtonCell : ConstraintLayout {
         cell_button.setOnClickListener {
             clickFunction()
         }
+    }
+
+    fun hideButton() {
+        cell_button.visibility = View.GONE
     }
 
     /**

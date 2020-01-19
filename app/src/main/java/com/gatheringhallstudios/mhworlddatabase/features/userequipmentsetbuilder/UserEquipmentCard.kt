@@ -257,7 +257,6 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         if (onSwipeRight != null) card.setOnSwipeRight(onSwipeRight)
     }
 
-
     /**
      * Binds a view only decoration card to the encapsulated card
      */
@@ -447,6 +446,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 imageView.setImageDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
                 detailView.setLeftIconDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
                 detailView.setLabelText(getString(R.string.user_equipment_set_no_decoration))
+                detailView.hideButton()
 
                 detailView.setOnClickListener {
                     onEmptyClick?.invoke(slotNumber)
