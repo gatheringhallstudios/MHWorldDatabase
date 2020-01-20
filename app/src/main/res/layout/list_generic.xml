@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.gatheringhallstudios.mhworlddatabase.common.DetachingRecyclerView
+    <com.gatheringhallstudios.mhworlddatabase.util.DetachingRecyclerView
         android:id="@+id/recycler_view"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"

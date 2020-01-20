@@ -8,9 +8,11 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
+import com.gatheringhallstudios.mhworlddatabase.components.VerboseIconLabelTextCellBinder
 import com.gatheringhallstudios.mhworlddatabase.components.applyIconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemLocation
-import com.gatheringhallstudios.mhworlddatabase.data.models.ItemReward
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemMonsterReward
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuestReward
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.*
@@ -48,8 +50,8 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation>() {
  * Used to display the monsters that a particular item can come from.
  * This is the "reverse" of MonsterRewardAdapterDelegate.
  */
-class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward>() {
-    override fun isForViewType(obj: Any) = obj is ItemReward
+class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemMonsterReward>() {
+    override fun isForViewType(obj: Any) = obj is ItemMonsterReward
 
     override fun onCreateView(parent: ViewGroup): View {
         // todo: decide if we want to make this into a standalone view class or not
@@ -58,7 +60,7 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward>() {
         return inflater.inflate(R.layout.cell_icon_verbose_label_text, parent, false)
     }
 
-    override fun bindView(viewHolder: SimpleViewHolder, data: ItemReward) {
+    override fun bindView(viewHolder: SimpleViewHolder, data: ItemMonsterReward) {
         // Returns LR/HR depending on the rank
         val rankStr = viewHolder.resources.getString(when (data.rank) {
             Rank.LOW -> R.string.rank_short_low
@@ -81,6 +83,41 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemReward>() {
 
         viewHolder.itemView.setOnClickListener {
             it.getRouter().navigateMonsterDetail(data.monster.id)
+        }
+    }
+}
+
+/**
+ * Used to display the monsters that a particular item can come from.
+ * This is the "reverse" of MonsterRewardAdapterDelegate.
+ */
+class QuestRewardSourceAdapterDelegate: SimpleListDelegate<ItemQuestReward>() {
+    override fun isForViewType(obj: Any) = obj is ItemQuestReward
+
+    override fun onCreateView(parent: ViewGroup): View {
+        val inflater = LayoutInflater.from(parent.context)
+        return inflater.inflate(R.layout.cell_icon_verbose_label_text, parent, false)
+    }
+
+    override fun bindView(viewHolder: SimpleViewHolder, data: ItemQuestReward) {
+        val categoryText = AssetLoader.localizeQuestCategory(data.quest.category)
+        val categoryCombined = viewHolder.resources.getString(
+                R.string.quest_category_combined, categoryText, data.quest.stars
+        )
+
+        with (VerboseIconLabelTextCellBinder(viewHolder.itemView)) {
+            setIconDrawable(AssetLoader.loadIconFor(data.quest))
+            setLabelText(data.quest.name)
+            setSubLabelText(categoryCombined)
+            setValueText(when (data.percentage) {
+                0 -> viewHolder.resources.getString(R.string.format_percentage_unknown)
+                else -> viewHolder.resources.getString(R.string.format_percentage, data.percentage)
+            })
+            setSubValueText(viewHolder.resources.getString(R.string.format_quantity_none, data.stack))
+        }
+
+        viewHolder.itemView.setOnClickListener {
+            it.getRouter().navigateQuestDetail(data.quest.id)
         }
     }
 }

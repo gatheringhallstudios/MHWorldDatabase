@@ -96,7 +96,8 @@
     <string name="header_break">Breaks</string>
     <string name="header_crafting">Crafting</string>
     <string name="header_gathering">Gathering</string>
-    <string name="header_rewards">Rewards</string>
+    <string name="header_rewards">Monster Rewards</string>
+    <string name="header_quest_rewards">Quest Rewards</string>
     <string name="header_armor">Armor</string>
     <string name="header_charms">Charms</string>
     <string name="header_weapons">Weapons</string>
@@ -114,6 +115,7 @@
     <string name="header_armor_set_skills">Armor Set Skills</string>
     <string name="header_active_set_bonuses">Active Set Bonuses</string>
     <string name="header_active_skills">Active Skills</string>
+    <string name="header_description">Description</string>
 
     <!-- ####################### -->
     <!-- ## Settings and Meta ## -->
@@ -311,7 +313,6 @@
     <string name="weapon_bowgun_reload">Reload</string>
     <string name="weapon_bowgun_recoil">RCL</string>
 
-
     <!-- ################ -->
     <!-- ## ARMOR MENU ## -->
     <!-- ################ -->
@@ -370,6 +371,24 @@
     <string name="header_location_area">Area %1$d</string>
     <string name="header_location_base_camps">Base Camps</string>
 
+    <!-- ################ -->
+    <!-- ## QUEST MENU ## -->
+    <!-- ################ -->
+
+    <string name="title_quests">Quests</string>
+    <string name="quest_category_assigned">Assigned</string>
+    <string name="quest_category_optional">Optional</string>
+    <string name="quest_category_event">Event</string>
+    <string name="quest_category_arena">Arena</string>
+    <string name="quest_category_special">Special Assignment</string>
+    <string name="quest_category_combined">%s %d★</string>
+
+    <string name="tab_quest_summary">Summary</string>
+    <string name="tab_quest_rewards">Rewards</string>
+
+    <string name="quest_group">Group %s</string>
+    <string name="quest_label_objective">Objective</string>
+
     <!-- ################# -->
     <!-- ## SEARCH MENU ## -->
     <!-- ################# -->
@@ -390,6 +409,7 @@
     <string name="type_item_material">Material</string>
     <string name="type_item_ammo">Ammo</string>
     <string name="type_item_misc">Misc Item</string>
+    <string name="type_quest">Quest</string>
 
     <!-- #################### -->
     <!-- ## BOOKMARKS MENU ## -->

@@ -15,9 +15,9 @@ import androidx.core.graphics.drawable.toBitmap
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
-import com.gatheringhallstudios.mhworlddatabase.common.RenderedTreeNode
-import com.gatheringhallstudios.mhworlddatabase.common.TreeFormatter
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNodeType
+import com.gatheringhallstudios.mhworlddatabase.util.tree.RenderedTreeNode
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeFormatter
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNodeType
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatIconLayoutCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon

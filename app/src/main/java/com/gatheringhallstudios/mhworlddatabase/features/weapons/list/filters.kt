@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 
-import com.gatheringhallstudios.mhworlddatabase.common.Filter
+import com.gatheringhallstudios.mhworlddatabase.util.tree.Filter
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 

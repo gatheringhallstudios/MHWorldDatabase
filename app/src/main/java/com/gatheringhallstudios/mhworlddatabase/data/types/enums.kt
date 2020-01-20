@@ -22,6 +22,7 @@ enum class DataType {
     CHARM,
     ARMOR,
     WEAPON,
+    QUEST,
     NONE
 }
 
@@ -230,4 +231,18 @@ enum class ReloadType {
     NORMAL,
     FAST,
     VERY_FAST
+}
+
+enum class QuestCategory {
+    ASSIGNED,
+    OPTIONAL,
+    EVENT,
+    ARENA,
+    SPECIAL
+}
+
+enum class QuestType {
+    HUNT,
+    DELIVER,
+    CAPTURE
 }

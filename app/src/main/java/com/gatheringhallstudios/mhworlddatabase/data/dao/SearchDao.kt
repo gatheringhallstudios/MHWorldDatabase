@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
-import com.gatheringhallstudios.mhworlddatabase.common.CachedValue
+import com.gatheringhallstudios.mhworlddatabase.util.CachedValue
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.features.search.SearchFilter
 
@@ -45,6 +45,9 @@ abstract class SearchDao {
         loadAllWeaponsSync(AppSettings.dataLocale)
     }
 
+    private val questDataCache = CachedValue(timeout) {
+        loadAllQuestsSync(AppSettings.dataLocale)
+    }
 
     fun searchLocations(searchFilter: String): List<Location> {
         val filter = SearchFilter(searchFilter)
@@ -83,7 +86,12 @@ abstract class SearchDao {
 
     fun searchWeapons(searchFilter: String): List<WeaponBase> {
         val filter = SearchFilter(searchFilter)
-        return weaponDataCache.get().filter {filter.matches(it.name)}
+        return weaponDataCache.get().filter { filter.matches(it.name) }
+    }
+
+    fun searchQuests(searchFilter: String): List<QuestBase> {
+        val filter = SearchFilter(searchFilter)
+        return questDataCache.get().filter { filter.matches(it.name) }
     }
 
     // All queries for search are below. Currently, it loads the entire table.
@@ -151,7 +159,6 @@ abstract class SearchDao {
     """)
     protected abstract fun loadAllItemsSync(langId: String): List<ItemBase>
 
-
     @Query("""
         SELECT w.id, w.rarity, w.weapon_type, w.category, w.attack, w.affinity, w.previous_weapon_id,
         w.slot_1, w.slot_2, w.slot_3, w.element_hidden, wt.*
@@ -161,4 +168,13 @@ abstract class SearchDao {
     """)
     abstract fun loadAllWeaponsSync(langId: String): List<WeaponBase>
 
+    @Query("""
+        SELECT q.id, q.category, q.stars, qt.name, q.quest_type, 
+            qt.objective, qt.description, q.location_id, q.zenny
+        FROM quest q
+            JOIN quest_text qt USING (id)
+        WHERE qt.lang_id = :langId
+        ORDER BY q.order_id ASC
+    """)
+    abstract fun loadAllQuestsSync(langId: String): List<QuestBase>
 }

@@ -1,5 +1,6 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase.util
 
+import com.gatheringhallstudios.mhworlddatabase.util.ThrottledExecutor
 import org.junit.Test
 import java.util.*
 import java.util.concurrent.CountDownLatch

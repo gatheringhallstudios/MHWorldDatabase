@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNode
 
 /**
  * A collection of weapon trees for a particular weapon type

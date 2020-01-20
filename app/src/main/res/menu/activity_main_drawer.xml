@@ -41,6 +41,10 @@
             android:icon="@drawable/ic_ui_map"
             android:title="@string/title_locations" />
         <item
+            android:id="@+id/questListDestination"
+            android:icon="@drawable/ic_ui_map"
+            android:title="@string/title_quests" />
+        <item
             android:id="@+id/bookmarksListDestination"
             android:icon="@drawable/ic_ui_bookmark"
             android:title="@string/title_bookmarks" />

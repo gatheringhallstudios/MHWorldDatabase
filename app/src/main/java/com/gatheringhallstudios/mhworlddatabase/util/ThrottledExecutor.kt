@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.common
+package com.gatheringhallstudios.mhworlddatabase.util
 
 import java.util.concurrent.Executor
 import java.util.concurrent.atomic.AtomicReference

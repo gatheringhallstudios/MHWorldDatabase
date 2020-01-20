@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.data
 
 import androidx.room.TypeConverter
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.util.Converter
 
 private val RankConverter = Converter(
         "LR" to Rank.LOW,
@@ -89,7 +88,7 @@ private val WeaponTypeConverter = Converter(
         "gunlance" to WeaponType.GUNLANCE,
         "switch-axe" to WeaponType.SWITCH_AXE,
         "charge-blade" to WeaponType.CHARGE_BLADE,
-        "insect-glaive" to WeaponType.INSECT_GLAIVE ,
+        "insect-glaive" to WeaponType.INSECT_GLAIVE,
         "bow" to WeaponType.BOW,
         "light-bowgun" to WeaponType.LIGHT_BOWGUN,
         "heavy-bowgun" to WeaponType.HEAVY_BOWGUN,
@@ -145,7 +144,21 @@ private val ReloadTypeConverter = Converter(
         "very fast" to ReloadType.VERY_FAST
 )
 
+private val QuestCategoryConverter = Converter(
+        "optional" to QuestCategory.OPTIONAL,
+        "assigned" to QuestCategory.ASSIGNED,
+        "arena" to QuestCategory.ARENA,
+        "event" to QuestCategory.EVENT,
+        "special" to QuestCategory.SPECIAL,
+        null to QuestCategory.OPTIONAL
+)
 
+private val QuestTypeConverter = Converter(
+        "hunt" to QuestType.HUNT,
+        "deliver" to QuestType.DELIVER,
+        "capture" to QuestType.CAPTURE,
+        null to QuestType.HUNT
+)
 
 /**
  * Type conversions for things like enumerations.
@@ -202,4 +215,10 @@ class Converters {
 
     @TypeConverter fun reloadTypeFromString(value: String?) = ReloadTypeConverter.deserialize(value)
     @TypeConverter fun fromReloadType(type: ReloadType) = ReloadTypeConverter.serialize(type)
+
+    @TypeConverter fun questCategoryFromString(value: String?) = QuestCategoryConverter.deserialize(value)
+    @TypeConverter fun fromQuestCategory(category: QuestCategory) = QuestCategoryConverter.serialize(category)
+
+    @TypeConverter fun questTypeFromString(value: String?) = QuestTypeConverter.deserialize(value)
+    @TypeConverter fun fromQuestType(type: QuestType) = QuestTypeConverter.serialize(type)
 }

@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import androidx.navigation.NavController
+import com.gatheringhallstudios.mhworlddatabase.data.models.MHModel
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
@@ -14,6 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.Deco
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
@@ -37,7 +39,12 @@ class Router(private val navController: NavController) {
         DataType.CHARM -> navigateCharmDetail(id)
         DataType.DECORATION -> navigateDecorationDetail(id)
         DataType.WEAPON -> navigateWeaponDetail(id)
+        DataType.QUEST -> navigateQuestDetail(id)
         else -> Unit
+    }
+
+    fun navigateObject(entity: MHModel) {
+        navigateObject(entity.entityType, entity.entityId)
     }
 
     fun navigateItemDetail(itemId: Int) {
@@ -74,6 +81,10 @@ class Router(private val navController: NavController) {
 
     fun navigateWeaponDetail(weaponId: Int) {
         navController.navigate(R.id.openWeaponDetailAction, BundleBuilder().putInt(WeaponDetailPagerFragment.ARG_WEAPON_ID, weaponId).build())
+    }
+
+    fun navigateQuestDetail(questId: Int) {
+        navController.navigate(R.id.openQuestDetailAction, BundleBuilder().putInt(QuestDetailPagerFragment.ARG_QUEST_ID, questId).build())
     }
 
     fun navigateUserEquipmentSetDetail(userEquipmentSetId: Int) {

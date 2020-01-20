@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNodeType
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNodeType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine
@@ -141,6 +141,10 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
+    fun loadIconFor(quest: QuestBase): Drawable? {
+        return ctx.getDrawableCompat(R.drawable.ic_question_mark)
+    }
+
     fun loadSkillIcon(color: String?): Drawable? {
         return ctx.getVectorDrawable("Skill", color)
     }
@@ -262,6 +266,15 @@ object AssetLoader {
         SpecialAmmoType.WYVERNBLAST -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernblast)
         SpecialAmmoType.WYVERNHEART -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernheart)
         SpecialAmmoType.WYVERNSNIPE -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernsnipe)
+    }
+
+    fun localizeQuestCategory(category: QuestCategory?): String = when (category) {
+        null -> ""
+        QuestCategory.ASSIGNED -> ctx.getString(R.string.quest_category_assigned)
+        QuestCategory.OPTIONAL -> ctx.getString(R.string.quest_category_optional)
+        QuestCategory.EVENT -> ctx.getString(R.string.quest_category_event)
+        QuestCategory.ARENA -> ctx.getString(R.string.quest_category_arena)
+        QuestCategory.SPECIAL -> ctx.getString(R.string.quest_category_special)
     }
 
     fun loadFilledSlotIcon(decoration: DecorationBase, slotNumber: Int): Drawable? {

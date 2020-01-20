@@ -141,6 +141,19 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
+        android:id="@+id/questListDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.quests.list.QuestListPagerFragment"
+        android:label="@string/title_quests"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/questListAction"
+        app:destination="@id/questListDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <fragment
         android:id="@+id/bookmarksListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksListFragment"
         android:label="@string/title_bookmarks"
@@ -299,6 +312,18 @@
     <action
         android:id="@+id/openWeaponDetailAction"
         app:destination="@id/weaponDetailDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
+
+    <fragment
+        android:id="@+id/questDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment"
+        tools:layout="@layout/fragment_generic_pager" />
+    <action
+        android:id="@+id/openQuestDetailAction"
+        app:destination="@id/questDetailDestination"
         app:enterAnim="@anim/nav_enter_right"
         app:exitAnim="@anim/nav_exit_left"
         app:popEnterAnim="@anim/nav_enter_left"
