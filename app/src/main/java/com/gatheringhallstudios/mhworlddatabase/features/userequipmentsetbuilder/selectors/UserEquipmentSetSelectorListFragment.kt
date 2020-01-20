@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -160,11 +161,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
 
-            if (it.isEmpty()) {
-                empty_view.visibility = View.VISIBLE
-            } else {
-                empty_view.visibility = View.GONE
-            }
+            empty_view.isVisible = it.isEmpty()
         })
     }
 

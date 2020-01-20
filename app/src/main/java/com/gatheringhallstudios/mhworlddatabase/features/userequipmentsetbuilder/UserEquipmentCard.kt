@@ -83,16 +83,19 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             setHeader(R.layout.view_weapon_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
             setCardElevation(1f)
+        }
 
+        with (card.card_header) {
             equipment_name.text = weapon.name
             equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
-            rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
-            rarity_string.visibility = View.VISIBLE
             attack_value.text = weapon.attack.toString()
+        }
 
+        with (card.card_body) {
             decorations_section.visibility = View.GONE
         }
+
+        bindRarity(weapon.rarity)
         populateSkills(weaponFull.skills)
         populateSetBonuses(emptyList())
 
@@ -175,20 +178,23 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
             setCardElevation(1f)
+        }
+
+        with (card.card_header) {
             equipment_name.text = armor.armor.name
-            rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
-            rarity_string.visibility = View.VISIBLE
             equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
             defense_value.text = getString(
                     R.string.armor_defense_value,
                     armor.armor.defense_base,
                     armor.armor.defense_max,
                     armor.armor.defense_augment_max)
+        }
 
+        with (card.card_body) {
             decorations_section.visibility = View.GONE
         }
 
+        bindRarity(armor.armor.rarity)
         populateSkills(armor.skills)
         populateSetBonuses(armor.setBonuses)
         if (onClick != null) card.setOnClick(onClick)
@@ -238,23 +244,37 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
             setCardElevation(1f)
+        }
 
+        with (card.card_header) {
             equipment_name.text = charm.charm.name
             equipment_icon.setImageDrawable(AssetLoader.loadIconFor(charm.charm))
-            rarity_string.text = getString(R.string.format_rarity, charm.charm.rarity)
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(charm.charm.rarity))
-            rarity_string.visibility = View.VISIBLE
-
             defense_value.visibility = View.GONE
             icon_defense.visibility = View.GONE
+        }
+
+        with (card.card_body) {
             decorations_section.visibility = View.GONE
         }
+
+        bindRarity(charm.charm.rarity)
         populateSkills(charm.skills)
         populateSetBonuses(emptyList())
         hideSlots()
 
         if (onClick != null) card.setOnClick(onClick)
         if (onSwipeRight != null) card.setOnSwipeRight(onSwipeRight)
+    }
+
+    /**
+     * Internal function to enable the rarity string and display the value
+     */
+    private fun bindRarity(rarity: Int) {
+        with (card.card_header) {
+            rarity_string.text = getString(R.string.format_rarity, rarity)
+            rarity_string.setTextColor(AssetLoader.loadRarityColor(rarity))
+            rarity_string.visibility = View.VISIBLE
+        }
     }
 
     /**
@@ -277,22 +297,27 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             setBody(R.layout.view_base_body_expandable_cardview)
             setCardElevation(1f)
 
-            equipment_name.text = decoration.name
-            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
-            rarity_string.text = getString(R.string.format_rarity, decoration.rarity)
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(decoration.rarity))
-            rarity_string.visibility = View.VISIBLE
-
-            defense_value.visibility = View.GONE
-            icon_defense.visibility = View.GONE
-            icon_slots.visibility = View.GONE
-            BaseSlotSection.visibility = View.GONE
-            set_bonus_section.visibility = View.GONE
-            decorations_section.visibility = View.GONE
             setOnClick {
                 onClick?.invoke()
             }
         }
+
+        with (card.card_header) {
+            equipment_name.text = decoration.name
+            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
+            defense_value.visibility = View.GONE
+            icon_defense.visibility = View.GONE
+            icon_slots.visibility = View.GONE
+            BaseSlotSection.visibility = View.GONE
+        }
+
+        with (card.card_body) {
+            set_bonus_section.visibility = View.GONE
+            decorations_section.visibility = View.GONE
+        }
+
+        bindRarity(decoration.rarity)
+
         val skillLevel = SkillLevel(1)
         skillLevel.skillTree = decoration.skillTree
         populateSkills(listOf(skillLevel))
