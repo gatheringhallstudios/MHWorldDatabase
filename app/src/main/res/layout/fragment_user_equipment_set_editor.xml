@@ -1,108 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/user_equipment_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/padding_footer_space"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_footer_space">
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_weapon_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="1"
-            app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
-            app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview"
-            android:clipToPadding="false"
-            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
-            android:clipChildren="false" />
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_head_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="1"
-            android:clipToPadding="false"
-            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:clipChildren="false"
-            app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
-            app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview" />
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_chest_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="1"
-            android:clipToPadding="false"
-            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:clipChildren="false"
-            app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
-            app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview" />
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_arms_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="1"
-            android:clipToPadding="false"
-            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:clipChildren="false"
-            app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
-            app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview" />
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_waist_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="1"
-            android:clipToPadding="false"
-            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:clipChildren="false"
-            app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
-            app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview" />
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_legs_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="1"
-            android:clipToPadding="false"
-            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:clipChildren="false"
-            app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
-            app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview" />
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
             android:id="@+id/user_equipment_charm_slot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardViewElevation="1"
-            android:clipToPadding="false"
-            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:clipChildren="false"
-            app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
-            app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview" />
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
     </LinearLayout>
 </ScrollView>

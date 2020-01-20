@@ -23,7 +23,9 @@ import kotlinx.android.synthetic.main.view_user_equipment_set_body_expandable_ca
 
 
 
-class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit, private val onDelete: (UserEquipmentSet, pos: Int, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit,
+                                      private val onDelete: (UserEquipmentSet, pos: Int,
+                                                             adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType != 0) {

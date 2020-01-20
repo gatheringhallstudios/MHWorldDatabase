@@ -3,6 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilde
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -138,6 +139,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
 
         if (armorType != null) {
             viewModel.loadArmor(AppSettings.dataLocale, armorType)
+            card.bindActiveArmor(activeArmorPiece, armorType)
+            card.populateSlots(activeArmorPiece?.armor?.armor?.slots)
         }
 
         val adapter = UserEquipmentSetArmorSelectorAdapter {
@@ -150,13 +153,6 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
         }
 
-        //If this is going to be new piece of armor, do not populate the active armor piece
-        if (activeArmorPiece != null) {
-            populateActiveArmor(activeArmorPiece)
-        } else {
-            card.bindEmptyArmor(armorType)
-        }
-
         equipment_list.adapter = adapter
         equipment_list.addItemDecoration(SpacesItemDecoration(32))
         viewModel.armor.observe(this, Observer {
@@ -165,11 +161,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
 
-            if (it.isEmpty()) {
-                empty_view.visibility = View.VISIBLE
-            } else {
-                empty_view.visibility = View.GONE
-            }
+            empty_view.isVisible = it.isEmpty()
         })
     }
 
@@ -187,11 +179,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
         }
 
-        if (activeCharm != null) {
-            populateActiveCharm(activeCharm)
-        } else {
-            card.bindEmptyCharm()
-        }
+        card.bindActiveCharm(activeCharm)
 
         equipment_list.adapter = adapter
         equipment_list.addItemDecoration(SpacesItemDecoration(32))
@@ -224,23 +212,21 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
         }
 
-        if (activeDecoration != null) {
-            populateActiveDecoration(activeDecoration)
-        } else {
-            card.bindEmptyDecoration(decorationsConfig.decorationLevelFilter)
-        }
+        card.bindDecoration(activeDecoration, decorationsConfig.decorationLevelFilter)
 
         equipment_list.adapter = adapter
         equipment_list.addItemDecoration(SpacesItemDecoration(32))
 
         viewModel.decorations.observe(this, Observer {
-            adapter.items = it.filter { decoration ->
+            val filteredCollection = it.filter { decoration ->
                 decoration.slot <= decorationsConfig.decorationLevelFilter
             }
             if (viewModel.islistStateInitialized()) {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
-            if (it.isEmpty()) {
+
+            adapter.items = filteredCollection
+            if (filteredCollection.isEmpty()) {
                 empty_view.visibility = View.VISIBLE
             } else {
                 empty_view.visibility = View.GONE
@@ -261,11 +247,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             }
         }
 
-        if (activeWeapon != null) {
-            populateActiveWeapon(activeWeapon)
-        } else {
-            card.bindEmptyWeapon()
-        }
+        card.bindActiveWeapon(activeWeapon)
+        card.populateSlots(activeWeapon?.weapon?.weapon?.slots)
 
         equipment_list.adapter = adapter
         equipment_list.addItemDecoration(SpacesItemDecoration(32))
@@ -280,36 +263,5 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                 empty_view.visibility = View.VISIBLE
             }
         })
-    }
-
-    private fun populateActiveWeapon(userWeapon: UserWeapon) {
-        card.bindWeapon(userWeapon)
-        card.populateSkills(userWeapon.weapon.skills)
-        card.populateSetBonuses(emptyList())
-        card.populateSlots(userWeapon.weapon.weapon.slots)
-    }
-
-    private fun populateActiveArmor(userArmor: UserArmorPiece) {
-        val armor = userArmor.armor
-
-        card.bindArmor(userArmor)
-        card.populateSkills(armor.skills)
-        card.populateSetBonuses(armor.setBonuses)
-        card.populateSlots(userArmor.armor.armor.slots)
-    }
-
-    private fun populateActiveCharm(userCharm: UserCharm) {
-        card.bindCharm(userCharm)
-        card.populateSkills(userCharm.charm.skills)
-        card.populateSetBonuses(emptyList())
-    }
-
-    private fun populateActiveDecoration(userDecoration: UserDecoration) {
-        val skill = SkillLevel(level = 1)
-        skill.skillTree = userDecoration.decoration.skillTree
-
-        card.bindDecoration(userDecoration)
-        card.populateSkills(listOf(skill))
-        card.populateSetBonuses(emptyList())
     }
 }

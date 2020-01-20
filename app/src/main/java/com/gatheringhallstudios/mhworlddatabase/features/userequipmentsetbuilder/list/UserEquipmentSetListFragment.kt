@@ -8,21 +8,18 @@ import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class UserEquipmentSetListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(UserEquipmentSetListViewModel::class.java)
+        ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.getEquipmentSetList()
+        viewModel.getEquipmentSets()
 
         recyclerView.itemAnimator = SlideInRightAnimator(OvershootInterpolator(1f))
         viewModel.userEquipmentSets.observe(this, Observer<MutableList<UserEquipmentSet>> {
@@ -34,12 +31,11 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
             val adapter = UserEquipmentSetAdapterDelegate(it,
                     onSelect = { itr ->
                         if (itr.id == 0) { //Set has not yet been created
-                            GlobalScope.launch(Dispatchers.Main) {
-                                val equipmentSet = withContext(Dispatchers.IO) { viewModel.createEquipmentSet() }
-                                getRouter().navigateUserEquipmentSetDetail(equipmentSet)
-                            }
+                            val newSet = viewModel.createEquipmentSet()
+                            getRouter().navigateUserEquipmentSetDetail(newSet.id)
+
                         } else {
-                            getRouter().navigateUserEquipmentSetDetail(itr)
+                            getRouter().navigateUserEquipmentSetDetail(itr.id)
                         }
                     },
                     onDelete = { itr, idx, adapter ->

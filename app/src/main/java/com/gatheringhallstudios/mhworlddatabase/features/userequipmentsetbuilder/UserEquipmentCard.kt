@@ -11,22 +11,25 @@ import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.icon_slots
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot_section as BaseSlotSection
 import kotlinx.android.synthetic.main.view_empty_equipment_header_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.icon_slots
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
 
 /**
  * Wrapper over the ExpandableCardView used to display equipment data.
@@ -37,93 +40,287 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         return card.resources.getString(resId, *formatArgs)
     }
 
-    fun bindWeapon(userWeapon: UserWeapon) {
-        val weapon = userWeapon.weapon.weapon
-        with (card) {
-            setHeader(R.layout.view_weapon_header_expandable_cardview)
-            setBody(R.layout.view_base_body_expandable_cardview)
-
-            equipment_name.text = weapon.name
-            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(weapon.rarity))
-            rarity_string.text = getString(R.string.format_rarity, weapon.rarity)
-            rarity_string.visibility = View.VISIBLE
-            attack_value.text = weapon.attack.toString()
-
-            decorations_section.visibility = View.GONE
+    fun bindActiveWeapon(userWeapon: UserWeapon?) {
+        if (userWeapon != null) {
+            bindWeapon(userWeapon.weapon, null, null)
+            card.setCardElevation(2f)
+        } else {
+            bindEmptyWeapon()
         }
     }
 
-    fun bindArmor(userArmor: UserArmorPiece) {
-        val armor = userArmor.armor
+    /**
+    Binds a clickable user weapon card to the encapsulated card
+     */
+    fun bindWeapon(userWeapon: UserWeapon?, setId: Int, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?) {
+        if (userWeapon != null) {
+            bindWeapon(userWeapon.weapon, onClick, onSwipeRight)
 
+            //Repopulate the skills section to include the decoration skills
+            card.card_body.skill_list.removeAllViews()
+            val skillsList = combineEquipmentSkillsWithDecorationSkills(userWeapon.weapon.skills, userWeapon.decorations.map {
+                val skillLevel = SkillLevel(level = 1)
+                skillLevel.skillTree = it.decoration.skillTree
+                skillLevel
+            })
+
+            populateSkills(skillsList)
+        } else {
+            bindEmptyWeapon()
+            card.setOnClick {
+                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.WEAPON,
+                        null, setId, null, null)
+            }
+        }
+    }
+
+    /**
+     * Binds a weapon entity to the encapsulated card
+     */
+    fun bindWeapon(weaponFull: WeaponFull, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?) {
+        val weapon = weaponFull.weapon
+        with(card) {
+            setHeader(R.layout.view_weapon_header_expandable_cardview)
+            setBody(R.layout.view_base_body_expandable_cardview)
+            setCardElevation(1f)
+        }
+
+        with (card.card_header) {
+            equipment_name.text = weapon.name
+            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
+            attack_value.text = weapon.attack.toString()
+        }
+
+        with (card.card_body) {
+            decorations_section.visibility = View.GONE
+        }
+
+        bindRarity(weapon.rarity)
+        populateSkills(weaponFull.skills)
+        populateSetBonuses(emptyList())
+
+        if (onClick != null) card.setOnClick(onClick)
+        if (onSwipeRight != null) card.setOnSwipeRight(onSwipeRight)
+    }
+
+    /**
+     *
+     */
+    fun bindActiveArmor(userArmor: UserArmorPiece?, armorType: ArmorType) {
+        if (userArmor != null) {
+            bindArmor(userArmor.armor, null, null)
+            card.setCardElevation(2f)
+        } else {
+            bindEmptyArmor(armorType)
+        }
+    }
+
+    /**
+    Binds a clickable head armor card to the encapsulated card
+     */
+    fun bindHeadArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
+        bindUserArmor(userArmor, ArmorType.HEAD, setId, onClick, onSwipeRight)
+    }
+
+    /**
+    Binds a clickable arm armor card to the encapsulated card
+     */
+    fun bindArmArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
+        bindUserArmor(userArmor, ArmorType.ARMS, setId, onClick, onSwipeRight)
+    }
+
+    /**
+    Binds a clickable chest armor card to the encapsulated card
+     */
+    fun bindChestArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
+        bindUserArmor(userArmor, ArmorType.CHEST, setId, onClick, onSwipeRight)
+    }
+
+    /**
+    Binds a clickable leg armor card to the encapsulated card
+     */
+    fun bindLegArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
+        bindUserArmor(userArmor, ArmorType.LEGS, setId, onClick, onSwipeRight)
+    }
+
+    /**
+    Binds a view only waist armor card to the encapsulated card
+     */
+    fun bindWaistArmor(userArmor: UserArmorPiece?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
+        bindUserArmor(userArmor, ArmorType.WAIST, setId, onClick, onSwipeRight)
+    }
+
+    private fun bindUserArmor(userArmor: UserArmorPiece?, armorType: ArmorType, setId: Int? = null,
+                              onClick: (() -> Unit)? = null, onSwipeRight: (() -> Unit)? = null) {
+        if (userArmor != null) {
+            val armor = userArmor.armor
+            bindArmor(armor, onClick, onSwipeRight)
+            //Repopulate the skills section to include the decoration skills
+            card.card_body.skill_list.removeAllViews()
+            val skillsList = combineEquipmentSkillsWithDecorationSkills(armor.skills, userArmor.decorations.map {
+                val skillLevel = SkillLevel(level = 1)
+                skillLevel.skillTree = it.decoration.skillTree
+                skillLevel
+            })
+
+            populateSkills(skillsList)
+        } else {
+            bindEmptyArmor(armorType)
+            card.setOnClick {
+                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR,
+                        null, setId, armorType, null)
+            }
+        }
+    }
+
+    fun bindArmor(armor: ArmorFull, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?) {
         with(card) {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
+            setCardElevation(1f)
+        }
 
+        with (card.card_header) {
             equipment_name.text = armor.armor.name
-            rarity_string.text = getString(R.string.format_rarity, armor.armor.rarity)
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.armor.rarity))
-            rarity_string.visibility = View.VISIBLE
             equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
             defense_value.text = getString(
                     R.string.armor_defense_value,
                     armor.armor.defense_base,
                     armor.armor.defense_max,
                     armor.armor.defense_augment_max)
+        }
 
+        with (card.card_body) {
             decorations_section.visibility = View.GONE
         }
+
+        bindRarity(armor.armor.rarity)
+        populateSkills(armor.skills)
+        populateSetBonuses(armor.setBonuses)
+        if (onClick != null) card.setOnClick(onClick)
+        if (onSwipeRight != null) card.setOnSwipeRight(onSwipeRight)
     }
-    
-    fun bindCharm(userCharm: UserCharm) {
-        with (card) {
+
+    /**
+     * Binds a view only active charm card to the encapsulated card. The active card is the top most card on the
+     * selector fragment
+     */
+    fun bindActiveCharm(userCharm: UserCharm?) {
+        bindCharm(userCharm)
+        card.setCardElevation(2f)
+    }
+
+    /**
+     * Binds a view only charm card to the encapsulated card
+     */
+    fun bindCharm(userCharm: UserCharm?) {
+        if (userCharm != null) {
+            bindCharm(userCharm.charm, null, null)
+        } else {
+            bindEmptyCharm()
+        }
+    }
+
+    /**
+     * Binds a clickable charm card to the encapsulated card
+     */
+    fun bindCharm(userCharm: UserCharm?, setId: Int, onClick: () -> Unit, onSwipeRight: () -> Unit) {
+        if (userCharm != null) {
+            bindCharm(userCharm.charm, onClick, onSwipeRight)
+        } else {
+            bindEmptyCharm()
+            card.setOnClick {
+                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM,
+                        null, setId, null, null)
+            }
+        }
+    }
+
+    /**
+     * Bind a charm entity to the encapsulated card
+     */
+    fun bindCharm(charm: CharmFull, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?) {
+        with(card) {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
+            setCardElevation(1f)
+        }
 
-            equipment_name.text = userCharm.charm.charm.name
-            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(userCharm.charm.charm))
-            rarity_string.text = getString(R.string.format_rarity, userCharm.charm.charm.rarity)
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(userCharm.charm.charm.rarity))
-            rarity_string.visibility = View.VISIBLE
-
+        with (card.card_header) {
+            equipment_name.text = charm.charm.name
+            equipment_icon.setImageDrawable(AssetLoader.loadIconFor(charm.charm))
             defense_value.visibility = View.GONE
             icon_defense.visibility = View.GONE
-            hideSlots()
+        }
+
+        with (card.card_body) {
             decorations_section.visibility = View.GONE
         }
-    }
-    
-    fun bindDecoration(userDecoration: UserDecoration) {
-        val decoration = userDecoration.decoration
 
-        with (card) {
+        bindRarity(charm.charm.rarity)
+        populateSkills(charm.skills)
+        populateSetBonuses(emptyList())
+        hideSlots()
+
+        if (onClick != null) card.setOnClick(onClick)
+        if (onSwipeRight != null) card.setOnSwipeRight(onSwipeRight)
+    }
+
+    /**
+     * Internal function to enable the rarity string and display the value
+     */
+    private fun bindRarity(rarity: Int) {
+        with (card.card_header) {
+            rarity_string.text = getString(R.string.format_rarity, rarity)
+            rarity_string.setTextColor(AssetLoader.loadRarityColor(rarity))
+            rarity_string.visibility = View.VISIBLE
+        }
+    }
+
+    /**
+     * Binds a view only decoration card to the encapsulated card
+     */
+    fun bindDecoration(userDecoration: UserDecoration?, slotSize: Int) {
+        if (userDecoration != null) {
+            bindDecoration(userDecoration.decoration, null)
+        } else {
+            bindEmptyDecoration(slotSize)
+        }
+    }
+
+    /**
+     * Bind a charm entity to the encapsulated card
+     */
+    fun bindDecoration(decoration: Decoration, onClick: (() -> Unit)?) {
+        with(card) {
             setHeader(R.layout.view_base_header_expandable_cardview)
             setBody(R.layout.view_base_body_expandable_cardview)
+            setCardElevation(1f)
 
+            setOnClick {
+                onClick?.invoke()
+            }
+        }
+
+        with (card.card_header) {
             equipment_name.text = decoration.name
             equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
-            rarity_string.text = getString(R.string.format_rarity, decoration.rarity)
-            rarity_string.setTextColor(AssetLoader.loadRarityColor(decoration.rarity))
-            rarity_string.visibility = View.VISIBLE
-
             defense_value.visibility = View.GONE
             icon_defense.visibility = View.GONE
+            icon_slots.visibility = View.GONE
+            BaseSlotSection.visibility = View.GONE
         }
-    }
 
-    private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
-        card.setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
-        card.setBody(R.layout.view_empty_equipment_body_expandable_cardview)
-        card.new_equipment_set_label.text = getString(title)
-        card.equipment_set_icon2.setImageResource(icon)
-    }
+        with (card.card_body) {
+            set_bonus_section.visibility = View.GONE
+            decorations_section.visibility = View.GONE
+        }
 
-    private fun hideSlots() {
-        card.icon_slots.visibility = View.GONE
-        card.slot1.visibility = View.GONE
-        card.slot2.visibility = View.GONE
-        card.slot3.visibility = View.GONE
+        bindRarity(decoration.rarity)
+
+        val skillLevel = SkillLevel(1)
+        skillLevel.skillTree = decoration.skillTree
+        populateSkills(listOf(skillLevel))
     }
 
     fun bindEmptyWeapon() {
@@ -155,25 +352,16 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         })
     }
 
-    fun setOnClick(onClick: () -> Unit) {
-        card.setOnClick(onClick)
-    }
-
     fun populateSkills(skills: List<SkillLevel>) {
-        val skillLayout = card.skill_section
-        if (skills.isEmpty()) {
-            skillLayout.visibility = View.GONE
-            return
+        with(card.skill_section) {
+            skill_list.removeAllViews()
+            visibility = if (skills.isEmpty()) View.GONE else View.VISIBLE
         }
 
-        skillLayout.visibility = View.VISIBLE
-        skillLayout.skill_list.removeAllViews()
-
         val inflater = LayoutInflater.from(card.context)
-
         for (skill in skills) {
             //Set the label for the Set name
-            val view = inflater.inflate(R.layout.listitem_skill_level, skillLayout.skill_list, false)
+            val view = inflater.inflate(R.layout.listitem_skill_level, card.skill_list, false)
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
@@ -187,29 +375,23 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 card.getRouter().navigateSkillDetail(skill.skillTree.id)
             }
 
-            skillLayout.skill_list.addView(view)
+            card.skill_list.addView(view)
         }
     }
 
-    fun populateSetBonuses(armorSetBonuses: List<ArmorSetBonus>) {
-        val setBonusSection = card.set_bonus_section
-
-        if (armorSetBonuses.isEmpty()) {
-            setBonusSection.visibility = View.GONE
-            return
+    fun populateSetBonuses(setBonuses: List<ArmorSetBonus>) {
+        with(card.set_bonus_section) {
+            set_bonus_list.removeAllViews()
+            visibility = if (setBonuses.isEmpty()) View.GONE else View.VISIBLE
         }
-
-        // show set bonus section
-        setBonusSection.visibility = View.VISIBLE
-        setBonusSection.set_bonus_list.removeAllViews()
 
         val inflater = LayoutInflater.from(card.context)
 
         //Now to set the actual skills
-        for (setBonus in armorSetBonuses) {
+        for (setBonus in setBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, null, false)
+            val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, card.set_bonus_list, false)
 
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name
@@ -219,7 +401,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 card.getRouter().navigateSkillDetail(setBonus.skillTree.id)
             }
 
-            setBonusSection.set_bonus_list.addView(listItem)
+            card.set_bonus_list.addView(listItem)
         }
     }
 
@@ -227,9 +409,11 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
      * Populates the slot icons, but hides the decorations section.
      * If you want decorations to be selectable, use populateDecorations instead.
      */
-    fun populateSlots(slots: EquipmentSlots) {
-        this.populateDecorations(slots, emptyList())
-        card.decorations_section.visibility = View.GONE
+    fun populateSlots(slots: EquipmentSlots?) {
+        if (slots != null) {
+            this.populateDecorations(slots, emptyList())
+            card.decorations_section.visibility = View.GONE
+        }
     }
 
     /**
@@ -239,9 +423,9 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
      */
     fun populateDecorations(slots: EquipmentSlots, decorations: List<UserDecoration>,
                             onEmptyClick: ((Int) -> Unit)? = null,
-                            onClick: ((UserDecoration) -> Unit)? = null,
+                            onClick: ((Int, UserDecoration) -> Unit)? = null,
                             onDelete: ((UserDecoration) -> Unit)? = null) {
-        with (card.decorations_section) {
+        with(card.decorations_section) {
             visibility = if (slots.isEmpty()) View.GONE else View.VISIBLE
             slot1_detail.visibility = View.GONE
             slot2_detail.visibility = View.GONE
@@ -277,7 +461,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 detailView.setLeftIconDrawable(AssetLoader.loadFilledSlotIcon(decoration, slotSize))
 
                 detailView.setOnClickListener {
-                    onClick?.invoke(userDecoration)
+                    onClick?.invoke(slotNumber, userDecoration)
                 }
 
                 detailView.setButtonClickFunction {
@@ -287,11 +471,48 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 imageView.setImageDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
                 detailView.setLeftIconDrawable(card.context!!.getDrawableCompat(SlotEmptyRegistry(slotSize)))
                 detailView.setLabelText(getString(R.string.user_equipment_set_no_decoration))
+                detailView.hideButton()
 
                 detailView.setOnClickListener {
                     onEmptyClick?.invoke(slotNumber)
                 }
             }
         }
+    }
+
+
+    private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
+        with(card) {
+            setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
+            setBody(R.layout.view_empty_equipment_body_expandable_cardview)
+            new_equipment_set_label.text = getString(title)
+            equipment_set_icon2.setImageResource(icon)
+        }
+    }
+
+    private fun hideSlots() {
+        with(card) {
+            icon_slots.visibility = View.GONE
+            slot1.visibility = View.GONE
+            slot2.visibility = View.GONE
+            slot3.visibility = View.GONE
+        }
+    }
+
+    private fun combineEquipmentSkillsWithDecorationSkills(equipmentSkills: List<SkillLevel>, decorationSkills: List<SkillLevel>): List<SkillLevel> {
+        val skills = equipmentSkills.associateBy({ it.skillTree.id }, { it }).toMutableMap()
+        for (skill in decorationSkills) {
+            if (skills.containsKey(skill.skillTree.id)) {
+                val level = skills.getValue(skill.skillTree.id).level + skill.level
+                val skillLevel = SkillLevel(level)
+                skillLevel.skillTree = skill.skillTree
+                skills[skill.skillTree.id] = skillLevel
+            } else {
+                skills[skill.skillTree.id] = skill
+            }
+        }
+        val result = skills.values.toMutableList()
+        result.sortWith(compareByDescending<SkillLevel> { it.level }.thenBy { it.skillTree.id })
+        return result
     }
 }
