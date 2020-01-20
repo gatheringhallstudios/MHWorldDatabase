@@ -1,10 +1,11 @@
 @file:JvmName("Functions")
+
 package com.gatheringhallstudios.mhworlddatabase.util
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import android.content.res.Resources
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
 
@@ -16,7 +17,7 @@ const val TAG = "MHFunctions"
 inline fun loggedThread(name: String? = null, crossinline process: () -> Unit) {
     val nameDisplay = name ?: "Unnamed"
 
-    thread(start=true) {
+    thread(start = true) {
         try {
             val timeToRun = measureTimeMillis(process)
             Log.d(TAG, "Ran $nameDisplay thread in $timeToRun milliseconds")
@@ -41,4 +42,22 @@ fun <T> createLiveData(block: () -> T): LiveData<T> {
 /**
  * Converts a measurement from DP to onscreen pixels, uses the system density
  */
-fun dpToPx(dp: Int) =  (dp * Resources.getSystem().displayMetrics.density).toInt()
+fun dpToPx(dp: Int) = (dp * Resources.getSystem().displayMetrics.density).toInt()
+
+/**
+ * Converts an elevation to an alpha value for a material design card overlay
+ */
+fun elevationToAlpha(elevation: Int): Float {
+    return when {
+        elevation >= 24 -> 0.48f
+        elevation >= 16 -> 0.45f
+        elevation >= 12 -> 0.42f
+        elevation >= 8 -> 0.36f
+        elevation >= 6 -> 0.33f
+        elevation > 4 -> 0.27f
+        elevation > 3 -> 0.24f
+        elevation > 2 -> 0.21f
+        elevation > 1 -> 0.15f
+        else -> 0f
+    }
+}

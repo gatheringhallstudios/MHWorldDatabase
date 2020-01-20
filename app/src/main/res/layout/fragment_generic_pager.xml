@@ -10,7 +10,7 @@
         android:id="@+id/tab_layout"
         layout="@layout/tab_layout_generic" />
 
-    <androidx.viewpager.widget.ViewPager
+    <com.gatheringhallstudios.mhworlddatabase.util.CustomViewPager
         android:id="@+id/pager_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"

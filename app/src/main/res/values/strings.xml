@@ -10,11 +10,17 @@
 
     <string name="action_search">Search</string>
     <string name="action_bookmark">Bookmark</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_apply">Apply</string>
+    <string name="action_undo">Undo</string>
 
     <string name="general_no_data">Nothing here, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
     <string name="general_none">None</string> <!-- Empty message for skill/charms subsections -->
 
     <!-- Rank -->
+    <string name="rank_title">Rank</string>
     <string name="rank_short_low">LR</string>
     <string name="rank_short_high">HR</string>
     <string name="rank_short_all">ANY</string> <!-- null rank -->
@@ -29,7 +35,10 @@
     <string name="format_rarity">Rarity %1$d</string> <!-- Example: Rarity 2 -->
     <string name="format_plus">%1$+d</string> <!-- Example: +5 -->
     <string name="format_percentage">%1$s%%</string> <!-- Example: 20%-->
+    <string name="format_percentage_unknown">\??%</string>
     <string name="format_plus_percentage">%1$+d%%</string> <!-- Example: +20%-->
+    <string name="format_element">%1$d (%2$d max)</string>
+    <string name="format_element_hidden">(%1$d) (%2$d max)</string>
 
     <!-- Ailments -->
     <string name="ailment_roar_small">Roar (small)</string>
@@ -66,6 +75,17 @@
     <string name="extract_white_abbr">WHT</string>
     <string name="extract_green_abbr">GRN</string>
 
+    <!-- Elements and statuses -->
+    <string name="element_fire">Fire</string>
+    <string name="element_water">Water</string>
+    <string name="element_thunder">Thunder</string>
+    <string name="element_ice">Ice</string>
+    <string name="element_dragon">Dragon</string>
+    <string name="status_poison">Poison</string>
+    <string name="status_sleep">Sleep</string>
+    <string name="status_paralysis">Paralysis</string>
+    <string name="status_blast">Blast</string>
+
     <!-- Section Headers -->
     <!-- These aren't tied to a particular screen so they can be used anywhere -->
     <string name="header_habitat">Habitat</string>
@@ -76,7 +96,8 @@
     <string name="header_break">Breaks</string>
     <string name="header_crafting">Crafting</string>
     <string name="header_gathering">Gathering</string>
-    <string name="header_rewards">Rewards</string>
+    <string name="header_rewards">Monster Rewards</string>
+    <string name="header_quest_rewards">Quest Rewards</string>
     <string name="header_armor">Armor</string>
     <string name="header_charms">Charms</string>
     <string name="header_weapons">Weapons</string>
@@ -92,6 +113,9 @@
     <string name="header_components">Components</string>
     <string name="header_armor_set_pieces">Armor Set Pieces</string>
     <string name="header_armor_set_skills">Armor Set Skills</string>
+    <string name="header_active_set_bonuses">Active Set Bonuses</string>
+    <string name="header_active_skills">Active Skills</string>
+    <string name="header_description">Description</string>
 
     <!-- ####################### -->
     <!-- ## Settings and Meta ## -->
@@ -103,20 +127,15 @@
     <string name="label_whats_new">What\'s new!</string>
     <string name="label_rate_app">RATE OUR APP!</string>
     <string name="action_ok">OK</string>
-    <string name="preference_data_language">Data Language (BETA / INCOMPLETE)</string>
-    <string name="preference_weapons_attack_values">Weapon attack values</string>
+    <string name="preference_data_language">Data Language</string>
+    <string name="preference_weapons_attack_values">Show Weapon True Attack</string>
     <string name="preference_data_language_description">
         Show names and descriptions using %s.
         \nChanging this will restart the app.
     </string>
     <string name="preference_weapons_attack_values_description">
-       Use bloated weapon attack values in the weapons tree instead of true attack values.
-    </string>
-    <string name="preference_weapons_attack_values_enabled">
-        Enabled
-    </string>
-    <string name="preference_weapons_attack_values_disabled">
-        Disabled
+        The game shows bloated attack values. Enable this to shows
+        true attack values instead, which are what\'s used in the damage formula.
     </string>
     <string name="preference_language_default">Default</string>
 
@@ -173,7 +192,7 @@
     <!-- ## WEAPON MENU ## -->
     <!-- ################# -->
 
-    <string name="weapon_final_only">Final Only</string>
+    <string name="weapon_final_only">Final</string>
     <string name="weapon_final_upgrades">Final</string>
 
     <!-- Weapon List Entries -->
@@ -194,8 +213,13 @@
     <string name="title_bow">Bow</string>
 
     <!-- Tab Headers -->
+    <string name="tab_weapon_normal">Normal</string>
+    <string name="tab_weapon_kulve">Kulve</string>
     <string name="tab_weapon_detail">Detail</string>
     <string name="tab_weapon_tree">Family</string>
+
+    <string name="filter_title_show_only">Show Only</string>
+    <string name="filter_title_sort_by">Sort By</string>
 
     <!-- General Strings -->
     <string name="weapon_attack">Attack</string>
@@ -251,29 +275,32 @@
 
     <string name="weapon_bowgun_deviation">Deviation</string>
     <string name="weapon_bowgun_special_ammo">Special Ammo</string>
+    <string name="weapon_bowgun_special_ammo_wyvernblast">Wyvernblast</string>
+    <string name="weapon_bowgun_special_ammo_wyvernheart">Wyvernheart</string>
+    <string name="weapon_bowgun_special_ammo_wyvernsnipe">Wyvernsnipe</string>
     <string name="weapon_bowgun_ammo_types">Ammo Types</string>
-    <string name="weapon_bowgun_ammo_normal">Normal Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_pierce">Pierce Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_spread">Spread Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_sticky">Sticky Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_cluster">Cluster Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_recover">Recover Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_poison">Poison Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_paralysis">Paralysis Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_sleep">Sleep Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_exhaust">Exhaust Ammo %1$d</string>
-    <string name="weapon_bowgun_ammo_flaming">Flaming Ammo</string>
-    <string name="weapon_bowgun_ammo_thunder">Thunder Ammo</string>
-    <string name="weapon_bowgun_ammo_dragon">Dragon Ammo</string>
-    <string name="weapon_bowgun_ammo_water">Water Ammo</string>
-    <string name="weapon_bowgun_ammo_freeze">Freeze Ammo</string>
-    <string name="weapon_bowgun_ammo_slicing">Slicing Ammo</string>
-    <string name="weapon_bowgun_ammo_wyvern">Wyvern Ammo</string>
-    <string name="weapon_bowgun_ammo_demon">Demon Ammo</string>
-    <string name="weapon_bowgun_ammo_armor">Armor Ammo</string>
-    <string name="weapon_bowgun_ammo_tranq">Tranq Ammo</string>
+    <string name="weapon_bowgun_ammo_normal">Normal %1$d</string>
+    <string name="weapon_bowgun_ammo_pierce">Pierce %1$d</string>
+    <string name="weapon_bowgun_ammo_spread">Spread %1$d</string>
+    <string name="weapon_bowgun_ammo_sticky">Sticky %1$d</string>
+    <string name="weapon_bowgun_ammo_cluster">Cluster %1$d</string>
+    <string name="weapon_bowgun_ammo_recover">Recover %1$d</string>
+    <string name="weapon_bowgun_ammo_poison">Poison %1$d</string>
+    <string name="weapon_bowgun_ammo_paralysis">Paralysis %1$d</string>
+    <string name="weapon_bowgun_ammo_sleep">Sleep %1$d</string>
+    <string name="weapon_bowgun_ammo_exhaust">Exhaust %1$d</string>
+    <string name="weapon_bowgun_ammo_flaming">Flaming</string>
+    <string name="weapon_bowgun_ammo_thunder">Thunder</string>
+    <string name="weapon_bowgun_ammo_dragon">Dragon</string>
+    <string name="weapon_bowgun_ammo_water">Water</string>
+    <string name="weapon_bowgun_ammo_freeze">Freeze</string>
+    <string name="weapon_bowgun_ammo_slicing">Slicing</string>
+    <string name="weapon_bowgun_ammo_wyvern">Wyvern</string>
+    <string name="weapon_bowgun_ammo_demon">Demon</string>
+    <string name="weapon_bowgun_ammo_armor">Armor</string>
+    <string name="weapon_bowgun_ammo_tranq">Tranq</string>
     <string name="weapon_bowgun_ammo_shot_normal">Normal</string>
-    <string name="weapon_bowgun_ammo_shot_rapid_fire">Rapid Fire</string>
+    <string name="weapon_bowgun_ammo_shot_rapid_fire">Rapid</string>
     <string name="weapon_bowgun_ammo_shot_auto_reload">Auto Reload</string>
     <string name="weapon_bowgun_ammo_shot_wyvern">Wyvern</string>
     <string name="weapon_bowgun_ammo_reload_very_slow">V. Slow</string>
@@ -281,11 +308,10 @@
     <string name="weapon_bowgun_ammo_reload_normal">Normal</string>
     <string name="weapon_bowgun_ammo_reload_fast">Fast</string>
     <string name="weapon_bowgun_ammo_reload_very_fast">V. Fast</string>
-    <string name="weapon_bowgun_shot_type_rcl">Shot Type+RCL</string>
+    <string name="weapon_bowgun_shot_type_rcl">Type+Recoil</string>
     <string name="weapon_bowgun_capacity">CAP</string>
     <string name="weapon_bowgun_reload">Reload</string>
     <string name="weapon_bowgun_recoil">RCL</string>
-
 
     <!-- ################ -->
     <!-- ## ARMOR MENU ## -->
@@ -345,6 +371,24 @@
     <string name="header_location_area">Area %1$d</string>
     <string name="header_location_base_camps">Base Camps</string>
 
+    <!-- ################ -->
+    <!-- ## QUEST MENU ## -->
+    <!-- ################ -->
+
+    <string name="title_quests">Quests</string>
+    <string name="quest_category_assigned">Assigned</string>
+    <string name="quest_category_optional">Optional</string>
+    <string name="quest_category_event">Event</string>
+    <string name="quest_category_arena">Arena</string>
+    <string name="quest_category_special">Special Assignment</string>
+    <string name="quest_category_combined">%s %d★</string>
+
+    <string name="tab_quest_summary">Summary</string>
+    <string name="tab_quest_rewards">Rewards</string>
+
+    <string name="quest_group">Group %s</string>
+    <string name="quest_label_objective">Objective</string>
+
     <!-- ################# -->
     <!-- ## SEARCH MENU ## -->
     <!-- ################# -->
@@ -365,6 +409,7 @@
     <string name="type_item_material">Material</string>
     <string name="type_item_ammo">Ammo</string>
     <string name="type_item_misc">Misc Item</string>
+    <string name="type_quest">Quest</string>
 
     <!-- #################### -->
     <!-- ## BOOKMARKS MENU ## -->
@@ -372,6 +417,35 @@
 
     <string name="title_bookmarks">Bookmarks</string>
 
+    <!-- ################# -->
+    <!-- ## USER EQUIPMENT SET MENU ## -->
+    <!-- ################# -->
+    <string name="title_armor_set_builder">Armor Set Builder</string>
+    <string name="title_armor_set_armor_selector">Armor Selector</string>
+    <string name="title_armor_set_charm_selector">Charm Selector</string>
+    <string name="title_armor_set_weapon_selector">Weapon Selector</string>
+    <string name="title_armor_set_decoration_selector">Decoration Selector</string>
+
+    <string name="tab_armor_set_builder_summary">Summary</string>
+    <string name="tab_armor_set_builder_equipment">Equipment</string>
+
+    <string name="user_equipment_set_new_set">+ Create a Set</string>
+    <string name="user_equipment_set_no_weapon">No weapon</string>
+    <string name="user_equipment_set_no_armor">No armor</string>
+    <string name="user_equipment_set_no_charm">No charm</string>
+    <string name="user_equipment_set_no_equipment">No equipment</string>
+    <string name="user_equipment_set_no_decoration">No decoration</string>
+    <string name="user_equipment_set_no_skill">No skill</string>
+    <string name="user_equipment_delete_set">Delete set</string>
+    <string name="user_equipment_set_deleted">%1$s was deleted</string>
+    <string name="user_equipment_new_set_name">Rename Set</string>
+    <string name="user_equipment_apply">Apply</string>
+    <string name="user_equipment_cancel">Cancel</string>
+
+    <string name="user_equipment_set_filter_name">Name</string>
+    <string name="user_equipment_set_filter_slot_level">Slot Level</string>
+    <string name="user_equipment_set_filter_elemental_defense">Elemental Defense</string>
+    <string name="user_equipment_set_filter_add_skill">Add a new skill</string>
     <!-- ################ -->
     <!-- ## ABOUT MENU ## -->
     <!-- ################ -->
@@ -379,7 +453,8 @@
     <string name="about_body">
         Gathering Hall Studios is an open source team of designers and developers
         dedicated to building high-quality apps for the Monster Hunter series.
-        If you’d like to join or contribute, we’re always open.
+        \n\nIf you’d like to join or contribute, we’re always open.
         Contact us at contact@gatheringhallstudios.com or visit our Discord.
+        You can also visit the Github for either the app or the data project.
     </string>
 </resources>

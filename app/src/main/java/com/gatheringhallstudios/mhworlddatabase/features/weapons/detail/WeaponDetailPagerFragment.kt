@@ -2,7 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons.detail
 
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
+import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 
 /**
  * Fragment for the Weapon detail screen. Contains both the detail and tree tab.

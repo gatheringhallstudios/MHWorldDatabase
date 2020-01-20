@@ -61,7 +61,23 @@ abstract class ItemDao {
           AND rtext.lang_id = :langId
         ORDER BY m.id ASC, r.percentage DESC
     """)
-    abstract fun loadItemRewardsSync(langId: String, itemId: Int): List<ItemReward>
+    abstract fun loadItemMonsterRewardsSync(langId: String, itemId: Int): List<ItemMonsterReward>
+
+    @Query("""
+        SELECT r.quest_id, q.category quest_category, q.stars quest_stars,
+            qt.name quest_name, q.quest_type quest_quest_type, qt.objective quest_objective,
+            qt.description quest_description, q.location_id quest_location_id, q.zenny quest_zenny,
+            r.stack, r.percentage
+        FROM quest_reward r
+            JOIN quest q
+                ON q.id = r.quest_id
+            JOIN quest_text qt
+                ON qt.id = q.id
+        WHERE r.item_id = :itemId
+          AND qt.lang_id = :langId
+        ORDER BY r.percentage DESC
+    """)
+    abstract fun loadItemQuestRewardsSync(langId: String, itemId: Int): List<ItemQuestReward>
 
     /**
      * Loads all possible gathering locations for an item asynchronously
@@ -108,9 +124,9 @@ abstract class ItemDao {
 
     @Query("""
         SELECT c.id, c.rarity, c.previous_id, ctext.name, cr.quantity
-        FROM charm_recipe cr
+        FROM recipe_item cr
             JOIN charm c
-                ON c.id = cr.charm_id
+                ON c.recipe_id = cr.recipe_id
             JOIN charm_text ctext
                 ON ctext.id = c.id
         WHERE cr.item_id = :itemId
@@ -119,10 +135,10 @@ abstract class ItemDao {
     abstract fun loadCharmUsageForSync(langId: String, itemId: Int): List<ItemUsageCharm>
 
     @Query("""
-        SELECT armor_id id, name, armor_type, rarity, slot_1, slot_2, slot_3, ar.quantity
-        FROM armor_recipe ar
+        SELECT a.id id, name, armor_type, rarity, rank, slot_1, slot_2, slot_3, ar.quantity
+        FROM recipe_item ar
             JOIN armor a
-                ON ar.armor_id = a.id
+                ON a.recipe_id = ar.recipe_id
             JOIN armor_text atext
                 ON a.id = atext.id
         WHERE ar.item_id = :itemId
@@ -132,14 +148,15 @@ abstract class ItemDao {
 
 
     @Query("""
-        SELECT w.id, w.rarity, w.weapon_type, w.attack, w.affinity, w.attack_true, w.affinity,
+        SELECT w.id, w.rarity, w.weapon_type, w.category, w.attack, w.affinity, w.attack_true, w.affinity,
             w.element1, w.element1_attack, w.element1, w.element2_attack, w.element_hidden, w.defense,
             w.previous_weapon_id, w.craftable, w.kinsect_bonus, w.elderseal, w.phial, w.phial_power,
             w.shelling, w.shelling_level, w.notes, w.slot_1, w.slot_2, w.slot_3,
             wt.*, wr.quantity
         FROM weapon w
             JOIN weapon_text wt USING (id)
-            JOIN weapon_recipe wr ON w.id = wr.weapon_id
+            JOIN recipe_item wr 
+				ON (w.create_recipe_id = wr.recipe_id OR w.upgrade_recipe_id = wr.recipe_id)
         WHERE wt.lang_id = :langId
             AND wr.item_id = :itemId
     """)
@@ -170,7 +187,8 @@ abstract class ItemDao {
         return@createLiveData ItemSources(
                 craftRecipes = itemCombos.filter { it.result.id == itemId },
                 locations = loadItemLocationsSync(langId, itemId),
-                rewards = loadItemRewardsSync(langId, itemId)
+                monsterRewards = loadItemMonsterRewardsSync(langId, itemId),
+                questRewards = loadItemQuestRewardsSync(langId, itemId)
         )
     }
 }

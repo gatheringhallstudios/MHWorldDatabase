@@ -8,7 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
@@ -35,7 +35,7 @@ class LocationSummaryFragment : RecyclerViewFragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val locationData = viewModel.location.value
         if (locationData != null && BookmarksFeature.isBookmarked(locationData)) {
-            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
         }
     }
 

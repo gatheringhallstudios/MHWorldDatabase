@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.assets
 
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
 
 private fun <T, K> createRegistry(vararg pairs: Pair<T, K>): (T) -> K? {
@@ -47,6 +48,32 @@ val VectorRegistry = createRegistry(
         "Decoration1" to R.xml.ic_ui_decoration_1_base,
         "Decoration2" to R.xml.ic_ui_decoration_2_base,
         "Decoration3" to R.xml.ic_ui_decoration_3_base,
+        "Decoration4" to R.xml.ic_ui_decoration_4_base,
+
+        "Slot1" to R.drawable.ic_ui_slot_1_empty,
+        "Slot2" to R.drawable.ic_ui_slot_2_empty,
+        "Slot3" to R.drawable.ic_ui_slot_3_empty,
+        "Slot4" to R.drawable.ic_ui_slot_4_empty,
+
+        "Slot1Jewel1" to R.xml.ic_ui_slot_1_jewel_1_base,
+        "Slot2Jewel1" to R.xml.ic_ui_slot_2_jewel_1_base,
+        "Slot2Jewel2" to R.xml.ic_ui_slot_2_jewel_2_base,
+        "Slot3Jewel1" to R.xml.ic_ui_slot_3_jewel_1_base,
+        "Slot3Jewel2" to R.xml.ic_ui_slot_3_jewel_2_base,
+        "Slot3Jewel3" to R.xml.ic_ui_slot_3_jewel_3_base,
+        "Slot4Jewel1" to R.xml.ic_ui_slot_4_jewel_1_base,
+        "Slot4Jewel2" to R.xml.ic_ui_slot_4_jewel_2_base,
+        "Slot4Jewel3" to R.xml.ic_ui_slot_4_jewel_3_base,
+        "Slot4Jewel4" to R.xml.ic_ui_slot_4_jewel_4_base,
+
+        "NodeStart" to R.xml.ui_tree_node_start_base,
+        "NodeStartCollapsed" to R.xml.ui_tree_node_start_collapsed_base,
+        "NodeMid" to R.xml.ui_tree_node_mid_base,
+        "NodeMidCollapsed" to R.xml.ui_tree_node_mid_collapsed_base,
+        "NodeThrough" to R.xml.ui_tree_node_through_base,
+        "NodeThroughCollapsed" to R.xml.ui_tree_node_through_collapsed_base,
+        "NodeEnd" to R.xml.ui_tree_node_end_base,
+        "NodeEndIndented" to R.xml.ui_tree_node_end_indented_base,
 
         "Ammo" to R.xml.ic_items_ammo_base,
         "Bait" to R.xml.ic_items_bait_base,
@@ -96,16 +123,16 @@ val VectorRegistry = createRegistry(
         "Wing" to R.xml.ic_items_wing_base
 )
 
-val ElementRegistry = fun(element: String?) = when (element) {
-    "Fire" -> R.drawable.ic_element_fire
-    "Dragon" -> R.drawable.ic_element_dragon
-    "Poison" -> R.drawable.ic_status_poison
-    "Water" -> R.drawable.ic_element_water
-    "Thunder" -> R.drawable.ic_element_thunder
-    "Ice" -> R.drawable.ic_element_ice
-    "Blast" -> R.drawable.ic_status_blast
-    "Paralysis" -> R.drawable.ic_status_paralysis
-    "Sleep" -> R.drawable.ic_status_sleep
+val ElementRegistry = fun(element: ElementStatus?) = when (element) {
+    ElementStatus.FIRE -> R.drawable.ic_element_fire
+    ElementStatus.WATER -> R.drawable.ic_element_water
+    ElementStatus.THUNDER -> R.drawable.ic_element_thunder
+    ElementStatus.ICE -> R.drawable.ic_element_ice
+    ElementStatus.DRAGON -> R.drawable.ic_element_dragon
+    ElementStatus.POISON -> R.drawable.ic_status_poison
+    ElementStatus.SLEEP -> R.drawable.ic_status_sleep
+    ElementStatus.PARALYSIS -> R.drawable.ic_status_paralysis
+    ElementStatus.BLAST -> R.drawable.ic_status_blast
     else -> R.drawable.ic_ui_slot_none
 }
 

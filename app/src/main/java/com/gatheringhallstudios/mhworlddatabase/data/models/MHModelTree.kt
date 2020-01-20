@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
-import com.gatheringhallstudios.mhworlddatabase.common.TreeNode
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNode
 
 /**
  * A collection of weapon trees for a particular weapon type
@@ -35,11 +35,41 @@ class MHModelTree<T: MHParentedModel>(
 
         // Extract all root nodes and then all leaves
         roots = modelMap.filter { it.value.isRoot }.values.toList()
-        leaves = roots.map { it.leaves }.flatten()
+
+        val leaves = mutableListOf<TreeNode<T>>()
+        for (root in roots) {
+            if (root.isLeaf) {
+                leaves.add(root)
+            } else {
+                leaves.addAll(root.leaves)
+            }
+        }
+
+        this.leaves = leaves
     }
 
     /**
      * Method used to
      */
     fun getModel(weaponId: Int) = modelMap[weaponId]
+
+    /**
+     * Creates a list that crawls through every node in this list (depth first).
+     * TODO: Make into an iterator once kotlin stops having issues with recursive sequences and iterators
+     */
+    fun flatten() = roots.flatMap { flattenNode(it) }
+
+    /**
+     * Helper that recursively creates a list including the node itself (depth search)
+     */
+    private fun flattenNode(node: TreeNode<T>): List<TreeNode<T>> {
+        val result = mutableListOf<TreeNode<T>>()
+        result.add(node)
+
+        for (child in node.getChildren()) {
+            result.addAll(flattenNode(child))
+        }
+
+        return result
+    }
 }

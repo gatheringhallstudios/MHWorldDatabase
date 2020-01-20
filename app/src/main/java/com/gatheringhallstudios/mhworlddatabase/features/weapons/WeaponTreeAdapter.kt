@@ -2,7 +2,10 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.util.Log
 import android.view.ViewGroup
-import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import androidx.recyclerview.widget.RecyclerView
+import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyState
+import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
+import com.gatheringhallstudios.mhworlddatabase.util.tree.RenderedTreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
@@ -12,9 +15,10 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
  */
 class WeaponTreeAdapter(showTrueAttackValues: Boolean, onSelected: (Weapon) -> Unit): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
-    protected var delegatesManager = AdapterDelegatesManager<List<Any>>()
+    private val delegatesManager = AdapterDelegatesManager<List<Any>>()
 
     init {
+        delegatesManager.addDelegate(EmptyStateAdapterDelegate())
         delegatesManager.addDelegate(WeaponTreeListAdapterDelegate(
                 onSelected=onSelected,
                 onLongSelect=this::onToggle,
@@ -28,6 +32,7 @@ class WeaponTreeAdapter(showTrueAttackValues: Boolean, onSelected: (Weapon) -> U
 
     /**
      * Contains the sourceItems to display in the recyclerview itself.
+     * When rendering, use resolvedItems instead of renderedItems, as resolvedItems includes the empty state.
      */
     private val renderedItems: MutableList<RenderedTreeNode<Weapon>> = mutableListOf()
 
@@ -36,9 +41,20 @@ class WeaponTreeAdapter(showTrueAttackValues: Boolean, onSelected: (Weapon) -> U
      */
     private val nodeMap = mutableMapOf<Int, RenderedTreeNode<Weapon>>()
 
+    /** Internal non-changing list of the empty state **/
+    private val emptyState = listOf(EmptyState())
+
     /**
-     * Binds the list of items to this adapter.
-     * TODO: Consider making it take the MHModelTree and doing the logic currently in the WeaponTreeListViewModel
+     * Returns the current items that need to be rendered in the recyclerview.
+     * If the source items are empty, returns the empty state.
+     */
+    private val resolvedItems get() = when(sourceItems.isEmpty()) {
+        true -> emptyState
+        false -> renderedItems
+    }
+
+    /**
+     * Binds the list of items to this adapter and notifies the update
      */
     fun setItems(items: List<RenderedTreeNode<Weapon>>) {
         this.sourceItems = items
@@ -75,14 +91,34 @@ class WeaponTreeAdapter(showTrueAttackValues: Boolean, onSelected: (Weapon) -> U
     }
 
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
-        delegatesManager.onBindViewHolder(renderedItems, position, holder, null)
+        delegatesManager.onBindViewHolder(resolvedItems, position, holder, null)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return delegatesManager.getItemViewType(resolvedItems, position)
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        delegatesManager.onViewRecycled(holder)
+    }
+
+    override fun onFailedToRecycleView(holder: RecyclerView.ViewHolder): Boolean {
+        return delegatesManager.onFailedToRecycleView(holder)
+    }
+
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        delegatesManager.onViewAttachedToWindow(holder)
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+        delegatesManager.onViewDetachedFromWindow(holder)
     }
 
     /**
      * Returns the count of items currently visible
      */
     override fun getItemCount(): Int {
-        return renderedItems.size
+        return resolvedItems.size
     }
 
     /**

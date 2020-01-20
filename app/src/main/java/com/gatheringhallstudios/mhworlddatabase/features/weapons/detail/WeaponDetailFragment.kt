@@ -7,6 +7,7 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.R.id.*
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
@@ -62,7 +63,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val weaponData = viewModel.weaponData.value
         if (weaponData != null && BookmarksFeature.isBookmarked(weaponData)) {
-            menu.findItem(action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
+            menu.findItem(action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
         }
     }
 
@@ -119,22 +120,30 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
             ElderSealLevel.HIGH -> getString(R.string.weapon_elderseal_high)
         }
 
-        // Element
-        val elementAttackStr = weapon.element1_attack?.toString()
-                ?: getString(R.string.weapon_element_none)
-        element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
-        element_icon.visibility = when (weapon.element1) {
-            null -> View.GONE
-            else -> View.VISIBLE
-        }
-        element_value.text = when (weapon.element_hidden) {
-            true -> "($elementAttackStr)"
-            false -> elementAttackStr
-        }
-        element_type_value.text = weapon.element1 //TODO: This element string needs to be localized in the DB
+        // Element 1
         element_layout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
+        element_icon.isVisible = weapon.element1 != null
+        element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
+        val elementResource = when (weapon.element_hidden) {
+            true -> R.string.format_element_hidden
+            false -> R.string.format_element
+        }
+        element_type_value.text = AssetLoader.localizeElementStatus(weapon.element1)
+        element_value.text = when (weapon.element1) {
+            null -> getString(R.string.weapon_element_none)
+            else -> getString(elementResource, weapon.element1_attack, weapon.element1_attack_max)
+        }
 
-        //Slot information
+        // Element 2
+        element2_row.isVisible = weapon.element2 != null
+        if (weapon.element2 != null) {
+            element2_layout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
+            element2_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element2))
+            element2_type_value.text = AssetLoader.localizeElementStatus(weapon.element2)
+            element2_value.text = getString(elementResource, weapon.element2_attack, weapon.element2_attack_max)
+        }
+
+        // Slot information
         val slotImages = weapon.slots.map {
             context?.getDrawableCompat(SlotEmptyRegistry(it))
         }
@@ -415,7 +424,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         if (ammo == null) return
 
         deviation_value.text = ammo.deviation
-        special_ammo_value.text = ammo.special_ammo
+        special_ammo_value.text = AssetLoader.localizeSpecialAmmoType(ammo.special_ammo)
 
         ammo.iterator().forEach {
             val view = layoutInflater.inflate(R.layout.listitem_bowgun_ammo, ammo_layout, false)

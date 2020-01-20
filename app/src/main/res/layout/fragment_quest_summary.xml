@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_footer_space">
+
+        <com.gatheringhallstudios.mhworlddatabase.components.DetailHeaderCell
+            android:id="@+id/quest_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:iconSrc="@drawable/ic_ui_question_mark_white"
+            tools:titleText="One For the History Books"
+            tools:subtitleText="Assigned 5★"
+            tools:descriptionText="Complete the assignment"/>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
+            android:id="@+id/quest_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:labelText="Ancient Forest"
+            android:layout_marginTop="@dimen/margin_large"/>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SubHeaderCell
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:labelText="@string/title_monster_list"/>
+
+        <LinearLayout
+            android:id="@+id/quest_monsters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle"
+            android:orientation="vertical">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.VerboseIconLabelTextCell
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:labelText="Rathalos"
+                tools:subLabelText="@string/quest_label_objective"
+                tools:subValueText="x 2"
+                android:visibility="gone"
+                tools:visibility="visible"
+                />
+            <com.gatheringhallstudios.mhworlddatabase.components.VerboseIconLabelTextCell
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:labelText="Rathalos"
+                tools:subLabelText="@string/quest_label_objective"
+                tools:subValueText="x 2"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SubHeaderCell
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:labelText="@string/header_description"/>
+
+        <TextView
+            android:id="@+id/quest_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="A really great quest you should definitely do it."
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"/>
+
+    </LinearLayout>
+
+</ScrollView>

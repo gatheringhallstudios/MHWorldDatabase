@@ -3,19 +3,32 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 
 @Dao
 abstract class WeaponDao {
-
     /**
-     * Loads all weapons for a provided weapon type
+     * Loads all weapons
      */
     @Query("""
-        SELECT w.id, w.weapon_type, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
+        SELECT w.id, w.weapon_type, w.category, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
+            w.element2, w.element2_attack, w.element_hidden, w.sharpness, w.sharpness_maxed, w.previous_weapon_id, w.craftable, w.kinsect_bonus,
+            w.elderseal, w.phial, w.phial_power, w.shelling, w.shelling_level, w.coating_close, w.coating_power, w.coating_poison, w.coating_paralysis, w.coating_sleep, w.coating_blast,
+            w.notes, wa.special_ammo, wt.name
+        FROM weapon w
+            JOIN weapon_text wt USING (id)
+            LEFT JOIN weapon_ammo wa ON w.ammo_id = wa.id
+        WHERE wt.lang_id = :langId            
+        ORDER BY w.id ASC
+          """)
+    abstract fun loadWeaponsSync(langId: String): List<Weapon>
+
+    /**
+     * Loads all weapons for a provided weapon type and category
+     */
+    @Query("""
+        SELECT w.id, w.weapon_type, w.category, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
             w.element2, w.element2_attack, w.element_hidden, w.sharpness, w.sharpness_maxed, w.previous_weapon_id, w.craftable, w.kinsect_bonus,
             w.elderseal, w.phial, w.phial_power, w.shelling, w.shelling_level, w.coating_close, w.coating_power, w.coating_poison, w.coating_paralysis, w.coating_sleep, w.coating_blast,
             w.notes, wa.special_ammo, wt.name
@@ -26,13 +39,13 @@ abstract class WeaponDao {
             AND w.weapon_type = :weaponType
         ORDER BY w.id ASC
           """)
-    abstract fun loadWeapons(langId: String, weaponType: WeaponType): List<Weapon>
+    abstract fun loadWeaponsSync(langId: String, weaponType: WeaponType): List<Weapon>
 
     /**
      * Loads a single weapon by id
      */
     @Query("""
-        SELECT w.id, w.weapon_type, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
+        SELECT w.id, w.weapon_type, w.category, w.rarity, w.attack, w.attack_true, w.affinity, w.defense, w.slot_1, w.slot_2, w.slot_3, w.element1, w.element1_attack,
             w.element2, w.element2_attack, w.element_hidden, w.sharpness, w.sharpness_maxed, w.previous_weapon_id, w.craftable, w.kinsect_bonus,
             w.elderseal, w.phial, w.phial_power, w.shelling, w.shelling_level, w.coating_close, w.coating_power, w.coating_poison, w.coating_paralysis, w.coating_sleep, w.coating_blast,
             w.notes, wt.name
@@ -42,19 +55,26 @@ abstract class WeaponDao {
         WHERE w.id = :weaponId
         AND wt.lang_id = :langId
         """)
-    abstract fun loadWeapon(langId: String, weaponId: Int): Weapon
+    abstract fun loadWeaponSync(langId: String, weaponId: Int): Weapon
 
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
-            i.category item_category, i.icon_color item_icon_color, w.quantity, w.recipe_type
-         FROM weapon_recipe w
-            JOIN item i
-                ON w.item_id = i.id
-            JOIN item_text it
-                ON it.id = i.id
-                AND it.lang_id = :langId
-        WHERE it.lang_id = :langId
-        AND w.weapon_id= :weaponId
+                    i.category item_category, i.icon_color item_icon_color, ri.quantity, ri.recipe_type
+        FROM
+        (
+            SELECT 'Create' recipe_type, item_id, quantity
+            FROM recipe_item
+            WHERE recipe_id = (SELECT create_recipe_id FROM weapon WHERE id = :weaponId)
+            UNION
+            SELECT 'Upgrade' recipe_type, item_id, quantity
+            FROM recipe_item
+            WHERE recipe_id = (SELECT upgrade_recipe_id FROM weapon WHERE id = :weaponId)
+        ) ri
+        JOIN item i
+          ON i.id = ri.item_id
+        JOIN item_text it
+          ON it.id = i.id
+          AND it.lang_id = :langId
         ORDER BY i.id
     """)
     abstract fun loadWeaponComponents(langId: String, weaponId: Int): List<ItemQuantity>
@@ -142,10 +162,10 @@ abstract class WeaponDao {
 
     /**
      * Loads extended detail weapon for a particular weapon.
-     * Equivalent to calling loadWeapon with additional bundled information.
+     * Equivalent to calling loadWeaponSync with additional bundled information.
      */
     fun loadWeaponFullSync(langId: String, weaponId: Int): WeaponFull {
-        val weapon = loadWeapon(langId, weaponId)
+        val weapon = loadWeaponSync(langId, weaponId)
         return WeaponFull(
                 weapon = weapon,
                 recipe = queryRecipeComponents(langId, weaponId),
@@ -155,11 +175,24 @@ abstract class WeaponDao {
         )
     }
 
+    fun loadWeaponsWithSkillsSync(langId: String): List<WeaponFull> {
+        val weapons = loadWeaponsSync(langId)
+        return weapons.map {
+            WeaponFull(
+                    weapon = it,
+                    skills = queryWeaponSkillsSync(langId, it.id)
+            )
+        }
+    }
+
+    /**
+     * Loads all weapons of a particular type, contained as a collection of weapon trees.
+     */
     /**
      * Loads all weapons of a particular type, contained as a collection of weapon trees.
      */
     fun loadWeaponTrees(langId: String, weaponType: WeaponType): MHModelTree<Weapon> {
         // todo: cache it
-        return MHModelTree(loadWeapons(langId, weaponType))
+        return MHModelTree(loadWeaponsSync(langId, weaponType))
     }
 }

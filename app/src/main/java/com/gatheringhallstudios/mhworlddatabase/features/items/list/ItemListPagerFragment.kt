@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.items.list
 import android.os.Bundle
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
+import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.types.ItemCategory
 
 /**

@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_large">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title_sort_by"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/filter_title_sort_by"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/sort_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_sort_by">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/sort_attack_toggle"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_small"
+                app:src="@drawable/ic_ui_attack"
+                app:text="@string/weapon_attack" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/sort_affinity_toggle"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_small"
+                app:src="@drawable/ic_ui_affinity"
+                app:text="@string/weapon_affinity"
+                tools:checked="true" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_show_only"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:text="@string/filter_title_show_only"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sort_conditions" />
+
+        <ToggleButton
+            android:id="@+id/final_toggle"
+            style="@style/ButtonToggle"
+            android:layout_marginTop="@dimen/margin_large"
+            android:textOff="@string/weapon_final_only"
+            android:textOn="@string/weapon_final_only"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_show_only"
+            tools:checked="true" />
+
+        <LinearLayout
+            android:id="@+id/element_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/final_toggle">
+
+            <!-- Elements -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_fire"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_fire" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_water"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_water" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_thunder"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_thunder" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_ice"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_ice" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_dragon"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_element_dragon" />
+            </LinearLayout>
+
+            <!-- Statuses -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_poison"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_poison" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_sleep"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_sleep" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_paralysis"
+                    style="@style/ButtonToggle.ImageOnly"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_paralysis" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_blast"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_status_blast" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_phials"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:text="@string/weapon_blade_phial_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/element_toggles" />
+
+        <LinearLayout
+            android:id="@+id/phial_types_cb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_phials">
+
+            <ToggleButton
+                android:id="@+id/phial_toggle_impact"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_phial_impact"
+                android:textOn="@string/weapon_phial_impact" />
+
+            <ToggleButton
+                android:id="@+id/phial_toggle_power_element_cb"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:textOff="@string/weapon_phial_power_element"
+                android:textOn="@string/weapon_phial_power_element"
+                tools:checked="true" />
+        </LinearLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/phial_types_swaxe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phial_types_cb">
+
+            <ToggleButton
+                android:id="@+id/phial_toggle_power"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_phial_power"
+                android:textOn="@string/weapon_phial_power" />
+
+            <ToggleButton
+                android:id="@+id/phial_toggle_power_element_swaxe"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_phial_power_element"
+                android:textOn="@string/weapon_phial_power_element" />
+
+            <ToggleButton
+                android:id="@+id/phial_toggle_poison"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_phial_poison"
+                android:textOn="@string/weapon_phial_poison" />
+
+            <ToggleButton
+                android:id="@+id/phial_toggle_paralysis"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_phial_paralysis"
+                android:textOn="@string/weapon_phial_paralysis" />
+
+            <ToggleButton
+                android:id="@+id/phial_toggle_exhaust"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_phial_exhaust"
+                android:textOn="@string/weapon_phial_exhaust" />
+
+            <ToggleButton
+                android:id="@+id/phial_toggle_dragon"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_phial_dragon"
+                android:textOn="@string/weapon_phial_dragon" />
+        </com.google.android.flexbox.FlexboxLayout>
+
+
+        <TextView
+            android:id="@+id/title_kinsect"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:text="@string/weapon_kinsect_bonus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phial_types_swaxe" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/kinsect_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:layout_constraintTop_toBottomOf="@id/title_kinsect">
+
+            <ToggleButton
+                android:id="@+id/kinsect_toggle_speed"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_kinsect_bonus_speed"
+                android:textOn="@string/weapon_kinsect_bonus_speed" />
+
+            <ToggleButton
+                android:id="@+id/kinsect_toggle_stamina"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_kinsect_bonus_stamina"
+                android:textOn="@string/weapon_kinsect_bonus_stamina" />
+
+            <ToggleButton
+                android:id="@+id/kinsect_toggle_health"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_kinsect_bonus_health"
+                android:textOn="@string/weapon_kinsect_bonus_health" />
+
+            <ToggleButton
+                android:id="@+id/kinsect_toggle_element"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_kinsect_bonus_element"
+                android:textOn="@string/weapon_kinsect_bonus_element" />
+
+            <ToggleButton
+                android:id="@+id/kinsect_toggle_sever"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_kinsect_bonus_sever"
+                android:textOn="@string/weapon_kinsect_bonus_sever" />
+
+            <ToggleButton
+                android:id="@+id/kinsect_toggle_blunt"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_kinsect_bonus_blunt"
+                android:textOn="@string/weapon_kinsect_bonus_blunt" />
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <TextView
+            android:id="@+id/title_shelling"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:text="@string/weapon_gunlance_shelling"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/kinsect_toggles" />
+
+        <LinearLayout
+            android:id="@+id/shelling_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/title_shelling">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:flexWrap="wrap">
+
+                <ToggleButton
+                    android:id="@+id/shelling_toggle_normal"
+                    style="@style/ButtonToggle"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:textOff="@string/weapon_gunlance_shelling_normal"
+                    android:textOn="@string/weapon_gunlance_shelling_normal" />
+
+                <ToggleButton
+                    android:id="@+id/shelling_toggle_long"
+                    style="@style/ButtonToggle"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:textOff="@string/weapon_gunlance_shelling_long"
+                    android:textOn="@string/weapon_gunlance_shelling_long" />
+
+                <ToggleButton
+                    android:id="@+id/shelling_toggle_wide"
+                    style="@style/ButtonToggle"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:textOff="@string/weapon_gunlance_shelling_wide"
+                    android:textOn="@string/weapon_gunlance_shelling_wide" />
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                app:flexDirection="row"
+                app:flexWrap="wrap">
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_1"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 1" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_2"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 2" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_3"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 3" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_4"
+                    style="@style/ButtonToggle"
+                    app:text="Lv 4" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_coatings"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:text="@string/weapon_bow_coatings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shelling_toggles" />
+
+        <LinearLayout
+            android:id="@+id/coating_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/title_coatings">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_power"
+                style="@style/ButtonToggle.ImageOnly"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_large" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_para"
+                style="@style/ButtonToggle.ImageOnly"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_large" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_poison"
+                style="@style/ButtonToggle.ImageOnly"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_large" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_sleep"
+                style="@style/ButtonToggle.ImageOnly"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_large" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/coating_blast"
+                style="@style/ButtonToggle.ImageOnly"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_large" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_ammo"
+            style="@style/TextSubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:text="@string/tab_item_list_ammo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/coating_toggles" />
+
+        <LinearLayout
+            android:id="@+id/special_ammo_toggles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/title_ammo">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/sammo_wyvernheart_toggle"
+                style="@style/ButtonToggle"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:text="@string/weapon_bowgun_special_ammo_wyvernheart" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/sammo_wyvernsnipe_toggle"
+                style="@style/ButtonToggle"
+                app:text="@string/weapon_bowgun_special_ammo_wyvernsnipe" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/bottom_space"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/padding_footer_space"
+            app:layout_constraintTop_toBottomOf="@id/special_ammo_toggles" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

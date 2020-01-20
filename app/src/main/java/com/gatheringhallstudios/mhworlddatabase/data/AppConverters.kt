@@ -3,7 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.data
 import android.util.Log
 import androidx.room.TypeConverter
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import com.gatheringhallstudios.mhworlddatabase.util.Converter
 import java.text.SimpleDateFormat
 import java.util.*
 

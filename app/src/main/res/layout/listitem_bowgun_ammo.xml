@@ -19,9 +19,17 @@
         style="@style/TextBodyHigh"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_medium"
         android:layout_weight="1"
         tools:text="Recover Ammo 1" />
+
+    <TextView
+        android:id="@+id/capacity_value"
+        style="@style/TextBodyMedium"
+        android:layout_width="38dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="5" />
 
     <TextView
         android:id="@+id/shot_type_value_recoil"
@@ -34,17 +42,9 @@
     <TextView
         android:id="@+id/reload_value"
         style="@style/TextBodyMedium"
-        android:layout_width="72dp"
+        android:layout_width="68dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="V. Slow" />
-
-    <TextView
-        android:id="@+id/capacity_value"
-        style="@style/TextBodyMedium"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="5" />
 
 </LinearLayout>

@@ -1,28 +1,29 @@
 package com.gatheringhallstudios.mhworlddatabase.features.charms.list
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.CharmAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 class CharmListFragment : RecyclerViewFragment() {
+    companion object {
+        const val ARG_MODE = "CHARMLIST_MODE"
+    }
+
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(CharmListViewModel::class.java)
     }
 
-    val adapter = BasicListDelegationAdapter(CharmAdapterDelegate {
-        getRouter().navigateCharmDetail(it.id)
-    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,10 @@ class CharmListFragment : RecyclerViewFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val adapter = BasicListDelegationAdapter(CharmAdapterDelegate {
+            getRouter().navigateCharmDetail(it.id)
+        })
         setAdapter(adapter)
 
         // Add dividers between items

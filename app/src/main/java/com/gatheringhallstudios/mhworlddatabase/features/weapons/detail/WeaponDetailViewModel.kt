@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNode
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class WeaponFamilyData(
-        val familyPath: List<Weapon>,
+        val familyPath: TreeNode<Weapon>,
         val finalWeapons: List<Weapon>
 )
 
@@ -58,7 +59,7 @@ class WeaponDetailViewModel(application: Application) : AndroidViewModel(applica
             if (node != null && weapon.entityId == weaponId) {
                 weaponData.value = weapon
                 weaponFamilyData.value = WeaponFamilyData(
-                        familyPath = node.path.map { it.value },
+                        familyPath = node.getPathSubtree(),
                         finalWeapons = node.leaves.map { it.value }
                 )
             }

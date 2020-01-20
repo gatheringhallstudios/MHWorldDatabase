@@ -7,11 +7,12 @@ import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
-import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.WeaponTreeListAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.features.weapons.RenderedTreeNode
+import com.gatheringhallstudios.mhworlddatabase.util.tree.RenderedTreeNode
+import com.gatheringhallstudios.mhworlddatabase.util.tree.createTreeRenderList
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 /**
@@ -19,14 +20,6 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
  * Weapon families are used to figure out the crafting path.
  */
 class WeaponDetailFamilyFragment : RecyclerViewFragment() {
-    val adapter = CategoryAdapter(
-            WeaponTreeListAdapterDelegate(
-                    showTrueAttackValues = AppSettings.showTrueAttackValues,
-                    onLongSelect = null,
-                    onSelected = { getRouter().navigateWeaponDetail(it.id)}
-            )
-    )
-
     /**
      * Returns the viewmodel owned by the parent fragment
      */
@@ -36,14 +29,23 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adapter = CategoryAdapter(
+                WeaponTreeListAdapterDelegate(
+                        showTrueAttackValues = AppSettings.showTrueAttackValues,
+                        onLongSelect = null,
+                        onSelected = { getRouter().navigateWeaponDetail(it.id)}
+                )
+        )
         setAdapter(adapter)
 
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
         viewModel.weaponFamilyData.observe(this, Observer { data ->
+            adapter.clear()
             if (data == null) return@Observer
 
-            val familyNodes = data.familyPath.map { RenderedTreeNode(it) }
+            val familyNodes = createTreeRenderList(data.familyPath)
             val finalNodes = data.finalWeapons.map { RenderedTreeNode(it) }
 
             adapter.addSection(familyNodes)

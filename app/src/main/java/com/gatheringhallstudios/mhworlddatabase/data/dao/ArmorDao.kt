@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.room.Dao
 import androidx.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 /**
@@ -13,6 +14,17 @@ import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
  */
 @Dao
 abstract class ArmorDao {
+    @Query("""
+        SELECT a.*, at.name, ast.name armorset_name
+        FROM armor a
+            JOIN armor_text at USING (id)
+            JOIN armorset_text ast
+                ON ast.id = a.armorset_id
+                AND ast.lang_id = at.lang_id
+        WHERE at.lang_id = :langId          
+    """)
+    abstract fun loadArmorListSync(langId: String): List<Armor>
+
     @Query("""
         SELECT a.*, at.name, ast.name armorset_name
         FROM armor a
@@ -47,6 +59,13 @@ abstract class ArmorDao {
         WHERE at.lang_id = :langId
         AND a.id = :armorId""")
     abstract fun loadArmorSync(langId: String, armorId: Int): Armor
+
+    @Query(""" 
+        SELECT a.id
+        FROM armor a
+        WHERE a.armor_type = :armorType 
+    """)
+    abstract fun loadArmorIdsByArmorTypeSync(armorType: ArmorType): List<Int>
 
     fun loadArmor(langId: String, armorId: Int) = createLiveData {
         loadArmorSync(langId, armorId)
@@ -118,6 +137,18 @@ abstract class ArmorDao {
                 })
     }
 
+    fun loadArmorFullSync(langId: String, armorId: Int): ArmorFull {
+        val armor = loadArmorSync(langId, armorId)
+        return ArmorFull(
+                armor = armor,
+                recipe = loadArmorComponentsSync(langId, armorId),
+                skills = loadArmorSkillsSync(langId, armorId),
+                setBonuses = when (armor.armorset_bonus_id) {
+                    null -> emptyList()
+                    else -> loadArmorSetBonusSync(langId, armor.armorset_bonus_id)
+                })
+    }
+
     @Query("""
         SELECT st.id as skilltree_id, stt.name as skilltree_name, st.max_level skilltree_max_level,
             st.icon_color as skilltree_icon_color,
@@ -136,15 +167,17 @@ abstract class ArmorDao {
 
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
-            i.category item_category, i.icon_color item_icon_color, a.quantity
-         FROM armor_recipe a
+            i.category item_category, i.icon_color item_icon_color, ri.quantity
+         FROM armor a
+            JOIN recipe_item ri
+                ON a.recipe_id = ri.recipe_id
             JOIN item i
-                ON a.item_id = i.id
+                ON ri.item_id = i.id
             JOIN item_text it
                 ON it.id = i.id
                 AND it.lang_id = :langId
         WHERE it.lang_id = :langId
-        AND a.armor_id= :armorId
+        AND a.id= :armorId
         ORDER BY i.id
     """)
     abstract fun loadArmorComponentsSync(langId: String, armorId: Int): List<ItemQuantity>
@@ -163,4 +196,12 @@ abstract class ArmorDao {
                AND askill.armor_id = :armorId
             ORDER BY askill.skilltree_id ASC""")
     abstract fun loadArmorSkillsSync(langId: String, armorId: Int): List<SkillLevel>
+
+    fun loadArmorFullByType(langId: String, armorType: ArmorType): List<ArmorFull> {
+        val armorIds = loadArmorIdsByArmorTypeSync(armorType)
+
+        return armorIds.map { id ->
+            loadArmorFullSync(langId, id)
+        }
+    }
 }

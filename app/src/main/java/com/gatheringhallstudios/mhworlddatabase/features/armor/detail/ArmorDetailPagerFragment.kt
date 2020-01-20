@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
+import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorFull
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
@@ -30,7 +30,7 @@ class ArmorDetailPagerFragment : BasePagerFragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val itemData = viewModel.armor.value
         if (itemData != null && BookmarksFeature.isBookmarked(itemData)) {
-            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_ui_bookmark_on_white))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
         }
     }
 

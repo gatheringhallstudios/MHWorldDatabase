@@ -28,6 +28,7 @@ class SearchResultAdapter: BasicListDelegationAdapter<Any>(SimpleUniversalBinder
         items.addAll(results.armor.map(::createArmorBinder))
         items.addAll(results.items.map(::createItemBinder))
         items.addAll(results.weapons.map(::createWeaponBinder))
+        items.addAll(results.quests.map(::createQuestBinder))
 
         this.items = items
         notifyDataSetChanged()
@@ -125,5 +126,17 @@ fun createWeaponBinder(weapon: WeaponBase) = createSimpleUniversalBinder { ctx -
 
     SimpleUniversalBinding(name, typeString, IconType.ZEMBELLISHED, icon) {
         it.getRouter().navigateWeaponDetail(weapon.id)
+    }
+}
+
+fun createQuestBinder(quest: QuestBase) = createSimpleUniversalBinder { ctx ->
+    val icon = AssetLoader.loadIconFor(quest)
+    val name = quest.name
+    val typeString = ctx.getString(R.string.type_quest)
+    val category = AssetLoader.localizeQuestCategory(quest.category)
+    val categoryFull = ctx.getString(R.string.quest_category_combined, category, quest.stars)
+
+    SimpleUniversalBinding(name, typeString, IconType.EMBELLISHED, icon, categoryFull) {
+        it.getRouter().navigateObject(quest)
     }
 }

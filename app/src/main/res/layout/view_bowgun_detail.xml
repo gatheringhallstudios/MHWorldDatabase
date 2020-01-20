@@ -107,9 +107,19 @@
                 app:labelText="@string/weapon_bowgun_ammo_types"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            </com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell>
+            <TextView
+                android:id="@+id/capacity_label"
+                style="@style/TextBodyHigh"
+                android:layout_width="38dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/weapon_bowgun_capacity"
+                app:layout_constraintBottom_toBottomOf="@id/ammo_header"
+                app:layout_constraintEnd_toStartOf="@+id/ammo_recoil_label"
+                app:layout_constraintTop_toTopOf="@+id/ammo_header"
+                />
 
             <TextView
                 android:id="@+id/ammo_recoil_label"
@@ -119,33 +129,22 @@
                 android:text="@string/weapon_bowgun_shot_type_rcl"
                 android:textColor="@color/textColorHigh"
                 app:layout_constraintBottom_toBottomOf="@id/ammo_header"
-                app:layout_constraintEnd_toStartOf="@+id/capacity_icon"
+                app:layout_constraintEnd_toStartOf="@+id/reload_label"
                 app:layout_constraintTop_toTopOf="@+id/ammo_header">
             </TextView>
 
             <TextView
-                android:id="@+id/capacity_icon"
-                android:layout_width="72dp"
+                android:id="@+id/reload_label"
+                android:layout_width="68dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/weapon_bowgun_reload"
                 android:textColor="@color/textColorHigh"
                 app:layout_constraintBottom_toBottomOf="@id/ammo_header"
-                app:layout_constraintEnd_toStartOf="@+id/capacity_label"
-                app:layout_constraintTop_toTopOf="@+id/ammo_header">
-            </TextView>
-
-            <TextView
-                android:id="@+id/capacity_label"
-                style="@style/TextBodyHigh"
-                android:layout_width="32dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:gravity="center"
-                android:text="@string/weapon_bowgun_capacity"
-                app:layout_constraintBottom_toBottomOf="@id/ammo_header"
                 app:layout_constraintEnd_toEndOf="@+id/ammo_header"
-                app:layout_constraintTop_toTopOf="@+id/ammo_header" />
+                app:layout_constraintTop_toTopOf="@+id/ammo_header"
+                android:layout_marginEnd="@dimen/margin_large">
+            </TextView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -155,7 +154,16 @@
             android:id="@+id/ammo_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:divider="@drawable/divider_stroke"
+            android:showDividers="middle|end">
+
+            <include
+                layout="@layout/listitem_bowgun_ammo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/row_height_small"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <include
                 layout="@layout/listitem_bowgun_ammo"

@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
+import java.io.Serializable
 
 
 open class SkillTreeBase(
@@ -25,7 +26,7 @@ open class SkillTree(
         max_level: Int,
         icon_color: String?,
         val description: String?
-) : SkillTreeBase(id, name, max_level, icon_color)
+) : Serializable, SkillTreeBase(id, name, max_level, icon_color)
 
 /**
  * A skill tree with skill information included.
@@ -55,7 +56,8 @@ open class SkillLevel(
 ) {
     // note: Embeddeds must be a var in a superclass or it won't work
 
-    @Embedded(prefix = "skill_") lateinit var skillTree: SkillTreeBase
+    @Embedded(prefix = "skill_")
+    lateinit var skillTree: SkillTreeBase
 }
 
 /**
@@ -64,7 +66,7 @@ open class SkillLevel(
 class ArmorSkillLevel(
         @Embedded(prefix = "armor_") val armor: ArmorBase,
         level: Int
-): SkillLevel(level)
+) : SkillLevel(level)
 
 /**
  * Represents a charm and its skill level.
@@ -72,7 +74,7 @@ class ArmorSkillLevel(
 class CharmSkillLevel(
         @Embedded(prefix = "charm_") val charm: CharmBase,
         level: Int
-): SkillLevel(level)
+) : SkillLevel(level)
 
 /**
  * Represents a charm and its skill level.
@@ -80,4 +82,4 @@ class CharmSkillLevel(
 class DecorationSkillLevel(
         @Embedded(prefix = "deco_") val decoration: DecorationBase,
         level: Int
-): SkillLevel(level)
+) : SkillLevel(level)

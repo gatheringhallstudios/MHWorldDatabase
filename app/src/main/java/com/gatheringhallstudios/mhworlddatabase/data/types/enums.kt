@@ -11,6 +11,22 @@ package com.gatheringhallstudios.mhworlddatabase.data.types
  */
 
 /**
+ * Represents an object's type.
+ */
+enum class DataType {
+    LOCATION,
+    ITEM,
+    MONSTER,
+    SKILL,
+    DECORATION,
+    CHARM,
+    ARMOR,
+    WEAPON,
+    QUEST,
+    NONE
+}
+
+/**
  * Denotes a quest rank. Mapped by the Converters class.
  */
 enum class Rank {
@@ -39,7 +55,6 @@ enum class ItemSubcategory {
 
 /**
  * An enumeration used to represent a monster's size.
- * Created by Carlos on 3/21/2018.
  */
 enum class MonsterSize {
     SMALL,
@@ -67,7 +82,6 @@ enum class Extract {
 
 /**
  * An enumeration that defines where a piece of armor is worn.
- * Created by Carlos on 3/6/2018.
  */
 enum class ArmorType {
     HEAD,
@@ -78,8 +92,23 @@ enum class ArmorType {
 }
 
 /**
+ * Represents an element or a status.
+ * Tied to the same object as a weapon may be either/or.
+ */
+enum class ElementStatus {
+    FIRE,
+    WATER,
+    THUNDER,
+    ICE,
+    DRAGON,
+    POISON,
+    SLEEP,
+    PARALYSIS,
+    BLAST
+}
+
+/**
  * An enumeration that defines the type of weapon.
- * Created by Carlos on 3/20/2018.
  */
 enum class WeaponType {
     GREAT_SWORD,
@@ -99,19 +128,12 @@ enum class WeaponType {
 }
 
 /**
- * Represents an object type.
- * Currently only used by search results for identification reasons.
+ * Defines the categorization of the weapon.
+ * Use Regular for crafted weapons.
  */
-enum class DataType {
-    LOCATION,
-    ITEM,
-    MONSTER,
-    SKILL,
-    DECORATION,
-    CHARM,
-    ARMOR,
-    WEAPON,
-    NONE
+enum class WeaponCategory {
+    REGULAR,
+    KULVE
 }
 
 enum class ElderSealLevel {
@@ -156,6 +178,12 @@ enum class ShellingType {
     WIDE,
     LONG,
     NORMAL
+}
+
+enum class SpecialAmmoType {
+    WYVERNBLAST,
+    WYVERNHEART,
+    WYVERNSNIPE
 }
 
 enum class AmmoType {
@@ -203,4 +231,18 @@ enum class ReloadType {
     NORMAL,
     FAST,
     VERY_FAST
+}
+
+enum class QuestCategory {
+    ASSIGNED,
+    OPTIONAL,
+    EVENT,
+    ARENA,
+    SPECIAL
+}
+
+enum class QuestType {
+    HUNT,
+    DELIVER,
+    CAPTURE
 }

@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.SimpleUniversalBinding
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
 import com.gatheringhallstudios.mhworlddatabase.adapters.createSimpleUniversalBinder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
-import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.IconType

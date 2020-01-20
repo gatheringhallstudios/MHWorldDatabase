@@ -2,8 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,14 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
+import com.gatheringhallstudios.mhworlddatabase.util.tree.RenderedTreeNode
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeFormatter
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNodeType
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatIconLayoutCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.Weapon
@@ -89,12 +93,12 @@ class WeaponTreeListAdapterDelegate(
             populateStaticStats(weapon)
             // Populate stats like horn notes, shelling type...
             populateWeaponSpecificStats(weapon)
-            // Populate decorations
+            // Populate decorationIds
             populateDecorations(weapon)
             // Populate stats like element, defense...
             populateComplexStats(weapon)
             // Populate tree lines
-            createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed)
+            createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed, weapon.rarity)
 
             view.invalidate()
         }
@@ -190,18 +194,16 @@ class WeaponTreeListAdapterDelegate(
                             shellingValue
                     )
                     view.tree_weapon_specific_section.addView(shellingView)
-
                 }
 
                 WeaponType.LIGHT_BOWGUN, WeaponType.HEAVY_BOWGUN -> {
-                    val specialAmmoValue = weapon.special_ammo.toString()
+                    val specialAmmoValue = AssetLoader.localizeSpecialAmmoType(weapon.special_ammo)
                     val specialAmmoView = CompactStatCell(
                             view.context,
                             R.drawable.ic_ui_special_ammo,
                             specialAmmoValue
                     )
                     view.tree_weapon_specific_section.addView(specialAmmoView)
-
                 }
 
                 WeaponType.BOW -> {
@@ -209,26 +211,15 @@ class WeaponTreeListAdapterDelegate(
                             .inflate(R.layout.section_bow_coating_compact, view.tree_weapon_specific_section, false)
 
                     weapon.weaponCoatings?.iterator()?.forEach {
-                        when (it) {
-                            CoatingType.CLOSE_RANGE -> {
-                                coatingView.close_range_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
-                            }
-                            CoatingType.POWER -> {
-                                coatingView.power_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
-                            }
-                            CoatingType.PARALYSIS -> {
-                                coatingView.paralysis_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
-                            }
-                            CoatingType.POISON -> {
-                                coatingView.poison_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
-                            }
-                            CoatingType.SLEEP -> {
-                                coatingView.sleep_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
-                            }
-                            CoatingType.BLAST -> {
-                                coatingView.blast_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
-                            }
+                        val imageView = when (it) {
+                            CoatingType.CLOSE_RANGE -> coatingView.close_range_coating_icon
+                            CoatingType.POWER -> coatingView.power_coating_icon
+                            CoatingType.PARALYSIS -> coatingView.paralysis_coating_icon
+                            CoatingType.POISON -> coatingView.poison_coating_icon
+                            CoatingType.SLEEP -> coatingView.sleep_coating_icon
+                            CoatingType.BLAST -> coatingView.blast_coating_icon
                         }
+                        imageView.setImageDrawable(AssetLoader.loadIconFor(it))
                     }
 
                     view.tree_weapon_specific_section.addView(coatingView)
@@ -302,55 +293,54 @@ class WeaponTreeListAdapterDelegate(
             }
         }
 
-        private fun createTreeLayout(formatter: List<TreeFormatter>, isCollapsed: Boolean) {
+        private fun createTreeLayout(formatter: List<TreeFormatter>, isCollapsed: Boolean, rarity: Int) {
             val treeView = view.tree_components
 
             if (treeView.childCount != 0) treeView.removeAllViews()
 
             formatter.forEach {
-                when (it) {
-                    TreeFormatter.START -> {
-                        if (!isCollapsed) {
-                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start))
+                val drawable = when (it) {
+                    TreeFormatter.START -> if (!isCollapsed) {
+                            AssetLoader.loadIconFor(TreeNodeType.START, rarity)
                         } else {
-                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_start_collapsed))
+                            AssetLoader.loadIconFor(TreeNodeType.START_COLLAPSED, rarity)
                         }
+                    TreeFormatter.MID -> if (!isCollapsed) {
+                        AssetLoader.loadIconFor(TreeNodeType.MID, rarity)
+                    } else {
+                        AssetLoader.loadIconFor(TreeNodeType.MID_COLLAPSED, rarity)
                     }
-                    TreeFormatter.INDENT -> {
-                        val space = Space(treeView.context)
-                        space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE.px, LinearLayout.LayoutParams.MATCH_PARENT)
-                        treeView.addView(space)
+                    TreeFormatter.THROUGH -> if (!isCollapsed) {
+                        AssetLoader.loadIconFor(TreeNodeType.THROUGH, rarity)
+                    } else {
+                        AssetLoader.loadIconFor(TreeNodeType.THROUGH_COLLAPSED, rarity)
                     }
-                    TreeFormatter.STRAIGHT_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_line))
-                    }
-                    TreeFormatter.T_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_t))
-                    }
-                    TreeFormatter.MID -> {
-                        if (!isCollapsed) {
-                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid))
-                        } else {
-                            treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_mid_collapsed))
-                        }
-                    }
-                    TreeFormatter.L_BRANCH -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_space_l))
-                    }
-                    TreeFormatter.END -> {
-                        treeView.addView(createImageView(treeView.context, R.drawable.ui_tree_node_end))
-                    }
+                    TreeFormatter.INDENT -> null
+                    TreeFormatter.STRAIGHT_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_line)
+                    TreeFormatter.T_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_t)
+                    TreeFormatter.L_BRANCH -> ContextCompat.getDrawable(treeView.context, R.drawable.ui_tree_space_l)
+                    TreeFormatter.END -> AssetLoader.loadIconFor(TreeNodeType.END, rarity)
+                    TreeFormatter.END_INDENTED -> AssetLoader.loadIconFor(TreeNodeType.END_INDENTED, rarity)
                 }
+
+                treeView.addView(createImageView(treeView.context, drawable))
             }
         }
 
-        private fun createImageView(context: Context, resource: Int): ImageView {
+        private fun createImageView(context: Context, drawable: Drawable?): View {
             val imageView = ImageView(context)
             imageView.scaleType = ImageView.ScaleType.FIT_XY
             imageView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
             imageView.setPadding(0, 0, 0, 0)
-            imageView.setImageResource(resource)
-            return imageView
+            imageView.setImageBitmap(drawable?.toBitmap()) // TODO raster only the required drawables instead of all of them
+
+            return if (drawable == null) {
+                val space = Space(context)
+                space.layoutParams = LinearLayout.LayoutParams(INDENT_SIZE.px, LinearLayout.LayoutParams.MATCH_PARENT)
+                space
+            } else {
+                imageView
+            }
         }
     }
 }

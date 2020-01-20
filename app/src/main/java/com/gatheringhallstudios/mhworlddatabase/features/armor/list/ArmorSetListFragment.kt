@@ -1,16 +1,17 @@
 package com.gatheringhallstudios.mhworlddatabase.features.armor.list
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import com.gatheringhallstudios.mhworlddatabase.common.RecyclerViewFragment
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
-import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSet
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
+import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -23,6 +24,7 @@ import com.xwray.groupie.ViewHolder
 class ArmorSetListFragment : RecyclerViewFragment() {
     companion object {
         const val ARG_RANK = "ARMORLIST_RANK"
+        const val ARG_MODE = "ARMORLIST_MODE"
 
         @JvmStatic
         fun newInstance(rank: Rank): ArmorSetListFragment {
@@ -50,7 +52,12 @@ class ArmorSetListFragment : RecyclerViewFragment() {
             viewModel.getArmorSetList(rank).observe(this, Observer<List<ArmorSet>> {
                 val items = it?.map {
                     val headerItem = ArmorSetHeaderItem(it)
-                    val bodyItems = it.armor.map { ArmorSetDetailItem(it) }
+                    val bodyItems = it.armor
+                            .map {
+                                ArmorSetDetailItem(it) {
+                                    getRouter().navigateArmorDetail(it.id)
+                                }
+                            }
 
                     return@map ExpandableGroup(headerItem, false).apply {
                         addAll(bodyItems)

@@ -3,7 +3,10 @@ package com.gatheringhallstudios.mhworlddatabase.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
-import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
+import com.gatheringhallstudios.mhworlddatabase.data.models.CharmFull
+import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuantity
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
 import com.gatheringhallstudios.mhworlddatabase.util.createLiveData
 
 @Dao
@@ -20,6 +23,24 @@ abstract class CharmDao {
         ORDER BY ct.name""")
     abstract fun loadCharmsSync(langId: String): List<Charm>
 
+    @Query("""
+        SELECT c.*, ct.name
+        FROM charm c
+            JOIN charm_text ct
+                ON ct.id = c.id
+                AND ct.lang_id = :langId
+        ORDER BY ct.name""")
+    abstract fun loadCharmList(langId: String): LiveData<List<Charm>>
+
+    @Query("""
+        SELECT c.*, ct.name
+        FROM charm c
+            JOIN charm_text ct
+                ON ct.id = c.id
+                AND ct.lang_id = :langId
+        ORDER BY ct.name""")
+    abstract fun loadCharmListSync(langId: String): List<Charm>
+
     /**
      * Loads full data for a charm asynchronously.
      * Full data includes all join tables like items and skills
@@ -30,6 +51,26 @@ abstract class CharmDao {
                 skills = loadCharmSkillsSync(langId, charmId),
                 components = loadCharmComponentsSync(langId, charmId)
         )
+    }
+
+    fun loadCharmFullSync(langId: String, charmId: Int): CharmFull {
+        return CharmFull(
+                charm = loadCharmSync(langId, charmId),
+                skills = loadCharmSkillsSync(langId, charmId),
+                components = loadCharmComponentsSync(langId, charmId)
+        )
+    }
+
+    fun loadCharmAndSkillList(langId: String): List<CharmFull> {
+        val charms = loadCharmListSync(langId)
+
+        return charms.map {
+            CharmFull(
+                    charm = it,
+                    skills = loadCharmSkillsSync(langId, it.id),
+                    components = emptyList()
+            )
+        }
     }
 
     @Query("""
@@ -43,13 +84,15 @@ abstract class CharmDao {
     @Query("""
         SELECT i.id item_id, it.name item_name, i.icon_name item_icon_name,
             i.category item_category, i.icon_color item_icon_color, cr.quantity
-        FROM charm_recipe cr
+        FROM charm c
+            JOIN recipe_item cr
+                ON cr.recipe_id = c.recipe_id
             JOIN item i
                 ON i.id = cr.item_id
             JOIN item_text it
                 ON it.id = i.id
-        WHERE it.lang_id = :langId
-          AND cr.charm_id = :charmId
+                AND it.lang_id = :langId
+        WHERE c.id = :charmId
     """)
     protected abstract fun loadCharmComponentsSync(langId: String, charmId: Int): List<ItemQuantity>
 

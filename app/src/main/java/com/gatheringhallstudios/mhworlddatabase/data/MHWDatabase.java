@@ -12,18 +12,17 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MetaDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.QuestDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SearchDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.WeaponDao;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity;
-import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorRecipeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetBonusEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetBonusTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmEntity;
-import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmRecipe;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.CharmText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.DecorationEntity;
@@ -44,6 +43,11 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterHitzoneText
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardConditionText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterRewardEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.MonsterText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.QuestEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.QuestMonsterEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.QuestRewardEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.QuestText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.RecipeItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
@@ -51,7 +55,6 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponAmmoEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyTextEntity;
-import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponRecipe;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponText;
 import com.gatheringhallstudios.mhworlddatabase.util.sqliteloader.SQLiteAssetHelperFactory;
@@ -77,6 +80,9 @@ import androidx.room.TypeConverters;
                 // Meta
                 Language.class,
 
+                // General (reused)
+                RecipeItemEntity.class,
+
                 // Items
                 ItemEntity.class, ItemText.class, ItemCombinationEntity.class,
 
@@ -93,18 +99,20 @@ import androidx.room.TypeConverters;
                 SkillTreeEntity.class, SkillTreeText.class, SkillEntity.class,
 
                 // Charms
-                CharmEntity.class, CharmSkill.class, CharmText.class, CharmRecipe.class,
+                CharmEntity.class, CharmSkill.class, CharmText.class,
 
                 //Decorations
                 DecorationEntity.class, DecorationText.class,
 
                 // Armor classes
                 ArmorEntity.class, ArmorText.class, ArmorSkill.class, ArmorSetTextEntity.class,
-                ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class, ArmorRecipeEntity.class,
+                ArmorSetBonusEntity.class, ArmorSetBonusTextEntity.class,
 
                 // Weapon Classes
-                WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class, WeaponRecipe.class,
-                WeaponMelodyEntity.class, WeaponMelodyTextEntity.class, WeaponSkill.class
+                WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class,
+                WeaponMelodyEntity.class, WeaponMelodyTextEntity.class, WeaponSkill.class,
+
+                QuestEntity.class, QuestText.class, QuestMonsterEntity.class, QuestRewardEntity.class
         })
 
 @TypeConverters({Converters.class})
@@ -157,6 +165,8 @@ public abstract class MHWDatabase extends RoomDatabase {
     public abstract DecorationDao decorationDao();
 
     public abstract WeaponDao weaponDao();
+
+    public abstract QuestDao questDao();
 
     public abstract BulkLoaderDao bookmarksSearchDao();
 

@@ -1,11 +1,5 @@
 package com.gatheringhallstudios.mhworlddatabase.features.locations.detail
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.common.BasePagerFragment
-import com.gatheringhallstudios.mhworlddatabase.data.models.Location
-
 /**
  * UNUSED. Here because it may be used again
  * Location detail hub. Displays information for a single location

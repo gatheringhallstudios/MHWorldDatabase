@@ -2,7 +2,6 @@ package com.gatheringhallstudios.mhworlddatabase.data
 
 import androidx.room.TypeConverter
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.util.Converter
 
 private val RankConverter = Converter(
         "LR" to Rank.LOW,
@@ -65,6 +64,19 @@ private val ElderSealLevelConverter = Converter(
         "high" to ElderSealLevel.HIGH
 )
 
+private val ElementStatusConverter = Converter(
+        null to null,
+        "Fire" to ElementStatus.FIRE,
+        "Water" to ElementStatus.WATER,
+        "Thunder" to ElementStatus.THUNDER,
+        "Ice" to ElementStatus.ICE,
+        "Dragon" to ElementStatus.DRAGON,
+        "Poison" to ElementStatus.POISON,
+        "Sleep" to ElementStatus.SLEEP,
+        "Paralysis" to ElementStatus.PARALYSIS,
+        "Blast" to ElementStatus.BLAST
+)
+
 private val WeaponTypeConverter = Converter(
         "great-sword" to WeaponType.GREAT_SWORD,
         "long-sword" to WeaponType.LONG_SWORD,
@@ -76,11 +88,16 @@ private val WeaponTypeConverter = Converter(
         "gunlance" to WeaponType.GUNLANCE,
         "switch-axe" to WeaponType.SWITCH_AXE,
         "charge-blade" to WeaponType.CHARGE_BLADE,
-        "insect-glaive" to WeaponType.INSECT_GLAIVE ,
+        "insect-glaive" to WeaponType.INSECT_GLAIVE,
         "bow" to WeaponType.BOW,
         "light-bowgun" to WeaponType.LIGHT_BOWGUN,
         "heavy-bowgun" to WeaponType.HEAVY_BOWGUN,
         null to null
+)
+
+private val WeaponCategoryConverter = Converter(
+        null to WeaponCategory.REGULAR,
+        "Kulve" to WeaponCategory.KULVE
 )
 
 private val PhialTypeConverter = Converter(
@@ -111,6 +128,13 @@ private val ShellingTypeConverter = Converter(
         "wide" to ShellingType.WIDE
 )
 
+private val SpecialAmmoTypeConverter = Converter(
+        null to null,
+        "Wyvernblast" to SpecialAmmoType.WYVERNBLAST,
+        "Wyvernheart" to SpecialAmmoType.WYVERNHEART,
+        "Wyvernsnipe" to SpecialAmmoType.WYVERNSNIPE
+)
+
 private val ReloadTypeConverter = Converter(
         null to ReloadType.NONE,
         "very slow" to ReloadType.VERY_SLOW,
@@ -120,7 +144,21 @@ private val ReloadTypeConverter = Converter(
         "very fast" to ReloadType.VERY_FAST
 )
 
+private val QuestCategoryConverter = Converter(
+        "optional" to QuestCategory.OPTIONAL,
+        "assigned" to QuestCategory.ASSIGNED,
+        "arena" to QuestCategory.ARENA,
+        "event" to QuestCategory.EVENT,
+        "special" to QuestCategory.SPECIAL,
+        null to QuestCategory.OPTIONAL
+)
 
+private val QuestTypeConverter = Converter(
+        "hunt" to QuestType.HUNT,
+        "deliver" to QuestType.DELIVER,
+        "capture" to QuestType.CAPTURE,
+        null to QuestType.HUNT
+)
 
 /**
  * Type conversions for things like enumerations.
@@ -151,8 +189,14 @@ class Converters {
     @TypeConverter fun armorTypefromString(value: String) = ArmorTypeConverter.deserialize(value)
     @TypeConverter fun fromArmorType(type: ArmorType?) = ArmorTypeConverter.serialize(type)
 
+    @TypeConverter fun elementStatusFromString(value: String?) = ElementStatusConverter.deserialize(value)
+    @TypeConverter fun fromElementStatus(value: ElementStatus?) = ElementStatusConverter.serialize(value)
+
     @TypeConverter fun weaponTypeFromString(value: String) = WeaponTypeConverter.deserialize(value)
     @TypeConverter fun fromWeaponType(type: WeaponType?) = WeaponTypeConverter.serialize(type)
+
+    @TypeConverter fun weaponCategoryFromString(value: String?) = WeaponCategoryConverter.deserialize(value)
+    @TypeConverter fun fromWeaponCategory(category: WeaponCategory?) = WeaponCategoryConverter.serialize(category ?: WeaponCategory.REGULAR)
 
     @TypeConverter fun elderSealFromString(value: String?) = ElderSealLevelConverter.deserialize(value)
     @TypeConverter fun fromElderSealLevel(type: ElderSealLevel) = ElderSealLevelConverter.serialize(type)
@@ -166,6 +210,15 @@ class Converters {
     @TypeConverter fun shellingTypeFromString(value: String?) = ShellingTypeConverter.deserialize(value)
     @TypeConverter fun fromShellingType(type: ShellingType) = ShellingTypeConverter.serialize(type)
 
+    @TypeConverter fun specialAmmoTypeFromString(value: String?) = SpecialAmmoTypeConverter.deserialize(value)
+    @TypeConverter fun fromSpecialAmmoType(type: SpecialAmmoType?) = SpecialAmmoTypeConverter.serialize(type)
+
     @TypeConverter fun reloadTypeFromString(value: String?) = ReloadTypeConverter.deserialize(value)
     @TypeConverter fun fromReloadType(type: ReloadType) = ReloadTypeConverter.serialize(type)
+
+    @TypeConverter fun questCategoryFromString(value: String?) = QuestCategoryConverter.deserialize(value)
+    @TypeConverter fun fromQuestCategory(category: QuestCategory) = QuestCategoryConverter.serialize(category)
+
+    @TypeConverter fun questTypeFromString(value: String?) = QuestTypeConverter.deserialize(value)
+    @TypeConverter fun fromQuestType(type: QuestType) = QuestTypeConverter.serialize(type)
 }

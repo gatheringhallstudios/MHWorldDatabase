@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNodeType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 
 // we are storing an application context, so its fine
@@ -126,6 +127,24 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, color)
     }
 
+    fun loadIconFor(node: TreeNodeType, rarity: Int): Drawable? {
+        val name = when (node) {
+            TreeNodeType.START -> "NodeStart"
+            TreeNodeType.START_COLLAPSED -> "NodeStartCollapsed"
+            TreeNodeType.MID -> "NodeMid"
+            TreeNodeType.MID_COLLAPSED -> "NodeMidCollapsed"
+            TreeNodeType.THROUGH -> "NodeThrough"
+            TreeNodeType.THROUGH_COLLAPSED -> "NodeThroughCollapsed"
+            TreeNodeType.END -> "NodeEnd"
+            TreeNodeType.END_INDENTED -> "NodeEndIndented"
+        }
+        return ctx.getVectorDrawable(name, "rare$rarity")
+    }
+
+    fun loadIconFor(quest: QuestBase): Drawable? {
+        return ctx.getDrawableCompat(R.drawable.ic_question_mark)
+    }
+
     fun loadSkillIcon(color: String?): Drawable? {
         return ctx.getVectorDrawable("Skill", color)
     }
@@ -142,7 +161,7 @@ object AssetLoader {
         return ctx.getVectorDrawable(name, "rare$rarity")
     }
 
-    fun loadElementIcon(element: String?): Drawable? {
+    fun loadElementIcon(element: ElementStatus?): Drawable? {
         return ctx.getDrawableCompat(ElementRegistry(element))
     }
 
@@ -160,7 +179,6 @@ object AssetLoader {
             else -> null
         }
     }
-
 
     fun loadRarityColor(rarity: Int) : Int {
         val colorId = ColorRegistry("rare$rarity") ?: ColorRegistry("rare1")
@@ -185,6 +203,22 @@ object AssetLoader {
         WeaponType.LIGHT_BOWGUN -> ctx.getString(R.string.title_light_bowgun)
         WeaponType.HEAVY_BOWGUN -> ctx.getString(R.string.title_heavy_bowgun)
         WeaponType.BOW -> ctx.getString(R.string.title_bow)
+    }
+
+    /**
+     * Returns the localized element or status name.
+     */
+    fun localizeElementStatus(elementStatus: ElementStatus?): String = when(elementStatus) {
+        null -> ""
+        ElementStatus.FIRE -> ctx.getString(R.string.element_fire)
+        ElementStatus.WATER -> ctx.getString(R.string.element_water)
+        ElementStatus.THUNDER -> ctx.getString(R.string.element_thunder)
+        ElementStatus.ICE -> ctx.getString(R.string.element_ice)
+        ElementStatus.DRAGON -> ctx.getString(R.string.element_dragon)
+        ElementStatus.POISON -> ctx.getString(R.string.status_poison)
+        ElementStatus.SLEEP -> ctx.getString(R.string.status_sleep)
+        ElementStatus.PARALYSIS -> ctx.getString(R.string.status_paralysis)
+        ElementStatus.BLAST -> ctx.getString(R.string.status_blast)
     }
 
     /**
@@ -222,5 +256,29 @@ object AssetLoader {
         ShellingType.NORMAL -> ctx.getString(R.string.weapon_gunlance_shelling_normal)
         ShellingType.WIDE -> ctx.getString(R.string.weapon_gunlance_shelling_wide)
         ShellingType.LONG -> ctx.getString(R.string.weapon_gunlance_shelling_long)
+    }
+
+    /**
+     * Localizes the special ammo type using the current app language settings.
+     */
+    fun localizeSpecialAmmoType(type: SpecialAmmoType?): String = when (type) {
+        null -> ""
+        SpecialAmmoType.WYVERNBLAST -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernblast)
+        SpecialAmmoType.WYVERNHEART -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernheart)
+        SpecialAmmoType.WYVERNSNIPE -> ctx.getString(R.string.weapon_bowgun_special_ammo_wyvernsnipe)
+    }
+
+    fun localizeQuestCategory(category: QuestCategory?): String = when (category) {
+        null -> ""
+        QuestCategory.ASSIGNED -> ctx.getString(R.string.quest_category_assigned)
+        QuestCategory.OPTIONAL -> ctx.getString(R.string.quest_category_optional)
+        QuestCategory.EVENT -> ctx.getString(R.string.quest_category_event)
+        QuestCategory.ARENA -> ctx.getString(R.string.quest_category_arena)
+        QuestCategory.SPECIAL -> ctx.getString(R.string.quest_category_special)
+    }
+
+    fun loadFilledSlotIcon(decoration: DecorationBase, slotNumber: Int): Drawable? {
+        val assetName = "Slot${slotNumber}Jewel${decoration.slot}"
+        return ctx.getVectorDrawable(assetName, decoration.icon_color)
     }
 }

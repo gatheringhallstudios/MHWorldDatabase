@@ -28,6 +28,11 @@
     <color name="backgroundColor">#212121</color>
     <color name="backgroundColorSectionHeader">#99455A64</color>
 
+    <!-- Button Colors -->
+    <color name="backgroundButtonRipple">#33FFFFFF</color>
+    <color name="backgroundButtonSelected">#2dffffff</color>
+    <color name="backgroundButtonAction">@color/primaryLightColor</color>
+
     <!-- Asset Colors for ColorRegistry -->
     <color name="icon_gray">#C2BFBF</color>
     <color name="icon_white">#F3F3F3</color>

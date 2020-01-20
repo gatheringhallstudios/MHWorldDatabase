@@ -3,6 +3,8 @@ package com.gatheringhallstudios.mhworlddatabase.data.models
 import androidx.room.Embedded
 import androidx.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 /**
  * The base class for all weapon model types. Contains the basic identifying information
@@ -12,6 +14,7 @@ open class WeaponBase(
         val name: String,
         val rarity: Int,
         val weapon_type: WeaponType,
+        val category: WeaponCategory,
         val previous_weapon_id: Int?
 ) : MHParentedModel {
     override val entityId get() = id
@@ -19,20 +22,32 @@ open class WeaponBase(
     override val parentId get() = previous_weapon_id
 }
 
+/**
+ * Helper to calculate max element value.
+ * TODO: Once we gain a bunch of calculations, move this somewhere maybe.
+ * Perhaps use an extension instead of putting on the weapon
+ */
+fun calculateMaxElement(elementVal: Int): Int {
+    return BigDecimal(elementVal / 10 * 1.3)
+            .setScale(0, RoundingMode.HALF_DOWN)
+            .toInt() * 10
+}
+
 class Weapon(
         id: Int,
         name: String,
         rarity: Int,
         weapon_type: WeaponType,
+        category: WeaponCategory,
         previous_weapon_id: Int?,
 
         val attack: Int,
         val attack_true: Int,
         val affinity: Int,
 
-        val element1: String?,
+        val element1: ElementStatus?,
         val element1_attack: Int?,
-        val element2: String?,
+        val element2: ElementStatus?,
         val element2_attack: Int?,
         val element_hidden: Boolean,
         val defense: Int,
@@ -45,24 +60,34 @@ class Weapon(
         val shelling: ShellingType,
         val shelling_level: Int?,
         val notes: String?,
-        val special_ammo: String?
+        val special_ammo: SpecialAmmoType?
 
-) : WeaponBase(id, name, rarity, weapon_type, previous_weapon_id) {
+) : WeaponBase(id, name, rarity, weapon_type, category, previous_weapon_id) {
     @Embedded
-    lateinit var slots: WeaponSlots
+    lateinit var slots: EquipmentSlots
 
     @Embedded
     var weaponCoatings: WeaponCoatings? = null
 
     @Embedded
     var sharpnessData: WeaponSharpness? = null
+
+    /**
+     * Return the max possible value for element 1 attack power
+     */
+    val element1_attack_max get() = calculateMaxElement(element1_attack ?: 0)
+
+    /**
+     * Return the max possible value for element 2 attack power
+     */
+    val element2_attack_max get() = calculateMaxElement(element2_attack ?: 0)
 }
 
 /**
  * An embedded class representing the available slots on a weapon
  * Can be iterated on.
  */
-data class WeaponSlots(
+data class EquipmentSlots(
         val slot_1: Int,
         val slot_2: Int,
         val slot_3: Int
@@ -175,12 +200,14 @@ class WeaponFull(
 ) : MHModel {
     override val entityId get() = weapon.id
     override val entityType get() = DataType.WEAPON
+
+    constructor(weapon: Weapon, skills: List<SkillLevel>) : this(weapon, null, emptyList(), emptyMap(), skills)
 }
 
 data class WeaponAmmoData(
         val ammo_id: Int,
         val deviation: String?,
-        val special_ammo: String?,
+        val special_ammo: SpecialAmmoType?,
         val normal1_clip: Int,
         val normal1_rapid: Boolean,
         val normal1_recoil: Int,
@@ -318,7 +345,8 @@ data class WeaponAmmoData(
         val tranq_reload: ReloadType
 ) : Iterable<WeaponAmmo> {
     override fun iterator(): Iterator<WeaponAmmo> {
-        val buffer = listOf(WeaponAmmo(AmmoType.NORMAL_AMMO1, normal1_clip, normal1_rapid, normal1_reload, normal1_recoil),
+        val buffer = listOf(
+                WeaponAmmo(AmmoType.NORMAL_AMMO1, normal1_clip, normal1_rapid, normal1_reload, normal1_recoil),
                 WeaponAmmo(AmmoType.NORMAL_AMMO2, normal2_clip, normal2_rapid, normal2_reload, normal2_recoil),
                 WeaponAmmo(AmmoType.NORMAL_AMMO3, normal3_clip, normal3_rapid, normal3_reload, normal3_recoil),
                 WeaponAmmo(AmmoType.PIERCE_AMMO1, pierce1_clip, pierce1_rapid, pierce1_reload, pierce1_recoil),
@@ -337,7 +365,7 @@ data class WeaponAmmoData(
                 WeaponAmmo(AmmoType.RECOVER_AMMO2, recover2_clip, recover2_rapid, recover2_reload, recover2_recoil),
                 WeaponAmmo(AmmoType.POISON_AMMO1, poison1_clip, poison1_rapid, poison1_reload, poison1_recoil),
                 WeaponAmmo(AmmoType.POISON_AMMO2, poison2_clip, poison2_rapid, poison2_reload, poison2_recoil),
-                WeaponAmmo(AmmoType.PARALYSIS_AMMO1, paralysis1_clip, paralysis1_rapid, paralysis1_reload, paralysis2_recoil),
+                WeaponAmmo(AmmoType.PARALYSIS_AMMO1, paralysis1_clip, paralysis1_rapid, paralysis1_reload, paralysis1_recoil),
                 WeaponAmmo(AmmoType.PARALYSIS_AMMO2, paralysis2_clip, paralysis2_rapid, paralysis2_reload, paralysis2_recoil),
                 WeaponAmmo(AmmoType.SLEEP_AMMO1, sleep1_clip, sleep1_rapid, sleep1_reload, sleep1_recoil),
                 WeaponAmmo(AmmoType.SLEEP_AMMO2, sleep2_clip, sleep2_rapid, sleep2_reload, sleep2_recoil),
