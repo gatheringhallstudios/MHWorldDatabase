@@ -76,8 +76,8 @@ class Router(private val navController: NavController) {
         navController.navigate(R.id.openWeaponDetailAction, BundleBuilder().putInt(WeaponDetailPagerFragment.ARG_WEAPON_ID, weaponId).build())
     }
 
-    fun navigateUserEquipmentSetDetail(userEquipmentSet: UserEquipmentSet) {
-        navController.navigate(R.id.openUserEquipmentSetDetailAction, BundleBuilder().putSerializable(UserEquipmentSetDetailPagerFragment.ARG_USER_EQUIPMENT_SET, userEquipmentSet).build())
+    fun navigateUserEquipmentSetDetail(userEquipmentSetId: Int) {
+        navController.navigate(R.id.openUserEquipmentSetDetailAction, BundleBuilder().putInt(UserEquipmentSetDetailPagerFragment.ARG_USER_EQUIPMENT_SET_ID, userEquipmentSetId).build())
     }
 
     fun navigateUserEquipmentPieceSelector(selectorMode: Companion.SelectorMode?, activeEquipment: UserEquipment?, userEquipmentSetId: Int?, filter: ArmorType?, decorationsConfig: Companion.DecorationsConfig?) {

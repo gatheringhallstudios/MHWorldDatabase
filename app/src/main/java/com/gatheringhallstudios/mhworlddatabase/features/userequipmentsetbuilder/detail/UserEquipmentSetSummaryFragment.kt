@@ -17,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
+import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_summary.*
@@ -30,20 +31,18 @@ import kotlinx.android.synthetic.main.listitem_weapon.view.slot2
 import kotlinx.android.synthetic.main.listitem_weapon.view.slot3
 
 class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
-
-    /**
-     * Returns the viewmodel owned by the parent fragment
-     */
-    private val viewModel: UserEquipmentSetDetailViewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(UserEquipmentSetDetailViewModel::class.java)
+    private val viewModel: UserEquipmentSetViewModel by lazy {
+        ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_user_equipment_set_summary, parent, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.activeUserEquipmentSet.observe(this, Observer<UserEquipmentSet> {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.activeUserEquipmentSet.observe(viewLifecycleOwner, Observer<UserEquipmentSet> {
             populateUserEquipmentSummary(it, AppSettings.showTrueAttackValues)
         })
     }
@@ -95,6 +94,10 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         populateDecorations(weapon.weapon, view)
         // Populate stats like element, defense...
         populateComplexStats(weapon.weapon, view)
+
+        view.setOnClickListener {
+            getRouter().navigateWeaponDetail(weapon.weapon.id)
+        }
 
         weapon_list.addView(view)
     }
@@ -250,7 +253,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         for (setBonus in setBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, armor_set_set_bonus_list, false)
 
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name
