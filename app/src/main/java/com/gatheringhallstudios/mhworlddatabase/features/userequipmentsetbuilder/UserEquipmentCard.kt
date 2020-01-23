@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
@@ -353,15 +354,16 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     fun populateSkills(skills: List<SkillLevel>) {
-        with(card.skill_section) {
-            skill_list.removeAllViews()
-            visibility = if (skills.isEmpty()) View.GONE else View.VISIBLE
-        }
+        val skill_section = card.card_body.skill_section
+        val skill_list = skill_section.skill_list
+
+        skill_list.removeAllViews()
+        skill_section.isVisible = !skills.isEmpty()
 
         val inflater = LayoutInflater.from(card.context)
         for (skill in skills) {
             //Set the label for the Set name
-            val view = inflater.inflate(R.layout.listitem_skill_level, card.skill_list, false)
+            val view = inflater.inflate(R.layout.listitem_skill_level, skill_list, false)
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
@@ -375,7 +377,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                 card.getRouter().navigateSkillDetail(skill.skillTree.id)
             }
 
-            card.skill_list.addView(view)
+            skill_list.addView(view)
         }
     }
 
@@ -425,7 +427,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                             onEmptyClick: ((Int) -> Unit)? = null,
                             onClick: ((Int, UserDecoration) -> Unit)? = null,
                             onDelete: ((UserDecoration) -> Unit)? = null) {
-        with(card.decorations_section) {
+        with(card.card_body.decorations_section) {
             visibility = if (slots.isEmpty()) View.GONE else View.VISIBLE
             slot1_detail.visibility = View.GONE
             slot2_detail.visibility = View.GONE
@@ -439,16 +441,16 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             val decoration = userDecoration?.decoration
 
             val imageView = when (slotNumber) {
-                1 -> card.slot1
-                2 -> card.slot2
-                3 -> card.slot3
+                1 -> card.card_header.slot1
+                2 -> card.card_header.slot2
+                3 -> card.card_header.slot3
                 else -> throw IndexOutOfBoundsException("SlotIdx is out of range 1-3: $slotNumber")
             }
 
             val detailView = when (slotNumber) {
-                1 -> card.slot1_detail
-                2 -> card.slot2_detail
-                3 -> card.slot3_detail
+                1 -> card.card_body.slot1_detail
+                2 -> card.card_body.slot2_detail
+                3 -> card.card_body.slot3_detail
                 else -> throw IndexOutOfBoundsException("SlotIdx is out of range 1-3: $slotNumber")
             }
 
@@ -485,13 +487,16 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         with(card) {
             setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
             setBody(R.layout.view_empty_equipment_body_expandable_cardview)
+        }
+
+        with (card.card_header) {
             new_equipment_set_label.text = getString(title)
             equipment_set_icon2.setImageResource(icon)
         }
     }
 
     private fun hideSlots() {
-        with(card) {
+        with(card.card_header) {
             icon_slots.visibility = View.GONE
             slot1.visibility = View.GONE
             slot2.visibility = View.GONE
