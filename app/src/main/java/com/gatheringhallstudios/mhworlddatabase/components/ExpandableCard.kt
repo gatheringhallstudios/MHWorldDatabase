@@ -168,7 +168,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     fun setCardState(cardState: CardState) {
         when (cardState) {
             CardState.COLLAPSING, CardState.COLLAPSED -> {
-                if (this.cardState == CardState.COLLAPSING || this.cardState == CardState.COLLAPSED) return
+                if (this.cardState == CardState.COLLAPSING || this.cardState == CardState.COLLAPSED) return //TODO: Figure out why measured height is 26 pixels too large :S
                 card_header.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                 val cardHeight = card_header.measuredHeight
                 card_container.layoutParams.height = cardHeight
