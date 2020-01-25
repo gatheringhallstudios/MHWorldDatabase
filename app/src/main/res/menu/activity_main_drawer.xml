@@ -48,6 +48,10 @@
             android:id="@+id/bookmarksListDestination"
             android:icon="@drawable/ic_ui_bookmark"
             android:title="@string/title_bookmarks" />
+        <item
+            android:id="@+id/armorSetBuilderDestination"
+            android:icon="@drawable/ic_ui_buildable_white"
+            android:title="@string/title_armor_set_builder" />
     </group>
 
     <item android:title="Other">
@@ -67,13 +71,10 @@
         </menu>
     </item>
 
-    <item android:title="Debug Only"
+    <item
+        android:title="Debug Only"
         android:visible="@bool/DEBUG">
         <menu>
-            <item
-                android:id="@+id/armorSetBuilderDestination"
-                android:icon="@drawable/ic_ui_buildable_white"
-                android:title="@string/title_armor_set_builder" />
             <item
                 android:id="@+id/testDestination"
                 android:icon="@drawable/ic_ui_mascot"
