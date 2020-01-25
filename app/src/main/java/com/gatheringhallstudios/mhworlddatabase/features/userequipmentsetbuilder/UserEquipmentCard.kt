@@ -90,9 +90,11 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         card.setBody(R.layout.view_base_body_expandable_cardview)
         card.setCardElevation(1f)
 
-        card.equipment_name.text = weapon.name
-        card.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
-        card.attack_value.text = weapon.attack.toString()
+        val header = card.card_header
+        header.equipment_name.text = weapon.name
+        header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
+        header.attack_value.text = weapon.attack.toString()
+
         card.decorations_section.visibility = View.GONE
         bindRarity(weapon.rarity)
         populateSkills(weaponFull.skills)
@@ -186,15 +188,16 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         card.setBody(R.layout.view_base_body_expandable_cardview)
         card.setCardElevation(1f)
 
-        card.equipment_name.text = armor.armor.name
-        card.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
-        card.defense_value.text = getString(
+        val header = card.card_header
+        header.equipment_name.text = armor.armor.name
+        header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(armor.armor))
+        header.defense_value.text = getString(
                 R.string.armor_defense_value,
                 armor.armor.defense_base,
                 armor.armor.defense_max,
                 armor.armor.defense_augment_max)
-        card.decorations_section.visibility = View.GONE
 
+        card.decorations_section.visibility = View.GONE
         bindRarity(armor.armor.rarity)
         populateSkills(armor.skills)
         populateSetBonuses(armor.setBonuses)
@@ -251,10 +254,12 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         card.setBody(R.layout.view_base_body_expandable_cardview)
         card.setCardElevation(1f)
 
-        card.equipment_name.text = charm.charm.name
-        card.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(charm.charm))
-        card.defense_value.visibility = View.GONE
-        card.icon_defense.visibility = View.GONE
+        val header = card.card_header
+        header.equipment_name.text = charm.charm.name
+        header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(charm.charm))
+        header.defense_value.visibility = View.GONE
+        header.icon_defense.visibility = View.GONE
+
         card.decorations_section.visibility = View.GONE
         bindRarity(charm.charm.rarity)
         populateSkills(charm.skills)
@@ -271,9 +276,10 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
      * Internal function to enable the rarity string and display the value
      */
     private fun bindRarity(rarity: Int) {
-        card.rarity_string.text = getString(R.string.format_rarity, rarity)
-        card.rarity_string.setTextColor(AssetLoader.loadRarityColor(rarity))
-        card.rarity_string.visibility = View.VISIBLE
+        val header = card.card_header
+        header.rarity_string.text = getString(R.string.format_rarity, rarity)
+        header.rarity_string.setTextColor(AssetLoader.loadRarityColor(rarity))
+        header.rarity_string.visibility = View.VISIBLE
     }
 
     /**
@@ -300,15 +306,16 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             onClick?.invoke()
         }
 
-        card.equipment_name.text = decoration.name
-        card.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
-        card.defense_value.visibility = View.GONE
-        card.icon_defense.visibility = View.GONE
-        card.icon_slots.visibility = View.GONE
-        card.BaseSlotSection.visibility = View.GONE
+        val header = card.card_header
+        header.equipment_name.text = decoration.name
+        header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(decoration))
+        header.defense_value.visibility = View.GONE
+        header.icon_defense.visibility = View.GONE
+        header.icon_slots.visibility = View.GONE
+        header.BaseSlotSection.visibility = View.GONE
+
         card.set_bonus_section.visibility = View.GONE
         card.decorations_section.visibility = View.GONE
-
 
         bindRarity(decoration.rarity)
 
