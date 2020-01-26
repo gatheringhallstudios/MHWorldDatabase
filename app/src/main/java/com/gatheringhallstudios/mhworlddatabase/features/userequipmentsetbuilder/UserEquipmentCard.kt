@@ -95,7 +95,10 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
         header.attack_value.text = weapon.attack.toString()
 
-        card.decorations_section.visibility = View.GONE
+        val body = card.card_body
+        body.decorations_section.visibility = View.GONE
+        body.set_bonus_section.visibility = View.GONE
+
         bindRarity(weapon.rarity)
         populateSkills(weaponFull.skills)
         populateSetBonuses(emptyList())
@@ -314,8 +317,9 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         header.icon_slots.visibility = View.GONE
         header.BaseSlotSection.visibility = View.GONE
 
-        card.set_bonus_section.visibility = View.GONE
-        card.decorations_section.visibility = View.GONE
+        val body = card.card_body
+        body.set_bonus_section.visibility = View.GONE
+        body.decorations_section.visibility = View.GONE
 
         bindRarity(decoration.rarity)
 
