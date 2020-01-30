@@ -25,12 +25,12 @@ import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
 import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot_section as BaseSlotSection
 import kotlinx.android.synthetic.main.view_empty_equipment_header_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
+import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot_section as BaseSlotSection
 
 /**
  * Wrapper over the ExpandableCardView used to display equipment data.
@@ -339,12 +339,12 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             ArmorType.ARMS -> R.drawable.ic_equipment_arm_empty
             ArmorType.WAIST -> R.drawable.ic_equipment_waist_empty
             ArmorType.LEGS -> R.drawable.ic_equipment_leg_empty
-            else -> R.drawable.ic_equipment_armor_set_empty
+            else -> R.drawable.ic_equipment_charm_empty
         })
     }
 
     fun bindEmptyCharm() {
-        setEmptyView(R.string.user_equipment_set_no_charm, R.drawable.ic_equipment_armor_set_empty)
+        setEmptyView(R.string.user_equipment_set_no_charm, R.drawable.ic_equipment_charm_empty)
     }
 
     fun bindEmptyDecoration(slotSize: Int) {
@@ -386,26 +386,22 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     fun populateSetBonuses(setBonuses: List<ArmorSetBonus>) {
-        card.set_bonus_list.removeAllViews()
-        card.set_bonus_section.visibility = if (setBonuses.isEmpty()) View.GONE else View.VISIBLE
-
-        val inflater = LayoutInflater.from(card.context)
-
+        val cardBody = card.card_body
+        cardBody.set_bonus_list.removeAllViews()
+        cardBody.set_bonus_section.visibility = if (setBonuses.isEmpty()) View.GONE else View.VISIBLE
+        val inflater = LayoutInflater.from(cardBody.context)
         //Now to set the actual skills
         for (setBonus in setBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
             val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, card.set_bonus_list, false)
-
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name
             listItem.bonus_requirement.setImageResource(reqIcon)
-
             listItem.setOnClickListener {
                 card.getRouter().navigateSkillDetail(setBonus.skillTree.id)
             }
-
-            card.set_bonus_list.addView(listItem)
+            cardBody.set_bonus_list.addView(listItem)
         }
     }
 
@@ -416,7 +412,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     fun populateSlots(slots: EquipmentSlots?) {
         if (slots != null) {
             this.populateDecorations(slots, emptyList())
-            card.decorations_section.visibility = View.GONE
+            card.card_body.decorations_section.visibility = View.GONE
         }
     }
 
@@ -486,16 +482,16 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
         card.setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
         card.setBody(R.layout.view_empty_equipment_body_expandable_cardview)
-        card.new_equipment_set_label.text = getString(title)
-        card.equipment_set_icon2.setImageResource(icon)
+        card.card_header.new_equipment_set_label.text = getString(title)
+        card.card_header.equipment_set_icon2.setImageResource(icon)
 
     }
 
     private fun hideSlots() {
-        card.icon_slots.visibility = View.GONE
-        card.slot1.visibility = View.GONE
-        card.slot2.visibility = View.GONE
-        card.slot3.visibility = View.GONE
+        card.card_header.icon_slots.visibility = View.GONE
+        card.card_header.slot1.visibility = View.GONE
+        card.card_header.slot2.visibility = View.GONE
+        card.card_header.slot3.visibility = View.GONE
     }
 
     private fun combineEquipmentSkillsWithDecorationSkills(equipmentSkills: List<SkillLevel>, decorationSkills: List<SkillLevel>): List<SkillLevel> {
