@@ -23,8 +23,23 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
     private var activeUserEquipment: UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
     private var _userEquipmentSets = MutableLiveData<MutableList<UserEquipmentSet>>()
 
+
     val activeUserEquipmentSet: LiveData<UserEquipmentSet> = _activeUserEquipmentSet
     val userEquipmentSets: LiveData<MutableList<UserEquipmentSet>> = _userEquipmentSets
+
+    //Keeps track of the state of equipment cards on the armor set edit fragment
+    private var _armorSetCardStates = mutableMapOf(0 to false, 1 to false, 2 to false, 3 to false, 4 to false, 5 to false, 6 to false)
+    val armorSetCardStates: Map<Int, Boolean> = _armorSetCardStates
+
+    fun updateCardState(cardIndex: Int, state: Boolean) {
+        _armorSetCardStates[cardIndex] = state
+    }
+
+    fun resetCardStates() {
+        for ((key, _) in _armorSetCardStates) {
+            _armorSetCardStates[key] = false
+        }
+    }
 
     fun setActiveUserEquipment(userEquipment: UserEquipment?) {
         this.activeUserEquipment = userEquipment

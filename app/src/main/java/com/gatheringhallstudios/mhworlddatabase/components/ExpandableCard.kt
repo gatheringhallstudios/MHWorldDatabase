@@ -52,7 +52,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var onExpand: () -> Unit = {}
     private var onContract: () -> Unit = {}
 
-    private enum class CardState {
+    enum class CardState {
         EXPANDED,
         EXPANDING,
         COLLAPSED,
@@ -98,6 +98,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             setRightLayout(swipeRightIcon, swipeRightBackground)
             setHeader(headerLayout)
             setBody(bodyLayout)
+            this.cardState = CardState.COLLAPSED
             attributes.recycle()
         }
 
@@ -158,6 +159,26 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             val layoutParams = card_container.layoutParams
             layoutParams.height = card_header.height
             card_container.layoutParams = layoutParams
+        }
+    }
+
+    /**
+     * Sets the card state to either full expanded or full collapsed immediately without the animation
+     */
+    fun setCardState(cardState: CardState) {
+        when (cardState) {
+            CardState.COLLAPSING, CardState.COLLAPSED -> {
+                if (this.cardState == CardState.COLLAPSING || this.cardState == CardState.COLLAPSED) return //TODO: Figure out why measured height is 26 pixels too large :S
+                card_header.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                val cardHeight = card_header.measuredHeight
+                card_container.layoutParams.height = cardHeight
+                this.cardState = CardState.COLLAPSED
+            }
+            CardState.EXPANDING, CardState.EXPANDED -> {
+                card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                card_container.layoutParams.height = card_layout.measuredHeight
+                this.cardState = CardState.EXPANDED
+            }
         }
     }
 

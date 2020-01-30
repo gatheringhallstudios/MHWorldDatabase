@@ -5,6 +5,7 @@ import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentCard
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
@@ -68,6 +69,26 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         inflater.inflate(R.menu.menu_user_equipment_set_editor, menu)
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.armorSetCardStates.forEach { (key, value) ->
+            when (key) {
+                0 -> weaponCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+                1 -> headArmorCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+                2 -> armArmorCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+                3 -> chestArmorCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+                4 -> waistArmorCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+                5 -> legArmorCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+                6 -> charmCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+            }
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        viewModel.resetCardStates()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         super.onOptionsItemSelected(item)
@@ -109,12 +130,14 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(weapon!!)
                     viewModel.deleteUserEquipment(weapon!!.entityId(), userEquipmentSet.id, weapon.type())
+                    viewModel.updateCardState(0, false)
                     refreshFragment()
-                })
+                },
+                onExpand = { viewModel.updateCardState(0, true) },
+                onContract = { viewModel.updateCardState(0, false) })
         if (weapon != null) {
             populateDecorations(weapon, userEquipmentSet.id, weaponCard)
         }
-
 
         val headArmor = userEquipmentSet.getHeadArmor()
         headArmorCard.bindHeadArmor(headArmor, userEquipmentSet.id,
@@ -126,8 +149,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(headArmor!!)
                     viewModel.deleteUserEquipment(headArmor!!.entityId(), userEquipmentSet.id, headArmor!!.type())
+                    viewModel.updateCardState(1, false)
                     refreshFragment()
-                })
+                },
+                onExpand = { viewModel.updateCardState(1, true) },
+                onContract = { viewModel.updateCardState(1, false) })
         if (headArmor != null) {
             populateDecorations(headArmor, userEquipmentSet.id, headArmorCard)
         }
@@ -142,8 +168,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(armArmor!!)
                     viewModel.deleteUserEquipment(armArmor!!.entityId(), userEquipmentSet.id, armArmor.type())
+                    viewModel.updateCardState(2, false)
                     refreshFragment()
-                })
+                },
+                onExpand = { viewModel.updateCardState(2, true) },
+                onContract = { viewModel.updateCardState(2, false) })
         if (armArmor != null) {
             populateDecorations(armArmor, userEquipmentSet.id, armArmorCard)
         }
@@ -158,8 +187,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(chestArmor!!)
                     viewModel.deleteUserEquipment(chestArmor!!.entityId(), userEquipmentSet.id, chestArmor.type())
+                    viewModel.updateCardState(3, false)
                     refreshFragment()
-                })
+                },
+                onExpand = { viewModel.updateCardState(3, true) },
+                onContract = { viewModel.updateCardState(3, false) })
         if (chestArmor != null) {
             populateDecorations(chestArmor, userEquipmentSet.id, chestArmorCard)
         }
@@ -174,8 +206,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor!!)
                     viewModel.deleteUserEquipment(legArmor!!.entityId(), userEquipmentSet.id, legArmor.type())
+                    viewModel.updateCardState(4, false)
                     refreshFragment()
-                })
+                },
+                onExpand = { viewModel.updateCardState(4, true) },
+                onContract = { viewModel.updateCardState(4, false) })
         if (legArmor != null) {
             populateDecorations(legArmor, userEquipmentSet.id, legArmorCard)
         }
@@ -190,8 +225,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(waistArmor!!)
                     viewModel.deleteUserEquipment(waistArmor!!.entityId(), userEquipmentSet.id, waistArmor.type())
+                    viewModel.updateCardState(5, false)
                     refreshFragment()
-                })
+                },
+                onExpand = { viewModel.updateCardState(5, true) },
+                onContract = { viewModel.updateCardState(5, false) })
         if (waistArmor != null) {
             populateDecorations(waistArmor, userEquipmentSet.id, waistArmorCard)
         }
@@ -206,8 +244,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(charm!!)
                     viewModel.deleteUserEquipment(charm!!.entityId(), userEquipmentSet.id, charm.type())
+                    viewModel.updateCardState(6, false)
                     refreshFragment()
-                })
+                },
+                onExpand = { viewModel.updateCardState(6, true) },
+                onContract = { viewModel.updateCardState(6, false) })
     }
 
     private fun populateDecorations(userEquipment: UserEquipment?, userEquipmentSetId: Int, card: UserEquipmentCard) {

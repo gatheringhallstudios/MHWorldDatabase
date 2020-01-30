@@ -43,5 +43,6 @@ class UserEquipmentSetWeaponSelectorAdapter(private val onSelected: (WeaponFull)
     override fun bindView(viewHolder: SimpleViewHolder, data: WeaponFull) {
         val card = UserEquipmentCard(viewHolder.itemView as ExpandableCardView)
         card.bindWeapon(data, onClick = { onSelected(data) }, onSwipeRight = null)
+        card.populateSlots(data.weapon.slots)
     }
 }
