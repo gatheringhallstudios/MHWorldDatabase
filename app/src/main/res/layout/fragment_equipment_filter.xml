@@ -43,16 +43,15 @@
     <!--        layout="@layout/fragment_weapon_filter_body"-->
     <ViewStub
         android:id="@+id/scroll_body"
-        android:inflatedId="@+id/scroll_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_large"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_filter"
+        android:inflatedId="@+id/scroll_body"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar_filter"
+        app:layout_constraintBottom_toTopOf="@id/action_apply" />
 
     <Button
         android:id="@+id/action_cancel"
@@ -61,11 +60,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_large"
-        android:layout_marginBottom="@dimen/margin_large"
         android:text="@string/action_cancel"
-        app:layout_constraintTop_toBottomOf="@id/scroll_body"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/action_apply"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scroll_body" />
 
     <Button
         android:id="@+id/action_apply"
@@ -73,10 +72,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_large"
-        android:layout_marginBottom="@dimen/margin_large"
         android:text="@string/action_apply"
-        app:layout_constraintTop_toBottomOf="@id/scroll_body"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/action_cancel" />
+        app:layout_constraintStart_toEndOf="@id/action_cancel"
+        app:layout_constraintTop_toTopOf="@id/action_cancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

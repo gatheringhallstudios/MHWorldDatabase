@@ -40,6 +40,8 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
                     },
                     onDelete = { itr, idx, adapter ->
                         viewModel.userEquipmentSets.value?.remove(itr)
+
+                        //Show UNDO snackbar
                         val snackBar = Snackbar.make(view, getString(R.string.user_equipment_set_deleted, itr.name), Snackbar.LENGTH_LONG).setAction(R.string.action_undo) {
                             viewModel.userEquipmentSets.value?.add(idx, itr)
                             adapter.notifyItemInserted(idx)

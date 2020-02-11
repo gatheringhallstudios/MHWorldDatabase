@@ -329,11 +329,11 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     fun bindEmptyWeapon() {
-        setEmptyView(R.string.user_equipment_set_no_weapon, R.drawable.ic_equipment_weapon_empty)
+        setEmptyView(R.string.user_equipment_set_no_equipment, R.drawable.ic_equipment_weapon_empty)
     }
 
     fun bindEmptyArmor(type: ArmorType?) {
-        setEmptyView(R.string.user_equipment_set_no_armor, when (type) {
+        setEmptyView(R.string.user_equipment_set_no_equipment, when (type) {
             ArmorType.HEAD -> R.drawable.ic_equipment_head_empty
             ArmorType.CHEST -> R.drawable.ic_equipment_chest_empty
             ArmorType.ARMS -> R.drawable.ic_equipment_arm_empty
@@ -344,7 +344,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     fun bindEmptyCharm() {
-        setEmptyView(R.string.user_equipment_set_no_charm, R.drawable.ic_equipment_charm_empty)
+        setEmptyView(R.string.user_equipment_set_no_equipment, R.drawable.ic_equipment_charm_empty)
     }
 
     fun bindEmptyDecoration(slotSize: Int) {
@@ -477,7 +477,6 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             }
         }
     }
-
 
     private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
         card.setHeader(R.layout.view_empty_equipment_header_expandable_cardview)

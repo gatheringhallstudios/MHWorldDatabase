@@ -33,6 +33,7 @@ class UserEquipmentSet(
         }
     }
 
+    var maxRarity:Int = 0
     var defense_base: Int = 0
     var defense_max: Int = 0
     var defense_augment_max: Int = 0

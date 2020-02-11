@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
+import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentCard
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
@@ -82,6 +84,8 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                 6 -> charmCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
             }
         }
+
+        resetCardIfNewEquipmentChosen()
     }
 
     override fun onDetach() {
@@ -123,7 +127,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         val weapon = userEquipmentSet.getWeapon()
         weaponCard.bindWeapon(weapon, userEquipmentSet.id,
                 onClick = {
-                    viewModel.setActiveUserEquipment(weapon)
+                    viewModel.activeUserEquipment = weapon
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, weapon,
                             userEquipmentSet.id, null, null)
                 },
@@ -142,7 +146,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         val headArmor = userEquipmentSet.getHeadArmor()
         headArmorCard.bindHeadArmor(headArmor, userEquipmentSet.id,
                 onClick = {
-                    viewModel.setActiveUserEquipment(headArmor)
+                    viewModel.activeUserEquipment = headArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, headArmor,
                             userEquipmentSet.id, headArmor!!.armor.armor.armor_type, null)
                 },
@@ -161,7 +165,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         val armArmor = userEquipmentSet.getArmArmor()
         armArmorCard.bindArmArmor(armArmor, userEquipmentSet.id,
                 onClick = {
-                    viewModel.setActiveUserEquipment(armArmor)
+                    viewModel.activeUserEquipment = armArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armArmor,
                             userEquipmentSet.id, armArmor!!.armor.armor.armor_type, null)
                 },
@@ -180,7 +184,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         val chestArmor = userEquipmentSet.getChestArmor()
         chestArmorCard.bindChestArmor(chestArmor, userEquipmentSet.id,
                 onClick = {
-                    viewModel.setActiveUserEquipment(chestArmor)
+                    viewModel.activeUserEquipment = chestArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, chestArmor,
                             userEquipmentSet.id, chestArmor!!.armor.armor.armor_type, null)
                 },
@@ -196,48 +200,48 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
             populateDecorations(chestArmor, userEquipmentSet.id, chestArmorCard)
         }
 
-        val legArmor = userEquipmentSet.getLegArmor()
-        legArmorCard.bindLegArmor(legArmor, userEquipmentSet.id,
-                onClick = {
-                    viewModel.setActiveUserEquipment(legArmor)
-                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, legArmor,
-                            userEquipmentSet.id, legArmor!!.armor.armor.armor_type, null)
-                },
-                onSwipeRight = {
-                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor!!)
-                    viewModel.deleteUserEquipment(legArmor!!.entityId(), userEquipmentSet.id, legArmor.type())
-                    viewModel.updateCardState(4, false)
-                    refreshFragment()
-                },
-                onExpand = { viewModel.updateCardState(4, true) },
-                onContract = { viewModel.updateCardState(4, false) })
-        if (legArmor != null) {
-            populateDecorations(legArmor, userEquipmentSet.id, legArmorCard)
-        }
-
         val waistArmor = userEquipmentSet.getWaistArmor()
         waistArmorCard.bindWaistArmor(waistArmor, userEquipmentSet.id,
                 onClick = {
-                    viewModel.setActiveUserEquipment(waistArmor)
+                    viewModel.activeUserEquipment = waistArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, waistArmor,
                             userEquipmentSet.id, waistArmor!!.armor.armor.armor_type, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(waistArmor!!)
                     viewModel.deleteUserEquipment(waistArmor!!.entityId(), userEquipmentSet.id, waistArmor.type())
+                    viewModel.updateCardState(4, false)
+                    refreshFragment()
+                },
+                onExpand = { viewModel.updateCardState(4, true) },
+                onContract = { viewModel.updateCardState(4, false) })
+        if (waistArmor != null) {
+            populateDecorations(waistArmor, userEquipmentSet.id, waistArmorCard)
+        }
+
+        val legArmor = userEquipmentSet.getLegArmor()
+        legArmorCard.bindLegArmor(legArmor, userEquipmentSet.id,
+                onClick = {
+                    viewModel.activeUserEquipment = legArmor
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, legArmor,
+                            userEquipmentSet.id, legArmor!!.armor.armor.armor_type, null)
+                },
+                onSwipeRight = {
+                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor!!)
+                    viewModel.deleteUserEquipment(legArmor!!.entityId(), userEquipmentSet.id, legArmor.type())
                     viewModel.updateCardState(5, false)
                     refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(5, true) },
                 onContract = { viewModel.updateCardState(5, false) })
-        if (waistArmor != null) {
-            populateDecorations(waistArmor, userEquipmentSet.id, waistArmorCard)
+        if (legArmor != null) {
+            populateDecorations(legArmor, userEquipmentSet.id, legArmorCard)
         }
 
         val charm = userEquipmentSet.getCharm()
         charmCard.bindCharm(charm, userEquipmentSet.id,
                 onClick = {
-                    viewModel.setActiveUserEquipment(charm)
+                    viewModel.activeUserEquipment = charm
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, charm, userEquipmentSet.id,
                             null, null)
                 },
@@ -275,7 +279,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
                             Companion.DecorationsConfig(userEquipment.entityId(), slotNumber, userEquipment.type(), slots[slotNumber - 1]))
                 },
                 onClick = { slotNumber, userDecoration ->
-                    viewModel.setActiveUserEquipment(userDecoration)
+                    viewModel.activeUserEquipment = userDecoration
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION,
                             userDecoration, userEquipmentSetId, null,
                             Companion.DecorationsConfig(
@@ -289,6 +293,60 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
                 }
         )
+    }
+
+    private fun resetCardIfNewEquipmentChosen() {
+        when (viewModel.activeUserEquipment?.type()) {
+            DataType.CHARM -> {
+                if (viewModel.activeUserEquipment?.entityId() != viewModel.activeUserEquipmentSet.value?.getCharm()?.entityId()) {
+                    charmCard.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                    viewModel.updateCardState(6, false)
+                }
+            }
+            DataType.ARMOR -> {
+                val armor = viewModel.activeUserEquipment as UserArmorPiece?
+                when(armor?.armor?.armor?.armor_type) {
+                    ArmorType.HEAD -> {
+                        if (armor.entityId() != viewModel.activeUserEquipmentSet.value?.getHeadArmor()?.entityId()) {
+                            headArmorCard.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                            viewModel.updateCardState(1, false)
+                        }
+                    }
+                    ArmorType.CHEST -> {
+                        if (armor.entityId() != viewModel.activeUserEquipmentSet.value?.getChestArmor()?.entityId()) {
+                            chestArmorCard.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                            viewModel.updateCardState(2, false)
+                        }
+                    }
+                    ArmorType.ARMS -> {
+                        if (armor.entityId() != viewModel.activeUserEquipmentSet.value?.getArmArmor()?.entityId()) {
+                            armArmorCard.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                            viewModel.updateCardState(3, false)
+                        }
+                    }
+                    ArmorType.WAIST -> {
+                        if (armor.entityId() != viewModel.activeUserEquipmentSet.value?.getWaistArmor()?.entityId()) {
+                            waistArmorCard.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                            viewModel.updateCardState(4, false)
+                        }
+                    }
+                    ArmorType.LEGS -> {
+                        if (armor.entityId() != viewModel.activeUserEquipmentSet.value?.getLegArmor()?.entityId()) {
+                            legArmorCard.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                            viewModel.updateCardState(5, false)
+                        }
+                    }
+                }
+            }
+            DataType.WEAPON -> {
+                if (viewModel.activeUserEquipment?.entityId() != viewModel.activeUserEquipmentSet.value?.getWeapon()?.entityId()) {
+                    weaponCard.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                    viewModel.updateCardState(0, false)
+
+                }
+            }
+            else -> {}
+        }
     }
 
     private fun refreshFragment() {

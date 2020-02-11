@@ -10,6 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.*
+import kotlin.math.max
 
 class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(application) {
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
@@ -20,12 +21,12 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
 
 
     private var _activeUserEquipmentSet = MutableLiveData<UserEquipmentSet>()
-    private var activeUserEquipment: UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
     private var _userEquipmentSets = MutableLiveData<MutableList<UserEquipmentSet>>()
 
 
     val activeUserEquipmentSet: LiveData<UserEquipmentSet> = _activeUserEquipmentSet
     val userEquipmentSets: LiveData<MutableList<UserEquipmentSet>> = _userEquipmentSets
+    var activeUserEquipment: UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
 
     //Keeps track of the state of equipment cards on the armor set edit fragment
     private var _armorSetCardStates = mutableMapOf(0 to false, 1 to false, 2 to false, 3 to false, 4 to false, 5 to false, 6 to false)
@@ -39,10 +40,6 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
         for ((key, _) in _armorSetCardStates) {
             _armorSetCardStates[key] = false
         }
-    }
-
-    fun setActiveUserEquipment(userEquipment: UserEquipment?) {
-        this.activeUserEquipment = userEquipment
     }
 
     fun setActiveUserEquipmentSet(id: Int) {
@@ -91,6 +88,7 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
                 appDao.deleteUserEquipmentEquipment(userEquipmentId, type, userEquipmentSetId)
                 appDao.deleteUserEquipmentDecorations(userEquipmentSetId, userEquipmentId, type)
             }
+            _activeUserEquipmentSet.value = getEquipmentSet(userEquipmentSetId)
         }
     }
 
@@ -161,7 +159,6 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
                                 decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
                                 slotNumber = decorationIds.slotNumber)
                     }.sortedWith(compareBy(UserDecoration::slotNumber))
-
                     userEquipment.add(UserArmorPiece(
                             equipmentSetId = userEquipmentSetIds.id,
                             armor = armorDao.loadArmorFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
@@ -174,7 +171,6 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
                                 decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
                                 slotNumber = decorationIds.slotNumber)
                     }.toMutableList()
-
                     userEquipment.add(UserWeapon(
                             equipmentSetId = userEquipmentSetIds.id,
                             weapon = weaponDao.loadWeaponFullSync(AppSettings.dataLocale, userEquipmentId.dataId),
@@ -202,9 +198,34 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
             set.dragonDefense = calculateDragonDefense(userEquipment)
             set.skills = calculateSkillLevels(userEquipment)
             set.setBonuses = calculateSetBonuses(userEquipment)
+            set.maxRarity = calculateMaxRarity(userEquipment)
 
             set
         }()
+    }
+
+    private fun calculateMaxRarity(userEquipment: List<UserEquipment>): Int {
+        var maxRarity = 0
+        userEquipment.forEach {
+            var rarity = 0
+            when (it.type()) {
+                DataType.ARMOR -> {
+                    val armor = it as UserArmorPiece
+                    rarity = armor.armor.armor.rarity
+                }
+                DataType.WEAPON -> {
+                    val weapon = it as UserWeapon
+                    rarity = weapon.weapon.weapon.rarity
+                }
+                DataType.CHARM -> {
+                    val charm = it as UserCharm
+                    rarity = charm.charm.charm.rarity
+                }
+                else -> 0
+            }
+            maxRarity = if (rarity > maxRarity) rarity else maxRarity
+        }
+        return maxRarity
     }
 
     private fun calculateSetBonuses(userEquipment: List<UserEquipment>): MutableMap<String, List<ArmorSetBonus>> {

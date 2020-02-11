@@ -7,7 +7,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large">
 
         <TextView
             android:id="@+id/title_show_only"
@@ -367,6 +369,13 @@
             </com.google.android.flexbox.FlexboxLayout>
 
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/bottom_space"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/padding_footer_space"
+            app:layout_constraintTop_toBottomOf="@id/rank_toggles" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

@@ -2,7 +2,8 @@
     android:width="72dp"
     android:height="72dp"
     android:viewportWidth="512"
-    android:viewportHeight="512">
+    android:viewportHeight="512"
+    android:tint="@color/icon_gray">
     <path
         android:fillColor="#E2E2E2"
         android:fillType="evenOdd"

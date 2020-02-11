@@ -17,7 +17,9 @@
             android:layout_marginTop="@dimen/margin_large"
             android:text="@string/filter_title_show_only"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"/>
 
         <TextView
             android:id="@+id/title_name_filter"
@@ -27,7 +29,9 @@
             android:layout_marginTop="@dimen/margin_large"
             android:text="@string/user_equipment_set_filter_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_show_only" />
+            app:layout_constraintTop_toBottomOf="@+id/title_show_only"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"/>
 
         <LinearLayout
             android:id="@+id/name_filter_entries"
@@ -35,7 +39,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_name_filter">
+            app:layout_constraintTop_toBottomOf="@id/title_name_filter"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large">
 
             <EditText
                 android:id="@+id/name_filter_edittext"
@@ -53,7 +59,9 @@
             android:layout_marginTop="@dimen/margin_large"
             android:text="@string/title_skills"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_filter_entries" />
+            app:layout_constraintTop_toBottomOf="@+id/name_filter_entries"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"/>
 
         <LinearLayout
             android:id="@+id/skill_list"
