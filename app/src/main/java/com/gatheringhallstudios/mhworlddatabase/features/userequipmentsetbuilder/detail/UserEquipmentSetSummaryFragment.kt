@@ -53,7 +53,7 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_set_bonus_list.removeAllViews()
         weapon_list.removeAllViews()
 
-        armor_set_header.setIconDrawable(context!!.getVectorDrawable("ArmorChest", "rare1"))
+        armor_set_header.setIconDrawable(context!!.getVectorDrawable("ArmorChest", "rare${userEquipmentSet.maxRarity}"))
 
         armor_set_header.setTitleText(userEquipmentSet.name)
         armor_set_defense_value.text = getString(

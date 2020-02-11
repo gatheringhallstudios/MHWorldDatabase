@@ -384,7 +384,9 @@ class SkillGroup {
 
     fun emptyList() {
         this.list = list.map {
-            it.copy(second = null)
+            val res = it.copy(second = null)
+            res.first.hideButton()
+            res
         }.toMutableList()
     }
 
@@ -427,6 +429,7 @@ class SkillGroup {
             val icon = if (skill != null) AssetLoader.loadIconFor(skill) else null
             registered.setLeftIconDrawable(icon)
             registered.setLabelText(skill?.name)
+            registered.showButton()
         }
     }
 
@@ -446,9 +449,12 @@ class SkillGroup {
         for (pair in list) {
             val registered = pair.first
             val skill = pair.second
-            val icon = if (skill != null) AssetLoader.loadIconFor(skill) else null
-            registered.setLeftIconDrawable(icon)
-            registered.setLabelText(skill?.name)
+            if (skill != null) {
+                val icon = AssetLoader.loadIconFor(skill)
+                registered.showButton()
+                registered.setLeftIconDrawable(icon)
+                registered.setLabelText(skill?.name)
+            }
         }
     }
 
@@ -460,6 +466,7 @@ class SkillGroup {
 
             buf.first.setLeftIconDrawable(null)
             buf.first.setLabelText(null)
+            buf.first.hideButton()
         }
     }
 }

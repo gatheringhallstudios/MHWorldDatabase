@@ -94,6 +94,10 @@ class IconLabelButtonCell : ConstraintLayout {
         cell_button.visibility = View.GONE
     }
 
+    fun showButton() {
+        cell_button.visibility = View.VISIBLE
+    }
+
     /**
      * Removes the decorator around the icon.
      * TODO Make this an instantiation flag if necessary

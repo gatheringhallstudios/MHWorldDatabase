@@ -155,11 +155,6 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         resetState()
-        if (cardState == CardState.EXPANDED) {
-            val layoutParams = card_container.layoutParams
-            layoutParams.height = card_header.height
-            card_container.layoutParams = layoutParams
-        }
     }
 
     /**
@@ -168,16 +163,19 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     fun setCardState(cardState: CardState) {
         when (cardState) {
             CardState.COLLAPSING, CardState.COLLAPSED -> {
-                if (this.cardState == CardState.COLLAPSING || this.cardState == CardState.COLLAPSED) return //TODO: Figure out why measured height is 26 pixels too large :S
-                card_header.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-                val cardHeight = card_header.measuredHeight
-                card_container.layoutParams.height = cardHeight
                 this.cardState = CardState.COLLAPSED
+                val headerParams = card_header.layoutParams
+                //Using the layout params instead of the height param because the height may not yet be set when setCardState is called.
+                card_container.layoutParams = card_container.layoutParams.apply {
+                    height = headerParams.height
+                }
+                card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
             }
             CardState.EXPANDING, CardState.EXPANDED -> {
                 card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                 card_container.layoutParams.height = card_layout.measuredHeight
                 this.cardState = CardState.EXPANDED
+                card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_less))
             }
         }
     }
@@ -236,6 +234,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         val layoutParams3 = right_icon_layout.layoutParams
         layoutParams3.width = 0
         right_icon_layout.layoutParams = layoutParams3
+
+        if (cardState == CardState.EXPANDED) {
+            val cardLayoutParams = card_container.layoutParams
+            cardLayoutParams.height = card_header.height
+            card_container.layoutParams = cardLayoutParams
+            card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
+        }
     }
 
     fun setOnExpand(onExpand: () -> Unit) {

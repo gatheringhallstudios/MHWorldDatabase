@@ -63,7 +63,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
                 notifyItemRemoved(position)
             }
 
-            viewHolder.view.setHeader(R.layout.view_base_header_expandable_cardview)
+            viewHolder.view.setHeader(R.layout.view_user_equipment_set_header_expandable_cardview)
             viewHolder.view.setBody(R.layout.view_user_equipment_set_body_expandable_cardview)
             viewHolder.view.setCardElevation(1f)
             viewHolder.bind(userEquipmentSet)
@@ -78,7 +78,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
     internal inner class EquipmentSetHolder(val view: View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("ResourceType")
         fun bind(data: UserEquipmentSet) {
-            view.card_header.equipment_icon.setImageDrawable(view.context!!.getVectorDrawable("ArmorSet", "rare1"))
+            view.card_header.equipment_icon.setImageDrawable(view.context!!.getVectorDrawable("ArmorSet", "rare${data.maxRarity}"))
 
             view.card_header.equipment_name.text = data.name
             view.card_header.icon_slots.visibility = View.GONE
