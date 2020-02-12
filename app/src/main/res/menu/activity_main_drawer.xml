@@ -42,7 +42,7 @@
             android:title="@string/title_locations" />
         <item
             android:id="@+id/questListDestination"
-            android:icon="@drawable/ic_ui_map"
+            android:icon="@drawable/ic_ui_quests_white"
             android:title="@string/title_quests" />
         <item
             android:id="@+id/bookmarksListDestination"
