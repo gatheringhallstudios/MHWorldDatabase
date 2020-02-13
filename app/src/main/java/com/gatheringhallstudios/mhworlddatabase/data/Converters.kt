@@ -6,6 +6,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.*
 private val RankConverter = Converter(
         "LR" to Rank.LOW,
         "HR" to Rank.HIGH,
+        "MR" to Rank.MASTER,
         null to null
 )
 

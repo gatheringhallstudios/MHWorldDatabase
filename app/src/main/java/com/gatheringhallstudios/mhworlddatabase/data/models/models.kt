@@ -30,12 +30,20 @@ class Decoration(
         icon_color: String?,
 
         val rarity: Int,
-        @Embedded(prefix = "skill_") val skillTree: SkillTreeBase,
+        @Embedded(prefix = "skill_") val skillLevel: SkillLevel,
+        @Embedded(prefix = "skill2_") val skillLevel2: SkillLevel?,
         val mysterious_feystone_percent: Double,
         val glowing_feystone_percent: Double,
         val worn_feystone_percent: Double,
         val warped_feystone_percent: Double
-) : DecorationBase(id, name, slot, icon_color)
+) : DecorationBase(id, name, slot, icon_color) {
+    /**
+     * Returns skill all non-null skill levels
+     */
+    fun getSkillLevels(): List<SkillLevel> {
+        return listOfNotNull(skillLevel, skillLevel2)
+    }
+}
 
 class BulkModels(
         val locations: List<Location> = emptyList(),

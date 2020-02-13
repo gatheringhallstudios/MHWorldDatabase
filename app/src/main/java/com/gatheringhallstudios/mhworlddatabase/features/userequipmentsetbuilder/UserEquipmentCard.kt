@@ -65,10 +65,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             //Repopulate the skills section to include the decoration skills
             card.card_body.skill_list.removeAllViews()
             val skillsList = combineEquipmentSkillsWithDecorationSkills(userWeapon.weapon.skills, userWeapon.decorations.map {
-                val skillLevel = SkillLevel(level = 1)
-                skillLevel.skillTree = it.decoration.skillTree
-                skillLevel
-            })
+                it.decoration.getSkillLevels()
+            }.flatten())
 
             populateSkills(skillsList)
         } else {
@@ -170,10 +168,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             //Repopulate the skills section to include the decoration skills
             card.card_body.skill_list.removeAllViews()
             val skillsList = combineEquipmentSkillsWithDecorationSkills(armor.skills, userArmor.decorations.map {
-                val skillLevel = SkillLevel(level = 1)
-                skillLevel.skillTree = it.decoration.skillTree
-                skillLevel
-            })
+                it.decoration.getSkillLevels()
+            }.flatten())
 
             populateSkills(skillsList)
         } else {
@@ -322,10 +318,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         body.decorations_section.visibility = View.GONE
 
         bindRarity(decoration.rarity)
-
-        val skillLevel = SkillLevel(1)
-        skillLevel.skillTree = decoration.skillTree
-        populateSkills(listOf(skillLevel))
+        populateSkills(decoration.getSkillLevels())
     }
 
     fun bindEmptyWeapon() {

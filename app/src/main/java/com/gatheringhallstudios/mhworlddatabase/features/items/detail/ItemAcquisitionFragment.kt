@@ -54,6 +54,7 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
                 val rankString = when (it.rank) {
                     Rank.LOW -> getString(R.string.rank_short_low)
                     Rank.HIGH -> getString(R.string.rank_short_high)
+                    Rank.MASTER -> getString(R.string.rank_short_master)
                     null -> getString(R.string.rank_short_all)
                 }
 

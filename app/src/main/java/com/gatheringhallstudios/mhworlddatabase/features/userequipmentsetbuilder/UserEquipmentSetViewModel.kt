@@ -10,7 +10,6 @@ import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import kotlinx.coroutines.*
-import kotlin.math.max
 
 class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(application) {
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
@@ -327,9 +326,7 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
             when (item.type()) {
                 DataType.ARMOR -> {
                     (item as UserArmorPiece).decorations.forEach { userDecoration ->
-                        val skillLevel = SkillLevel(1) //Decorations always only give 1 skill point
-                        skillLevel.skillTree = userDecoration.decoration.skillTree
-                        providedSkills.add(skillLevel)
+                        providedSkills.addAll(userDecoration.decoration.getSkillLevels())
                     }
 
                     providedSkills.addAll(item.armor.skills)
@@ -337,9 +334,7 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
 
                 DataType.WEAPON -> {
                     (item as UserWeapon).decorations.forEach { userDecoration ->
-                        val skillLevel = SkillLevel(1) //Decorations always only give 1 skill point
-                        skillLevel.skillTree = userDecoration.decoration.skillTree
-                        providedSkills.add(skillLevel)
+                        providedSkills.addAll(userDecoration.decoration.getSkillLevels())
                     }
                 }
                 DataType.CHARM -> {

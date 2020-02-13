@@ -31,7 +31,8 @@ enum class DataType {
  */
 enum class Rank {
     LOW,
-    HIGH
+    HIGH,
+    MASTER
 }
 
 

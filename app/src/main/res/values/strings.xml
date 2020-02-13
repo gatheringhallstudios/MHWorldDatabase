@@ -23,11 +23,14 @@
     <string name="rank_title">Rank</string>
     <string name="rank_short_low">LR</string>
     <string name="rank_short_high">HR</string>
+    <string name="rank_short_master">MR</string>
     <string name="rank_short_all">ANY</string> <!-- null rank -->
     <string name="rank_low">Low</string>
     <string name="rank_high">High</string>
+    <string name="rank_master">Master</string>
     <string name="rank_full_low">Low Rank</string>
     <string name="rank_full_high">High Rank</string>
+    <string name="rank_full_master">Master Rank</string>
 
     <!-- Common Formatted Strings -->
     <string name="format_quantity_none">%1$d</string> <!-- Example: 1 -->

@@ -17,6 +17,10 @@ data class DecorationEntity(
 
         val rarity: Int,
         val skilltree_id: Int,
+        val skilltree_level: Int,
+        val skilltree2_id: Int,
+        val skilltree2_level: Int,
+
         val slot: Int,
         val icon_color: String?,
 
