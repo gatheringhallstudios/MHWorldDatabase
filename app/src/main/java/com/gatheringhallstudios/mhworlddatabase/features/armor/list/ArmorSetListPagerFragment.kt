@@ -7,6 +7,10 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 class ArmorSetListPagerFragment : BasePagerFragment() {
 
     override fun onAddTabs(tabs: TabAdder) {
+        tabs.addTab(getString(R.string.rank_full_master)) {
+            ArmorSetListFragment.newInstance(Rank.MASTER)
+        }
+
         tabs.addTab(getString(R.string.rank_full_high)) {
             ArmorSetListFragment.newInstance(Rank.HIGH)
         }

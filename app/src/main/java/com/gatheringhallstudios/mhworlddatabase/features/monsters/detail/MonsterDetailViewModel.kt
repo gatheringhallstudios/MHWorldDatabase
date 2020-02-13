@@ -53,5 +53,6 @@ class MonsterDetailViewModel(application: Application) : AndroidViewModel(applic
         null -> rewards
         Rank.LOW -> Transformations.map(rewards) { filterRank(it, Rank.LOW) }
         Rank.HIGH -> Transformations.map(rewards) { filterRank(it, Rank.HIGH) }
+        Rank.MASTER -> Transformations.map(rewards) { filterRank(it, Rank.MASTER) }
     }
 }

@@ -8,6 +8,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
+import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.getRouter
@@ -32,7 +33,7 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
     private val viewModel: DecorationDetailViewModel by lazy {
         ViewModelProviders.of(this).get(DecorationDetailViewModel::class.java)
     }
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
@@ -128,28 +129,29 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
                 WARPED_FEYSTONE_COLOR
         ))
 
-        populateSkill(decoration.skillTree)
+        populateSkills(decoration.getSkillLevels())
     }
 
-    private fun populateSkill(skill: SkillTreeBase) {
-
+    private fun populateSkills(skills: List<SkillLevel>) {
         decoration_skill_list.removeAllViews()
-        val view = layoutInflater.inflate(R.layout.listitem_skill_level, decoration_skill_list, false)
 
-        view.icon.setImageDrawable(AssetLoader.loadIconFor(skill))
-        view.label_text.text = skill.name
+        skills.forEach {skillLevel ->
+            val view = layoutInflater.inflate(R.layout.listitem_skill_level, decoration_skill_list, false)
 
-        //Decorations always only give 1 level. Sorry about the magic number
-        view.level_text.text = getString(R.string.skill_level_qty, 1)
-        with(view.skill_level) {
-            maxLevel = skill.max_level
-            level = 1
+            view.icon.setImageDrawable(AssetLoader.loadIconFor(skillLevel.skillTree))
+            view.label_text.text = skillLevel.skillTree.name
+            view.level_text.text = getString(R.string.skill_level_qty, skillLevel.level)
+            with(view.skill_level) {
+                maxLevel = skillLevel.skillTree.max_level
+                level = skillLevel.level
+            }
+
+            view.setOnClickListener {
+                getRouter().navigateSkillDetail(skillLevel.skillTree.id)
+            }
+
+            decoration_skill_list.addView(view)
         }
 
-        view.setOnClickListener {
-            getRouter().navigateSkillDetail(skill.id)
-        }
-
-        decoration_skill_list.addView(view)
     }
 }

@@ -65,6 +65,7 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemMonsterReward>(
         val rankStr = viewHolder.resources.getString(when (data.rank) {
             Rank.LOW -> R.string.rank_short_low
             Rank.HIGH -> R.string.rank_short_high
+            Rank.MASTER -> R.string.rank_short_master
         })
 
         // The condition alongside the rank

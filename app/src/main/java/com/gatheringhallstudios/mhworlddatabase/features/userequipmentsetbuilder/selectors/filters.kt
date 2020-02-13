@@ -109,6 +109,9 @@ class WeaponRankFilter(private val ranks: Set<Rank>) : Filter<WeaponFull> {
                 Rank.LOW -> {
                     obj.weapon.rarity in 1..4
                 }
+                Rank.MASTER -> {
+                    obj.weapon.rarity > 8
+                }
             }
         }
 
