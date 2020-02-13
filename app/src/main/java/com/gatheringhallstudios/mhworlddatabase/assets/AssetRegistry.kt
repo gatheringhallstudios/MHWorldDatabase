@@ -101,6 +101,7 @@ val VectorRegistry = createRegistry(
         "Jaw" to R.xml.ic_items_monster_jaw_base,
         "Knife" to R.xml.ic_items_knife_base,
         "Liquid" to R.xml.ic_items_liquid_base,
+        "Mantle" to R.xml.ic_items_mantle_base,
         "Meat" to R.xml.ic_items_meat_base,
         "Mushroom" to R.xml.ic_items_mushroom_base,
         "Ore" to R.xml.ic_items_ore_base,
