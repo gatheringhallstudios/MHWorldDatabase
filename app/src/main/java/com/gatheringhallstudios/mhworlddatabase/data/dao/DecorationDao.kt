@@ -33,9 +33,9 @@ abstract class DecorationDao {
                 ON s2.id = d.skilltree2_id
             LEFT JOIN skilltree_text stext2
                 ON stext2.id = s2.id
-                AND stext2.lang_id = dtext.lang_id       
-           
-          AND dtext.lang_id = :langId""")
+                AND stext2.lang_id = dtext.lang_id
+        WHERE dtext.lang_id = :langId
+          """)
     abstract fun loadDecorationsWithSkills(langId: String): LiveData<List<Decoration>>
 
     @Query("""
@@ -54,9 +54,9 @@ abstract class DecorationDao {
                 ON s2.id = d.skilltree2_id
             LEFT JOIN skilltree_text stext2
                 ON stext2.id = s2.id
-                AND stext2.lang_id = dtext.lang_id       
-                        
-          AND dtext.lang_id = :langId""")
+                AND stext2.lang_id = dtext.lang_id    
+        WHERE dtext.lang_id = :langId
+            """)
     abstract fun loadDecorationsWithSkillsSync(langId: String): List<Decoration>
 
     @Query("""
@@ -75,7 +75,7 @@ abstract class DecorationDao {
                 ON s2.id = d.skilltree2_id
             LEFT JOIN skilltree_text stext2
                 ON stext2.id = s2.id
-                AND stext2.lang_id = dtext.lang_id       
+                AND stext2.lang_id = dtext.lang_id    
                 
         WHERE d.id = :decorationId
           AND dtext.lang_id = :langId""")
@@ -84,8 +84,7 @@ abstract class DecorationDao {
     @Query("""
         SELECT d.*, dtext.name,
             s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, d.skilltree_level skill_level,
-            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, d.skilltree2_level skill2_level
-            
+            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, d.skilltree2_level skill2_level            
         FROM decoration d
             JOIN decoration_text dtext
                 ON dtext.id = d.id

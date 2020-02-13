@@ -17,6 +17,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.CheckedGroup
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.*
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.name_filter_edittext
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.rank_toggle_high_rank
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.rank_toggle_low_rank
@@ -146,6 +147,7 @@ class EquipmentFilterFragment : DialogFragment() {
                 rankGroup.apply {
                     rankGroup.addBinding(rank_toggle_low_rank, Rank.LOW)
                     rankGroup.addBinding(rank_toggle_high_rank, Rank.HIGH)
+                    rankGroup.addBinding(rank_toggle_master_rank, Rank.MASTER)
                 }
 
                 elementalDefGroup = CheckedGroup()

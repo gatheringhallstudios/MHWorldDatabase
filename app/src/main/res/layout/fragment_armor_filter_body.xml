@@ -91,6 +91,12 @@
                     android:layout_marginEnd="@dimen/margin_large"
                     app:text="@string/rank_full_high" />
 
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/rank_toggle_master_rank"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="@string/rank_full_master" />
+
             </com.google.android.flexbox.FlexboxLayout>
 
         </LinearLayout>
