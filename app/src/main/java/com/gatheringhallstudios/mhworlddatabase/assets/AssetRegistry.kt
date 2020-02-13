@@ -152,6 +152,7 @@ val SlotEmptyRegistry = fun(slot: Int) = when (slot) {
     1 -> R.drawable.ic_ui_slot_1_empty
     2 -> R.drawable.ic_ui_slot_2_empty
     3 -> R.drawable.ic_ui_slot_3_empty
+    4 -> R.drawable.ic_ui_slot_4_empty
     else -> R.drawable.ic_ui_slot_none
 }
 
