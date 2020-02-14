@@ -31,6 +31,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     private lateinit var waistArmorCard: UserEquipmentCard
     private lateinit var legArmorCard: UserEquipmentCard
     private lateinit var charmCard: UserEquipmentCard
+    private var scrollY = 0
 
     fun showNoticeDialog() {
         // Create an instance of the dialog fragment and show it
@@ -73,6 +74,8 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
 
     override fun onResume() {
         super.onResume()
+
+        if (scrollY != 0) user_equipment_editor_scroll_view.scrollTo(0, scrollY)
         viewModel.armorSetCardStates.forEach { (key, value) ->
             when (key) {
                 0 -> weaponCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
@@ -86,6 +89,11 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
         }
 
         resetCardIfNewEquipmentChosen()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        scrollY = user_equipment_editor_scroll_view.scrollY
     }
 
     override fun onDetach() {
