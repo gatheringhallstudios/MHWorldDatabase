@@ -259,7 +259,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         header.defense_value.visibility = View.GONE
         header.icon_defense.visibility = View.GONE
 
-        card.decorations_section.visibility = View.GONE
+        val body = card.card_body
+        body.decorations_section.visibility = View.GONE
         bindRarity(charm.charm.rarity)
         populateSkills(charm.skills)
         populateSetBonuses(emptyList())
