@@ -10,7 +10,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/new_equipment_set_label"
-        style="@style/TextBodyMedium"
+        style="@style/TextHeadlineMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"

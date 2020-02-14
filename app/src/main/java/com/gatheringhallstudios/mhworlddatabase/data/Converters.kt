@@ -119,6 +119,8 @@ private val KinsectBonusTypeConverter = Converter(
         "health" to KinsectBonus.HEALTH,
         "stamina" to KinsectBonus.STAMINA,
         "blunt" to KinsectBonus.BLUNT,
+        "spirit_strength" to KinsectBonus.SPIRIT_STRENGTH,
+        "stamina_health" to KinsectBonus.STAMINA_HEALTH,
         null to KinsectBonus.NONE
 )
 
@@ -169,57 +171,113 @@ private val QuestTypeConverter = Converter(
  */
 
 class Converters {
-    @TypeConverter fun rankFromString(value: String?) = RankConverter.deserialize(value)
-    @TypeConverter fun fromRank(type: Rank?) = RankConverter.serialize(type)
+    @TypeConverter
+    fun rankFromString(value: String?) = RankConverter.deserialize(value)
 
-    @TypeConverter fun monsterSizefromString(value: String) = MonsterSizeConverter.deserialize(value)
-    @TypeConverter fun fromMonsterSize(type: MonsterSize?) = MonsterSizeConverter.serialize(type)
+    @TypeConverter
+    fun fromRank(type: Rank?) = RankConverter.serialize(type)
 
-    @TypeConverter fun ailmentFromString(value: String?) = AilmentStrengthConverter.deserialize(value)
-    @TypeConverter fun fromAilment(ailment: AilmentStrength) = AilmentStrengthConverter.serialize(ailment)
+    @TypeConverter
+    fun monsterSizefromString(value: String) = MonsterSizeConverter.deserialize(value)
 
-    @TypeConverter fun extractFromString(value: String) = ExtractConverter.deserialize(value)
-    @TypeConverter fun fromExtract(type: Extract?) = ExtractConverter.serialize(type)
+    @TypeConverter
+    fun fromMonsterSize(type: MonsterSize?) = MonsterSizeConverter.serialize(type)
 
-    @TypeConverter fun itemCategoryFromString(value: String) = ItemCategoryConverter.deserialize(value)
-    @TypeConverter fun fromItemCategory(category: ItemCategory?) = ItemCategoryConverter.serialize(category)
+    @TypeConverter
+    fun ailmentFromString(value: String?) = AilmentStrengthConverter.deserialize(value)
 
-    @TypeConverter fun itemSubcategoryFromString(value: String?) = ItemSubcategoryConverter.deserialize(value)
-    @TypeConverter fun fromItemSubcategory(subcategory: ItemSubcategory?) = ItemSubcategoryConverter.serialize(subcategory ?: ItemSubcategory.NONE)
+    @TypeConverter
+    fun fromAilment(ailment: AilmentStrength) = AilmentStrengthConverter.serialize(ailment)
 
-    @TypeConverter fun armorTypefromString(value: String) = ArmorTypeConverter.deserialize(value)
-    @TypeConverter fun fromArmorType(type: ArmorType?) = ArmorTypeConverter.serialize(type)
+    @TypeConverter
+    fun extractFromString(value: String) = ExtractConverter.deserialize(value)
 
-    @TypeConverter fun elementStatusFromString(value: String?) = ElementStatusConverter.deserialize(value)
-    @TypeConverter fun fromElementStatus(value: ElementStatus?) = ElementStatusConverter.serialize(value)
+    @TypeConverter
+    fun fromExtract(type: Extract?) = ExtractConverter.serialize(type)
 
-    @TypeConverter fun weaponTypeFromString(value: String) = WeaponTypeConverter.deserialize(value)
-    @TypeConverter fun fromWeaponType(type: WeaponType?) = WeaponTypeConverter.serialize(type)
+    @TypeConverter
+    fun itemCategoryFromString(value: String) = ItemCategoryConverter.deserialize(value)
 
-    @TypeConverter fun weaponCategoryFromString(value: String?) = WeaponCategoryConverter.deserialize(value)
-    @TypeConverter fun fromWeaponCategory(category: WeaponCategory?) = WeaponCategoryConverter.serialize(category ?: WeaponCategory.REGULAR)
+    @TypeConverter
+    fun fromItemCategory(category: ItemCategory?) = ItemCategoryConverter.serialize(category)
 
-    @TypeConverter fun elderSealFromString(value: String?) = ElderSealLevelConverter.deserialize(value)
-    @TypeConverter fun fromElderSealLevel(type: ElderSealLevel) = ElderSealLevelConverter.serialize(type)
+    @TypeConverter
+    fun itemSubcategoryFromString(value: String?) = ItemSubcategoryConverter.deserialize(value)
 
-    @TypeConverter fun phialTypeFromString(value: String?) = PhialTypeConverter.deserialize(value)
-    @TypeConverter fun fromPhialType(type: PhialType) = PhialTypeConverter.serialize(type)
+    @TypeConverter
+    fun fromItemSubcategory(subcategory: ItemSubcategory?) = ItemSubcategoryConverter.serialize(subcategory
+            ?: ItemSubcategory.NONE)
 
-    @TypeConverter fun kinsectBonusFromString(value: String?) = KinsectBonusTypeConverter.deserialize(value)
-    @TypeConverter fun fromKinsectBonus(type: KinsectBonus) = KinsectBonusTypeConverter.serialize(type)
+    @TypeConverter
+    fun armorTypefromString(value: String) = ArmorTypeConverter.deserialize(value)
 
-    @TypeConverter fun shellingTypeFromString(value: String?) = ShellingTypeConverter.deserialize(value)
-    @TypeConverter fun fromShellingType(type: ShellingType) = ShellingTypeConverter.serialize(type)
+    @TypeConverter
+    fun fromArmorType(type: ArmorType?) = ArmorTypeConverter.serialize(type)
 
-    @TypeConverter fun specialAmmoTypeFromString(value: String?) = SpecialAmmoTypeConverter.deserialize(value)
-    @TypeConverter fun fromSpecialAmmoType(type: SpecialAmmoType?) = SpecialAmmoTypeConverter.serialize(type)
+    @TypeConverter
+    fun elementStatusFromString(value: String?) = ElementStatusConverter.deserialize(value)
 
-    @TypeConverter fun reloadTypeFromString(value: String?) = ReloadTypeConverter.deserialize(value)
-    @TypeConverter fun fromReloadType(type: ReloadType) = ReloadTypeConverter.serialize(type)
+    @TypeConverter
+    fun fromElementStatus(value: ElementStatus?) = ElementStatusConverter.serialize(value)
 
-    @TypeConverter fun questCategoryFromString(value: String?) = QuestCategoryConverter.deserialize(value)
-    @TypeConverter fun fromQuestCategory(category: QuestCategory) = QuestCategoryConverter.serialize(category)
+    @TypeConverter
+    fun weaponTypeFromString(value: String) = WeaponTypeConverter.deserialize(value)
 
-    @TypeConverter fun questTypeFromString(value: String?) = QuestTypeConverter.deserialize(value)
-    @TypeConverter fun fromQuestType(type: QuestType) = QuestTypeConverter.serialize(type)
+    @TypeConverter
+    fun fromWeaponType(type: WeaponType?) = WeaponTypeConverter.serialize(type)
+
+    @TypeConverter
+    fun weaponCategoryFromString(value: String?) = WeaponCategoryConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromWeaponCategory(category: WeaponCategory?) = WeaponCategoryConverter.serialize(category
+            ?: WeaponCategory.REGULAR)
+
+    @TypeConverter
+    fun elderSealFromString(value: String?) = ElderSealLevelConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromElderSealLevel(type: ElderSealLevel) = ElderSealLevelConverter.serialize(type)
+
+    @TypeConverter
+    fun phialTypeFromString(value: String?) = PhialTypeConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromPhialType(type: PhialType) = PhialTypeConverter.serialize(type)
+
+    @TypeConverter
+    fun kinsectBonusFromString(value: String?) = KinsectBonusTypeConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromKinsectBonus(type: KinsectBonus) = KinsectBonusTypeConverter.serialize(type)
+
+    @TypeConverter
+    fun shellingTypeFromString(value: String?) = ShellingTypeConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromShellingType(type: ShellingType) = ShellingTypeConverter.serialize(type)
+
+    @TypeConverter
+    fun specialAmmoTypeFromString(value: String?) = SpecialAmmoTypeConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromSpecialAmmoType(type: SpecialAmmoType?) = SpecialAmmoTypeConverter.serialize(type)
+
+    @TypeConverter
+    fun reloadTypeFromString(value: String?) = ReloadTypeConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromReloadType(type: ReloadType) = ReloadTypeConverter.serialize(type)
+
+    @TypeConverter
+    fun questCategoryFromString(value: String?) = QuestCategoryConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromQuestCategory(category: QuestCategory) = QuestCategoryConverter.serialize(category)
+
+    @TypeConverter
+    fun questTypeFromString(value: String?) = QuestTypeConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromQuestType(type: QuestType) = QuestTypeConverter.serialize(type)
 }

@@ -246,6 +246,8 @@ object AssetLoader {
         KinsectBonus.HEALTH -> ctx.getString(R.string.weapon_kinsect_bonus_health)
         KinsectBonus.STAMINA -> ctx.getString(R.string.weapon_kinsect_bonus_stamina)
         KinsectBonus.BLUNT -> ctx.getString(R.string.weapon_kinsect_bonus_blunt)
+        KinsectBonus.STAMINA_HEALTH -> ctx.getString(R.string.weapon_kinsect_bonus_stamina_health)
+        KinsectBonus.SPIRIT_STRENGTH -> ctx.getString(R.string.weapon_kinsect_bonus_spirit_strength)
     }
 
     /**

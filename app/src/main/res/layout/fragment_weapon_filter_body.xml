@@ -315,6 +315,22 @@
                 android:layout_marginEnd="@dimen/margin_large"
                 android:textOff="@string/weapon_kinsect_bonus_blunt"
                 android:textOn="@string/weapon_kinsect_bonus_blunt" />
+
+            <ToggleButton
+                android:id="@+id/kinsect_toggle_spirit_strength"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_kinsect_bonus_spirit_strength"
+                android:textOn="@string/weapon_kinsect_bonus_spirit_strength" />
+
+            <ToggleButton
+                android:id="@+id/kinsect_toggle_stamina_health"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:textOff="@string/weapon_kinsect_bonus_stamina_health"
+                android:textOn="@string/weapon_kinsect_bonus_stamina_health" />
         </com.google.android.flexbox.FlexboxLayout>
 
         <TextView

@@ -255,6 +255,8 @@
     <string name="weapon_kinsect_bonus_health">Health</string>
     <string name="weapon_kinsect_bonus_stamina">Stamina</string>
     <string name="weapon_kinsect_bonus_blunt">Blunt</string>
+    <string name="weapon_kinsect_bonus_spirit_strength">Spirit/Strength</string>
+    <string name="weapon_kinsect_bonus_stamina_health">Stamina/Health</string>
 
     <string name="weapon_gunlance_shelling">Shelling</string>
     <string name="weapon_gunlance_shelling_long">Long</string>
@@ -433,7 +435,7 @@
     <string name="tab_armor_set_builder_equipment">Equipment</string>
 
     <string name="user_equipment_set_new_set">+ Create a Set</string>
-    <string name="user_equipment_set_no_equipment">No equipment</string>
+    <string name="user_equipment_set_no_equipment">No Equipment</string>
     <string name="user_equipment_set_no_decoration">No decoration</string>
     <string name="user_equipment_set_no_skill">No skill</string>
     <string name="user_equipment_delete_set">Delete set</string>
