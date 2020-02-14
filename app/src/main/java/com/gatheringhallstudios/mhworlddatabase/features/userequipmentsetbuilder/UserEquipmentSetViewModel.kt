@@ -336,6 +336,8 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
                     (item as UserWeapon).decorations.forEach { userDecoration ->
                         providedSkills.addAll(userDecoration.decoration.getSkillLevels())
                     }
+
+                    providedSkills.addAll(item.weapon.skills)
                 }
                 DataType.CHARM -> {
                     providedSkills.addAll((item as UserCharm).charm.skills)
