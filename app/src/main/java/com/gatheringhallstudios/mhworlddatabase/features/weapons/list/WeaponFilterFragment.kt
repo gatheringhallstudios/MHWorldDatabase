@@ -220,6 +220,8 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(kinsect_toggle_element, KinsectBonus.ELEMENT)
             addBinding(kinsect_toggle_sever, KinsectBonus.SEVER)
             addBinding(kinsect_toggle_blunt, KinsectBonus.BLUNT)
+            addBinding(kinsect_toggle_spirit_strength, KinsectBonus.SPIRIT_STRENGTH)
+            addBinding(kinsect_toggle_stamina_health, KinsectBonus.STAMINA_HEALTH)
         }
 
         shellingGroup = CheckedGroup()

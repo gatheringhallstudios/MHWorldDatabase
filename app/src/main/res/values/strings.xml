@@ -255,6 +255,8 @@
     <string name="weapon_kinsect_bonus_health">Health</string>
     <string name="weapon_kinsect_bonus_stamina">Stamina</string>
     <string name="weapon_kinsect_bonus_blunt">Blunt</string>
+    <string name="weapon_kinsect_bonus_spirit_strength">Spirit/Strength</string>
+    <string name="weapon_kinsect_bonus_stamina_health">Stamina/Health</string>
 
     <string name="weapon_gunlance_shelling">Shelling</string>
     <string name="weapon_gunlance_shelling_long">Long</string>

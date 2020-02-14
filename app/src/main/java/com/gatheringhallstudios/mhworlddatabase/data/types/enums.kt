@@ -171,7 +171,9 @@ enum class KinsectBonus {
     ELEMENT,
     HEALTH,
     STAMINA,
-    BLUNT
+    BLUNT,
+    STAMINA_HEALTH,
+    SPIRIT_STRENGTH,
 }
 
 enum class ShellingType {
