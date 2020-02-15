@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,18 +13,18 @@ import com.gatheringhallstudios.mhworlddatabase.components.SpacesItemDecoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentCard
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentCard
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
-import kotlinx.android.synthetic.main.fragment_user_equipment_set_selector.*
+import kotlinx.android.synthetic.main.fragment_workshop_selector.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.Serializable
 
-class UserEquipmentSetSelectorListFragment : Fragment() {
+class WorkshopSelectorListFragment : Fragment() {
     companion object {
         const val ARG_ACTIVE_EQUIPMENT = "ACTIVE_EQUIPMENT"
         const val ARG_SET_ID = "ACTIVE_SET_ID" //The equipment set that is currently being handled when in builder mode
@@ -44,8 +44,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
                                 val targetEquipmentType: DataType, val decorationLevelFilter: Int) : Serializable
     }
 
-    private val viewModel: UserEquipmentSetSelectorViewModel by lazy {
-        ViewModelProviders.of(this).get(UserEquipmentSetSelectorViewModel::class.java)
+    private val viewModel: WorkshopSelectorViewModel by lazy {
+        ViewModelProviders.of(this).get(WorkshopSelectorViewModel::class.java)
     }
 
     private lateinit var card: UserEquipmentCard
@@ -92,7 +92,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_user_equipment_set_selector, parent, false)
+        return inflater.inflate(R.layout.fragment_workshop_selector, parent, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -137,7 +137,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun initArmorSelector(armorType: ArmorType?, activeArmorPiece: UserArmorPiece?, activeEquipmentSetId: Int?) {
-        setActivityTitle(getString(R.string.title_armor_set_armor_selector))
+        setActivityTitle(getString(R.string.title_workshop_armor_selector))
 
         if (armorType != null) {
             viewModel.loadArmor(AppSettings.dataLocale, armorType)
@@ -145,7 +145,7 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
             card.populateSlots(activeArmorPiece?.armor?.armor?.slots)
         }
 
-        val adapter = UserEquipmentSetArmorSelectorAdapter {
+        val adapter = WorkshopArmorSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
                     viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeArmorPiece?.armor?.entityId)
@@ -168,10 +168,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun initCharmSelector(activeCharm: UserCharm?, activeEquipmentSetId: Int?) {
-        setActivityTitle(getString(R.string.title_armor_set_charm_selector))
+        setActivityTitle(getString(R.string.title_workshop_charm_selector))
         viewModel.loadCharms(AppSettings.dataLocale)
 
-        val adapter = UserEquipmentSetCharmSelectorAdapter {
+        val adapter = WorkshopCharmSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
                     viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeCharm?.entityId())
@@ -201,10 +201,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun initDecorationSelector(activeDecoration: UserDecoration?, activeEquipmentSetId: Int?, decorationsConfig: DecorationsConfig) {
-        setActivityTitle(getString(R.string.title_armor_set_decoration_selector))
+        setActivityTitle(getString(R.string.title_workshop_decoration_selector))
         viewModel.loadDecorations(AppSettings.dataLocale)
 
-        val adapter = UserEquipmentSetDecorationSelectorAdapter {
+        val adapter = WorkshopDecorationSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
                     viewModel.updateDecorationForEquipmentSet(it.id, decorationsConfig.targetEquipmentId,
@@ -237,10 +237,10 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
     }
 
     private fun initWeaponSelector(activeWeapon: UserWeapon?, activeEquipmentSetId: Int?) {
-        setActivityTitle(getString(R.string.title_armor_set_weapon_selector))
+        setActivityTitle(getString(R.string.title_workshop_weapon_selector))
         viewModel.loadWeapons(AppSettings.dataLocale)
 
-        val adapter = UserEquipmentSetWeaponSelectorAdapter {
+        val adapter = WorkshopWeaponSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
                     viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeWeapon?.entityId())

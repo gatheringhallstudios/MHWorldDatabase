@@ -3,23 +3,20 @@ package com.gatheringhallstudios.mhworlddatabase
 import androidx.navigation.NavController
 import com.gatheringhallstudios.mhworlddatabase.data.models.MHModel
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipment
-import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment
-import com.gatheringhallstudios.mhworlddatabase.features.armor.list.ArmorSetListPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment
-import com.gatheringhallstudios.mhworlddatabase.features.charms.list.CharmListFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.detail.WorkshopDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.detail.WeaponDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.ARG_WEAPON_TREE_TYPE
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
@@ -88,16 +85,16 @@ class Router(private val navController: NavController) {
     }
 
     fun navigateUserEquipmentSetDetail(userEquipmentSetId: Int) {
-        navController.navigate(R.id.openUserEquipmentSetDetailAction, BundleBuilder().putInt(UserEquipmentSetDetailPagerFragment.ARG_USER_EQUIPMENT_SET_ID, userEquipmentSetId).build())
+        navController.navigate(R.id.openWorkshopDetailAction, BundleBuilder().putInt(WorkshopDetailPagerFragment.ARG_USER_EQUIPMENT_SET_ID, userEquipmentSetId).build())
     }
 
     fun navigateUserEquipmentPieceSelector(selectorMode: Companion.SelectorMode?, activeEquipment: UserEquipment?, userEquipmentSetId: Int?, filter: ArmorType?, decorationsConfig: Companion.DecorationsConfig?) {
         val bundle = BundleBuilder()
-        if (selectorMode != null) bundle.putSerializable(UserEquipmentSetSelectorListFragment.ARG_SELECTOR_MODE, selectorMode)
-        if (activeEquipment != null) bundle.putSerializable(UserEquipmentSetSelectorListFragment.ARG_ACTIVE_EQUIPMENT, activeEquipment)
-        if (userEquipmentSetId != null) bundle.putInt(UserEquipmentSetSelectorListFragment.ARG_SET_ID, userEquipmentSetId)
-        if (filter != null) bundle.putSerializable(UserEquipmentSetSelectorListFragment.ARG_ARMOR_FILTER, filter)
-        if (decorationsConfig != null) bundle.putSerializable(UserEquipmentSetSelectorListFragment.ARG_DECORATION_CONFIG, decorationsConfig)
+        if (selectorMode != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_SELECTOR_MODE, selectorMode)
+        if (activeEquipment != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_ACTIVE_EQUIPMENT, activeEquipment)
+        if (userEquipmentSetId != null) bundle.putInt(WorkshopSelectorListFragment.ARG_SET_ID, userEquipmentSetId)
+        if (filter != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_ARMOR_FILTER, filter)
+        if (decorationsConfig != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_DECORATION_CONFIG, decorationsConfig)
         navController.navigate(R.id.equipmentSetSelectorAction, bundle.build())
     }
 

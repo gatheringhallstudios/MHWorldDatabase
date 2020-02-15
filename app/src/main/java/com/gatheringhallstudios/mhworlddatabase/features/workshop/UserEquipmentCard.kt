@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
+package com.gatheringhallstudios.mhworlddatabase.features.workshop
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,25 +12,25 @@ import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
-import kotlinx.android.synthetic.main.view_base_body_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.icon_slots
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot1
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot2
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot3
-import kotlinx.android.synthetic.main.view_empty_equipment_header_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_workshop_body_expandable_cardview_base.view.*
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.*
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.icon_slots
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot1
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot2
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot3
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_empty_equipment.view.*
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
 import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.slot_section as BaseSlotSection
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot_section as BaseSlotSection
 
 /**
  * Wrapper over the ExpandableCardView used to display equipment data.
@@ -72,7 +72,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         } else {
             bindEmptyWeapon()
             card.setOnClick {
-                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.WEAPON,
+                card.getRouter().navigateUserEquipmentPieceSelector(WorkshopSelectorListFragment.Companion.SelectorMode.WEAPON,
                         null, setId, null, null)
             }
         }
@@ -85,7 +85,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                    onExpand: (() -> Unit)? = null, onContract: (() -> Unit)? = null) {
         val weapon = weaponFull.weapon
         card.setHeader(R.layout.view_weapon_header_expandable_cardview)
-        card.setBody(R.layout.view_base_body_expandable_cardview)
+        card.setBody(R.layout.view_workshop_body_expandable_cardview_base)
         card.setCardElevation(1f)
 
         val header = card.card_header
@@ -175,7 +175,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         } else {
             bindEmptyArmor(armorType)
             card.setOnClick {
-                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.ARMOR,
+                card.getRouter().navigateUserEquipmentPieceSelector(WorkshopSelectorListFragment.Companion.SelectorMode.ARMOR,
                         null, setId, armorType, null)
             }
         }
@@ -183,8 +183,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
 
     fun bindArmor(armor: ArmorFull, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?,
                   onExpand: (() -> Unit)? = null, onContract: (() -> Unit)? = null) {
-        card.setHeader(R.layout.view_base_header_expandable_cardview)
-        card.setBody(R.layout.view_base_body_expandable_cardview)
+        card.setHeader(R.layout.view_workshop_header_expandable_cardview_base)
+        card.setBody(R.layout.view_workshop_body_expandable_cardview_base)
         card.setCardElevation(1f)
 
         val header = card.card_header
@@ -237,7 +237,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         } else {
             bindEmptyCharm()
             card.setOnClick {
-                card.getRouter().navigateUserEquipmentPieceSelector(UserEquipmentSetSelectorListFragment.Companion.SelectorMode.CHARM,
+                card.getRouter().navigateUserEquipmentPieceSelector(WorkshopSelectorListFragment.Companion.SelectorMode.CHARM,
                         null, setId, null, null)
             }
         }
@@ -249,8 +249,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     fun bindCharm(charm: CharmFull, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?,
                   onExpand: (() -> Unit)? = null, onContract: (() -> Unit)? = null) {
 
-        card.setHeader(R.layout.view_base_header_expandable_cardview)
-        card.setBody(R.layout.view_base_body_expandable_cardview)
+        card.setHeader(R.layout.view_workshop_header_expandable_cardview_base)
+        card.setBody(R.layout.view_workshop_body_expandable_cardview_base)
         card.setCardElevation(1f)
 
         val header = card.card_header
@@ -298,8 +298,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
      */
     fun bindDecoration(decoration: Decoration, onClick: (() -> Unit)?) {
 
-        card.setHeader(R.layout.view_base_header_expandable_cardview)
-        card.setBody(R.layout.view_base_body_expandable_cardview)
+        card.setHeader(R.layout.view_workshop_header_expandable_cardview_base)
+        card.setBody(R.layout.view_workshop_body_expandable_cardview_base)
         card.setCardElevation(1f)
 
         card.setOnClick {
@@ -473,8 +473,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
-        card.setHeader(R.layout.view_empty_equipment_header_expandable_cardview)
-        card.setBody(R.layout.view_empty_equipment_body_expandable_cardview)
+        card.setHeader(R.layout.view_workshop_header_expandable_cardview_empty_equipment)
+        card.setBody(R.layout.view_workshop_body_expandable_cardview_empty_equipment)
         card.card_header.new_equipment_set_label.text = getString(title)
         card.card_header.equipment_set_icon2.setImageResource(icon)
 

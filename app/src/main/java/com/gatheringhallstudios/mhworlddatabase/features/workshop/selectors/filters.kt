@@ -1,10 +1,10 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors
 
-import com.gatheringhallstudios.mhworlddatabase.util.tree.Filter
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
+import com.gatheringhallstudios.mhworlddatabase.util.tree.Filter
 
 class ArmorNameFilter(private val name: String) : Filter<ArmorFull> {
     override fun runFilter(obj: ArmorFull): Boolean {

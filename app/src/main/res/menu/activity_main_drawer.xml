@@ -17,9 +17,9 @@
             android:icon="@drawable/ic_equipment_armor_set_white"
             android:title="@string/title_armor" />
         <item
-            android:id="@+id/armorSetBuilderDestination"
+            android:id="@+id/workshopDestination"
             android:icon="@drawable/ic_ui_buildable_white"
-            android:title="@string/title_armor_set_builder" />
+            android:title="@string/title_workshop" />
         <item
             android:id="@+id/questListDestination"
             android:icon="@drawable/ic_ui_quests_white"

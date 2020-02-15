@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors
 
 import android.app.Application
 import android.os.Parcelable
@@ -12,13 +12,13 @@ import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion.SelectorMode
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion.SelectorMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class UserEquipmentSetSelectorViewModel(application: Application) : AndroidViewModel(application) {
+class WorkshopSelectorViewModel(application: Application) : AndroidViewModel(application) {
     private val appDao = AppDatabase.getAppDataBase(application)!!.userEquipmentSetDao()
     private val charmDao = MHWDatabase.getDatabase(application).charmDao()
     private val weaponDao = MHWDatabase.getDatabase(application).weaponDao()

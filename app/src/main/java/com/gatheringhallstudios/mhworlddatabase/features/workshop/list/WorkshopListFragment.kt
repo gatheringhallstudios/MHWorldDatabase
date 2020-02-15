@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.list
 
 import android.os.Bundle
 import android.view.View
@@ -8,12 +8,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 
-class UserEquipmentSetListFragment : RecyclerViewFragment() {
+class WorkshopListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
@@ -28,7 +28,7 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
                 it.add(UserEquipmentSet.createEmptySet())
             }
 
-            val adapter = UserEquipmentSetAdapterDelegate(it,
+            val adapter = WorkshopAdapterDelegate(it,
                     onSelect = { itr ->
                         if (itr.id == 0) { //Set has not yet been created
                             val newSet = viewModel.createEquipmentSet()
@@ -64,7 +64,7 @@ class UserEquipmentSetListFragment : RecyclerViewFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity?.title = getString(R.string.title_armor_set_builder)
+        activity?.title = getString(R.string.title_workshop)
     }
 
     private fun containsEmptyElement(list: MutableList<UserEquipmentSet>): Boolean {

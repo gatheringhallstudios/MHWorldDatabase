@@ -193,9 +193,9 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
-        android:id="@+id/armorSetBuilderDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list.UserEquipmentSetListFragment"
-        android:label="@string/title_armor_set_builder"
+        android:id="@+id/workshopDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.workshop.list.WorkshopListFragment"
+        android:label="@string/title_workshop"
         tools:layout="@layout/list_generic" />
     <action
         android:id="@+id/armorSetBuilderAction"
@@ -330,12 +330,12 @@
         app:popExitAnim="@anim/nav_exit_right" />
 
     <fragment
-        android:id="@+id/userEquipmentSetDetailDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail.UserEquipmentSetDetailPagerFragment"
+        android:id="@+id/workshopDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.workshop.detail.WorkshopDetailPagerFragment"
         tools:layout="@layout/fragment_generic_pager" />
     <action
-        android:id="@+id/openUserEquipmentSetDetailAction"
-        app:destination="@id/userEquipmentSetDetailDestination"
+        android:id="@+id/openWorkshopDetailAction"
+        app:destination="@id/workshopDetailDestination"
         app:enterAnim="@anim/nav_enter_right"
         app:exitAnim="@anim/nav_exit_left"
         app:popEnterAnim="@anim/nav_enter_left"
@@ -356,7 +356,7 @@
 
     <fragment
         android:id="@+id/equipmentSetSelectorDestination"
-        android:name="com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment" />
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment" />
     <action
         android:id="@+id/equipmentSetSelectorAction"
         app:destination="@id/equipmentSetSelectorDestination"
