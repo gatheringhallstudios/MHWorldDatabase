@@ -20,7 +20,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import kotlinx.android.synthetic.main.fragment_armor_summary.*
 import kotlinx.android.synthetic.main.fragment_user_equipment_set_summary.*
+import kotlinx.android.synthetic.main.fragment_user_equipment_set_summary.armor_skill_section
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.defense_value
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -68,17 +70,20 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_ice_value.text = userEquipmentSet.iceDefense.toString()
         armor_set_dragon_value.text = userEquipmentSet.dragonDefense.toString()
 
-        userEquipmentSet.equipment.filter { it.type() == DataType.WEAPON }.forEach { populateWeapon(it as UserWeapon, showTrueAttackValues) }
-        userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.sortedWith(compareBy { (it as UserArmorPiece).armor.armor.armor_type }).forEach { populateArmorSetPieces(it as UserArmorPiece) }
+        populateWeapon(userEquipmentSet.equipment.filter { it.type() == DataType.WEAPON }, showTrueAttackValues)
+        populateArmorSetPieces(userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.sortedWith(compareBy { (it as UserArmorPiece).armor.armor.armor_type }))
         populateArmorSkills(userEquipmentSet.skills)
-        userEquipmentSet.setBonuses.forEach {
-            populateArmorSetBonusName(it.key)
-            populateArmorSetBonuses(it.value)
-        }
+        populateArmorSetBonuses(userEquipmentSet.setBonuses)
     }
 
-    private fun populateWeapon(userWeapon: UserWeapon, showTrueAttackValues: Boolean) {
-        val weapon = userWeapon.weapon
+    private fun populateWeapon(userWeapons: List<UserEquipment>, showTrueAttackValues: Boolean) {
+        if (userWeapons.isNullOrEmpty()) {
+            val view = layoutInflater.inflate(R.layout.listitem_empty_no_margin, weapon_list, false)
+            weapon_list.addView(view)
+            return
+        }
+
+        val weapon = (userWeapons.first() as UserWeapon).weapon
         val view = layoutInflater.inflate(R.layout.listitem_weapon, weapon_list, false)
 
         view.weapon_name.text = weapon.weapon.name
@@ -103,7 +108,6 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateComplexStats(weapon: Weapon, weaponView: View) {
-        weaponView.complex_stat_layout.removeAllViews()
         // Elemental Stat (added if there's a value)
         if (weapon.element1 != null) {
             val elementView = CompactStatCell(
@@ -195,8 +199,14 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    private fun populateArmorSetPieces(armorPiece: UserArmorPiece) {
-        val armorFull = armorPiece.armor
+    private fun populateArmorSetPieces(armorPieces: List<UserEquipment>) {
+        if (armorPieces.isNullOrEmpty()) {
+            val view = layoutInflater.inflate(R.layout.listitem_empty_medium, armor_set_piece_list, false)
+            armor_set_piece_list.addView(view)
+            return
+        }
+
+        val armorFull = (armorPieces.first() as UserArmorPiece).armor
         val view = layoutInflater.inflate(R.layout.listitem_armorset_armor, armor_set_piece_list, false)
 
         view.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armorFull.armor))
@@ -223,6 +233,12 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateArmorSkills(skills: List<SkillLevel>) {
+        if (skills.isNullOrEmpty()) {
+            val view = layoutInflater.inflate(R.layout.listitem_empty_medium, armor_set_skill_list, false)
+            armor_set_skill_list.addView(view)
+            return
+        }
+
         for (skill in skills) {
             //Set the label for the Set name
             val view = layoutInflater.inflate(R.layout.listitem_skill_level, armor_skill_section, false)
@@ -241,7 +257,18 @@ class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
             armor_set_skill_list.addView(view)
         }
     }
+    private fun populateArmorSetBonuses(setBonuses: Map<String, List<ArmorSetBonus>>) {
+        if (setBonuses.isEmpty()) {
+            val view = layoutInflater.inflate(R.layout.listitem_empty_no_margin, armor_set_set_bonus_list, false)
+            armor_set_set_bonus_list.addView(view)
+            return
+        }
 
+        setBonuses.forEach {
+            populateArmorSetBonusName(it.key)
+            populateArmorSetBonuses(it.value)
+        }
+    }
     private fun populateArmorSetBonusName(setBonusName: String) {
         val textView = TextView(context)
         textView.text = setBonusName
