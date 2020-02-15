@@ -101,6 +101,8 @@ class UserEquipmentSetSelectorListFragment : Fragment() {
         val activeEquipment = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserEquipment
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
         val decorationsConfig = arguments?.getSerializable(ARG_DECORATION_CONFIG) as? DecorationsConfig
+        //Remove the userEquipment from arguments to prevent it from being serialized onPause
+        arguments?.putSerializable(ARG_ACTIVE_EQUIPMENT, null)
 
         card = UserEquipmentCard(active_equipment_slot)
 
