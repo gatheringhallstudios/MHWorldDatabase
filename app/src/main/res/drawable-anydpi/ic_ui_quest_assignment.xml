@@ -1,0 +1,51 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <group
+        android:translateX="67"
+        android:translateY="76">
+        <path
+            android:fillColor="#000000"
+            android:pathData="M340.3 48.05l25.95 33.05-26.09 33.24 25.07 33.28-26.89 32.63 27.23 33.05-27.23 33.05 27.23 33.05-28.06 34.06 30.84 47.04H0V0h378.02z"/>
+        <path
+            android:fillColor="#A57EC2"
+            android:pathData="M15 15v330.5h325.58l-21.68-33.05 27.23-33.05-27.23-33.05 27.23-33.05-27.23-33.05 27.23-33.05-24.9-33.05 25.95-33.05-25.95-33.05L347.18 15z"/>
+        <path
+            android:fillColor="#000000"
+            android:fillAlpha="0.5"
+            android:pathData="M288.5 47L268 28h41z"/>
+        <path
+            android:fillColor="#000000"
+            android:fillAlpha="0.5"
+            android:pathData="M54.5 314L75 333H34z"/>
+        <path
+            android:fillColor="#000000"
+            android:fillAlpha="0.5"
+            android:pathData="M210.5 314l20.5 19h-41z"/>
+        <path
+            android:fillColor="#000000"
+            android:fillAlpha="0.5"
+            android:pathData="M132.5 314l20.5 19h-41z"/>
+        <path
+            android:fillColor="#000000"
+            android:fillAlpha="0.5"
+            android:pathData="M288.5 314l20.5 19h-41z"/>
+        <path
+            android:fillColor="#000000"
+            android:fillAlpha="0.5"
+            android:pathData="M54.5 47L34 28h41z"/>
+        <path
+            android:fillColor="#000000"
+            android:fillAlpha="0.5"
+            android:pathData="M210.5 47L190 28h41z"/>
+        <path
+            android:fillColor="#000000"
+            android:fillAlpha="0.5"
+            android:pathData="M132.5 47L112 28h41z"/>
+        <path
+            android:fillColor="#000000"
+            android:pathData="M133.3 150.8c-4.13-3.53-13.33-10.28-25.79-13H91V100h38.13l0.02 15.5c3.63 17.47 15.51 28.67 15.51 28.67l28.34 28.1 28.34-28.1s11.89-11.2 15.53-28.63V100H255v37.8h-16.51c-12.45 2.72-21.65 9.47-25.79 13l-30.67 30.41 30.24 29.99c4.13 3.52 13.33 10.28 25.78 13h16.51V262h-38.12l-0.02-15.5c-3.63-17.47-15.51-28.67-15.51-28.67L173 190.17l-27.91 27.66s-11.88 11.2-15.54 28.63V262H91.44v-37.8h16.51c12.46-2.72 21.65-9.48 25.79-13l30.23-29.99-30.67-30.4zm40.2 75.2l40.5 40.5-40.5 40.5-40.5-40.5 40.5-40.5zm-87-85l40.5 40.5L86.5 222 46 181.5 86.5 141zm172 0l40.5 40.5-40.5 40.5-40.5-40.5 40.5-40.5zm-85-87L214 94.5 173.5 135 133 94.5 173.5 54z"/>
+    </group>
+</vector>
