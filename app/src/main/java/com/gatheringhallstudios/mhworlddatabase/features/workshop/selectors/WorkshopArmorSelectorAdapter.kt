@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,10 +6,10 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleRecyclerVi
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorFull
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentCard
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentCard
 
 
-class UserEquipmentSetArmorSelectorAdapter(private val onSelected: (ArmorFull) -> Unit) : SimpleRecyclerViewAdapter<ArmorFull>() {
+class WorkshopArmorSelectorAdapter(private val onSelected: (ArmorFull) -> Unit) : SimpleRecyclerViewAdapter<ArmorFull>() {
 
     val TAG = this.javaClass.simpleName
 

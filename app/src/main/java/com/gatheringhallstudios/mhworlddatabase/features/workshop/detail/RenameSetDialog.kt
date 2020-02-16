@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.detail
 
 import android.app.Dialog
 import android.content.Context

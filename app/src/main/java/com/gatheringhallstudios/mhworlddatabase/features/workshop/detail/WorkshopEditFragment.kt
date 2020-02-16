@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.detail
 
 import android.os.Bundle
 import android.view.*
@@ -9,17 +9,14 @@ import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentCard
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors.UserEquipmentSetSelectorListFragment.Companion
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentCard
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentSetViewModel
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
-import kotlinx.android.synthetic.main.fragment_user_equipment_set_editor.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.android.synthetic.main.fragment_workshop_editor.*
 
-class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.RenameDialogListener {
+class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.RenameDialogListener {
     private val viewModel by lazy {
         ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
@@ -58,7 +55,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_user_equipment_set_editor, parent, false)
+        return inflater.inflate(R.layout.fragment_workshop_editor, parent, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -69,7 +66,7 @@ class UserEquipmentSetEditFragment : androidx.fragment.app.Fragment(), RenameSet
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_user_equipment_set_editor, menu)
+        inflater.inflate(R.menu.menu_workshop_editor, menu)
     }
 
     override fun onResume() {

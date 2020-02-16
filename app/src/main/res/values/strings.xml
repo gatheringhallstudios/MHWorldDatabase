@@ -425,14 +425,14 @@
     <!-- ################# -->
     <!-- ## USER EQUIPMENT SET MENU ## -->
     <!-- ################# -->
-    <string name="title_armor_set_builder">Armor Set Builder</string>
-    <string name="title_armor_set_armor_selector">Armor Selector</string>
-    <string name="title_armor_set_charm_selector">Charm Selector</string>
-    <string name="title_armor_set_weapon_selector">Weapon Selector</string>
-    <string name="title_armor_set_decoration_selector">Decoration Selector</string>
+    <string name="title_workshop">Workshop</string>
+    <string name="title_workshop_armor_selector">Armor Selector</string>
+    <string name="title_workshop_charm_selector">Charm Selector</string>
+    <string name="title_workshop_weapon_selector">Weapon Selector</string>
+    <string name="title_workshop_decoration_selector">Decoration Selector</string>
 
-    <string name="tab_armor_set_builder_summary">Summary</string>
-    <string name="tab_armor_set_builder_equipment">Equipment</string>
+    <string name="tab_workshop_builder_summary">Summary</string>
+    <string name="tab_workshop_builder_equipment">Equipment</string>
 
     <string name="user_equipment_set_new_set">+ Create a Set</string>
     <string name="user_equipment_set_no_equipment">No Equipment</string>

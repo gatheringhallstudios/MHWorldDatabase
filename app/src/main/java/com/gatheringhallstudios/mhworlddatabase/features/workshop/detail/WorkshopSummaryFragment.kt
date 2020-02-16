@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,12 +17,11 @@ import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.fragment_armor_summary.*
-import kotlinx.android.synthetic.main.fragment_user_equipment_set_summary.*
-import kotlinx.android.synthetic.main.fragment_user_equipment_set_summary.armor_skill_section
+import kotlinx.android.synthetic.main.fragment_workshop_summary.*
+import kotlinx.android.synthetic.main.fragment_workshop_summary.armor_skill_section
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.defense_value
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -32,13 +31,13 @@ import kotlinx.android.synthetic.main.listitem_weapon.view.slot1
 import kotlinx.android.synthetic.main.listitem_weapon.view.slot2
 import kotlinx.android.synthetic.main.listitem_weapon.view.slot3
 
-class UserEquipmentSetSummaryFragment : androidx.fragment.app.Fragment() {
+class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
     private val viewModel: UserEquipmentSetViewModel by lazy {
         ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_user_equipment_set_summary, parent, false)
+        return inflater.inflate(R.layout.fragment_workshop_summary, parent, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

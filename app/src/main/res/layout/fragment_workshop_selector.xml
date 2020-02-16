@@ -34,7 +34,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         app:cardViewElevation="2"
         app:clickable="false"
-        app:cardHeaderLayout="@layout/view_empty_equipment_header_expandable_cardview"
-        app:cardBodyLayout="@layout/view_empty_equipment_body_expandable_cardview" />
+        app:cardHeaderLayout="@layout/view_workshop_header_expandable_cardview_empty_equipment"
+        app:cardBodyLayout="@layout/view_workshop_body_expandable_cardview_empty_equipment" />
 
 </RelativeLayout>

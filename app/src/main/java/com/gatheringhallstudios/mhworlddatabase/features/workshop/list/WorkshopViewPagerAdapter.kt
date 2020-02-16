@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.list
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import kotlin.math.ceil
 import kotlin.math.roundToInt
 
 
-class UserEquipmentSetViewPagerAdapter(private val context: Context, private val skills: List<SkillLevel>) : RecyclerView.Adapter<UserEquipmentSetViewPagerAdapter.SkillViewHolder>() {
+class WorkshopViewPagerAdapter(private val context: Context, private val skills: List<SkillLevel>) : RecyclerView.Adapter<WorkshopViewPagerAdapter.SkillViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkillViewHolder {
         val view = LinearLayout(context)

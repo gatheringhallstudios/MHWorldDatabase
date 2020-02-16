@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.list
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.list
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -18,13 +18,13 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
-import kotlinx.android.synthetic.main.view_base_header_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_user_equipment_set_body_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.*
+import kotlinx.android.synthetic.main.view_workshop_body_expandable_cardview.view.*
 
 
 
-class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit,
-                                      private val onDelete: (UserEquipmentSet, pos: Int,
+class WorkshopAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>, private val onSelect: (UserEquipmentSet) -> Unit,
+                              private val onDelete: (UserEquipmentSet, pos: Int,
                                                              adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -63,13 +63,13 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
                 notifyItemRemoved(position)
             }
 
-            viewHolder.view.setHeader(R.layout.view_user_equipment_set_header_expandable_cardview)
-            viewHolder.view.setBody(R.layout.view_user_equipment_set_body_expandable_cardview)
+            viewHolder.view.setHeader(R.layout.view_workshop_header_expandable_cardview)
+            viewHolder.view.setBody(R.layout.view_workshop_body_expandable_cardview)
             viewHolder.view.setCardElevation(1f)
             viewHolder.bind(userEquipmentSet)
         } else {
             val vh = viewHolder as NewEquipmentSetHolder
-            (vh.view as ExpandableCardView).setHeader(R.layout.view_new_set_header_expandable_cardview)
+            (vh.view as ExpandableCardView).setHeader(R.layout.view_workshop_header_expandable_cardview_new_set)
             vh.view.setCardElevation(1f)
             vh.view.setOnClick { onSelect(userEquipmentSet) }
         }
@@ -89,7 +89,7 @@ class UserEquipmentSetAdapterDelegate(private val dataSet: MutableList<UserEquip
             view.card_header.defense_value.visibility = View.GONE
             view.card_body.skill_section.visibility = if (data.skills.isNotEmpty()) View.VISIBLE else View.GONE
             view.card_body.set_bonus_section.visibility = if (data.setBonuses.isNotEmpty()) View.VISIBLE else View.GONE
-            val adapter = UserEquipmentSetViewPagerAdapter(view.context, data.skills)
+            val adapter = WorkshopViewPagerAdapter(view.context, data.skills)
             view.skill_pager.adapter = adapter
             view.skill_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

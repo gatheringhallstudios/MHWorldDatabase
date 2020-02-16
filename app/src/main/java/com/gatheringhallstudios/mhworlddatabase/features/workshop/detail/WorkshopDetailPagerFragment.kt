@@ -1,12 +1,11 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.detail
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.detail
 
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
-import com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.UserEquipmentSetViewModel
-import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_generic_pager.*
 
 /**
@@ -14,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_generic_pager.*
  * All data is displayed in separate tabs.
  */
 
-class UserEquipmentSetDetailPagerFragment : BasePagerFragment() {
+class WorkshopDetailPagerFragment : BasePagerFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
@@ -39,11 +38,11 @@ class UserEquipmentSetDetailPagerFragment : BasePagerFragment() {
         viewModel.setActiveUserEquipmentSet(equipmentSetId)
 
         // Now add our tabs
-        tabs.addTab(getString(R.string.tab_armor_set_builder_equipment)) {
-            UserEquipmentSetEditFragment()
+        tabs.addTab(getString(R.string.tab_workshop_builder_equipment)) {
+            WorkshopEditFragment()
         }
-        tabs.addTab(getString(R.string.tab_armor_set_builder_summary)) {
-            UserEquipmentSetSummaryFragment()
+        tabs.addTab(getString(R.string.tab_workshop_builder_summary)) {
+            WorkshopSummaryFragment()
         }
     }
 }

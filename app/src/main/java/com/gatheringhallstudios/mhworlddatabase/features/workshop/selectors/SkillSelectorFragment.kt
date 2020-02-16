@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder.selectors
+package com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
-import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTree
 import com.gatheringhallstudios.mhworlddatabase.features.skills.list.SkillTreeListAdapter
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import kotlinx.android.synthetic.main.fragment_equipment_filter.*
@@ -29,8 +28,8 @@ class SkillSelectorFragment : DialogFragment() {
         }
     }
 
-    private val viewModel: UserEquipmentSetSelectorViewModel by lazy {
-        ViewModelProviders.of(this).get(UserEquipmentSetSelectorViewModel::class.java)
+    private val viewModel: WorkshopSelectorViewModel by lazy {
+        ViewModelProviders.of(this).get(WorkshopSelectorViewModel::class.java)
     }
 
     var skillNumber: Int = 0

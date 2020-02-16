@@ -1,4 +1,4 @@
-package com.gatheringhallstudios.mhworlddatabase.features.userequipmentsetbuilder
+package com.gatheringhallstudios.mhworlddatabase.features.workshop
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
