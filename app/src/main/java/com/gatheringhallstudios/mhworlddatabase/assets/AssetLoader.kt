@@ -8,8 +8,8 @@ import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
-import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNodeType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNodeType
 
 // we are storing an application context, so its fine
 @SuppressLint("StaticFieldLeak")
@@ -142,7 +142,13 @@ object AssetLoader {
     }
 
     fun loadIconFor(quest: QuestBase): Drawable? {
-        return ctx.getDrawableCompat(R.drawable.ic_question_mark)
+        return when(quest.quest_type) {
+            QuestType.HUNT -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_hunt)
+            QuestType.SLAY -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_slay)
+            QuestType.ASSIGNMENT -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_assignment)
+            QuestType.DELIVER -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_deliver)
+            QuestType.CAPTURE -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_capture)
+        }
     }
 
     fun loadSkillIcon(color: String?): Drawable? {

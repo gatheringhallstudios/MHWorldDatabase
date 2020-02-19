@@ -246,6 +246,8 @@ enum class QuestCategory {
 
 enum class QuestType {
     HUNT,
+    SLAY,
+    ASSIGNMENT,
     DELIVER,
     CAPTURE
 }

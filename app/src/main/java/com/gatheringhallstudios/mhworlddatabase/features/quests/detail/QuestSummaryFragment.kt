@@ -91,5 +91,9 @@ class QuestSummaryFragment : Fragment() {
 
             quest_monsters.addView(cell)
         }
+        if (monsters.isEmpty()) {
+            quest_monsters.addView(
+                    layoutInflater.inflate(R.layout.listitem_empty_medium, quest_monsters, false))
+        }
     }
 }

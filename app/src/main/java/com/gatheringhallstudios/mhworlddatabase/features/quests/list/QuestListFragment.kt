@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.HeaderItemDivider
 import com.gatheringhallstudios.mhworlddatabase.data.types.QuestCategory
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
@@ -39,6 +39,7 @@ class QuestListFragment : RecyclerViewFragment() {
 
         val categories = arguments?.getSerializable(ARG_QUEST_CATEGORY) as? Array<QuestCategory> ?: emptyArray()
         viewModel.getQuests(categories).observe(viewLifecycleOwner, Observer { quests ->
+            adapter.clear()
             quests ?: return@Observer
 
             // Group by category first (so that if we have multiple categories, last one is last

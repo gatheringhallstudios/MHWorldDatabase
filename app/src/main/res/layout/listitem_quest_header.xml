@@ -13,12 +13,37 @@
         style="@style/TextHeadlineHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Kadachi α"
+        tools:text="MR"
 
         android:layout_marginStart="@dimen/margin_large"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/quest_star_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:orientation="horizontal"
+        android:gravity="start"
+        app:layout_constraintTop_toTopOf="@id/quest_group_name"
+        app:layout_constraintBottom_toBottomOf="@id/quest_group_name"
+        app:layout_constraintStart_toEndOf="@id/quest_group_name"
+        app:layout_constraintEnd_toStartOf="@+id/dropdown_icon"
+        >
+        <!-- These are removed and populated at runtime -->
+        <ImageView
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            app:srcCompat="@drawable/ic_ui_quest_star_mr"
+            />
+        <ImageView
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            app:srcCompat="@drawable/ic_ui_quest_star_mr"
+            />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/dropdown_icon"
