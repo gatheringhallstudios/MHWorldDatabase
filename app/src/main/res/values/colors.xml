@@ -38,11 +38,11 @@
     <color name="icon_white">#F3F3F3</color>
     <color name="icon_lime">#A9B978</color>
     <color name="icon_green">#6AAC85</color>
+    <color name="icon_dull_cyan">#418189</color>
     <color name="icon_cyan">#55D1F0</color>
     <color name="icon_blue">#5e8efc</color>
     <color name="icon_violet">#9D93E7</color>
     <color name="icon_orange">#B58377</color>
-
     <color name="icon_pink">#F399A6</color>
     <color name="icon_red">#9A3548</color>
     <color name="icon_dark_red">#781D38</color>
@@ -52,7 +52,8 @@
     <color name="icon_yellow">#E6EE09</color>
     <color name="icon_gold">#EFCD1E</color>
     <color name="icon_dark_green">#324C27</color>
-    <color name="icon_dark_purple">#554CAF</color> <!-- tentative -->
+    <color name="icon_dark_blue">#4A49D1</color>
+    <color name="icon_dark_purple">#58349b</color>
 
     <!-- Color percentages to Alpha
     https://stackoverflow.com/questions/15852122/hex-transparency-in-colors?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
