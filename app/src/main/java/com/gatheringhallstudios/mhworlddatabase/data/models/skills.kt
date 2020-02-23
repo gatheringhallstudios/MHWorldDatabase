@@ -1,6 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.models
 
 import androidx.room.Embedded
+import androidx.room.Ignore
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
 import java.io.Serializable
 
@@ -25,8 +26,14 @@ open class SkillTree(
         name: String?,
         max_level: Int,
         icon_color: String?,
+        val secret: Int,
         val description: String?
-) : Serializable, SkillTreeBase(id, name, max_level, icon_color)
+) : Serializable, SkillTreeBase(id, name, max_level, icon_color) {
+    /**
+     * The max level that can be reached without uncapping the skill via an "X Secret" other skill.
+     */
+    @Ignore val unlocked = max_level - secret
+}
 
 /**
  * A skill tree with skill information included.
@@ -36,10 +43,10 @@ class SkillTreeFull(
         name: String?,
         max_level: Int,
         icon_color: String?,
+        secret: Int,
         description: String?,
-
         val skills: List<Skill>
-) : SkillTree(id, name, max_level, icon_color, description)
+) : SkillTree(id, name, max_level, icon_color, secret, description)
 
 data class Skill(
         val skilltree_id: Int,

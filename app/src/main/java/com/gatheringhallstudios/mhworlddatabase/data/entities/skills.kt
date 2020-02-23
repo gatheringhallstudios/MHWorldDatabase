@@ -9,7 +9,8 @@ import androidx.room.PrimaryKey
 data class SkillTreeEntity(
         @PrimaryKey val id: Int,
         val max_level: Int,
-        val icon_color: String?
+        val icon_color: String?,
+        val secret: Int
 )
 
 /**
