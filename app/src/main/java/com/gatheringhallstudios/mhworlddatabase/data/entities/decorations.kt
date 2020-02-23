@@ -27,7 +27,10 @@ data class DecorationEntity(
         val mysterious_feystone_percent: Double,
         val glowing_feystone_percent: Double,
         val worn_feystone_percent: Double,
-        val warped_feystone_percent: Double
+        val warped_feystone_percent: Double,
+        val ancient_feystone_percent: Double,
+        val carved_feystone_percent: Double,
+        val sealed_feystone_percent: Double
 )
 
 @Entity(tableName = "decoration_text",
