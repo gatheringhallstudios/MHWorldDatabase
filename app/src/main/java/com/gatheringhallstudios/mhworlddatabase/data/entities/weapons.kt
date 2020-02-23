@@ -13,6 +13,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 data class WeaponEntity(
         @PrimaryKey
         val id: Int,
+        val order_id: Int,
         val weapon_type: WeaponType,
         val category: WeaponCategory,
         val rarity: Int,
