@@ -20,7 +20,7 @@ abstract class WeaponDao {
             JOIN weapon_text wt USING (id)
             LEFT JOIN weapon_ammo wa ON w.ammo_id = wa.id
         WHERE wt.lang_id = :langId            
-        ORDER BY w.id ASC
+        ORDER BY w.order_id ASC
           """)
     abstract fun loadWeaponsSync(langId: String): List<Weapon>
 
@@ -37,7 +37,7 @@ abstract class WeaponDao {
             LEFT JOIN weapon_ammo wa ON w.ammo_id = wa.id
         WHERE wt.lang_id = :langId
             AND w.weapon_type = :weaponType
-        ORDER BY w.id ASC
+        ORDER BY w.order_id ASC
           """)
     abstract fun loadWeaponsSync(langId: String, weaponType: WeaponType): List<Weapon>
 

@@ -180,10 +180,14 @@ val ColorRegistry = createRegistry(
         "rare2" to R.color.icon_white,
         "rare3" to R.color.icon_lime,
         "rare4" to R.color.icon_green,
-        "rare5" to R.color.icon_cyan,
-        "rare6" to R.color.icon_blue,
+        "rare5" to R.color.icon_dull_cyan,
+        "rare6" to R.color.icon_dark_purple,
         "rare7" to R.color.icon_violet,
         "rare8" to R.color.icon_orange,
+        "rare9" to R.color.icon_red,
+        "rare10" to R.color.icon_blue,
+        "rare11" to R.color.icon_gold,
+        "rare12" to R.color.icon_cyan,
 
         "White" to R.color.icon_white,
         "Gray" to R.color.icon_gray,
@@ -201,5 +205,6 @@ val ColorRegistry = createRegistry(
         "Cyan" to R.color.icon_cyan,
         "Green" to R.color.icon_green,
         "DarkGreen" to R.color.icon_dark_green,
+        "DarkBlue" to R.color.icon_dark_blue,
         "DarkPurple" to R.color.icon_dark_purple
 )

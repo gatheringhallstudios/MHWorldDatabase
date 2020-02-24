@@ -24,6 +24,9 @@ private val MYSTERIOUS_FEYSTONE_COLOR = "Gray"
 private val GLOWING_FEYSTONE_COLOR = "Blue"
 private val WORN_FEYSTONE_COLOR = "Beige"
 private val WARPED_FEYSTONE_COLOR = "Red"
+private val ANCIENT_FEYSTONE_COLOR = "Violet"
+private val CARVED_FEYSTONE_COLOR = "Green"
+private val SEALED_FEYSTONE_COLOR = "Gold"
 
 class DecorationDetailFragment : androidx.fragment.app.Fragment() {
     companion object {
@@ -127,6 +130,24 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
                 R.string.decorations_chance_warped,
                 decoration.warped_feystone_percent,
                 WARPED_FEYSTONE_COLOR
+        ))
+
+        decoration_drop_list.addView(inflateFeystoneChance(
+                R.string.decorations_chance_ancient,
+                decoration.ancient_feystone_percent,
+                ANCIENT_FEYSTONE_COLOR
+        ))
+
+        decoration_drop_list.addView(inflateFeystoneChance(
+                R.string.decorations_chance_carved,
+                decoration.carved_feystone_percent,
+                CARVED_FEYSTONE_COLOR
+        ))
+
+        decoration_drop_list.addView(inflateFeystoneChance(
+                R.string.decorations_chance_sealed,
+                decoration.sealed_feystone_percent,
+                SEALED_FEYSTONE_COLOR
         ))
 
         populateSkills(decoration.getSkillLevels())

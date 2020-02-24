@@ -35,7 +35,10 @@ class Decoration(
         val mysterious_feystone_percent: Double,
         val glowing_feystone_percent: Double,
         val worn_feystone_percent: Double,
-        val warped_feystone_percent: Double
+        val warped_feystone_percent: Double,
+        val ancient_feystone_percent: Double,
+        val carved_feystone_percent: Double,
+        val sealed_feystone_percent: Double
 ) : DecorationBase(id, name, slot, icon_color) {
     /**
      * Returns skill all non-null skill levels

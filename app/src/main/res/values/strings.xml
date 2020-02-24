@@ -359,6 +359,9 @@
     <string name="decorations_chance_glowing">Glowing Feystone</string>
     <string name="decorations_chance_worn">Worn Feystone</string>
     <string name="decorations_chance_warped">Warped Feystone</string>
+    <string name="decorations_chance_ancient">Ancient Feystone</string>
+    <string name="decorations_chance_carved">Carved Feystone</string>
+    <string name="decorations_chance_sealed">Sealed Feystone</string>
 
     <!-- ################# -->
     <!-- ## CHARMS MENU ## -->

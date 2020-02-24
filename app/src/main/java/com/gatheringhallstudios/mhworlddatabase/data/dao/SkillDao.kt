@@ -15,7 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 @Dao
 abstract class SkillDao {
     @Query("""
-        SELECT id, name, max_level, description, icon_color
+        SELECT id, name, max_level, description, icon_color, secret
         FROM skilltree s join skilltree_text st USING (id)
         WHERE lang_id = :langId
         ORDER BY name """)
@@ -36,7 +36,8 @@ abstract class SkillDao {
             SkillTreeFull(
                     id = firstItem.id,
                     name = firstItem.skilltree_name,
-                    max_level = firstItem.max_level ,
+                    max_level = firstItem.max_level,
+                    secret = firstItem.secret,
                     description = firstItem.skilltree_description,
                     icon_color = firstItem.icon_color,
                     skills = skills
@@ -52,13 +53,14 @@ abstract class SkillDao {
             val skilltree_description: String?,
             val max_level: Int,
             val level: Int,
+            val secret: Int,
             val description: String?,
             val icon_color: String?
     )
 
     // internal query used by "loadSkillTree"
     @Query("""
-        SELECT st.id, stt.name skilltree_name, stt.description skilltree_description,
+        SELECT st.id, stt.name skilltree_name, st.secret, stt.description skilltree_description,
             st.max_level, s.level, s.description, st.icon_color
         FROM skilltree st
             JOIN skilltree_text stt
