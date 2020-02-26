@@ -26,11 +26,16 @@ Runs all the tests
 fastlane android beta
 ```
 Submit a new Beta Build to Crashlytics Beta
-### android deploy
+### android deploy_beta
 ```
-fastlane android deploy
+fastlane android deploy_beta
 ```
 Deploy a new version to the Google Play
+### android bundle_release
+```
+fastlane android bundle_release
+```
+Build Signed Release App
 
 ----
 

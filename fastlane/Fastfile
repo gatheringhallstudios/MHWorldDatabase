@@ -31,8 +31,23 @@ platform :android do
   end
 
   desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
+  lane :deploy_beta do
+    bundle_release
+
+    upload_to_play_store(
+        track: 'beta',
+        rollout: '1',
+        aab: 'app/build/outputs/bundle/release/app-release.aab',
+        skip_upload_apk: 'true',
+        validate_only: 'false' # set to true to dry run
+    )
+  end
+
+  desc "Build Signed Release App"
+  lane :bundle_release do
+    gradle(
+      task: 'bundle',
+      build_type: 'Release'
+    )
   end
 end
