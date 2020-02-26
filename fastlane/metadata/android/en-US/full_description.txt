@@ -1,0 +1,38 @@
+*ICEBORNE DATA IS ONLY AVAILABLE AFTER PC RELEASE - SORRY!*
+
+Gathering Hall Studios (creators of MHGen Database and MH4U Database) releases a quick and easy to use Monster Hunter World reference, including armor, monsters, decorations, skills, and more!
+
+Features Include:
+
+-	*Universal Search*
+-       *TRANSLATIONS*
+-	*OFFLINE ACCESS*
+-       *Free and Open Source*
+-	Monster Weaknesses, Hitzones, and Rewards
+-	Gathering Points and Drop Rates
+-	Item Combinations
+-       Weapon List with Material Requirements
+-	Armor List with Skills and Material Requirements
+-	Decorations List with Feystone Drop Rates
+-	Charms List with Material Requirements
+-       Bookmarking!
+
+Future Updates to Include:
+
+-	Armor Set Builder
+
+Note: Translations is currently in Beta. Currently supported languages include:
+-       English
+-       日本語
+-       Français
+-       Italiano
+-       Deutsch
+-       Español
+-       Português do Brasil
+-       Polski
+-       Pусский
+-       한국어
+-       繁體中文
+-       Arabe
+
+Disclaimer: GatheringHallStudios is unaffiliated with Capcom, which owns the trademark for Monster Hunter. This is an app made by the community for the community.

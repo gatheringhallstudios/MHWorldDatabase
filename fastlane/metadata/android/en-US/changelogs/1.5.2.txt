@@ -1,0 +1,6 @@
+ - Added Nergigante Gamma armor.
+ - Updated Weapon Tree display to be more compact.
+ - Bug fixes and prep work for ICEBORNE!
+ - Quick fix for an upgrade issue. Sorry for the inconvenience!
+
+ Unfortunately ICEBORNE data won't be available to us until after the PC launch. Thank you for your patience!
