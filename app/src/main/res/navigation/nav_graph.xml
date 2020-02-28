@@ -154,6 +154,19 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
+        android:id="@+id/kinsectTreeDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.kinsects.list.KinsectTreeListFragment"
+        android:label="@string/title_kinsects"
+        tools:layout="@layout/list_generic" />
+    <action
+        android:id="@+id/openKinsectTreeAction"
+        app:destination="@id/kinsectTreeDestination"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <fragment
         android:id="@+id/bookmarksListDestination"
         android:name="com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksListFragment"
         android:label="@string/title_bookmarks"
@@ -324,6 +337,18 @@
     <action
         android:id="@+id/openQuestDetailAction"
         app:destination="@id/questDetailDestination"
+        app:enterAnim="@anim/nav_enter_right"
+        app:exitAnim="@anim/nav_exit_left"
+        app:popEnterAnim="@anim/nav_enter_left"
+        app:popExitAnim="@anim/nav_exit_right" />
+
+    <fragment
+        android:id="@+id/kinsectDetailDestination"
+        android:name="com.gatheringhallstudios.mhworlddatabase.features.kinsects.detail.KinsectDetailPagerFragment"
+        tools:layout="@layout/fragment_kinsect_summary" />
+    <action
+        android:id="@+id/openKinsectDetailAction"
+        app:destination="@id/kinsectDetailDestination"
         app:enterAnim="@anim/nav_enter_right"
         app:exitAnim="@anim/nav_exit_left"
         app:popEnterAnim="@anim/nav_enter_left"

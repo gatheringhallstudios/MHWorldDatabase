@@ -163,6 +163,20 @@ private val QuestTypeConverter = Converter(
         null to QuestType.HUNT
 )
 
+private val KinsectAttackTypeConverter = Converter(
+        "Sever" to KinsectAttackType.SEVER,
+        "Blunt" to KinsectAttackType.BLUNT,
+        null to null
+)
+
+private val KinsectDustEffectConverter = Converter(
+        "Poison" to KinsectDustEffect.POISON,
+        "Paralysis" to KinsectDustEffect.PARALYSIS,
+        "Heal" to KinsectDustEffect.HEAL,
+        "Blast" to KinsectDustEffect.BLAST,
+        null to null
+)
+
 /**
  * Type conversions for things like enumerations.
  * Change this to add new enum values
@@ -280,4 +294,16 @@ class Converters {
 
     @TypeConverter
     fun fromQuestType(type: QuestType) = QuestTypeConverter.serialize(type)
+
+    @TypeConverter
+    fun kinsectAttackTypeFromString(value: String?) = KinsectAttackTypeConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromKinsectAttackType(type: KinsectAttackType) = KinsectAttackTypeConverter.serialize(type)
+
+    @TypeConverter
+    fun kinsectDustEffectFromString(value: String?) = KinsectDustEffectConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromKinsectDustEffect(type: KinsectDustEffect) = KinsectDustEffectConverter.serialize(type)
 }

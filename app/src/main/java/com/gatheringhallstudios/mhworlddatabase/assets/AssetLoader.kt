@@ -151,6 +151,14 @@ object AssetLoader {
         }
     }
 
+    fun loadIconFor(kinsect: Kinsect): Drawable? {
+        val name = when (kinsect.attack_type) {
+            KinsectAttackType.SEVER -> "Sever"
+            KinsectAttackType.BLUNT -> "Blunt"
+        }
+        return ctx.getVectorDrawable("Kinsect$name", "rare${kinsect.rarity}")
+    }
+
     fun loadSkillIcon(color: String?): Drawable? {
         return ctx.getVectorDrawable("Skill", color)
     }
@@ -184,6 +192,10 @@ object AssetLoader {
             'C' -> ctx.getVectorDrawable(vectorName, "Cyan")
             else -> null
         }
+    }
+
+    fun loadKinsectDustIcon(dustEffect: KinsectDustEffect): Drawable? {
+        return ctx.getDrawableCompat(KinsectDustRegistry(dustEffect))
     }
 
     fun loadRarityColor(rarity: Int) : Int {

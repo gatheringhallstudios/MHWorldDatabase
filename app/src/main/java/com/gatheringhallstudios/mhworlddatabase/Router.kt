@@ -10,6 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetai
 import com.gatheringhallstudios.mhworlddatabase.features.charms.detail.CharmDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.decorations.detail.DecorationDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.items.detail.ItemDetailPagerFragment
+import com.gatheringhallstudios.mhworlddatabase.features.kinsects.detail.KinsectDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.LocationSummaryFragment
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment
@@ -37,6 +38,7 @@ class Router(private val navController: NavController) {
         DataType.DECORATION -> navigateDecorationDetail(id)
         DataType.WEAPON -> navigateWeaponDetail(id)
         DataType.QUEST -> navigateQuestDetail(id)
+        DataType.KINSECT -> navigateKinsectDetail(id)
         else -> Unit
     }
 
@@ -82,6 +84,10 @@ class Router(private val navController: NavController) {
 
     fun navigateQuestDetail(questId: Int) {
         navController.navigate(R.id.openQuestDetailAction, BundleBuilder().putInt(QuestDetailPagerFragment.ARG_QUEST_ID, questId).build())
+    }
+
+    fun navigateKinsectDetail(kinsectId: Int) {
+        navController.navigate(R.id.openKinsectDetailAction, BundleBuilder().putInt(KinsectDetailPagerFragment.ARG_KINSECT_ID, kinsectId).build())
     }
 
     fun navigateUserEquipmentSetDetail(userEquipmentSetId: Int) {

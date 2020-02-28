@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/padding_small"
+    android:background="?android:attr/selectableItemBackground">
+    android:minHeight="@dimen/row_height_xxlarge">
+
+    <TextView
+        android:id="@+id/kinsect_name"
+        style="@style/TextHeadlineHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/kinsect_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Monarch Alucanid III" />
+
+    <ImageView
+        android:id="@+id/kinsect_craftable_image"
+        style="@style/IconXSmall"
+        android:layout_marginStart="@dimen/margin_small"
+        app:layout_constraintBottom_toBottomOf="@id/kinsect_name"
+        app:layout_constraintStart_toEndOf="@id/kinsect_name"
+        app:layout_constraintTop_toTopOf="@id/kinsect_name"
+        app:srcCompat="@drawable/ic_ui_buildable" />
+
+    <ImageView
+        android:id="@+id/kinsect_image"
+        style="@style/IconMedium.Decorated"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_ui_kinsect_white" />
+
+    <LinearLayout
+        android:id="@+id/basic_stat_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/complex_stat_layout"
+        app:layout_constraintTop_toTopOf="@+id/complex_stat_layout"
+        app:layout_constraintWidth_max="@dimen/width_sharpness_bar">
+
+        <!-- These should be removed from this layout and added at runtime -->
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/attack_type"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/row_height_xsmall"
+            app:iconSrc="@drawable/ic_ui_kinsect_white"
+            app:labelText="Sever" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/dust_effect"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/row_height_xsmall"
+            app:iconSrc="@drawable/ic_status_poison"
+            app:labelText="Poison" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/complex_stat_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:gravity="left|start"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium"
+        app:layout_constraintStart_toEndOf="@+id/kinsect_image"
+        app:layout_constraintTop_toTopOf="@+id/kinsect_image">
+
+        <!-- These should be removed from this layout and added at runtime -->
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/power_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:minWidth="@dimen/image_size_small"
+            app:iconSrc="@drawable/ic_ui_attack"
+            app:labelText="14" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/speed_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            app:iconSrc="@drawable/ic_ui_effective_star"
+            app:labelText="7" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/heal_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            app:iconSrc="@drawable/ic_ui_defense"
+            app:labelText="11" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

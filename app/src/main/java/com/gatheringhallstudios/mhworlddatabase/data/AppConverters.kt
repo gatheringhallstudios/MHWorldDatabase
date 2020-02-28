@@ -15,6 +15,7 @@ val DataTypeConverter = Converter(
         "CHARM" to DataType.CHARM,
         "ARMOR" to DataType.ARMOR,
         "WEAPON" to DataType.WEAPON,
+        "KINSECT" to DataType.KINSECT,
         null to null
 )
 
