@@ -398,6 +398,31 @@
     <string name="quest_group">Group %s</string>
     <string name="quest_label_objective">Objective</string>
 
+    <!-- ################ -->
+    <!-- ## KINSECT MENU ## -->
+    <!-- ################ -->
+
+    <string name="title_kinsects">Kinsects</string>
+
+    <string name="kinsect_attack_type">Attack Type</string>
+    <string name="kinsect_attack_type_sever">Sever</string>
+    <string name="kinsect_attack_type_blunt">Blunt</string>
+
+    <string name="kinsect_dust_effect">Dust Effect</string>
+    <string name="kinsect_dust_effect_poison">Poison</string>
+    <string name="kinsect_dust_effect_paralysis">Paralysis</string>
+    <string name="kinsect_dust_effect_heal">Heal</string>
+    <string name="kinsect_dust_effect_blast">Blast</string>
+
+    <string name="kinsect_power">Power</string>
+    <string name="kinsect_speed">Speed</string>
+    <string name="kinsect_heal">Heal</string>
+
+    <string name="tab_kinsect_detail">Detail</string>
+    <string name="tab_kinsect_tree">Family</string>
+
+    <string name="kinsect_final_upgrades">Final</string>
+
     <!-- ################# -->
     <!-- ## SEARCH MENU ## -->
     <!-- ################# -->

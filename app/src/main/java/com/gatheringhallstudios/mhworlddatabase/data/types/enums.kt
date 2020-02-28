@@ -23,6 +23,7 @@ enum class DataType {
     ARMOR,
     WEAPON,
     QUEST,
+    KINSECT,
     NONE
 }
 
@@ -250,4 +251,16 @@ enum class QuestType {
     ASSIGNMENT,
     DELIVER,
     CAPTURE
+}
+
+enum class KinsectAttackType {
+    SEVER,
+    BLUNT,
+}
+
+enum class KinsectDustEffect {
+    POISON,
+    PARALYSIS,
+    HEAL,
+    BLAST,
 }

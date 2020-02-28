@@ -9,6 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.BulkLoaderDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.CharmDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.DecorationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.ItemDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.KinsectDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.LocationDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MetaDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
@@ -30,6 +31,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.DecorationText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemCombinationEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ItemText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.KinsectEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.KinsectText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.Language;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationCampText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.LocationItemEntity;
@@ -112,7 +115,10 @@ import androidx.room.TypeConverters;
                 WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class,
                 WeaponMelodyEntity.class, WeaponMelodyTextEntity.class, WeaponSkill.class,
 
-                QuestEntity.class, QuestText.class, QuestMonsterEntity.class, QuestRewardEntity.class
+                QuestEntity.class, QuestText.class, QuestMonsterEntity.class, QuestRewardEntity.class,
+
+                // Kinsects
+                KinsectEntity.class, KinsectText.class
         })
 
 @TypeConverters({Converters.class})
@@ -167,6 +173,8 @@ public abstract class MHWDatabase extends RoomDatabase {
     public abstract WeaponDao weaponDao();
 
     public abstract QuestDao questDao();
+
+    public abstract KinsectDao kinsectDao();
 
     public abstract BulkLoaderDao bookmarksSearchDao();
 

@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.assets
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
+import com.gatheringhallstudios.mhworlddatabase.data.types.KinsectDustEffect
 import com.gatheringhallstudios.mhworlddatabase.data.types.PhialType
 
 private fun <T, K> createRegistry(vararg pairs: Pair<T, K>): (T) -> K? {
@@ -65,6 +66,9 @@ val VectorRegistry = createRegistry(
         "Slot4Jewel2" to R.xml.ic_ui_slot_4_jewel_2_base,
         "Slot4Jewel3" to R.xml.ic_ui_slot_4_jewel_3_base,
         "Slot4Jewel4" to R.xml.ic_ui_slot_4_jewel_4_base,
+
+        "KinsectSever" to R.drawable.ic_ui_kinsect_white,
+        "KinsectBlunt" to R.drawable.ic_ui_kinsect_white,
 
         "NodeStart" to R.xml.ui_tree_node_start_base,
         "NodeStartCollapsed" to R.xml.ui_tree_node_start_collapsed_base,
@@ -146,6 +150,14 @@ val PhialRegistry = fun(phial: PhialType?) = when (phial) {
     PhialType.POISON -> R.drawable.ic_status_poison
     PhialType.PARALYSIS -> R.drawable.ic_status_paralysis
     PhialType.IMPACT -> 0
+    else -> 0
+}
+
+val KinsectDustRegistry = fun(dustEffect: KinsectDustEffect?) = when (dustEffect) {
+    KinsectDustEffect.POISON -> R.drawable.ic_status_poison
+    KinsectDustEffect.PARALYSIS -> R.drawable.ic_status_paralysis
+    KinsectDustEffect.HEAL -> R.drawable.ic_ui_defense
+    KinsectDustEffect.BLAST -> R.drawable.ic_status_blast
     else -> 0
 }
 

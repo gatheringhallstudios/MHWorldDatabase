@@ -52,6 +52,10 @@
             android:id="@+id/bookmarksListDestination"
             android:icon="@drawable/ic_ui_bookmark"
             android:title="@string/title_bookmarks" />
+        <item
+            android:id="@+id/kinsectTreeDestination"
+            android:icon="@drawable/ic_ui_kinsect_white"
+            android:title="@string/title_kinsects" />
     </group>
 
     <item android:title="Other">
