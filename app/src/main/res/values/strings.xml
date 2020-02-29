@@ -444,6 +444,7 @@
     <string name="type_item_ammo">Ammo</string>
     <string name="type_item_misc">Misc Item</string>
     <string name="type_quest">Quest</string>
+    <string name="type_kinsect">Kinsect</string>
 
     <!-- #################### -->
     <!-- ## BOOKMARKS MENU ## -->
