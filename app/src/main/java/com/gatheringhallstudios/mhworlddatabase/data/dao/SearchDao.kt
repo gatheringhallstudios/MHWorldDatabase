@@ -49,6 +49,10 @@ abstract class SearchDao {
         loadAllQuestsSync(AppSettings.dataLocale)
     }
 
+    private val kinsectDataCache = CachedValue(timeout) {
+        loadAllKinsectsSync(AppSettings.dataLocale)
+    }
+
     fun searchLocations(searchFilter: String): List<Location> {
         val filter = SearchFilter(searchFilter)
         return locationDataCache.get().filter { filter.matches(it.name) }
@@ -92,6 +96,11 @@ abstract class SearchDao {
     fun searchQuests(searchFilter: String): List<QuestBase> {
         val filter = SearchFilter(searchFilter)
         return questDataCache.get().filter { filter.matches(it.name) }
+    }
+
+    fun searchKinsects(searchFilter: String): List<Kinsect> {
+        val filter = SearchFilter(searchFilter)
+        return kinsectDataCache.get().filter { filter.matches(it.name) }
     }
 
     // All queries for search are below. Currently, it loads the entire table.
@@ -177,4 +186,14 @@ abstract class SearchDao {
         ORDER BY q.order_id ASC
     """)
     abstract fun loadAllQuestsSync(langId: String): List<QuestBase>
+
+    @Query("""
+        SELECT k.id, kt.name, k.rarity, k.previous_kinsect_id,
+            k.attack_type, k.dust_effect, k.power, k.speed, k.heal
+        FROM kinsect k
+            JOIN kinsect_text kt USING (id)
+        WHERE kt.lang_id = :langId
+        ORDER BY kt.name ASC
+    """)
+    abstract fun loadAllKinsectsSync(langId: String): List<Kinsect>
 }
