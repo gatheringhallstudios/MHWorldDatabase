@@ -15,7 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 @Dao
 abstract class SkillDao {
     @Query("""
-        SELECT id, name, max_level, description, icon_color, secret
+        SELECT id, name, max_level, description, icon_color, secret, unlocks_id
         FROM skilltree s join skilltree_text st USING (id)
         WHERE lang_id = :langId
         ORDER BY name """)
@@ -40,6 +40,7 @@ abstract class SkillDao {
                     secret = firstItem.secret,
                     description = firstItem.skilltree_description,
                     icon_color = firstItem.icon_color,
+                    unlocks_id = firstItem.unlocks_id,
                     skills = skills
             )
         }
@@ -54,13 +55,14 @@ abstract class SkillDao {
             val max_level: Int,
             val level: Int,
             val secret: Int,
+            val unlocks_id: Int?,
             val description: String?,
             val icon_color: String?
     )
 
     // internal query used by "loadSkillTree"
     @Query("""
-        SELECT st.id, stt.name skilltree_name, st.secret, stt.description skilltree_description,
+        SELECT st.id, stt.name skilltree_name, st.secret, st.unlocks_id, stt.description skilltree_description,
             st.max_level, s.level, s.description, st.icon_color
         FROM skilltree st
             JOIN skilltree_text stt
@@ -75,7 +77,7 @@ abstract class SkillDao {
 
     @Query("""
         SELECT c.id AS charm_id, c.previous_id AS charm_previous_id, c.rarity AS charm_rarity,
-             ct.name AS charm_name, st.id skill_id, stext.name skill_name, st.max_level skill_max_level,
+             ct.name AS charm_name, st.id skill_id, stext.name skill_name, st.max_level skill_max_level, st.secret skill_secret, st.unlocks_id skill_unlocks_id,
              st.icon_color skill_icon_color, cs.level level
         FROM charm c
             JOIN charm_text ct USING (id)
@@ -91,7 +93,7 @@ abstract class SkillDao {
 
 
     @Query("""
-        SELECT stt.id skill_id, stext.name skill_name, stt.max_level skill_max_level, stt.icon_color skill_icon_color,
+        SELECT stt.id skill_id, stext.name skill_name, stt.max_level skill_max_level, stt.secret skill_secret, stt.unlocks_id skill_unlocks_id, stt.icon_color skill_icon_color,
             a.id armor_id, at.name armor_name, a.rarity armor_rarity, a.rank armor_rank, a.armor_type armor_armor_type,
             askill.level level, a.slot_1 armor_slot_1, a.slot_2 armor_slot_2, a.slot_3 armor_slot_3
         FROM armor a
@@ -108,9 +110,8 @@ abstract class SkillDao {
 
     @Query("""
         SELECT
-            stt.id skill_id, stext.name skill_name, stt.max_level skill_max_level, stt.icon_color skill_icon_color,
-            d.id deco_id, dt.name deco_name, d.slot deco_slot, d.icon_color deco_icon_color,
-            1 level
+            stt.id skill_id, stext.name skill_name, stt.max_level skill_max_level, stt.secret skill_secret, stt.unlocks_id skill_unlocks_id, stt.icon_color skill_icon_color,
+            d.id deco_id, dt.name deco_name, d.slot deco_slot, d.icon_color deco_icon_color, d.skilltree_level level            
         FROM decoration d
             JOIN decoration_text dt USING (id)
             JOIN skilltree stt ON (stt.id = d.skilltree_id)
@@ -123,7 +124,7 @@ abstract class SkillDao {
     abstract fun loadDecorationsWithSkill(langId: String, skillTreeId: Int): LiveData<List<DecorationSkillLevel>>
 
     @Query("""
-        SELECT stt.id skilltree_id, stext.name skilltree_name, stt.max_level skilltree_max_level, stt.icon_color skilltree_icon_color,
+        SELECT stt.id skilltree_id, stext.name skilltree_name, stt.max_level skilltree_max_level, stt.secret skilltree_secret, stt.unlocks_id skill_unlocks_id, stt.icon_color skilltree_icon_color,
             abs.setbonus_id as id, abt.name, abs.required
         FROM armorset_bonus_skill abs
             JOIN armorset_bonus_text abt ON (abt.id = abs.setbonus_id)

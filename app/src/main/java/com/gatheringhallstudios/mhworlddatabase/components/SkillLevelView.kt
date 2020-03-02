@@ -40,11 +40,18 @@ class SkillLevelView @JvmOverloads constructor(
             invalidate()
         }
 
+    var secretLevels = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     init {
         if (attrs != null) {
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.SkillLevelView)
             try {
                 level = attributes.getInteger(R.styleable.SkillLevelView_level, 0)
+                secretLevels = attributes.getInteger(R.styleable.SkillLevelView_secretLevels, 0)
                 maxLevel = attributes.getInteger(R.styleable.SkillLevelView_maxLevel, 7)
             } finally {
                 attributes.recycle()
@@ -58,7 +65,9 @@ class SkillLevelView @JvmOverloads constructor(
     private val leftImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_left)
     private val rightImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_right)
     private val filledImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_filled)
+    private val filledImgSecret = AppCompatResources.getDrawable(context, R.drawable.ui_skill_filled_secret)
     private val emptyImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_empty)
+    private val emptyImgSecret = AppCompatResources.getDrawable(context, R.drawable.ui_skill_empty_secret)
     private val gapImg = AppCompatResources.getDrawable(context, R.drawable.ui_skill_space)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -82,7 +91,9 @@ class SkillLevelView @JvmOverloads constructor(
         for (i in 0 until maxSkillPoints) {
             val image = when {
                 i >= maxLevel -> gapImg
-                i >= level -> emptyImg
+                i >= level && i < maxLevel - secretLevels -> emptyImg
+                i >= level && i >= maxLevel - secretLevels -> emptyImgSecret
+                i < level && i >= maxLevel - secretLevels -> filledImgSecret
                 else -> filledImg
             }
 

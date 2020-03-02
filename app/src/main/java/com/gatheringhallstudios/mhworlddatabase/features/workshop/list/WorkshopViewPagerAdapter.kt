@@ -48,11 +48,15 @@ class WorkshopViewPagerAdapter(private val context: Context, private val skills:
             val inflater = LayoutInflater.from(context)
             for (item in skills.subList(startIndex, endIndex)) {
                 val skillLayout = inflater.inflate(R.layout.listitem_skill_level, itemView as ViewGroup, false)
-                skillLayout.icon.setImageDrawable(AssetLoader.loadIconFor(item.skillTree))
-                skillLayout.label_text.text = item.skillTree.name
-                skillLayout.skill_level.maxLevel = item.skillTree.max_level
-                skillLayout.skill_level.level = item.level
-                skillLayout.level_text.text = itemView.resources.getString(R.string.skill_level_qty, item.level)
+                with(skillLayout) {
+                    icon.setImageDrawable(AssetLoader.loadIconFor(item.skillTree))
+                    label_text.text = item.skillTree.name
+                    skill_level.maxLevel = item.skillTree.max_level
+                    skill_level.level = item.level
+                    skill_level.secretLevels = item.skillTree.secret
+                    level_text.text = itemView.resources.getString(R.string.skill_level_qty, item.level)
+                }
+
                 itemView.addView(skillLayout)
             }
         }

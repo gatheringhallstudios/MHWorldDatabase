@@ -65,6 +65,7 @@
     <declare-styleable name="SkillLevelView">
         <attr name="level" format="integer"/>
         <attr name="maxLevel" format="integer"/>
+        <attr name="secretLevels" format="integer"/>
     </declare-styleable>
 
     <declare-styleable name="CheckedImageButton">
