@@ -355,16 +355,22 @@
                 app:flexWrap="wrap">
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
-                    android:id="@+id/rank_toggle_low_rank"
+                    android:id="@+id/rank_weapon_toggle_low_rank"
                     style="@style/ButtonToggle"
                     android:layout_marginEnd="@dimen/margin_large"
                     app:text="@string/rank_full_low" />
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
-                    android:id="@+id/rank_toggle_high_rank"
+                    android:id="@+id/rank_weapon_toggle_high_rank"
                     style="@style/ButtonToggle"
                     android:layout_marginEnd="@dimen/margin_large"
                     app:text="@string/rank_full_high" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/rank_weapon_toggle_master_rank"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="@string/rank_full_master" />
 
             </com.google.android.flexbox.FlexboxLayout>
 
