@@ -56,7 +56,8 @@ class BulkModels(
         val decorations: List<DecorationBase> = emptyList(),
         val armor: List<Armor> = emptyList(),
         val items: List<Item> = emptyList(),
-        val weapons: List<Weapon> = emptyList()
+        val weapons: List<Weapon> = emptyList(),
+        val kinsects: List<Kinsect> = emptyList()
 ) {
     fun isEmpty() = (
             locations.isEmpty() &&
@@ -66,6 +67,7 @@ class BulkModels(
             decorations.isEmpty() &&
             armor.isEmpty() &&
             items.isEmpty() &&
-            weapons.isEmpty())
+            weapons.isEmpty() &&
+            kinsects.isEmpty())
 }
 
