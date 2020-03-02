@@ -73,6 +73,7 @@ class KinsectDetailFragment : androidx.fragment.app.Fragment() {
 
     private fun populateKinsectBasic(kinsect: Kinsect) {
         kinsect_header.setIconType(IconType.ZEMBELLISHED)
+        kinsect_header.setIconDrawable(AssetLoader.loadIconFor(kinsect))
         kinsect_header.setTitleText(kinsect.name)
         kinsect_header.setSubtitleText(getString(R.string.format_rarity, kinsect.rarity))
         kinsect_header.setSubtitleColor(AssetLoader.loadRarityColor(kinsect.rarity))
@@ -99,7 +100,7 @@ class KinsectDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateComponents(recipe: List<ItemQuantity>?) {
-        if (recipe == null) {
+        if (recipe == null || recipe.isEmpty()) {
             kinsect_recipes.visibility = View.GONE
             return
         }
@@ -108,7 +109,7 @@ class KinsectDetailFragment : androidx.fragment.app.Fragment() {
 
         val view = layoutInflater.inflate(R.layout.view_weapon_recipe, kinsect_recipes, false)
 
-        view.weapon_components_list_title.setLabelText(getString(R.string.header_required_materials_upgrade))
+        view.weapon_components_list_title.setLabelText(getString(R.string.header_required_materials))
 
         for (component in recipe) {
             val itemView = IconLabelTextCell(context)
