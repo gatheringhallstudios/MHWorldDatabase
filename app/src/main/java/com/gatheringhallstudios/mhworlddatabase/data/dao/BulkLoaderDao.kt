@@ -17,7 +17,8 @@ abstract class BulkLoaderDao {
                   monsterIds: IntArray,
                   skillTreeIds: IntArray,
                   weaponIds: IntArray,
-                  decorationIds: IntArray): LiveData<BulkModels> = createLiveData {
+                  decorationIds: IntArray,
+                  kinsectIds: IntArray): LiveData<BulkModels> = createLiveData {
         BulkModels(
                 armor = loadArmorByIdList(langId, armorIds),
                 items = loadItemsByIdList(langId, itemIds),
@@ -26,7 +27,8 @@ abstract class BulkLoaderDao {
                 monsters = loadMonstersByIdList(langId, monsterIds),
                 skillTrees = loadSkillTreesByIdList(langId, skillTreeIds),
                 weapons = loadWeaponsByIdList(langId, weaponIds),
-                decorations = loadDecorationsByIdList(langId, decorationIds)
+                decorations = loadDecorationsByIdList(langId, decorationIds),
+                kinsects = loadKinsectsByIdList(langId, kinsectIds)
         )
     }
 
@@ -110,4 +112,13 @@ abstract class BulkLoaderDao {
         ORDER BY w.id ASC
           """)
     abstract fun loadWeaponsByIdList(langId: String, weaponIds: IntArray): List<Weapon>
+
+    @Query("""
+        SELECT k.id, kt.name, k.rarity, k.previous_kinsect_id, k.attack_type, k.dust_effect, k.power, k.speed, k.heal
+        FROM kinsect k
+            JOIN kinsect_text kt USING (id)
+        WHERE kt.lang_id = :langId
+            AND k.id IN (:kinsectIds)
+    """)
+    abstract fun loadKinsectsByIdList(langId: String, kinsectIds: IntArray): List<Kinsect>
 }

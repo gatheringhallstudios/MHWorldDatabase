@@ -31,6 +31,7 @@ class BookmarksListFragment : RecyclerViewFragment() {
             SkillTreeBookmarkDelegate { getRouter().navigateSkillDetail(it.id) },
             WeaponBookmarkDelegate { getRouter().navigateWeaponDetail(it.id) },
             ArmorBookmarkDelegate { getRouter().navigateArmorDetail(it.id) },
+            KinsectBookmarkDelegate { getRouter().navigateKinsectDetail(it.id) },
             EmptyStateAdapterDelegate()
     )
 
@@ -81,5 +82,8 @@ class BookmarksListFragment : RecyclerViewFragment() {
             adapter.addSection(getString(R.string.title_decorations), data.decorations)
         }
 
+        if (data.kinsects.isNotEmpty()) {
+            adapter.addSection(getString(R.string.title_kinsects), data.kinsects)
+        }
     }
 }

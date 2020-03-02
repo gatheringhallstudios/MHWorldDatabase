@@ -162,3 +162,22 @@ class ArmorBookmarkDelegate(private val onSelect: (Armor) -> Unit) : SimpleListD
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
 }
+
+class KinsectBookmarkDelegate(private val onSelect: (Kinsect) -> Unit) : SimpleListDelegate<Kinsect>() {
+    override fun isForViewType(obj: Any) = obj is Kinsect
+    private  lateinit var context: Context
+
+    override fun onCreateView(parent: ViewGroup): View {
+        context = parent.context
+        val inflater = LayoutInflater.from(parent.context)
+        return inflater.inflate(R.layout.listitem_bookmark, parent, false)
+    }
+
+    override fun bindView(viewHolder: SimpleViewHolder, data: Kinsect) {
+        val icon = AssetLoader.loadIconFor(data)
+        viewHolder.itemView.generic_icon.setImageDrawable(icon)
+        viewHolder.itemView.label_text.text = data.name
+        viewHolder.itemView.setOnClickListener { onSelect(data) }
+//        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
+    }
+}
