@@ -1,0 +1,17 @@
+Thank you for your patience! This is the beta track for our Iceborne update.
+
+ - ICEBORNE UPDATE:
+    - Weapons
+    - Armor
+    - Monsters
+    - Decorations
+ - WORKSHOP
+ - QUEST LIST
+ - KINSECT LIST
+ - Currently missing data:
+    - Item drop rates
+    - Charms, Mantles, Iceborne Quests
+
+Please hold tight while we polish things up to get ready for release.
+
+We're a team of volunteers so be sure to join your Discord channel to see how you can help.

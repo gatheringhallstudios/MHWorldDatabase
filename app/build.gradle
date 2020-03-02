@@ -7,7 +7,7 @@ apply plugin: 'kotlin-kapt'
 
 // Update this to update the database on the next build
 // This is also used to populate populate MHWDatabase.java configuration
-def DATABASE_VERSION = 35
+def DATABASE_VERSION = 36
 
 android {
     signingConfigs {
@@ -23,8 +23,8 @@ android {
         applicationId "com.gatheringhallstudios.mhworlddatabase"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 16
-        versionName "2.0.1-beta"
+        versionCode 17
+        versionName "2.0.0-beta3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // We set this to false so vectors get rastered at buildtime.
