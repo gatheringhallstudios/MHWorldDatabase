@@ -45,9 +45,12 @@ class ArmorElementalDefenseFilter(private val elementDefs: Set<ElementStatus>) :
     }
 }
 
-class ArmorSkillsFilter(private val skills: Set<SkillTree>) : Filter<ArmorFull> {
+class ArmorSkillsFilter(private val searchSkills: Set<SkillTree>) : Filter<ArmorFull> {
     override fun runFilter(obj: ArmorFull): Boolean {
-        return obj.skills.map { it.skillTree.id }.containsAll(skills.map { it.id })
+        val skills = mutableSetOf<Int>()
+        skills.addAll(obj.skills.map{it.skillTree.id})
+        skills.addAll(obj.setBonuses.map { it.skillTree.id})
+        return skills.containsAll(searchSkills.map { it.id })
     }
 }
 

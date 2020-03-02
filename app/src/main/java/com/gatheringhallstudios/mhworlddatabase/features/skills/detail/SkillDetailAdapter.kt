@@ -136,6 +136,7 @@ class DecorationSkillLevelAdapterDelegate: SimpleListDelegate<DecorationSkillLev
         viewHolder.label_text.text = data.decoration.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
         viewHolder.skill_level.level = data.level
+        viewHolder.skill_level.secretLevels = data.skillTree.secret
         viewHolder.level_text.text = viewHolder.context.getString(R.string.skill_level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateDecorationDetail(data.decoration.id) }
     }
@@ -154,6 +155,7 @@ class CharmSkillLevelAdapterDelegate: SimpleListDelegate<CharmSkillLevel>() {
         viewHolder.label_text.text = data.charm.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
         viewHolder.skill_level.level = data.level
+        viewHolder.skill_level.secretLevels = data.skillTree.secret
         viewHolder.level_text.text = viewHolder.context.getString(R.string.skill_level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateCharmDetail(data.charm.id) }
     }
@@ -172,6 +174,7 @@ class ArmorSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSkillLevel>() {
         viewHolder.label_text.text = data.armor.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
         viewHolder.skill_level.level = data.level
+        viewHolder.skill_level.secretLevels = data.skillTree.secret
 
         // make it possible to reference slots using a list
         val slots = data.armor.slots
@@ -210,6 +213,7 @@ class ArmorSetBonusSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSetBonus>(
         viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data))
         viewHolder.label_text.text = data.name
         viewHolder.skill_level.maxLevel = data.skillTree.max_level
+        viewHolder.skill_level.secretLevels = data.skillTree.secret
         viewHolder.skill_level.level = data.points
         viewHolder.bonus_requirement.setImageResource(SetBonusNumberRegistry(data.required))
 

@@ -195,8 +195,9 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
             set.thunderDefense = calculateThunderDefense(userEquipment)
             set.iceDefense = calculateIceDefense(userEquipment)
             set.dragonDefense = calculateDragonDefense(userEquipment)
-            set.skills = calculateSkillLevels(userEquipment)
             set.setBonuses = calculateSetBonuses(userEquipment)
+            set.skills = calculateSkillLevels(userEquipment,
+                    set.setBonuses.map { it.value.mapNotNull { itr -> itr.skillTree.unlocks_id } }.flatten().toSet())
             set.maxRarity = calculateMaxRarity(userEquipment)
 
             set
@@ -319,10 +320,9 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
-    private fun calculateSkillLevels(userEquipment: List<UserEquipment>): List<SkillLevel> {
-        val skillLevels = mutableMapOf<Int, SkillLevel>()
+    private fun calculateSkillLevels(userEquipment: List<UserEquipment>, unlockedSkillsFromSetBonuses: Set<Int>): List<SkillLevel> {
+        val providedSkills = mutableListOf<SkillLevel>()
         userEquipment.forEach { item ->
-            val providedSkills = mutableListOf<SkillLevel>()
             when (item.type()) {
                 DataType.ARMOR -> {
                     (item as UserArmorPiece).decorations.forEach { userDecoration ->
@@ -345,20 +345,38 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
                 else -> {
                 }
             }
+        }
 
-            providedSkills.forEach {
-                if (skillLevels.containsKey(it.skillTree.id)) {
-                    val level = skillLevels[it.skillTree.id]!!.level + it.level
-                    val skillLevel = SkillLevel(level)
-                    skillLevel.skillTree = it.skillTree
-                    skillLevels[it.skillTree.id] = skillLevel
+        val unlockedSkills = providedSkills.filter { it.skillTree.unlocks_id != null }.map { it.skillTree.unlocks_id }.toMutableSet()
+        unlockedSkills.addAll(unlockedSkillsFromSetBonuses)
+        val skillLevels = mutableMapOf<Int, SkillLevel>()
+
+        providedSkills.forEach {
+            if (skillLevels.containsKey(it.skillTree.id)) {
+                val level: Int
+
+                //Determine whether the skill has been unlocked, and set the skill level appropriately
+                if (it.skillTree.secret > 0 && unlockedSkills.contains(it.skillTree.id)) {
+                    level = addSkillLevels(skillLevels[it.skillTree.id]!!.level, it.level, it.skillTree.max_level)
+                } else if (it.skillTree.secret > 0 && !unlockedSkills.contains(it.skillTree.id)) {
+                    level = addSkillLevels(skillLevels[it.skillTree.id]!!.level, it.level, it.skillTree.lockedMaxLevel)
                 } else {
-                    skillLevels[it.skillTree.id] = it
+                    level = addSkillLevels(skillLevels[it.skillTree.id]!!.level, it.level, it.skillTree.max_level)
                 }
+
+                val skillLevel = SkillLevel(level)
+                skillLevel.skillTree = it.skillTree
+                skillLevels[it.skillTree.id] = skillLevel
+            } else {
+                skillLevels[it.skillTree.id] = it
             }
         }
         val list = skillLevels.map { it.value }.toMutableList()
         list.sortWith(compareByDescending<SkillLevel> { it.level }.thenBy { it.skillTree.id })
         return list
+    }
+
+    private fun addSkillLevels(a: Int, b: Int, max: Int): Int {
+        return if (a + b > max) max else a + b
     }
 }

@@ -178,6 +178,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
             view.level_text.text = getString(R.string.skill_level_qty, skill.level)
             with(view.skill_level) {
                 maxLevel = skill.skillTree.max_level
+                secretLevels = skill.skillTree.secret
                 level = skill.level
             }
 

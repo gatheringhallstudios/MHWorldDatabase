@@ -97,7 +97,7 @@ abstract class CharmDao {
     protected abstract fun loadCharmComponentsSync(langId: String, charmId: Int): List<ItemQuantity>
 
     @Query("""
-        SELECT s.id skill_id, stt.name skill_name, s.max_level skill_max_level,
+        SELECT s.id skill_id, stt.name skill_name, s.max_level skill_max_level, s.secret skill_secret, s.unlocks_id skill_unlocks_id,
             s.icon_color skill_icon_color, cs.level level
         FROM charm_skill cs
             JOIN skilltree s

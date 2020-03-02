@@ -146,7 +146,7 @@ abstract class WeaponDao {
     }
 
     @Query("""
-        SELECT s.id skill_id, stt.name skill_name, s.max_level skill_max_level, s.icon_color skill_icon_color,
+        SELECT s.id skill_id, stt.name skill_name, s.max_level skill_max_level, s.secret skill_secret, s.icon_color skill_icon_color, s.unlocks_id skill_unlocks_id,
             wskill.level level
         FROM weapon_skill wskill
             JOIN weapon w

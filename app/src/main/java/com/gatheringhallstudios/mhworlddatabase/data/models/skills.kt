@@ -10,10 +10,17 @@ open class SkillTreeBase(
         val id: Int,
         val name: String?,
         val max_level: Int,
-        val icon_color: String?
+        val secret: Int,
+        val icon_color: String?,
+        val unlocks_id: Int?
 ) : MHModel {
     override val entityId get() = id
     override val entityType get() = DataType.SKILL
+
+    /**
+     * The max level that can be reached without uncapping the skill via an "X Secret" other skill.
+     */
+    @Ignore val lockedMaxLevel = max_level - secret
 }
 
 /**
@@ -26,9 +33,10 @@ open class SkillTree(
         name: String?,
         max_level: Int,
         icon_color: String?,
-        val secret: Int,
-        val description: String?
-) : Serializable, SkillTreeBase(id, name, max_level, icon_color) {
+        secret: Int,
+        val description: String?,
+        unlocks_id: Int?
+        ) : Serializable, SkillTreeBase(id, name, max_level, secret, icon_color, unlocks_id) {
     /**
      * The max level that can be reached without uncapping the skill via an "X Secret" other skill.
      */
@@ -45,8 +53,9 @@ class SkillTreeFull(
         icon_color: String?,
         secret: Int,
         description: String?,
+        unlocks_id: Int?,
         val skills: List<Skill>
-) : SkillTree(id, name, max_level, icon_color, secret, description)
+) : SkillTree(id, name, max_level, icon_color, secret, description, unlocks_id)
 
 data class Skill(
         val skilltree_id: Int,

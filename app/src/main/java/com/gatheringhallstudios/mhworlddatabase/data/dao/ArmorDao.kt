@@ -150,7 +150,7 @@ abstract class ArmorDao {
     }
 
     @Query("""
-        SELECT st.id as skilltree_id, stt.name as skilltree_name, st.max_level skilltree_max_level,
+        SELECT st.id as skilltree_id, stt.name as skilltree_name, st.max_level skilltree_max_level, st.secret skilltree_secret, st.unlocks_id skilltree_unlocks_id,
             st.icon_color as skilltree_icon_color,
             abs.setbonus_id as id, abt.name, abs.required
         FROM armorset_bonus_skill abs
@@ -183,7 +183,7 @@ abstract class ArmorDao {
     abstract fun loadArmorComponentsSync(langId: String, armorId: Int): List<ItemQuantity>
 
     @Query("""
-        SELECT s.id skill_id, stt.name skill_name, s.max_level skill_max_level, s.icon_color skill_icon_color,
+        SELECT s.id skill_id, stt.name skill_name, s.max_level skill_max_level, s.icon_color skill_icon_color, s.secret skill_secret, s.unlocks_id skill_unlocks_id,
             askill.level level
         FROM armor_skill askill
             JOIN armor a

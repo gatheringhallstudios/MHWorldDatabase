@@ -92,7 +92,7 @@ abstract class BulkLoaderDao {
     abstract fun loadMonstersByIdList(langId: String, monsterIds: IntArray): List<MonsterBase>
 
     @Query("""
-        SELECT id, name, max_level, description, icon_color, secret
+        SELECT id, name, max_level, description, icon_color, secret, unlocks_id
         FROM skilltree s join skilltree_text st USING (id)
         WHERE lang_id = :langId
         AND id IN (:skillTreeIds)

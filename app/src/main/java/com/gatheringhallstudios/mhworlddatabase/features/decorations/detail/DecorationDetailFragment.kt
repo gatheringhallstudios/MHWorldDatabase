@@ -164,6 +164,7 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
             view.level_text.text = getString(R.string.skill_level_qty, skillLevel.level)
             with(view.skill_level) {
                 maxLevel = skillLevel.skillTree.max_level
+                secretLevels = skillLevel.skillTree.secret
                 level = skillLevel.level
             }
 

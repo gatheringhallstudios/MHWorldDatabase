@@ -19,8 +19,8 @@ abstract class DecorationDao {
 
     @Query("""
         SELECT d.*, dtext.name,
-            s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, d.skilltree_level skill_level,
-            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, d.skilltree2_level skill2_level
+            s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, s.secret skill_skill_secret, s.unlocks_id skill_unlocks_id, d.skilltree_level skill_level,
+            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, s2.secret skill2_skill_secret, d.skilltree2_level skill2_level
         FROM decoration d
             JOIN decoration_text dtext
                 ON dtext.id = d.id
@@ -40,8 +40,8 @@ abstract class DecorationDao {
 
     @Query("""
         SELECT d.*, dtext.name,
-            s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, d.skilltree_level skill_level,
-            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, d.skilltree2_level skill2_level
+            s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, s.secret skill_skill_secret, s.unlocks_id skill_unlocks_id, d.skilltree_level skill_level,
+            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, s2.secret skill2_skill_secret, d.skilltree2_level skill2_level
         FROM decoration d
             JOIN decoration_text dtext
                 ON dtext.id = d.id
@@ -61,8 +61,8 @@ abstract class DecorationDao {
 
     @Query("""
         SELECT d.*, dtext.name,
-            s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, d.skilltree_level skill_level,
-            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, d.skilltree2_level skill2_level
+            s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, s.secret skill_skill_secret, s.unlocks_id skill_unlocks_id, d.skilltree_level skill_level,
+            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, s2.secret skill2_skill_secret, d.skilltree2_level skill2_level
         FROM decoration d
             JOIN decoration_text dtext
                 ON dtext.id = d.id
@@ -83,8 +83,8 @@ abstract class DecorationDao {
 
     @Query("""
         SELECT d.*, dtext.name,
-            s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, d.skilltree_level skill_level,
-            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color, d.skilltree2_level skill2_level            
+            s.id skill_skill_id, stext.name skill_skill_name, s.max_level skill_skill_max_level, s.icon_color skill_skill_icon_color, s.secret skill_skill_secret, s.unlocks_id skill_unlocks_id, d.skilltree_level skill_level,
+            s2.id skill2_skill_id, stext2.name skill2_skill_name, s2.max_level skill2_skill_max_level, s2.icon_color skill2_skill_icon_color,  s2.secret skill2_skill_secret, d.skilltree2_level skill2_level            
         FROM decoration d
             JOIN decoration_text dtext
                 ON dtext.id = d.id
