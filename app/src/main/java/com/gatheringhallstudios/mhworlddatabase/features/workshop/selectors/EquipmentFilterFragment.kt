@@ -26,12 +26,14 @@ import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_fire
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_ice
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_thunder
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_water
+import kotlinx.android.synthetic.main.fragment_armor_filter_body.view.*
 import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_1
 import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_2
 import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_3
 import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_4
 import kotlinx.android.synthetic.main.fragment_equipment_filter.*
-import kotlinx.android.synthetic.main.fragment_weapon_filter2_body.*
+import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.*
+import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.view.*
 import java.io.Serializable
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.skill_1 as armor_skill_1
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.skill_2 as armor_skill_2
@@ -203,7 +205,7 @@ class EquipmentFilterFragment : DialogFragment() {
                 }
             }
             SelectorMode.WEAPON -> {
-                scroll_body.layoutResource = R.layout.fragment_weapon_filter2_body
+                scroll_body.layoutResource = R.layout.fragment_workshop_weapon_filter_body
                 scroll_body.inflate()
 
                 weaponTypeGroup = CheckedGroup()
@@ -247,8 +249,9 @@ class EquipmentFilterFragment : DialogFragment() {
 
                 rankGroup = CheckedGroup()
                 rankGroup.apply {
-                    rankGroup.addBinding(rank_toggle_low_rank, Rank.LOW)
-                    rankGroup.addBinding(rank_toggle_high_rank, Rank.HIGH)
+                    rankGroup.addBinding(rank_weapon_toggle_low_rank, Rank.LOW)
+                    rankGroup.addBinding(rank_weapon_toggle_high_rank, Rank.HIGH)
+                    rankGroup.addBinding(rank_weapon_toggle_master_rank, Rank.MASTER)
                 }
             }
             SelectorMode.DECORATION -> {
