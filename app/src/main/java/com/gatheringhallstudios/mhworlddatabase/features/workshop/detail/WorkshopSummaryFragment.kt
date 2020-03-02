@@ -205,30 +205,32 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
             return
         }
 
-        val armorFull = (armorPieces.first() as UserArmorPiece).armor
-        val view = layoutInflater.inflate(R.layout.listitem_armorset_armor, armor_set_piece_list, false)
+        for (armorPiece in armorPieces) {
+            val armorFull = (armorPiece as UserArmorPiece).armor
+            val view = layoutInflater.inflate(R.layout.listitem_armorset_armor, armor_set_piece_list, false)
 
-        view.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armorFull.armor))
-        view.armor_name.text = armorFull.armor.name
-        view.rarity_string.text = getString(R.string.format_rarity, armorFull.armor.rarity)
-        view.defense_value.text = view.resources.getString(
-                R.string.armor_defense_value,
-                armorFull.armor.defense_base,
-                armorFull.armor.defense_max,
-                armorFull.armor.defense_augment_max)
-        val slotImages = armorFull.armor.slots.map {
-            view.context.getDrawableCompat(SlotEmptyRegistry(it))
+            view.armor_icon.setImageDrawable(AssetLoader.loadIconFor(armorFull.armor))
+            view.armor_name.text = armorFull.armor.name
+            view.rarity_string.text = getString(R.string.format_rarity, armorFull.armor.rarity)
+            view.defense_value.text = view.resources.getString(
+                    R.string.armor_defense_value,
+                    armorFull.armor.defense_base,
+                    armorFull.armor.defense_max,
+                    armorFull.armor.defense_augment_max)
+            val slotImages = armorFull.armor.slots.map {
+                view.context.getDrawableCompat(SlotEmptyRegistry(it))
+            }
+
+            view.slot1.setImageDrawable(slotImages[0])
+            view.slot2.setImageDrawable(slotImages[1])
+            view.slot3.setImageDrawable(slotImages[2])
+
+            view.setOnClickListener {
+                getRouter().navigateArmorDetail(armorFull.armor.id)
+            }
+
+            armor_set_piece_list.addView(view)
         }
-
-        view.slot1.setImageDrawable(slotImages[0])
-        view.slot2.setImageDrawable(slotImages[1])
-        view.slot3.setImageDrawable(slotImages[2])
-
-        view.setOnClickListener {
-            getRouter().navigateArmorDetail(armorFull.armor.id)
-        }
-
-        armor_set_piece_list.addView(view)
     }
 
     private fun populateArmorSkills(skills: List<SkillLevel>) {
