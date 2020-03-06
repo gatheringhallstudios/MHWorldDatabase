@@ -98,6 +98,7 @@ enum class ArmorType {
  * Tied to the same object as a weapon may be either/or.
  */
 enum class ElementStatus {
+    NON_ELEMENTAL,
     FIRE,
     WATER,
     THUNDER,

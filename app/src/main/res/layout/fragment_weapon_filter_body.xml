@@ -145,13 +145,25 @@
                     style="@style/ButtonToggle.ImageOnly"
                     android:layout_marginEnd="@dimen/margin_medium"
                     app:imageSize="@dimen/image_size_large"
-                    app:src="@drawable/ic_status_paralysis" />
+                    app:src="@drawable/ic_status_paralysis">
+
+                </com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton>
 
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/toggle_blast"
                     style="@style/ButtonToggle.ImageOnly"
                     app:imageSize="@dimen/image_size_large"
-                    app:src="@drawable/ic_status_blast" />
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    app:src="@drawable/ic_status_blast">
+
+                </com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton>
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/toggle_non_elemental"
+                    style="@style/ButtonToggle.ImageOnly"
+                    app:imageSize="@dimen/image_size_large"
+                    app:src="@drawable/ic_question_mark" />
+
             </LinearLayout>
         </LinearLayout>
 

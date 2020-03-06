@@ -48,8 +48,8 @@ class ArmorElementalDefenseFilter(private val elementDefs: Set<ElementStatus>) :
 class ArmorSkillsFilter(private val searchSkills: Set<SkillTree>) : Filter<ArmorFull> {
     override fun runFilter(obj: ArmorFull): Boolean {
         val skills = mutableSetOf<Int>()
-        skills.addAll(obj.skills.map{it.skillTree.id})
-        skills.addAll(obj.setBonuses.map { it.skillTree.id})
+        skills.addAll(obj.skills.map { it.skillTree.id })
+        skills.addAll(obj.setBonuses.map { it.skillTree.id })
         return skills.containsAll(searchSkills.map { it.id })
     }
 }
@@ -98,7 +98,8 @@ class WeaponTypeFilter(private val weaponTypes: Set<WeaponType>) : Filter<Weapon
 
 class WeaponElementFilter(private val elements: Set<ElementStatus>) : Filter<WeaponFull> {
     override fun runFilter(obj: WeaponFull): Boolean {
-        return elements.contains(obj.weapon.element1) || elements.contains(obj.weapon.element2)
+        return if (ElementStatus.NON_ELEMENTAL in elements) ((obj.weapon.element1 == null && obj.weapon.element2 == null) || obj.weapon.element_hidden)
+        else (obj.weapon.element1 in elements || obj.weapon.element2 in elements)
     }
 }
 

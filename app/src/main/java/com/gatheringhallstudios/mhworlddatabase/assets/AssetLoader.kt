@@ -233,6 +233,7 @@ object AssetLoader {
         ElementStatus.THUNDER -> ctx.getString(R.string.element_thunder)
         ElementStatus.ICE -> ctx.getString(R.string.element_ice)
         ElementStatus.DRAGON -> ctx.getString(R.string.element_dragon)
+        ElementStatus.NON_ELEMENTAL -> ctx.getString(R.string.element_non_elemental)
         ElementStatus.POISON -> ctx.getString(R.string.status_poison)
         ElementStatus.SLEEP -> ctx.getString(R.string.status_sleep)
         ElementStatus.PARALYSIS -> ctx.getString(R.string.status_paralysis)
