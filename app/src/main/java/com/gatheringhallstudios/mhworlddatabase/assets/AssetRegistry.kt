@@ -67,8 +67,8 @@ val VectorRegistry = createRegistry(
         "Slot4Jewel3" to R.xml.ic_ui_slot_4_jewel_3_base,
         "Slot4Jewel4" to R.xml.ic_ui_slot_4_jewel_4_base,
 
-        "KinsectSever" to R.drawable.ic_ui_kinsect_white,
-        "KinsectBlunt" to R.drawable.ic_ui_kinsect_white,
+        "KinsectSever" to R.xml.ic_ui_kinsect_sever_base,
+        "KinsectBlunt" to R.xml.ic_ui_kinsect_blunt_base,
 
         "NodeStart" to R.xml.ui_tree_node_start_base,
         "NodeStartCollapsed" to R.xml.ui_tree_node_start_collapsed_base,

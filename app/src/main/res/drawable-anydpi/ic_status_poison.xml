@@ -1,31 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="40dp"
-    android:height="40dp"
+    android:width="72dp"
+    android:height="72dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-    <group>
-        <path
-            android:fillColor="#000000"
-            android:pathData="M122 240C54.62 240 0 186.27 0 120 0 53.73 54.62 0 122 0s122 53.73 122 120c0 66.27-54.62 120-122 120z"/>
-        <path
-            android:fillColor="#C875BF"
-            android:fillType="evenOdd"
-            android:pathData="M122 216a94 94 0 1 0 0-188 94 94 0 0 0 0 188z"/>
-        <path
-            android:fillColor="#7F3598"
-            android:fillType="evenOdd"
-            android:pathData="M84,122a38,38 0 0,1 76,0a38,38 0 0,1 -76,0z"/>
-        <path
-            android:fillColor="#000000"
-            android:pathData="M270 400c-67.38 0-122-53.73-122-120 0-66.27 54.62-120 122-120s122 53.73 122 120c0 66.27-54.62 120-122 120z"/>
-        <path
-            android:fillColor="#AE6AC9"
-            android:fillType="evenOdd"
-            android:pathData="M270 376a94 94 0 1 0 0-188 94 94 0 0 0 0 188z"/>
-        <path
-            android:fillColor="#7F3598"
-            android:fillType="evenOdd"
-            android:pathData="M232,278a38,38 0 0,1 76,0a38,38 0 0,1 -76,0z"/>
-    </group>
+    <path
+        android:fillColor="#000"
+        android:pathData="M182 296c-67.38 0-122-53.73-122-120c0-66.27 54.62-120 122-120s122 53.73 122 120c0 66.27-54.62 120-122 120z"/>
+    <path
+        android:fillColor="#C875BF"
+        android:fillType="evenOdd"
+        android:pathData="M182 272c51.91 0 94-42.09 94-94c0-51.92-42.09-94-94-94s-94 42.08-94 94c0 51.91 42.09 94 94 94z"/>
+    <path
+        android:fillColor="#7F3598"
+        android:pathData="M182 216c20.99 0 38-17.01 38-38s-17.01-38-38-38s-38 17.01-38 38s17.01 38 38 38z"/>
+    <path
+        android:fillColor="#000"
+        android:pathData="M330 456c-67.38 0-122-53.73-122-120c0-66.27 54.62-120 122-120s122 53.73 122 120c0 66.27-54.62 120-122 120z"/>
+    <path
+        android:fillColor="#AE6AC9"
+        android:fillType="evenOdd"
+        android:pathData="M330 432c51.92 0 94-42.08 94-94s-42.08-94-94-94s-94 42.08-94 94s42.08 94 94 94z"/>
+    <path
+        android:fillColor="#7F3598"
+        android:pathData="M330 372c20.99 0 38-17.01 38-38s-17.01-38-38-38s-38 17.01-38 38s17.01 38 38 38z"/>
 </vector>
