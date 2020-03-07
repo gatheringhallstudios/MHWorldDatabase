@@ -13,27 +13,28 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTree
 import com.gatheringhallstudios.mhworlddatabase.data.types.ElementStatus
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion.SelectorMode
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.CheckedGroup
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
+import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion.SelectorMode
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.*
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.name_filter_edittext
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.rank_toggle_high_rank
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.rank_toggle_low_rank
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_dragon
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_fire
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_ice
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_thunder
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_water
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.view.*
 import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_1
 import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_2
 import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_3
 import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_4
 import kotlinx.android.synthetic.main.fragment_equipment_filter.*
 import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.*
-import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.view.*
+import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_paralysis
+import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_poison
+import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_sleep
+import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_blast
+import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_non_elemental
 import java.io.Serializable
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.skill_1 as armor_skill_1
 import kotlinx.android.synthetic.main.fragment_armor_filter_body.skill_2 as armor_skill_2
@@ -237,6 +238,7 @@ class EquipmentFilterFragment : DialogFragment() {
                     addBinding(toggle_sleep, ElementStatus.SLEEP)
                     addBinding(toggle_paralysis, ElementStatus.PARALYSIS)
                     addBinding(toggle_blast, ElementStatus.BLAST)
+                    addBinding(toggle_non_elemental, ElementStatus.NON_ELEMENTAL)
                 }
 
                 slotLevelToggles = CheckedGroup()

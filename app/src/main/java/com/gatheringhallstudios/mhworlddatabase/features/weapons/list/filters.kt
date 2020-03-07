@@ -6,7 +6,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.*
 
 class WeaponElementFilter(private val elements: Set<ElementStatus>): Filter<Weapon> {
     override fun runFilter(obj: Weapon): Boolean {
-        return (obj.element1 in elements || obj.element2 in elements)
+        return if (ElementStatus.NON_ELEMENTAL in elements) ((obj.element1 == null && obj.element2 == null) || obj.element_hidden)
+                else (obj.element1 in elements || obj.element2 in elements)
     }
 }
 

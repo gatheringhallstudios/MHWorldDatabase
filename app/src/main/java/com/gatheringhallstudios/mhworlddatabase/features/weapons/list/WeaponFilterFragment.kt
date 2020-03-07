@@ -193,6 +193,7 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(toggle_sleep, ElementStatus.SLEEP)
             addBinding(toggle_paralysis, ElementStatus.PARALYSIS)
             addBinding(toggle_blast, ElementStatus.BLAST)
+            addBinding(toggle_non_elemental, ElementStatus.NON_ELEMENTAL)
         }
 
         // define phial group

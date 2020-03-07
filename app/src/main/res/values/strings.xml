@@ -84,6 +84,7 @@
     <string name="element_thunder">Thunder</string>
     <string name="element_ice">Ice</string>
     <string name="element_dragon">Dragon</string>
+    <string name="element_non_elemental">Non-elemental</string>
     <string name="status_poison">Poison</string>
     <string name="status_sleep">Sleep</string>
     <string name="status_paralysis">Paralysis</string>
