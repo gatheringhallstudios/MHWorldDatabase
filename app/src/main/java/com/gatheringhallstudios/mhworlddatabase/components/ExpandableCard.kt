@@ -191,7 +191,15 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun setHeader(layout: Int) {
         card_header.removeAllViews()
+        if (layout == 0) return
         LayoutInflater.from(this.context).inflate(layout, card_header, true)
+        card_header.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        card_header.layoutParams = card_header.layoutParams.apply {
+            height = card_header.measuredHeight
+        }
+        card_container.layoutParams = card_container.layoutParams.apply {
+            height = card_header.measuredHeight
+        }
     }
 
     fun setBody(layout: Int) {
