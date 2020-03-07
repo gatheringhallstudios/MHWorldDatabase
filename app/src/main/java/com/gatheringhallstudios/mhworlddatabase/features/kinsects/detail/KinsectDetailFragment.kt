@@ -20,7 +20,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_kinsect_summary.*
 import kotlinx.android.synthetic.main.view_weapon_recipe.view.*
 
-class KinsectDetailFragment : androidx.fragment.app.Fragment() {
+class  KinsectDetailFragment : androidx.fragment.app.Fragment() {
     /**
      * Returns the viewmodel owned by the parent fragment
      */
