@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    app:cardCornerRadius="5dp"
     android:id="@+id/header_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/row_height_large"
-    >
+    android:layout_height="@dimen/row_height_xxlarge"
+    android:orientation="vertical"
+    app:cardCornerRadius="5dp">
     <!-- Right Side -->
     <ImageView
         android:id="@+id/icon_attack"
         style="@style/IconXSmall"
-        app:layout_constraintBottom_toTopOf="@+id/icon_slots"
         app:layout_constraintEnd_toEndOf="@+id/barrier_values"
-        android:layout_marginBottom="@dimen/margin_small"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sharpness_container"
         app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/ic_ui_attack" />
-
 
     <ImageView
         android:id="@+id/icon_slots"
         style="@style/IconXSmall"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/slot_section"
         app:layout_constraintTop_toBottomOf="@+id/icon_attack"
         app:srcCompat="@drawable/ic_ui_slots" />
@@ -79,7 +73,6 @@
         app:layout_constraintBottom_toBottomOf="@id/icon_attack"
         app:layout_constraintStart_toEndOf="@+id/icon_attack"
         app:layout_constraintTop_toTopOf="@id/icon_attack"
-        android:layout_marginBottom="@dimen/margin_small"
         tools:text="68~120" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -88,6 +81,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
         android:gravity="center_vertical"
         android:maxLines="2"
         android:text="@string/user_equipment_set_no_equipment"
@@ -105,9 +99,90 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@id/equipment_icon"
         app:layout_constraintTop_toBottomOf="@+id/equipment_name"
         tools:text="Rare 8" />
+
+    <LinearLayout
+        android:id="@+id/sharpness_container"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipment_name"
+        app:layout_constraintWidth_max="@dimen/width_sharpness_bar">
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
+            android:id="@+id/sharpness_value"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:paddingStart="@dimen/padding_small"
+            android:paddingTop="@dimen/padding_small"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingBottom="1dp"
+            app:blue="30"
+            app:green="40"
+            app:orange="80"
+            app:red="100"
+            app:white="50"
+            app:yellow="50" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.SharpnessView
+            android:id="@+id/sharpness_max_value"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:paddingStart="@dimen/padding_small"
+            android:paddingTop="1dp"
+            android:paddingEnd="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding_small"
+            app:blue="30"
+            app:green="40"
+            app:orange="80"
+            app:red="100"
+            app:white="50"
+            app:yellow="50" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/complex_stat_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left|start"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium"
+        app:layout_constraintStart_toStartOf="@+id/rarity_string"
+        app:layout_constraintTop_toBottomOf="@+id/rarity_string">
+
+        <!-- These should be removed from this layout and added at runtime -->
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/element_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:minWidth="@dimen/image_size_small"
+            app:iconSrc="@drawable/ic_element_fire"
+            app:labelText="252"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/affinity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            app:iconSrc="@drawable/ic_ui_affinity"
+            app:labelText="20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/element_value" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
+            android:id="@+id/weapon_defense_value"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/margin_large"
+            app:iconSrc="@drawable/ic_ui_defense"
+            app:labelText="+10"
+            app:layout_constraintStart_toEndOf="@id/element_value"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
