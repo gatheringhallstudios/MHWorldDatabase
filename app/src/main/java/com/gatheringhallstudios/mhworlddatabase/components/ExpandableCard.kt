@@ -104,9 +104,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         card_body.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             card_body.measure(MATCH_PARENT, WRAP_CONTENT)
             if (card_body.measuredHeight <= 0) {
-                card_arrow.alpha = 0.3f
+                card_arrow.visibility = View.INVISIBLE
             } else {
-                card_arrow.alpha = 1.0f
+                card_arrow.visibility = View.VISIBLE
             }
 
             if (cardState == CardState.EXPANDED) {
@@ -191,18 +191,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun setHeader(layout: Int) {
         card_header.removeAllViews()
-        val view = LayoutInflater.from(this.context).inflate(layout, card_header, false)
-        card_header.addView(view)
-        val inflatedHeight = view.layoutParams.height
-        card_header.layoutParams = card_header.layoutParams.apply {
-            height = inflatedHeight
-        }
-
-        //Only adjust the size of the card container if the card is not in it's EXPANDED state
-        //When the card is in EXPANDED state, the height is WRAP_CONTENT so it will automatically adjust to match the new header
-        if (this.cardState == CardState.COLLAPSED || this.cardState == CardState.COLLAPSING) card_container.layoutParams = card_container.layoutParams.apply {
-            height = inflatedHeight
-        }
+        LayoutInflater.from(this.context).inflate(layout, card_header, true)
     }
 
     fun setBody(layout: Int) {

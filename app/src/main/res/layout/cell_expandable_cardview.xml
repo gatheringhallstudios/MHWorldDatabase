@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/row_height_large"
@@ -76,9 +75,10 @@
                 <FrameLayout
                     android:id="@+id/card_header"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    tools:layout_height="@dimen/row_height_large"/>
+                    android:layout_height="@dimen/row_height_large"
+                    android:layout_weight="1">
+
+                </FrameLayout>
 
                 <ImageButton
                     android:id="@+id/card_arrow"

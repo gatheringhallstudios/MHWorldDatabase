@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
@@ -21,10 +19,6 @@ import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
 import kotlinx.android.synthetic.main.view_workshop_body_expandable_cardview_base.view.*
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.*
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.icon_slots
@@ -32,6 +26,10 @@ import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_b
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot2
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot3
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_empty_equipment.view.*
+import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
+import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
+import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot_section as BaseSlotSection
 
 /**
@@ -93,8 +91,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         val header = card.card_header
         header.equipment_name.text = weapon.name
         header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(weapon))
-        populateStaticWeaponStats(weaponFull.weapon)
-        populateComplexStats(weaponFull.weapon)
+        header.attack_value.text = weapon.attack.toString()
 
         val body = card.card_body
         body.decorations_section.visibility = View.GONE
@@ -506,80 +503,5 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         val result = skills.values.toMutableList()
         result.sortWith(compareByDescending<SkillLevel> { it.level }.thenBy { it.skillTree.id })
         return result
-    }
-
-    /**
-     * Populate weapon static stats
-     */
-    private fun populateStaticWeaponStats(weapon: Weapon) {
-        card.card_header.attack_value.text = weapon.attack.toString()
-
-        card.card_header.attack_value.text = if (AppSettings.showTrueAttackValues) weapon.attack_true.toString()
-        else weapon.attack.toString()
-
-        //Render sharpness data if it exists, else hide the bars
-        val sharpnessData = weapon.sharpnessData
-        if (sharpnessData != null) {
-            card.card_header.sharpness_container.visibility = View.VISIBLE
-            card.card_header.sharpness_value.drawSharpness(sharpnessData.min)
-            card.card_header.sharpness_max_value.drawSharpness(sharpnessData.max)
-        } else {
-            card.card_header.sharpness_container.visibility = View.GONE
-        }
-    }
-
-    /**
-     * Populate weapon complex stats
-     */
-    private fun populateComplexStats(weapon: Weapon) {
-        // Elemental Stat (added if there's a value)
-        if (weapon.element1 != null) {
-            card.card_header.complex_stat_layout.element_value.setLeftIconDrawable(AssetLoader.loadElementIcon(weapon.element1))
-            card.card_header.complex_stat_layout.element_value.setLabelText(createElementString(weapon.element1_attack, weapon.element_hidden))
-            if (weapon.element_hidden) {
-                card.card_header.complex_stat_layout.element_value.labelView.alpha = 0.5.toFloat()
-            } else {
-                card.card_header.complex_stat_layout.element_value.labelView.alpha = 1.0.toFloat()
-            }
-            card.card_header.complex_stat_layout.element_value.visibility = View.VISIBLE
-        } else {
-            card.card_header.complex_stat_layout.element_value.visibility = View.INVISIBLE
-        }
-
-        // Affinity (added if there's a value)
-        if (weapon.affinity != 0) {
-            val affinityValue = card.card_header.context.getString(R.string.format_plus_percentage, weapon.affinity)
-            card.card_header.complex_stat_layout.affinity_value.setLabelText(affinityValue)
-            card.card_header.complex_stat_layout.affinity_value.labelView.setTextColor(ContextCompat.getColor(card.context, when {
-                weapon.affinity > 0 -> R.color.textColorGreen
-                else -> R.color.textColorRed
-            }))
-
-            card.card_header.complex_stat_layout.affinity_value.visibility = View.VISIBLE
-        } else {
-            card.card_header.complex_stat_layout.affinity_value.visibility = View.INVISIBLE
-        }
-
-        // Defense, added if there's a value
-        if (weapon.defense != 0) {
-            val defenseValue = card.context.getString(R.string.format_plus, weapon.defense)
-            card.card_header.complex_stat_layout.weapon_defense_value.setLabelText(defenseValue)
-            card.card_header.complex_stat_layout.weapon_defense_value.labelView.setTextColor(ContextCompat.getColor(card.context, when {
-                weapon.defense > 0 -> R.color.textColorGreen
-                else -> R.color.textColorRed
-            }))
-            card.card_header.complex_stat_layout.weapon_defense_value.visibility = View.VISIBLE
-        } else {
-            card.card_header.complex_stat_layout.weapon_defense_value.visibility = View.INVISIBLE
-        }
-    }
-
-    private fun createElementString(element1_attack: Int?, element_hidden: Boolean): String {
-        val workString = element1_attack ?: "-----"
-
-        return when (element_hidden) {
-            true -> "($workString)"
-            false -> workString.toString()
-        }
     }
 }
