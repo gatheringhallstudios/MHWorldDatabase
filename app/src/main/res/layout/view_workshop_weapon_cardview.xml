@@ -27,11 +27,9 @@
         android:id="@+id/equipment_icon"
         style="@style/IconLarge.Decorated"
         android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_large"
-        android:layout_marginBottom="@dimen/margin_large"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/rarity_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/equipment_name"
         tools:src="@drawable/ic_ui_armor_skill_white" />
 
     <LinearLayout
@@ -152,7 +150,7 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/padding_medium"
         app:layout_constraintStart_toStartOf="@+id/rarity_string"
-        app:layout_constraintTop_toBottomOf="@+id/rarity_string">
+        app:layout_constraintTop_toBottomOf="@+id/sharpness_container">
 
         <!-- These should be removed from this layout and added at runtime -->
 

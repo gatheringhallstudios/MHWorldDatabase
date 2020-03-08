@@ -21,17 +21,17 @@ import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_icon
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.equipment_name
-import kotlinx.android.synthetic.main.view_weapon_header_expandable_cardview.view.rarity_string
-import kotlinx.android.synthetic.main.view_workshop_body_expandable_cardview_base.view.*
+import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.*
+import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.equipment_icon
+import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.equipment_name
+import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.rarity_string
+import kotlinx.android.synthetic.main.view_workshop_body_cardview_base.view.*
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.*
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.icon_slots
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot1
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot2
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot3
-import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_empty_equipment.view.*
+import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_empty.view.*
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot_section as BaseSlotSection
 
 /**
@@ -86,8 +86,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     fun bindWeapon(weaponFull: WeaponFull, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?,
                    onExpand: (() -> Unit)? = null, onContract: (() -> Unit)? = null) {
         val weapon = weaponFull.weapon
-        card.setHeader(R.layout.view_weapon_header_expandable_cardview)
-        card.setBody(R.layout.view_workshop_body_expandable_cardview_base)
+        card.setHeader(R.layout.view_workshop_weapon_cardview)
+        card.setBody(R.layout.view_workshop_body_cardview_base)
         card.setCardElevation(1f)
 
         val header = card.card_header
@@ -187,7 +187,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     fun bindArmor(armor: ArmorFull, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?,
                   onExpand: (() -> Unit)? = null, onContract: (() -> Unit)? = null) {
         card.setHeader(R.layout.view_workshop_header_expandable_cardview_base)
-        card.setBody(R.layout.view_workshop_body_expandable_cardview_base)
+        card.setBody(R.layout.view_workshop_body_cardview_base)
         card.setCardElevation(1f)
 
         val header = card.card_header
@@ -253,7 +253,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
                   onExpand: (() -> Unit)? = null, onContract: (() -> Unit)? = null) {
 
         card.setHeader(R.layout.view_workshop_header_expandable_cardview_base)
-        card.setBody(R.layout.view_workshop_body_expandable_cardview_base)
+        card.setBody(R.layout.view_workshop_body_cardview_base)
         card.setCardElevation(1f)
 
         val header = card.card_header
@@ -302,7 +302,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     fun bindDecoration(decoration: Decoration, onClick: (() -> Unit)?) {
 
         card.setHeader(R.layout.view_workshop_header_expandable_cardview_base)
-        card.setBody(R.layout.view_workshop_body_expandable_cardview_base)
+        card.setBody(R.layout.view_workshop_body_cardview_base)
         card.setCardElevation(1f)
 
         card.setOnClick {
@@ -477,8 +477,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     private fun setEmptyView(@StringRes title: Int, @DrawableRes icon: Int) {
-        card.setHeader(R.layout.view_workshop_header_expandable_cardview_empty_equipment)
-        card.setBody(R.layout.view_workshop_body_expandable_cardview_empty_equipment)
+        card.setHeader(R.layout.view_workshop_header_expandable_cardview_empty)
+        card.setBody(R.layout.view_workshop_body_cardview_empty)
         card.card_header.new_equipment_set_label.text = getString(title)
         card.card_header.equipment_set_icon2.setImageResource(icon)
 

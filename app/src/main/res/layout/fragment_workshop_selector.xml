@@ -16,8 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:cardViewElevation="2"
         app:clickable="false"
-        app:cardHeaderLayout="@layout/view_workshop_header_expandable_cardview_empty_equipment"
-        app:cardBodyLayout="@layout/view_workshop_body_expandable_cardview_empty_equipment" />
+        app:cardHeaderLayout="@layout/view_workshop_header_expandable_cardview_empty"
+        app:cardBodyLayout="@layout/view_workshop_body_cardview_empty" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/equipment_list"
