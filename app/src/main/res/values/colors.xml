@@ -43,6 +43,7 @@
     <color name="icon_blue">#5e8efc</color>
     <color name="icon_violet">#9D93E7</color>
     <color name="icon_orange">#B58377</color>
+    <color name="icon_bright_orange">#FC5200</color>
     <color name="icon_pink">#F399A6</color>
     <color name="icon_red">#9A3548</color>
     <color name="icon_dark_red">#781D38</color>

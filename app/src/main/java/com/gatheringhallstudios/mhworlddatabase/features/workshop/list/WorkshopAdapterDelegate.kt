@@ -19,7 +19,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.*
-import kotlinx.android.synthetic.main.view_workshop_body_expandable_cardview.view.*
+import kotlinx.android.synthetic.main.view_workshop_body_cardview.view.*
 
 
 
@@ -64,7 +64,7 @@ class WorkshopAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>
             }
 
             viewHolder.view.setHeader(R.layout.view_workshop_header_expandable_cardview)
-            viewHolder.view.setBody(R.layout.view_workshop_body_expandable_cardview)
+            viewHolder.view.setBody(R.layout.view_workshop_body_cardview)
             viewHolder.view.setCardElevation(1f)
             viewHolder.bind(userEquipmentSet)
         } else {
