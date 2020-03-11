@@ -46,6 +46,8 @@ val VectorRegistry = createRegistry(
 
         "Charm" to R.xml.ic_equipment_charm_base,
 
+        "Star" to R.xml.ic_ui_quest_star_base,
+
         "Decoration1" to R.xml.ic_ui_decoration_1_base,
         "Decoration2" to R.xml.ic_ui_decoration_2_base,
         "Decoration3" to R.xml.ic_ui_decoration_3_base,
@@ -201,12 +203,16 @@ val ColorRegistry = createRegistry(
         "rare11" to R.color.icon_gold,
         "rare12" to R.color.icon_cyan,
 
+        "LowRank" to R.color.icon_blue,
+        "HighRank" to R.color.icon_bright_orange,
+
         "White" to R.color.icon_white,
         "Gray" to R.color.icon_gray,
         "Pink" to R.color.icon_pink,
         "Red" to R.color.icon_red,
         "DarkRed" to R.color.icon_dark_red,
         "Orange" to R.color.icon_orange,
+        "BrightOrange" to R.color.icon_bright_orange,
         "LightBeige" to R.color.icon_light_beige,
         "Beige" to R.color.icon_beige,
         "DarkBeige" to R.color.icon_dark_beige,

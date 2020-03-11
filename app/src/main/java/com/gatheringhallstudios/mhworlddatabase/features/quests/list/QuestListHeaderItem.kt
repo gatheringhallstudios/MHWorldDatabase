@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.types.QuestCategory
+import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
@@ -35,7 +36,11 @@ class QuestListHeaderItem(val category: QuestCategory, val stars: Int) : Item(),
 
         viewHolder.quest_group_name.text = name
 
-        addStarsToLayout(viewHolder.quest_star_layout, stars)
+        when (stars) {
+            in 1..5 -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars, Rank.LOW)
+            in 6..9 -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars, Rank.HIGH)
+            else -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars, Rank.MASTER)
+        }
 
         bindCurrentState(viewHolder, false)
         viewHolder.itemView.setOnClickListener {
@@ -65,13 +70,17 @@ class QuestListHeaderItem(val category: QuestCategory, val stars: Int) : Item(),
         }
     }
 
-    private fun addStarsToLayout(layout: ViewGroup, numStars: Int) {
+    private fun addStarsToLayoutLow(layout: ViewGroup, numStars: Int, rank: Rank) {
         layout.removeAllViews()
         for (i in 1..numStars) {
             val star = ImageView(layout.context)
 
-            // TODO Replace with appropriate star if LR/HR/MR
-            star.setImageDrawable(AppCompatResources.getDrawable(layout.context, R.drawable.ic_ui_effective_star))
+            when (rank) {
+                Rank.LOW -> star.setImageDrawable(AssetLoader.loadIconFor(Rank.LOW))
+                Rank.HIGH -> star.setImageDrawable(AssetLoader.loadIconFor(Rank.HIGH))
+                else -> star.setImageDrawable(AssetLoader.loadIconFor(Rank.MASTER))
+            }
+
             val lp = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             lp.height = layout.resources.getDimensionPixelSize(R.dimen.image_size_small)
             lp.width = layout.resources.getDimensionPixelSize(R.dimen.image_size_small)

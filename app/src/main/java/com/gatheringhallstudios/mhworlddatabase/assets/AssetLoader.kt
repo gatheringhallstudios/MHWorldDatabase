@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -148,6 +149,14 @@ object AssetLoader {
             QuestType.ASSIGNMENT -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_assignment)
             QuestType.DELIVER -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_deliver)
             QuestType.CAPTURE -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_capture)
+        }
+    }
+
+    fun loadIconFor(rank: Rank): Drawable? {
+        return when(rank) {
+            Rank.LOW -> ctx.getVectorDrawable("Star", "LowRank")
+            Rank.HIGH -> ctx.getVectorDrawable("Star", "HighRank")
+            Rank.MASTER -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_star_mr)
         }
     }
 
