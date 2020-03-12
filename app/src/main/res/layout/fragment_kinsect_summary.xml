@@ -33,7 +33,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    app:srcCompat="@drawable/ic_ui_kinsect_white" />
+                    app:srcCompat="@drawable/ic_ui_kinsect_attack_type" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -57,7 +57,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    app:srcCompat="@drawable/ic_ui_element" />
+                    app:srcCompat="@drawable/ic_ui_kinsect_dust_effect" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -97,7 +97,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    app:srcCompat="@drawable/ic_ui_attack" />
+                    app:srcCompat="@drawable/ic_ui_kinsect_power" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
-                    tools:text="14" />
+                    tools:text="Lv 14" />
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
@@ -121,7 +121,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    app:srcCompat="@drawable/ic_ui_effective_star" />
+                    app:srcCompat="@drawable/ic_ui_kinsect_speed" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
-                    tools:text="7" />
+                    tools:text="Lv 7" />
             </LinearLayout>
 
             <LinearLayout style="@style/EquipmentRow">
@@ -145,7 +145,7 @@
                 <ImageView
                     style="@style/IconXSmall"
                     android:layout_marginStart="@dimen/margin_large"
-                    app:srcCompat="@drawable/ic_ui_defense" />
+                    app:srcCompat="@drawable/ic_ui_kinsect_heal" />
 
                 <TextView
                     style="@style/TextSubHead"
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_large"
                     android:gravity="end"
-                    tools:text="11" />
+                    tools:text="Lv 11" />
             </LinearLayout>
 
         </LinearLayout>

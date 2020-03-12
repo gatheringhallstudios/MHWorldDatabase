@@ -187,7 +187,7 @@ class WeaponTreeListAdapterDelegate(
                 }
 
                 WeaponType.GUNLANCE -> {
-                    val shellingValue = AssetLoader.localizeShellingType(weapon.shelling) + " " + view.context.getString(R.string.skill_level_short_qty, weapon.shelling_level)
+                    val shellingValue = AssetLoader.localizeShellingType(weapon.shelling) + " " + view.context.getString(R.string.level_short_qty, weapon.shelling_level)
                     val shellingView = CompactStatCell(
                             view.context,
                             R.drawable.ic_ui_shelling,

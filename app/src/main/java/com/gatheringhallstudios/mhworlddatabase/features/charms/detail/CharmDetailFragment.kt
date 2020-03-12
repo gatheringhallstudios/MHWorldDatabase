@@ -154,7 +154,7 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            view.level_text.text = getString(R.string.level_qty, skill.level)
             with(view.skill_level) {
                 maxLevel = skill.skillTree.max_level
                 secretLevels = skill.skillTree.secret

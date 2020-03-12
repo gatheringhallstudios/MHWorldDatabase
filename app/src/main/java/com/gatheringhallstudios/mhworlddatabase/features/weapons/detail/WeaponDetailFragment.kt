@@ -175,7 +175,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            view.level_text.text = getString(R.string.level_qty, skill.level)
             with(view.skill_level) {
                 maxLevel = skill.skillTree.max_level
                 secretLevels = skill.skillTree.secret
@@ -346,7 +346,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
     private fun bindGunlance(weapon: Weapon, view: View) {
         populateSharpness(weapon.sharpnessData, view)
         view.findViewById<TextView>(R.id.shelling_type).text = AssetLoader.localizeShellingType(weapon.shelling)
-        view.findViewById<TextView>(R.id.shelling_level_value).text = getString(R.string.skill_level_short_qty, weapon.shelling_level)
+        view.findViewById<TextView>(R.id.shelling_level_value).text = getString(R.string.level_short_qty, weapon.shelling_level)
     }
 
     private fun bindHuntingHorn(weapon: Weapon, melodies: List<WeaponMelody>?, view: View) {

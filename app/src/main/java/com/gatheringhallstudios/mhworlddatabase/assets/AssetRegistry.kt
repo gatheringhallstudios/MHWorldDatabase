@@ -158,7 +158,7 @@ val PhialRegistry = fun(phial: PhialType?) = when (phial) {
 val KinsectDustRegistry = fun(dustEffect: KinsectDustEffect?) = when (dustEffect) {
     KinsectDustEffect.POISON -> R.drawable.ic_status_poison
     KinsectDustEffect.PARALYSIS -> R.drawable.ic_status_paralysis
-    KinsectDustEffect.HEAL -> R.drawable.ic_ui_defense
+    KinsectDustEffect.HEAL -> R.drawable.ic_ui_kinsect_heal
     KinsectDustEffect.BLAST -> R.drawable.ic_status_blast
     else -> 0
 }

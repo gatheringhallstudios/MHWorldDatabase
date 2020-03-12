@@ -92,11 +92,11 @@ class  KinsectDetailFragment : androidx.fragment.app.Fragment() {
 
         dust_effect_icon.setImageDrawable(AssetLoader.loadKinsectDustIcon(kinsect.dust_effect))
 
-        power_value.text = kinsect.power.toString()
+        power_value.text = getString(R.string.level_short_qty,  kinsect.power)
 
-        speed_value.text = kinsect.speed.toString()
+        speed_value.text = getString(R.string.level_short_qty, kinsect.speed)
 
-        heal_value.text = kinsect.heal.toString()
+        heal_value.text = getString(R.string.level_short_qty, kinsect.heal)
     }
 
     private fun populateComponents(recipe: List<ItemQuantity>?) {

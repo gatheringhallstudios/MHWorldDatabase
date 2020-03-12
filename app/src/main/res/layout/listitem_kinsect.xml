@@ -55,7 +55,7 @@
             android:id="@+id/attack_type"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/row_height_xsmall"
-            app:iconSrc="@drawable/ic_ui_kinsect_white"
+            app:iconSrc="@drawable/ic_ui_kinsect_attack_type"
             app:labelText="Sever" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
@@ -85,21 +85,21 @@
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:minWidth="@dimen/image_size_small"
-            app:iconSrc="@drawable/ic_ui_attack"
+            app:iconSrc="@drawable/ic_ui_kinsect_power"
             app:labelText="14" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:id="@+id/speed_value"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            app:iconSrc="@drawable/ic_ui_effective_star"
+            app:iconSrc="@drawable/ic_ui_kinsect_speed"
             app:labelText="7" />
 
         <com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
             android:id="@+id/heal_value"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            app:iconSrc="@drawable/ic_ui_defense"
+            app:iconSrc="@drawable/ic_ui_kinsect_heal"
             app:labelText="11" />
     </LinearLayout>
 
