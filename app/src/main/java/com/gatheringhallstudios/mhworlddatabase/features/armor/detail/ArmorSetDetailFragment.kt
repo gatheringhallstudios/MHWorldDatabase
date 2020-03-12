@@ -13,7 +13,6 @@ import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_armor_set_summary.*
@@ -189,7 +188,7 @@ class ArmorSetDetailFragment : androidx.fragment.app.Fragment() {
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            view.level_text.text = getString(R.string.level_qty, skill.level)
             with(view.skill_level) {
                 maxLevel = skill.skillTree.max_level
                 level = skill.level

@@ -127,7 +127,7 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
 
         for ((i, skill) in skills.withIndex()) {
             val view = layoutInflater.inflate(R.layout.listitem_skill_description, skill_level_descriptions, false)
-            view.level_text.text = getString(R.string.skill_level_short_qty, i + 1)
+            view.level_text.text = getString(R.string.level_short_qty, i + 1)
             view.level_description.text = skill.description
 
             skill_level_descriptions.addView(view)

@@ -54,7 +54,7 @@ class WorkshopViewPagerAdapter(private val context: Context, private val skills:
                     skill_level.maxLevel = item.skillTree.max_level
                     skill_level.level = item.level
                     skill_level.secretLevels = item.skillTree.secret
-                    level_text.text = itemView.resources.getString(R.string.skill_level_qty, item.level)
+                    level_text.text = itemView.resources.getString(R.string.level_qty, item.level)
                 }
 
                 itemView.addView(skillLayout)

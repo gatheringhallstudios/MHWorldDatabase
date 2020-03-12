@@ -3,7 +3,6 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor.detail
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.*
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import com.gatheringhallstudios.mhworlddatabase.features.armor.detail.ArmorDetailPagerFragment.Companion.ARG_ARMOR_ID
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_armor_summary.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -91,7 +88,7 @@ class ArmorDetailFragment : androidx.fragment.app.Fragment() {
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            view.level_text.text = getString(R.string.level_qty, skill.level)
             with(view.skill_level) {
                 maxLevel = skill.skillTree.max_level
                 secretLevels = skill.skillTree.secret

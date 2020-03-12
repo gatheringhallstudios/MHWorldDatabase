@@ -245,7 +245,7 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
             val view = layoutInflater.inflate(R.layout.listitem_skill_level, armor_skill_section, false)
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
             view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.skill_level_qty, skill.level)
+            view.level_text.text = getString(R.string.level_qty, skill.level)
             with(view.skill_level) {
                 maxLevel = skill.skillTree.max_level
                 secretLevels = skill.skillTree.secret

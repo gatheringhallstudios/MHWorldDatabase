@@ -158,7 +158,7 @@ val PhialRegistry = fun(phial: PhialType?) = when (phial) {
 val KinsectDustRegistry = fun(dustEffect: KinsectDustEffect?) = when (dustEffect) {
     KinsectDustEffect.POISON -> R.drawable.ic_status_poison
     KinsectDustEffect.PARALYSIS -> R.drawable.ic_status_paralysis
-    KinsectDustEffect.HEAL -> R.drawable.ic_ui_defense
+    KinsectDustEffect.HEAL -> R.drawable.ic_ui_kinsect_heal
     KinsectDustEffect.BLAST -> R.drawable.ic_status_blast
     else -> 0
 }
@@ -186,6 +186,7 @@ val LocationDrawableRegistry = fun(id: Int) = when (id) {
     3 -> R.drawable.ic_locations_coral_highlands
     4 -> R.drawable.ic_locations_rotten_vale
     5 -> R.drawable.ic_locations_elders_recess
+    // TODO what ID is Hoarfrost and Guiding Lands?
     else -> R.drawable.ic_ui_question_mark_paper
 }
 

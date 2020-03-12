@@ -302,8 +302,8 @@
 
     <!-- General Strings -->
     <string name="title_skill_level">Livello</string>
-    <string name="skill_level_qty">Livello %1$d</string> <!-- Example: Level 1 -->
-    <string name="skill_level_short_qty">Lv %1$d</string> <!-- Example: Lv 2 -->
+    <string name="level_qty">Livello %1$d</string> <!-- Example: Level 1 -->
+    <string name="level_short_qty">Lv %1$d</string> <!-- Example: Lv 2 -->
 
     <!-- ###################### -->
     <!-- ## DECORATIONS MENU ## -->

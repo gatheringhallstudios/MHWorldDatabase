@@ -36,7 +36,7 @@
                 android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
                 app:imageSize="@dimen/image_size_small"
-                app:src="@drawable/ic_ui_attack"
+                app:src="@drawable/ic_ui_kinsect_power"
                 app:text="@string/kinsect_power" />
 
             <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
@@ -45,7 +45,7 @@
                 android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
                 app:imageSize="@dimen/image_size_small"
-                app:src="@drawable/ic_ui_effective_star"
+                app:src="@drawable/ic_ui_kinsect_speed"
                 app:text="@string/kinsect_speed" />
 
             <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
@@ -53,7 +53,7 @@
                 style="@style/ButtonToggle"
                 android:layout_marginTop="@dimen/margin_large"
                 app:imageSize="@dimen/image_size_small"
-                app:src="@drawable/ic_ui_defense"
+                app:src="@drawable/ic_ui_kinsect_heal"
                 app:text="@string/kinsect_heal"
                 tools:checked="true" />
 
@@ -153,7 +153,7 @@
                 style="@style/ButtonToggle.ImageOnly"
                 android:layout_marginEnd="@dimen/margin_medium"
                 app:imageSize="@dimen/image_size_large"
-                app:src="@drawable/ic_ui_defense" />
+                app:src="@drawable/ic_ui_kinsect_heal" />
 
             <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                 android:id="@+id/toggle_blast"

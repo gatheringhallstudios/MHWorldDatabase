@@ -9,7 +9,6 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.models.Decoration
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
-import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeBase
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
@@ -161,7 +160,7 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
 
             view.icon.setImageDrawable(AssetLoader.loadIconFor(skillLevel.skillTree))
             view.label_text.text = skillLevel.skillTree.name
-            view.level_text.text = getString(R.string.skill_level_qty, skillLevel.level)
+            view.level_text.text = getString(R.string.level_qty, skillLevel.level)
             with(view.skill_level) {
                 maxLevel = skillLevel.skillTree.max_level
                 secretLevels = skillLevel.skillTree.secret
