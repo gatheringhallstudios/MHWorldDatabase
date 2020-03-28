@@ -8,12 +8,14 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.adapters.CharmAdapterDelegate
-import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
-import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
+import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
+import com.xwray.groupie.ExpandableGroup
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
 
 class CharmListFragment : RecyclerViewFragment() {
     companion object {
@@ -31,19 +33,45 @@ class CharmListFragment : RecyclerViewFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        val adapter = BasicListDelegationAdapter(CharmAdapterDelegate {
-            getRouter().navigateCharmDetail(it.id)
-        })
+        val adapter = GroupAdapter<ViewHolder>()
         setAdapter(adapter)
 
         // Add dividers between items
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.charmData.observe(this, Observer {
-            adapter.items = it
-            adapter.notifyDataSetChanged()
-        })
+        if (adapter.itemCount == 0) {
+            viewModel.charmData.observe(this, Observer<List<Charm>> {
+                //Group up charms by type (name)
+                val groups = it?.groupBy {
+                    //Multi-rank Charm names typically end with a roman numeral
+                    if (it.name!!.endsWith("I") ||
+                            it.name.endsWith("V")) {
+                        it.name.substring(0, it.name.lastIndexOf(" "))
+                    } else {
+                        it.name
+                    }
+                }
+
+                val items = groups?.map { itr ->
+                    val headerItem = CharmHeaderItem(
+                            Charm(itr.value[0].id,
+                                    itr.key,
+                                    itr.value[0].rarity,
+                                    itr.value[0].previous_id))
+                    val bodyItems = itr.value.map {
+                        CharmDetailItem(it) {
+                            getRouter().navigateArmorDetail(it.id)
+                        }
+                    }
+
+                    return@map ExpandableGroup(headerItem, false).apply {
+                        addAll(bodyItems)
+                    }
+                }
+
+                adapter.update(items ?: emptyList())
+            })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
