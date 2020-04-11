@@ -43,13 +43,15 @@ class CharmListFragment : RecyclerViewFragment() {
             viewModel.charmData.observe(this, Observer<List<Charm>> {
                 //Group up charms by type (name)
                 val groups = it?.groupBy {
-                    //Multi-rank Charm names typically end with a roman numeral
-                    if (it.name!!.endsWith("I") ||
-                            it.name.endsWith("V")) {
-                        it.name.substring(0, it.name.lastIndexOf(" "))
-                    } else {
-                        it.name
+                    val targetIndex = it.name!!.indexOfLast { itr ->
+                        //For NA and European languages
+                        itr != 'I' && itr != 'V' &&
+                                //For Russian
+                                !itr.isDigit() && !itr.isWhitespace() &&
+                                //For Asian languages (unicode roman numerals instead of ascii)
+                                itr.toInt() !in 8544..8579
                     }
+                    it.name.substring(0, targetIndex + 1)
                 }
 
                 val items = groups?.map { itr ->
