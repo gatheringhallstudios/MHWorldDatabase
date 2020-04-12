@@ -10,7 +10,10 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.michaelflisar.changelog.ChangelogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
@@ -110,7 +113,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.weaponListDestination,
                 R.id.bookmarksListDestination,
                 R.id.kinsectTreeDestination,
-                R.id.workshopDestination),
+                R.id.workshopDestination,
+                R.id.toolListDestination),
                 drawer_layout
         )
 

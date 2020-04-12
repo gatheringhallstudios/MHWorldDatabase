@@ -15,6 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.Locati
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
+import com.gatheringhallstudios.mhworlddatabase.features.tools.detail.ToolDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.detail.WorkshopDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion
@@ -39,6 +40,7 @@ class Router(private val navController: NavController) {
         DataType.WEAPON -> navigateWeaponDetail(id)
         DataType.QUEST -> navigateQuestDetail(id)
         DataType.KINSECT -> navigateKinsectDetail(id)
+        DataType.TOOL -> navigateToolDetail(id)
         else -> Unit
     }
 
@@ -88,6 +90,10 @@ class Router(private val navController: NavController) {
 
     fun navigateKinsectDetail(kinsectId: Int) {
         navController.navigate(R.id.openKinsectDetailAction, BundleBuilder().putInt(KinsectDetailPagerFragment.ARG_KINSECT_ID, kinsectId).build())
+    }
+
+    fun navigateToolDetail(toolId: Int) {
+        navController.navigate(R.id.openToolDetailAction, BundleBuilder().putInt(ToolDetailFragment.ARG_TOOL_ID, toolId).build())
     }
 
     fun navigateUserEquipmentSetDetail(userEquipmentSetId: Int) {

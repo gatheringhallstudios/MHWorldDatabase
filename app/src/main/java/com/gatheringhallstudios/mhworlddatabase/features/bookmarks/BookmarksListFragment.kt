@@ -1,18 +1,18 @@
 package com.gatheringhallstudios.mhworlddatabase.features.bookmarks
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyState
 import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
-import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.data.models.BulkModels
 import com.gatheringhallstudios.mhworlddatabase.getRouter
+import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 
 /**
  * A sub-fragment that displays the means of acquiring an item
@@ -32,6 +32,7 @@ class BookmarksListFragment : RecyclerViewFragment() {
             WeaponBookmarkDelegate { getRouter().navigateWeaponDetail(it.id) },
             ArmorBookmarkDelegate { getRouter().navigateArmorDetail(it.id) },
             KinsectBookmarkDelegate { getRouter().navigateKinsectDetail(it.id) },
+            ToolBookmarkDelegate { getRouter().navigateToolDetail(it.id) },
             EmptyStateAdapterDelegate()
     )
 
@@ -84,6 +85,10 @@ class BookmarksListFragment : RecyclerViewFragment() {
 
         if (data.kinsects.isNotEmpty()) {
             adapter.addSection(getString(R.string.title_kinsects), data.kinsects)
+        }
+
+        if (data.tools.isNotEmpty()) {
+            adapter.addSection(getString(R.string.title_tools), data.tools)
         }
     }
 }

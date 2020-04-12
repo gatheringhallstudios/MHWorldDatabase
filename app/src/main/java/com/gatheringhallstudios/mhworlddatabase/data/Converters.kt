@@ -177,6 +177,12 @@ private val KinsectDustEffectConverter = Converter(
         null to null
 )
 
+private val ToolTypeConverter = Converter(
+        "mantle" to ToolType.MANTLE,
+        "booster" to ToolType.BOOSTER,
+        null to null
+)
+
 /**
  * Type conversions for things like enumerations.
  * Change this to add new enum values
@@ -306,4 +312,10 @@ class Converters {
 
     @TypeConverter
     fun fromKinsectDustEffect(type: KinsectDustEffect) = KinsectDustEffectConverter.serialize(type)
+
+    @TypeConverter
+    fun toolTypeFromString(value: String?) = ToolTypeConverter.deserialize(value)
+
+    @TypeConverter
+    fun fromToolType(type: ToolType) = ToolTypeConverter.serialize(type)
 }
