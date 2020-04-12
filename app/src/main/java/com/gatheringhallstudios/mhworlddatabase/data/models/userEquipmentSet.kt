@@ -14,7 +14,8 @@ class UserEquipmentIds(
         val dataId: Int,
         val equipmentSetId: Int,
         val dataType: DataType,
-        val decorationIds: MutableList<UserDecorationIds>
+        val decorationIds: MutableList<UserDecorationIds>,
+        val orderId: Int
 )
 
 class UserDecorationIds(
@@ -33,7 +34,7 @@ class UserEquipmentSet(
         }
     }
 
-    var maxRarity:Int = 0
+    var maxRarity: Int = 0
     var defense_base: Int = 0
     var defense_max: Int = 0
     var defense_augment_max: Int = 0
@@ -82,6 +83,16 @@ class UserEquipmentSet(
 
     fun getCharm(): UserCharm? {
         return equipment.find { it.type() == DataType.CHARM } as? UserCharm
+    }
+
+    fun getTool1(): UserTool? {
+        return ((equipment.filter { it.type() == DataType.TOOL })
+                .find { (it as? UserTool)?.orderId == 1 }) as? UserTool
+    }
+
+    fun getTool2(): UserTool? {
+        return ((equipment.filter { it.type() == DataType.TOOL })
+                .find { (it as? UserTool)?.orderId == 2 }) as? UserTool
     }
 }
 
@@ -159,5 +170,24 @@ class UserDecoration(
 
     override fun type(): DataType {
         return DataType.DECORATION
+    }
+}
+
+class UserTool(
+        val equipmentSetId: Int,
+        val tool: Tool,
+        val decorations: List<UserDecoration>,
+        val orderId: Int
+) : UserEquipment {
+    override fun setId(): Int {
+        return equipmentSetId
+    }
+
+    override fun entityId(): Int {
+        return tool.id
+    }
+
+    override fun type(): DataType {
+        return DataType.TOOL
     }
 }

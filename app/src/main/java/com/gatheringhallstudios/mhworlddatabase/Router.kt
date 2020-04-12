@@ -100,13 +100,14 @@ class Router(private val navController: NavController) {
         navController.navigate(R.id.openWorkshopDetailAction, BundleBuilder().putInt(WorkshopDetailPagerFragment.ARG_USER_EQUIPMENT_SET_ID, userEquipmentSetId).build())
     }
 
-    fun navigateUserEquipmentPieceSelector(selectorMode: Companion.SelectorMode?, activeEquipment: UserEquipment?, userEquipmentSetId: Int?, filter: ArmorType?, decorationsConfig: Companion.DecorationsConfig?) {
+    fun navigateUserEquipmentPieceSelector(selectorMode: Companion.SelectorMode?, activeEquipment: UserEquipment?, userEquipmentSetId: Int?, filter: ArmorType?, orderId: Int?, decorationsConfig: Companion.DecorationsConfig?) {
         val bundle = BundleBuilder()
         if (selectorMode != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_SELECTOR_MODE, selectorMode)
         if (activeEquipment != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_ACTIVE_EQUIPMENT, activeEquipment)
         if (userEquipmentSetId != null) bundle.putInt(WorkshopSelectorListFragment.ARG_SET_ID, userEquipmentSetId)
         if (filter != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_ARMOR_FILTER, filter)
         if (decorationsConfig != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_DECORATION_CONFIG, decorationsConfig)
+        if (orderId != null) bundle.putInt(WorkshopSelectorListFragment.ARG_ORDER_ID, orderId)
         navController.navigate(R.id.equipmentSetSelectorAction, bundle.build())
     }
 

@@ -472,6 +472,7 @@
     <string name="title_workshop_charm_selector">Charm Selector</string>
     <string name="title_workshop_weapon_selector">Weapon Selector</string>
     <string name="title_workshop_decoration_selector">Decoration Selector</string>
+    <string name="title_workshop_tool_selector">Tool Selector</string>
 
     <string name="tab_workshop_builder_summary">Summary</string>
     <string name="tab_workshop_builder_equipment">Equipment</string>

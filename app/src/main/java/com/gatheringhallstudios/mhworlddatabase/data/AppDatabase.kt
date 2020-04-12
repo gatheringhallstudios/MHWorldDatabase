@@ -15,7 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentEntit
 import com.gatheringhallstudios.mhworlddatabase.data.entities.UserEquipmentSetEntity
 
 @Database(
-        version = 2,
+        version = 3,
         exportSchema = true,
         entities = [
             BookmarkEntity::class,
@@ -74,4 +74,13 @@ val MIGRATION_1_2 = object: Migration(1, 2) {
     }
 }
 
-val AppDatabase_MIGRATIONS = arrayOf(MIGRATION_1_2)
+val MIGRATION_2_3 = object: Migration(2, 3) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("""
+            ALTER TABLE `user_equipment_set_equipment`
+            ADD COLUMN `orderId` INT NOT NULL DEFAULT(0);
+        """.trimIndent())
+    }
+}
+
+val AppDatabase_MIGRATIONS = arrayOf(MIGRATION_1_2, MIGRATION_2_3)

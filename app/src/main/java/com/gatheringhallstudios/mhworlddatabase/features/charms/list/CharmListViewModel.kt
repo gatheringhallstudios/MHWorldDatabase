@@ -57,12 +57,4 @@ class CharmListViewModel(application: Application) : AndroidViewModel(applicatio
     private fun updateCharmData() {
         charmData.value = filter.renderResults().map { it.value }
     }
-
-    fun updateCharmForArmorSet(newArmor: Charm, userEquipmentSetId: Int, prevId: Int?) {
-        if (prevId != null) {
-            userEquipmentDao.deleteUserEquipmentEquipment(prevId, DataType.CHARM, userEquipmentSetId)
-        }
-
-        userEquipmentDao.createUserEquipmentEquipment(newArmor.id, DataType.CHARM, userEquipmentSetId)
-    }
 }

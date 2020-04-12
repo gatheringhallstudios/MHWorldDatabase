@@ -28,6 +28,8 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
     private lateinit var waistArmorCard: UserEquipmentCard
     private lateinit var legArmorCard: UserEquipmentCard
     private lateinit var charmCard: UserEquipmentCard
+    private lateinit var tool1Card: UserEquipmentCard
+    private lateinit var tool2Card: UserEquipmentCard
     private var scrollY = 0
 
     fun showNoticeDialog() {
@@ -82,6 +84,8 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 4 -> waistArmorCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
                 5 -> legArmorCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
                 6 -> charmCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+                7 -> tool1Card.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
+                8 -> tool2Card.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
             }
         }
 
@@ -124,6 +128,8 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
         this.waistArmorCard = UserEquipmentCard(user_equipment_waist_slot)
         this.legArmorCard = UserEquipmentCard(user_equipment_legs_slot)
         this.charmCard = UserEquipmentCard(user_equipment_charm_slot)
+        this.tool1Card = UserEquipmentCard(user_equipment_tool_1_slot)
+        this.tool2Card = UserEquipmentCard(user_equipment_tool_2_slot)
     }
 
     private fun populateUserEquipmentSet(userEquipmentSet: UserEquipmentSet) {
@@ -134,7 +140,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 onClick = {
                     viewModel.activeUserEquipment = weapon
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.WEAPON, weapon,
-                            userEquipmentSet.id, null, null)
+                            userEquipmentSet.id, null, null, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(weapon!!)
@@ -153,7 +159,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 onClick = {
                     viewModel.activeUserEquipment = headArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, headArmor,
-                            userEquipmentSet.id, headArmor!!.armor.armor.armor_type, null)
+                            userEquipmentSet.id, headArmor!!.armor.armor.armor_type, null, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(headArmor!!)
@@ -172,7 +178,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 onClick = {
                     viewModel.activeUserEquipment = armArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, armArmor,
-                            userEquipmentSet.id, armArmor!!.armor.armor.armor_type, null)
+                            userEquipmentSet.id, armArmor!!.armor.armor.armor_type, null, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(armArmor!!)
@@ -191,7 +197,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 onClick = {
                     viewModel.activeUserEquipment = chestArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, chestArmor,
-                            userEquipmentSet.id, chestArmor!!.armor.armor.armor_type, null)
+                            userEquipmentSet.id, chestArmor!!.armor.armor.armor_type, null, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(chestArmor!!)
@@ -210,7 +216,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 onClick = {
                     viewModel.activeUserEquipment = waistArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, waistArmor,
-                            userEquipmentSet.id, waistArmor!!.armor.armor.armor_type, null)
+                            userEquipmentSet.id, waistArmor!!.armor.armor.armor_type, null, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(waistArmor!!)
@@ -229,7 +235,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 onClick = {
                     viewModel.activeUserEquipment = legArmor
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.ARMOR, legArmor,
-                            userEquipmentSet.id, legArmor!!.armor.armor.armor_type, null)
+                            userEquipmentSet.id, legArmor!!.armor.armor.armor_type, null, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor!!)
@@ -248,7 +254,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 onClick = {
                     viewModel.activeUserEquipment = charm
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.CHARM, charm, userEquipmentSet.id,
-                            null, null)
+                            null, null, null)
                 },
                 onSwipeRight = {
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(charm!!)
@@ -258,6 +264,43 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                 },
                 onExpand = { viewModel.updateCardState(6, true) },
                 onContract = { viewModel.updateCardState(6, false) })
+
+        val tool1 = userEquipmentSet.getTool1()
+        tool1Card.bindUserTool(tool1, userEquipmentSet.id,1,
+                onClick = {
+                    viewModel.activeUserEquipment = tool1
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.TOOL, tool1, userEquipmentSet.id,
+                            null, 1, null)
+                },
+                onSwipeRight = {
+                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(tool1!!)
+                    viewModel.deleteUserEquipment(tool1!!.entityId(), userEquipmentSet.id, tool1.type())
+                    viewModel.updateCardState(7, false)
+                    refreshFragment()
+                },
+                onExpand = { viewModel.updateCardState(7, true) },
+                onContract = { viewModel.updateCardState(7, false) })
+        if (tool1 != null) {
+            populateDecorations(tool1, userEquipmentSet.id, tool1Card)
+        }
+        val tool2 = userEquipmentSet.getTool2()
+        tool2Card.bindUserTool(tool2, userEquipmentSet.id, 2,
+                onClick = {
+                    viewModel.activeUserEquipment = tool2
+                    getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.TOOL, tool2, userEquipmentSet.id,
+                            null, 2, null)
+                },
+                onSwipeRight = {
+                    viewModel.activeUserEquipmentSet.value?.equipment?.remove(tool2!!)
+                    viewModel.deleteUserEquipment(tool2!!.entityId(), userEquipmentSet.id, tool2.type())
+                    viewModel.updateCardState(8, false)
+                    refreshFragment()
+                },
+                onExpand = { viewModel.updateCardState(8, true) },
+                onContract = { viewModel.updateCardState(8, false) })
+        if (tool2 != null) {
+            populateDecorations(tool2, userEquipmentSet.id, tool2Card)
+        }
     }
 
     private fun populateDecorations(userEquipment: UserEquipment?, userEquipmentSetId: Int, card: UserEquipmentCard) {
@@ -265,6 +308,8 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
             userEquipment.armor.armor.slots
         } else if ((userEquipment as? UserWeapon) != null) {
             userEquipment.weapon.weapon.slots
+        } else if ((userEquipment as? UserTool) != null) {
+            userEquipment.tool.slots
         } else {
             return
         }
@@ -273,6 +318,8 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
             userEquipment.decorations
         } else if ((userEquipment as? UserWeapon) != null) {
             userEquipment.decorations
+        } else if ((userEquipment as? UserTool) != null) {
+            userEquipment.decorations
         } else {
             mutableListOf()
         }
@@ -280,13 +327,13 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
         card.populateDecorations(slots, decorations,
                 onEmptyClick = { slotNumber ->
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION, null,
-                            userEquipmentSetId, null,
+                            userEquipmentSetId, null, null,
                             Companion.DecorationsConfig(userEquipment.entityId(), slotNumber, userEquipment.type(), slots[slotNumber - 1]))
                 },
                 onClick = { slotNumber, userDecoration ->
                     viewModel.activeUserEquipment = userDecoration
                     getRouter().navigateUserEquipmentPieceSelector(Companion.SelectorMode.DECORATION,
-                            userDecoration, userEquipmentSetId, null,
+                            userDecoration, userEquipmentSetId, null, null,
                             Companion.DecorationsConfig(
                                     userEquipment.entityId(), userDecoration.slotNumber,
                                     userEquipment.type(), slots[slotNumber - 1]))
@@ -310,7 +357,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
             }
             DataType.ARMOR -> {
                 val armor = viewModel.activeUserEquipment as UserArmorPiece?
-                when(armor?.armor?.armor?.armor_type) {
+                when (armor?.armor?.armor?.armor_type) {
                     ArmorType.HEAD -> {
                         if (armor.entityId() != viewModel.activeUserEquipmentSet.value?.getHeadArmor()?.entityId()) {
                             headArmorCard.setCardState(ExpandableCardView.CardState.COLLAPSED)
@@ -350,7 +397,19 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
 
                 }
             }
-            else -> {}
+            DataType.TOOL -> {
+                if (viewModel.activeUserEquipment?.entityId() != viewModel.activeUserEquipmentSet.value?.getTool1()?.entityId()) {
+                    tool1Card.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                    viewModel.updateCardState(7, false)
+                }
+
+                if (viewModel.activeUserEquipment?.entityId() != viewModel.activeUserEquipmentSet.value?.getTool2()?.entityId()) {
+                    tool2Card.setCardState(ExpandableCardView.CardState.COLLAPSED)
+                    viewModel.updateCardState(8, false)
+                }
+            }
+            else -> {
+            }
         }
     }
 

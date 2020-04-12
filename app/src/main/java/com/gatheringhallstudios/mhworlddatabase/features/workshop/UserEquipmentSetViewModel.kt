@@ -17,6 +17,7 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
     private val charmDao = MHWDatabase.getDatabase(application).charmDao()
     private val weaponDao = MHWDatabase.getDatabase(application).weaponDao()
     private val armorDao = MHWDatabase.getDatabase(application).armorDao()
+    private val toolDao = MHWDatabase.getDatabase(application).toolDao()
 
 
     private var _activeUserEquipmentSet = MutableLiveData<UserEquipmentSet>()
@@ -28,7 +29,7 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
     var activeUserEquipment: UserEquipment? = null // The userEquipment model being edited via armor/weapon/charm/decoration selector
 
     //Keeps track of the state of equipment cards on the armor set edit fragment
-    private var _armorSetCardStates = mutableMapOf(0 to false, 1 to false, 2 to false, 3 to false, 4 to false, 5 to false, 6 to false)
+    private var _armorSetCardStates = mutableMapOf(0 to false, 1 to false, 2 to false, 3 to false, 4 to false, 5 to false, 6 to false, 7 to false, 8 to false)
     val armorSetCardStates: Map<Int, Boolean> = _armorSetCardStates
 
     fun updateCardState(cardIndex: Int, state: Boolean) {
@@ -179,6 +180,19 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
                     userEquipment.add(UserCharm(
                             equipmentSetId = userEquipmentSetIds.id,
                             charm = charmDao.loadCharmFullSync(AppSettings.dataLocale, userEquipmentId.dataId)))
+                }
+                DataType.TOOL -> {
+                    val decorations = userEquipmentId.decorationIds.map { decorationIds ->
+                        UserDecoration(
+                                equipmentSetId = userEquipmentSetIds.id,
+                                decoration = decorationDao.loadDecorationSync(AppSettings.dataLocale, decorationIds.decorationId),
+                                slotNumber = decorationIds.slotNumber)
+                    }.sortedWith(compareBy(UserDecoration::slotNumber))
+                    userEquipment.add(UserTool(
+                            equipmentSetId = userEquipmentSetIds.id,
+                            tool = toolDao.loadToolSync(AppSettings.dataLocale, userEquipmentId.dataId),
+                            decorations = decorations,
+                            orderId = userEquipmentId.orderId))
                 }
                 else -> {
                 } //Shouldn't happen, so ignore
@@ -341,6 +355,11 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
                 }
                 DataType.CHARM -> {
                     providedSkills.addAll((item as UserCharm).charm.skills)
+                }
+                DataType.TOOL -> {
+                    (item as UserTool).decorations.forEach { userDecoration ->
+                        providedSkills.addAll(userDecoration.decoration.getSkillLevels())
+                    }
                 }
                 else -> {
                 }
