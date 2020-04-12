@@ -160,6 +160,7 @@ private val QuestTypeConverter = Converter(
         "hunt" to QuestType.HUNT,
         "deliver" to QuestType.DELIVER,
         "capture" to QuestType.CAPTURE,
+        "assignment" to QuestType.ASSIGNMENT,
         null to QuestType.HUNT
 )
 
