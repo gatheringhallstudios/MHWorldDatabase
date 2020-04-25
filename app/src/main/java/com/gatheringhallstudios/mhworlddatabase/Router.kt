@@ -15,6 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.features.locations.detail.Locati
 import com.gatheringhallstudios.mhworlddatabase.features.monsters.detail.MonsterDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.skills.detail.SkillDetailFragment
+import com.gatheringhallstudios.mhworlddatabase.features.tools.detail.ToolDetailFragment
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.detail.WorkshopDetailPagerFragment
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion
@@ -39,6 +40,7 @@ class Router(private val navController: NavController) {
         DataType.WEAPON -> navigateWeaponDetail(id)
         DataType.QUEST -> navigateQuestDetail(id)
         DataType.KINSECT -> navigateKinsectDetail(id)
+        DataType.TOOL -> navigateToolDetail(id)
         else -> Unit
     }
 
@@ -90,17 +92,22 @@ class Router(private val navController: NavController) {
         navController.navigate(R.id.openKinsectDetailAction, BundleBuilder().putInt(KinsectDetailPagerFragment.ARG_KINSECT_ID, kinsectId).build())
     }
 
+    fun navigateToolDetail(toolId: Int) {
+        navController.navigate(R.id.openToolDetailAction, BundleBuilder().putInt(ToolDetailFragment.ARG_TOOL_ID, toolId).build())
+    }
+
     fun navigateUserEquipmentSetDetail(userEquipmentSetId: Int) {
         navController.navigate(R.id.openWorkshopDetailAction, BundleBuilder().putInt(WorkshopDetailPagerFragment.ARG_USER_EQUIPMENT_SET_ID, userEquipmentSetId).build())
     }
 
-    fun navigateUserEquipmentPieceSelector(selectorMode: Companion.SelectorMode?, activeEquipment: UserEquipment?, userEquipmentSetId: Int?, filter: ArmorType?, decorationsConfig: Companion.DecorationsConfig?) {
+    fun navigateUserEquipmentPieceSelector(selectorMode: Companion.SelectorMode?, activeEquipment: UserEquipment?, userEquipmentSetId: Int?, filter: ArmorType?, orderId: Int?, decorationsConfig: Companion.DecorationsConfig?) {
         val bundle = BundleBuilder()
         if (selectorMode != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_SELECTOR_MODE, selectorMode)
         if (activeEquipment != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_ACTIVE_EQUIPMENT, activeEquipment)
         if (userEquipmentSetId != null) bundle.putInt(WorkshopSelectorListFragment.ARG_SET_ID, userEquipmentSetId)
         if (filter != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_ARMOR_FILTER, filter)
         if (decorationsConfig != null) bundle.putSerializable(WorkshopSelectorListFragment.ARG_DECORATION_CONFIG, decorationsConfig)
+        if (orderId != null) bundle.putInt(WorkshopSelectorListFragment.ARG_ORDER_ID, orderId)
         navController.navigate(R.id.equipmentSetSelectorAction, bundle.build())
     }
 

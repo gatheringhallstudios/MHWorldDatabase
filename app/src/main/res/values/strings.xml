@@ -147,7 +147,6 @@
     <!-- ## FEATURE MENUS ## -->
     <!-- ################### -->
 
-
     <!-- ############## -->
     <!-- ## Monsters ## -->
     <!-- ############## -->
@@ -453,6 +452,18 @@
 
     <string name="title_bookmarks">Bookmarks</string>
 
+    <!-- #################### -->
+    <!-- ## TOOLS MENU ## -->
+    <!-- #################### -->
+    <string name="title_tools">Tools</string>
+
+    <string name="tool_effect_duration">Effect Duration</string>
+    <string name="tool_effect_recharge_time">Recharge Time</string>
+    <string name="tool_slots">Slots</string>
+    <string name="tool_type">Type</string>
+    <string name="tool_mantle">Mantle</string>
+    <string name="tool_booster">Booster</string>
+
     <!-- ################# -->
     <!-- ## USER EQUIPMENT SET MENU ## -->
     <!-- ################# -->
@@ -461,6 +472,7 @@
     <string name="title_workshop_charm_selector">Charm Selector</string>
     <string name="title_workshop_weapon_selector">Weapon Selector</string>
     <string name="title_workshop_decoration_selector">Decoration Selector</string>
+    <string name="title_workshop_tool_selector">Tool Selector</string>
 
     <string name="tab_workshop_builder_summary">Summary</string>
     <string name="tab_workshop_builder_equipment">Equipment</string>

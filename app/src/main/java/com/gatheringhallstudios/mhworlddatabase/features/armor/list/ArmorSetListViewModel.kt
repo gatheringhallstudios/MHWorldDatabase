@@ -38,6 +38,6 @@ class ArmorSetListViewModel(application: Application) : AndroidViewModel(applica
             userEquipmentDao.deleteUserEquipmentEquipment(prevId, DataType.ARMOR, userEquipmentSetId)
         }
 
-        userEquipmentDao.createUserEquipmentEquipment(newArmor.id, DataType.ARMOR, userEquipmentSetId)
+        userEquipmentDao.createUserEquipmentEquipment(newArmor.id, DataType.ARMOR, userEquipmentSetId, 0)
     }
 }

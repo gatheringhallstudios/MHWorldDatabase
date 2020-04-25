@@ -16,6 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.dao.MonsterDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.QuestDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SearchDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.SkillDao;
+import com.gatheringhallstudios.mhworlddatabase.data.dao.ToolDao;
 import com.gatheringhallstudios.mhworlddatabase.data.dao.WeaponDao;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.ArmorSetBonusEntity;
@@ -54,6 +55,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.RecipeItemEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ToolEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.ToolText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponAmmoEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyEntity;
@@ -117,6 +120,9 @@ import androidx.room.TypeConverters;
 
                 QuestEntity.class, QuestText.class, QuestMonsterEntity.class, QuestRewardEntity.class,
 
+                //Tool Classes
+                ToolEntity.class, ToolText.class,
+
                 // Kinsects
                 KinsectEntity.class, KinsectText.class
         })
@@ -175,6 +181,8 @@ public abstract class MHWDatabase extends RoomDatabase {
     public abstract QuestDao questDao();
 
     public abstract KinsectDao kinsectDao();
+
+    public abstract ToolDao toolDao();
 
     public abstract BulkLoaderDao bookmarksSearchDao();
 

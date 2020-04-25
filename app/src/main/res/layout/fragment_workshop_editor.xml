@@ -91,5 +91,27 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             app:cardViewElevation="1" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
+            android:id="@+id/user_equipment_tool_1_slot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
+
+        <com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
+            android:id="@+id/user_equipment_tool_2_slot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:cardViewElevation="1" />
     </LinearLayout>
 </ScrollView>

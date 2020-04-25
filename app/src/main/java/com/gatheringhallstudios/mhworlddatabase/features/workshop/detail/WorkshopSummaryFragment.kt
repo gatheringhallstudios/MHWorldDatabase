@@ -17,11 +17,11 @@ import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.CompactStatCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.DataType
+import com.gatheringhallstudios.mhworlddatabase.data.types.ToolType
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_workshop_summary.*
-import kotlinx.android.synthetic.main.fragment_workshop_summary.armor_skill_section
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_armor.view.defense_value
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
@@ -71,6 +71,7 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
 
         populateWeapon(userEquipmentSet.equipment.filter { it.type() == DataType.WEAPON }, showTrueAttackValues)
         populateArmorSetPieces(userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.sortedWith(compareBy { (it as UserArmorPiece).armor.armor.armor_type }))
+        populateTools(userEquipmentSet.equipment.filter { it.type() == DataType.TOOL }.sortedBy { (it as UserTool).orderId })
         populateArmorSkills(userEquipmentSet.skills)
         populateArmorSetBonuses(userEquipmentSet.setBonuses)
     }
@@ -233,6 +234,38 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
         }
     }
 
+    private fun populateTools(tools: List<UserEquipment>) {
+        //Append to the bottom of the armor piece list, so do nothing if we have none
+        if (tools.isNullOrEmpty()) return
+
+        for (tool in tools) {
+            tool as UserTool
+            val view = layoutInflater.inflate(R.layout.listitem_armorset_armor, armor_set_piece_list, false)
+            view.armor_icon.setImageDrawable(AssetLoader.loadIconFor(tool.tool))
+            view.armor_name.text = tool.tool.name
+            view.rarity_string.text = when (tool.tool.tool_type) {
+                ToolType.MANTLE -> getString(R.string.tool_mantle)
+                ToolType.BOOSTER -> getString(R.string.tool_booster)
+            }
+            view.icon_defense.visibility = View.INVISIBLE
+            view.defense_value.visibility = View.INVISIBLE
+
+            val slotImages = tool.tool.slots.map {
+                view.context.getDrawableCompat(SlotEmptyRegistry(it))
+            }
+
+            view.slot1.setImageDrawable(slotImages[0])
+            view.slot2.setImageDrawable(slotImages[1])
+            view.slot3.setImageDrawable(slotImages[2])
+
+            view.setOnClickListener {
+                getRouter().navigateToolDetail(tool.tool.id)
+            }
+
+            armor_set_piece_list.addView(view)
+        }
+    }
+
     private fun populateArmorSkills(skills: List<SkillLevel>) {
         if (skills.isNullOrEmpty()) {
             val view = layoutInflater.inflate(R.layout.listitem_empty_medium, armor_set_skill_list, false)
@@ -259,6 +292,7 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
             armor_set_skill_list.addView(view)
         }
     }
+
     private fun populateArmorSetBonuses(setBonuses: Map<String, List<ArmorSetBonus>>) {
         if (setBonuses.isEmpty()) {
             val view = layoutInflater.inflate(R.layout.listitem_empty_no_margin, armor_set_set_bonus_list, false)
@@ -271,6 +305,7 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
             populateArmorSetBonuses(it.value)
         }
     }
+
     private fun populateArmorSetBonusName(setBonusName: String) {
         val textView = TextView(context)
         textView.text = setBonusName

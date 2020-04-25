@@ -25,11 +25,13 @@ class WorkshopSelectorViewModel(application: Application) : AndroidViewModel(app
     private val armorDao = MHWDatabase.getDatabase(application).armorDao()
     private val decorationDao = MHWDatabase.getDatabase(application).decorationDao()
     private val skillDao = MHWDatabase.getDatabase(application).skillDao()
+    private val toolDao = MHWDatabase.getDatabase(application).toolDao()
 
     val armor: MutableLiveData<List<ArmorFull>> = MutableLiveData()
     val weapons: MutableLiveData<List<WeaponFull>> = MutableLiveData()
     val decorations: MutableLiveData<List<Decoration>> = MutableLiveData()
     val charms: MutableLiveData<List<CharmFull>> = MutableLiveData()
+    val tools: MutableLiveData<List<Tool>> = MutableLiveData()
     lateinit var skills: LiveData<List<SkillTree>>
     lateinit var listState: Parcelable
     private var armorFilters = EquipmentFilter<ArmorFull>(null)
@@ -171,17 +173,26 @@ class WorkshopSelectorViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
+    fun loadTools(langId: String) {
+        GlobalScope.launch(Dispatchers.Main) {
+            val toolList = withContext(Dispatchers.IO) {
+                toolDao.loadToolsSync(langId)
+            }
+            tools.value = toolList
+        }
+    }
+
     fun loadSkills(langId: String) {
         skills = skillDao.loadSkillTrees(langId);
     }
 
-    fun updateEquipmentForEquipmentSet(newId: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?) {
+    fun updateEquipmentForEquipmentSet(newId: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?, orderId: Int) {
         if (prevId != null) {
             appDao.deleteUserEquipmentEquipment(prevId, type, userEquipmentSetId)
             appDao.deleteUserEquipmentDecorations(userEquipmentSetId, prevId, type)
         }
 
-        appDao.createUserEquipmentEquipment(newId, type, userEquipmentSetId)
+        appDao.createUserEquipmentEquipment(newId, type, userEquipmentSetId, orderId)
     }
 
     fun updateDecorationForEquipmentSet(newId: Int, targetDataId: Int, targetSlotNumber: Int, type: DataType, userEquipmentSetId: Int, prevId: Int?) {
