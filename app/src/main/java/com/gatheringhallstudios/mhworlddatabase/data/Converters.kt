@@ -98,7 +98,8 @@ private val WeaponTypeConverter = Converter(
 
 private val WeaponCategoryConverter = Converter(
         null to WeaponCategory.REGULAR,
-        "Kulve" to WeaponCategory.KULVE
+        "Kulve" to WeaponCategory.KULVE,
+        "Safi" to WeaponCategory.SAFI
 )
 
 private val PhialTypeConverter = Converter(
@@ -152,6 +153,7 @@ private val QuestCategoryConverter = Converter(
         "assigned" to QuestCategory.ASSIGNED,
         "arena" to QuestCategory.ARENA,
         "event" to QuestCategory.EVENT,
+        "challenge" to QuestCategory.CHALLENGE,
         "special" to QuestCategory.SPECIAL,
         null to QuestCategory.OPTIONAL
 )
