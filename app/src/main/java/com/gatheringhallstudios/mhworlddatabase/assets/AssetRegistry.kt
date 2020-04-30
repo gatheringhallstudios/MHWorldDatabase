@@ -127,7 +127,9 @@ val VectorRegistry = createRegistry(
         "Voucher" to R.xml.ic_items_voucher_base,
         "Web" to R.xml.ic_items_web_base,
         "Webbing" to R.xml.ic_items_honey_base,
-        "Wing" to R.xml.ic_items_wing_base
+        "Wing" to R.xml.ic_items_wing_base,
+        "Booster" to R.xml.ic_equipment_booster_base,
+        "Mantle" to R.xml.ic_equipment_mantle_base
 )
 
 val ElementRegistry = fun(element: ElementStatus?) = when (element) {
