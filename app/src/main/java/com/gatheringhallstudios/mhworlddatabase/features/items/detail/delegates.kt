@@ -103,7 +103,10 @@ class QuestRewardSourceAdapterDelegate: SimpleListDelegate<ItemQuestReward>() {
     override fun bindView(viewHolder: SimpleViewHolder, data: ItemQuestReward) {
         val categoryText = AssetLoader.localizeQuestCategory(data.quest.category)
         val categoryCombined = viewHolder.resources.getString(
-                R.string.quest_category_combined, categoryText, data.quest.stars
+                R.string.quest_category_combined,
+                categoryText,
+                if(data.quest.stars_raw > 9) " MR" else "",
+                data.quest.stars
         )
 
         with (VerboseIconLabelTextCellBinder(viewHolder.itemView)) {

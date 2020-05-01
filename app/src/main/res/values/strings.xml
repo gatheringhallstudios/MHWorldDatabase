@@ -392,7 +392,7 @@
     <string name="quest_category_challenge">Challenge</string>
     <string name="quest_category_special">Special Assignment</string>
     <string name="quest_category_special_abbr">SP</string>
-    <string name="quest_category_combined">%s %d★</string>
+    <string name="quest_category_combined">%s%s %d★</string>
 
     <string name="tab_quest_summary">Summary</string>
     <string name="tab_quest_rewards">Rewards</string>
