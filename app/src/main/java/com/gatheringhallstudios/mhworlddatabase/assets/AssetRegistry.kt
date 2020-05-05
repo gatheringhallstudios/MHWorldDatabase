@@ -188,7 +188,8 @@ val LocationDrawableRegistry = fun(id: Int) = when (id) {
     3 -> R.drawable.ic_locations_coral_highlands
     4 -> R.drawable.ic_locations_rotten_vale
     5 -> R.drawable.ic_locations_elders_recess
-    // TODO what ID is Hoarfrost and Guiding Lands?
+    12 -> R.drawable.ic_locations_hoarfrost_reach
+    14 -> R.drawable.ic_locations_the_guiding_lands
     else -> R.drawable.ic_ui_question_mark_paper
 }
 

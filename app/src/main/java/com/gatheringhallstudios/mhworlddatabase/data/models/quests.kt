@@ -9,6 +9,7 @@ open class QuestBase(
         val id: Int,
         val category: QuestCategory,
         val stars: Int,
+        val stars_raw: Int,
         val name: String,
         val quest_type: QuestType,
         val objective: String?,

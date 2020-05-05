@@ -178,7 +178,7 @@ abstract class SearchDao {
     abstract fun loadAllWeaponsSync(langId: String): List<WeaponBase>
 
     @Query("""
-        SELECT q.id, q.category, q.stars, qt.name, q.quest_type, 
+        SELECT q.id, q.category, q.stars, q.stars_raw, qt.name, q.quest_type, 
             qt.objective, qt.description, q.location_id, q.zenny
         FROM quest q
             JOIN quest_text qt USING (id)

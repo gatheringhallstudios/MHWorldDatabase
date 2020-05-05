@@ -64,7 +64,7 @@ abstract class ItemDao {
     abstract fun loadItemMonsterRewardsSync(langId: String, itemId: Int): List<ItemMonsterReward>
 
     @Query("""
-        SELECT r.quest_id, q.category quest_category, q.stars quest_stars,
+        SELECT r.quest_id, q.category quest_category, q.stars quest_stars, q.stars_raw quest_stars_raw,
             qt.name quest_name, q.quest_type quest_quest_type, qt.objective quest_objective,
             qt.description quest_description, q.location_id quest_location_id, q.zenny quest_zenny,
             r.stack, r.percentage

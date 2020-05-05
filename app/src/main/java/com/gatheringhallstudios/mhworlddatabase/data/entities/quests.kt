@@ -18,6 +18,8 @@ data class QuestEntity(
 
         val stars: Int,
 
+        val stars_raw: Int,
+
         val quest_type: QuestType,
 
         val location_id: Int,
