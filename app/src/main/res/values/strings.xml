@@ -158,9 +158,9 @@
     <string name="tab_monsters_list_large">Large</string>
     <string name="tab_monsters_detail_summary">Summary</string>
     <string name="tab_monsters_detail_damage">Damage</string>
-    <string name="tab_monsters_detail_rewards_master_rank">Master-Rank</string>
-    <string name="tab_monsters_detail_rewards_high_rank">High-Rank</string>
-    <string name="tab_monsters_detail_rewards_low_rank">Low-Rank</string>
+    <string name="tab_monsters_detail_rewards_master_rank">Master Rank</string>
+    <string name="tab_monsters_detail_rewards_high_rank">High Rank</string>
+    <string name="tab_monsters_detail_rewards_low_rank">Low Rank</string>
 
     <!-- ################ -->
     <!-- ## ITEMS MENU ## -->
