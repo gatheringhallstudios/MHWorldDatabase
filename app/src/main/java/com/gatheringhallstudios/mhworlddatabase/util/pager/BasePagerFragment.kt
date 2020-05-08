@@ -28,6 +28,9 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
         val TAG = BasePagerFragment::class.java.simpleName
     }
 
+    // Override to set a different [TabLayout.Mode]
+    open val tabMode: Int = TabLayout.MODE_FIXED
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate view
         val root = inflater.inflate(R.layout.fragment_generic_pager, container, false)
@@ -47,6 +50,7 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
         // Initialize ViewPager (tab behavior)
         viewPager.adapter = GenericPagerAdapter(this, tabs)
         tabLayout.setupWithViewPager(viewPager)
+        tabLayout.tabMode = tabMode
 
         if (tabIdx > 0) {
             pager_list.currentItem = tabIdx
