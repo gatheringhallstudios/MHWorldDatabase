@@ -207,9 +207,19 @@ data class WeaponAmmoEntity(
 data class WeaponMelodyEntity (
         @PrimaryKey
         val id: Int,
-        val notes: String,
-        val duration: String,
-        val extension: String
+        val base_duration: Int?,
+        val base_extension:Int?,
+        val m1_duration:Int?,
+        val m1_extension:Int?,
+        val m2_duration:Int?,
+        val m2_extension:Int?
+)
+
+@Entity(tableName = "weapon_melody_notes")
+data class WeaponMelodyNotesEntity(
+        @PrimaryKey
+        val id: Int,
+        val notes: String
 )
 
 @Entity(tableName = "weapon_melody_text")

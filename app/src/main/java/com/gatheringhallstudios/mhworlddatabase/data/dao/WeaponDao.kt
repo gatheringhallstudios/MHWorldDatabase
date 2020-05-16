@@ -110,10 +110,13 @@ abstract class WeaponDao {
      * matching will be done in Kotlin instead
      */
     @Query("""
-        SELECT wm.id, wm.notes, wmt.effect1, wmt.effect2, wm.duration, wm.extension
-         FROM weapon_melody wm
+        SELECT wm.id, wmn.notes, wmt.effect1, wmt.effect2, wm.base_duration, wm.base_extension, 
+            wm.m1_duration, wm.m1_extension, wm.m2_duration, wm.m2_extension         
+        FROM weapon_melody wm
             JOIN weapon_melody_text wmt
-                ON  wm.id = wmt.id
+                ON  wm.id = wmt.id       
+            JOIN weapon_melody_notes wmn
+                ON wm.id = wmn.id
         WHERE wmt.lang_id = :langId
         ORDER BY wm.id
     """)
@@ -125,9 +128,10 @@ abstract class WeaponDao {
 
     fun queryWeaponMelodies(langId: String, weapon: Weapon): List<WeaponMelody> {
         if (weapon.weapon_type != WeaponType.HUNTING_HORN) return listOf()
-        val comparator = Array(4) {
-            if (it < weapon.notes!!.length) {
-                Character.getNumericValue(weapon.notes[it])
+        val buf = weapon.notes + 'E' //Add an 'E' because all hunting horns now also support an Echo note
+        val comparator = Array(5) {
+            if (it < buf.length) {
+                Character.getNumericValue(buf[it])
             } else {
                 0
             }
@@ -135,7 +139,7 @@ abstract class WeaponDao {
 
         return loadWeaponMelodies(langId).filter {
             var result = true
-            for (note in it.notes!!) {
+            for (note in it.notes) {
                 if (!comparator.contains(Character.getNumericValue(note))) {
                     result = false
                 }

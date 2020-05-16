@@ -57,6 +57,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.entities.SkillTreeText;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponAmmoEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyEntity;
+import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyNotesEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponMelodyTextEntity;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponSkill;
 import com.gatheringhallstudios.mhworlddatabase.data.entities.WeaponText;
@@ -113,7 +114,7 @@ import androidx.room.TypeConverters;
 
                 // Weapon Classes
                 WeaponEntity.class, WeaponText.class, WeaponAmmoEntity.class,
-                WeaponMelodyEntity.class, WeaponMelodyTextEntity.class, WeaponSkill.class,
+                WeaponMelodyEntity.class, WeaponMelodyNotesEntity.class, WeaponMelodyTextEntity.class, WeaponSkill.class,
 
                 QuestEntity.class, QuestText.class, QuestMonsterEntity.class, QuestRewardEntity.class,
 
