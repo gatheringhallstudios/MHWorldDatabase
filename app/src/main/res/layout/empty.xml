@@ -6,10 +6,10 @@
 
     <ImageView
         android:id="@+id/mascot_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:alpha=".6"
-        app:srcCompat="@drawable/ic_mascot_confused"
+        app:srcCompat="@drawable/ic_ui_mascot_confused"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -8,7 +8,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/splash_mascot"/>
+            android:src="@drawable/splash_mascot_ib"/>
     </item>
 
 </layer-list>
