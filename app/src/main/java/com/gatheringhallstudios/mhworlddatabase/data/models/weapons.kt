@@ -397,8 +397,12 @@ class WeaponAmmo(
 class WeaponMelody(
         val id: Int,
         val notes: String,
-        val duration: String,
-        val extension: String,
+        val base_duration: Int?,
+        val base_extension:Int?,
+        val m1_duration:Int?,
+        val m1_extension:Int?,
+        val m2_duration:Int?,
+        val m2_extension:Int?,
         val effect1: String,
         val effect2: String
 )

@@ -63,29 +63,39 @@
         tools:srcCompat="@drawable/ic_ui_question_mark_white" />
 
     <TextView
-        android:id="@+id/duration_value"
-        style="@style/TextBodyMedium"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/note1_icon"
-        app:layout_constraintEnd_toStartOf="@+id/extension_value"
-        app:layout_constraintTop_toTopOf="@+id/note1_icon"
-        tools:text="120(150)" />
-
-    <TextView
-        android:id="@+id/extension_value"
+        android:id="@+id/base_duration_value"
         style="@style/TextBodyMedium"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_large"
-
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/duration_value"
+        app:layout_constraintBottom_toBottomOf="@+id/note1_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/duration_value"
+        app:layout_constraintTop_toTopOf="@+id/note1_icon"
+        tools:text="120(150)" />
 
-        tools:text="+90(+120)"
-        tools:textColor="@color/icon_orange" />
+    <TextView
+        android:id="@+id/m1_extension_value"
+        style="@style/TextBodyMedium"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:gravity="center"
+        android:textColor="@color/icon_orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/base_duration_value"
+        tools:text="+90(+120)" />
+
+    <TextView
+        android:id="@+id/m2_extension_value"
+        style="@style/TextBodyMedium"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:gravity="center"
+        android:textColor="@color/icon_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/m1_extension_value"
+        tools:text="+90(+120)" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

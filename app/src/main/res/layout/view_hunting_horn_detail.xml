@@ -81,18 +81,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/duration_label"
-            style="@style/TextBodyHigh"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/weapon_hunting_horn_duration"
-            app:layout_constraintBottom_toTopOf="@+id/melody_layout"
-            app:layout_constraintEnd_toStartOf="@+id/extension_label"
-            app:layout_constraintTop_toTopOf="@+id/melody_header" />
-
-        <TextView
             android:id="@+id/extension_label"
             style="@style/TextBodyHigh"
             android:layout_width="90dp"
@@ -100,7 +88,7 @@
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/margin_large"
             android:gravity="center"
-            android:text="@string/weapon_hunting_horn_extension"
+            android:text="@string/weapon_hunting_horn_duration"
             app:layout_constraintBottom_toTopOf="@+id/melody_layout"
             app:layout_constraintEnd_toEndOf="@+id/melody_header"
             app:layout_constraintTop_toTopOf="@+id/melody_header" />
