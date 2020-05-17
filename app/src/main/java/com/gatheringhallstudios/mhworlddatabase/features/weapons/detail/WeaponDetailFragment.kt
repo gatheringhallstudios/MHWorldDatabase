@@ -380,8 +380,9 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
             melodyView.effect1.text = melody.effect1
             melodyView.effect2.text = melody.effect2
-            melodyView.duration_value.text = melody.duration
-            melodyView.extension_value.text = melody.extension
+            melodyView.base_duration_value.text = if (melody.base_duration != null && melody.base_extension != null) "${melody.base_duration}(+${melody.base_extension})" else ""
+            melodyView.m1_extension_value.text = if (melody.m1_duration != null && melody.m1_extension != null) "${melody.m1_duration}(+${melody.m1_extension})" else ""
+            melodyView.m2_extension_value.text = if (melody.m2_duration != null && melody.m2_extension != null) "${melody.m2_duration}(+${melody.m2_extension})" else ""
             melody_layout.addView(melodyView)
         }
     }
