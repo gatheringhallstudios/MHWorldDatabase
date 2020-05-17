@@ -421,7 +421,25 @@
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/shelling_toggle_level_4"
                     style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
                     app:text="Lv 4" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_5"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 5" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_6"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 6" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_7"
+                    style="@style/ButtonToggle"
+                    app:text="Lv 7" />
 
             </com.google.android.flexbox.FlexboxLayout>
 

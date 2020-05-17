@@ -238,6 +238,9 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(shelling_toggle_level_2, 2)
             addBinding(shelling_toggle_level_3, 3)
             addBinding(shelling_toggle_level_4, 4)
+            addBinding(shelling_toggle_level_5, 5)
+            addBinding(shelling_toggle_level_6, 6)
+            addBinding(shelling_toggle_level_7, 7)
         }
 
         coatingGroup = CheckedGroup()
