@@ -43,6 +43,7 @@ val VectorRegistry = createRegistry(
         "HuntingHornNote1" to R.xml.ic_ui_note_1_base,
         "HuntingHornNote2" to R.xml.ic_ui_note_2_base,
         "HuntingHornNote3" to R.xml.ic_ui_note_3_base,
+        "HuntingHornNoteEcho" to R.drawable.ic_ui_note_echo,
 
         "Charm" to R.xml.ic_equipment_charm_base,
 

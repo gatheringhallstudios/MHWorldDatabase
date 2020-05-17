@@ -199,7 +199,7 @@ object AssetLoader {
             'P' -> ctx.getVectorDrawable(vectorName, "Violet")
             'G' -> ctx.getVectorDrawable(vectorName, "Green")
             'C' -> ctx.getVectorDrawable(vectorName, "Cyan")
-            'E' -> ctx.getVectorDrawable(vectorName, "Black")
+            'E' -> ctx.getVectorDrawable("HuntingHornNoteEcho", "Black")
             else -> null
         }
     }
