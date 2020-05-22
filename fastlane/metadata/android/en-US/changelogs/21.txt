@@ -1,17 +1,17 @@
-Thank you for your patience! This is the beta track for our Iceborne update.
+Gathering Hall Studios proudly presents the long-awaited ICEBORNE update for MHWorld Database!
 
- - ICEBORNE UPDATE:
-    - Weapons
-    - Armor
-    - Monsters
-    - Decorations
- - WORKSHOP
- - QUEST LIST
- - KINSECT LIST
- - Currently missing data:
-    - Item drop rates
-    - Charms, Mantles, Iceborne Quests
+We're also happy to announce return of the WORKSHOP feature! Create sets of equipment to preview
+stats and skills. Includes support for weapons, decorations and charms.
 
-Please hold tight while we polish things up to get ready for release.
+ ICEBORNE DATA UPDATE:
+    - Master Rank Weapons
+    - Master Rank Armor
+    - Master Rank Monsters
+    - Master Rank Decorations
+    - Master Rank Charms
+    - WORKSHOP
+    - QUEST LIST
+    - KINSECT LIST
 
-We're a team of volunteers so be sure to join your Discord channel to see how you can help.
+ COMING SOON:
+    - Tools
