@@ -44,6 +44,7 @@ data class WeaponEntity(
         val shelling: String?,
         val shelling_level: Int?,
         val ammo_id: Int?,
+        val armorset_bonus_id: Int?,
         val coating_close: String?,
         val coating_power: String?,
         val coating_poison: String?,
