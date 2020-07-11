@@ -43,9 +43,19 @@
                 android:id="@+id/sort_affinity_toggle"
                 style="@style/ButtonToggle"
                 android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
                 app:imageSize="@dimen/image_size_small"
                 app:src="@drawable/ic_ui_affinity"
                 app:text="@string/weapon_affinity"
+                tools:checked="true" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/sort_element_toggle"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_small"
+                app:src="@drawable/ic_ui_element"
+                app:text="@string/weapon_element"
                 tools:checked="true" />
         </LinearLayout>
 
