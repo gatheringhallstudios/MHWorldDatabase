@@ -175,7 +175,8 @@ abstract class WeaponDao {
                 recipe = queryRecipeComponents(langId, weaponId),
                 ammo = loadWeaponAmmoData(langId, weaponId),
                 melodies = queryWeaponMelodies(langId, weapon),
-                skills = queryWeaponSkillsSync(langId, weaponId)
+                skills = queryWeaponSkillsSync(langId, weaponId),
+                setBonus = queryArmorSetBonusSync(langId, weaponId)
         )
     }
 
@@ -184,10 +185,29 @@ abstract class WeaponDao {
         return weapons.map {
             WeaponFull(
                     weapon = it,
-                    skills = queryWeaponSkillsSync(langId, it.id)
+                    skills = queryWeaponSkillsSync(langId, it.id),
+                    setBonus = queryArmorSetBonusSync(langId, it.id)
             )
         }
     }
+
+    @Query("""
+        SELECT st.id as skilltree_id, stt.name as skilltree_name, st.max_level skilltree_max_level, st.secret skilltree_secret, st.unlocks_id skilltree_unlocks_id,
+            st.icon_color as skilltree_icon_color,
+            abs.setbonus_id as id, abt.name, abs.required
+        FROM armorset_bonus_skill abs
+            JOIN armorset_bonus_text abt
+                ON abt.id = abs.setbonus_id
+            JOIN skilltree st
+                ON abs.skilltree_id = st.id
+            JOIN skilltree_text stt
+                ON abs.skilltree_id = stt.id
+                AND abt.lang_id = stt.lang_id
+            JOIN weapon w
+                ON w.armorset_bonus_id = abs.setbonus_id
+        WHERE abt.lang_id = :langId
+          AND w.id = :weaponId""")
+    abstract fun queryArmorSetBonusSync(langId: String, weaponId: Int): List<ArmorSetBonus>
 
     /**
      * Loads all weapons of a particular type, contained as a collection of weapon trees.

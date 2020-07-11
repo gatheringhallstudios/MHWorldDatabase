@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.*
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
@@ -14,13 +15,21 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_armor_summary.*
+import kotlinx.android.synthetic.main.fragment_armor_summary.armor_set_bonus_list
+import kotlinx.android.synthetic.main.fragment_armor_summary.armor_set_bonus_section
+import kotlinx.android.synthetic.main.fragment_armor_summary.defense_value
+import kotlinx.android.synthetic.main.fragment_armor_summary.set_bonus_name
+import kotlinx.android.synthetic.main.fragment_armor_summary.slot1
+import kotlinx.android.synthetic.main.fragment_armor_summary.slot2
+import kotlinx.android.synthetic.main.fragment_armor_summary.slot3
+import kotlinx.android.synthetic.main.fragment_weapon_summary.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
 
 class ArmorDetailFragment : androidx.fragment.app.Fragment() {
 
     private val viewModel: ArmorDetailViewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(ArmorDetailViewModel::class.java)
+        ViewModelProvider(requireParentFragment()).get(ArmorDetailViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,7 +37,7 @@ class ArmorDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.armor.observe(this, Observer(::populateArmor))
+        viewModel.armor.observe(viewLifecycleOwner, Observer(::populateArmor))
     }
 
     private fun populateArmor(armorData: ArmorFull?) {
@@ -120,7 +129,7 @@ class ArmorDetailFragment : androidx.fragment.app.Fragment() {
         for (setBonus in armorSetBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, null)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, armor_set_bonus_list, false)
 
             listItem.bonus_skill_icon.setImageDrawable(skillIcon)
             listItem.bonus_skill_name.text = setBonus.skillTree.name
