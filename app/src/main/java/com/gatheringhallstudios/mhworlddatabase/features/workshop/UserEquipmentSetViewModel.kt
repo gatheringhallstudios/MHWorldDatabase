@@ -229,25 +229,41 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
     }
 
     private fun calculateSetBonuses(userEquipment: List<UserEquipment>): MutableMap<String, List<ArmorSetBonus>> {
-        val setBonuses = mutableMapOf<String, List<ArmorSetBonus>>()
-        val setsPresent = userEquipment
-                .filter { it.type() == DataType.ARMOR }
-                .groupBy { (it as UserArmorPiece).armor.armor.armorset_id }
-
-        //Set Bonus breakpoints are at 2-pieces, 3-pieces, and 4-pieces
-        setsPresent.forEach {
-            if (it.value.isNotEmpty()) {
-                val userArmorPiece = (it.value.first() as UserArmorPiece)
-                val activeSetBonuses = userArmorPiece.armor.setBonuses
-                        .filter { setBonus -> it.value.size >= setBonus.required }
-
-                if (activeSetBonuses.isNotEmpty()) {
-                    setBonuses[activeSetBonuses.first().name!!] = activeSetBonuses
+        val setBonuses = mutableMapOf<String, MutableList<ArmorSetBonus>>()
+        val setBonusesPresent = mutableMapOf<String, MutableList<ArmorSetBonus>>()
+        userEquipment.forEach {
+            when {
+                it.type() == DataType.ARMOR -> (it as UserArmorPiece).armor.setBonuses.forEach { setBonus ->
+                    if (setBonusesPresent["${setBonus.id}-${setBonus.required}"].isNullOrEmpty()) {
+                        setBonusesPresent["${setBonus.id}-${setBonus.required}"] = mutableListOf(setBonus)
+                    } else {
+                        setBonusesPresent["${setBonus.id}-${setBonus.required}"]?.add(setBonus)
+                    }
+                }
+                it.type() == DataType.WEAPON -> (it as UserWeapon).weapon.setBonus.forEach { setBonus ->
+                    if (setBonusesPresent["${setBonus.id}-${setBonus.required}"].isNullOrEmpty()) {
+                        setBonusesPresent["${setBonus.id}-${setBonus.required}"] = mutableListOf(setBonus)
+                    } else {
+                        setBonusesPresent["${setBonus.id}-${setBonus.required}"]?.add(setBonus)
+                    }
                 }
             }
         }
 
-        return setBonuses
+        //Set Bonus breakpoints are at 2-pieces, 3-pieces, and 4-pieces
+        setBonusesPresent.filter {
+            it.value.size >= it.value.first().required
+        }.forEach {
+            if (setBonuses[it.value.first().name].isNullOrEmpty()) {
+                setBonuses[it.value.first().name!!] = mutableListOf(it.value.first())
+            } else {
+                setBonuses[it.value.first().name!!]?.add(it.value.first())
+            }
+        }
+
+        return setBonuses.mapValues {
+            it.value.toList()
+        }.toMutableMap()
     }
 
     private fun calculateDefenseBase(userEquipment: List<UserEquipment>): Int {
