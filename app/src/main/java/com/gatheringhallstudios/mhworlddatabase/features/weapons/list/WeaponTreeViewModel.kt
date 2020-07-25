@@ -113,7 +113,7 @@ class WeaponTreeViewModel(application: Application) : AndroidViewModel(applicati
         when (filterState.sortBy) {
             FilterSortCondition.ATTACK -> results.sortByDescending { it.value.attack_true }
             FilterSortCondition.AFFINITY -> results.sortByDescending { it.value.affinity }
-            FilterSortCondition.ELEMENT_STATUS -> results.sortByDescending { it.value.element1 }
+            FilterSortCondition.ELEMENT_STATUS -> results.sortByDescending { it.value.element1_attack }
             FilterSortCondition.NONE -> {}
         }
 
