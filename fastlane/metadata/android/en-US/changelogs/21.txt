@@ -1,0 +1,17 @@
+Gathering Hall Studios proudly presents the long-awaited ICEBORNE update for MHWorld Database!
+
+We're also happy to announce return of the WORKSHOP feature! Create sets of equipment to preview
+stats and skills. Includes support for weapons, decorations and charms.
+
+ ICEBORNE DATA UPDATE:
+    - Master Rank Weapons
+    - Master Rank Armor
+    - Master Rank Monsters
+    - Master Rank Decorations
+    - Master Rank Charms
+    - WORKSHOP
+    - QUEST LIST
+    - KINSECT LIST
+
+ COMING SOON:
+    - Tools

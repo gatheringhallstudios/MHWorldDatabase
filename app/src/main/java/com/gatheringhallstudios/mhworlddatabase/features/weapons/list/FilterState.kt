@@ -6,7 +6,8 @@ import java.io.Serializable
 enum class FilterSortCondition {
     NONE,
     ATTACK,
-    AFFINITY
+    AFFINITY,
+    ELEMENT_STATUS
 }
 
 /**

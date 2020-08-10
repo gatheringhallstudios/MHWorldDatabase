@@ -108,6 +108,9 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateComplexStats(weapon: Weapon, weaponView: View) {
+        // Clear the placeholder layouts
+        weaponView.complex_stat_layout.removeAllViews()
+
         // Elemental Stat (added if there's a value)
         if (weapon.element1 != null) {
             val elementView = CompactStatCell(

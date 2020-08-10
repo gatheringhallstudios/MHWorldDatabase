@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.QuestCategory
 @Dao
 abstract class QuestDao {
     @Query("""
-        SELECT q.id, category, stars, name, quest_type, objective, description, location_id, zenny
+        SELECT q.id, category, stars, stars_raw, name, quest_type, objective, description, location_id, zenny
         FROM quest q
             JOIN quest_text qt
                 ON qt.id = q.id
@@ -22,7 +22,7 @@ abstract class QuestDao {
     abstract fun loadQuests(langId: String, categories: Array<QuestCategory>): LiveData<List<QuestBase>>
 
     @Query("""
-        SELECT q.id, category, stars, name, quest_type, objective, description, location_id, zenny
+        SELECT q.id, category, stars, stars_raw, name, quest_type, objective, description, location_id, zenny
         FROM quest q
             JOIN quest_text qt
                 ON qt.id = q.id

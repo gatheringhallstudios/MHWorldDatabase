@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -13,6 +14,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.fragment_generic_pager.view.*
 
 /**
  * Monster detail Hub. Displays information for a single monster.
@@ -23,6 +26,8 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
     companion object {
         const val ARG_MONSTER_ID = "MONSTER_ID"
     }
+
+    override val tabMode: Int = TabLayout.MODE_SCROLLABLE
 
     private lateinit var viewModel : MonsterDetailViewModel
 
@@ -71,6 +76,9 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
         }
         tabs.addTab(getString(R.string.tab_monsters_detail_damage)) {
             MonsterDamageFragment()
+        }
+        tabs.addTab(getString(R.string.tab_monsters_detail_rewards_master_rank)) {
+            MonsterRewardFragment.newInstance(Rank.MASTER)
         }
         tabs.addTab(getString(R.string.tab_monsters_detail_rewards_high_rank)) {
             MonsterRewardFragment.newInstance(Rank.HIGH)

@@ -167,7 +167,11 @@ class WorkshopSelectorListFragment : Fragment() {
                 equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
 
-            empty_view.isVisible = it.isEmpty()
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
+            } else {
+                empty_view.visibility = View.GONE
+            }
         })
     }
 
@@ -267,6 +271,8 @@ class WorkshopSelectorListFragment : Fragment() {
 
             if (it.isEmpty()) {
                 empty_view.visibility = View.VISIBLE
+            } else {
+                empty_view.visibility = View.GONE
             }
         })
     }

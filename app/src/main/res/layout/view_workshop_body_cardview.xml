@@ -72,6 +72,7 @@
             android:id="@+id/set_bonus_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
             android:orientation="vertical" />
 
     </LinearLayout>

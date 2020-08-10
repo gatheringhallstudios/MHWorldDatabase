@@ -196,12 +196,14 @@ class WeaponFull(
         val ammo: WeaponAmmoData?,
         val melodies: List<WeaponMelody>,
         val recipe: Map<String?, List<ItemQuantity>>,
-        val skills: List<SkillLevel>
+        val skills: List<SkillLevel>,
+        val setBonus: List<ArmorSetBonus>
 ) : MHModel {
     override val entityId get() = weapon.id
     override val entityType get() = DataType.WEAPON
 
-    constructor(weapon: Weapon, skills: List<SkillLevel>) : this(weapon, null, emptyList(), emptyMap(), skills)
+    constructor(weapon: Weapon, skills: List<SkillLevel>, setBonus: List<ArmorSetBonus>)
+            : this(weapon, null, emptyList(), emptyMap(), skills, setBonus)
 }
 
 data class WeaponAmmoData(
@@ -397,8 +399,12 @@ class WeaponAmmo(
 class WeaponMelody(
         val id: Int,
         val notes: String,
-        val duration: String,
-        val extension: String,
+        val base_duration: Int?,
+        val base_extension:Int?,
+        val m1_duration:Int?,
+        val m1_extension:Int?,
+        val m2_duration:Int?,
+        val m2_extension:Int?,
         val effect1: String,
         val effect2: String
 )

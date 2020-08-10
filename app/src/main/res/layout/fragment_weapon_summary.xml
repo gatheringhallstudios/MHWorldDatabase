@@ -306,6 +306,37 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/armor_set_bonus_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_gap"
+            android:orientation="vertical">
+
+            <com.gatheringhallstudios.mhworlddatabase.components.SectionHeaderCell
+                android:id="@+id/armor_set_bonus_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelText="@string/header_set_bonuses"
+                />
+
+            <TextView
+                android:id="@+id/set_bonus_name"
+                style="@style/TextHeadlineHigh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                tools:text="Rathalos Mastery"/>
+
+            <LinearLayout
+                android:id="@+id/armor_set_bonus_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/weapon_recipes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

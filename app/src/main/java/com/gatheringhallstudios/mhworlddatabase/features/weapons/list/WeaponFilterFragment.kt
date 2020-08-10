@@ -180,6 +180,7 @@ class WeaponFilterFragment : DialogFragment() {
         sortGroup = CheckedGroup(singleOnly = true)
         sortGroup.addBinding(sort_attack_toggle, FilterSortCondition.ATTACK)
         sortGroup.addBinding(sort_affinity_toggle, FilterSortCondition.AFFINITY)
+        sortGroup.addBinding(sort_element_toggle, FilterSortCondition.ELEMENT_STATUS)
 
         // define element group
         elementGroup = CheckedGroup()
@@ -238,6 +239,9 @@ class WeaponFilterFragment : DialogFragment() {
             addBinding(shelling_toggle_level_2, 2)
             addBinding(shelling_toggle_level_3, 3)
             addBinding(shelling_toggle_level_4, 4)
+            addBinding(shelling_toggle_level_5, 5)
+            addBinding(shelling_toggle_level_6, 6)
+            addBinding(shelling_toggle_level_7, 7)
         }
 
         coatingGroup = CheckedGroup()

@@ -1,18 +1,18 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
-import com.gatheringhallstudios.mhworlddatabase.R.id.*
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadIconFor
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader.loadNoteFromChar
+import com.gatheringhallstudios.mhworlddatabase.assets.SetBonusNumberRegistry
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
@@ -24,6 +24,11 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.fragment_weapon_summary.*
+import kotlinx.android.synthetic.main.fragment_weapon_summary.defense_value
+import kotlinx.android.synthetic.main.fragment_weapon_summary.slot1
+import kotlinx.android.synthetic.main.fragment_weapon_summary.slot2
+import kotlinx.android.synthetic.main.fragment_weapon_summary.slot3
+import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
 import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
@@ -43,7 +48,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
      * Returns the viewmodel owned by the parent fragment
      */
     private val viewModel: WeaponDetailViewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(WeaponDetailViewModel::class.java)
+        ViewModelProvider(requireParentFragment()).get(WeaponDetailViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,14 +61,14 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.weaponData.observe(this, Observer(::populateWeapon))
+        viewModel.weaponData.observe(viewLifecycleOwner, Observer(::populateWeapon))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val weaponData = viewModel.weaponData.value
         if (weaponData != null && BookmarksFeature.isBookmarked(weaponData)) {
-            menu.findItem(action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
+            menu.findItem(R.id.action_toggle_bookmark).icon = requireContext().getDrawableCompat(R.drawable.ic_sys_bookmark_on)
         }
     }
 
@@ -73,7 +78,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_bookmark) {
             BookmarksFeature.toggleBookmark(viewModel.weaponData.value)
-            activity!!.invalidateOptionsMenu()
+            requireActivity().invalidateOptionsMenu()
             true
         } else false
     }
@@ -82,11 +87,12 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         if (weaponData == null) return
 
         //Rerender the menu bar because we are 100% sure we have the weapon data now
-        activity!!.invalidateOptionsMenu()
+        requireActivity().invalidateOptionsMenu()
 
         setActivityTitle(weaponData.weapon.name)
         populateWeaponBasic(weaponData.weapon)
         populateWeaponSkills(weaponData.skills)
+        populateSetBonus(weaponData.setBonus)
         populateComponents(weaponData.recipe)
         populateWeaponSpecificSection(weaponData)
     }
@@ -187,6 +193,37 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
             }
 
             skill_list.addView(view)
+        }
+    }
+
+    private fun populateSetBonus(armorSetBonuses: List<ArmorSetBonus>) {
+        if (armorSetBonuses.isEmpty()) {
+            armor_set_bonus_section.visibility = View.GONE
+            return
+        }
+
+        // show set bonus section
+        armor_set_bonus_section.visibility = View.VISIBLE
+        armor_set_bonus_list.removeAllViews()
+
+        //Set the label for the Set name
+        set_bonus_name.text = armorSetBonuses.first().name
+
+        for (setBonus in armorSetBonuses) {
+            // Now to set the actual skills
+            val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
+            val reqIcon = SetBonusNumberRegistry(setBonus.required)
+            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, armor_set_bonus_list, false)
+
+            listItem.bonus_skill_icon.setImageDrawable(skillIcon)
+            listItem.bonus_skill_name.text = setBonus.skillTree.name
+            listItem.bonus_requirement.setImageResource(reqIcon)
+
+            listItem.setOnClickListener {
+                getRouter().navigateSkillDetail(setBonus.skillTree.id)
+            }
+
+            armor_set_bonus_list.addView(listItem)
         }
     }
 
@@ -380,8 +417,9 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
             melodyView.effect1.text = melody.effect1
             melodyView.effect2.text = melody.effect2
-            melodyView.duration_value.text = melody.duration
-            melodyView.extension_value.text = melody.extension
+            melodyView.base_duration_value.text = if (melody.base_duration != null && melody.base_extension != null) "${melody.base_duration}(+${melody.base_extension})" else ""
+            melodyView.m1_extension_value.text = if (melody.m1_duration != null && melody.m1_extension != null) "${melody.m1_duration}(+${melody.m1_extension})" else ""
+            melodyView.m2_extension_value.text = if (melody.m2_duration != null && melody.m2_extension != null) "${melody.m2_duration}(+${melody.m2_extension})" else ""
             melody_layout.addView(melodyView)
         }
     }

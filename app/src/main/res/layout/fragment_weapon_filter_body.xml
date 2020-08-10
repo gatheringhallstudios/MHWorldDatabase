@@ -43,9 +43,19 @@
                 android:id="@+id/sort_affinity_toggle"
                 style="@style/ButtonToggle"
                 android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
                 app:imageSize="@dimen/image_size_small"
                 app:src="@drawable/ic_ui_affinity"
                 app:text="@string/weapon_affinity"
+                tools:checked="true" />
+
+            <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                android:id="@+id/sort_element_toggle"
+                style="@style/ButtonToggle"
+                android:layout_marginTop="@dimen/margin_large"
+                app:imageSize="@dimen/image_size_small"
+                app:src="@drawable/ic_ui_element"
+                app:text="@string/weapon_element"
                 tools:checked="true" />
         </LinearLayout>
 
@@ -421,7 +431,25 @@
                 <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
                     android:id="@+id/shelling_toggle_level_4"
                     style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
                     app:text="Lv 4" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_5"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 5" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_6"
+                    style="@style/ButtonToggle"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:text="Lv 6" />
+
+                <com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
+                    android:id="@+id/shelling_toggle_level_7"
+                    style="@style/ButtonToggle"
+                    app:text="Lv 7" />
 
             </com.google.android.flexbox.FlexboxLayout>
 

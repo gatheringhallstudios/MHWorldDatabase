@@ -51,8 +51,11 @@ class QuestSummaryFragment : Fragment() {
 
         quest_header.setIconDrawable(AssetLoader.loadIconFor(quest))
         quest_header.setTitleText(quest.name)
-        quest_header.setSubtitleText(getString(R.string.quest_category_combined,
-                    AssetLoader.localizeQuestCategory(quest.category), quest.stars))
+        quest_header.setSubtitleText(getString(
+                R.string.quest_category_combined,
+                AssetLoader.localizeQuestCategory(quest.category),
+                if(quest.stars_raw > 9) " MR" else "",
+                quest.stars))
         quest_header.setDescriptionText(quest.objective)
 
         quest_description.text = quest.description

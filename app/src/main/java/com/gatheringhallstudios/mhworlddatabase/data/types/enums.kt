@@ -137,7 +137,8 @@ enum class WeaponType {
  */
 enum class WeaponCategory {
     REGULAR,
-    KULVE
+    KULVE,
+    SAFI
 }
 
 enum class ElderSealLevel {
@@ -244,6 +245,7 @@ enum class QuestCategory {
     OPTIONAL,
     EVENT,
     ARENA,
+    CHALLENGE,
     SPECIAL
 }
 

@@ -30,16 +30,19 @@ class QuestListHeaderItem(val category: QuestCategory, val stars: Int) : Item(),
         val res = viewHolder.itemView.resources
 
         // TODO Change to MR once master rank quest are supported
-        val name = if (categoryString == res.getString(R.string.quest_category_special))
-            res.getString(R.string.quest_category_special_abbr)
-            else stars.toString()
+        val name =
+                when {
+                    categoryString == res.getString(R.string.quest_category_special) -> res.getString(R.string.quest_category_special_abbr)
+                    stars > 9 -> (stars - 10).toString()
+                    else -> stars.toString()
+                }
 
         viewHolder.quest_group_name.text = name
 
         when (stars) {
             in 1..5 -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars, Rank.LOW)
             in 6..9 -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars, Rank.HIGH)
-            else -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars, Rank.MASTER)
+            else -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars - 10, Rank.MASTER)
         }
 
         bindCurrentState(viewHolder, false)

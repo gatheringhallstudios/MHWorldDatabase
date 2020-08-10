@@ -44,6 +44,7 @@ data class WeaponEntity(
         val shelling: String?,
         val shelling_level: Int?,
         val ammo_id: Int?,
+        val armorset_bonus_id: Int?,
         val coating_close: String?,
         val coating_power: String?,
         val coating_poison: String?,
@@ -207,9 +208,19 @@ data class WeaponAmmoEntity(
 data class WeaponMelodyEntity (
         @PrimaryKey
         val id: Int,
-        val notes: String,
-        val duration: String,
-        val extension: String
+        val base_duration: Int?,
+        val base_extension:Int?,
+        val m1_duration:Int?,
+        val m1_extension:Int?,
+        val m2_duration:Int?,
+        val m2_extension:Int?
+)
+
+@Entity(tableName = "weapon_melody_notes")
+data class WeaponMelodyNotesEntity(
+        @PrimaryKey
+        val id: Int,
+        val notes: String
 )
 
 @Entity(tableName = "weapon_melody_text")

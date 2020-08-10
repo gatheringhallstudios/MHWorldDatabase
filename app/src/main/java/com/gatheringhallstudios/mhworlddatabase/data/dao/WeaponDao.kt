@@ -110,10 +110,13 @@ abstract class WeaponDao {
      * matching will be done in Kotlin instead
      */
     @Query("""
-        SELECT wm.id, wm.notes, wmt.effect1, wmt.effect2, wm.duration, wm.extension
-         FROM weapon_melody wm
+        SELECT wm.id, wmn.notes, wmt.effect1, wmt.effect2, wm.base_duration, wm.base_extension, 
+            wm.m1_duration, wm.m1_extension, wm.m2_duration, wm.m2_extension         
+        FROM weapon_melody wm
             JOIN weapon_melody_text wmt
-                ON  wm.id = wmt.id
+                ON  wm.id = wmt.id       
+            JOIN weapon_melody_notes wmn
+                ON wm.id = wmn.id
         WHERE wmt.lang_id = :langId
         ORDER BY wm.id
     """)
@@ -125,9 +128,10 @@ abstract class WeaponDao {
 
     fun queryWeaponMelodies(langId: String, weapon: Weapon): List<WeaponMelody> {
         if (weapon.weapon_type != WeaponType.HUNTING_HORN) return listOf()
-        val comparator = Array(4) {
-            if (it < weapon.notes!!.length) {
-                Character.getNumericValue(weapon.notes[it])
+        val buf = weapon.notes + 'E' //Add an 'E' because all hunting horns now also support an Echo note
+        val comparator = Array(5) {
+            if (it < buf.length) {
+                Character.getNumericValue(buf[it])
             } else {
                 0
             }
@@ -135,7 +139,7 @@ abstract class WeaponDao {
 
         return loadWeaponMelodies(langId).filter {
             var result = true
-            for (note in it.notes!!) {
+            for (note in it.notes) {
                 if (!comparator.contains(Character.getNumericValue(note))) {
                     result = false
                 }
@@ -171,7 +175,8 @@ abstract class WeaponDao {
                 recipe = queryRecipeComponents(langId, weaponId),
                 ammo = loadWeaponAmmoData(langId, weaponId),
                 melodies = queryWeaponMelodies(langId, weapon),
-                skills = queryWeaponSkillsSync(langId, weaponId)
+                skills = queryWeaponSkillsSync(langId, weaponId),
+                setBonus = queryArmorSetBonusSync(langId, weaponId)
         )
     }
 
@@ -180,10 +185,29 @@ abstract class WeaponDao {
         return weapons.map {
             WeaponFull(
                     weapon = it,
-                    skills = queryWeaponSkillsSync(langId, it.id)
+                    skills = queryWeaponSkillsSync(langId, it.id),
+                    setBonus = queryArmorSetBonusSync(langId, it.id)
             )
         }
     }
+
+    @Query("""
+        SELECT st.id as skilltree_id, stt.name as skilltree_name, st.max_level skilltree_max_level, st.secret skilltree_secret, st.unlocks_id skilltree_unlocks_id,
+            st.icon_color as skilltree_icon_color,
+            abs.setbonus_id as id, abt.name, abs.required
+        FROM armorset_bonus_skill abs
+            JOIN armorset_bonus_text abt
+                ON abt.id = abs.setbonus_id
+            JOIN skilltree st
+                ON abs.skilltree_id = st.id
+            JOIN skilltree_text stt
+                ON abs.skilltree_id = stt.id
+                AND abt.lang_id = stt.lang_id
+            JOIN weapon w
+                ON w.armorset_bonus_id = abs.setbonus_id
+        WHERE abt.lang_id = :langId
+          AND w.id = :weaponId""")
+    abstract fun queryArmorSetBonusSync(langId: String, weaponId: Int): List<ArmorSetBonus>
 
     /**
      * Loads all weapons of a particular type, contained as a collection of weapon trees.

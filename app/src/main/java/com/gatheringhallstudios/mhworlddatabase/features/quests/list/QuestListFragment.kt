@@ -47,9 +47,12 @@ class QuestListFragment : RecyclerViewFragment() {
                     .sortedBy {it.category}.groupBy { it.category }
 
             for (category in categories) {
-                val catQuests = (groupings[category] ?: emptyList()).sortedBy { it.stars }
-                for ((stars, catstarQuests) in catQuests.groupBy { it.stars }) {
-                    val expandable = ExpandableGroup(QuestListHeaderItem(category, stars), false)
+                // Sort by star value
+                val catQuests = (groupings[category] ?: emptyList()).sortedBy { it.stars_raw }
+
+                // Display all
+                for ((stars_raw, catstarQuests) in catQuests.groupBy { it.stars_raw }) {
+                    val expandable = ExpandableGroup(QuestListHeaderItem(category, stars_raw), false)
                     expandable.addAll(catstarQuests.map { QuestListDetailItem(it) })
                     adapter.add(expandable)
                 }

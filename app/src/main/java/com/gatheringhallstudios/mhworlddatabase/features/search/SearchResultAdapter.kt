@@ -135,7 +135,11 @@ fun createQuestBinder(quest: QuestBase) = createSimpleUniversalBinder { ctx ->
     val name = quest.name
     val typeString = ctx.getString(R.string.type_quest)
     val category = AssetLoader.localizeQuestCategory(quest.category)
-    val categoryFull = ctx.getString(R.string.quest_category_combined, category, quest.stars)
+    val categoryFull = ctx.getString(
+            R.string.quest_category_combined,
+            category,
+            if(quest.stars_raw > 9) " MR" else "",
+            quest.stars)
 
     SimpleUniversalBinding(name, typeString, IconType.EMBELLISHED, icon, categoryFull) {
         it.getRouter().navigateObject(quest)

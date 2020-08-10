@@ -205,6 +205,7 @@ object AssetLoader {
             'P' -> ctx.getVectorDrawable(vectorName, "Violet")
             'G' -> ctx.getVectorDrawable(vectorName, "Green")
             'C' -> ctx.getVectorDrawable(vectorName, "Cyan")
+            'E' -> ctx.getDrawableCompat(R.drawable.ic_ui_note_echo)
             else -> null
         }
     }
@@ -310,6 +311,7 @@ object AssetLoader {
         QuestCategory.OPTIONAL -> ctx.getString(R.string.quest_category_optional)
         QuestCategory.EVENT -> ctx.getString(R.string.quest_category_event)
         QuestCategory.ARENA -> ctx.getString(R.string.quest_category_arena)
+        QuestCategory.CHALLENGE -> ctx.getString(R.string.quest_category_challenge)
         QuestCategory.SPECIAL -> ctx.getString(R.string.quest_category_special)
     }
 
