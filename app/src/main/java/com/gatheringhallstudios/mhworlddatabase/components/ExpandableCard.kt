@@ -16,6 +16,7 @@ import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import com.gatheringhallstudios.mhworlddatabase.util.elevationToAlpha
@@ -23,8 +24,8 @@ import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlin.math.abs
 
-private const val clickThreshold = 100
-private const val threshold = 400
+private const val clickThreshold = 50
+private const val threshold = 700
 
 /**
  * A CardView with a space for a static header and expandable body.
@@ -42,7 +43,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var swipeLeftIcon: Int = android.R.drawable.ic_menu_delete
     private var swipeRightIcon: Int = android.R.drawable.ic_input_add
     private var swipeLeftBackground: Int = Color.parseColor("#FF1744")
-    private var swipeRightBackground: Int = Color.parseColor("#00E676")
+    private var swipeRightBackground: Int = Color.parseColor( "#00E676")
     private var cardState: CardState = CardState.COLLAPSED
 
     private var onSwipeLeft: () -> Unit = {}
@@ -77,9 +78,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             expandAnimationDuration = attributes.getInt(R.styleable.ExpandableCardView_expandAnimationDuration, 300)
             swipeReboundAnimationDuration = attributes.getInt(R.styleable.ExpandableCardView_swipeReboundDuration, 200)
             swipeLeftIcon = attributes.getResourceId(R.styleable.ExpandableCardView_swipeLeftIcon, android.R.drawable.ic_menu_delete)
-            swipeLeftBackground = attributes.getColor(R.styleable.ExpandableCardView_swipeLeftBackground, Color.parseColor("#FF1744"))
+            swipeLeftBackground = attributes.getColor(R.styleable.ExpandableCardView_swipeLeftBackground, swipeLeftBackground)
             swipeRightIcon = attributes.getResourceId(R.styleable.ExpandableCardView_swipeRightIcon, android.R.drawable.ic_input_add)
-            swipeRightBackground = attributes.getColor(R.styleable.ExpandableCardView_swipeRightBackground, Color.parseColor("#00E676"))
+            swipeRightBackground = attributes.getColor(R.styleable.ExpandableCardView_swipeRightBackground, swipeRightBackground)
 
             val swipeMode = attributes.getInt(R.styleable.ExpandableCardView_swipeMode, 0)
             swipeLeftEnabled = swipeMode == 1 || swipeMode == 3
@@ -93,14 +94,14 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             card_overlay.alpha = elevationToAlpha(cardElevation.toInt())
             card_container.isClickable = showRipple
             card_container.isFocusable = showRipple
-            setLeftLayout(swipeLeftIcon, swipeLeftBackground)
-            setRightLayout(swipeRightIcon, swipeRightBackground)
             setHeader(headerLayout)
             setBody(bodyLayout)
             this.cardState = CardState.COLLAPSED
             attributes.recycle()
         }
 
+        setLeftLayout(swipeLeftIcon, swipeLeftBackground)
+        setRightLayout(swipeRightIcon, swipeRightBackground)
         card_body.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             card_body.measure(MATCH_PARENT, WRAP_CONTENT)
             if (card_body.measuredHeight <= 0) {

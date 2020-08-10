@@ -30,7 +30,6 @@
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:background="@color/icon_red"
             android:orientation="horizontal">
 
             <ImageView
@@ -47,7 +46,6 @@
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:background="#00E676"
             android:orientation="horizontal">
             <!-- Not Enabled -->
 
