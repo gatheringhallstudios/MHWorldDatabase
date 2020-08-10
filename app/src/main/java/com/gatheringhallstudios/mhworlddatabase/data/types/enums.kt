@@ -24,6 +24,7 @@ enum class DataType {
     WEAPON,
     QUEST,
     KINSECT,
+    TOOL,
     NONE
 }
 
@@ -266,4 +267,9 @@ enum class KinsectDustEffect {
     PARALYSIS,
     HEAL,
     BLAST,
+}
+
+enum class ToolType {
+    BOOSTER,
+    MANTLE
 }

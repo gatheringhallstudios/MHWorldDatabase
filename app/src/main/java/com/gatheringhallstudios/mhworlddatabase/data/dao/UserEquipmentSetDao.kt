@@ -24,12 +24,12 @@ abstract class UserEquipmentSetDao {
     abstract fun loadUserEquipmentSetInfo(setId: Int): UserEquipmentSetEntity
 
     @Query("""
-        SELECT u.id, u.equipmentSetId, u.dataId, u.dataType
+        SELECT u.id, u.equipmentSetId, u.dataId, u.dataType, u.orderId
         FROM user_equipment_set_equipment u """)
     abstract fun loadUserEquipmentSetEquipment(): List<UserEquipmentEntity>
 
     @Query("""
-        SELECT u.id, u.equipmentSetId, u.dataId, u.dataType
+        SELECT u.id, u.equipmentSetId, u.dataId, u.dataType, u.orderId
         FROM user_equipment_set_equipment u
         WHERE u.equipmentSetId = :equipmentSetId
         AND u.dataId = :dataId
@@ -37,7 +37,7 @@ abstract class UserEquipmentSetDao {
     abstract fun loadUserEquipmentSetEquipment(equipmentSetId: Int, dataId: Int, type: DataType): UserEquipmentEntity?
 
     @Query("""
-        SELECT u.id, u.equipmentSetId, u.dataId, u.dataType
+        SELECT u.id, u.equipmentSetId, u.dataId, u.dataType, u.orderId
         FROM user_equipment_set_equipment u
         WHERE u.equipmentSetId = :equipmentSetId""")
     abstract fun loadUserEquipmentSetEquipment(equipmentSetId: Int): List<UserEquipmentEntity>
@@ -84,8 +84,8 @@ abstract class UserEquipmentSetDao {
     @Query("""UPDATE user_equipment_sets SET name=:name WHERE id = :equipmentSetId""")
     abstract fun renameUserEquipmentSet(name: String, equipmentSetId: Int)
 
-    @Query("""INSERT INTO user_equipment_set_equipment VALUES (NULL, :id, :type, :equipmentSetId )""")
-    abstract fun createUserEquipmentEquipment(id: Int, type: DataType, equipmentSetId: Int)
+    @Query("""INSERT INTO user_equipment_set_equipment VALUES (NULL, :id, :type, :equipmentSetId, :orderId )""")
+    abstract fun createUserEquipmentEquipment(id: Int, type: DataType, equipmentSetId: Int, orderId: Int)
 
     @Query("""DELETE FROM user_equipment_set_equipment WHERE dataId = :dataId AND dataType = :type AND equipmentSetId = :equipmentSetId""")
     abstract fun deleteUserEquipmentEquipment(dataId: Int, type: DataType, equipmentSetId: Int)
@@ -114,6 +114,7 @@ abstract class UserEquipmentSetDao {
                         dataId = equipment.dataId,
                         equipmentSetId = equipment.equipmentSetId,
                         dataType = equipment.dataType,
+                        orderId = equipment.orderId,
                         decorationIds = decorations.filter { decoration ->
                             decoration.dataId == equipment.dataId
                                     && decoration.dataType == equipment.dataType
@@ -134,6 +135,7 @@ abstract class UserEquipmentSetDao {
                     dataId = equipmentEntity.dataId,
                     equipmentSetId = equipmentEntity.equipmentSetId,
                     dataType = equipmentEntity.dataType,
+                    orderId = equipmentEntity.orderId,
                     decorationIds = decorations.filter { decoration ->
                         decoration.dataId == equipmentEntity.dataId && decoration.dataType == equipmentEntity.dataType
                     }.map { decoration -> UserDecorationIds(decoration.decorationId, decoration.slotNumber) }
@@ -151,6 +153,7 @@ abstract class UserEquipmentSetDao {
             UserEquipmentIds(
                     dataId = equipment.dataId,
                     dataType = equipment.dataType,
+                    orderId = equipment.orderId,
                     decorationIds = decorations.map { decoration -> UserDecorationIds(decoration.decorationId, decoration.slotNumber) }.toMutableList(),
                     equipmentSetId = equipment.equipmentSetId
             )

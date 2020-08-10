@@ -39,7 +39,9 @@ class BookmarksListViewModel(app: Application) : AndroidViewModel(app) {
                 BookmarksFeature
                         .getBookmarksByType(DataType.DECORATION).map {it.dataId}.toIntArray(),
                 BookmarksFeature
-                        .getBookmarksByType(DataType.KINSECT).map {it.dataId}.toIntArray()
+                        .getBookmarksByType(DataType.KINSECT).map {it.dataId}.toIntArray(),
+                BookmarksFeature
+                        .getBookmarksByType(DataType.TOOL).map {it.dataId}.toIntArray()
                 )
     }
 }

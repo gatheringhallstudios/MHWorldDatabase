@@ -14,6 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.data.types.ArmorType
+import com.gatheringhallstudios.mhworlddatabase.data.types.ToolType
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
@@ -21,10 +22,6 @@ import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
 import kotlinx.android.synthetic.main.listitem_skill_description.view.level_text
 import kotlinx.android.synthetic.main.listitem_skill_level.view.*
-import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.*
-import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.equipment_icon
-import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.equipment_name
-import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.rarity_string
 import kotlinx.android.synthetic.main.view_workshop_body_cardview_base.view.*
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.*
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.icon_slots
@@ -32,6 +29,10 @@ import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_b
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot2
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot3
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_empty.view.*
+import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.*
+import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.equipment_icon
+import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.equipment_name
+import kotlinx.android.synthetic.main.view_workshop_weapon_cardview.view.rarity_string
 import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.slot_section as BaseSlotSection
 
 /**
@@ -45,6 +46,71 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
 
     fun setCardState(cardState: ExpandableCardView.CardState) {
         card.setCardState(cardState)
+    }
+
+    /**
+     * Binds a view only tool card
+     */
+    fun bindActiveTool(tool: UserTool?) {
+        if (tool != null) {
+            bindTool(tool.tool, null, null)
+        } else {
+            bindEmptyTool()
+        }
+    }
+
+    /**
+     * Binds a clickable tool card
+     */
+    fun bindUserTool(tool: UserTool?, setId: Int, orderId: Int, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?,
+                     onExpand: (() -> Unit)? = null, onContract: (() -> Unit)? = null) {
+        if (tool != null) {
+            bindTool(tool.tool, onClick, onSwipeRight, onExpand, onContract)
+            //Repopulate the skills section to include the decoration skills
+            card.card_body.skill_list.removeAllViews()
+            val skillsList = combineEquipmentSkillsWithDecorationSkills(emptyList(), tool.decorations.map {
+                it.decoration.getSkillLevels()
+            }.flatten())
+
+            populateSkills(skillsList)
+        } else {
+            bindEmptyTool()
+            card.setOnClick {
+                card.getRouter().navigateUserEquipmentPieceSelector(WorkshopSelectorListFragment.Companion.SelectorMode.TOOL,
+                        null, setId, null, orderId, null)
+            }
+        }
+    }
+
+    /**
+     * Binds a tool entity to the card
+     */
+    fun bindTool(tool: Tool, onClick: (() -> Unit)?, onSwipeRight: (() -> Unit)?,
+                     onExpand: (() -> Unit)? = null, onContract: (() -> Unit)? = null) {
+        card.setHeader(R.layout.view_workshop_header_expandable_cardview_base)
+        card.setBody(R.layout.view_workshop_body_cardview_base)
+        card.setCardElevation(1f)
+
+        val header = card.card_header
+        header.equipment_name.text = tool.name
+        header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(tool))
+        header.rarity_string.text = when (tool.tool_type) {
+            ToolType.MANTLE -> getString(R.string.tool_mantle)
+            ToolType.BOOSTER -> getString(R.string.tool_booster)
+        }
+        header.rarity_string.visibility = View.VISIBLE
+
+        val body = card.card_body
+        body.decorations_section.visibility = View.GONE
+        body.set_bonus_section.visibility = View.GONE
+
+        populateSetBonuses(emptyList())
+        populateSkills(emptyList())
+
+        if (onClick != null) card.setOnClick(onClick)
+        if (onSwipeRight != null) card.setOnSwipeRight(onSwipeRight)
+        if (onExpand != null) card.setOnExpand { onExpand() }
+        if (onContract != null) card.setOnContract { onContract() }
     }
 
     fun bindActiveWeapon(userWeapon: UserWeapon?) {
@@ -75,7 +141,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             bindEmptyWeapon()
             card.setOnClick {
                 card.getRouter().navigateUserEquipmentPieceSelector(WorkshopSelectorListFragment.Companion.SelectorMode.WEAPON,
-                        null, setId, null, null)
+                        null, setId, null, null, null)
             }
         }
     }
@@ -179,7 +245,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             bindEmptyArmor(armorType)
             card.setOnClick {
                 card.getRouter().navigateUserEquipmentPieceSelector(WorkshopSelectorListFragment.Companion.SelectorMode.ARMOR,
-                        null, setId, armorType, null)
+                        null, setId, armorType, null, null)
             }
         }
     }
@@ -241,7 +307,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             bindEmptyCharm()
             card.setOnClick {
                 card.getRouter().navigateUserEquipmentPieceSelector(WorkshopSelectorListFragment.Companion.SelectorMode.CHARM,
-                        null, setId, null, null)
+                        null, setId, null, null, null)
             }
         }
     }
@@ -352,6 +418,10 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
             4 -> R.drawable.ic_ui_slot_4_empty
             else -> R.drawable.ic_ui_slot_none
         })
+    }
+
+    fun bindEmptyTool() {
+        setEmptyView(R.string.user_equipment_set_no_equipment, R.drawable.ic_equipment_charm_empty)
     }
 
     fun populateSkills(skills: List<SkillLevel>) {

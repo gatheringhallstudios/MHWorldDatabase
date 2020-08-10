@@ -31,12 +31,14 @@ class WorkshopSelectorListFragment : Fragment() {
         const val ARG_ARMOR_FILTER = "ACTIVE_ARMOR_FILTER" //What class armor to limit the selector to
         const val ARG_SELECTOR_MODE = "SELECTOR_MODE"
         const val ARG_DECORATION_CONFIG = "DECORATION_CONFIG"
+        const val ARG_ORDER_ID = "ORDER_ID" //For types of equipment that have repeated entries, e.g. tools
 
         enum class SelectorMode {
             ARMOR,
             DECORATION,
             CHARM,
             WEAPON,
+            TOOL,
             NONE
         }
 
@@ -100,6 +102,7 @@ class WorkshopSelectorListFragment : Fragment() {
         val filter = arguments?.getSerializable(ARG_ARMOR_FILTER) as? ArmorType
         val activeEquipment = arguments?.getSerializable(ARG_ACTIVE_EQUIPMENT) as? UserEquipment
         val activeEquipmentSetId = arguments?.getInt(ARG_SET_ID)
+        val orderId = arguments?.getInt(ARG_ORDER_ID)
         val decorationsConfig = arguments?.getSerializable(ARG_DECORATION_CONFIG) as? DecorationsConfig
         //Remove the userEquipment from arguments to prevent it from being serialized onPause
         arguments?.putSerializable(ARG_ACTIVE_EQUIPMENT, null)
@@ -111,6 +114,7 @@ class WorkshopSelectorListFragment : Fragment() {
             SelectorMode.CHARM -> initCharmSelector(activeEquipment as? UserCharm, activeEquipmentSetId)
             SelectorMode.DECORATION -> initDecorationSelector(activeEquipment as? UserDecoration, activeEquipmentSetId, decorationsConfig!!)
             SelectorMode.WEAPON -> initWeaponSelector(activeEquipment as? UserWeapon, activeEquipmentSetId)
+            SelectorMode.TOOL -> initToolSelector(activeEquipment as? UserTool, activeEquipmentSetId, orderId)
         }
     }
 
@@ -148,7 +152,7 @@ class WorkshopSelectorListFragment : Fragment() {
         val adapter = WorkshopArmorSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
-                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeArmorPiece?.armor?.entityId)
+                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeArmorPiece?.armor?.entityId, 0)
                 }
 
                 getRouter().goBack()
@@ -178,7 +182,7 @@ class WorkshopSelectorListFragment : Fragment() {
         val adapter = WorkshopCharmSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
-                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeCharm?.entityId())
+                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeCharm?.entityId(), 0)
                 }
 
                 getRouter().goBack()
@@ -241,13 +245,13 @@ class WorkshopSelectorListFragment : Fragment() {
     }
 
     private fun initWeaponSelector(activeWeapon: UserWeapon?, activeEquipmentSetId: Int?) {
-        setActivityTitle(getString(R.string.title_workshop_weapon_selector))
+        setActivityTitle(getString(R.string.title_workshop_tool_selector))
         viewModel.loadWeapons(AppSettings.dataLocale)
 
         val adapter = WorkshopWeaponSelectorAdapter {
             GlobalScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.IO) {
-                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeWeapon?.entityId())
+                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeWeapon?.entityId(), 0)
                 }
                 getRouter().goBack()
             }
@@ -269,6 +273,36 @@ class WorkshopSelectorListFragment : Fragment() {
                 empty_view.visibility = View.VISIBLE
             } else {
                 empty_view.visibility = View.GONE
+            }
+        })
+    }
+
+    private fun initToolSelector(activeTool: UserTool?, activeEquipmentSetId: Int?, orderId: Int?) {
+        setActivityTitle(getString(R.string.title_workshop_tool_selector))
+        viewModel.loadTools(AppSettings.dataLocale)
+
+        val adapter = WorkshopToolSelectorAdapter {
+            GlobalScope.launch(Dispatchers.Main) {
+                withContext(Dispatchers.IO) {
+                    viewModel.updateEquipmentForEquipmentSet(it.entityId, it.entityType, activeEquipmentSetId!!, activeTool?.entityId(), orderId ?: 0)
+                }
+                getRouter().goBack()
+            }
+        }
+
+        card.bindActiveTool(activeTool)
+        equipment_list.adapter = adapter
+
+        equipment_list.addItemDecoration(SpacesItemDecoration(32))
+
+        viewModel.tools.observe(this, Observer {
+            adapter.items = it
+            if (viewModel.islistStateInitialized()) {
+                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+            }
+
+            if (it.isEmpty()) {
+                empty_view.visibility = View.VISIBLE
             }
         })
     }

@@ -53,6 +53,10 @@
             android:icon="@drawable/ic_ui_map"
             android:title="@string/title_locations" />
         <item
+            android:id="@+id/toolListDestination"
+            android:icon="@drawable/ic_ui_question_mark_white"
+            android:title="@string/title_tools" />
+        <item
             android:id="@+id/bookmarksListDestination"
             android:icon="@drawable/ic_ui_bookmark"
             android:title="@string/title_bookmarks" />

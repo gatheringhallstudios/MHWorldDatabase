@@ -16,7 +16,8 @@ data class UserEquipmentSetEntity(
 data class UserEquipmentEntity(
         val dataId: Int,
         val dataType: DataType,
-        val equipmentSetId: Int
+        val equipmentSetId: Int,
+        val orderId: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

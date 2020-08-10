@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -50,7 +49,7 @@ object AssetLoader {
     fun loadIconFor(armorSet: ArmorSetBase): Drawable? {
         return ctx.getVectorDrawable("ArmorSet", "rare${armorSet.rarity}")
     }
-    
+
     fun loadIconFor(entity: ArmorBase): Drawable? {
         return loadArmorIcon(entity.armor_type, entity.rarity)
     }
@@ -71,9 +70,16 @@ object AssetLoader {
         }
     }
 
+    fun loadIconFor(tool: ToolBase): Drawable? {
+        return ctx.getVectorDrawable(when (tool.tool_type) {
+            ToolType.MANTLE -> "Mantle"
+            ToolType.BOOSTER -> "Booster"
+        }, tool.icon_color)
+    }
+
     fun loadIconFor(coating_type: CoatingType): Drawable? {
         return when (coating_type) {
-            CoatingType.POWER ->  ctx.getVectorDrawable("Bottle", "Red")
+            CoatingType.POWER -> ctx.getVectorDrawable("Bottle", "Red")
             CoatingType.SLEEP -> ctx.getVectorDrawable("Bottle", "Cyan")
             CoatingType.CLOSE_RANGE -> ctx.getVectorDrawable("Bottle", "White")
             CoatingType.POISON -> ctx.getVectorDrawable("Bottle", "DarkPurple")
@@ -84,7 +90,7 @@ object AssetLoader {
 
     fun loadIconFor(ammo_type: AmmoType): Drawable? {
         return when (ammo_type) {
-            AmmoType.NORMAL_AMMO1, AmmoType.NORMAL_AMMO2, AmmoType.NORMAL_AMMO3, AmmoType.SLICING_AMMO, AmmoType.FREEZE_AMMO ->  ctx.getVectorDrawable("Ammo", "White")
+            AmmoType.NORMAL_AMMO1, AmmoType.NORMAL_AMMO2, AmmoType.NORMAL_AMMO3, AmmoType.SLICING_AMMO, AmmoType.FREEZE_AMMO -> ctx.getVectorDrawable("Ammo", "White")
             AmmoType.PIERCE_AMMO1, AmmoType.PIERCE_AMMO2, AmmoType.PIERCE_AMMO3 -> ctx.getVectorDrawable("Ammo", "Blue")
             AmmoType.SPREAD_AMMO1, AmmoType.SPREAD_AMMO2, AmmoType.SPREAD_AMMO3 -> ctx.getVectorDrawable("Ammo", "DarkGreen")
             AmmoType.STICKY_AMMO1, AmmoType.STICKY_AMMO2, AmmoType.STICKY_AMMO3 -> ctx.getVectorDrawable("Ammo", "Beige")
@@ -98,7 +104,7 @@ object AssetLoader {
             AmmoType.PARALYSIS_AMMO1, AmmoType.PARALYSIS_AMMO2 -> ctx.getVectorDrawable("Ammo", "Yellow")
             AmmoType.THUNDER_AMMO -> ctx.getVectorDrawable("Ammo", "Gold")
             AmmoType.WYVERN_AMMO -> ctx.getVectorDrawable("Ammo", "LightBeige")
-            AmmoType.DEMON_AMMO ->  ctx.getVectorDrawable("Ammo", "Red")
+            AmmoType.DEMON_AMMO -> ctx.getVectorDrawable("Ammo", "Red")
             AmmoType.FLAMING_AMMO -> ctx.getVectorDrawable("Ammo", "Orange")
         }
     }
@@ -143,7 +149,7 @@ object AssetLoader {
     }
 
     fun loadIconFor(quest: QuestBase): Drawable? {
-        return when(quest.quest_type) {
+        return when (quest.quest_type) {
             QuestType.HUNT -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_hunt)
             QuestType.SLAY -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_slay)
             QuestType.ASSIGNMENT -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_assignment)
@@ -153,7 +159,7 @@ object AssetLoader {
     }
 
     fun loadIconFor(rank: Rank): Drawable? {
-        return when(rank) {
+        return when (rank) {
             Rank.LOW -> ctx.getVectorDrawable("Star", "LowRank")
             Rank.HIGH -> ctx.getVectorDrawable("Star", "HighRank")
             Rank.MASTER -> ctx.getDrawableCompat(R.drawable.ic_ui_quest_star_mr)
@@ -208,7 +214,7 @@ object AssetLoader {
         return ctx.getDrawableCompat(KinsectDustRegistry(dustEffect))
     }
 
-    fun loadRarityColor(rarity: Int) : Int {
+    fun loadRarityColor(rarity: Int): Int {
         val colorId = ColorRegistry("rare$rarity") ?: ColorRegistry("rare1")
         return ContextCompat.getColor(ctx, colorId!!)
     }
@@ -236,7 +242,7 @@ object AssetLoader {
     /**
      * Returns the localized element or status name.
      */
-    fun localizeElementStatus(elementStatus: ElementStatus?): String = when(elementStatus) {
+    fun localizeElementStatus(elementStatus: ElementStatus?): String = when (elementStatus) {
         null -> ""
         ElementStatus.FIRE -> ctx.getString(R.string.element_fire)
         ElementStatus.WATER -> ctx.getString(R.string.element_water)
