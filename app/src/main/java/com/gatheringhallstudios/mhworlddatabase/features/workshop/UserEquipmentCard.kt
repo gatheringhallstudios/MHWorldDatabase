@@ -94,6 +94,8 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
         val header = card.card_header
         header.equipment_name.text = tool.name
         header.equipment_icon.setImageDrawable(AssetLoader.loadIconFor(tool))
+        header.defense_value.visibility = View.INVISIBLE
+        header.icon_defense.visibility = View.INVISIBLE
         header.rarity_string.text = when (tool.tool_type) {
             ToolType.MANTLE -> getString(R.string.tool_mantle)
             ToolType.BOOSTER -> getString(R.string.tool_booster)
@@ -421,7 +423,7 @@ class UserEquipmentCard(private val card: ExpandableCardView) {
     }
 
     fun bindEmptyTool() {
-        setEmptyView(R.string.user_equipment_set_no_equipment, R.drawable.ic_equipment_charm_empty)
+        setEmptyView(R.string.user_equipment_set_no_equipment, R.drawable.ic_equipment_mantle_empty)
     }
 
     fun populateSkills(skills: List<SkillLevel>) {

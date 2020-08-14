@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.listitem_weapon.view.slot3
 
 class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
     private val viewModel: UserEquipmentSetViewModel by lazy {
-        ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
+        ViewModelProviders.of(requireActivity()).get(UserEquipmentSetViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,7 +54,7 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
         armor_set_set_bonus_list.removeAllViews()
         weapon_list.removeAllViews()
 
-        armor_set_header.setIconDrawable(context!!.getVectorDrawable("ArmorChest", "rare${userEquipmentSet.maxRarity}"))
+        armor_set_header.setIconDrawable(requireContext().getVectorDrawable("ArmorChest", "rare${userEquipmentSet.maxRarity}"))
 
         armor_set_header.setTitleText(userEquipmentSet.name)
         armor_set_defense_value.text = getString(
@@ -71,6 +71,7 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
 
         populateWeapon(userEquipmentSet.equipment.filter { it.type() == DataType.WEAPON }, showTrueAttackValues)
         populateArmorSetPieces(userEquipmentSet.equipment.filter { it.type() == DataType.ARMOR }.sortedWith(compareBy { (it as UserArmorPiece).armor.armor.armor_type }))
+        populateCharm(userEquipmentSet.equipment.filter { it.type() == DataType.CHARM})
         populateTools(userEquipmentSet.equipment.filter { it.type() == DataType.TOOL }.sortedBy { (it as UserTool).orderId })
         populateArmorSkills(userEquipmentSet.skills)
         populateArmorSetBonuses(userEquipmentSet.setBonuses)
@@ -136,7 +137,7 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
                     R.drawable.ic_ui_affinity,
                     affinityValue)
 
-            affinityView.labelView.setTextColor(ContextCompat.getColor(context!!, when {
+            affinityView.labelView.setTextColor(ContextCompat.getColor(requireContext(), when {
                 weapon.affinity > 0 -> R.color.textColorGreen
                 else -> R.color.textColorRed
             }))
@@ -153,7 +154,7 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
                     defenseValue
             )
 
-            defenseView.labelView.setTextColor(ContextCompat.getColor(context!!, when {
+            defenseView.labelView.setTextColor(ContextCompat.getColor(requireContext(), when {
                 weapon.defense > 0 -> R.color.textColorGreen
                 else -> R.color.textColorRed
             }))
@@ -235,6 +236,29 @@ class WorkshopSummaryFragment : androidx.fragment.app.Fragment() {
 
             armor_set_piece_list.addView(view)
         }
+    }
+
+    private fun populateCharm(userCharms: List<UserEquipment>) {
+        if (userCharms.isNullOrEmpty()) return // Do nothing
+
+        val charm = (userCharms.first() as UserCharm).charm
+        val view = layoutInflater.inflate(R.layout.listitem_armorset_armor, armor_set_piece_list, false)
+
+        view.armor_name.text = charm.charm.name
+        view.armor_icon.setImageDrawable(AssetLoader.loadIconFor(charm.charm))
+
+        view.icon_defense.visibility = View.INVISIBLE
+        view.defense_value.visibility = View.INVISIBLE
+        view.icon_slots.visibility = View.INVISIBLE
+        view.slot1.visibility = View.INVISIBLE
+        view.slot2.visibility = View.INVISIBLE
+        view.slot3.visibility = View.INVISIBLE
+
+        view.setOnClickListener {
+            getRouter().navigateCharmDetail(charm.charm.id)
+        }
+
+        armor_set_piece_list.addView(view)
     }
 
     private fun populateTools(tools: List<UserEquipment>) {

@@ -72,7 +72,7 @@ object AssetLoader {
 
     fun loadIconFor(tool: ToolBase): Drawable? {
         return ctx.getVectorDrawable(when (tool.tool_type) {
-            ToolType.MANTLE -> "Mantle"
+            ToolType.MANTLE -> "ToolMantle"
             ToolType.BOOSTER -> "Booster"
         }, tool.icon_color)
     }

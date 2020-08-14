@@ -3,13 +3,13 @@ package com.gatheringhallstudios.mhworlddatabase.features.tools.detail
 import android.app.Application
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
+import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.assets.SlotEmptyRegistry
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Tool
@@ -49,7 +49,7 @@ class ToolDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val toolId = arguments!!.getInt(ARG_TOOL_ID)
+        val toolId = requireArguments().getInt(ARG_TOOL_ID)
         viewModel.loadTool(toolId, AppSettings.dataLocale)
         viewModel.tool.observe(viewLifecycleOwner, Observer(::populateTool))
     }
@@ -58,7 +58,7 @@ class ToolDetailFragment : androidx.fragment.app.Fragment() {
         inflater.inflate(R.menu.main_bookmarkable, menu)
         val itemData = viewModel.tool.value
         if (itemData != null && BookmarksFeature.isBookmarked(itemData)) {
-            menu.findItem(R.id.action_toggle_bookmark).icon = (context!!.getDrawableCompat(R.drawable.ic_sys_bookmark_on))
+            menu.findItem(R.id.action_toggle_bookmark).icon = (requireContext().getDrawableCompat(R.drawable.ic_sys_bookmark_on))
         }
     }
 
@@ -68,31 +68,31 @@ class ToolDetailFragment : androidx.fragment.app.Fragment() {
         super.onOptionsItemSelected(item)
         return if (id == R.id.action_toggle_bookmark) {
             BookmarksFeature.toggleBookmark(viewModel.tool.value)
-            activity!!.invalidateOptionsMenu()
+            requireActivity().invalidateOptionsMenu()
             true
         } else false
     }
 
     private fun populateTool(toolData: Tool?) {
-        if (toolData == null) return;
+        if (toolData == null) return
         setActivityTitle(toolData.name)
 
         //Rerender the menu bar because we are 100% sure we have the tool data now
-        activity!!.invalidateOptionsMenu()
+        requireActivity().invalidateOptionsMenu()
 
         tool_header.setTitleText(toolData.name)
         tool_header.setSubtitleText(when (toolData.tool_type) {
-            ToolType.MANTLE -> context!!.getString(R.string.tool_mantle)
-            ToolType.BOOSTER -> context!!.getString(R.string.tool_booster)
+            ToolType.MANTLE -> requireContext().getString(R.string.tool_mantle)
+            ToolType.BOOSTER -> requireContext().getString(R.string.tool_booster)
         })
-        tool_header.setIconDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_question_mark))
+        tool_header.setIconDrawable(AssetLoader.loadIconFor(toolData))
 
         effect_duration_value.text = if (toolData.duration_upgraded != null) String.format("%d (%d)",
                 toolData.duration, toolData.duration_upgraded) else toolData.duration.toString()
         recharge_time_value.text = toolData.recharge.toString()
 
         val slotImages = toolData.slots.map {
-            this.context!!.getDrawableCompat(SlotEmptyRegistry(it))
+            this.requireContext().getDrawableCompat(SlotEmptyRegistry(it))
         }
         slot1.setImageDrawable(slotImages[0])
         slot2.setImageDrawable(slotImages[1])
