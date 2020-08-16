@@ -20,7 +20,7 @@ private const val SEARCH_FILTER = "SEARCH_FILTER"
 class UniversalSearchFragment : RecyclerViewFragment() {
 
     private val activityViewModel by lazy {
-        ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
+        ViewModelProviders.of(requireActivity()).get(MainActivityViewModel::class.java)
     }
 
     private val searchViewModel by lazy {
@@ -44,7 +44,7 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         }
 
         // add decorator
-        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
+        recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(requireContext())))
 
         // open up the search menu (if not open) if we're on this page
         // If the user hit back and returned to this page, we need to open it again
@@ -52,12 +52,12 @@ class UniversalSearchFragment : RecyclerViewFragment() {
         (activity as MainActivity).updateSearchView(searchViewModel.searchFilter)
 
         // If the activity filter changes, update the fragment viewmodel
-        activityViewModel.filter.observe(this, Observer {
+        activityViewModel.filter.observe(viewLifecycleOwner, Observer {
             searchViewModel.searchData(it)
         })
 
         // If the search results have a value or changed, show them.
-        searchViewModel.searchResults.observe(this, Observer {
+        searchViewModel.searchResults.observe(viewLifecycleOwner, Observer {
             if (it != null) adapter.bindSearchResults(it)
         })
     }
