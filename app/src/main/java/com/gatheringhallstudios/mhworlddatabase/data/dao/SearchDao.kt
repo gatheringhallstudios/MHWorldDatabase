@@ -53,6 +53,10 @@ abstract class SearchDao {
         loadAllKinsectsSync(AppSettings.dataLocale)
     }
 
+    private val toolsDataCache = CachedValue(timeout) {
+        loadAllToolsSync(AppSettings.dataLocale)
+    }
+
     fun searchLocations(searchFilter: String): List<Location> {
         val filter = SearchFilter(searchFilter)
         return locationDataCache.get().filter { filter.matches(it.name) }
@@ -101,6 +105,11 @@ abstract class SearchDao {
     fun searchKinsects(searchFilter: String): List<Kinsect> {
         val filter = SearchFilter(searchFilter)
         return kinsectDataCache.get().filter { filter.matches(it.name) }
+    }
+
+    fun searchTools(searchFilter: String): List<ToolBase> {
+        val filter = SearchFilter(searchFilter)
+        return toolsDataCache.get().filter { filter.matches(it.name) }
     }
 
     // All queries for search are below. Currently, it loads the entire table.
@@ -196,4 +205,14 @@ abstract class SearchDao {
         ORDER BY kt.name ASC
     """)
     abstract fun loadAllKinsectsSync(langId: String): List<Kinsect>
+
+    @Query("""
+        SELECT t.id, order_id, icon_color, name, name_base, description, tool_type
+        FROM tool t
+            JOIN tool_text tt
+                ON tt.id = t.id        
+        WHERE lang_id = :langId          
+        ORDER BY t.order_id ASC
+    """)
+    abstract fun loadAllToolsSync(langId: String): List<ToolBase>
 }

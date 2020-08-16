@@ -30,9 +30,20 @@ class SearchResultAdapter: BasicListDelegationAdapter<Any>(SimpleUniversalBinder
         items.addAll(results.weapons.map(::createWeaponBinder))
         items.addAll(results.quests.map(::createQuestBinder))
         items.addAll(results.kinsects.map(::createKinsectBinder))
+        items.addAll(results.tools.map(::createToolBinder))
 
         this.items = items
         notifyDataSetChanged()
+    }
+}
+
+fun createToolBinder(tool: ToolBase) = createSimpleUniversalBinder { ctx ->
+    val icon = AssetLoader.loadIconFor(tool)
+    val name = tool.name
+    val typeString = ctx.getString(R.string.type_location)
+
+    SimpleUniversalBinding(name, typeString, IconType.EMBELLISHED, icon) {
+        it.getRouter().navigateToolDetail(tool.id)
     }
 }
 

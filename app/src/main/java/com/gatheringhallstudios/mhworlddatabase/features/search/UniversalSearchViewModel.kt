@@ -19,7 +19,8 @@ class SearchResults(
         val items: List<ItemBase> = emptyList(),
         val weapons: List<WeaponBase> = emptyList(),
         val quests: List<QuestBase> = emptyList(),
-        val kinsects: List<Kinsect> = emptyList()
+        val kinsects: List<Kinsect> = emptyList(),
+        val tools: List<ToolBase> = emptyList()
 )
 
 class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
@@ -90,7 +91,8 @@ class UniversalSearchViewModel(app: Application) : AndroidViewModel(app) {
                 items = dao.searchItems(filterStr),
                 weapons = dao.searchWeapons(filterStr),
                 quests = dao.searchQuests(filterStr),
-                kinsects = dao.searchKinsects(filterStr)
+                kinsects = dao.searchKinsects(filterStr),
+                tools = dao.searchTools(filterStr)
         )
     }
 }
