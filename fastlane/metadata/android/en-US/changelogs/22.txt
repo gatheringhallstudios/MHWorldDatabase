@@ -1,0 +1,4 @@
+ - Added Alatreon and Frostfang Barioth data
+ - Added Tools section
+ - Added support for Tools in the Workshop
+ - Weapons can now be sorted by element/status

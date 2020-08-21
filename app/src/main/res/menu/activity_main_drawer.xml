@@ -45,6 +45,10 @@
             android:icon="@xml/ic_equipment_charm_base"
             android:title="@string/title_charms" />
         <item
+            android:id="@+id/toolListDestination"
+            android:icon="@drawable/ic_equipment_mantle_base"
+            android:title="@string/title_tools" />
+        <item
             android:id="@+id/kinsectTreeDestination"
             android:icon="@drawable/ic_ui_kinsect_white"
             android:title="@string/title_kinsects" />
@@ -52,10 +56,6 @@
             android:id="@+id/locationListDestination"
             android:icon="@drawable/ic_ui_map"
             android:title="@string/title_locations" />
-        <item
-            android:id="@+id/toolListDestination"
-            android:icon="@drawable/ic_ui_question_mark_white"
-            android:title="@string/title_tools" />
         <item
             android:id="@+id/bookmarksListDestination"
             android:icon="@drawable/ic_ui_bookmark"
