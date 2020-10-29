@@ -8,6 +8,13 @@ The project's Trello board, containing todo's and bugs, is available [here](http
 
 If you wish to chat with us, we also have a [discord server](https://discord.gg/k5rmEWh)
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/com.gatheringhallstudios.mhworlddatabase/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt="Get it on Google Play"
+     height="80">](https://play.google.com/store/apps/details?id=com.gatheringhallstudios.mhworlddatabase)
+
 ## Build instructions
 
 - Install Android Studio, and use it to open this project directory
