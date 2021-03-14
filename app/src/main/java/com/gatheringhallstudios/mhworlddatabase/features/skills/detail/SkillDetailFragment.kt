@@ -113,10 +113,10 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
         skill_label.setTitleText(skillTreeFull.name)
         skill_label.setDescriptionText(skillTreeFull.description)
         skill_label.removeDecorator()
-        populateDescriptions(skillTreeFull.skills)
+        populateDescriptions(skillTreeFull.skills, skillTreeFull.max_level - skillTreeFull.secret)
     }
 
-    private fun populateDescriptions(skills: List<Skill>) {
+    private fun populateDescriptions(skills: List<Skill>, secretThreshold: Int) {
         if (skill_level_descriptions.childCount > 0)
             skill_level_descriptions.removeAllViews()
 
@@ -129,6 +129,10 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
             val view = layoutInflater.inflate(R.layout.listitem_skill_description, skill_level_descriptions, false)
             view.level_text.text = getString(R.string.level_short_qty, i + 1)
             view.level_description.text = skill.description
+
+            if (i >= secretThreshold) {
+                view.level_icon_secret.visibility = View.VISIBLE
+            }
 
             skill_level_descriptions.addView(view)
         }
