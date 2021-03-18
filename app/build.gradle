@@ -23,8 +23,8 @@ android {
     defaultConfig {
         applicationId "com.gatheringhallstudios.mhworlddatabase"
         minSdkVersion 19
-        targetSdkVersion 28
         versionCode 22
+        targetSdkVersion 30
         versionName "2.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
