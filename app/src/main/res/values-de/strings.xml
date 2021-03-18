@@ -479,7 +479,8 @@
     <string name="tab_workshop_builder_summary">Zusammenfassung</string>
     <string name="tab_workshop_builder_equipment">Ausrüstung</string>
 
-    <string name="user_equipment_set_new_set">+ Erstelle ein Set</string>
+    <string name="user_equipment_set_new_set">Neues Set</string>
+    <string name="user_equipment_set_create_set">+ Erstelle ein Set</string>
     <string name="user_equipment_set_no_equipment">Keine Ausrüstung</string>
     <string name="user_equipment_set_no_decoration">Keine Dekoration</string>
     <string name="user_equipment_set_no_skill">Keine Fähigkeiten</string>

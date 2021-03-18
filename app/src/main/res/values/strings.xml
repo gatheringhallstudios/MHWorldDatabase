@@ -479,7 +479,8 @@
     <string name="tab_workshop_builder_summary">Summary</string>
     <string name="tab_workshop_builder_equipment">Equipment</string>
 
-    <string name="user_equipment_set_new_set">+ Create a Set</string>
+    <string name="user_equipment_set_new_set">New Set</string>
+    <string name="user_equipment_set_create_set">+ Create a Set</string>
     <string name="user_equipment_set_no_equipment">No Equipment</string>
     <string name="user_equipment_set_no_decoration">No decoration</string>
     <string name="user_equipment_set_no_skill">No skill</string>

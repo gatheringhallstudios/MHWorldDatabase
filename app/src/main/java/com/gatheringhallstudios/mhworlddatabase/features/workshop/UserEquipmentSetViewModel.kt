@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
+import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.data.AppDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -98,7 +99,7 @@ class UserEquipmentSetViewModel(application: Application) : AndroidViewModel(app
     fun createEquipmentSet(): UserEquipmentSet {
         return runBlocking {
             val set = withContext(Dispatchers.IO) {
-                val newId = appDao.createUserEquipmentSet("New Set")
+                val newId = appDao.createUserEquipmentSet(getApplication<Application>().resources.getString(R.string.user_equipment_set_new_set))
                 convertEquipmentSetIdToEquipmentSet(appDao.loadUserEquipmentSetIds(newId.toInt()))
             }
             _activeUserEquipmentSet.value = set

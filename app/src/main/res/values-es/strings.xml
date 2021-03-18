@@ -480,6 +480,7 @@
     <string name="tab_workshop_builder_summary">Resument</string>
     <string name="tab_workshop_builder_equipment">Equipamiento</string>
 
+    <string name="user_equipment_set_new_set">Nuevo Set</string>
     <string name="user_equipment_set_create_set">+ Crea un Set</string>
     <string name="user_equipment_set_no_equipment">Sin Equipmiento</string>
     <string name="user_equipment_set_no_decoration">Sin decoracion</string>
