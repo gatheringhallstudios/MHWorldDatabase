@@ -1,0 +1,5 @@
+ - Added Fatalis data
+ - Added ALL missing data for DLC monsters and quests
+ - Added UI translations for German and Spanish
+
+ Special thanks to everyone in our Discord channel who helped us get to DATA-COMPLETE!

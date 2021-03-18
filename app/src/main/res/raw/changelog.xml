@@ -1,5 +1,17 @@
 <changelog>
     <release
+        versionCode="23"
+        versionName="Version 2.1.1">
+        <info>
+            &#9;- Added Fatalis data
+            [br]&#9;- Added ALL missing data for DLC monsters and quests
+            [br]&#9;- Added UI translations for German and Spanish
+        </info>
+        <info>
+            Special thanks to everyone in our Discord channel who helped us get to DATA-COMPLETE!
+        </info>
+    </release>
+    <release
         versionCode="21"
         versionName="Version 2.0.0">
         <info>
