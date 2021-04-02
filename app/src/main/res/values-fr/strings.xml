@@ -1,375 +1,884 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- ############ -->
-    <!-- ## COMMON ## -->
-    <!-- ############ -->
-
-    <!-- This covers strings that are meant to be used across the app -->
-    <string name="app_name">MHWorld Database</string>
-    <string name="app_name_icon">MHWDB</string>
-
-    <string name="action_search">Recherche</string>
-    <string name="action_bookmark">Signet</string>
-
-    <string name="general_no_data">Rien ici, Meowster…</string> <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
-    <string name="general_none">Rien</string> <!-- Empty message for skill/charms subsections -->
-
-    <!-- Rank -->
-    <string name="rank_short_low">LR</string>
-    <string name="rank_short_high">HR</string>
-    <string name="rank_short_all">ANY</string> <!-- null rank -->
-    <string name="rank_low">Low</string>
-    <string name="rank_high">High</string>
-    <string name="rank_full_low">Low Rank</string>
-    <string name="rank_full_high">High Rank</string>
-
-    <!-- Common Formatted Strings -->
-    <string name="format_quantity_none">%1$d</string> <!-- Example: 1 -->
-    <string name="format_quantity_x">x %1$d</string> <!-- Example: x 2 -->
-    <string name="format_rarity">Rareté %1$d</string> <!-- Example: Rarity 2 -->
-    <string name="format_plus">%1$+d</string> <!-- Example: +5 -->
-    <string name="format_percentage">%1$s%%</string> <!-- Example: 20%-->
-    <string name="format_plus_percentage">%1$+d%%</string> <!-- Example: +20%-->
-
-    <!-- Ailments -->
-    <string name="ailment_roar_small">Rugissement (petit)</string>
-    <string name="ailment_roar_large">Rugissement (large)</string>
-    <string name="ailment_roar_extreme">Rugissement (extrême)</string>
-    <string name="ailment_wind_small">Souffle de l\'air (petit)</string>
-    <string name="ailment_wind_large">Souffle de l\'air (large)</string>
-    <string name="ailment_wind_extreme">Souffle de l\'air (extrême)</string>
-    <string name="ailment_tremor_small">Tremblement (petit)</string>
-    <string name="ailment_tremor_large">Tremblement (large)</string>
-    <string name="ailment_tremor_extreme">Tremblement (extrême)</string>
-    <string name="ailment_defensedown">Défense basse</string>
-    <string name="ailment_fireblight">Fléau-Feu</string>
-    <string name="ailment_waterblight">Fléau-Eau</string>
-    <string name="ailment_thunderblight">Fléau-Foudre</string>
-    <string name="ailment_iceblight">Fléau-Glace</string>
-    <string name="ailment_dragonblight">Fléau-Dragon</string>
-    <string name="ailment_blastblight">Fléau-Explosion</string>
-    <string name="ailment_poison">Poison</string>
-    <string name="ailment_sleep">Fatigue</string>
-    <string name="ailment_paralysis">Paralysie</string>
-    <string name="ailment_bleed">Hémorragie</string>
-    <string name="ailment_stun">Étourdissement</string>
-    <string name="ailment_mud">Boue</string>
-    <string name="ailment_effluvia">Effluvia</string>
-
-    <!-- Insect glaive extract -->
-    <string name="extract_orange">Orange</string>
-    <string name="extract_red">Rouge</string>
-    <string name="extract_white">Blanc</string>
-    <string name="extract_green">Vert</string>
-    <string name="extract_orange_abbr">ORN</string>
-    <string name="extract_red_abbr">RED</string>
-    <string name="extract_white_abbr">WHT</string>
-    <string name="extract_green_abbr">GRN</string>
-
-    <!-- Section Headers -->
-    <!-- These aren't tied to a particular screen so they can be used anywhere -->
-    <string name="header_habitat">Habitat</string>
-    <string name="header_weakness">Faiblesse</string>
-    <string name="header_ailments">Maladies</string>
-    <string name="header_hitzone_physical">Physique</string>
-    <string name="header_hitzone_elemental">Élémentaire</string>
-    <string name="header_break">Cassures</string>
-    <string name="header_crafting">Artisanat</string>
-    <string name="header_gathering">Gathering</string>
-    <string name="header_rewards">Récompenses</string>
-    <string name="header_armor">Armure</string>
-    <string name="header_charms">Charmes</string>
-    <string name="header_weapons">Armes</string>
-    <string name="header_decorations">Décorations</string>
-    <string name="header_required_materials">Matériaux Requis</string>
-    <string name="header_required_materials_upgrade">Matériaux Requis (Améliorer)</string>
-    <string name="header_required_materials_craft">Matériaux Requis (Artisanat)</string>
-    <string name="header_skills">Compétences</string>
-    <string name="header_set_bonuses">Bonus d\'ensemble</string>
-    <string name="header_skill">Compétence</string>
-    <string name="header_drop">Drop</string>
-    <string name="header_upgrade_from">Amélioration de:</string>
-    <string name="header_components">Composants</string>
-    <string name="header_armor_set_pieces">Pièces d\'ensemble d\'armure</string>
-    <string name="header_armor_set_skills">Compétences d\'ensemble d\'armure</string>
-
-    <!-- ####################### -->
-    <!-- ## Settings and Meta ## -->
-    <!-- ####################### -->
-
-    <string name="title_about">À Propos</string>
-    <string name="title_settings">Paramètres</string>
-    <string name="title_changelog">Changelog</string>
-    <string name="label_whats_new">Quoi d\'neuf !</string>
-    <string name="label_rate_app">NOTEZ L\'APPLI !</string>
-    <string name="action_ok">OK</string>
-    <string name="preference_data_language">Langage de l\'application (BETA / INCOMPLÈTE)</string>
-    <string name="preference_data_language_description">
-        Show names and descriptions using %s.
-        \nChanging this will restart the app.
-    </string>
-    <string name="preference_language_default">Défaut</string>
-
-    <!-- ################### -->
-    <!-- ## FEATURE MENUS ## -->
-    <!-- ################### -->
-
-
-    <!-- ############## -->
-    <!-- ## Monsters ## -->
-    <!-- ############## -->
-    <string name="title_monster_list">Monstres</string> <!-- Feature name used in the action bar on top -->
-
-    <!-- Tab Headers -->
-    <string name="tab_monsters_list_small">Petit</string>
-    <string name="tab_monsters_list_large">Large</string>
-    <string name="tab_monsters_detail_summary">Summary</string>
-    <string name="tab_monsters_detail_damage">Dommages</string>
-    <string name="tab_monsters_detail_rewards_high_rank">High-Rank</string>
-    <string name="tab_monsters_detail_rewards_low_rank">Low-Rank</string>
-
-    <!-- ################ -->
-    <!-- ## ITEMS MENU ## -->
-    <!-- ################ -->
-
-    <string name="title_item_list">Objets</string> <!-- Feature name used in the action bar on top -->
-
-    <!-- Tab Headers -->
-    <string name="tab_item_list_items">Objets</string>
-    <string name="tab_item_list_materials">Matériaux</string>
-    <string name="tab_item_list_ammo">Munitions</string>
-    <string name="tab_item_list_misc">Divers</string>
-    <string name="tab_item_detail_summary">Résumé</string>
-    <string name="tab_item_detail_usage">Utilisation</string>
-    <string name="tab_item_detail_acquisition">Obtention</string>
-
-    <!-- General Strings -->
-    <string name="item_price_buy">Achat</string>
-    <string name="item_price_sell">Vente</string>
-    <string name="item_capacity_carry">Carry</string>
-    <string name="item_rarity">Rareté</string>
-
-    <!-- ######################## -->
-    <!-- ## ITEM CRAFTING MENU ## -->
-    <!-- ######################## -->
-
-    <string name="item_crafting_list_title">Confection d\'objet</string><!-- Feature name used in the action bar on top -->
-
-    <!-- General Strings -->
-    <string name="item_crafting_yield">\x %1$d</string>
-    <string name="item_crafting_source_condition_reward">%1$s %2$s</string>
-
-    <!-- ################# -->
-    <!-- ## WEAPON MENU ## -->
-    <!-- ################# -->
-
-    <string name="weapon_final_only">Final Only</string>
-    <string name="weapon_final_upgrades">Final</string>
-
-    <!-- Weapon List Entries -->
-    <string name="title_weapons">Armes</string>
-    <string name="title_great_sword">Grande épée</string>
-    <string name="title_long_sword">Épée longue</string>
-    <string name="title_sword_and_shield">Épée et bouclier</string>
-    <string name="title_dual_blades">Lames doubles</string>
-    <string name="title_hammer">Marteau</string>
-    <string name="title_hunting_horn">Corne de chasse</string>
-    <string name="title_lance">Lance</string>
-    <string name="title_gunlance">Lancecanon</string>
-    <string name="title_switch_axe">Morpho-hache</string>
-    <string name="title_charge_blade">Volto-hache</string>
-    <string name="title_insect_glaive">Insectoglaive</string>
-    <string name="title_light_bowgun">Fusarbalette Léger</string>
-    <string name="title_heavy_bowgun">Fusarbalette Lourd</string>
-    <string name="title_bow">Arc</string>
-
-    <!-- Tab Headers -->
-    <string name="tab_weapon_detail">Détail</string>
-    <string name="tab_weapon_tree">Famille</string>
-
-    <!-- General Strings -->
-    <string name="weapon_attack">Attaque</string>
-    <string name="weapon_sharpness">Tranchant</string>
-    <string name="weapon_element">Élément</string>
-    <string name="weapon_element_none">Rien</string>
-    <string name="weapon_defense">Défense</string>
-    <string name="weapon_affinity">Affinité</string>
-    <string name="weapon_handicraft">(Avec Handicraft)</string>
-    <string name="weapon_elderseal">Elderseal</string>
-    <string name="weapon_elderseal_none">None</string>
-    <string name="weapon_elderseal_low">Faible</string>
-    <string name="weapon_elderseal_average">Moyen</string>
-    <string name="weapon_elderseal_high">Élevé</string>
-
-    <string name="weapon_blade_phial_type">Phial Type</string>
-    <string name="weapon_phial_exhaust">Exhaust</string>
-    <string name="weapon_phial_power">Puissance</string>
-    <string name="weapon_phial_poison">Poison</string>
-    <string name="weapon_phial_dragon">Dragon</string>
-    <string name="weapon_phial_power_element">Force d\'élement</string>
-    <string name="weapon_phial_paralysis">Paralysie</string>
-    <string name="weapon_phial_impact">Impact</string>
-
-    <string name="weapon_kinsect_bonus">Bonus Kinsect</string>
-    <string name="weapon_kinsect_bonus_sever">Sever</string>
-    <string name="weapon_kinsect_bonus_speed">Vitesse</string>
-    <string name="weapon_kinsect_bonus_element">Élément</string>
-    <string name="weapon_kinsect_bonus_health">Vie</string>
-    <string name="weapon_kinsect_bonus_stamina">Endurance</string>
-    <string name="weapon_kinsect_bonus_blunt">Blunt</string>
-
-    <string name="weapon_gunlance_shelling">Shelling</string>
-    <string name="weapon_gunlance_shelling_long">Long</string>
-    <string name="weapon_gunlance_shelling_normal">Normal</string>
-    <string name="weapon_gunlance_shelling_wide">Wide</string>
-
-    <string name="weapon_hunting_horn_notes">Notes</string>
-    <string name="weapon_hunting_horn_melodies">Melodies</string>
-    <string name="weapon_hunting_horn_effect1">Effet 1</string>
-    <string name="weapon_hunting_horn_effect2">Effet 2</string>
-    <string name="weapon_hunting_horn_duration">Durée</string>
-    <string name="weapon_hunting_horn_extension">Extension</string>
-
-    <string name="weapon_bow_coatings">Fioles</string>
-    <string name="weapon_bow_coatings_paralysis">Para</string>
-    <string name="weapon_bow_coatings_sleep">Fatigue</string>
-    <string name="weapon_bow_coatings_power">Puissance</string>
-    <string name="weapon_bow_coatings_poison">Poison</string>
-    <string name="weapon_bow_coatings_close_range">Close</string>
-    <string name="weapon_bow_coatings_blast">Étourdissement</string>
-
-    <string name="weapon_bowgun_deviation">Déviation</string>
-    <string name="weapon_bowgun_special_ammo">Munitions spéciales</string>
-    <string name="weapon_bowgun_ammo_types">Types de munitions</string>
-    <string name="weapon_bowgun_ammo_normal">Normale %1$d</string>
-    <string name="weapon_bowgun_ammo_pierce">Perforante %1$d</string>
-    <string name="weapon_bowgun_ammo_spread">Grenaille %1$d</string>
-    <string name="weapon_bowgun_ammo_sticky">Antiblindage %1$d</string>
-    <string name="weapon_bowgun_ammo_cluster">Fragmentation %1$d</string>
-    <string name="weapon_bowgun_ammo_recover">Guérison %1$d</string>
-    <string name="weapon_bowgun_ammo_poison">Toxique %1$d</string>
-    <string name="weapon_bowgun_ammo_paralysis">Paralysante %1$d</string>
-    <string name="weapon_bowgun_ammo_sleep">Somnifère %1$d</string>
-    <string name="weapon_bowgun_ammo_exhaust">Léthargique %1$d</string>
-    <string name="weapon_bowgun_ammo_flaming">Incendiaire</string>
-    <string name="weapon_bowgun_ammo_thunder">Foudre</string>
-    <string name="weapon_bowgun_ammo_dragon">Dragon</string>
-    <string name="weapon_bowgun_ammo_water">Aquatique</string>
-    <string name="weapon_bowgun_ammo_freeze">Cryogénique</string>
-    <string name="weapon_bowgun_ammo_slicing">Tranchante</string>
-    <string name="weapon_bowgun_ammo_wyvern">Wyvern</string>
-    <string name="weapon_bowgun_ammo_demon">Démon</string>
-    <string name="weapon_bowgun_ammo_armor">Peau de pierre</string>
-    <string name="weapon_bowgun_ammo_tranq">Tranquillisante</string>
-    <string name="weapon_bowgun_ammo_shot_normal">Normal</string>
-    <string name="weapon_bowgun_ammo_shot_rapid_fire">Tir rapide</string>
-    <string name="weapon_bowgun_ammo_shot_auto_reload">Charge automatique</string>
-    <string name="weapon_bowgun_ammo_shot_wyvern">Wyvern</string>
-    <string name="weapon_bowgun_ammo_reload_very_slow">Très lent</string>
-    <string name="weapon_bowgun_ammo_reload_slow">Lent</string>
-    <string name="weapon_bowgun_ammo_reload_normal">Normal</string>
-    <string name="weapon_bowgun_ammo_reload_fast">Rapide</string>
-    <string name="weapon_bowgun_ammo_reload_very_fast">Très rapide</string>
-    <string name="weapon_bowgun_shot_type_rcl">Shot Type+RCL</string>
-    <string name="weapon_bowgun_capacity">CAP</string>
-    <string name="weapon_bowgun_reload">Recharge</string>
-    <string name="weapon_bowgun_recoil">RCL</string>
-
-
-    <!-- ################ -->
-    <!-- ## ARMOR MENU ## -->
-    <!-- ################ -->
-    <string name="title_armor">Armure</string>
-
-    <!-- Tab headers -->
-    <string name="tab_armor_detail">Détail</string>
-    <string name="tab_armor_set_summary">Armor Set Details</string>
-
-    <!-- General Strings -->
-    <string name="armor_defense_value">%1$d - %2$d (%3$d)</string> <!-- Example: 32 - 64 (70) -->
-    <string name="armor_detail_piece_bonus">%1$d-Piece Bonus:</string> <!-- Examples: 1-piece bonus: -->
-    <string name="armor_detail_vs_fire">Res. Feu</string>
-    <string name="armor_detail_vs_water">Res. Eau</string>
-    <string name="armor_detail_vs_thunder">Res. Foudre</string>
-    <string name="armor_detail_vs_ice">Res. Glace</string>
-    <string name="armor_detail_vs_dragon">Res. Dragon</string>
-    <string name="armor_detail_defense">Défense</string>
-    <string name="armor_detail_slots">Emplacements</string>
-
-    <!-- ################# -->
-    <!-- ## SKILLS MENU ## -->
-    <!-- ################# -->
-    <string name="title_skills">Compétences</string>
-
-    <!-- General Strings -->
-    <string name="title_skill_level">Niveau</string>
-    <string name="level_qty">Niveau %1$d</string> <!-- Example: Level 1 -->
-    <string name="level_short_qty">Nv %1$d</string> <!-- Example: Lv 2 -->
-
-    <!-- ###################### -->
-    <!-- ## DECORATIONS MENU ## -->
-    <!-- ###################### -->
-
-    <string name="title_decorations">Décorations</string>
-
-    <!-- General Strings -->
-    <string name="decorations_chance_mysterious">Mysterious Feystone</string>
-    <string name="decorations_chance_glowing">Glowing Feystone</string>
-    <string name="decorations_chance_worn">Worn Feystone</string>
-    <string name="decorations_chance_warped">Warped Feystone</string>
-
-    <!-- ################# -->
-    <!-- ## CHARMS MENU ## -->
-    <!-- ################# -->
-
-    <string name="title_charms">Charmes</string>
-
-    <!-- #################### -->
-    <!-- ## LOCATIONS MENU ## -->
-    <!-- #################### -->
-
-    <string name="title_locations">Emplacement</string>
-
-    <!-- Section Headers -->
-    <string name="header_location_area">Zone %1$d</string>
-    <string name="header_location_base_camps">Campements</string>
-
-    <!-- ################# -->
-    <!-- ## SEARCH MENU ## -->
-    <!-- ################# -->
-
-    <!-- General Strings -->
-    <!-- Simple descriptor for data types (including modified descriptors) -->
-    <string name="type_location">Emplacement</string>
-    <string name="type_monster">Monstre</string>
-    <string name="type_monster_small">Monstre (Petit)</string>
-    <string name="type_monster_large">Monstre (Grand)</string>
-    <string name="type_skilltree">Arbre de compétences</string>
-    <string name="type_decoration">Décoration</string>
-    <string name="type_charm">Charme</string>
-    <string name="type_armor">Armure</string>
-    <string name="type_weapon">Arme</string>
-    <string name="type_item">Objet</string>
-    <string name="type_item_basic">Objet</string>
-    <string name="type_item_material">Matériaux</string>
-    <string name="type_item_ammo">Munitions</string>
-    <string name="type_item_misc">Objets divers</string>
-
-    <!-- #################### -->
-    <!-- ## BOOKMARKS MENU ## -->
-    <!-- #################### -->
-
-    <string name="title_bookmarks">Signet</string>
-
-    <!-- ################ -->
-    <!-- ## ABOUT MENU ## -->
-    <!-- ################ -->
-
-    <string name="about_body">
-        Gathering Hall Studios est une équipe de concepteurs et de développeurs open source
-        dédié à la construction d\'applications de haute qualité pour la série Monster Hunter.
-        Si vous souhaitez rejoindre ou contribuer, nous sommes toujours ouverts.
-        Contactez-nous à contact@gatheringhallstudios.com ou visitez notre Discord.
-    </string>
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <!-- ############ -->
+      
+  <!-- ## COMMON ## -->
+      
+  <!-- ############ -->
+      
+  <!-- This covers strings that are meant to be used across the app -->
+      
+  <string name="app_name">Base de données MHWorld</string>
+      
+  <string name="app_name_icon">MHWDB</string>
+      
+  <string name="action_search">Chercher</string>
+      
+  <string name="action_bookmark">Signet</string>
+      
+  <string name="action_filter">Filtre</string>
+      
+  <string name="action_clear">Enlever</string>
+      
+  <string name="action_cancel">Annuler</string>
+      
+  <string name="action_apply">Appliquer</string>
+      
+  <string name="action_undo">Annuler</string>
+      
+  <string name="general_no_data">Rien ici, Meowster…</string>
+   
+  <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
+      
+  <string name="general_none">Aucun</string>
+   
+  <!-- Empty message for skill/charms subsections -->
+      
+  <!-- Rank -->
+      
+  <string name="rank_title">Rang</string>
+      
+  <string name="rank_short_low">G / D</string>
+      
+  <string name="rank_short_high">HEURE</string>
+      
+  <string name="rank_short_master">M</string>
+      
+  <string name="rank_short_all">TOUT</string>
+   
+  <!-- null rank -->
+      
+  <string name="rank_low">Faible</string>
+      
+  <string name="rank_high">Haut</string>
+      
+  <string name="rank_master">Maître</string>
+      
+  <string name="rank_full_low">Rang inférieur</string>
+      
+  <string name="rank_full_high">Haut rang</string>
+      
+  <string name="rank_full_master">Rang de maître</string>
+      
+  <!-- Common Formatted Strings -->
+      
+  <string name="format_quantity_none">%1$d</string>
+   
+  <!-- Example: 1 -->
+      
+  <string name="format_quantity_x">x %1$d</string>
+   
+  <!-- Example: x 2 -->
+      
+  <string name="format_rarity">Rareté %1$d</string>
+   
+  <!-- Example: Rarity 2 -->
+      
+  <string name="format_plus">%1$+d</string>
+   
+  <!-- Example: +5 -->
+      
+  <string name="format_percentage">%1$s%%</string>
+   
+  <!-- Example: 20%-->
+      
+  <string name="format_percentage_unknown">/??%</string>
+      
+  <string name="format_plus_percentage">%1$+d%%</string>
+   
+  <!-- Example: +20%-->
+      
+  <string name="format_element">%1$d (%2$d max)</string>
+      
+  <string name="format_element_hidden">(%1$d) (%2$d max)</string>
+      
+  <!-- Ailments -->
+      
+  <string name="ailment_roar_small">Rugissement (petit)</string>
+      
+  <string name="ailment_roar_large">Rugissement (grand)</string>
+      
+  <string name="ailment_roar_extreme">Rugissement (extrême)</string>
+      
+  <string name="ailment_wind_small">Pression du vent (petite)</string>
+      
+  <string name="ailment_wind_large">Pression du vent (grande)</string>
+      
+  <string name="ailment_wind_extreme">Pression du vent (extrême)</string>
+      
+  <string name="ailment_tremor_small">Tremblement (petit)</string>
+      
+  <string name="ailment_tremor_large">Tremblement (grand)</string>
+      
+  <string name="ailment_tremor_extreme">Tremblement (extrême)</string>
+      
+  <string name="ailment_defensedown">Défense vers le bas</string>
+      
+  <string name="ailment_fireblight">FireBlight</string>
+      
+  <string name="ailment_waterblight">WaterBlight</string>
+      
+  <string name="ailment_thunderblight">ThunderBlight</string>
+      
+  <string name="ailment_iceblight">IceBlight</string>
+      
+  <string name="ailment_dragonblight">DragonBlight</string>
+      
+  <string name="ailment_blastblight">BlastBlight</string>
+      
+  <string name="ailment_poison">Poison</string>
+      
+  <string name="ailment_sleep">Dormir</string>
+      
+  <string name="ailment_paralysis">Paralysie</string>
+      
+  <string name="ailment_bleed">Saigner</string>
+      
+  <string name="ailment_stun">Étourdir</string>
+      
+  <string name="ailment_mud">Boue</string>
+      
+  <string name="ailment_effluvia">Effluve</string>
+      
+  <!-- Insect glaive extract -->
+      
+  <string name="extract_orange">Orange</string>
+      
+  <string name="extract_red">rouge</string>
+      
+  <string name="extract_white">blanc</string>
+      
+  <string name="extract_green">Vert</string>
+      
+  <string name="extract_orange_abbr">ORN</string>
+      
+  <string name="extract_red_abbr">ROUGE</string>
+      
+  <string name="extract_white_abbr">BLANC</string>
+      
+  <string name="extract_green_abbr">GRN</string>
+      
+  <!-- Elements and statuses -->
+      
+  <string name="element_fire">Feu</string>
+      
+  <string name="element_water">Eau</string>
+      
+  <string name="element_thunder">Tonnerre</string>
+      
+  <string name="element_ice">Glace</string>
+      
+  <string name="element_dragon">Dragon</string>
+      
+  <string name="element_non_elemental">Non élémentaire</string>
+      
+  <string name="status_poison">Poison</string>
+      
+  <string name="status_sleep">Dormir</string>
+      
+  <string name="status_paralysis">Paralysie</string>
+      
+  <string name="status_blast">Détruire</string>
+      
+  <!-- Section Headers -->
+      
+  <!-- These aren't tied to a particular screen so they can be used anywhere -->
+      
+  <string name="header_habitat">Habitat</string>
+      
+  <string name="header_weakness">Faiblesse</string>
+      
+  <string name="header_ailments">Maux</string>
+      
+  <string name="header_hitzone_physical">Physique</string>
+      
+  <string name="header_hitzone_elemental">Élémentaire</string>
+      
+  <string name="header_break">Pauses</string>
+      
+  <string name="header_crafting">Artisanat</string>
+      
+  <string name="header_gathering">Rassemblement</string>
+      
+  <string name="header_rewards">Récompenses de monstre</string>
+      
+  <string name="header_quest_rewards">Récompenses de quête</string>
+      
+  <string name="header_armor">Armure</string>
+      
+  <string name="header_charms">Breloques</string>
+      
+  <string name="header_weapons">Armes</string>
+      
+  <string name="header_decorations">Décorations</string>
+      
+  <string name="header_required_materials">Matériaux nécessaires</string>
+      
+  <string name="header_required_materials_upgrade">Matériel requis (mise à niveau)</string>
+      
+  <string name="header_required_materials_craft">Matériel requis (artisanat)</string>
+      
+  <string name="header_skills">Compétences</string>
+      
+  <string name="header_set_bonuses">Définir des bonus</string>
+      
+  <string name="header_skill">Compétence</string>
+      
+  <string name="header_drop">Laissez tomber</string>
+      
+  <string name="header_upgrade_from">Mises à niveau à partir de:</string>
+      
+  <string name="header_components">Composants</string>
+      
+  <string name="header_armor_set_pieces">Pièces du set d\'armure</string>
+      
+  <string name="header_armor_set_skills">Compétences d\'ensemble d\'armure</string>
+      
+  <string name="header_active_set_bonuses">Bonus d\'ensemble actif</string>
+      
+  <string name="header_active_skills">Compétences actives</string>
+      
+  <string name="header_description">Description</string>
+      
+  <!-- ####################### -->
+      
+  <!-- ## Settings and Meta ## -->
+      
+  <!-- ####################### -->
+      
+  <string name="title_about">À propos</string>
+      
+  <string name="title_settings">Réglages</string>
+      
+  <string name="title_changelog">Journal des modifications</string>
+      
+  <string name="label_whats_new">Quoi de neuf!</string>
+      
+  <string name="label_rate_app">ÉVALUEZ NOTRE APP!</string>
+      
+  <string name="action_ok">OK</string>
+      
+  <string name="preference_data_language">Langue des données</string>
+      
+  <string name="preference_weapons_attack_values">Afficher la véritable attaque de l\'arme</string>
+      
+  <string name="preference_data_language_description">Afficher les noms et les descriptions à l\'aide de %s. \nChanger cela redémarrera l\'application.</string>
+      
+  <string name="preference_weapons_attack_values_description">Le jeu montre des valeurs d\'attaque gonflées. Activez cette option pour afficher les vraies valeurs d\'attaque à la place, qui sont utilisées dans la formule de dégâts.</string>
+      
+  <string name="preference_language_default">Défaut</string>
+      
+  <!-- ################### -->
+      
+  <!-- ## FEATURE MENUS ## -->
+      
+  <!-- ################### -->
+      
+  <!-- ############## -->
+      
+  <!-- ## Monsters ## -->
+      
+  <!-- ############## -->
+      
+  <string name="title_monster_list">Monstres</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_monsters_list_small">Petit</string>
+      
+  <string name="tab_monsters_list_large">Grande</string>
+      
+  <string name="tab_monsters_detail_summary">Résumé</string>
+      
+  <string name="tab_monsters_detail_damage">Dommage</string>
+      
+  <string name="tab_monsters_detail_rewards_master_rank">Rang de maître</string>
+      
+  <string name="tab_monsters_detail_rewards_high_rank">Haut rang</string>
+      
+  <string name="tab_monsters_detail_rewards_low_rank">Rang inférieur</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ITEMS MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_item_list">Articles</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_item_list_items">Articles</string>
+      
+  <string name="tab_item_list_materials">Matériaux</string>
+      
+  <string name="tab_item_list_ammo">Munitions</string>
+      
+  <string name="tab_item_list_misc">Divers</string>
+      
+  <string name="tab_item_detail_summary">Résumé</string>
+      
+  <string name="tab_item_detail_usage">Usage</string>
+      
+  <string name="tab_item_detail_acquisition">Obtention</string>
+      
+  <!-- General Strings -->
+      
+  <string name="item_price_buy">Acheter</string>
+      
+  <string name="item_price_sell">Vendre</string>
+      
+  <string name="item_capacity_carry">Transporter</string>
+      
+  <string name="item_rarity">Rareté</string>
+      
+  <!-- ######################## -->
+      
+  <!-- ## ITEM CRAFTING MENU ## -->
+      
+  <!-- ######################## -->
+      
+  <string name="item_crafting_list_title">Fabrication d\'objets</string>
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- General Strings -->
+      
+  <string name="item_crafting_yield">x %1$d</string>
+      
+  <string name="item_crafting_source_condition_reward">%1$s %2$s</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## WEAPON MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="weapon_final_only">Final</string>
+      
+  <string name="weapon_final_upgrades">Final</string>
+      
+  <!-- Weapon List Entries -->
+      
+  <string name="title_weapons">Armes</string>
+      
+  <string name="title_great_sword">Grande épée</string>
+      
+  <string name="title_long_sword">Épée longue</string>
+      
+  <string name="title_sword_and_shield">Épée et bouclier</string>
+      
+  <string name="title_dual_blades">Lames doubles</string>
+      
+  <string name="title_hammer">Marteau</string>
+      
+  <string name="title_hunting_horn">Cor de chasse</string>
+      
+  <string name="title_lance">Lance</string>
+      
+  <string name="title_gunlance">Lancer en fusil</string>
+      
+  <string name="title_switch_axe">Commutateur de hache</string>
+      
+  <string name="title_charge_blade">Lame de charge</string>
+      
+  <string name="title_insect_glaive">Insecte Glaive</string>
+      
+  <string name="title_light_bowgun">Bowgun léger</string>
+      
+  <string name="title_heavy_bowgun">Fusil à canon lourd</string>
+      
+  <string name="title_bow">Arc</string>
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_weapon_normal">Normal</string>
+      
+  <string name="tab_weapon_kulve">Kulve</string>
+      
+  <string name="tab_weapon_detail">Détail</string>
+      
+  <string name="tab_weapon_tree">Famille</string>
+      
+  <string name="filter_title_show_only">Montrer seulement</string>
+      
+  <string name="filter_title_sort_by">Trier par</string>
+      
+  <!-- General Strings -->
+      
+  <string name="weapon_attack">Attaque</string>
+      
+  <string name="weapon_attack_true">Attaque (vrai)</string>
+      
+  <string name="weapon_sharpness">Acuité</string>
+      
+  <string name="weapon_element">Élément</string>
+      
+  <string name="weapon_element_none">Aucun</string>
+      
+  <string name="weapon_defense">La défense</string>
+      
+  <string name="weapon_affinity">Affinité</string>
+      
+  <string name="weapon_handicraft">(avec artisanat)</string>
+      
+  <string name="weapon_elderseal">Elderseal</string>
+      
+  <string name="weapon_elderseal_none">Aucun</string>
+      
+  <string name="weapon_elderseal_low">Faible</string>
+      
+  <string name="weapon_elderseal_average">Moyen</string>
+      
+  <string name="weapon_elderseal_high">Haut</string>
+      
+  <string name="weapon_blade_phial_type">Type de fiole</string>
+      
+  <string name="weapon_phial_exhaust">Échappement</string>
+      
+  <string name="weapon_phial_power">Puissance</string>
+      
+  <string name="weapon_phial_poison">Poison</string>
+      
+  <string name="weapon_phial_dragon">Dragon</string>
+      
+  <string name="weapon_phial_power_element">Élément de puissance</string>
+      
+  <string name="weapon_phial_paralysis">Paralysie</string>
+      
+  <string name="weapon_phial_impact">Impacter</string>
+      
+  <string name="weapon_kinsect_bonus">Bonus Kinsect</string>
+      
+  <string name="weapon_kinsect_bonus_sever">Rompre</string>
+      
+  <string name="weapon_kinsect_bonus_speed">Vitesse</string>
+      
+  <string name="weapon_kinsect_bonus_element">Élément</string>
+      
+  <string name="weapon_kinsect_bonus_health">Santé</string>
+      
+  <string name="weapon_kinsect_bonus_stamina">Endurance</string>
+      
+  <string name="weapon_kinsect_bonus_blunt">Cru</string>
+      
+  <string name="weapon_kinsect_bonus_spirit_strength">Esprit/Force</string>
+      
+  <string name="weapon_kinsect_bonus_stamina_health">Endurance/Santé</string>
+      
+  <string name="weapon_gunlance_shelling">Bombardement</string>
+      
+  <string name="weapon_gunlance_shelling_long">Longue</string>
+      
+  <string name="weapon_gunlance_shelling_normal">Normal</string>
+      
+  <string name="weapon_gunlance_shelling_wide">Large</string>
+      
+  <string name="weapon_hunting_horn_notes">Remarques</string>
+      
+  <string name="weapon_hunting_horn_melodies">Mélodies</string>
+      
+  <string name="weapon_hunting_horn_effect1">Effet 1</string>
+      
+  <string name="weapon_hunting_horn_effect2">Effet 2</string>
+      
+  <string name="weapon_hunting_horn_duration">Durée</string>
+      
+  <string name="weapon_hunting_horn_extension">Extension</string>
+      
+  <string name="weapon_bow_coatings">Revêtements</string>
+      
+  <string name="weapon_bow_coatings_paralysis">Para</string>
+      
+  <string name="weapon_bow_coatings_sleep">Dormir</string>
+      
+  <string name="weapon_bow_coatings_power">Puissance</string>
+      
+  <string name="weapon_bow_coatings_poison">Poison</string>
+      
+  <string name="weapon_bow_coatings_close_range">Fermer</string>
+      
+  <string name="weapon_bow_coatings_blast">Détruire</string>
+      
+  <string name="weapon_bowgun_deviation">Déviation</string>
+      
+  <string name="weapon_bowgun_special_ammo">Munitions spéciales</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernblast">Wyvernblast</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernheart">Wyvernheart</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernsnipe">Wyvernsnipe</string>
+      
+  <string name="weapon_bowgun_ammo_types">Types de munitions</string>
+      
+  <string name="weapon_bowgun_ammo_normal">Normal %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_pierce">Percer %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_spread">Spread %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sticky">Sticky %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_cluster">Cluster %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_recover">Récupérer %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_poison">Poison %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_paralysis">Paralysie %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sleep">Dormir %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_exhaust">Échappement %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_flaming">Flamboyant</string>
+      
+  <string name="weapon_bowgun_ammo_thunder">Tonnerre</string>
+      
+  <string name="weapon_bowgun_ammo_dragon">Dragon</string>
+      
+  <string name="weapon_bowgun_ammo_water">L\'eau</string>
+      
+  <string name="weapon_bowgun_ammo_freeze">Geler</string>
+      
+  <string name="weapon_bowgun_ammo_slicing">Tranchage</string>
+      
+  <string name="weapon_bowgun_ammo_wyvern">Wyvern</string>
+      
+  <string name="weapon_bowgun_ammo_demon">Démon</string>
+      
+  <string name="weapon_bowgun_ammo_armor">Armure</string>
+      
+  <string name="weapon_bowgun_ammo_tranq">Tranq</string>
+      
+  <string name="weapon_bowgun_ammo_shot_normal">Normal</string>
+      
+  <string name="weapon_bowgun_ammo_shot_rapid_fire">Rapide</string>
+      
+  <string name="weapon_bowgun_ammo_shot_auto_reload">Rechargement automatique</string>
+      
+  <string name="weapon_bowgun_ammo_shot_wyvern">Wyvern</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_slow">V. Lent</string>
+      
+  <string name="weapon_bowgun_ammo_reload_slow">Lent</string>
+      
+  <string name="weapon_bowgun_ammo_reload_normal">Normal</string>
+      
+  <string name="weapon_bowgun_ammo_reload_fast">Vite</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_fast">V. Rapide</string>
+      
+  <string name="weapon_bowgun_shot_type_rcl">Type + Recul</string>
+      
+  <string name="weapon_bowgun_capacity">CASQUETTE</string>
+      
+  <string name="weapon_bowgun_reload">Recharger</string>
+      
+  <string name="weapon_bowgun_recoil">RCL</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ARMOR MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_armor">Armure</string>
+      
+  <!-- Tab headers -->
+      
+  <string name="tab_armor_detail">Détail</string>
+      
+  <string name="tab_armor_set_summary">Détails de l\'ensemble d\'armure</string>
+      
+  <!-- General Strings -->
+      
+  <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
+   
+  <!-- Example: 32 - 64 (70) -->
+      
+  <string name="armor_detail_piece_bonus">%1$d - Bonus à la pièce:</string>
+   
+  <!-- Examples: 1-piece bonus: -->
+      
+  <string name="armor_detail_vs_fire">Contre. Feu</string>
+      
+  <string name="armor_detail_vs_water">Contre. L\'eau</string>
+      
+  <string name="armor_detail_vs_thunder">Contre. tonnerre</string>
+      
+  <string name="armor_detail_vs_ice">Contre. La glace</string>
+      
+  <string name="armor_detail_vs_dragon">Contre. Dragon</string>
+      
+  <string name="armor_detail_defense">Défense</string>
+      
+  <string name="armor_detail_slots">Machines à sous</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SKILLS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_skills">Compétences</string>
+      
+  <!-- General Strings -->
+      
+  <string name="title_skill_level">Niveau</string>
+      
+  <string name="level_qty">Niveau %1$d</string>
+   
+  <!-- Example: Level 1 -->
+      
+  <string name="level_short_qty">Niv %1$d</string>
+   
+  <!-- Example: Lv 2 -->
+      
+  <!-- ###################### -->
+      
+  <!-- ## DECORATIONS MENU ## -->
+      
+  <!-- ###################### -->
+      
+  <string name="title_decorations">Décorations</string>
+      
+  <!-- General Strings -->
+      
+  <string name="decorations_chance_mysterious">Mystérieuse Feystone</string>
+      
+  <string name="decorations_chance_glowing">Feystone éclatante</string>
+      
+  <string name="decorations_chance_worn">Feystone usé</string>
+      
+  <string name="decorations_chance_warped">Feystone déformée</string>
+      
+  <string name="decorations_chance_ancient">Ancienne Feystone</string>
+      
+  <string name="decorations_chance_carved">Feystone sculpté</string>
+      
+  <string name="decorations_chance_sealed">Feystone scellé</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## CHARMS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_charms">Breloques</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## LOCATIONS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_locations">Emplacements</string>
+      
+  <!-- Section Headers -->
+      
+  <string name="header_location_area">Zone %1$d</string>
+      
+  <string name="header_location_base_camps">Camps de base</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## QUEST MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_quests">Quêtes</string>
+      
+  <string name="quest_category_assigned">Attribué</string>
+      
+  <string name="quest_category_optional">Optionnel</string>
+      
+  <string name="quest_category_event">Événement</string>
+      
+  <string name="quest_category_arena">Arène</string>
+      
+  <string name="quest_category_challenge">Défi</string>
+      
+  <string name="quest_category_special">Affectation spéciale</string>
+      
+  <string name="quest_category_special_abbr">SP</string>
+      
+  <string name="quest_category_combined">%s%s %d★</string>
+      
+  <string name="tab_quest_summary">Résumé</string>
+      
+  <string name="tab_quest_rewards">Récompenses</string>
+      
+  <string name="quest_group">Groupe %s</string>
+      
+  <string name="quest_label_objective">Objectif</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## KINSECT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_kinsects">Kinsects</string>
+      
+  <string name="kinsect_attack_type">Type d\'attaque</string>
+      
+  <string name="kinsect_attack_type_sever">Rompre</string>
+      
+  <string name="kinsect_attack_type_blunt">Cru</string>
+      
+  <string name="kinsect_dust_effect">Effet de poussière</string>
+      
+  <string name="kinsect_dust_effect_poison">Poison</string>
+      
+  <string name="kinsect_dust_effect_paralysis">Paralysie</string>
+      
+  <string name="kinsect_dust_effect_heal">Soigner</string>
+      
+  <string name="kinsect_dust_effect_blast">Détruire</string>
+      
+  <string name="kinsect_power">Puissance</string>
+      
+  <string name="kinsect_speed">Vitesse</string>
+      
+  <string name="kinsect_heal">Soigner</string>
+      
+  <string name="tab_kinsect_detail">Détail</string>
+      
+  <string name="tab_kinsect_tree">Famille</string>
+      
+  <string name="kinsect_final_upgrades">Final</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SEARCH MENU ## -->
+      
+  <!-- ################# -->
+      
+  <!-- General Strings -->
+      
+  <!-- Simple descriptor for data types (including modified descriptors) -->
+      
+  <string name="type_location">Lieu</string>
+      
+  <string name="type_monster">Monstre</string>
+      
+  <string name="type_monster_small">Monstre (petit)</string>
+      
+  <string name="type_monster_large">Monstre (grand)</string>
+      
+  <string name="type_skilltree">Arbre de compétences</string>
+      
+  <string name="type_decoration">Décoration</string>
+      
+  <string name="type_charm">Charme</string>
+      
+  <string name="type_armor">Armure</string>
+      
+  <string name="type_weapon">Arme</string>
+      
+  <string name="type_item">Article</string>
+      
+  <string name="type_item_basic">Article</string>
+      
+  <string name="type_item_material">Matériel</string>
+      
+  <string name="type_item_ammo">Munitions</string>
+      
+  <string name="type_item_misc">Article divers</string>
+      
+  <string name="type_quest">Quête</string>
+      
+  <string name="type_kinsect">Kinsect</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## BOOKMARKS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_bookmarks">Signets</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## TOOLS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_tools">Outils</string>
+      
+  <string name="tool_effect_duration">Durée de l\'effet</string>
+      
+  <string name="tool_effect_recharge_time">Temps de recharge</string>
+      
+  <string name="tool_slots">Machines à sous</string>
+      
+  <string name="tool_type">Taper</string>
+      
+  <string name="tool_mantle">Manteau</string>
+      
+  <string name="tool_booster">Booster</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## USER EQUIPMENT SET MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_workshop">Atelier</string>
+      
+  <string name="title_workshop_armor_selector">Sélecteur d\'armure</string>
+      
+  <string name="title_workshop_charm_selector">Sélecteur de charme</string>
+      
+  <string name="title_workshop_weapon_selector">Sélecteur d\'arme</string>
+      
+  <string name="title_workshop_decoration_selector">Sélecteur de décoration</string>
+      
+  <string name="title_workshop_tool_selector">Sélecteur d\'outils</string>
+      
+  <string name="tab_workshop_builder_summary">Résumé</string>
+      
+  <string name="tab_workshop_builder_equipment">Équipement</string>
+      
+  <string name="user_equipment_set_new_set">Nouvel ensemble</string>
+      
+  <string name="user_equipment_set_create_set">+ Créer un ensemble</string>
+      
+  <string name="user_equipment_set_no_equipment">Aucun équipement</string>
+      
+  <string name="user_equipment_set_no_decoration">Pas de décoration</string>
+      
+  <string name="user_equipment_set_no_skill">Aucune compétence</string>
+      
+  <string name="user_equipment_delete_set">Supprimer l\'ensemble</string>
+      
+  <string name="user_equipment_set_deleted">%1$s a été supprimé</string>
+      
+  <string name="user_equipment_new_set_name">Renommer l\'ensemble</string>
+      
+  <string name="user_equipment_apply">Appliquer</string>
+      
+  <string name="user_equipment_cancel">Annuler</string>
+      
+  <string name="user_equipment_set_filter_name">Nom</string>
+      
+  <string name="user_equipment_set_filter_slot_level">Niveau de l\'emplacement</string>
+      
+  <string name="user_equipment_set_filter_elemental_defense">Défense élémentaire</string>
+      
+  <string name="user_equipment_set_filter_add_skill">Ajouter une nouvelle compétence</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ABOUT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="about_body">Gathering Hall Studios est une équipe open source de concepteurs et de développeurs dédiés à la création d\'applications de haute qualité pour la série Monster Hunter. \n\nSi vous souhaitez rejoindre ou contribuer, nous sommes toujours ouverts. Contactez-nous à contact\@gatheringhallstudios.com ou visitez notre Discord. Vous pouvez également visiter notre Github pour afficher le code source des projets de données d\'application.</string>
+  
 </resources>

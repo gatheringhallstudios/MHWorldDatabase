@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <!-- ############ -->
+      
+  <!-- ## COMMON ## -->
+      
+  <!-- ############ -->
+      
+  <!-- This covers strings that are meant to be used across the app -->
+      
+  <string name="app_name">قاعدة بيانات MHWorld</string>
+      
+  <string name="app_name_icon">MHWDB</string>
+      
+  <string name="action_search">بحث</string>
+      
+  <string name="action_bookmark">المرجعية</string>
+      
+  <string name="action_filter">منقي</string>
+      
+  <string name="action_clear">واضح</string>
+      
+  <string name="action_cancel">يلغي</string>
+      
+  <string name="action_apply">يتقدم</string>
+      
+  <string name="action_undo">الغاء التحميل</string>
+      
+  <string name="general_no_data">لا شيء هنا ، Meowster ...</string>
+   
+  <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
+      
+  <string name="general_none">لا أحد</string>
+   
+  <!-- Empty message for skill/charms subsections -->
+      
+  <!-- Rank -->
+      
+  <string name="rank_title">رتبة</string>
+      
+  <string name="rank_short_low">LR</string>
+      
+  <string name="rank_short_high">الموارد البشرية</string>
+      
+  <string name="rank_short_master">السيد</string>
+      
+  <string name="rank_short_all">أي</string>
+   
+  <!-- null rank -->
+      
+  <string name="rank_low">قليل</string>
+      
+  <string name="rank_high">متوسط</string>
+      
+  <string name="rank_master">يتقن</string>
+      
+  <string name="rank_full_low">مرتبة متدنية</string>
+      
+  <string name="rank_full_high">مرتبة عالية</string>
+      
+  <string name="rank_full_master">رتبة المتميز</string>
+      
+  <!-- Common Formatted Strings -->
+      
+  <string name="format_quantity_none">%1$d</string>
+   
+  <!-- Example: 1 -->
+      
+  <string name="format_quantity_x">× %1$d</string>
+   
+  <!-- Example: x 2 -->
+      
+  <string name="format_rarity">ندرة %1$d</string>
+   
+  <!-- Example: Rarity 2 -->
+      
+  <string name="format_plus">%1$+d</string>
+   
+  <!-- Example: +5 -->
+      
+  <string name="format_percentage">%1$s%%</string>
+   
+  <!-- Example: 20%-->
+      
+  <string name="format_percentage_unknown">؟؟٪</string>
+      
+  <string name="format_plus_percentage">%1$+d%%</string>
+   
+  <!-- Example: +20%-->
+      
+  <string name="format_element">%1$d (%2$d كحد أقصى)</string>
+      
+  <string name="format_element_hidden">(%1$d) (%2$d كحد أقصى)</string>
+      
+  <!-- Ailments -->
+      
+  <string name="ailment_roar_small">الزئير (صغير)</string>
+      
+  <string name="ailment_roar_large">الزئير (كبير)</string>
+      
+  <string name="ailment_roar_extreme">هدير (شديد)</string>
+      
+  <string name="ailment_wind_small">ضغط الرياح (صغير)</string>
+      
+  <string name="ailment_wind_large">ضغط الرياح (كبير)</string>
+      
+  <string name="ailment_wind_extreme">ضغط الرياح (شديد)</string>
+      
+  <string name="ailment_tremor_small">رعاش (صغير)</string>
+      
+  <string name="ailment_tremor_large">رعاش (كبير)</string>
+      
+  <string name="ailment_tremor_extreme">رعاش (شديد)</string>
+      
+  <string name="ailment_defensedown">سقوط الدفاع</string>
+      
+  <string name="ailment_fireblight">اللفحة النارية</string>
+      
+  <string name="ailment_waterblight">ضوء الماء</string>
+      
+  <string name="ailment_thunderblight">ThunderBlight</string>
+      
+  <string name="ailment_iceblight">IceBlight</string>
+      
+  <string name="ailment_dragonblight">دراغونبلايت</string>
+      
+  <string name="ailment_blastblight">بلاستبلايت</string>
+      
+  <string name="ailment_poison">سم</string>
+      
+  <string name="ailment_sleep">نايم</string>
+      
+  <string name="ailment_paralysis">شلل</string>
+      
+  <string name="ailment_bleed">ينزف</string>
+      
+  <string name="ailment_stun">صاعقة</string>
+      
+  <string name="ailment_mud">طين</string>
+      
+  <string name="ailment_effluvia">الروائح</string>
+      
+  <!-- Insect glaive extract -->
+      
+  <string name="extract_orange">البرتقالي</string>
+      
+  <string name="extract_red">أحمر</string>
+      
+  <string name="extract_white">أبيض</string>
+      
+  <string name="extract_green">لون أخضر</string>
+      
+  <string name="extract_orange_abbr">ORN</string>
+      
+  <string name="extract_red_abbr">أحمر</string>
+      
+  <string name="extract_white_abbr">WHT</string>
+      
+  <string name="extract_green_abbr">GRN</string>
+      
+  <!-- Elements and statuses -->
+      
+  <string name="element_fire">إطلاق النار</string>
+      
+  <string name="element_water">ماء</string>
+      
+  <string name="element_thunder">رعد</string>
+      
+  <string name="element_ice">جليد</string>
+      
+  <string name="element_dragon">التنين</string>
+      
+  <string name="element_non_elemental">غير عنصري</string>
+      
+  <string name="status_poison">سم</string>
+      
+  <string name="status_sleep">نايم</string>
+      
+  <string name="status_paralysis">شلل</string>
+      
+  <string name="status_blast">انفجار</string>
+      
+  <!-- Section Headers -->
+      
+  <!-- These aren't tied to a particular screen so they can be used anywhere -->
+      
+  <string name="header_habitat">الموطن</string>
+      
+  <string name="header_weakness">ضعف</string>
+      
+  <string name="header_ailments">الأمراض</string>
+      
+  <string name="header_hitzone_physical">جسدي - بدني</string>
+      
+  <string name="header_hitzone_elemental">عنصري</string>
+      
+  <string name="header_break">فرامل</string>
+      
+  <string name="header_crafting">صياغة</string>
+      
+  <string name="header_gathering">تجمع</string>
+      
+  <string name="header_rewards">مكافآت الوحش</string>
+      
+  <string name="header_quest_rewards">مكافآت كويست</string>
+      
+  <string name="header_armor">درع</string>
+      
+  <string name="header_charms">مفاتن</string>
+      
+  <string name="header_weapons">أسلحة</string>
+      
+  <string name="header_decorations">زينة</string>
+      
+  <string name="header_required_materials">المواد المطلوبة</string>
+      
+  <string name="header_required_materials_upgrade">المواد المطلوبة (ترقية)</string>
+      
+  <string name="header_required_materials_craft">المواد المطلوبة (الحرف اليدوية)</string>
+      
+  <string name="header_skills">مهارات</string>
+      
+  <string name="header_set_bonuses">تعيين المكافآت</string>
+      
+  <string name="header_skill">مهارة</string>
+      
+  <string name="header_drop">قطرة</string>
+      
+  <string name="header_upgrade_from">ترقيات من:</string>
+      
+  <string name="header_components">عناصر</string>
+      
+  <string name="header_armor_set_pieces">قطع مجموعة الدروع</string>
+      
+  <string name="header_armor_set_skills">مهارات تعيين الدروع</string>
+      
+  <string name="header_active_set_bonuses">مكافآت المجموعة النشطة</string>
+      
+  <string name="header_active_skills">المهارات النشطة</string>
+      
+  <string name="header_description">وصف</string>
+      
+  <!-- ####################### -->
+      
+  <!-- ## Settings and Meta ## -->
+      
+  <!-- ####################### -->
+      
+  <string name="title_about">حول</string>
+      
+  <string name="title_settings">إعدادات</string>
+      
+  <string name="title_changelog">التغيير</string>
+      
+  <string name="label_whats_new">ما هو الجديد!</string>
+      
+  <string name="label_rate_app">صنف تطبيقنا!</string>
+      
+  <string name="action_ok">موافق</string>
+      
+  <string name="preference_data_language">لغة البيانات</string>
+      
+  <string name="preference_weapons_attack_values">عرض سلاح الهجوم الحقيقي</string>
+      
+  <string name="preference_data_language_description">عرض الأسماء والأوصاف باستخدام %s. \nسيؤدي تغيير هذا إلى إعادة تشغيل التطبيق.</string>
+      
+  <string name="preference_weapons_attack_values_description">تظهر اللعبة قيم هجوم متضخمة. قم بتمكين هذا لإظهار قيم الهجوم الحقيقية بدلاً من ذلك ، وهي ما يتم استخدامه في صيغة الضرر.</string>
+      
+  <string name="preference_language_default">تقصير</string>
+      
+  <!-- ################### -->
+      
+  <!-- ## FEATURE MENUS ## -->
+      
+  <!-- ################### -->
+      
+  <!-- ############## -->
+      
+  <!-- ## Monsters ## -->
+      
+  <!-- ############## -->
+      
+  <string name="title_monster_list">الوحوش</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_monsters_list_small">صغير</string>
+      
+  <string name="tab_monsters_list_large">كبير</string>
+      
+  <string name="tab_monsters_detail_summary">ملخص</string>
+      
+  <string name="tab_monsters_detail_damage">تلف</string>
+      
+  <string name="tab_monsters_detail_rewards_master_rank">رتبة المتميز</string>
+      
+  <string name="tab_monsters_detail_rewards_high_rank">مرتبة عالية</string>
+      
+  <string name="tab_monsters_detail_rewards_low_rank">مرتبة متدنية</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ITEMS MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_item_list">العناصر</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_item_list_items">العناصر</string>
+      
+  <string name="tab_item_list_materials">المواد</string>
+      
+  <string name="tab_item_list_ammo">ذخيرة</string>
+      
+  <string name="tab_item_list_misc">متفرقات</string>
+      
+  <string name="tab_item_detail_summary">ملخص</string>
+      
+  <string name="tab_item_detail_usage">إستعمال</string>
+      
+  <string name="tab_item_detail_acquisition">الحصول</string>
+      
+  <!-- General Strings -->
+      
+  <string name="item_price_buy">يشتري</string>
+      
+  <string name="item_price_sell">باع</string>
+      
+  <string name="item_capacity_carry">يحمل</string>
+      
+  <string name="item_rarity">ندرة</string>
+      
+  <!-- ######################## -->
+      
+  <!-- ## ITEM CRAFTING MENU ## -->
+      
+  <!-- ######################## -->
+      
+  <string name="item_crafting_list_title">صياغة البند</string>
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- General Strings -->
+      
+  <string name="item_crafting_yield">× %1$d</string>
+      
+  <string name="item_crafting_source_condition_reward">%1$s %2$s</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## WEAPON MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="weapon_final_only">أخير</string>
+      
+  <string name="weapon_final_upgrades">أخير</string>
+      
+  <!-- Weapon List Entries -->
+      
+  <string name="title_weapons">أسلحة</string>
+      
+  <string name="title_great_sword">السيف العظيم</string>
+      
+  <string name="title_long_sword">سيف طويل</string>
+      
+  <string name="title_sword_and_shield">سيف ودرع</string>
+      
+  <string name="title_dual_blades">شفرات مزدوجة</string>
+      
+  <string name="title_hammer">شاكوش</string>
+      
+  <string name="title_hunting_horn">قرن الصيد</string>
+      
+  <string name="title_lance">حربة</string>
+      
+  <string name="title_gunlance">بندقية</string>
+      
+  <string name="title_switch_axe">تبديل الفأس</string>
+      
+  <string name="title_charge_blade">شفرة الشحن</string>
+      
+  <string name="title_insect_glaive">حشرة جلايف</string>
+      
+  <string name="title_light_bowgun">بندقية القوس الخفيفة</string>
+      
+  <string name="title_heavy_bowgun">بندقية القوس الثقيلة</string>
+      
+  <string name="title_bow">ينحني</string>
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_weapon_normal">طبيعي</string>
+      
+  <string name="tab_weapon_kulve">كولفي</string>
+      
+  <string name="tab_weapon_detail">التفاصيل</string>
+      
+  <string name="tab_weapon_tree">عائلة</string>
+      
+  <string name="filter_title_show_only">أظهر فقط</string>
+      
+  <string name="filter_title_sort_by">ترتيب حسب</string>
+      
+  <!-- General Strings -->
+      
+  <string name="weapon_attack">هجوم</string>
+      
+  <string name="weapon_attack_true">هجوم (صحيح)</string>
+      
+  <string name="weapon_sharpness">حدة</string>
+      
+  <string name="weapon_element">جزء</string>
+      
+  <string name="weapon_element_none">لا أحد</string>
+      
+  <string name="weapon_defense">دفاع</string>
+      
+  <string name="weapon_affinity">التقارب</string>
+      
+  <string name="weapon_handicraft">(مع الحرف اليدوية)</string>
+      
+  <string name="weapon_elderseal">إلدرسيل</string>
+      
+  <string name="weapon_elderseal_none">لا أحد</string>
+      
+  <string name="weapon_elderseal_low">قليل</string>
+      
+  <string name="weapon_elderseal_average">متوسط</string>
+      
+  <string name="weapon_elderseal_high">متوسط</string>
+      
+  <string name="weapon_blade_phial_type">نوع فيال</string>
+      
+  <string name="weapon_phial_exhaust">العادم</string>
+      
+  <string name="weapon_phial_power">قوة</string>
+      
+  <string name="weapon_phial_poison">السم</string>
+      
+  <string name="weapon_phial_dragon">التنين</string>
+      
+  <string name="weapon_phial_power_element">عنصر الطاقة</string>
+      
+  <string name="weapon_phial_paralysis">شلل</string>
+      
+  <string name="weapon_phial_impact">تأثير</string>
+      
+  <string name="weapon_kinsect_bonus">مكافأة Kinsect</string>
+      
+  <string name="weapon_kinsect_bonus_sever">قطع</string>
+      
+  <string name="weapon_kinsect_bonus_speed">سرعة</string>
+      
+  <string name="weapon_kinsect_bonus_element">جزء</string>
+      
+  <string name="weapon_kinsect_bonus_health">صحة</string>
+      
+  <string name="weapon_kinsect_bonus_stamina">القدرة على التحمل</string>
+      
+  <string name="weapon_kinsect_bonus_blunt">حاد</string>
+      
+  <string name="weapon_kinsect_bonus_spirit_strength">الروح/القوة</string>
+      
+  <string name="weapon_kinsect_bonus_stamina_health">القدرة على التحمل/الصحة</string>
+      
+  <string name="weapon_gunlance_shelling">قصف</string>
+      
+  <string name="weapon_gunlance_shelling_long">طويل</string>
+      
+  <string name="weapon_gunlance_shelling_normal">طبيعي</string>
+      
+  <string name="weapon_gunlance_shelling_wide">واسع</string>
+      
+  <string name="weapon_hunting_horn_notes">ملاحظات</string>
+      
+  <string name="weapon_hunting_horn_melodies">الألحان</string>
+      
+  <string name="weapon_hunting_horn_effect1">التأثير 1</string>
+      
+  <string name="weapon_hunting_horn_effect2">التأثير 2</string>
+      
+  <string name="weapon_hunting_horn_duration">مدة</string>
+      
+  <string name="weapon_hunting_horn_extension">تمديد</string>
+      
+  <string name="weapon_bow_coatings">الطلاءات</string>
+      
+  <string name="weapon_bow_coatings_paralysis">الفقرة</string>
+      
+  <string name="weapon_bow_coatings_sleep">نايم</string>
+      
+  <string name="weapon_bow_coatings_power">قوة</string>
+      
+  <string name="weapon_bow_coatings_poison">سم</string>
+      
+  <string name="weapon_bow_coatings_close_range">قريب</string>
+      
+  <string name="weapon_bow_coatings_blast">انفجار</string>
+      
+  <string name="weapon_bowgun_deviation">انحراف</string>
+      
+  <string name="weapon_bowgun_special_ammo">الذخيرة الخاصة</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernblast">يفرنبلاست</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernheart">ويفرنهارت</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernsnipe">يفيرنسنيب</string>
+      
+  <string name="weapon_bowgun_ammo_types">أنواع الذخيرة</string>
+      
+  <string name="weapon_bowgun_ammo_normal">عادي %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_pierce">بيرس %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_spread">انتشار %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sticky">ثابت %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_cluster">المجموعة %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_recover">استرداد %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_poison">السم %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_paralysis">شلل %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sleep">النوم %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_exhaust">العادم %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_flaming">المشتعلة</string>
+      
+  <string name="weapon_bowgun_ammo_thunder">رعد</string>
+      
+  <string name="weapon_bowgun_ammo_dragon">التنين</string>
+      
+  <string name="weapon_bowgun_ammo_water">ماء</string>
+      
+  <string name="weapon_bowgun_ammo_freeze">تجميد</string>
+      
+  <string name="weapon_bowgun_ammo_slicing">التقطيع</string>
+      
+  <string name="weapon_bowgun_ammo_wyvern">يفيرن</string>
+      
+  <string name="weapon_bowgun_ammo_demon">شيطان</string>
+      
+  <string name="weapon_bowgun_ammo_armor">درع</string>
+      
+  <string name="weapon_bowgun_ammo_tranq">ترانق</string>
+      
+  <string name="weapon_bowgun_ammo_shot_normal">طبيعي</string>
+      
+  <string name="weapon_bowgun_ammo_shot_rapid_fire">سريعون</string>
+      
+  <string name="weapon_bowgun_ammo_shot_auto_reload">إعادة تحميل تلقائي</string>
+      
+  <string name="weapon_bowgun_ammo_shot_wyvern">يفيرن</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_slow">V. بطيئة</string>
+      
+  <string name="weapon_bowgun_ammo_reload_slow">بطيء</string>
+      
+  <string name="weapon_bowgun_ammo_reload_normal">طبيعي</string>
+      
+  <string name="weapon_bowgun_ammo_reload_fast">سريع</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_fast">V. سريع</string>
+      
+  <string name="weapon_bowgun_shot_type_rcl">اكتب + نكص</string>
+      
+  <string name="weapon_bowgun_capacity">قبعة</string>
+      
+  <string name="weapon_bowgun_reload">إعادة تحميل</string>
+      
+  <string name="weapon_bowgun_recoil">RCL</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ARMOR MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_armor">درع</string>
+      
+  <!-- Tab headers -->
+      
+  <string name="tab_armor_detail">التفاصيل</string>
+      
+  <string name="tab_armor_set_summary">تفاصيل مجموعة الدروع</string>
+      
+  <!-- General Strings -->
+      
+  <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
+   
+  <!-- Example: 32 - 64 (70) -->
+      
+  <string name="armor_detail_piece_bonus">%1$d - قطعة إضافية:</string>
+   
+  <!-- Examples: 1-piece bonus: -->
+      
+  <string name="armor_detail_vs_fire">ضد. إطلاق النار</string>
+      
+  <string name="armor_detail_vs_water">ضد. ماء</string>
+      
+  <string name="armor_detail_vs_thunder">ضد. رعد</string>
+      
+  <string name="armor_detail_vs_ice">ضد. جليد</string>
+      
+  <string name="armor_detail_vs_dragon">ضد. التنين</string>
+      
+  <string name="armor_detail_defense">دفاع</string>
+      
+  <string name="armor_detail_slots">فتحات</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SKILLS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_skills">مهارات</string>
+      
+  <!-- General Strings -->
+      
+  <string name="title_skill_level">مستوى</string>
+      
+  <string name="level_qty">المستوى %1$d</string>
+   
+  <!-- Example: Level 1 -->
+      
+  <string name="level_short_qty">مستوى %1$d</string>
+   
+  <!-- Example: Lv 2 -->
+      
+  <!-- ###################### -->
+      
+  <!-- ## DECORATIONS MENU ## -->
+      
+  <!-- ###################### -->
+      
+  <string name="title_decorations">زينة</string>
+      
+  <!-- General Strings -->
+      
+  <string name="decorations_chance_mysterious">حجر الحجر الغامض</string>
+      
+  <string name="decorations_chance_glowing">متوهجة فيستون</string>
+      
+  <string name="decorations_chance_worn">البالية فيستون</string>
+      
+  <string name="decorations_chance_warped">مشوه فيستون</string>
+      
+  <string name="decorations_chance_ancient">القديمة فيستون</string>
+      
+  <string name="decorations_chance_carved">منحوتة فيستون</string>
+      
+  <string name="decorations_chance_sealed">حجر مختوم</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## CHARMS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_charms">مفاتن</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## LOCATIONS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_locations">المواقع</string>
+      
+  <!-- Section Headers -->
+      
+  <string name="header_location_area">المنطقة %1$d</string>
+      
+  <string name="header_location_base_camps">معسكرات القاعدة</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## QUEST MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_quests">أسئلة</string>
+      
+  <string name="quest_category_assigned">مكلف</string>
+      
+  <string name="quest_category_optional">خياري</string>
+      
+  <string name="quest_category_event">هدف</string>
+      
+  <string name="quest_category_arena">ارينا</string>
+      
+  <string name="quest_category_challenge">تحدي</string>
+      
+  <string name="quest_category_special">مهمة خاصة</string>
+      
+  <string name="quest_category_special_abbr">SP</string>
+      
+  <string name="quest_category_combined">%s%s %d★</string>
+      
+  <string name="tab_quest_summary">ملخص</string>
+      
+  <string name="tab_quest_rewards">المكافآت</string>
+      
+  <string name="quest_group">المجموعة %s</string>
+      
+  <string name="quest_label_objective">هدف</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## KINSECT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_kinsects">الأقارب</string>
+      
+  <string name="kinsect_attack_type">نوع الهجوم</string>
+      
+  <string name="kinsect_attack_type_sever">قطع</string>
+      
+  <string name="kinsect_attack_type_blunt">حاد</string>
+      
+  <string name="kinsect_dust_effect">تأثير الغبار</string>
+      
+  <string name="kinsect_dust_effect_poison">سم</string>
+      
+  <string name="kinsect_dust_effect_paralysis">شلل</string>
+      
+  <string name="kinsect_dust_effect_heal">يشفي</string>
+      
+  <string name="kinsect_dust_effect_blast">انفجار</string>
+      
+  <string name="kinsect_power">قوة</string>
+      
+  <string name="kinsect_speed">سرعة</string>
+      
+  <string name="kinsect_heal">يشفي</string>
+      
+  <string name="tab_kinsect_detail">التفاصيل</string>
+      
+  <string name="tab_kinsect_tree">عائلة</string>
+      
+  <string name="kinsect_final_upgrades">أخير</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SEARCH MENU ## -->
+      
+  <!-- ################# -->
+      
+  <!-- General Strings -->
+      
+  <!-- Simple descriptor for data types (including modified descriptors) -->
+      
+  <string name="type_location">موقع</string>
+      
+  <string name="type_monster">مسخ</string>
+      
+  <string name="type_monster_small">الوحش (صغير)</string>
+      
+  <string name="type_monster_large">مونستر (كبير)</string>
+      
+  <string name="type_skilltree">شجرة المهارة</string>
+      
+  <string name="type_decoration">زخرفة</string>
+      
+  <string name="type_charm">سحر</string>
+      
+  <string name="type_armor">درع</string>
+      
+  <string name="type_weapon">سلاح</string>
+      
+  <string name="type_item">العنصر</string>
+      
+  <string name="type_item_basic">العنصر</string>
+      
+  <string name="type_item_material">مواد</string>
+      
+  <string name="type_item_ammo">ذخيرة</string>
+      
+  <string name="type_item_misc">بند متنوع</string>
+      
+  <string name="type_quest">بحث</string>
+      
+  <string name="type_kinsect">كينسيكت</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## BOOKMARKS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_bookmarks">إشارات مرجعية</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## TOOLS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_tools">أدوات</string>
+      
+  <string name="tool_effect_duration">مدة التأثير</string>
+      
+  <string name="tool_effect_recharge_time">الوقت إعادة تعبئة الرصيد</string>
+      
+  <string name="tool_slots">فتحات</string>
+      
+  <string name="tool_type">اكتب</string>
+      
+  <string name="tool_mantle">عباءة</string>
+      
+  <string name="tool_booster">الداعم</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## USER EQUIPMENT SET MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_workshop">ورشة عمل</string>
+      
+  <string name="title_workshop_armor_selector">محدد الدروع</string>
+      
+  <string name="title_workshop_charm_selector">محدد السحر</string>
+      
+  <string name="title_workshop_weapon_selector">محدد السلاح</string>
+      
+  <string name="title_workshop_decoration_selector">محدد الديكور</string>
+      
+  <string name="title_workshop_tool_selector">محدد الأداة</string>
+      
+  <string name="tab_workshop_builder_summary">ملخص</string>
+      
+  <string name="tab_workshop_builder_equipment">ادوات</string>
+      
+  <string name="user_equipment_set_new_set">مجموعة جديدة</string>
+      
+  <string name="user_equipment_set_create_set">+ إنشاء مجموعة</string>
+      
+  <string name="user_equipment_set_no_equipment">لا توجد معدات</string>
+      
+  <string name="user_equipment_set_no_decoration">لا زخرفة</string>
+      
+  <string name="user_equipment_set_no_skill">لا مهارة</string>
+      
+  <string name="user_equipment_delete_set">حذف المجموعة</string>
+      
+  <string name="user_equipment_set_deleted">تم حذف %1$s</string>
+      
+  <string name="user_equipment_new_set_name">إعادة تسمية المجموعة</string>
+      
+  <string name="user_equipment_apply">يتقدم</string>
+      
+  <string name="user_equipment_cancel">يلغي</string>
+      
+  <string name="user_equipment_set_filter_name">اسم</string>
+      
+  <string name="user_equipment_set_filter_slot_level">مستوى الفتحة</string>
+      
+  <string name="user_equipment_set_filter_elemental_defense">الدفاع العنصري</string>
+      
+  <string name="user_equipment_set_filter_add_skill">أضف مهارة جديدة</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ABOUT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="about_body">Gathering Hall Studios هو فريق مفتوح المصدر من المصممين والمطورين مكرسين لبناء تطبيقات عالية الجودة لسلسلة Monster Hunter. \n\nإذا كنت ترغب في الانضمام أو المساهمة ، فنحن دائمًا منفتحون. اتصل بنا على contact\@gatheringhallstudios.com أو قم بزيارة Discord. يمكنك أيضًا زيارة Github لعرض الكود المصدري لمشروعات بيانات التطبيق.</string>
+  
+</resources>

@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <!-- ############ -->
+      
+  <!-- ## COMMON ## -->
+      
+  <!-- ############ -->
+      
+  <!-- This covers strings that are meant to be used across the app -->
+      
+  <string name="app_name">MHWorld 数据库</string>
+      
+  <string name="app_name_icon">MHWDB</string>
+      
+  <string name="action_search">搜索</string>
+      
+  <string name="action_bookmark">书签</string>
+      
+  <string name="action_filter">过滤</string>
+      
+  <string name="action_clear">清除</string>
+      
+  <string name="action_cancel">取消</string>
+      
+  <string name="action_apply">申请</string>
+      
+  <string name="action_undo">撤消</string>
+      
+  <string name="general_no_data">这里没什么，喵喵…</string>
+   
+  <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
+      
+  <string name="general_none">没有</string>
+   
+  <!-- Empty message for skill/charms subsections -->
+      
+  <!-- Rank -->
+      
+  <string name="rank_title">级别</string>
+      
+  <string name="rank_short_low">低级别</string>
+      
+  <string name="rank_short_high">猎人级别</string>
+      
+  <string name="rank_short_master">大师级别</string>
+      
+  <string name="rank_short_all">任何</string>
+   
+  <!-- null rank -->
+      
+  <string name="rank_low">低</string>
+      
+  <string name="rank_high">高</string>
+      
+  <string name="rank_master">大师</string>
+      
+  <string name="rank_full_low">低级别</string>
+      
+  <string name="rank_full_high">高级别</string>
+      
+  <string name="rank_full_master">大师级别</string>
+      
+  <!-- Common Formatted Strings -->
+      
+  <string name="format_quantity_none">%1$d</string>
+   
+  <!-- Example: 1 -->
+      
+  <string name="format_quantity_x">x %1$d</string>
+   
+  <!-- Example: x 2 -->
+      
+  <string name="format_rarity">稀有度%1$d</string>
+   
+  <!-- Example: Rarity 2 -->
+      
+  <string name="format_plus">%1$+d</string>
+   
+  <!-- Example: +5 -->
+      
+  <string name="format_percentage">%1$s%%</string>
+   
+  <!-- Example: 20%-->
+      
+  <string name="format_percentage_unknown">\??％</string>
+      
+  <string name="format_plus_percentage">%1$+d%%</string>
+   
+  <!-- Example: +20%-->
+      
+  <string name="format_element">%1$d（最大%2$d）</string>
+      
+  <string name="format_element_hidden">（%1$d）（最大%2$d）</string>
+      
+  <!-- Ailments -->
+      
+  <string name="ailment_roar_small">咆哮（小）</string>
+      
+  <string name="ailment_roar_large">咆哮（大）</string>
+      
+  <string name="ailment_roar_extreme">咆哮（极度）</string>
+      
+  <string name="ailment_wind_small">风压（小）</string>
+      
+  <string name="ailment_wind_large">风压（大）</string>
+      
+  <string name="ailment_wind_extreme">风压（极限）</string>
+      
+  <string name="ailment_tremor_small">震颤（小）</string>
+      
+  <string name="ailment_tremor_large">震颤（大）</string>
+      
+  <string name="ailment_tremor_extreme">震颤（极度）</string>
+      
+  <string name="ailment_defensedown">防御下降</string>
+      
+  <string name="ailment_fireblight">火疫</string>
+      
+  <string name="ailment_waterblight">水疫</string>
+      
+  <string name="ailment_thunderblight">雷暴</string>
+      
+  <string name="ailment_iceblight">冰零</string>
+      
+  <string name="ailment_dragonblight">龙枯</string>
+      
+  <string name="ailment_blastblight">爆破疫</string>
+      
+  <string name="ailment_poison">毒药</string>
+      
+  <string name="ailment_sleep">睡觉</string>
+      
+  <string name="ailment_paralysis">麻痹</string>
+      
+  <string name="ailment_bleed">流血</string>
+      
+  <string name="ailment_stun">惊呆</string>
+      
+  <string name="ailment_mud">淤泥</string>
+      
+  <string name="ailment_effluvia">瘴气侵蚀</string>
+      
+  <!-- Insect glaive extract -->
+      
+  <string name="extract_orange">橘色</string>
+      
+  <string name="extract_red">红色</string>
+      
+  <string name="extract_white">白色</string>
+      
+  <string name="extract_green">绿色</string>
+      
+  <string name="extract_orange_abbr">奥恩</string>
+      
+  <string name="extract_red_abbr">红色</string>
+      
+  <string name="extract_white_abbr">WHT</string>
+      
+  <string name="extract_green_abbr">GRN</string>
+      
+  <!-- Elements and statuses -->
+      
+  <string name="element_fire">火</string>
+      
+  <string name="element_water">水</string>
+      
+  <string name="element_thunder">雷</string>
+      
+  <string name="element_ice">冰</string>
+      
+  <string name="element_dragon">龙</string>
+      
+  <string name="element_non_elemental">非元素</string>
+      
+  <string name="status_poison">毒药</string>
+      
+  <string name="status_sleep">睡觉</string>
+      
+  <string name="status_paralysis">麻痹</string>
+      
+  <string name="status_blast">爆破</string>
+      
+  <!-- Section Headers -->
+      
+  <!-- These aren't tied to a particular screen so they can be used anywhere -->
+      
+  <string name="header_habitat">栖息地</string>
+      
+  <string name="header_weakness">弱点</string>
+      
+  <string name="header_ailments">疾病</string>
+      
+  <string name="header_hitzone_physical">身体</string>
+      
+  <string name="header_hitzone_elemental">元素</string>
+      
+  <string name="header_break">休息时间</string>
+      
+  <string name="header_crafting">手工制作</string>
+      
+  <string name="header_gathering">搜集</string>
+      
+  <string name="header_rewards">怪物奖励</string>
+      
+  <string name="header_quest_rewards">任务奖励</string>
+      
+  <string name="header_armor">盔甲</string>
+      
+  <string name="header_charms">魅力</string>
+      
+  <string name="header_weapons">武器</string>
+      
+  <string name="header_decorations">装饰</string>
+      
+  <string name="header_required_materials">所需材料</string>
+      
+  <string name="header_required_materials_upgrade">所需材料（升级）</string>
+      
+  <string name="header_required_materials_craft">所需材料（工艺）</string>
+      
+  <string name="header_skills">技能专长</string>
+      
+  <string name="header_set_bonuses">设置奖金</string>
+      
+  <string name="header_skill">技能</string>
+      
+  <string name="header_drop">降低</string>
+      
+  <string name="header_upgrade_from">升级自：</string>
+      
+  <string name="header_components">成分</string>
+      
+  <string name="header_armor_set_pieces">护甲套装</string>
+      
+  <string name="header_armor_set_skills">装甲技能</string>
+      
+  <string name="header_active_set_bonuses">有效集奖金</string>
+      
+  <string name="header_active_skills">主动技能</string>
+      
+  <string name="header_description">描述</string>
+      
+  <!-- ####################### -->
+      
+  <!-- ## Settings and Meta ## -->
+      
+  <!-- ####################### -->
+      
+  <string name="title_about">关于</string>
+      
+  <string name="title_settings">设定值</string>
+      
+  <string name="title_changelog">变更日志</string>
+      
+  <string name="label_whats_new">最新内容！</string>
+      
+  <string name="label_rate_app">评价我们的应用！</string>
+      
+  <string name="action_ok">好的</string>
+      
+  <string name="preference_data_language">资料语言</string>
+      
+  <string name="preference_weapons_attack_values">显示武器真实攻击</string>
+      
+  <string name="preference_data_language_description">使用%s显示名称和描述。更改此设置将重新启动应用。</string>
+      
+  <string name="preference_weapons_attack_values_description">游戏显示臃肿的攻击值。启用它可以显示相反的真实攻击值，即伤害公式中使用的值。</string>
+      
+  <string name="preference_language_default">默认</string>
+      
+  <!-- ################### -->
+      
+  <!-- ## FEATURE MENUS ## -->
+      
+  <!-- ################### -->
+      
+  <!-- ############## -->
+      
+  <!-- ## Monsters ## -->
+      
+  <!-- ############## -->
+      
+  <string name="title_monster_list">怪兽</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_monsters_list_small">小</string>
+      
+  <string name="tab_monsters_list_large">大</string>
+      
+  <string name="tab_monsters_detail_summary">概括</string>
+      
+  <string name="tab_monsters_detail_damage">损害</string>
+      
+  <string name="tab_monsters_detail_rewards_master_rank">大师级别</string>
+      
+  <string name="tab_monsters_detail_rewards_high_rank">高级别</string>
+      
+  <string name="tab_monsters_detail_rewards_low_rank">低级别</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ITEMS MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_item_list">物品</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_item_list_items">物品</string>
+      
+  <string name="tab_item_list_materials">材料</string>
+      
+  <string name="tab_item_list_ammo">弹药</string>
+      
+  <string name="tab_item_list_misc">杂项</string>
+      
+  <string name="tab_item_detail_summary">概括</string>
+      
+  <string name="tab_item_detail_usage">用法</string>
+      
+  <string name="tab_item_detail_acquisition">取得</string>
+      
+  <!-- General Strings -->
+      
+  <string name="item_price_buy">购买</string>
+      
+  <string name="item_price_sell">出售</string>
+      
+  <string name="item_capacity_carry">携带</string>
+      
+  <string name="item_rarity">稀有度</string>
+      
+  <!-- ######################## -->
+      
+  <!-- ## ITEM CRAFTING MENU ## -->
+      
+  <!-- ######################## -->
+      
+  <string name="item_crafting_list_title">物品制作</string>
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- General Strings -->
+      
+  <string name="item_crafting_yield">x %1$d</string>
+      
+  <string name="item_crafting_source_condition_reward">%1$s %2$s</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## WEAPON MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="weapon_final_only">最终</string>
+      
+  <string name="weapon_final_upgrades">最终</string>
+      
+  <!-- Weapon List Entries -->
+      
+  <string name="title_weapons">武器类</string>
+      
+  <string name="title_great_sword">大剑</string>
+      
+  <string name="title_long_sword">长剑</string>
+      
+  <string name="title_sword_and_shield">剑与盾</string>
+      
+  <string name="title_dual_blades">双刀刃</string>
+      
+  <string name="title_hammer">锤子</string>
+      
+  <string name="title_hunting_horn">狩猎号角</string>
+      
+  <string name="title_lance">矛</string>
+      
+  <string name="title_gunlance">枪炮</string>
+      
+  <string name="title_switch_axe">切换斧</string>
+      
+  <string name="title_charge_blade">充电刀刃</string>
+      
+  <string name="title_insect_glaive">昆虫战刃</string>
+      
+  <string name="title_light_bowgun">轻型弩弓</string>
+      
+  <string name="title_heavy_bowgun">重型弩弓</string>
+      
+  <string name="title_bow">弓</string>
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_weapon_normal">普通</string>
+      
+  <string name="tab_weapon_kulve">烂辉龙</string>
+      
+  <string name="tab_weapon_detail">细节</string>
+      
+  <string name="tab_weapon_tree">家庭</string>
+      
+  <string name="filter_title_show_only">只显示</string>
+      
+  <string name="filter_title_sort_by">排序方式</string>
+      
+  <!-- General Strings -->
+      
+  <string name="weapon_attack">攻击</string>
+      
+  <string name="weapon_attack_true">攻击（真）</string>
+      
+  <string name="weapon_sharpness">锋利度</string>
+      
+  <string name="weapon_element">元素</string>
+      
+  <string name="weapon_element_none">无</string>
+      
+  <string name="weapon_defense">防御</string>
+      
+  <string name="weapon_affinity">熟练度</string>
+      
+  <string name="weapon_handicraft">（与手工艺品）</string>
+      
+  <string name="weapon_elderseal">龙封力</string>
+      
+  <string name="weapon_elderseal_none">无</string>
+      
+  <string name="weapon_elderseal_low">低</string>
+      
+  <string name="weapon_elderseal_average">平均</string>
+      
+  <string name="weapon_elderseal_high">高</string>
+      
+  <string name="weapon_blade_phial_type">药瓶类型</string>
+      
+  <string name="weapon_phial_exhaust">精疲力竭</string>
+      
+  <string name="weapon_phial_power">力量</string>
+      
+  <string name="weapon_phial_poison">毒药</string>
+      
+  <string name="weapon_phial_dragon">龙</string>
+      
+  <string name="weapon_phial_power_element">力量元素</string>
+      
+  <string name="weapon_phial_paralysis">麻痹</string>
+      
+  <string name="weapon_phial_impact">影响</string>
+      
+  <string name="weapon_kinsect_bonus">猎虫奖金</string>
+      
+  <string name="weapon_kinsect_bonus_sever">断绝</string>
+      
+  <string name="weapon_kinsect_bonus_speed">速度</string>
+      
+  <string name="weapon_kinsect_bonus_element">元素</string>
+      
+  <string name="weapon_kinsect_bonus_health">生命</string>
+      
+  <string name="weapon_kinsect_bonus_stamina">耐力</string>
+      
+  <string name="weapon_kinsect_bonus_blunt">钝</string>
+      
+  <string name="weapon_kinsect_bonus_spirit_strength">精神/力量</string>
+      
+  <string name="weapon_kinsect_bonus_stamina_health">耐力/生命</string>
+      
+  <string name="weapon_gunlance_shelling">脱壳</string>
+      
+  <string name="weapon_gunlance_shelling_long">长</string>
+      
+  <string name="weapon_gunlance_shelling_normal">普通</string>
+      
+  <string name="weapon_gunlance_shelling_wide">宽</string>
+      
+  <string name="weapon_hunting_horn_notes">笔记</string>
+      
+  <string name="weapon_hunting_horn_melodies">旋律</string>
+      
+  <string name="weapon_hunting_horn_effect1">效果 1</string>
+      
+  <string name="weapon_hunting_horn_effect2">效果 2</string>
+      
+  <string name="weapon_hunting_horn_duration">期间</string>
+      
+  <string name="weapon_hunting_horn_extension">扩大</string>
+      
+  <string name="weapon_bow_coatings">涂层</string>
+      
+  <string name="weapon_bow_coatings_paralysis">帕拉</string>
+      
+  <string name="weapon_bow_coatings_sleep">睡觉</string>
+      
+  <string name="weapon_bow_coatings_power">力量</string>
+      
+  <string name="weapon_bow_coatings_poison">毒药</string>
+      
+  <string name="weapon_bow_coatings_close_range">关闭</string>
+      
+  <string name="weapon_bow_coatings_blast">爆破</string>
+      
+  <string name="weapon_bowgun_deviation">偏差</string>
+      
+  <string name="weapon_bowgun_special_ammo">特殊弹药</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernblast">飞龙爆破</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernheart">飞龙之心</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernsnipe">飞龙狙击</string>
+      
+  <string name="weapon_bowgun_ammo_types">弹药类型</string>
+      
+  <string name="weapon_bowgun_ammo_normal">普通%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_pierce">刺穿%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_spread">扩散%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sticky">粘性%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_cluster">集群%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_recover">恢复%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_poison">毒药%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_paralysis">瘫痪%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sleep">睡眠%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_exhaust">精疲力竭%1$d</string>
+      
+  <string name="weapon_bowgun_ammo_flaming">炽烈</string>
+      
+  <string name="weapon_bowgun_ammo_thunder">雷</string>
+      
+  <string name="weapon_bowgun_ammo_dragon">龙</string>
+      
+  <string name="weapon_bowgun_ammo_water">水</string>
+      
+  <string name="weapon_bowgun_ammo_freeze">冻结</string>
+      
+  <string name="weapon_bowgun_ammo_slicing">切片</string>
+      
+  <string name="weapon_bowgun_ammo_wyvern">飞龙</string>
+      
+  <string name="weapon_bowgun_ammo_demon">恶魔</string>
+      
+  <string name="weapon_bowgun_ammo_armor">盔甲</string>
+      
+  <string name="weapon_bowgun_ammo_tranq">镇静</string>
+      
+  <string name="weapon_bowgun_ammo_shot_normal">普通</string>
+      
+  <string name="weapon_bowgun_ammo_shot_rapid_fire">迅速</string>
+      
+  <string name="weapon_bowgun_ammo_shot_auto_reload">自动装弹</string>
+      
+  <string name="weapon_bowgun_ammo_shot_wyvern">飞龙</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_slow">极慢</string>
+      
+  <string name="weapon_bowgun_ammo_reload_slow">慢</string>
+      
+  <string name="weapon_bowgun_ammo_reload_normal">普通</string>
+      
+  <string name="weapon_bowgun_ammo_reload_fast">快速</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_fast">极快</string>
+      
+  <string name="weapon_bowgun_shot_type_rcl">类型+反冲</string>
+      
+  <string name="weapon_bowgun_capacity">封顶</string>
+      
+  <string name="weapon_bowgun_reload">重装</string>
+      
+  <string name="weapon_bowgun_recoil">RCL</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ARMOR MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_armor">盔甲</string>
+      
+  <!-- Tab headers -->
+      
+  <string name="tab_armor_detail">细节</string>
+      
+  <string name="tab_armor_set_summary">装甲细节</string>
+      
+  <!-- General Strings -->
+      
+  <string name="armor_defense_value">%1$d-%2$d（%3$d）</string>
+   
+  <!-- Example: 32 - 64 (70) -->
+      
+  <string name="armor_detail_piece_bonus">%1$d-刺穿奖励：</string>
+   
+  <!-- Examples: 1-piece bonus: -->
+      
+  <string name="armor_detail_vs_fire">VS. 火</string>
+      
+  <string name="armor_detail_vs_water">VS. 水</string>
+      
+  <string name="armor_detail_vs_thunder">VS. 雷</string>
+      
+  <string name="armor_detail_vs_ice">VS. 冰</string>
+      
+  <string name="armor_detail_vs_dragon">VS. 龙</string>
+      
+  <string name="armor_detail_defense">防御</string>
+      
+  <string name="armor_detail_slots">插槽</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SKILLS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_skills">技能专长</string>
+      
+  <!-- General Strings -->
+      
+  <string name="title_skill_level">级别</string>
+      
+  <string name="level_qty">级别%1$d</string>
+   
+  <!-- Example: Level 1 -->
+      
+  <string name="level_short_qty">等级%1$d</string>
+   
+  <!-- Example: Lv 2 -->
+      
+  <!-- ###################### -->
+      
+  <!-- ## DECORATIONS MENU ## -->
+      
+  <!-- ###################### -->
+      
+  <string name="title_decorations">装饰</string>
+      
+  <!-- General Strings -->
+      
+  <string name="decorations_chance_mysterious">神秘的铠玉</string>
+      
+  <string name="decorations_chance_glowing">发光的铠玉</string>
+      
+  <string name="decorations_chance_worn">磨损的铠玉</string>
+      
+  <string name="decorations_chance_warped">扭曲的铠玉</string>
+      
+  <string name="decorations_chance_ancient">远古的铠玉</string>
+      
+  <string name="decorations_chance_carved">雕刻的铠玉</string>
+      
+  <string name="decorations_chance_sealed">封印的铠玉</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## CHARMS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_charms">魅力</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## LOCATIONS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_locations">地点</string>
+      
+  <!-- Section Headers -->
+      
+  <string name="header_location_area">区域%1$d</string>
+      
+  <string name="header_location_base_camps">大本营</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## QUEST MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_quests">任务</string>
+      
+  <string name="quest_category_assigned">已分配</string>
+      
+  <string name="quest_category_optional">任选</string>
+      
+  <string name="quest_category_event">事件</string>
+      
+  <string name="quest_category_arena">竞技场</string>
+      
+  <string name="quest_category_challenge">挑战</string>
+      
+  <string name="quest_category_special">特别任务</string>
+      
+  <string name="quest_category_special_abbr">SP</string>
+      
+  <string name="quest_category_combined">%s%s %d★</string>
+      
+  <string name="tab_quest_summary">概括</string>
+      
+  <string name="tab_quest_rewards">奖赏</string>
+      
+  <string name="quest_group">组%s</string>
+      
+  <string name="quest_label_objective">客观</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## KINSECT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_kinsects">猎虫</string>
+      
+  <string name="kinsect_attack_type">攻击类型</string>
+      
+  <string name="kinsect_attack_type_sever">断绝</string>
+      
+  <string name="kinsect_attack_type_blunt">钝</string>
+      
+  <string name="kinsect_dust_effect">尘埃效应</string>
+      
+  <string name="kinsect_dust_effect_poison">毒药</string>
+      
+  <string name="kinsect_dust_effect_paralysis">麻痹</string>
+      
+  <string name="kinsect_dust_effect_heal">愈合</string>
+      
+  <string name="kinsect_dust_effect_blast">爆破</string>
+      
+  <string name="kinsect_power">力量</string>
+      
+  <string name="kinsect_speed">速度</string>
+      
+  <string name="kinsect_heal">愈合</string>
+      
+  <string name="tab_kinsect_detail">细节</string>
+      
+  <string name="tab_kinsect_tree">家庭</string>
+      
+  <string name="kinsect_final_upgrades">最终</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SEARCH MENU ## -->
+      
+  <!-- ################# -->
+      
+  <!-- General Strings -->
+      
+  <!-- Simple descriptor for data types (including modified descriptors) -->
+      
+  <string name="type_location">地点</string>
+      
+  <string name="type_monster">怪物</string>
+      
+  <string name="type_monster_small">怪物（小）</string>
+      
+  <string name="type_monster_large">怪物（大）</string>
+      
+  <string name="type_skilltree">技能树</string>
+      
+  <string name="type_decoration">装饰</string>
+      
+  <string name="type_charm">魅力</string>
+      
+  <string name="type_armor">盔甲</string>
+      
+  <string name="type_weapon">武器</string>
+      
+  <string name="type_item">物品</string>
+      
+  <string name="type_item_basic">物品</string>
+      
+  <string name="type_item_material">材料</string>
+      
+  <string name="type_item_ammo">弹药</string>
+      
+  <string name="type_item_misc">杂项</string>
+      
+  <string name="type_quest">任务</string>
+      
+  <string name="type_kinsect">猎虫</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## BOOKMARKS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_bookmarks">书签</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## TOOLS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_tools">工具</string>
+      
+  <string name="tool_effect_duration">效果持续时间</string>
+      
+  <string name="tool_effect_recharge_time">充电时间</string>
+      
+  <string name="tool_slots">插槽</string>
+      
+  <string name="tool_type">类型</string>
+      
+  <string name="tool_mantle">披风</string>
+      
+  <string name="tool_booster">助推器</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## USER EQUIPMENT SET MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_workshop">作坊</string>
+      
+  <string name="title_workshop_armor_selector">装甲选择器</string>
+      
+  <string name="title_workshop_charm_selector">魅力选择器</string>
+      
+  <string name="title_workshop_weapon_selector">武器选择器</string>
+      
+  <string name="title_workshop_decoration_selector">装饰选择器</string>
+      
+  <string name="title_workshop_tool_selector">工具选择器</string>
+      
+  <string name="tab_workshop_builder_summary">概括</string>
+      
+  <string name="tab_workshop_builder_equipment">设备</string>
+      
+  <string name="user_equipment_set_new_set">新套装</string>
+      
+  <string name="user_equipment_set_create_set">+创建一个集合</string>
+      
+  <string name="user_equipment_set_no_equipment">没有设备</string>
+      
+  <string name="user_equipment_set_no_decoration">没有装饰</string>
+      
+  <string name="user_equipment_set_no_skill">没有技能</string>
+      
+  <string name="user_equipment_delete_set">删除集</string>
+      
+  <string name="user_equipment_set_deleted">%1$s已被删除</string>
+      
+  <string name="user_equipment_new_set_name">重命名集</string>
+      
+  <string name="user_equipment_apply">申请</string>
+      
+  <string name="user_equipment_cancel">取消</string>
+      
+  <string name="user_equipment_set_filter_name">姓名</string>
+      
+  <string name="user_equipment_set_filter_slot_level">插槽等级</string>
+      
+  <string name="user_equipment_set_filter_elemental_defense">元素防御</string>
+      
+  <string name="user_equipment_set_filter_add_skill">新增技能</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ABOUT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="about_body">Gathering Hall Studios 是一个由设计师和开发者组成的开源团队，致力于为 Monster Hunter （《怪兽猎人》）系列构建高质量的应用。如果您想加入或为我们出力，我们始终保持开放态度。通过 contact\@gatheringhallstudios.com 与我们联系，或访问我们的 Discord。您也可以访问我们的 Github 来查看应用数据项目的源代码。</string>
+  
+</resources>

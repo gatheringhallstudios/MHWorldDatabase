@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <!-- ############ -->
+      
+  <!-- ## COMMON ## -->
+      
+  <!-- ############ -->
+      
+  <!-- This covers strings that are meant to be used across the app -->
+      
+  <string name="app_name">База данных MHWorld</string>
+      
+  <string name="app_name_icon">MHWDB</string>
+      
+  <string name="action_search">Поиск</string>
+      
+  <string name="action_bookmark">Закладка</string>
+      
+  <string name="action_filter">Фильтр</string>
+      
+  <string name="action_clear">Прозрачный</string>
+      
+  <string name="action_cancel">Отмена</string>
+      
+  <string name="action_apply">Подать заявление</string>
+      
+  <string name="action_undo">Отменить</string>
+      
+  <string name="general_no_data">Здесь ничего, Мяустер ...</string>
+   
+  <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
+      
+  <string name="general_none">Никто</string>
+   
+  <!-- Empty message for skill/charms subsections -->
+      
+  <!-- Rank -->
+      
+  <string name="rank_title">Классифицировать</string>
+      
+  <string name="rank_short_low">LR</string>
+      
+  <string name="rank_short_high">HR</string>
+      
+  <string name="rank_short_master">МИСТЕР</string>
+      
+  <string name="rank_short_all">ЛЮБОЙ</string>
+   
+  <!-- null rank -->
+      
+  <string name="rank_low">Низкий</string>
+      
+  <string name="rank_high">Высоко</string>
+      
+  <string name="rank_master">Владелец</string>
+      
+  <string name="rank_full_low">Низкий ранг</string>
+      
+  <string name="rank_full_high">Высокий ранг</string>
+      
+  <string name="rank_full_master">Мастер Ранг</string>
+      
+  <!-- Common Formatted Strings -->
+      
+  <string name="format_quantity_none">%1$d</string>
+   
+  <!-- Example: 1 -->
+      
+  <string name="format_quantity_x">х %1$d</string>
+   
+  <!-- Example: x 2 -->
+      
+  <string name="format_rarity">Редкость %1$d</string>
+   
+  <!-- Example: Rarity 2 -->
+      
+  <string name="format_plus">%1$+d</string>
+   
+  <!-- Example: +5 -->
+      
+  <string name="format_percentage">%1$s%%</string>
+   
+  <!-- Example: 20%-->
+      
+  <string name="format_percentage_unknown">\??%</string>
+      
+  <string name="format_plus_percentage">%1$+d%%</string>
+   
+  <!-- Example: +20%-->
+      
+  <string name="format_element">%1$d (не более %2$d)</string>
+      
+  <string name="format_element_hidden">(%1$d) (макс. %2$d)</string>
+      
+  <!-- Ailments -->
+      
+  <string name="ailment_roar_small">Рев (небольшой)</string>
+      
+  <string name="ailment_roar_large">Рев (большой)</string>
+      
+  <string name="ailment_roar_extreme">Рев (крайний)</string>
+      
+  <string name="ailment_wind_small">Давление ветра (малое)</string>
+      
+  <string name="ailment_wind_large">Давление ветра (большое)</string>
+      
+  <string name="ailment_wind_extreme">Давление ветра (экстремальное)</string>
+      
+  <string name="ailment_tremor_small">Тремор (небольшой)</string>
+      
+  <string name="ailment_tremor_large">Тремор (большой)</string>
+      
+  <string name="ailment_tremor_extreme">Тремор (экстремальный)</string>
+      
+  <string name="ailment_defensedown">Защита снижена</string>
+      
+  <string name="ailment_fireblight">FireBlight</string>
+      
+  <string name="ailment_waterblight">WaterBlight</string>
+      
+  <string name="ailment_thunderblight">ThunderBlight</string>
+      
+  <string name="ailment_iceblight">IceBlight</string>
+      
+  <string name="ailment_dragonblight">DragonBlight</string>
+      
+  <string name="ailment_blastblight">BlastBlight</string>
+      
+  <string name="ailment_poison">Яд</string>
+      
+  <string name="ailment_sleep">Спать</string>
+      
+  <string name="ailment_paralysis">Паралич</string>
+      
+  <string name="ailment_bleed">Кровоточить</string>
+      
+  <string name="ailment_stun">Оглушить</string>
+      
+  <string name="ailment_mud">Грязь</string>
+      
+  <string name="ailment_effluvia">Effluvia</string>
+      
+  <!-- Insect glaive extract -->
+      
+  <string name="extract_orange">апельсин</string>
+      
+  <string name="extract_red">красный</string>
+      
+  <string name="extract_white">белый</string>
+      
+  <string name="extract_green">Зеленый</string>
+      
+  <string name="extract_orange_abbr">ORN</string>
+      
+  <string name="extract_red_abbr">КРАСНЫЙ</string>
+      
+  <string name="extract_white_abbr">WHT</string>
+      
+  <string name="extract_green_abbr">GRN</string>
+      
+  <!-- Elements and statuses -->
+      
+  <string name="element_fire">Огонь</string>
+      
+  <string name="element_water">Вода</string>
+      
+  <string name="element_thunder">гром</string>
+      
+  <string name="element_ice">Лед</string>
+      
+  <string name="element_dragon">Дракон</string>
+      
+  <string name="element_non_elemental">Не элементарный</string>
+      
+  <string name="status_poison">Яд</string>
+      
+  <string name="status_sleep">Спать</string>
+      
+  <string name="status_paralysis">Паралич</string>
+      
+  <string name="status_blast">Взрыв</string>
+      
+  <!-- Section Headers -->
+      
+  <!-- These aren't tied to a particular screen so they can be used anywhere -->
+      
+  <string name="header_habitat">Среда обитания</string>
+      
+  <string name="header_weakness">Слабое место</string>
+      
+  <string name="header_ailments">Недуги</string>
+      
+  <string name="header_hitzone_physical">Физический</string>
+      
+  <string name="header_hitzone_elemental">Элементарный</string>
+      
+  <string name="header_break">Перерывы</string>
+      
+  <string name="header_crafting">Ремесло</string>
+      
+  <string name="header_gathering">Встреча</string>
+      
+  <string name="header_rewards">Награды монстров</string>
+      
+  <string name="header_quest_rewards">Награды за квест</string>
+      
+  <string name="header_armor">Броня</string>
+      
+  <string name="header_charms">Чары</string>
+      
+  <string name="header_weapons">Оружие</string>
+      
+  <string name="header_decorations">Украшения</string>
+      
+  <string name="header_required_materials">Необходимые материалы</string>
+      
+  <string name="header_required_materials_upgrade">Необходимые материалы (обновление)</string>
+      
+  <string name="header_required_materials_craft">Необходимые материалы (ремесло)</string>
+      
+  <string name="header_skills">Навыки</string>
+      
+  <string name="header_set_bonuses">Установить бонусы</string>
+      
+  <string name="header_skill">Навык</string>
+      
+  <string name="header_drop">Уронить</string>
+      
+  <string name="header_upgrade_from">Обновления с:</string>
+      
+  <string name="header_components">Составные части</string>
+      
+  <string name="header_armor_set_pieces">Части набора доспехов</string>
+      
+  <string name="header_armor_set_skills">Навыки набора доспехов</string>
+      
+  <string name="header_active_set_bonuses">Бонусы активного набора</string>
+      
+  <string name="header_active_skills">Активные навыки</string>
+      
+  <string name="header_description">Описание</string>
+      
+  <!-- ####################### -->
+      
+  <!-- ## Settings and Meta ## -->
+      
+  <!-- ####################### -->
+      
+  <string name="title_about">О</string>
+      
+  <string name="title_settings">Настройки</string>
+      
+  <string name="title_changelog">Журнал изменений</string>
+      
+  <string name="label_whats_new">Какие новости!</string>
+      
+  <string name="label_rate_app">Оцените наше приложение!</string>
+      
+  <string name="action_ok">OK</string>
+      
+  <string name="preference_data_language">Язык данных</string>
+      
+  <string name="preference_weapons_attack_values">Показать истинную атаку оружия</string>
+      
+  <string name="preference_data_language_description">Показывать имена и описания с помощью %s. \nЕсли вы измените это значение, приложение будет перезапущено.</string>
+      
+  <string name="preference_weapons_attack_values_description">Игра показывает раздутые значения атаки. Включите это, чтобы вместо этого отображались истинные значения атаки, которые используются в формуле урона.</string>
+      
+  <string name="preference_language_default">Дефолт</string>
+      
+  <!-- ################### -->
+      
+  <!-- ## FEATURE MENUS ## -->
+      
+  <!-- ################### -->
+      
+  <!-- ############## -->
+      
+  <!-- ## Monsters ## -->
+      
+  <!-- ############## -->
+      
+  <string name="title_monster_list">Монстры</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_monsters_list_small">Маленький</string>
+      
+  <string name="tab_monsters_list_large">Большой</string>
+      
+  <string name="tab_monsters_detail_summary">Резюме</string>
+      
+  <string name="tab_monsters_detail_damage">Повреждать</string>
+      
+  <string name="tab_monsters_detail_rewards_master_rank">Мастер Ранг</string>
+      
+  <string name="tab_monsters_detail_rewards_high_rank">Высокий ранг</string>
+      
+  <string name="tab_monsters_detail_rewards_low_rank">Низкий ранг</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ITEMS MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_item_list">Предметы</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_item_list_items">Предметы</string>
+      
+  <string name="tab_item_list_materials">Материалы</string>
+      
+  <string name="tab_item_list_ammo">Боеприпасы</string>
+      
+  <string name="tab_item_list_misc">Разное</string>
+      
+  <string name="tab_item_detail_summary">Резюме</string>
+      
+  <string name="tab_item_detail_usage">использование</string>
+      
+  <string name="tab_item_detail_acquisition">Получение</string>
+      
+  <!-- General Strings -->
+      
+  <string name="item_price_buy">Купить</string>
+      
+  <string name="item_price_sell">Продавать</string>
+      
+  <string name="item_capacity_carry">Нести</string>
+      
+  <string name="item_rarity">Редкость</string>
+      
+  <!-- ######################## -->
+      
+  <!-- ## ITEM CRAFTING MENU ## -->
+      
+  <!-- ######################## -->
+      
+  <string name="item_crafting_list_title">Изготовление предметов</string>
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- General Strings -->
+      
+  <string name="item_crafting_yield">х %1$d</string>
+      
+  <string name="item_crafting_source_condition_reward">%1$s %2$s</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## WEAPON MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="weapon_final_only">Финал</string>
+      
+  <string name="weapon_final_upgrades">Финал</string>
+      
+  <!-- Weapon List Entries -->
+      
+  <string name="title_weapons">Оружие</string>
+      
+  <string name="title_great_sword">Большой меч</string>
+      
+  <string name="title_long_sword">Длинный меч</string>
+      
+  <string name="title_sword_and_shield">Меч и щит</string>
+      
+  <string name="title_dual_blades">Двойные лезвия</string>
+      
+  <string name="title_hammer">Молоток</string>
+      
+  <string name="title_hunting_horn">Охотничий рог</string>
+      
+  <string name="title_lance">Копье</string>
+      
+  <string name="title_gunlance">Gunlance</string>
+      
+  <string name="title_switch_axe">Переключить топор</string>
+      
+  <string name="title_charge_blade">Зарядный клинок</string>
+      
+  <string name="title_insect_glaive">Глефа насекомых</string>
+      
+  <string name="title_light_bowgun">Легкое ружье</string>
+      
+  <string name="title_heavy_bowgun">Тяжелое ружье</string>
+      
+  <string name="title_bow">Поклон</string>
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_weapon_normal">Нормальный</string>
+      
+  <string name="tab_weapon_kulve">Кульве</string>
+      
+  <string name="tab_weapon_detail">Деталь</string>
+      
+  <string name="tab_weapon_tree">Семья</string>
+      
+  <string name="filter_title_show_only">Покажи только</string>
+      
+  <string name="filter_title_sort_by">Сортировать по</string>
+      
+  <!-- General Strings -->
+      
+  <string name="weapon_attack">Атака</string>
+      
+  <string name="weapon_attack_true">Атака (True)</string>
+      
+  <string name="weapon_sharpness">Острота</string>
+      
+  <string name="weapon_element">Элемент</string>
+      
+  <string name="weapon_element_none">Никто</string>
+      
+  <string name="weapon_defense">Защита</string>
+      
+  <string name="weapon_affinity">Близость</string>
+      
+  <string name="weapon_handicraft">(с рукоделием)</string>
+      
+  <string name="weapon_elderseal">Elderseal</string>
+      
+  <string name="weapon_elderseal_none">Никто</string>
+      
+  <string name="weapon_elderseal_low">Низкий</string>
+      
+  <string name="weapon_elderseal_average">Средний</string>
+      
+  <string name="weapon_elderseal_high">Высоко</string>
+      
+  <string name="weapon_blade_phial_type">Тип флакона</string>
+      
+  <string name="weapon_phial_exhaust">Выхлоп</string>
+      
+  <string name="weapon_phial_power">Мощность</string>
+      
+  <string name="weapon_phial_poison">Яд</string>
+      
+  <string name="weapon_phial_dragon">Дракон</string>
+      
+  <string name="weapon_phial_power_element">Элемент питания</string>
+      
+  <string name="weapon_phial_paralysis">Паралич</string>
+      
+  <string name="weapon_phial_impact">Влияние</string>
+      
+  <string name="weapon_kinsect_bonus">Бонус Кинсекта</string>
+      
+  <string name="weapon_kinsect_bonus_sever">Север</string>
+      
+  <string name="weapon_kinsect_bonus_speed">Скорость</string>
+      
+  <string name="weapon_kinsect_bonus_element">Элемент</string>
+      
+  <string name="weapon_kinsect_bonus_health">Здоровье</string>
+      
+  <string name="weapon_kinsect_bonus_stamina">Выносливость</string>
+      
+  <string name="weapon_kinsect_bonus_blunt">Тупой</string>
+      
+  <string name="weapon_kinsect_bonus_spirit_strength">Дух/Сила</string>
+      
+  <string name="weapon_kinsect_bonus_stamina_health">Выносливость/Здоровье</string>
+      
+  <string name="weapon_gunlance_shelling">Артобстрел</string>
+      
+  <string name="weapon_gunlance_shelling_long">Длинный</string>
+      
+  <string name="weapon_gunlance_shelling_normal">Нормальный</string>
+      
+  <string name="weapon_gunlance_shelling_wide">Широкий</string>
+      
+  <string name="weapon_hunting_horn_notes">Примечания</string>
+      
+  <string name="weapon_hunting_horn_melodies">Мелодии</string>
+      
+  <string name="weapon_hunting_horn_effect1">Эффект 1</string>
+      
+  <string name="weapon_hunting_horn_effect2">Эффект 2</string>
+      
+  <string name="weapon_hunting_horn_duration">Продолжительность</string>
+      
+  <string name="weapon_hunting_horn_extension">Расширение</string>
+      
+  <string name="weapon_bow_coatings">Покрытия</string>
+      
+  <string name="weapon_bow_coatings_paralysis">Para</string>
+      
+  <string name="weapon_bow_coatings_sleep">Спать</string>
+      
+  <string name="weapon_bow_coatings_power">Мощность</string>
+      
+  <string name="weapon_bow_coatings_poison">Яд</string>
+      
+  <string name="weapon_bow_coatings_close_range">Закрывать</string>
+      
+  <string name="weapon_bow_coatings_blast">Взрыв</string>
+      
+  <string name="weapon_bowgun_deviation">Отклонение</string>
+      
+  <string name="weapon_bowgun_special_ammo">Особые боеприпасы</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernblast">Wyvernblast</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernheart">Вивернхарт</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernsnipe">Wyvernsnipe</string>
+      
+  <string name="weapon_bowgun_ammo_types">Типы боеприпасов</string>
+      
+  <string name="weapon_bowgun_ammo_normal">Нормальный %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_pierce">Пирс %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_spread">Распространение %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sticky">Прикреплено %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_cluster">Кластер %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_recover">Восстановить %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_poison">Яд %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_paralysis">Паралич %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sleep">Сон %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_exhaust">Выхлоп %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_flaming">Пылающий</string>
+      
+  <string name="weapon_bowgun_ammo_thunder">гром</string>
+      
+  <string name="weapon_bowgun_ammo_dragon">Дракон</string>
+      
+  <string name="weapon_bowgun_ammo_water">Вода</string>
+      
+  <string name="weapon_bowgun_ammo_freeze">Заморозить</string>
+      
+  <string name="weapon_bowgun_ammo_slicing">Нарезка</string>
+      
+  <string name="weapon_bowgun_ammo_wyvern">Виверна</string>
+      
+  <string name="weapon_bowgun_ammo_demon">Демон</string>
+      
+  <string name="weapon_bowgun_ammo_armor">Броня</string>
+      
+  <string name="weapon_bowgun_ammo_tranq">Транк</string>
+      
+  <string name="weapon_bowgun_ammo_shot_normal">Нормальный</string>
+      
+  <string name="weapon_bowgun_ammo_shot_rapid_fire">Стремительный</string>
+      
+  <string name="weapon_bowgun_ammo_shot_auto_reload">Автоматическая перезагрузка</string>
+      
+  <string name="weapon_bowgun_ammo_shot_wyvern">Виверна</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_slow">V. Медленно</string>
+      
+  <string name="weapon_bowgun_ammo_reload_slow">Медленный</string>
+      
+  <string name="weapon_bowgun_ammo_reload_normal">Нормальный</string>
+      
+  <string name="weapon_bowgun_ammo_reload_fast">Быстрый</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_fast">V. быстрый</string>
+      
+  <string name="weapon_bowgun_shot_type_rcl">Тип + отдача</string>
+      
+  <string name="weapon_bowgun_capacity">КОЛПАЧОК</string>
+      
+  <string name="weapon_bowgun_reload">Перезагрузить</string>
+      
+  <string name="weapon_bowgun_recoil">RCL</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ARMOR MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_armor">Броня</string>
+      
+  <!-- Tab headers -->
+      
+  <string name="tab_armor_detail">Деталь</string>
+      
+  <string name="tab_armor_set_summary">Детали набора брони</string>
+      
+  <!-- General Strings -->
+      
+  <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
+   
+  <!-- Example: 32 - 64 (70) -->
+      
+  <string name="armor_detail_piece_bonus">%1$d - Бонус за штуку:</string>
+   
+  <!-- Examples: 1-piece bonus: -->
+      
+  <string name="armor_detail_vs_fire">Против. Огонь</string>
+      
+  <string name="armor_detail_vs_water">Против. Вода</string>
+      
+  <string name="armor_detail_vs_thunder">Против. гром</string>
+      
+  <string name="armor_detail_vs_ice">Против. Лед</string>
+      
+  <string name="armor_detail_vs_dragon">Против. Дракон</string>
+      
+  <string name="armor_detail_defense">Защита</string>
+      
+  <string name="armor_detail_slots">Слоты</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SKILLS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_skills">Навыки</string>
+      
+  <!-- General Strings -->
+      
+  <string name="title_skill_level">Уровень</string>
+      
+  <string name="level_qty">Уровень %1$d</string>
+   
+  <!-- Example: Level 1 -->
+      
+  <string name="level_short_qty">Уровень %1$d</string>
+   
+  <!-- Example: Lv 2 -->
+      
+  <!-- ###################### -->
+      
+  <!-- ## DECORATIONS MENU ## -->
+      
+  <!-- ###################### -->
+      
+  <string name="title_decorations">Украшения</string>
+      
+  <!-- General Strings -->
+      
+  <string name="decorations_chance_mysterious">Таинственный волшебный камень</string>
+      
+  <string name="decorations_chance_glowing">Светящийся волшебный камень</string>
+      
+  <string name="decorations_chance_worn">Потертый камень фей</string>
+      
+  <string name="decorations_chance_warped">Искаженный магический камень</string>
+      
+  <string name="decorations_chance_ancient">Древний фейстоун</string>
+      
+  <string name="decorations_chance_carved">Резной магический камень</string>
+      
+  <string name="decorations_chance_sealed">Запечатанный Магический Камень</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## CHARMS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_charms">Чары</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## LOCATIONS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_locations">Локации</string>
+      
+  <!-- Section Headers -->
+      
+  <string name="header_location_area">Площадь %1$d</string>
+      
+  <string name="header_location_base_camps">Базовые лагеря</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## QUEST MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_quests">Квесты</string>
+      
+  <string name="quest_category_assigned">Назначенный</string>
+      
+  <string name="quest_category_optional">Необязательный</string>
+      
+  <string name="quest_category_event">Мероприятие</string>
+      
+  <string name="quest_category_arena">Арена</string>
+      
+  <string name="quest_category_challenge">Испытание</string>
+      
+  <string name="quest_category_special">Специальное задание</string>
+      
+  <string name="quest_category_special_abbr">SP</string>
+      
+  <string name="quest_category_combined">%s%s %d★</string>
+      
+  <string name="tab_quest_summary">Резюме</string>
+      
+  <string name="tab_quest_rewards">Награды</string>
+      
+  <string name="quest_group">Группа %s</string>
+      
+  <string name="quest_label_objective">Цель</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## KINSECT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_kinsects">Насекомые</string>
+      
+  <string name="kinsect_attack_type">Тип атаки</string>
+      
+  <string name="kinsect_attack_type_sever">Север</string>
+      
+  <string name="kinsect_attack_type_blunt">Тупой</string>
+      
+  <string name="kinsect_dust_effect">Эффект пыли</string>
+      
+  <string name="kinsect_dust_effect_poison">Яд</string>
+      
+  <string name="kinsect_dust_effect_paralysis">Паралич</string>
+      
+  <string name="kinsect_dust_effect_heal">Лечить</string>
+      
+  <string name="kinsect_dust_effect_blast">Взрыв</string>
+      
+  <string name="kinsect_power">Мощность</string>
+      
+  <string name="kinsect_speed">Скорость</string>
+      
+  <string name="kinsect_heal">Лечить</string>
+      
+  <string name="tab_kinsect_detail">Деталь</string>
+      
+  <string name="tab_kinsect_tree">Семья</string>
+      
+  <string name="kinsect_final_upgrades">Финал</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SEARCH MENU ## -->
+      
+  <!-- ################# -->
+      
+  <!-- General Strings -->
+      
+  <!-- Simple descriptor for data types (including modified descriptors) -->
+      
+  <string name="type_location">Место расположения</string>
+      
+  <string name="type_monster">Монстр</string>
+      
+  <string name="type_monster_small">Монстр (маленький)</string>
+      
+  <string name="type_monster_large">Монстр (большой)</string>
+      
+  <string name="type_skilltree">Дерево способностей</string>
+      
+  <string name="type_decoration">Украшение</string>
+      
+  <string name="type_charm">Очарование</string>
+      
+  <string name="type_armor">Броня</string>
+      
+  <string name="type_weapon">Оружие</string>
+      
+  <string name="type_item">Элемент</string>
+      
+  <string name="type_item_basic">Элемент</string>
+      
+  <string name="type_item_material">Материал</string>
+      
+  <string name="type_item_ammo">Боеприпасы</string>
+      
+  <string name="type_item_misc">Разное</string>
+      
+  <string name="type_quest">Квест</string>
+      
+  <string name="type_kinsect">Кинсект</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## BOOKMARKS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_bookmarks">Закладки</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## TOOLS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_tools">Инструменты</string>
+      
+  <string name="tool_effect_duration">Продолжительность эффекта</string>
+      
+  <string name="tool_effect_recharge_time">Время перезарядки</string>
+      
+  <string name="tool_slots">Слоты</string>
+      
+  <string name="tool_type">Тип</string>
+      
+  <string name="tool_mantle">Мантия</string>
+      
+  <string name="tool_booster">Бустер</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## USER EQUIPMENT SET MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_workshop">мастерская</string>
+      
+  <string name="title_workshop_armor_selector">Селектор брони</string>
+      
+  <string name="title_workshop_charm_selector">Селектор очарования</string>
+      
+  <string name="title_workshop_weapon_selector">Селектор оружия</string>
+      
+  <string name="title_workshop_decoration_selector">Селектор украшения</string>
+      
+  <string name="title_workshop_tool_selector">Селектор инструментов</string>
+      
+  <string name="tab_workshop_builder_summary">Резюме</string>
+      
+  <string name="tab_workshop_builder_equipment">Оборудование</string>
+      
+  <string name="user_equipment_set_new_set">Новый набор</string>
+      
+  <string name="user_equipment_set_create_set">+ Создать набор</string>
+      
+  <string name="user_equipment_set_no_equipment">Нет оборудования</string>
+      
+  <string name="user_equipment_set_no_decoration">Без украшения</string>
+      
+  <string name="user_equipment_set_no_skill">Нет навыка</string>
+      
+  <string name="user_equipment_delete_set">Удалить набор</string>
+      
+  <string name="user_equipment_set_deleted">%1$s удален</string>
+      
+  <string name="user_equipment_new_set_name">Переименовать набор</string>
+      
+  <string name="user_equipment_apply">Подать заявление</string>
+      
+  <string name="user_equipment_cancel">Отмена</string>
+      
+  <string name="user_equipment_set_filter_name">Имя</string>
+      
+  <string name="user_equipment_set_filter_slot_level">Уровень слота</string>
+      
+  <string name="user_equipment_set_filter_elemental_defense">Элементальная защита</string>
+      
+  <string name="user_equipment_set_filter_add_skill">Добавить новый навык</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ABOUT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="about_body">Gathering Hall Studios - это команда дизайнеров и разработчиков с открытым исходным кодом, занимающаяся созданием высококачественных приложений для серии Monster Hunter. \n\nЕсли вы хотите присоединиться или внести свой вклад, мы всегда открыты. Свяжитесь с нами по адресу contact\@gatheringhallstudios.com или посетите наш Discord. Вы также можете посетить наш Github, чтобы просмотреть исходный код проектов данных приложения.</string>
+  
+</resources>

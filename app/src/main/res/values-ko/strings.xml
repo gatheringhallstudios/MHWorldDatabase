@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <!-- ############ -->
+      
+  <!-- ## COMMON ## -->
+      
+  <!-- ############ -->
+      
+  <!-- This covers strings that are meant to be used across the app -->
+      
+  <string name="app_name">MHWorld 데이터베이스</string>
+      
+  <string name="app_name_icon">MHWDB</string>
+      
+  <string name="action_search">검색</string>
+      
+  <string name="action_bookmark">즐겨찾기</string>
+      
+  <string name="action_filter">필터</string>
+      
+  <string name="action_clear">제거</string>
+      
+  <string name="action_cancel">취소</string>
+      
+  <string name="action_apply">적용</string>
+      
+  <string name="action_undo">실행 취소</string>
+      
+  <string name="general_no_data">여긴 아무것도 없다옹...</string>
+   
+  <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
+      
+  <string name="general_none">없음</string>
+   
+  <!-- Empty message for skill/charms subsections -->
+      
+  <!-- Rank -->
+      
+  <string name="rank_title">계급</string>
+      
+  <string name="rank_short_low">LR</string>
+      
+  <string name="rank_short_high">HR</string>
+      
+  <string name="rank_short_master">MR</string>
+      
+  <string name="rank_short_all">모두</string>
+   
+  <!-- null rank -->
+      
+  <string name="rank_low">낮음</string>
+      
+  <string name="rank_high">높음</string>
+      
+  <string name="rank_master">마스터</string>
+      
+  <string name="rank_full_low">낮은 계급</string>
+      
+  <string name="rank_full_high">높은 계급</string>
+      
+  <string name="rank_full_master">마스터 계급</string>
+      
+  <!-- Common Formatted Strings -->
+      
+  <string name="format_quantity_none">%1$d</string>
+   
+  <!-- Example: 1 -->
+      
+  <string name="format_quantity_x">x %1$d</string>
+   
+  <!-- Example: x 2 -->
+      
+  <string name="format_rarity">희귀도 %1$d</string>
+   
+  <!-- Example: Rarity 2 -->
+      
+  <string name="format_plus">%1$+d</string>
+   
+  <!-- Example: +5 -->
+      
+  <string name="format_percentage">%1$s%%</string>
+   
+  <!-- Example: 20%-->
+      
+  <string name="format_percentage_unknown">\??%</string>
+      
+  <string name="format_plus_percentage">%1$+d%%</string>
+   
+  <!-- Example: +20%-->
+      
+  <string name="format_element">%1$d (최대 %2$d)</string>
+      
+  <string name="format_element_hidden">(%1$d) (최대 %2$d)</string>
+      
+  <!-- Ailments -->
+      
+  <string name="ailment_roar_small">포효 (스몰)</string>
+      
+  <string name="ailment_roar_large">포효 (라지)</string>
+      
+  <string name="ailment_roar_extreme">포효 (익스트림)</string>
+      
+  <string name="ailment_wind_small">풍압 (스몰)</string>
+      
+  <string name="ailment_wind_large">풍압 (라지)</string>
+      
+  <string name="ailment_wind_extreme">풍압 (익스트림</string>
+      
+  <string name="ailment_tremor_small">떨림 (스몰)</string>
+      
+  <string name="ailment_tremor_large">떨림 (라지)</string>
+      
+  <string name="ailment_tremor_extreme">떨림 (익스트림)</string>
+      
+  <string name="ailment_defensedown">방어 다운</string>
+      
+  <string name="ailment_fireblight">파이어 블라이트</string>
+      
+  <string name="ailment_waterblight">워터 블라이트</string>
+      
+  <string name="ailment_thunderblight">썬더 블라이트</string>
+      
+  <string name="ailment_iceblight">아이스 블라이트</string>
+      
+  <string name="ailment_dragonblight">드래곤 블라이트</string>
+      
+  <string name="ailment_blastblight">블래스트 블라이트</string>
+      
+  <string name="ailment_poison">독</string>
+      
+  <string name="ailment_sleep">수면</string>
+      
+  <string name="ailment_paralysis">마비</string>
+      
+  <string name="ailment_bleed">블리드</string>
+      
+  <string name="ailment_stun">스턴</string>
+      
+  <string name="ailment_mud">머드</string>
+      
+  <string name="ailment_effluvia">악취</string>
+      
+  <!-- Insect glaive extract -->
+      
+  <string name="extract_orange">오렌지</string>
+      
+  <string name="extract_red">레드</string>
+      
+  <string name="extract_white">화이트</string>
+      
+  <string name="extract_green">그린</string>
+      
+  <string name="extract_orange_abbr">ORN</string>
+      
+  <string name="extract_red_abbr">RED</string>
+      
+  <string name="extract_white_abbr">WHT</string>
+      
+  <string name="extract_green_abbr">GRN</string>
+      
+  <!-- Elements and statuses -->
+      
+  <string name="element_fire">파이어</string>
+      
+  <string name="element_water">워터</string>
+      
+  <string name="element_thunder">썬더</string>
+      
+  <string name="element_ice">아이스</string>
+      
+  <string name="element_dragon">드래곤</string>
+      
+  <string name="element_non_elemental">비원소</string>
+      
+  <string name="status_poison">독</string>
+      
+  <string name="status_sleep">수면</string>
+      
+  <string name="status_paralysis">마비</string>
+      
+  <string name="status_blast">블래스트</string>
+      
+  <!-- Section Headers -->
+      
+  <!-- These aren't tied to a particular screen so they can be used anywhere -->
+      
+  <string name="header_habitat">서식지</string>
+      
+  <string name="header_weakness">약점</string>
+      
+  <string name="header_ailments">질환</string>
+      
+  <string name="header_hitzone_physical">물리적</string>
+      
+  <string name="header_hitzone_elemental">원소</string>
+      
+  <string name="header_break">브레이크</string>
+      
+  <string name="header_crafting">제작</string>
+      
+  <string name="header_gathering">출현</string>
+      
+  <string name="header_rewards">몬스터 보상</string>
+      
+  <string name="header_quest_rewards">퀘스트 보상</string>
+      
+  <string name="header_armor">갑옷</string>
+      
+  <string name="header_charms">참</string>
+      
+  <string name="header_weapons">무기</string>
+      
+  <string name="header_decorations">데코</string>
+      
+  <string name="header_required_materials">필수 재료</string>
+      
+  <string name="header_required_materials_upgrade">필수 재료 (업그레이드)</string>
+      
+  <string name="header_required_materials_craft">필수 재료 (제작)</string>
+      
+  <string name="header_skills">스킬</string>
+      
+  <string name="header_set_bonuses">세트 보너스</string>
+      
+  <string name="header_skill">스킬</string>
+      
+  <string name="header_drop">드롭</string>
+      
+  <string name="header_upgrade_from">다음에서 업그레이드:</string>
+      
+  <string name="header_components">구성품</string>
+      
+  <string name="header_armor_set_pieces">갑옷 세트 피스</string>
+      
+  <string name="header_armor_set_skills">갑옷 세트 스킬</string>
+      
+  <string name="header_active_set_bonuses">액티브 세트 보너스</string>
+      
+  <string name="header_active_skills">액티브 스킬</string>
+      
+  <string name="header_description">설명</string>
+      
+  <!-- ####################### -->
+      
+  <!-- ## Settings and Meta ## -->
+      
+  <!-- ####################### -->
+      
+  <string name="title_about">소개</string>
+      
+  <string name="title_settings">설정</string>
+      
+  <string name="title_changelog">변경 로그</string>
+      
+  <string name="label_whats_new">새로운 소식!</string>
+      
+  <string name="label_rate_app">앱을 평가해 주세요!</string>
+      
+  <string name="action_ok">확인</string>
+      
+  <string name="preference_data_language">데이터 언어</string>
+      
+  <string name="preference_weapons_attack_values">무기 트루 어택 표시</string>
+      
+  <string name="preference_data_language_description">%s을/를 사용해 이름과 설명을 표시합니다. \n변경하면 앱이 다시 시작됩니다.</string>
+      
+  <string name="preference_weapons_attack_values_description">게임은 블로티드 어택 값을 표시합니다. 대신 데미지 공식에 사용되는 실제 공격 값을 표시하려면 활성화합니다.</string>
+      
+  <string name="preference_language_default">기본</string>
+      
+  <!-- ################### -->
+      
+  <!-- ## FEATURE MENUS ## -->
+      
+  <!-- ################### -->
+      
+  <!-- ############## -->
+      
+  <!-- ## Monsters ## -->
+      
+  <!-- ############## -->
+      
+  <string name="title_monster_list">몬스터</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_monsters_list_small">스몰</string>
+      
+  <string name="tab_monsters_list_large">라지</string>
+      
+  <string name="tab_monsters_detail_summary">요약</string>
+      
+  <string name="tab_monsters_detail_damage">데미지</string>
+      
+  <string name="tab_monsters_detail_rewards_master_rank">마스터 계급</string>
+      
+  <string name="tab_monsters_detail_rewards_high_rank">높은 계급</string>
+      
+  <string name="tab_monsters_detail_rewards_low_rank">낮은 계급</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ITEMS MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_item_list">아이템</string>
+   
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_item_list_items">아이템</string>
+      
+  <string name="tab_item_list_materials">재료</string>
+      
+  <string name="tab_item_list_ammo">탄약</string>
+      
+  <string name="tab_item_list_misc">기타</string>
+      
+  <string name="tab_item_detail_summary">요약</string>
+      
+  <string name="tab_item_detail_usage">사용법</string>
+      
+  <string name="tab_item_detail_acquisition">구하기</string>
+      
+  <!-- General Strings -->
+      
+  <string name="item_price_buy">구입</string>
+      
+  <string name="item_price_sell">판매</string>
+      
+  <string name="item_capacity_carry">이동</string>
+      
+  <string name="item_rarity">희귀도</string>
+      
+  <!-- ######################## -->
+      
+  <!-- ## ITEM CRAFTING MENU ## -->
+      
+  <!-- ######################## -->
+      
+  <string name="item_crafting_list_title">아이템 제작</string>
+  <!-- Feature name used in the action bar on top -->
+      
+  <!-- General Strings -->
+      
+  <string name="item_crafting_yield">x %1$d</string>
+      
+  <string name="item_crafting_source_condition_reward">%1$s %2$s</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## WEAPON MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="weapon_final_only">파이널</string>
+      
+  <string name="weapon_final_upgrades">파이널</string>
+      
+  <!-- Weapon List Entries -->
+      
+  <string name="title_weapons">무기</string>
+      
+  <string name="title_great_sword">그레이트 소드</string>
+      
+  <string name="title_long_sword">롱소드</string>
+      
+  <string name="title_sword_and_shield">검과 방패</string>
+      
+  <string name="title_dual_blades">듀얼 블레이드</string>
+      
+  <string name="title_hammer">해머</string>
+      
+  <string name="title_hunting_horn">헌팅 호른</string>
+      
+  <string name="title_lance">랜스</string>
+      
+  <string name="title_gunlance">건랜스</string>
+      
+  <string name="title_switch_axe">도끼 변경</string>
+      
+  <string name="title_charge_blade">차지 블레이드</string>
+      
+  <string name="title_insect_glaive">곤충 글레이브</string>
+      
+  <string name="title_light_bowgun">라이트 보우건</string>
+      
+  <string name="title_heavy_bowgun">헤비 보우건</string>
+      
+  <string name="title_bow">활</string>
+      
+  <!-- Tab Headers -->
+      
+  <string name="tab_weapon_normal">노멀</string>
+      
+  <string name="tab_weapon_kulve">컬브</string>
+      
+  <string name="tab_weapon_detail">디테일</string>
+      
+  <string name="tab_weapon_tree">패밀리</string>
+      
+  <string name="filter_title_show_only">다음만 표시</string>
+      
+  <string name="filter_title_sort_by">정렬 기준</string>
+      
+  <!-- General Strings -->
+      
+  <string name="weapon_attack">공격</string>
+      
+  <string name="weapon_attack_true">공격 (트루)</string>
+      
+  <string name="weapon_sharpness">날카로움</string>
+      
+  <string name="weapon_element">요소</string>
+      
+  <string name="weapon_element_none">없음</string>
+      
+  <string name="weapon_defense">방어</string>
+      
+  <string name="weapon_affinity">회심</string>
+      
+  <string name="weapon_handicraft">(핸디크래프트 포함)</string>
+      
+  <string name="weapon_elderseal">엘더 씰</string>
+      
+  <string name="weapon_elderseal_none">없음</string>
+      
+  <string name="weapon_elderseal_low">낮음</string>
+      
+  <string name="weapon_elderseal_average">평균</string>
+      
+  <string name="weapon_elderseal_high">높음</string>
+      
+  <string name="weapon_blade_phial_type">약병 유형</string>
+      
+  <string name="weapon_phial_exhaust">배출</string>
+      
+  <string name="weapon_phial_power">파워</string>
+      
+  <string name="weapon_phial_poison">독</string>
+      
+  <string name="weapon_phial_dragon">드래곤</string>
+      
+  <string name="weapon_phial_power_element">파워 요소</string>
+      
+  <string name="weapon_phial_paralysis">마비</string>
+      
+  <string name="weapon_phial_impact">임팩트</string>
+      
+  <string name="weapon_kinsect_bonus">킨섹트 보너스</string>
+      
+  <string name="weapon_kinsect_bonus_sever">절단</string>
+      
+  <string name="weapon_kinsect_bonus_speed">스피드</string>
+      
+  <string name="weapon_kinsect_bonus_element">요소</string>
+      
+  <string name="weapon_kinsect_bonus_health">건강</string>
+      
+  <string name="weapon_kinsect_bonus_stamina">스태미나</string>
+      
+  <string name="weapon_kinsect_bonus_blunt">블런트</string>
+      
+  <string name="weapon_kinsect_bonus_spirit_strength">스피릿/힘</string>
+      
+  <string name="weapon_kinsect_bonus_stamina_health">스태미나/건강</string>
+      
+  <string name="weapon_gunlance_shelling">포격</string>
+      
+  <string name="weapon_gunlance_shelling_long">롱</string>
+      
+  <string name="weapon_gunlance_shelling_normal">노멀</string>
+      
+  <string name="weapon_gunlance_shelling_wide">와이드</string>
+      
+  <string name="weapon_hunting_horn_notes">노트</string>
+      
+  <string name="weapon_hunting_horn_melodies">멜로디</string>
+      
+  <string name="weapon_hunting_horn_effect1">효과 1</string>
+      
+  <string name="weapon_hunting_horn_effect2">효과 2</string>
+      
+  <string name="weapon_hunting_horn_duration">지속 시간</string>
+      
+  <string name="weapon_hunting_horn_extension">연장</string>
+      
+  <string name="weapon_bow_coatings">코팅</string>
+      
+  <string name="weapon_bow_coatings_paralysis">마비</string>
+      
+  <string name="weapon_bow_coatings_sleep">수면</string>
+      
+  <string name="weapon_bow_coatings_power">파워</string>
+      
+  <string name="weapon_bow_coatings_poison">독</string>
+      
+  <string name="weapon_bow_coatings_close_range">닫기</string>
+      
+  <string name="weapon_bow_coatings_blast">블래스트</string>
+      
+  <string name="weapon_bowgun_deviation">일탈</string>
+      
+  <string name="weapon_bowgun_special_ammo">특수 탄약</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernblast">와이번 블래스트</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernheart">와이번 하트</string>
+      
+  <string name="weapon_bowgun_special_ammo_wyvernsnipe">와이번 스나이프</string>
+      
+  <string name="weapon_bowgun_ammo_types">탄약 유형</string>
+      
+  <string name="weapon_bowgun_ammo_normal">노멀 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_pierce">피어스 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_spread">스프레드 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sticky">스티키 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_cluster">클러스터 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_recover">회복 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_poison">독 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_paralysis">마비 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_sleep">수면 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_exhaust">배출 %1$d</string>
+      
+  <string name="weapon_bowgun_ammo_flaming">플레이밍</string>
+      
+  <string name="weapon_bowgun_ammo_thunder">썬더</string>
+      
+  <string name="weapon_bowgun_ammo_dragon">드래곤</string>
+      
+  <string name="weapon_bowgun_ammo_water">워터</string>
+      
+  <string name="weapon_bowgun_ammo_freeze">프리즈</string>
+      
+  <string name="weapon_bowgun_ammo_slicing">슬라이싱</string>
+      
+  <string name="weapon_bowgun_ammo_wyvern">와이번</string>
+      
+  <string name="weapon_bowgun_ammo_demon">데몬</string>
+      
+  <string name="weapon_bowgun_ammo_armor">갑옷</string>
+      
+  <string name="weapon_bowgun_ammo_tranq">Tranq</string>
+      
+  <string name="weapon_bowgun_ammo_shot_normal">노멀</string>
+      
+  <string name="weapon_bowgun_ammo_shot_rapid_fire">고속</string>
+      
+  <string name="weapon_bowgun_ammo_shot_auto_reload">자동 재장전</string>
+      
+  <string name="weapon_bowgun_ammo_shot_wyvern">와이번</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_slow">아주 느림</string>
+      
+  <string name="weapon_bowgun_ammo_reload_slow">느림</string>
+      
+  <string name="weapon_bowgun_ammo_reload_normal">노멀</string>
+      
+  <string name="weapon_bowgun_ammo_reload_fast">빠름</string>
+      
+  <string name="weapon_bowgun_ammo_reload_very_fast">아주 빠름</string>
+      
+  <string name="weapon_bowgun_shot_type_rcl">유형 + 반동</string>
+      
+  <string name="weapon_bowgun_capacity">캡</string>
+      
+  <string name="weapon_bowgun_reload">재장전</string>
+      
+  <string name="weapon_bowgun_recoil">RCL</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ARMOR MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_armor">갑옷</string>
+      
+  <!-- Tab headers -->
+      
+  <string name="tab_armor_detail">디테일</string>
+      
+  <string name="tab_armor_set_summary">갑옷 세트 디테일</string>
+      
+  <!-- General Strings -->
+      
+  <string name="armor_defense_value">%1$d - %2$d (%3$d)</string>
+   
+  <!-- Example: 32 - 64 (70) -->
+      
+  <string name="armor_detail_piece_bonus">%1$d-조각 보너스:</string>
+   
+  <!-- Examples: 1-piece bonus: -->
+      
+  <string name="armor_detail_vs_fire">Vs. 파이어</string>
+      
+  <string name="armor_detail_vs_water">Vs. 워터</string>
+      
+  <string name="armor_detail_vs_thunder">Vs. 썬더</string>
+      
+  <string name="armor_detail_vs_ice">Vs. 아이스</string>
+      
+  <string name="armor_detail_vs_dragon">Vs. 드래곤</string>
+      
+  <string name="armor_detail_defense">방어</string>
+      
+  <string name="armor_detail_slots">슬롯</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SKILLS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_skills">스킬</string>
+      
+  <!-- General Strings -->
+      
+  <string name="title_skill_level">레벨</string>
+      
+  <string name="level_qty">레벨 %1$d</string>
+   
+  <!-- Example: Level 1 -->
+      
+  <string name="level_short_qty">레벨 %1$d</string>
+   
+  <!-- Example: Lv 2 -->
+      
+  <!-- ###################### -->
+      
+  <!-- ## DECORATIONS MENU ## -->
+      
+  <!-- ###################### -->
+      
+  <string name="title_decorations">데코</string>
+      
+  <!-- General Strings -->
+      
+  <string name="decorations_chance_mysterious">신비한 페이스톤</string>
+      
+  <string name="decorations_chance_glowing">빛나는 페이스톤</string>
+      
+  <string name="decorations_chance_worn">낡은 페이스톤</string>
+      
+  <string name="decorations_chance_warped">뒤틀린 페이스톤</string>
+      
+  <string name="decorations_chance_ancient">고대 페이스톤</string>
+      
+  <string name="decorations_chance_carved">조각된 페이스톤</string>
+      
+  <string name="decorations_chance_sealed">봉인된 페이스톤</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## CHARMS MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_charms">참</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## LOCATIONS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_locations">위치</string>
+      
+  <!-- Section Headers -->
+      
+  <string name="header_location_area">지역 %1$d</string>
+      
+  <string name="header_location_base_camps">베이스 캠프</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## QUEST MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_quests">퀘스트</string>
+      
+  <string name="quest_category_assigned">할당됨</string>
+      
+  <string name="quest_category_optional">선택</string>
+      
+  <string name="quest_category_event">이벤트</string>
+      
+  <string name="quest_category_arena">아레나</string>
+      
+  <string name="quest_category_challenge">챌린지</string>
+      
+  <string name="quest_category_special">특별 과제</string>
+      
+  <string name="quest_category_special_abbr">SP</string>
+      
+  <string name="quest_category_combined">%s%s %d★</string>
+      
+  <string name="tab_quest_summary">요약</string>
+      
+  <string name="tab_quest_rewards">보상</string>
+      
+  <string name="quest_group">그룹 %s</string>
+      
+  <string name="quest_label_objective">목표</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## KINSECT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="title_kinsects">킨섹트</string>
+      
+  <string name="kinsect_attack_type">어택 유형</string>
+      
+  <string name="kinsect_attack_type_sever">절단</string>
+      
+  <string name="kinsect_attack_type_blunt">블런트</string>
+      
+  <string name="kinsect_dust_effect">더스트 효과</string>
+      
+  <string name="kinsect_dust_effect_poison">독</string>
+      
+  <string name="kinsect_dust_effect_paralysis">마비</string>
+      
+  <string name="kinsect_dust_effect_heal">회복</string>
+      
+  <string name="kinsect_dust_effect_blast">블래스트</string>
+      
+  <string name="kinsect_power">파워</string>
+      
+  <string name="kinsect_speed">스피드</string>
+      
+  <string name="kinsect_heal">회복</string>
+      
+  <string name="tab_kinsect_detail">디테일</string>
+      
+  <string name="tab_kinsect_tree">패밀리</string>
+      
+  <string name="kinsect_final_upgrades">파이널</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## SEARCH MENU ## -->
+      
+  <!-- ################# -->
+      
+  <!-- General Strings -->
+      
+  <!-- Simple descriptor for data types (including modified descriptors) -->
+      
+  <string name="type_location">위치</string>
+      
+  <string name="type_monster">몬스터</string>
+      
+  <string name="type_monster_small">몬스터 (스몰)</string>
+      
+  <string name="type_monster_large">몬스터 (라지)</string>
+      
+  <string name="type_skilltree">스킬 트리</string>
+      
+  <string name="type_decoration">데코</string>
+      
+  <string name="type_charm">참</string>
+      
+  <string name="type_armor">갑옷</string>
+      
+  <string name="type_weapon">무기</string>
+      
+  <string name="type_item">아이템</string>
+      
+  <string name="type_item_basic">아이템</string>
+      
+  <string name="type_item_material">재료</string>
+      
+  <string name="type_item_ammo">탄약</string>
+      
+  <string name="type_item_misc">기타 아이템</string>
+      
+  <string name="type_quest">퀘스트</string>
+      
+  <string name="type_kinsect">킨섹트</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## BOOKMARKS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_bookmarks">즐겨찾기</string>
+      
+  <!-- #################### -->
+      
+  <!-- ## TOOLS MENU ## -->
+      
+  <!-- #################### -->
+      
+  <string name="title_tools">도구</string>
+      
+  <string name="tool_effect_duration">효과 지속 시간</string>
+      
+  <string name="tool_effect_recharge_time">재충전 시간</string>
+      
+  <string name="tool_slots">슬롯</string>
+      
+  <string name="tool_type">유형</string>
+      
+  <string name="tool_mantle">맨틀</string>
+      
+  <string name="tool_booster">부스터</string>
+      
+  <!-- ################# -->
+      
+  <!-- ## USER EQUIPMENT SET MENU ## -->
+      
+  <!-- ################# -->
+      
+  <string name="title_workshop">워크숍</string>
+      
+  <string name="title_workshop_armor_selector">갑옷 선택기</string>
+      
+  <string name="title_workshop_charm_selector">참 선택기</string>
+      
+  <string name="title_workshop_weapon_selector">무기 선택기</string>
+      
+  <string name="title_workshop_decoration_selector">데코 선택기</string>
+      
+  <string name="title_workshop_tool_selector">도구 선택기</string>
+      
+  <string name="tab_workshop_builder_summary">요약</string>
+      
+  <string name="tab_workshop_builder_equipment">장비</string>
+      
+  <string name="user_equipment_set_new_set">새로운 세트</string>
+      
+  <string name="user_equipment_set_create_set">+ 세트 만들기</string>
+      
+  <string name="user_equipment_set_no_equipment">장비 없음</string>
+      
+  <string name="user_equipment_set_no_decoration">데코 없음</string>
+      
+  <string name="user_equipment_set_no_skill">스킬 없음</string>
+      
+  <string name="user_equipment_delete_set">세트 삭제</string>
+      
+  <string name="user_equipment_set_deleted">%1$s이/가 삭제되었습니다.</string>
+      
+  <string name="user_equipment_new_set_name">세트 이름 변경</string>
+      
+  <string name="user_equipment_apply">적용</string>
+      
+  <string name="user_equipment_cancel">취소</string>
+      
+  <string name="user_equipment_set_filter_name">이름</string>
+      
+  <string name="user_equipment_set_filter_slot_level">슬롯 레벨</string>
+      
+  <string name="user_equipment_set_filter_elemental_defense">원소 방어</string>
+      
+  <string name="user_equipment_set_filter_add_skill">새로운 스킬 추가</string>
+      
+  <!-- ################ -->
+      
+  <!-- ## ABOUT MENU ## -->
+      
+  <!-- ################ -->
+      
+  <string name="about_body">Gathering Hall Studios는 Monster Hunter 시리즈용 고품질 앱을 만드는 데 전념하는 디자이너와 개발자로 구성된 오픈 소스 팀입니다. \n\n참여나 기여는 늘 환영입니다. contact\@gatheringhallstudios.com으로 문의하거나 Discord를 방문하세요. Github를 방문해 앱 데이터 프로젝트의 소스 코드를 볼 수도 있습니다.</string>
+  
+</resources>
