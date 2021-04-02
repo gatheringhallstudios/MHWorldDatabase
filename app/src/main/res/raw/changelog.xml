@@ -1,5 +1,17 @@
 <changelog>
     <release
+        versionCode="24"
+        versionName="Version 2.1.2">
+        <info>
+            &#9;- Fixed a crash related to Quests.
+            [br]&#9;- Added UI translations for all supported languages!
+            [br]
+        </info>
+        <info>
+            Special thanks to our Open Collective supporters for making this possible!
+        </info>
+    </release>
+    <release
         versionCode="23"
         versionName="Version 2.1.1">
         <info>

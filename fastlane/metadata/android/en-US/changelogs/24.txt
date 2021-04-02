@@ -1,0 +1,4 @@
+ - Fixed a crash related to Quests in other languages.
+ - Added UI translations for all supported languages!
+
+Special thanks to our supporters at Open Collective for making this possible!
