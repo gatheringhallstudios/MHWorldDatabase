@@ -1,9 +1,12 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
 
-// This handles both kotlin and java. Use kapt instead of annotationProcessor
-apply plugin: 'kotlin-kapt'
+    // This handles both kotlin and java. Use kapt instead of annotationProcessor
+    id 'kotlin-kapt'
+}
+
 
 // Update this to update the database on the next build
 // This is also used to populate populate MHWDatabase.java configuration
@@ -19,11 +22,11 @@ android {
             keyPassword GHSKeyPW
         }
     }
-    compileSdkVersion 28
+    compileSdkVersion 34
     defaultConfig {
         applicationId "com.gatheringhallstudios.mhworlddatabase"
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 24
         versionName "2.1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -62,15 +65,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_17
     }
-    lintOptions {
+    namespace 'com.gatheringhallstudios.mhworlddatabase'
+    lint {
         abortOnError false
-
         // this application is open source, so we can't force translators to always translate.
         // disable it so we can at least fallback to english without explicit errors.
         disable 'MissingTranslation'
@@ -113,16 +116,13 @@ dependencies {
     /*
      * Flexbox layout
      */
-    implementation 'com.google.android:flexbox:1.1.0'
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     /*
      * Leak Canary
      * https://github.com/square/leakcanary
      */
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
-    // Optional, if you use support library fragments:
-    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
 
     /*
      * Android Kotlin Extensions
@@ -135,11 +135,11 @@ dependencies {
     def architecture_version = "1.1.1"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     kapt 'androidx.lifecycle:lifecycle-compiler:2.2.0'
-    implementation 'androidx.room:room-runtime:2.2.5'
-    kapt 'androidx.room:room-compiler:2.2.5'
+    implementation 'androidx.room:room-runtime:2.5.2'
+    kapt 'androidx.room:room-compiler:2.5.2'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
-    testImplementation 'androidx.room:room-testing:2.2.5'
-    androidTestImplementation 'android.arch.persistence.room:testing:2.2.0'
+    testImplementation 'androidx.room:room-testing:2.5.2'
+    androidTestImplementation 'androidx.room:room-testing:2.5.2'
 
     /*
      * Android Navigation Component
@@ -167,7 +167,6 @@ dependencies {
      * Groupie
      * https://github.com/lisawray/groupie
      */
-    implementation 'com.xwray:groupie:2.3.0'
     implementation 'com.xwray:groupie:2.3.0'
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
 

@@ -43,8 +43,7 @@ inline fun <K, V> androidx.collection.LruCache<K, V>.getOrPut(key: K, build: () 
 class CachedDrawable(innerDrawable: Drawable, key: String? = null) : DrawableWrapper(innerDrawable) {
     private val cacheId = key ?: UUID.randomUUID().toString()
 
-    override fun draw(canvas: Canvas?) {
-        if (canvas == null) return
+    override fun draw(canvas: Canvas) {
 
         val width = bounds.width()
         val height = bounds.height()
