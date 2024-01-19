@@ -23,7 +23,7 @@ val TAG = "MHWorldAssetUtil"
  * Returns null on failure, or default resource if provided.
  */
 fun Context.getAssetDrawable(
-        path: String?,
+        path: String,
         @DrawableRes default: Int = R.drawable.ic_question_mark): Drawable? {
     return try {
         this.assets.open(path).use {
@@ -32,7 +32,7 @@ fun Context.getAssetDrawable(
     } catch (ex: Exception) {
         // Show a log error if we were expecting to get something.
         // If path is null or empty we weren't expecting anything
-        if (path != null && path != "") {
+        if (path != "") {
             if (ex is FileNotFoundException) {
                 Log.e(TAG, "Failed to load asset file $path: Does not exist")
             } else {

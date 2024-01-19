@@ -24,7 +24,7 @@ class DashedDividerDrawable(context: Context): Drawable() {
         return dpToPx(1)
     }
 
-    override fun draw(canvas: Canvas?) {
+    override fun draw(canvas: Canvas) {
         val effect = DashPathEffect(floatArrayOf(dashWidth.toFloat(), dashGap.toFloat()), 0F)
         val paint = Paint()
         paint.pathEffect = effect
@@ -38,7 +38,7 @@ class DashedDividerDrawable(context: Context): Drawable() {
         path.moveTo(bounds.left.toFloat(), y)
         path.lineTo(bounds.right.toFloat(), y)
 
-        canvas?.drawPath(path, paint)
+        canvas.drawPath(path, paint)
     }
 
     override fun setAlpha(alpha: Int) {
