@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.*
  * Each one represents a single armor in an armor set.
  */
 class QuestListDetailItem(val quest: QuestBase) : Item() {
+
     override fun getLayout() = R.layout.cell_icon_verbose_label_text
 
     override fun bind(viewHolder: ViewHolder, position: Int) {

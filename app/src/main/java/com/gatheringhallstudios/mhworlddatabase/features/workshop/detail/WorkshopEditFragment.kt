@@ -146,7 +146,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(weapon!!)
                     viewModel.deleteUserEquipment(weapon!!.entityId(), userEquipmentSet.id, weapon.type())
                     viewModel.updateCardState(0, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(0, true) },
                 onContract = { viewModel.updateCardState(0, false) })
@@ -165,7 +164,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(headArmor!!)
                     viewModel.deleteUserEquipment(headArmor!!.entityId(), userEquipmentSet.id, headArmor!!.type())
                     viewModel.updateCardState(1, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(1, true) },
                 onContract = { viewModel.updateCardState(1, false) })
@@ -184,7 +182,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(armArmor!!)
                     viewModel.deleteUserEquipment(armArmor!!.entityId(), userEquipmentSet.id, armArmor.type())
                     viewModel.updateCardState(2, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(2, true) },
                 onContract = { viewModel.updateCardState(2, false) })
@@ -203,7 +200,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(chestArmor!!)
                     viewModel.deleteUserEquipment(chestArmor!!.entityId(), userEquipmentSet.id, chestArmor.type())
                     viewModel.updateCardState(3, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(3, true) },
                 onContract = { viewModel.updateCardState(3, false) })
@@ -222,7 +218,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(waistArmor!!)
                     viewModel.deleteUserEquipment(waistArmor!!.entityId(), userEquipmentSet.id, waistArmor.type())
                     viewModel.updateCardState(4, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(4, true) },
                 onContract = { viewModel.updateCardState(4, false) })
@@ -241,7 +236,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(legArmor!!)
                     viewModel.deleteUserEquipment(legArmor!!.entityId(), userEquipmentSet.id, legArmor.type())
                     viewModel.updateCardState(5, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(5, true) },
                 onContract = { viewModel.updateCardState(5, false) })
@@ -260,7 +254,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(charm!!)
                     viewModel.deleteUserEquipment(charm!!.entityId(), userEquipmentSet.id, charm.type())
                     viewModel.updateCardState(6, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(6, true) },
                 onContract = { viewModel.updateCardState(6, false) })
@@ -276,7 +269,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(tool1!!)
                     viewModel.deleteUserEquipment(tool1!!.entityId(), userEquipmentSet.id, tool1.type())
                     viewModel.updateCardState(7, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(7, true) },
                 onContract = { viewModel.updateCardState(7, false) })
@@ -294,7 +286,6 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                     viewModel.activeUserEquipmentSet.value?.equipment?.remove(tool2!!)
                     viewModel.deleteUserEquipment(tool2!!.entityId(), userEquipmentSet.id, tool2.type())
                     viewModel.updateCardState(8, false)
-                    refreshFragment()
                 },
                 onExpand = { viewModel.updateCardState(8, true) },
                 onContract = { viewModel.updateCardState(8, false) })
@@ -411,13 +402,5 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
             else -> {
             }
         }
-    }
-
-    private fun refreshFragment() {
-        val currentFragment = this
-        val fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction.detach(currentFragment)
-        fragmentTransaction.attach(currentFragment)
-        fragmentTransaction.commit()
     }
 }

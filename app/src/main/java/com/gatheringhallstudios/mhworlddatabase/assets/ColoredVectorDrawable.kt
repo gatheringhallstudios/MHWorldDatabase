@@ -28,7 +28,7 @@ class ColoredVectorDrawable(
         result
     }
 
-    override fun draw(canvas: Canvas?) {
+    override fun draw(canvas: Canvas) {
         basePath?.fillColor = color
         super.draw(canvas)
     }

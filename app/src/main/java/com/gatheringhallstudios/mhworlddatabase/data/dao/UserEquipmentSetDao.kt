@@ -78,19 +78,19 @@ abstract class UserEquipmentSetDao {
     """)
     abstract fun deleteUserEquipmentSetDecorations(equipmentSetId: Int)
 
-    @Query("""INSERT INTO user_equipment_sets VALUES (NULL, :name)""")
+    @Query("""INSERT INTO user_equipment_sets (id, name) VALUES (NULL, :name)""")
     abstract fun createUserEquipmentSet(name: String): Long
 
     @Query("""UPDATE user_equipment_sets SET name=:name WHERE id = :equipmentSetId""")
     abstract fun renameUserEquipmentSet(name: String, equipmentSetId: Int)
 
-    @Query("""INSERT INTO user_equipment_set_equipment VALUES (NULL, :id, :type, :equipmentSetId, :orderId )""")
+    @Query("""INSERT INTO user_equipment_set_equipment (id, dataId, dataType, equipmentSetID, orderId) VALUES (NULL, :id, :type, :equipmentSetId, :orderId )""")
     abstract fun createUserEquipmentEquipment(id: Int, type: DataType, equipmentSetId: Int, orderId: Int)
 
     @Query("""DELETE FROM user_equipment_set_equipment WHERE dataId = :dataId AND dataType = :type AND equipmentSetId = :equipmentSetId""")
     abstract fun deleteUserEquipmentEquipment(dataId: Int, type: DataType, equipmentSetId: Int)
 
-    @Query("""INSERT INTO user_equipment_set_decorations VALUES (NULL, :equipmentSetId, :dataId, :dataType, :decorationId, :slotNumber)""")
+    @Query("""INSERT INTO user_equipment_set_decorations (id, equipmentSetId, dataId, dataType, decorationId, slotNumber) VALUES (NULL, :equipmentSetId, :dataId, :dataType, :decorationId, :slotNumber)""")
     abstract fun createUserEquipmentDecoration(equipmentSetId: Int, dataId: Int, slotNumber: Int, dataType: DataType, decorationId: Int)
 
     @Query("""DELETE FROM user_equipment_set_decorations WHERE dataId = :dataId AND dataType = :type AND equipmentSetId = :equipmentSetId AND decorationId = :decorationId AND slotNumber = :targetSlot""")

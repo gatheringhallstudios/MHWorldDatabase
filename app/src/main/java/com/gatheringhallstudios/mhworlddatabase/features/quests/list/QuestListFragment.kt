@@ -35,7 +35,7 @@ class QuestListFragment : RecyclerViewFragment() {
         this.setAdapter(adapter)
 
         // Add dividers between items
-        recyclerView.addItemDecoration(HeaderItemDivider(DashedDividerDrawable(context!!)))
+        recyclerView.addItemDecoration(HeaderItemDivider(DashedDividerDrawable(requireContext())))
 
         val categories = arguments?.getSerializable(ARG_QUEST_CATEGORY) as? Array<QuestCategory> ?: emptyArray()
         viewModel.getQuests(categories).observe(viewLifecycleOwner, Observer { quests ->
