@@ -27,6 +27,7 @@ android {
         applicationId "com.gatheringhallstudios.mhworlddatabase"
         minSdkVersion 19
         targetSdkVersion 34
+        multiDexEnabled true
         versionCode 25
         versionName "2.1.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -103,6 +104,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     /*
      * Testing
@@ -167,14 +169,14 @@ dependencies {
      * Groupie
      * https://github.com/lisawray/groupie
      */
-    implementation 'com.xwray:groupie:2.3.0'
-    implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
+    implementation 'com.github.lisawray.groupie:groupie:2.3'
+    implementation 'com.github.lisawray.groupie:groupie-kotlin-android-extensions:2.3'
 
     /*
      * VectorMaster
      * https://github.com/harjot-oberai/VectorMaster
      */
-    implementation 'com.sdsmdg.harjot:vectormaster:1.1.3'
+    implementation 'com.github.harjot-oberai:VectorMaster:357124ddde'
 
     /*
     Change log extension
@@ -185,10 +187,10 @@ dependencies {
     /*
     View pager extension
      */
-    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+    implementation 'com.tbuonomo:dotsindicator:4.2'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
 
-    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
+    implementation 'com.github.wasabeef:recyclerview-animators:3.0.0'
 }
 
 apply plugin: 'de.undercouch.download'

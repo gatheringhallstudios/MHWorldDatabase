@@ -1,7 +1,9 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import android.app.Application
+import android.content.Context
 import android.os.Build
+import androidx.multidex.MultiDex
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
@@ -21,4 +23,10 @@ class MhwApplication : Application() {
         AppSettings.bindValidLanguages(languages)
 
     }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
+
 }
