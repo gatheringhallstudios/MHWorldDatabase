@@ -24,7 +24,6 @@ allprojects {
         mavenCentral()
 
         maven { url "https://jitpack.io" }
-        jcenter() // Deprecated but there's a few libraries only available here
     }
 }
 
