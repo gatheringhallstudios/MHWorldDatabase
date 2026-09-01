@@ -14,11 +14,11 @@
       
   <string name="action_search">Chercher</string>
       
-  <string name="action_bookmark">Signet</string>
+  <string name="action_bookmark">Favoris</string>
       
-  <string name="action_filter">Filtre</string>
+  <string name="action_filter">Filtres</string>
       
-  <string name="action_clear">Enlever</string>
+  <string name="action_clear">Supprimer</string>
       
   <string name="action_cancel">Annuler</string>
       
@@ -26,7 +26,7 @@
       
   <string name="action_undo">Annuler</string>
       
-  <string name="general_no_data">Rien ici, Meowster…</string>
+  <string name="general_no_data">Rien ici, Miamaitre.sse …</string>
    
   <!-- Generic message that is shown when a menu/tab does not contain any data. This is a reference to what the Palico says when he can't find anything -->
       
@@ -38,19 +38,19 @@
       
   <string name="rank_title">Rang</string>
       
-  <string name="rank_short_low">G / D</string>
+  <string name="rank_short_low">Novice</string>
       
-  <string name="rank_short_high">HEURE</string>
+  <string name="rank_short_high">Expert</string>
       
-  <string name="rank_short_master">M</string>
+  <string name="rank_short_master">Maître</string>
       
-  <string name="rank_short_all">TOUT</string>
+  <string name="rank_short_all">Tout</string>
    
   <!-- null rank -->
       
-  <string name="rank_low">Faible</string>
+  <string name="rank_low">Novice</string>
       
-  <string name="rank_high">Haut</string>
+  <string name="rank_high">Expert</string>
       
   <string name="rank_master">Maître</string>
       
@@ -100,11 +100,11 @@
       
   <string name="ailment_roar_extreme">Rugissement (extrême)</string>
       
-  <string name="ailment_wind_small">Pression du vent (petite)</string>
+  <string name="ailment_wind_small">Bourrasques (petite)</string>
       
-  <string name="ailment_wind_large">Pression du vent (grande)</string>
+  <string name="ailment_wind_large">Bourrasques (grande)</string>
       
-  <string name="ailment_wind_extreme">Pression du vent (extrême)</string>
+  <string name="ailment_wind_extreme">Bourrasques (extrême)</string>
       
   <string name="ailment_tremor_small">Tremblement (petit)</string>
       
@@ -112,29 +112,29 @@
       
   <string name="ailment_tremor_extreme">Tremblement (extrême)</string>
       
-  <string name="ailment_defensedown">Défense vers le bas</string>
+  <string name="ailment_defensedown">Défense Réduite</string>
+     
+  <string name="ailment_fireblight">Fléau-Feu</string>
       
-  <string name="ailment_fireblight">FireBlight</string>
+  <string name="ailment_waterblight">Fléau-Eau</string>
       
-  <string name="ailment_waterblight">WaterBlight</string>
+  <string name="ailment_thunderblight">Fléau-Foudre</string>
       
-  <string name="ailment_thunderblight">ThunderBlight</string>
+  <string name="ailment_iceblight">Fléau-Glace</string>
       
-  <string name="ailment_iceblight">IceBlight</string>
+  <string name="ailment_dragonblight">Fléau-Dragon</string>
       
-  <string name="ailment_dragonblight">DragonBlight</string>
-      
-  <string name="ailment_blastblight">BlastBlight</string>
+  <string name="ailment_blastblight">Fléau-Explosion</string>
       
   <string name="ailment_poison">Poison</string>
       
-  <string name="ailment_sleep">Dormir</string>
+  <string name="ailment_sleep">Sommeil</string>
       
   <string name="ailment_paralysis">Paralysie</string>
       
-  <string name="ailment_bleed">Saigner</string>
+  <string name="ailment_bleed">Saignement</string>
       
-  <string name="ailment_stun">Étourdir</string>
+  <string name="ailment_stun">Étourdissement</string>
       
   <string name="ailment_mud">Boue</string>
       
@@ -144,19 +144,19 @@
       
   <string name="extract_orange">Orange</string>
       
-  <string name="extract_red">rouge</string>
+  <string name="extract_red">Rouge</string>
       
-  <string name="extract_white">blanc</string>
+  <string name="extract_white">Blanc</string>
       
   <string name="extract_green">Vert</string>
       
-  <string name="extract_orange_abbr">ORN</string>
+  <string name="extract_orange_abbr">ORANGE</string>
       
   <string name="extract_red_abbr">ROUGE</string>
       
   <string name="extract_white_abbr">BLANC</string>
       
-  <string name="extract_green_abbr">GRN</string>
+  <string name="extract_green_abbr">VERT</string>
       
   <!-- Elements and statuses -->
       
@@ -164,7 +164,7 @@
       
   <string name="element_water">Eau</string>
       
-  <string name="element_thunder">Tonnerre</string>
+  <string name="element_thunder">Foudre</string>
       
   <string name="element_ice">Glace</string>
       
@@ -174,11 +174,11 @@
       
   <string name="status_poison">Poison</string>
       
-  <string name="status_sleep">Dormir</string>
+  <string name="status_sleep">Sommeil</string>
       
   <string name="status_paralysis">Paralysie</string>
       
-  <string name="status_blast">Détruire</string>
+  <string name="status_blast">Explosion</string>
       
   <!-- Section Headers -->
       
@@ -198,7 +198,7 @@
       
   <string name="header_crafting">Artisanat</string>
       
-  <string name="header_gathering">Rassemblement</string>
+  <string name="header_gathering">Récolte</string>
       
   <string name="header_rewards">Récompenses de monstre</string>
       
@@ -206,11 +206,11 @@
       
   <string name="header_armor">Armure</string>
       
-  <string name="header_charms">Breloques</string>
+  <string name="header_charms">Bijoux</string>
       
   <string name="header_weapons">Armes</string>
       
-  <string name="header_decorations">Décorations</string>
+  <string name="header_decorations">Joyaux</string>
       
   <string name="header_required_materials">Matériaux nécessaires</string>
       
@@ -258,7 +258,7 @@
       
   <string name="action_ok">OK</string>
       
-  <string name="preference_data_language">Langue des données</string>
+  <string name="preference_data_language">Langues</string>
       
   <string name="preference_weapons_attack_values">Afficher la véritable attaque de l\'arme</string>
       
@@ -296,9 +296,9 @@
       
   <string name="tab_monsters_detail_rewards_master_rank">Rang de maître</string>
       
-  <string name="tab_monsters_detail_rewards_high_rank">Haut rang</string>
+  <string name="tab_monsters_detail_rewards_high_rank">Expert</string>
       
-  <string name="tab_monsters_detail_rewards_low_rank">Rang inférieur</string>
+  <string name="tab_monsters_detail_rewards_low_rank">Novice</string>
       
   <!-- ################ -->
       
@@ -306,13 +306,13 @@
       
   <!-- ################ -->
       
-  <string name="title_item_list">Articles</string>
+  <string name="title_item_list">Objets</string>
    
   <!-- Feature name used in the action bar on top -->
       
   <!-- Tab Headers -->
       
-  <string name="tab_item_list_items">Articles</string>
+  <string name="tab_item_list_items">Objets</string>
       
   <string name="tab_item_list_materials">Matériaux</string>
       
@@ -375,21 +375,21 @@
       
   <string name="title_hammer">Marteau</string>
       
-  <string name="title_hunting_horn">Cor de chasse</string>
+  <string name="title_hunting_horn">Corne de chasse</string>
       
   <string name="title_lance">Lance</string>
       
-  <string name="title_gunlance">Lancer en fusil</string>
+  <string name="title_gunlance">Lance-canon</string>
       
-  <string name="title_switch_axe">Commutateur de hache</string>
+  <string name="title_switch_axe">Morpho-Hache</string>
       
-  <string name="title_charge_blade">Lame de charge</string>
+  <string name="title_charge_blade">Volto-Hache</string>
       
-  <string name="title_insect_glaive">Insecte Glaive</string>
+  <string name="title_insect_glaive">Insectolaive</string>
       
-  <string name="title_light_bowgun">Bowgun léger</string>
+  <string name="title_light_bowgun">Fusarbalète Leger</string>
       
-  <string name="title_heavy_bowgun">Fusil à canon lourd</string>
+  <string name="title_heavy_bowgun">Fusarbalète Lourd</string>
       
   <string name="title_bow">Arc</string>
       
@@ -401,7 +401,7 @@
       
   <string name="tab_weapon_detail">Détail</string>
       
-  <string name="tab_weapon_tree">Famille</string>
+  <string name="tab_weapon_tree">Arbre</string>
       
   <string name="filter_title_show_only">Montrer seulement</string>
       
@@ -411,23 +411,23 @@
       
   <string name="weapon_attack">Attaque</string>
       
-  <string name="weapon_attack_true">Attaque (vrai)</string>
+  <string name="weapon_attack_true">Véritable Attaque</string>
       
-  <string name="weapon_sharpness">Acuité</string>
+  <string name="weapon_sharpness">Tranchant</string>
       
   <string name="weapon_element">Élément</string>
       
-  <string name="weapon_element_none">Aucun</string>
+  <string name="weapon_element_none">Aucun éléments</string>
       
-  <string name="weapon_defense">La défense</string>
+  <string name="weapon_defense">Défense</string>
       
   <string name="weapon_affinity">Affinité</string>
       
-  <string name="weapon_handicraft">(avec artisanat)</string>
+  <string name="weapon_handicraft">Avec artisanat</string>
       
-  <string name="weapon_elderseal">Elderseal</string>
+  <string name="weapon_elderseal">Sceau des Anciens</string>
       
-  <string name="weapon_elderseal_none">Aucun</string>
+  <string name="weapon_elderseal_none">Aucun Sceaux</string>
       
   <string name="weapon_elderseal_low">Faible</string>
       
@@ -437,47 +437,47 @@
       
   <string name="weapon_blade_phial_type">Type de fiole</string>
       
-  <string name="weapon_phial_exhaust">Échappement</string>
+  <string name="weapon_phial_exhaust">Fiole de faiblesse</string>
       
-  <string name="weapon_phial_power">Puissance</string>
+  <string name="weapon_phial_power">Fiole de force</string>
       
-  <string name="weapon_phial_poison">Poison</string>
+  <string name="weapon_phial_poison">Fiole de poison</string>
       
-  <string name="weapon_phial_dragon">Dragon</string>
+  <string name="weapon_phial_dragon">Fiole dragonique</string>
       
   <string name="weapon_phial_power_element">Élément de puissance</string>
       
-  <string name="weapon_phial_paralysis">Paralysie</string>
+  <string name="weapon_phial_paralysis">Fiole de paralysie</string>
       
-  <string name="weapon_phial_impact">Impacter</string>
+  <string name="weapon_phial_impact">Fiole de choc</string>
       
   <string name="weapon_kinsect_bonus">Bonus Kinsect</string>
       
-  <string name="weapon_kinsect_bonus_sever">Rompre</string>
+  <string name="weapon_kinsect_bonus_sever">Tranchant</string>
       
   <string name="weapon_kinsect_bonus_speed">Vitesse</string>
       
   <string name="weapon_kinsect_bonus_element">Élément</string>
       
-  <string name="weapon_kinsect_bonus_health">Santé</string>
+  <string name="weapon_kinsect_bonus_health">Guérison</string>
       
   <string name="weapon_kinsect_bonus_stamina">Endurance</string>
       
-  <string name="weapon_kinsect_bonus_blunt">Cru</string>
+  <string name="weapon_kinsect_bonus_blunt">Contondant</string>
       
   <string name="weapon_kinsect_bonus_spirit_strength">Esprit/Force</string>
       
   <string name="weapon_kinsect_bonus_stamina_health">Endurance/Santé</string>
       
-  <string name="weapon_gunlance_shelling">Bombardement</string>
+  <string name="weapon_gunlance_shelling">Type de canon</string>
       
-  <string name="weapon_gunlance_shelling_long">Longue</string>
+  <string name="weapon_gunlance_shelling_long">Focus</string>
       
   <string name="weapon_gunlance_shelling_normal">Normal</string>
       
-  <string name="weapon_gunlance_shelling_wide">Large</string>
+  <string name="weapon_gunlance_shelling_wide">Frag</string>
       
-  <string name="weapon_hunting_horn_notes">Remarques</string>
+  <string name="weapon_hunting_horn_notes">Notes</string>
       
   <string name="weapon_hunting_horn_melodies">Mélodies</string>
       
@@ -489,19 +489,19 @@
       
   <string name="weapon_hunting_horn_extension">Extension</string>
       
-  <string name="weapon_bow_coatings">Revêtements</string>
+  <string name="weapon_bow_coatings">Fiole</string>
       
-  <string name="weapon_bow_coatings_paralysis">Para</string>
+  <string name="weapon_bow_coatings_paralysis">Fiole de paralysie</string>
       
-  <string name="weapon_bow_coatings_sleep">Dormir</string>
+  <string name="weapon_bow_coatings_sleep">Fiole de sommeil</string>
       
-  <string name="weapon_bow_coatings_power">Puissance</string>
+  <string name="weapon_bow_coatings_power">Fiole de force</string>
       
-  <string name="weapon_bow_coatings_poison">Poison</string>
+  <string name="weapon_bow_coatings_poison">Fiole de poison</string>
       
-  <string name="weapon_bow_coatings_close_range">Fermer</string>
+  <string name="weapon_bow_coatings_close_range">Fiole de combat</string>
       
-  <string name="weapon_bow_coatings_blast">Détruire</string>
+  <string name="weapon_bow_coatings_blast">Fiole explosive</string>
       
   <string name="weapon_bowgun_deviation">Déviation</string>
       
@@ -517,35 +517,35 @@
       
   <string name="weapon_bowgun_ammo_normal">Normal %1$d</string>
       
-  <string name="weapon_bowgun_ammo_pierce">Percer %1$d</string>
+  <string name="weapon_bowgun_ammo_pierce">Perforant %1$d</string>
       
-  <string name="weapon_bowgun_ammo_spread">Spread %1$d</string>
+  <string name="weapon_bowgun_ammo_spread">Grenaille %1$d</string>
       
-  <string name="weapon_bowgun_ammo_sticky">Sticky %1$d</string>
+  <string name="weapon_bowgun_ammo_sticky">Antiblindage %1$d</string>
       
-  <string name="weapon_bowgun_ammo_cluster">Cluster %1$d</string>
+  <string name="weapon_bowgun_ammo_cluster">Fragmentation %1$d</string>
       
-  <string name="weapon_bowgun_ammo_recover">Récupérer %1$d</string>
+  <string name="weapon_bowgun_ammo_recover">Guérison %1$d</string>
       
-  <string name="weapon_bowgun_ammo_poison">Poison %1$d</string>
+  <string name="weapon_bowgun_ammo_poison">Toxique %1$d</string>
       
   <string name="weapon_bowgun_ammo_paralysis">Paralysie %1$d</string>
       
-  <string name="weapon_bowgun_ammo_sleep">Dormir %1$d</string>
+  <string name="weapon_bowgun_ammo_sleep">Somnifère %1$d</string>
       
-  <string name="weapon_bowgun_ammo_exhaust">Échappement %1$d</string>
+  <string name="weapon_bowgun_ammo_exhaust">Lethargique %1$d</string>
       
-  <string name="weapon_bowgun_ammo_flaming">Flamboyant</string>
+  <string name="weapon_bowgun_ammo_flaming">Incendiaire</string>
       
-  <string name="weapon_bowgun_ammo_thunder">Tonnerre</string>
+  <string name="weapon_bowgun_ammo_thunder">Foudre</string>
       
-  <string name="weapon_bowgun_ammo_dragon">Dragon</string>
+  <string name="weapon_bowgun_ammo_dragon">Wyverne</string>
       
-  <string name="weapon_bowgun_ammo_water">L\'eau</string>
+  <string name="weapon_bowgun_ammo_water">Aquatique</string>
       
-  <string name="weapon_bowgun_ammo_freeze">Geler</string>
+  <string name="weapon_bowgun_ammo_freeze">Cryogénique</string>
       
-  <string name="weapon_bowgun_ammo_slicing">Tranchage</string>
+  <string name="weapon_bowgun_ammo_slicing">Tranchant</string>
       
   <string name="weapon_bowgun_ammo_wyvern">Wyvern</string>
       
@@ -553,33 +553,33 @@
       
   <string name="weapon_bowgun_ammo_armor">Armure</string>
       
-  <string name="weapon_bowgun_ammo_tranq">Tranq</string>
+  <string name="weapon_bowgun_ammo_tranq">Tranquillisant</string>
       
   <string name="weapon_bowgun_ammo_shot_normal">Normal</string>
       
-  <string name="weapon_bowgun_ammo_shot_rapid_fire">Rapide</string>
+  <string name="weapon_bowgun_ammo_shot_rapid_fire">Tir rapide</string>
       
   <string name="weapon_bowgun_ammo_shot_auto_reload">Rechargement automatique</string>
       
   <string name="weapon_bowgun_ammo_shot_wyvern">Wyvern</string>
       
-  <string name="weapon_bowgun_ammo_reload_very_slow">V. Lent</string>
+  <string name="weapon_bowgun_ammo_reload_very_slow">Très Lent</string>
       
   <string name="weapon_bowgun_ammo_reload_slow">Lent</string>
       
   <string name="weapon_bowgun_ammo_reload_normal">Normal</string>
       
-  <string name="weapon_bowgun_ammo_reload_fast">Vite</string>
+  <string name="weapon_bowgun_ammo_reload_fast">Rapide</string>
       
-  <string name="weapon_bowgun_ammo_reload_very_fast">V. Rapide</string>
+  <string name="weapon_bowgun_ammo_reload_very_fast">Très Rapide</string>
       
-  <string name="weapon_bowgun_shot_type_rcl">Type + Recul</string>
+  <string name="weapon_bowgun_shot_type_rcl">Recul</string>
       
-  <string name="weapon_bowgun_capacity">CASQUETTE</string>
+  <string name="weapon_bowgun_capacity">Capacité</string>
       
   <string name="weapon_bowgun_reload">Recharger</string>
       
-  <string name="weapon_bowgun_recoil">RCL</string>
+  <string name="weapon_bowgun_recoil">Recule</string>
       
   <!-- ################ -->
       
@@ -601,23 +601,23 @@
    
   <!-- Example: 32 - 64 (70) -->
       
-  <string name="armor_detail_piece_bonus">%1$d - Bonus à la pièce:</string>
+  <string name="armor_detail_piece_bonus">%1$d - Bonus de la pièce:</string>
    
   <!-- Examples: 1-piece bonus: -->
       
-  <string name="armor_detail_vs_fire">Contre. Feu</string>
+  <string name="armor_detail_vs_fire">Contre le Feu</string>
       
   <string name="armor_detail_vs_water">Contre. L\'eau</string>
       
-  <string name="armor_detail_vs_thunder">Contre. tonnerre</string>
+  <string name="armor_detail_vs_thunder">Contre la foudre</string>
       
-  <string name="armor_detail_vs_ice">Contre. La glace</string>
+  <string name="armor_detail_vs_ice">Contre la glace</string>
       
-  <string name="armor_detail_vs_dragon">Contre. Dragon</string>
+  <string name="armor_detail_vs_dragon">Contre le Dragonique</string>
       
   <string name="armor_detail_defense">Défense</string>
       
-  <string name="armor_detail_slots">Machines à sous</string>
+  <string name="armor_detail_slots">Emplacements</string>
       
   <!-- ################# -->
       
@@ -645,7 +645,7 @@
       
   <!-- ###################### -->
       
-  <string name="title_decorations">Décorations</string>
+  <string name="title_decorations">Joyaux</string>
       
   <!-- General Strings -->
       
@@ -669,7 +669,7 @@
       
   <!-- ################# -->
       
-  <string name="title_charms">Breloques</string>
+  <string name="title_charms">Bijoux</string>
       
   <!-- #################### -->
       
@@ -677,13 +677,13 @@
       
   <!-- #################### -->
       
-  <string name="title_locations">Emplacements</string>
+  <string name="title_locations">Zones</string>
       
   <!-- Section Headers -->
       
   <string name="header_location_area">Zone %1$d</string>
       
-  <string name="header_location_base_camps">Camps de base</string>
+  <string name="header_location_base_camps">Camps</string>
       
   <!-- ################ -->
       
@@ -701,9 +701,9 @@
       
   <string name="quest_category_arena">Arène</string>
       
-  <string name="quest_category_challenge">Défi</string>
+  <string name="quest_category_challenge">Défis</string>
       
-  <string name="quest_category_special">Affectation spéciale</string>
+  <string name="quest_category_special">Spéciale</string>
       
   <string name="quest_category_special_abbr">SP</string>
       
@@ -727,9 +727,9 @@
       
   <string name="kinsect_attack_type">Type d\'attaque</string>
       
-  <string name="kinsect_attack_type_sever">Rompre</string>
+  <string name="kinsect_attack_type_sever">Tranchant</string>
       
-  <string name="kinsect_attack_type_blunt">Cru</string>
+  <string name="kinsect_attack_type_blunt">Contondant</string>
       
   <string name="kinsect_dust_effect">Effet de poussière</string>
       
@@ -737,19 +737,19 @@
       
   <string name="kinsect_dust_effect_paralysis">Paralysie</string>
       
-  <string name="kinsect_dust_effect_heal">Soigner</string>
+  <string name="kinsect_dust_effect_heal">Soins</string>
       
-  <string name="kinsect_dust_effect_blast">Détruire</string>
+  <string name="kinsect_dust_effect_blast">Explosion</string>
       
-  <string name="kinsect_power">Puissance</string>
+  <string name="kinsect_power">Force</string>
       
   <string name="kinsect_speed">Vitesse</string>
       
-  <string name="kinsect_heal">Soigner</string>
+  <string name="kinsect_heal">Soins</string>
       
   <string name="tab_kinsect_detail">Détail</string>
       
-  <string name="tab_kinsect_tree">Famille</string>
+  <string name="tab_kinsect_tree">Arbre</string>
       
   <string name="kinsect_final_upgrades">Final</string>
       
@@ -773,7 +773,7 @@
       
   <string name="type_skilltree">Arbre de compétences</string>
       
-  <string name="type_decoration">Décoration</string>
+  <string name="type_decoration">Joyaux</string>
       
   <string name="type_charm">Charme</string>
       
@@ -781,15 +781,15 @@
       
   <string name="type_weapon">Arme</string>
       
-  <string name="type_item">Article</string>
+  <string name="type_item">Objet</string>
       
   <string name="type_item_basic">Article</string>
       
-  <string name="type_item_material">Matériel</string>
+  <string name="type_item_material">Matériaux</string>
       
   <string name="type_item_ammo">Munitions</string>
       
-  <string name="type_item_misc">Article divers</string>
+  <string name="type_item_misc">Objets divers</string>
       
   <string name="type_quest">Quête</string>
       
@@ -801,7 +801,7 @@
       
   <!-- #################### -->
       
-  <string name="title_bookmarks">Signets</string>
+  <string name="title_bookmarks">Favoris</string>
       
   <!-- #################### -->
       
@@ -815,11 +815,11 @@
       
   <string name="tool_effect_recharge_time">Temps de recharge</string>
       
-  <string name="tool_slots">Machines à sous</string>
+  <string name="tool_slots">Emplacements</string>
       
-  <string name="tool_type">Taper</string>
+  <string name="tool_type">Type</string>
       
-  <string name="tool_mantle">Manteau</string>
+  <string name="tool_mantle">Cape</string>
       
   <string name="tool_booster">Booster</string>
       
@@ -837,7 +837,7 @@
       
   <string name="title_workshop_weapon_selector">Sélecteur d\'arme</string>
       
-  <string name="title_workshop_decoration_selector">Sélecteur de décoration</string>
+  <string name="title_workshop_decoration_selector">Sélecteur de Joyaux</string>
       
   <string name="title_workshop_tool_selector">Sélecteur d\'outils</string>
       
@@ -851,7 +851,7 @@
       
   <string name="user_equipment_set_no_equipment">Aucun équipement</string>
       
-  <string name="user_equipment_set_no_decoration">Pas de décoration</string>
+  <string name="user_equipment_set_no_decoration">Pas de Joyaux</string>
       
   <string name="user_equipment_set_no_skill">Aucune compétence</string>
       
@@ -867,7 +867,7 @@
       
   <string name="user_equipment_set_filter_name">Nom</string>
       
-  <string name="user_equipment_set_filter_slot_level">Niveau de l\'emplacement</string>
+  <string name="user_equipment_set_filter_slot_level">Niveau d\'emplacement</string>
       
   <string name="user_equipment_set_filter_elemental_defense">Défense élémentaire</string>
       
