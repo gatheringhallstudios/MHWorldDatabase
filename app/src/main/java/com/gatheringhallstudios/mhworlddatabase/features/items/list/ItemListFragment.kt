@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.BasicListDelegationAdapter
@@ -32,7 +32,7 @@ class ItemListFragment : RecyclerViewFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ViewModel::class.java)
+        ViewModelProvider(this).get(ViewModel::class.java)
     }
 
     // Setup recycler list adapter and the on-selected

@@ -5,7 +5,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
@@ -16,17 +16,20 @@ import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeat
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.fragment_charm_summary.*
-import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSkillLevelBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentCharmSummaryBinding
 
 
 class CharmDetailFragment : androidx.fragment.app.Fragment() {
+    private var _binding: FragmentCharmSummaryBinding? = null
+    private val binding get() = _binding!!
+
     companion object {
         const val ARG_CHARM_ID = "CHARM_ID"
     }
 
     private val viewModel: CharmDetailViewModel by lazy {
-        ViewModelProviders.of(this).get(CharmDetailViewModel::class.java)
+        ViewModelProvider(this).get(CharmDetailViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,13 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_charm_summary, parent, false)
+        _binding = FragmentCharmSummaryBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,25 +86,25 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
         //Rerender the menu bar because we are 100% sure we have the charm data now
         activity!!.invalidateOptionsMenu()
 
-        charm_header.setIconDrawable(AssetLoader.loadIconFor(charm))
-        charm_header.setTitleText(charm.name)
-        charm_header.setSubtitleText(getString(R.string.format_rarity, charm.rarity))
-        charm_header.setSubtitleColor(AssetLoader.loadRarityColor(charm.rarity))
+        binding.charmHeader.setIconDrawable(AssetLoader.loadIconFor(charm))
+        binding.charmHeader.setTitleText(charm.name)
+        binding.charmHeader.setSubtitleText(getString(R.string.format_rarity, charm.rarity))
+        binding.charmHeader.setSubtitleColor(AssetLoader.loadRarityColor(charm.rarity))
 
-        previous_item_layout.removeAllViews()
-        insertEmptyState(previous_item_layout)
+        binding.previousItemLayout.removeAllViews()
+        insertEmptyState(binding.previousItemLayout)
 
         populateComponents(charmData.components)
         populateSkills(charmData.skills)
     }
 
     private fun populatePreviousItem(charmData: CharmFull?) {
-        if (previous_item_layout.childCount > 0) {
-            previous_item_layout.removeAllViews()
+        if (binding.previousItemLayout.childCount > 0) {
+            binding.previousItemLayout.removeAllViews()
         }
 
         if (charmData == null) {
-            insertEmptyState(previous_item_layout)
+            insertEmptyState(binding.previousItemLayout)
             return
         }
 
@@ -106,16 +115,16 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
 
         view.setOnClickListener { getRouter().navigateCharmDetail(charmData.charm.id) }
 
-        previous_item_layout.addView(view)
+        binding.previousItemLayout.addView(view)
     }
 
     private fun populateComponents(components: List<ItemQuantity>) {
-        if (charm_components_layout.childCount > 0) {
-            charm_components_layout.removeAllViews()
+        if (binding.charmComponentsLayout.childCount > 0) {
+            binding.charmComponentsLayout.removeAllViews()
         }
 
         if (components.isEmpty()) {
-            insertEmptyState(charm_skill_layout)
+            insertEmptyState(binding.charmSkillLayout)
             return
         }
 
@@ -125,7 +134,7 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
             view.setLabelText(component.item.name)
             view.setValueText("${component.quantity}")
             view.setOnClickListener { getRouter().navigateItemDetail(component.item.id) }
-            charm_components_layout.addView(view)
+            binding.charmComponentsLayout.addView(view)
         }
     }
 
@@ -139,33 +148,33 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun populateSkills(skills: List<SkillLevel>) {
-        if (charm_skill_layout.childCount > 0)
-            charm_skill_layout.removeAllViews()
+        if (binding.charmSkillLayout.childCount > 0)
+            binding.charmSkillLayout.removeAllViews()
 
         if (skills.isEmpty()) {
-            insertEmptyState(charm_skill_layout)
+            insertEmptyState(binding.charmSkillLayout)
             return
         }
 
         val inflater = LayoutInflater.from(context)
 
         for (skill in skills) {
-            val view = inflater.inflate(R.layout.listitem_skill_level, charm_skill_layout, false)
+            val skillBinding = ListitemSkillLevelBinding.inflate(inflater, binding.charmSkillLayout, false)
 
-            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
-            view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.level_qty, skill.level)
-            with(view.skill_level) {
+            skillBinding.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
+            skillBinding.labelText.text = skill.skillTree.name
+            skillBinding.levelText.text = getString(R.string.level_qty, skill.level)
+            with(skillBinding.skillLevel) {
                 maxLevel = skill.skillTree.max_level
                 secretLevels = skill.skillTree.secret
                 level = skill.level
             }
 
-            view.setOnClickListener {
+            skillBinding.root.setOnClickListener {
                 getRouter().navigateSkillDetail(skill.skillTree.id)
             }
 
-            charm_skill_layout.addView(view)
+            binding.charmSkillLayout.addView(skillBinding.root)
         }
     }
 }

@@ -1,12 +1,11 @@
 package com.gatheringhallstudios.mhworlddatabase.features.armor.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.*
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
@@ -14,26 +13,27 @@ import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.fragment_armor_summary.*
-import kotlinx.android.synthetic.main.fragment_armor_summary.armor_set_bonus_list
-import kotlinx.android.synthetic.main.fragment_armor_summary.armor_set_bonus_section
-import kotlinx.android.synthetic.main.fragment_armor_summary.defense_value
-import kotlinx.android.synthetic.main.fragment_armor_summary.set_bonus_name
-import kotlinx.android.synthetic.main.fragment_armor_summary.slot1
-import kotlinx.android.synthetic.main.fragment_armor_summary.slot2
-import kotlinx.android.synthetic.main.fragment_armor_summary.slot3
-import kotlinx.android.synthetic.main.fragment_weapon_summary.*
-import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
-import kotlinx.android.synthetic.main.listitem_skill_level.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSkillLevelBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemArmorsetBonusBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentArmorSummaryBinding
 
 class ArmorDetailFragment : androidx.fragment.app.Fragment() {
+    private var _binding: FragmentArmorSummaryBinding? = null
+    private val binding get() = _binding!!
+
 
     private val viewModel: ArmorDetailViewModel by lazy {
         ViewModelProvider(requireParentFragment()).get(ArmorDetailViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_armor_summary, parent, false)
+        _binding = FragmentArmorSummaryBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,106 +51,106 @@ class ArmorDetailFragment : androidx.fragment.app.Fragment() {
 
     private fun populateArmorBasic(armor: Armor) {
         // Set header info
-        armor_header.setIconType(IconType.ZEMBELLISHED)
-        armor_header.setIconDrawable(AssetLoader.loadIconFor(armor))
-        armor_header.setTitleText(armor.name)
-        armor_header.setSubtitleText(getString(R.string.format_rarity, armor.rarity))
-        armor_header.setSubtitleColor(AssetLoader.loadRarityColor(armor.rarity))
+        binding.armorHeader.setIconType(IconType.ZEMBELLISHED)
+        binding.armorHeader.setIconDrawable(AssetLoader.loadIconFor(armor))
+        binding.armorHeader.setTitleText(armor.name)
+        binding.armorHeader.setSubtitleText(getString(R.string.format_rarity, armor.rarity))
+        binding.armorHeader.setSubtitleColor(AssetLoader.loadRarityColor(armor.rarity))
 
         // set defense label
-        defense_value.text = getString(
+        binding.defenseValue.text = getString(
                 R.string.armor_defense_value,
                 armor.defense_base,
                 armor.defense_max,
                 armor.defense_augment_max)
 
         // set elemental defense values
-        fire_value.text = "${armor.fire}"
-        water_value.text = "${armor.water}"
-        thunder_value.text = "${armor.thunder}"
-        ice_value.text = "${armor.ice}"
-        dragon_value.text = "${armor.dragon}"
+        binding.fireValue.text = "${armor.fire}"
+        binding.waterValue.text = "${armor.water}"
+        binding.thunderValue.text = "${armor.thunder}"
+        binding.iceValue.text = "${armor.ice}"
+        binding.dragonValue.text = "${armor.dragon}"
 
         val slotImages = armor.slots.map {
             context?.getDrawableCompat(SlotEmptyRegistry(it))
         }
 
-        slot1.setImageDrawable(slotImages[0])
-        slot2.setImageDrawable(slotImages[1])
-        slot3.setImageDrawable(slotImages[2])
+        binding.slot1.setImageDrawable(slotImages[0])
+        binding.slot2.setImageDrawable(slotImages[1])
+        binding.slot3.setImageDrawable(slotImages[2])
     }
 
     private fun populateSkills(skills: List<SkillLevel>) {
         if (skills.isEmpty()) {
-            armor_skill_section.visibility = View.GONE
+            binding.armorSkillSection.visibility = View.GONE
             return
         }
 
-        armor_skill_section.visibility = View.VISIBLE
-        armor_skill_list.removeAllViews()
+        binding.armorSkillSection.visibility = View.VISIBLE
+        binding.armorSkillList.removeAllViews()
 
         val inflater = LayoutInflater.from(context)
 
         for (skill in skills) {
             //Set the label for the Set name
-            val view = inflater.inflate(R.layout.listitem_skill_level, armor_skill_list, false)
+            val skillBinding = ListitemSkillLevelBinding.inflate(inflater, binding.armorSkillList, false)
 
-            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
-            view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.level_qty, skill.level)
-            with(view.skill_level) {
+            skillBinding.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
+            skillBinding.labelText.text = skill.skillTree.name
+            skillBinding.levelText.text = getString(R.string.level_qty, skill.level)
+            with(skillBinding.skillLevel) {
                 maxLevel = skill.skillTree.max_level
                 secretLevels = skill.skillTree.secret
                 level = skill.level
             }
 
-            view.setOnClickListener {
+            skillBinding.root.setOnClickListener {
                 getRouter().navigateSkillDetail(skill.skillTree.id)
             }
 
-            armor_skill_list.addView(view)
+            binding.armorSkillList.addView(skillBinding.root)
         }
     }
 
     private fun populateSetBonuses(armorSetBonuses: List<ArmorSetBonus>) {
         if (armorSetBonuses.isEmpty()) {
-            armor_set_bonus_section.visibility = View.GONE
+            binding.armorSetBonusSection.visibility = View.GONE
             return
         }
 
         // show set bonus section
-        armor_set_bonus_section.visibility = View.VISIBLE
-        armor_set_bonus_list.removeAllViews()
+        binding.armorSetBonusSection.visibility = View.VISIBLE
+        binding.armorSetBonusList.removeAllViews()
 
         //Set the label for the Set name
-        set_bonus_name.text = armorSetBonuses.first().name
+        binding.setBonusName.text = armorSetBonuses.first().name
 
         //Now to set the actual skills
         for (setBonus in armorSetBonuses) {
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, armor_set_bonus_list, false)
+            val listItem = ListitemArmorsetBonusBinding.inflate(layoutInflater, binding.armorSetBonusList, false)
 
-            listItem.bonus_skill_icon.setImageDrawable(skillIcon)
-            listItem.bonus_skill_name.text = setBonus.skillTree.name
-            listItem.bonus_requirement.setImageResource(reqIcon)
+            listItem.bonusSkillIcon.setImageDrawable(skillIcon)
+            listItem.bonusSkillName.text = setBonus.skillTree.name
+            listItem.bonusRequirement.setImageResource(reqIcon)
 
-            listItem.setOnClickListener {
+            listItem.root.setOnClickListener {
                 getRouter().navigateSkillDetail(setBonus.skillTree.id)
             }
 
-            armor_set_bonus_list.addView(listItem)
+            binding.armorSetBonusList.addView(listItem.root)
         }
     }
 
     private fun populateComponents(components: List<ItemQuantity>) {
         if (components.isEmpty()) {
-            armor_components_section.visibility = View.GONE
+            binding.armorComponentsSection.visibility = View.GONE
             return
         }
 
-        armor_components_section.visibility = View.VISIBLE
-        armor_components_list.removeAllViews()
+        binding.armorComponentsSection.visibility = View.VISIBLE
+        binding.armorComponentsList.removeAllViews()
 
         for (itemQuantity in components) {
             val view = IconLabelTextCell(context)
@@ -163,7 +163,7 @@ class ArmorDetailFragment : androidx.fragment.app.Fragment() {
                 getRouter().navigateItemDetail(itemQuantity.item.id)
             }
 
-            armor_components_list.addView(view)
+            binding.armorComponentsList.addView(view)
         }
     }
 }

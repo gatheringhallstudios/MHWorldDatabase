@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
@@ -24,7 +24,7 @@ class WeaponTreePagerFragment : BasePagerFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(WeaponTreeViewModel::class.java)
+        ViewModelProvider(this).get(WeaponTreeViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

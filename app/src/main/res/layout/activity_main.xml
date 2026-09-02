@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/activity_main_content"/>
+    <include
+        android:id="@+id/main_content"
+        layout="@layout/activity_main_content" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -27,7 +27,7 @@ abstract class SkillDao {
     fun loadSkillTree(langId: String, skillTreeId: Int): LiveData<SkillTreeFull> {
         val skillFull = loadSkills(langId, skillTreeId)
 
-        return Transformations.map(skillFull) { data ->
+        return skillFull.map { data ->
             val firstItem = data.first()
             val skills = data.map {
                 Skill(skilltree_id = it.id, level = it.level, description = it.description)

@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
-import kotlinx.android.synthetic.main.listitem_bookmark.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemBookmarkBinding
 
 class ItemBookmarkDelegate(private val onSelect: (Item) -> Unit) : SimpleListDelegate<Item>() {
     override fun isForViewType(obj: Any) = obj is Item
@@ -23,8 +23,9 @@ class ItemBookmarkDelegate(private val onSelect: (Item) -> Unit) : SimpleListDel
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Item) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -42,8 +43,9 @@ class LocationBookmarkDelegate(private val onSelect: (Location) -> Unit) : Simpl
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Location) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -61,8 +63,9 @@ class CharmBookmarkDelegate(private val onSelect: (Charm) -> Unit) : SimpleListD
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Charm) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -80,8 +83,9 @@ class DecorationBaseBookmarkDelegate(private val onSelect: (DecorationBase) -> U
 
     override fun bindView(viewHolder: SimpleViewHolder, data: DecorationBase) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -99,8 +103,9 @@ class MonsterBaseBookmarkDelegate(private val onSelect: (MonsterBase) -> Unit) :
 
     override fun bindView(viewHolder: SimpleViewHolder, data: MonsterBase) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -118,8 +123,9 @@ class SkillTreeBookmarkDelegate(private val onSelect: (SkillTree) -> Unit) : Sim
 
     override fun bindView(viewHolder: SimpleViewHolder, data: SkillTree) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -137,8 +143,9 @@ class WeaponBookmarkDelegate(private val onSelect: (Weapon) -> Unit) : SimpleLis
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Weapon) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -156,8 +163,9 @@ class ArmorBookmarkDelegate(private val onSelect: (Armor) -> Unit) : SimpleListD
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Armor) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -175,8 +183,9 @@ class KinsectBookmarkDelegate(private val onSelect: (Kinsect) -> Unit) : SimpleL
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Kinsect) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }
@@ -194,8 +203,9 @@ class ToolBookmarkDelegate(private val onSelect: (ToolBase) -> Unit) : SimpleLis
 
     override fun bindView(viewHolder: SimpleViewHolder, data: ToolBase) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.itemView.generic_icon.setImageDrawable(icon)
-        viewHolder.itemView.label_text.text = data.name
+        val binding = ListitemBookmarkBinding.bind(viewHolder.itemView)
+        binding.genericIcon.setImageDrawable(icon)
+        binding.labelText.text = data.name
         viewHolder.itemView.setOnClickListener { onSelect(data) }
 //        viewHolder.itemView.delete_bookmark_button.setOnClick {onDelete(data)}
     }

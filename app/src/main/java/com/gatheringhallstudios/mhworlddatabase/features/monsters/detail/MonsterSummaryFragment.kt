@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -17,22 +17,31 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterHabitat
 import com.gatheringhallstudios.mhworlddatabase.data.types.AilmentStrength
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.fragment_monster_summary.*
-import kotlinx.android.synthetic.main.listitem_ailment.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemAilmentBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentMonsterSummaryBinding
 
 /**
  * Fragment for displaying Monster Summary
  */
 class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
+    private var _binding: FragmentMonsterSummaryBinding? = null
+    private val binding get() = _binding!!
+
 
     private val viewModel by lazy {
         // this fragment is a "child", so get the parent fragment's
-        ViewModelProviders.of(parentFragment!!).get(MonsterDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(MonsterDetailViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_monster_summary, parent, false)
+        _binding = FragmentMonsterSummaryBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,10 +58,10 @@ class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
 
         val icon = AssetLoader.loadIconFor(monster)
 
-        monster_header.setIconDrawable(icon)
-        monster_header.setTitleText(monster.name)
-        if (monster.ecology != null) monster_header.setSubtitleText(monster.ecology)
-        monster_header.setDescriptionText(monster.description)
+        binding.monsterHeader.setIconDrawable(icon)
+        binding.monsterHeader.setTitleText(monster.name)
+        if (monster.ecology != null) binding.monsterHeader.setSubtitleText(monster.ecology)
+        binding.monsterHeader.setDescriptionText(monster.description)
 
         if (monster.has_weakness) {
             populateWeaknessSection(monster)
@@ -65,38 +74,38 @@ class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
      * Populates the weakness data given a monster. Called by populateMonster().
      */
     private fun populateWeaknessSection(monster: Monster) {
-        weakness_section.visibility = View.VISIBLE
+        binding.weaknessSection.visibility = View.VISIBLE
         
         val elemWeakness = monster.weaknesses
         val altWeakness = monster.alt_weaknesses
         val statusWeakness = monster.status_weaknesses
         
         if (elemWeakness != null) {
-            fire_star_cell.setStars(elemWeakness.fire)
-            water_star_cell.setStars(elemWeakness.water)
-            lightning_star_cell.setStars(elemWeakness.thunder)
-            ice_star_cell.setStars(elemWeakness.ice)
-            dragon_star_cell.setStars(elemWeakness.dragon)
+            binding.fireStarCell.setStars(elemWeakness.fire)
+            binding.waterStarCell.setStars(elemWeakness.water)
+            binding.lightningStarCell.setStars(elemWeakness.thunder)
+            binding.iceStarCell.setStars(elemWeakness.ice)
+            binding.dragonStarCell.setStars(elemWeakness.dragon)
         }
         
         if (altWeakness != null) {
-            fire_star_cell.setAltStars(altWeakness.fire)
-            water_star_cell.setAltStars(altWeakness.water)
-            lightning_star_cell.setAltStars(altWeakness.thunder)
-            ice_star_cell.setAltStars(altWeakness.ice)
-            dragon_star_cell.setAltStars(altWeakness.dragon)
+            binding.fireStarCell.setAltStars(altWeakness.fire)
+            binding.waterStarCell.setAltStars(altWeakness.water)
+            binding.lightningStarCell.setAltStars(altWeakness.thunder)
+            binding.iceStarCell.setAltStars(altWeakness.ice)
+            binding.dragonStarCell.setAltStars(altWeakness.dragon)
         }
 
         if (statusWeakness != null) {
-            poison_star_cell.setStars(statusWeakness.poison)
-            sleep_star_cell.setStars(statusWeakness.sleep)
-            paralysis_star_cell.setStars(statusWeakness.paralysis)
-            blast_star_cell.setStars(statusWeakness.blast)
-            stun_star_cell.setStars(statusWeakness.stun)
+            binding.poisonStarCell.setStars(statusWeakness.poison)
+            binding.sleepStarCell.setStars(statusWeakness.sleep)
+            binding.paralysisStarCell.setStars(statusWeakness.paralysis)
+            binding.blastStarCell.setStars(statusWeakness.blast)
+            binding.stunStarCell.setStars(statusWeakness.stun)
         }
 
         if (!monster.alt_state_description.isNullOrEmpty()) {
-            alt_weakness_caption.text = "( ) = ${monster.alt_state_description}"
+            binding.altWeaknessCaption.text = "( ) = ${monster.alt_state_description}"
         }
     }
 
@@ -109,9 +118,9 @@ class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
 
         // Empty handling
         if (ailments == null) {
-            val ailmentView = layoutInflater.inflate(R.layout.listitem_ailment, ailments_layout, false)
-            ailmentView.ailment_text.text = getString(R.string.general_none)
-            ailments_layout.addView(ailmentView)
+            val ailmentBinding = ListitemAilmentBinding.inflate(layoutInflater, binding.ailmentsLayout, false)
+            ailmentBinding.ailmentText.text = getString(R.string.general_none)
+            binding.ailmentsLayout.addView(ailmentBinding.root)
             return
         }
 
@@ -155,13 +164,13 @@ class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
 
         // Populate ailments to views
         for (ailment in ailmentList) {
-            val ailmentView = layoutInflater.inflate(R.layout.listitem_ailment, ailments_layout, false)
-            ailmentView.ailment_text.text = ailment
-            ailments_layout.addView(ailmentView)
+            val ailmentBinding = ListitemAilmentBinding.inflate(layoutInflater, binding.ailmentsLayout, false)
+            ailmentBinding.ailmentText.text = ailment
+            binding.ailmentsLayout.addView(ailmentBinding.root)
         }
 
         // Request a layout pass because our height has changed
-        ailments_layout.requestLayout()
+        binding.ailmentsLayout.requestLayout()
 
     }
 
@@ -169,12 +178,12 @@ class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
         if (habitats == null) return
 
         if (habitats.isEmpty()) {
-            habitat_header.visibility = View.GONE
+            binding.habitatHeader.visibility = View.GONE
             return
         }
 
-        if (habitats_layout.childCount > 0)
-            habitats_layout.removeAllViews()
+        if (binding.habitatsLayout.childCount > 0)
+            binding.habitatsLayout.removeAllViews()
 
         for (habitat in habitats) {
             val view = IconLabelTextCell(context)
@@ -195,7 +204,7 @@ class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
 
             view.setOnClickListener { getRouter().navigateLocationDetail(habitat.location.id) }
 
-            habitats_layout.addView(view)
+            binding.habitatsLayout.addView(view)
         }
     }
 }

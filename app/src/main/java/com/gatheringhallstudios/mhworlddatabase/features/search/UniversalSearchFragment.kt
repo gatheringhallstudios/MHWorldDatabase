@@ -20,11 +20,11 @@ private const val SEARCH_FILTER = "SEARCH_FILTER"
 class UniversalSearchFragment : RecyclerViewFragment() {
 
     private val activityViewModel by lazy {
-        ViewModelProviders.of(requireActivity()).get(MainActivityViewModel::class.java)
+        ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
     }
 
     private val searchViewModel by lazy {
-        ViewModelProviders.of(this).get(UniversalSearchViewModel::class.java)
+        ViewModelProvider(this).get(UniversalSearchViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

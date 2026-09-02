@@ -81,7 +81,7 @@ class StandardDivider(private val drawable: Drawable?): BaseVerticalDivider() {
  */
 class HeaderItemDivider(private val drawable: Drawable): BaseVerticalDivider() {
     override fun shouldDraw(parent: androidx.recyclerview.widget.RecyclerView, firstView: View, firstIdx: Int, secondView: View, secondIdx: Int): Boolean {
-        val adapter = parent.adapter as? GroupAdapter
+        val adapter = parent.adapter as? GroupAdapter<*>
         if (adapter == null) {
             Log.e("HeaderItemDivider", "HeaderItemDivider only works for GroupAdapters")
             return false

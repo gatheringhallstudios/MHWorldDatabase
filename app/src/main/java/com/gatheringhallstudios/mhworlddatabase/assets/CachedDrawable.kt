@@ -24,7 +24,7 @@ private val cache = object: androidx.collection.LruCache<CacheKey, Bitmap>(cache
 /**
  * Extension: Gets a value from an LRUCache, or inserts and returns it
  */
-inline fun <K, V> androidx.collection.LruCache<K, V>.getOrPut(key: K, build: () -> V): V {
+inline fun <K : Any, V : Any> androidx.collection.LruCache<K, V>.getOrPut(key: K, build: () -> V): V {
     val value: V? = this[key]
     if (value != null) {
         return value

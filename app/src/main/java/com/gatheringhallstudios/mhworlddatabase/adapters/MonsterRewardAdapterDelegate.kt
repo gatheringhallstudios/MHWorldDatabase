@@ -7,7 +7,7 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterReward
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.listitem_reward.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemRewardBinding
 
 class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Unit) : AdapterDelegate<List<Any>>() {
 
@@ -17,9 +17,7 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Un
 
     override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.listitem_reward, parent, false)
-
-        return RewardViewHolder(v)
+        return RewardViewHolder(ListitemRewardBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(items: List<Any>,
@@ -31,17 +29,18 @@ class MonsterRewardAdapterDelegate(private val onSelected: (MonsterReward) -> Un
         val vh = holder as RewardViewHolder
         vh.bind(reward)
 
-        holder.view.setOnClickListener { onSelected(reward) }
+        holder.itemView.setOnClickListener { onSelected(reward) }
     }
 
-    internal inner class RewardViewHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    internal inner class RewardViewHolder(private val binding: ListitemRewardBinding) :
+            androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(reward: MonsterReward) {
             val icon = AssetLoader.loadIconFor(reward.item)
-            view.reward_icon.setImageDrawable(icon)
-            view.reward_name.text = reward.item.name
-            view.reward_stack.text = "x ${reward.stack}"
-            view.reward_percent.text = when (reward.percentage) {
-                0 -> view.context.getString(R.string.format_percentage_unknown)
+            binding.rewardIcon.setImageDrawable(icon)
+            binding.rewardName.text = reward.item.name
+            binding.rewardStack.text = "x ${reward.stack}"
+            binding.rewardPercent.text = when (reward.percentage) {
+                0 -> itemView.context.getString(R.string.format_percentage_unknown)
                 else -> "${reward.percentage}%"
             }
 

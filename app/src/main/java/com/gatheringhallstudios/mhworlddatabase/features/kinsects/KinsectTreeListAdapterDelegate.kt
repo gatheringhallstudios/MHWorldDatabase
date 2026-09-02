@@ -22,8 +22,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.tree.RenderedTreeNode
 import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeFormatter
 import com.gatheringhallstudios.mhworlddatabase.util.tree.TreeNodeType
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.listitem_kinsect.view.*
-import kotlinx.android.synthetic.main.listitem_kinsecttree.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemKinsecttreeBinding
 
 class KinsectTreeListAdapterDelegate(
         private val onSelected: (Kinsect) -> Unit,
@@ -39,9 +38,7 @@ class KinsectTreeListAdapterDelegate(
 
     override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.listitem_kinsecttree, parent, false)
-
-        return KinsectBaseHolder(v)
+        return KinsectBaseHolder(ListitemKinsecttreeBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(items: List<Any>,
@@ -54,9 +51,9 @@ class KinsectTreeListAdapterDelegate(
         val vh = holder as KinsectBaseHolder
         vh.bind(kinsectBaseTreeNode)
 
-        holder.view.setOnClickListener { onSelected(kinsectBaseTreeNode.value) }
+        holder.itemView.setOnClickListener { onSelected(kinsectBaseTreeNode.value) }
         if (onLongSelect != null) {
-            holder.view.setOnLongClickListener {
+            holder.itemView.setOnLongClickListener {
                 // note: cannot pass position as an optimization, as it will not change on list updates unless re-rendered
                 onLongSelect.invoke(kinsectBaseTreeNode.value)
                 true // notify that it was consumed
@@ -64,40 +61,41 @@ class KinsectTreeListAdapterDelegate(
         }
     }
 
-    internal inner class KinsectBaseHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    internal inner class KinsectBaseHolder(private val binding: ListitemKinsecttreeBinding) :
+            androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("ResourceType")
         fun bind(kinsectNode: RenderedTreeNode<Kinsect>) {
             val kinsect = kinsectNode.value
 
-            view.kinsect_name.text = kinsect.name
-            view.kinsect_image.setImageDrawable(AssetLoader.loadIconFor(kinsect))
-            view.kinsect_craftable_image.visibility = if (kinsect.previous_kinsect_id == null) View.VISIBLE else View.GONE
+            binding.kinsectLayout.kinsectName.text = kinsect.name
+            binding.kinsectLayout.kinsectImage.setImageDrawable(AssetLoader.loadIconFor(kinsect))
+            binding.kinsectLayout.kinsectCraftableImage.visibility = if (kinsect.previous_kinsect_id == null) View.VISIBLE else View.GONE
 
-            view.attack_type.setLabelText(when (kinsect.attack_type) {
-                KinsectAttackType.SEVER -> view.context.getString(R.string.kinsect_attack_type_sever)
-                KinsectAttackType.BLUNT -> view.context.getString(R.string.kinsect_attack_type_blunt)
+            binding.kinsectLayout.attackType.setLabelText(when (kinsect.attack_type) {
+                KinsectAttackType.SEVER -> itemView.context.getString(R.string.kinsect_attack_type_sever)
+                KinsectAttackType.BLUNT -> itemView.context.getString(R.string.kinsect_attack_type_blunt)
             })
-            view.dust_effect.setLabelText(when (kinsect.dust_effect) {
-                KinsectDustEffect.POISON -> view.context.getString(R.string.kinsect_dust_effect_poison)
-                KinsectDustEffect.PARALYSIS -> view.context.getString(R.string.kinsect_dust_effect_paralysis)
-                KinsectDustEffect.HEAL -> view.context.getString(R.string.kinsect_dust_effect_heal)
-                KinsectDustEffect.BLAST -> view.context.getString(R.string.kinsect_dust_effect_blast)
+            binding.kinsectLayout.dustEffect.setLabelText(when (kinsect.dust_effect) {
+                KinsectDustEffect.POISON -> itemView.context.getString(R.string.kinsect_dust_effect_poison)
+                KinsectDustEffect.PARALYSIS -> itemView.context.getString(R.string.kinsect_dust_effect_paralysis)
+                KinsectDustEffect.HEAL -> itemView.context.getString(R.string.kinsect_dust_effect_heal)
+                KinsectDustEffect.BLAST -> itemView.context.getString(R.string.kinsect_dust_effect_blast)
             })
-            view.dust_effect.setLeftIconDrawable(AssetLoader.loadKinsectDustIcon(kinsect.dust_effect))
+            binding.kinsectLayout.dustEffect.setLeftIconDrawable(AssetLoader.loadKinsectDustIcon(kinsect.dust_effect))
 
-            view.power_value.setLabelText(kinsect.power.toString())
-            view.speed_value.setLabelText(kinsect.speed.toString())
-            view.heal_value.setLabelText(kinsect.heal.toString())
+            binding.kinsectLayout.powerValue.setLabelText(kinsect.power.toString())
+            binding.kinsectLayout.speedValue.setLabelText(kinsect.speed.toString())
+            binding.kinsectLayout.healValue.setLabelText(kinsect.heal.toString())
 
             // Populate tree lines
             createTreeLayout(kinsectNode.formatter, kinsectNode.isCollapsed, kinsect.rarity)
 
-            view.invalidate()
+            itemView.invalidate()
         }
 
         private fun createTreeLayout(formatter: List<TreeFormatter>, isCollapsed: Boolean, rarity: Int) {
-            val treeView = view.tree_components
+            val treeView = binding.treeComponents
 
             if (treeView.childCount != 0) treeView.removeAllViews()
 

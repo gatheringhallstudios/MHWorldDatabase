@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
@@ -15,7 +15,7 @@ import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 
 class WorkshopListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
+        ViewModelProvider(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

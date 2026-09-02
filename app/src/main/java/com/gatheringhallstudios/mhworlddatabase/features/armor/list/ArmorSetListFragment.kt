@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor.list
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
@@ -14,7 +14,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.GroupieViewHolder
 
 
 /**
@@ -35,10 +35,10 @@ class ArmorSetListFragment : RecyclerViewFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ArmorSetListViewModel::class.java)
+        ViewModelProvider(this).get(ArmorSetListViewModel::class.java)
     }
 
-    val adapter = GroupAdapter<ViewHolder>()
+    val adapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.setAdapter(adapter)

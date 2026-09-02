@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +12,8 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.Item
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentItemSummaryBinding
 
-import kotlinx.android.synthetic.main.fragment_item_summary.*
 
 /**
  * Binds item data values from the itemView object to the view
@@ -24,37 +24,45 @@ private fun evaluateValue(value: Int?) = when(value) {
 }
 
 class ItemSummaryFragment : androidx.fragment.app.Fragment() {
+    private var _binding: FragmentItemSummaryBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_item_summary, parent, false)
+        _binding = FragmentItemSummaryBinding.inflate(inflater, parent, false)
 
-        val viewmodel = ViewModelProviders.of(parentFragment!!).get(ItemDetailViewModel::class.java)
+        val viewmodel = ViewModelProvider(parentFragment!!).get(ItemDetailViewModel::class.java)
         viewmodel.item.observe(this, Observer(::populateItem))
 
-        return view
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun populateItem(item: Item?) {
         if (item == null) return
 
         //Set the summary information
-        item_header.setIconDrawable(AssetLoader.loadIconFor(item))
-        item_header.setTitleText(item.name)
-        item_header.setDescriptionText(item.description)
+        binding.itemHeader.setIconDrawable(AssetLoader.loadIconFor(item))
+        binding.itemHeader.setTitleText(item.name)
+        binding.itemHeader.setDescriptionText(item.description)
 
-        rarity_value.setTextColor(AssetLoader.loadRarityColor(item.rarity))
-        rarity_value.text = getString(R.string.format_rarity, item.rarity)
+        binding.rarityValue.setTextColor(AssetLoader.loadRarityColor(item.rarity))
+        binding.rarityValue.text = getString(R.string.format_rarity, item.rarity)
 
-        buy_price_value.text = evaluateValue(item.buy_price)
-        carry_capacity_value.text = evaluateValue(item.carry_limit)
+        binding.buyPriceValue.text = evaluateValue(item.buy_price)
+        binding.carryCapacityValue.text = evaluateValue(item.carry_limit)
 
         // Set sell value. Swaps to research points if research points are available
         if (item.sell_price == 0 && item.points > 0) {
-            sell_price_value.text = item.points.toString()
-            sell_price_icon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_research_points))
+            binding.sellPriceValue.text = item.points.toString()
+            binding.sellPriceIcon.setImageDrawable(context?.getDrawableCompat(R.drawable.ic_ui_research_points))
         } else {
-            sell_price_value.text = evaluateValue(item.sell_price)
+            binding.sellPriceValue.text = evaluateValue(item.sell_price)
         }
 
     }

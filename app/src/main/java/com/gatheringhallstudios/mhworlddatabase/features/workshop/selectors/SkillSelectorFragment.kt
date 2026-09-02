@@ -7,17 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
 import com.gatheringhallstudios.mhworlddatabase.features.skills.list.SkillTreeListAdapter
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import kotlinx.android.synthetic.main.fragment_equipment_filter.*
-import kotlinx.android.synthetic.main.fragment_equipment_set_skill_selector.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentSkillFilterBinding
 
 class SkillSelectorFragment : DialogFragment() {
+    private var _binding: FragmentSkillFilterBinding? = null
+    private val binding get() = _binding!!
+
     companion object {
         const val SELECTED_SKILL = "SELECTED_SKILL"
         const val SKILL_NUMBER = "SKILL_NUMBER"
@@ -29,7 +31,7 @@ class SkillSelectorFragment : DialogFragment() {
     }
 
     private val viewModel: WorkshopSelectorViewModel by lazy {
-        ViewModelProviders.of(this).get(WorkshopSelectorViewModel::class.java)
+        ViewModelProvider(this).get(WorkshopSelectorViewModel::class.java)
     }
 
     var skillNumber: Int = 0
@@ -42,13 +44,19 @@ class SkillSelectorFragment : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_skill_filter, container, false)
+        _binding = FragmentSkillFilterBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.loadSkills(AppSettings.dataLocale)
 
-        skills_recycler_view.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
+        binding.scrollBody.skillsRecyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
         val adapter = SkillTreeListAdapter {
             val data = Intent()
             data.putExtra(SELECTED_SKILL, it)
@@ -57,13 +65,13 @@ class SkillSelectorFragment : DialogFragment() {
             dismiss()
         }
 
-        skills_recycler_view.adapter = adapter
+        binding.scrollBody.skillsRecyclerView.adapter = adapter
         viewModel.skills.observe(this, Observer {
             adapter.items = it
         })
 
         // Implement actions
-        action_cancel.setOnClickListener {
+        binding.actionCancel.setOnClickListener {
             dismiss()
         }
     }

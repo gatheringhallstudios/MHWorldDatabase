@@ -8,15 +8,14 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.michaelflisar.changelog.ChangelogBuilder
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main_content.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ActivityMainBinding
 
 
 /**
@@ -29,18 +28,20 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = javaClass.simpleName
 
+    private lateinit var binding: ActivityMainBinding
     private var searchView: SearchView? = null
     private lateinit var appBarConfiguration : AppBarConfiguration
 
     val viewModel by lazy {
-        ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        ViewModelProvider(this).get(MainActivityViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(this.toolbar)
+        setSupportActionBar(binding.mainContent.toolbar)
         setupNavigation()
         showChangelog()
 
@@ -115,21 +116,21 @@ class MainActivity : AppCompatActivity() {
                 R.id.kinsectTreeDestination,
                 R.id.workshopDestination,
                 R.id.toolListDestination),
-                drawer_layout
+                binding.drawerLayout
         )
 
         val navController = findNavController(R.id.content_main_frame)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         // Hook up navigation drawer items to NavController
-        nav_view.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
 
         // Remove icon tint from navigation drawer
-        this.nav_view.itemIconTintList = null
+        binding.navView.itemIconTintList = null
     }
 
     override fun onBackPressed() {
-        val drawer = this.drawer_layout
+        val drawer = binding.drawerLayout
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {

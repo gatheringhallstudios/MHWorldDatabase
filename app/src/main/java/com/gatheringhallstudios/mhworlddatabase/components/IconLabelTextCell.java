@@ -16,8 +16,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * This is a full height, full width cell that displays an icon, label, and value. Used to generate
@@ -28,9 +26,9 @@ public class IconLabelTextCell extends ConstraintLayout{
 
     private final String TAG = getClass().getSimpleName();
 
-    @BindView(R.id.generic_icon) ImageView imageView;
-    @BindView(R.id.label_text) TextView labelView;
-    @BindView(R.id.value_text) TextView valueView;
+    ImageView imageView;
+    TextView labelView;
+    TextView valueView;
 
     public IconLabelTextCell (Context context, @DrawableRes int imgSrc, String labelText, String valueText) {
         super(context);
@@ -69,7 +67,9 @@ public class IconLabelTextCell extends ConstraintLayout{
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cell_icon_label_text, this, true);
 
-        ButterKnife.bind(this);
+        imageView = findViewById(R.id.generic_icon);
+        labelView = findViewById(R.id.label_text);
+        valueView = findViewById(R.id.value_text);
 
         setLeftIconDrawable(drawable);
         setLabelText(labelText);

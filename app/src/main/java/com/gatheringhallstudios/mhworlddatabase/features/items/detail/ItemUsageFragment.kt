@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -56,7 +56,7 @@ fun bindWeaponCraft(data: ItemUsageWeapon) = createSimpleUniversalBinder { ctx -
  */
 class ItemUsageFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(ItemDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(ItemDetailViewModel::class.java)
     }
 
     val adapter = CategoryAdapter(

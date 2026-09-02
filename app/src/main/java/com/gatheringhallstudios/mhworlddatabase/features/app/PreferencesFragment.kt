@@ -19,12 +19,12 @@ class PreferencesFragment : PreferenceFragmentCompat() {
     // add listener on resume
     override fun onResume() {
         super.onResume()
-        preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(restartListener)
+        preferenceManager.sharedPreferences?.registerOnSharedPreferenceChangeListener(restartListener)
     }
 
     // remove listener on pause
     override fun onPause() {
-        preferenceManager.sharedPreferences.unregisterOnSharedPreferenceChangeListener(restartListener)
+        preferenceManager.sharedPreferences?.unregisterOnSharedPreferenceChangeListener(restartListener)
         super.onPause()
     }
 

@@ -11,10 +11,14 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.KinsectAttackType
 import com.gatheringhallstudios.mhworlddatabase.data.types.KinsectDustEffect
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.CheckedGroup
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import kotlinx.android.synthetic.main.fragment_equipment_filter.*
-import kotlinx.android.synthetic.main.fragment_kinsect_filter_body.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentKinsectFilterBodyBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentEquipmentFilterBinding
 
 class KinsectFilterFragment : DialogFragment() {
+    private var _binding: FragmentEquipmentFilterBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var bodyBinding: FragmentKinsectFilterBodyBinding
+
     companion object {
         const val FILTER_STATE = "FILTER_STATE"
 
@@ -36,43 +40,49 @@ class KinsectFilterFragment : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_equipment_filter, container, false)
+        _binding = FragmentEquipmentFilterBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        scroll_body.layoutResource = R.layout.fragment_kinsect_filter_body
-        scroll_body.inflate()
+        binding.scrollBody.layoutResource = R.layout.fragment_kinsect_filter_body
+        bodyBinding = FragmentKinsectFilterBodyBinding.bind(binding.scrollBody.inflate())
 
         // define sort group
         sortGroup = CheckedGroup(singleOnly = true)
-        sortGroup.addBinding(sort_power_toggle, FilterSortCondition.POWER)
-        sortGroup.addBinding(sort_speed_toggle, FilterSortCondition.SPEED)
-        sortGroup.addBinding(sort_heal_toggle, FilterSortCondition.HEAL)
+        sortGroup.addBinding(bodyBinding.sortPowerToggle, FilterSortCondition.POWER)
+        sortGroup.addBinding(bodyBinding.sortSpeedToggle, FilterSortCondition.SPEED)
+        sortGroup.addBinding(bodyBinding.sortHealToggle, FilterSortCondition.HEAL)
 
 
         attackTypeGroup = CheckedGroup()
         attackTypeGroup.apply {
-            addBinding(attack_type_toggle_sever, KinsectAttackType.SEVER)
-            addBinding(attack_type_toggle_blunt, KinsectAttackType.BLUNT)
+            addBinding(bodyBinding.attackTypeToggleSever, KinsectAttackType.SEVER)
+            addBinding(bodyBinding.attackTypeToggleBlunt, KinsectAttackType.BLUNT)
         }
 
         dustEffectGroup = CheckedGroup()
         dustEffectGroup.apply {
-            addBinding(toggle_poison, KinsectDustEffect.POISON)
-            addBinding(toggle_paralysis, KinsectDustEffect.PARALYSIS)
-            addBinding(toggle_heal, KinsectDustEffect.HEAL)
-            addBinding(toggle_blast, KinsectDustEffect.BLAST)
+            addBinding(bodyBinding.togglePoison, KinsectDustEffect.POISON)
+            addBinding(bodyBinding.toggleParalysis, KinsectDustEffect.PARALYSIS)
+            addBinding(bodyBinding.toggleHeal, KinsectDustEffect.HEAL)
+            addBinding(bodyBinding.toggleBlast, KinsectDustEffect.BLAST)
         }
 
         // Implement actions
         // Implement actions
-        action_clear.setOnClickListener {
+        binding.actionClear.setOnClickListener {
             applyState(FilterState.default)
         }
-        action_cancel.setOnClickListener {
+        binding.actionCancel.setOnClickListener {
             dismiss()
         }
-        action_apply.setOnClickListener {
+        binding.actionApply.setOnClickListener {
             val data = Intent()
             data.putExtra(FILTER_STATE, calculateState())
             targetFragment?.onActivityResult(targetRequestCode, 0, data)
@@ -91,7 +101,7 @@ class KinsectFilterFragment : DialogFragment() {
     fun calculateState(): FilterState {
 
         return FilterState(
-                isFinalOnly = final_toggle.isChecked,
+                isFinalOnly = bodyBinding.finalToggle.isChecked,
                 sortBy = sortGroup.getValue() ?: FilterSortCondition.NONE,
                 attackTypes = attackTypeGroup.getValues().toSet(),
                 dustEffects = dustEffectGroup.getValues().toSet()
@@ -103,7 +113,7 @@ class KinsectFilterFragment : DialogFragment() {
      */
     fun applyState(state: FilterState) {
         // handle final
-        final_toggle.isChecked = state.isFinalOnly
+        bodyBinding.finalToggle.isChecked = state.isFinalOnly
 
         // Set the basic group values
         sortGroup.setValue(state.sortBy)

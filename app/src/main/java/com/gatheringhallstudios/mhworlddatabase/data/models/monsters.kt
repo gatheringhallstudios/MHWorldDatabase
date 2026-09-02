@@ -20,7 +20,7 @@ open class MonsterBase(
 
 class Monster(
         id: Int,
-        name: String,
+        name: String?,
         size: MonsterSize,
         ecology: String?,
 

@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.quests.detail
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.switchMap
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
@@ -26,7 +26,7 @@ class QuestDetailViewModel(app: Application): AndroidViewModel(app) {
     }
 
     fun loadQuestLocation(questId: Int) = locationData.get(questId) {
-        Transformations.switchMap(loadQuestData(questId)) {
+        loadQuestData(questId).switchMap {
             db.locationDao().loadLocation(AppSettings.dataLocale, it.location_id)
         }
     }

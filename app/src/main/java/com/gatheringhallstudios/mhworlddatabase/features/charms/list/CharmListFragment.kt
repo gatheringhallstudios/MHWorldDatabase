@@ -6,7 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.StandardDivider
@@ -15,7 +15,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.GroupieViewHolder
 
 class CharmListFragment : RecyclerViewFragment() {
     companion object {
@@ -23,7 +23,7 @@ class CharmListFragment : RecyclerViewFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(CharmListViewModel::class.java)
+        ViewModelProvider(this).get(CharmListViewModel::class.java)
     }
 
 
@@ -33,7 +33,7 @@ class CharmListFragment : RecyclerViewFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = GroupAdapter<ViewHolder>()
+        val adapter = GroupAdapter<GroupieViewHolder>()
         setAdapter(adapter)
 
         // Add dividers between items

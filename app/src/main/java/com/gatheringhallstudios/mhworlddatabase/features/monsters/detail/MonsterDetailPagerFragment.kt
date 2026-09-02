@@ -6,7 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 import com.gatheringhallstudios.mhworlddatabase.data.models.Monster
@@ -15,7 +15,6 @@ import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeat
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_generic_pager.view.*
 
 /**
  * Monster detail Hub. Displays information for a single monster.
@@ -61,7 +60,7 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
         val monsterId = args!!.getInt(ARG_MONSTER_ID)
 
         // Set up our ViewModel
-        viewModel = ViewModelProviders.of(this).get(MonsterDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MonsterDetailViewModel::class.java)
         viewModel.setMonster(monsterId)
 
         viewModel.monster.observe(this, Observer<Monster> {

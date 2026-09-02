@@ -19,5 +19,7 @@
             app:srcCompat="@xml/ui_tree_node_start_base" />
     </LinearLayout>
 
-    <include layout="@layout/listitem_weapon" />
+    <include
+        android:id="@+id/weapon_layout"
+        layout="@layout/listitem_weapon" />
 </LinearLayout>

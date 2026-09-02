@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
@@ -20,7 +20,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
  */
 class SkillListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(SkillListFragment.ViewModel::class.java)
+        ViewModelProvider(this).get(SkillListFragment.ViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

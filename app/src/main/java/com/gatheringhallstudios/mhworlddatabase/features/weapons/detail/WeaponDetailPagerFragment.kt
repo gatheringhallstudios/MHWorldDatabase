@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.detail
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 
@@ -16,7 +16,7 @@ class WeaponDetailPagerFragment: BasePagerFragment() {
      * Returns the viewmodel owned by this parent fragment
      */
     private val viewModel: WeaponDetailViewModel by lazy {
-        ViewModelProviders.of(this).get(WeaponDetailViewModel::class.java)
+        ViewModelProvider(this).get(WeaponDetailViewModel::class.java)
     }
 
     override fun onAddTabs(tabs: TabAdder) {

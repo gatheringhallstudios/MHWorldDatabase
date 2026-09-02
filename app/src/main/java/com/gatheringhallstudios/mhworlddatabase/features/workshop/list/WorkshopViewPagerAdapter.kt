@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillLevel
-import kotlinx.android.synthetic.main.listitem_skill_level_armor.view.*
 import kotlin.math.ceil
 import kotlin.math.roundToInt
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSkillLevelBinding
 
 
 class WorkshopViewPagerAdapter(private val context: Context, private val skills: List<SkillLevel>) : RecyclerView.Adapter<WorkshopViewPagerAdapter.SkillViewHolder>() {
@@ -46,18 +46,19 @@ class WorkshopViewPagerAdapter(private val context: Context, private val skills:
             val startIndex = position * 4
             val endIndex = if (startIndex + 4 > skills.size) skills.size else startIndex + 4
             val inflater = LayoutInflater.from(context)
+            val container = itemView as ViewGroup
             for (item in skills.subList(startIndex, endIndex)) {
-                val skillLayout = inflater.inflate(R.layout.listitem_skill_level, itemView as ViewGroup, false)
-                with(skillLayout) {
+                val skillBinding = ListitemSkillLevelBinding.inflate(inflater, container, false)
+                with(skillBinding) {
                     icon.setImageDrawable(AssetLoader.loadIconFor(item.skillTree))
-                    label_text.text = item.skillTree.name
-                    skill_level.maxLevel = item.skillTree.max_level
-                    skill_level.level = item.level
-                    skill_level.secretLevels = item.skillTree.secret
-                    level_text.text = itemView.resources.getString(R.string.level_qty, item.level)
+                    labelText.text = item.skillTree.name
+                    skillLevel.maxLevel = item.skillTree.max_level
+                    skillLevel.level = item.level
+                    skillLevel.secretLevels = item.skillTree.secret
+                    levelText.text = itemView.resources.getString(R.string.level_qty, item.level)
                 }
 
-                itemView.addView(skillLayout)
+                container.addView(skillBinding.root)
             }
         }
     }

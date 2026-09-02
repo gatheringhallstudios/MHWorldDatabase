@@ -2,11 +2,10 @@ package com.gatheringhallstudios.mhworlddatabase.features.workshop.detail
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentSetViewModel
 import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
-import kotlinx.android.synthetic.main.fragment_generic_pager.*
 
 /**
  * Monster detail Hub. Displays information for a single monster.
@@ -15,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_generic_pager.*
 
 class WorkshopDetailPagerFragment : BasePagerFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
+        ViewModelProvider(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
 
     companion object {
@@ -29,7 +28,7 @@ class WorkshopDetailPagerFragment : BasePagerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pager_list.disableScroll(true)
+        pagerList.disableScroll(true)
     }
 
     override fun onAddTabs(tabs: TabAdder) {

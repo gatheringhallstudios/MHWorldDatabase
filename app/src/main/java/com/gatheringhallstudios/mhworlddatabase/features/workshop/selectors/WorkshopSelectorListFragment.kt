@@ -6,7 +6,7 @@ import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.SpacesItemDecoration
@@ -17,14 +17,17 @@ import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentC
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
-import kotlinx.android.synthetic.main.fragment_workshop_selector.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.Serializable
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentWorkshopSelectorBinding
 
 class WorkshopSelectorListFragment : Fragment() {
+    private var _binding: FragmentWorkshopSelectorBinding? = null
+    private val binding get() = _binding!!
+
     companion object {
         const val ARG_ACTIVE_EQUIPMENT = "ACTIVE_EQUIPMENT"
         const val ARG_SET_ID = "ACTIVE_SET_ID" //The equipment set that is currently being handled when in builder mode
@@ -47,7 +50,7 @@ class WorkshopSelectorListFragment : Fragment() {
     }
 
     private val viewModel: WorkshopSelectorViewModel by lazy {
-        ViewModelProviders.of(this).get(WorkshopSelectorViewModel::class.java)
+        ViewModelProvider(this).get(WorkshopSelectorViewModel::class.java)
     }
 
     private lateinit var card: UserEquipmentCard
@@ -94,7 +97,13 @@ class WorkshopSelectorListFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_workshop_selector, parent, false)
+        _binding = FragmentWorkshopSelectorBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -107,7 +116,7 @@ class WorkshopSelectorListFragment : Fragment() {
         //Remove the userEquipment from arguments to prevent it from being serialized onPause
         arguments?.putSerializable(ARG_ACTIVE_EQUIPMENT, null)
 
-        card = UserEquipmentCard(active_equipment_slot)
+        card = UserEquipmentCard(binding.activeEquipmentSlot)
 
         when (mode) {
             SelectorMode.ARMOR -> initArmorSelector(filter, activeEquipment as? UserArmorPiece, activeEquipmentSetId)
@@ -115,12 +124,13 @@ class WorkshopSelectorListFragment : Fragment() {
             SelectorMode.DECORATION -> initDecorationSelector(activeEquipment as? UserDecoration, activeEquipmentSetId, decorationsConfig!!)
             SelectorMode.WEAPON -> initWeaponSelector(activeEquipment as? UserWeapon, activeEquipmentSetId)
             SelectorMode.TOOL -> initToolSelector(activeEquipment as? UserTool, activeEquipmentSetId, orderId)
+            SelectorMode.NONE, null -> Unit
         }
     }
 
     override fun onPause() {
         super.onPause()
-        val listState = equipment_list.layoutManager?.onSaveInstanceState()
+        val listState = binding.equipmentList.layoutManager?.onSaveInstanceState()
         if (listState != null) {
             viewModel.listState = listState
         }
@@ -159,18 +169,18 @@ class WorkshopSelectorListFragment : Fragment() {
             }
         }
 
-        equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(32))
+        binding.equipmentList.adapter = adapter
+        binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
         viewModel.armor.observe(this, Observer {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
-                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+                binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
 
             if (it.isEmpty()) {
-                empty_view.visibility = View.VISIBLE
+                binding.emptyView.root.visibility = View.VISIBLE
             } else {
-                empty_view.visibility = View.GONE
+                binding.emptyView.root.visibility = View.GONE
             }
         })
     }
@@ -191,19 +201,19 @@ class WorkshopSelectorListFragment : Fragment() {
 
         card.bindActiveCharm(activeCharm)
 
-        equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(32))
+        binding.equipmentList.adapter = adapter
+        binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
 
         viewModel.charms.observe(this, Observer {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
-                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+                binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
 
             if (it.isEmpty()) {
-                empty_view.visibility = View.VISIBLE
+                binding.emptyView.root.visibility = View.VISIBLE
             } else {
-                empty_view.visibility = View.GONE
+                binding.emptyView.root.visibility = View.GONE
             }
         })
     }
@@ -224,22 +234,22 @@ class WorkshopSelectorListFragment : Fragment() {
 
         card.bindDecoration(activeDecoration, decorationsConfig.decorationLevelFilter)
 
-        equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(32))
+        binding.equipmentList.adapter = adapter
+        binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
 
         viewModel.decorations.observe(this, Observer {
             val filteredCollection = it.filter { decoration ->
                 decoration.slot <= decorationsConfig.decorationLevelFilter
             }
             if (viewModel.islistStateInitialized()) {
-                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+                binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
 
             adapter.items = filteredCollection
             if (filteredCollection.isEmpty()) {
-                empty_view.visibility = View.VISIBLE
+                binding.emptyView.root.visibility = View.VISIBLE
             } else {
-                empty_view.visibility = View.GONE
+                binding.emptyView.root.visibility = View.GONE
             }
         })
     }
@@ -260,19 +270,19 @@ class WorkshopSelectorListFragment : Fragment() {
         card.bindActiveWeapon(activeWeapon)
         card.populateSlots(activeWeapon?.weapon?.weapon?.slots)
 
-        equipment_list.adapter = adapter
-        equipment_list.addItemDecoration(SpacesItemDecoration(32))
+        binding.equipmentList.adapter = adapter
+        binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
 
         viewModel.weapons.observe(this, Observer {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
-                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+                binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
 
             if (it.isEmpty()) {
-                empty_view.visibility = View.VISIBLE
+                binding.emptyView.root.visibility = View.VISIBLE
             } else {
-                empty_view.visibility = View.GONE
+                binding.emptyView.root.visibility = View.GONE
             }
         })
     }
@@ -291,18 +301,18 @@ class WorkshopSelectorListFragment : Fragment() {
         }
 
         card.bindActiveTool(activeTool)
-        equipment_list.adapter = adapter
+        binding.equipmentList.adapter = adapter
 
-        equipment_list.addItemDecoration(SpacesItemDecoration(32))
+        binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
 
         viewModel.tools.observe(this, Observer {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
-                equipment_list.layoutManager?.onRestoreInstanceState(viewModel.listState)
+                binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)
             }
 
             if (it.isEmpty()) {
-                empty_view.visibility = View.VISIBLE
+                binding.emptyView.root.visibility = View.VISIBLE
             }
         })
     }

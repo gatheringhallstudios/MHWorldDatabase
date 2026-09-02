@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.bookmarks
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyState
 import com.gatheringhallstudios.mhworlddatabase.adapters.EmptyStateAdapterDelegate
@@ -19,7 +19,7 @@ import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
  */
 class BookmarksListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(BookmarksListViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(BookmarksListViewModel::class.java)
     }
 
     val adapter = CategoryAdapter(

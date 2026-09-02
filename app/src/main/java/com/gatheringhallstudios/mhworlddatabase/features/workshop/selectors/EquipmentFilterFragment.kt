@@ -17,28 +17,12 @@ import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.CheckedGro
 import com.gatheringhallstudios.mhworlddatabase.features.weapons.list.WeaponTreePagerFragment.Companion.FILTER_RESULT_CODE
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion.SelectorMode
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.*
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.name_filter_edittext
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_dragon
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_fire
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_ice
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_thunder
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.toggle_water
-import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_1
-import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_2
-import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_3
-import kotlinx.android.synthetic.main.fragment_decoration_filter_body.slot_level_toggle_level_4
-import kotlinx.android.synthetic.main.fragment_equipment_filter.*
-import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.*
-import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_paralysis
-import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_poison
-import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_sleep
-import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_blast
-import kotlinx.android.synthetic.main.fragment_workshop_weapon_filter_body.toggle_non_elemental
 import java.io.Serializable
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.skill_1 as armor_skill_1
-import kotlinx.android.synthetic.main.fragment_armor_filter_body.skill_2 as armor_skill_2
-import kotlinx.android.synthetic.main.fragment_charm_filter_body.skill_1 as charm_skill_1
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentDecorationFilterBodyBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentWorkshopWeaponFilterBodyBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentCharmFilterBodyBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentArmorFilterBodyBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentEquipmentFilterBinding
 
 class EquipmentFilterState(
         var selectorMode: SelectorMode,
@@ -78,6 +62,15 @@ class EquipmentFilterState(
  * it'll call back with a result.
  */
 class EquipmentFilterFragment : DialogFragment() {
+    private var _binding: FragmentEquipmentFilterBinding? = null
+    private val binding get() = _binding!!
+
+    // The scroll body is a ViewStub inflated with a different layout per selector mode
+    private var armorBody: FragmentArmorFilterBodyBinding? = null
+    private var charmBody: FragmentCharmFilterBodyBinding? = null
+    private var weaponBody: FragmentWorkshopWeaponFilterBodyBinding? = null
+    private var decorationBody: FragmentDecorationFilterBodyBinding? = null
+
     companion object {
         const val SELECTOR_MODE = "FILTER_MODE"
         const val FILTER_STATE = "FILTER_STATE"
@@ -118,7 +111,17 @@ class EquipmentFilterFragment : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_equipment_filter, container, false)
+        _binding = FragmentEquipmentFilterBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        armorBody = null
+        charmBody = null
+        weaponBody = null
+        decorationBody = null
+        _binding = null
     }
 
     /**
@@ -141,143 +144,148 @@ class EquipmentFilterFragment : DialogFragment() {
         when (selectorMode) {
             SelectorMode.ARMOR -> {
                 nameFilter = ""
-                scroll_body.layoutResource = R.layout.fragment_armor_filter_body
-                scroll_body.inflate()
-                armor_skill_1.setLabelText(getString(R.string.user_equipment_set_no_skill))
-                armor_skill_2.setLabelText(getString(R.string.user_equipment_set_no_skill))
+                binding.scrollBody.layoutResource = R.layout.fragment_armor_filter_body
+                val body = FragmentArmorFilterBodyBinding.bind(binding.scrollBody.inflate())
+                armorBody = body
+                body.skill1.setLabelText(getString(R.string.user_equipment_set_no_skill))
+                body.skill2.setLabelText(getString(R.string.user_equipment_set_no_skill))
 
                 rankGroup = CheckedGroup()
                 rankGroup.apply {
-                    rankGroup.addBinding(rank_toggle_low_rank, Rank.LOW)
-                    rankGroup.addBinding(rank_toggle_high_rank, Rank.HIGH)
-                    rankGroup.addBinding(rank_toggle_master_rank, Rank.MASTER)
+                    rankGroup.addBinding(body.rankToggleLowRank, Rank.LOW)
+                    rankGroup.addBinding(body.rankToggleHighRank, Rank.HIGH)
+                    rankGroup.addBinding(body.rankToggleMasterRank, Rank.MASTER)
                 }
 
                 elementalDefGroup = CheckedGroup()
                 elementalDefGroup.apply {
-                    elementalDefGroup.addBinding(toggle_fire, ElementStatus.FIRE)
-                    elementalDefGroup.addBinding(toggle_water, ElementStatus.WATER)
-                    elementalDefGroup.addBinding(toggle_thunder, ElementStatus.THUNDER)
-                    elementalDefGroup.addBinding(toggle_ice, ElementStatus.ICE)
-                    elementalDefGroup.addBinding(toggle_dragon, ElementStatus.DRAGON)
+                    elementalDefGroup.addBinding(body.toggleFire, ElementStatus.FIRE)
+                    elementalDefGroup.addBinding(body.toggleWater, ElementStatus.WATER)
+                    elementalDefGroup.addBinding(body.toggleThunder, ElementStatus.THUNDER)
+                    elementalDefGroup.addBinding(body.toggleIce, ElementStatus.ICE)
+                    elementalDefGroup.addBinding(body.toggleDragon, ElementStatus.DRAGON)
                 }
 
-                armor_skill_1.setOnClickListener {
+                body.skill1.setOnClickListener {
                     val skillFragment = SkillSelectorFragment.newInstance(0)
                     skillFragment.setTargetFragment(this, FILTER_RESULT_CODE)
                     skillFragment.show(fragmentManager!!, "Filter")
                 }
-                armor_skill_1.setButtonClickFunction {
+                body.skill1.setButtonClickFunction {
                     skillGroup.removeValue(0)
                 }
 
-                armor_skill_2.setOnClickListener {
+                body.skill2.setOnClickListener {
                     val skillFragment = SkillSelectorFragment.newInstance(1)
                     skillFragment.setTargetFragment(this, FILTER_RESULT_CODE)
                     skillFragment.show(fragmentManager!!, "Filter")
                 }
-                armor_skill_2.setButtonClickFunction {
+                body.skill2.setButtonClickFunction {
                     skillGroup.removeValue(1)
                 }
 
                 skillGroup = SkillGroup()
                 skillGroup.apply {
-                    skillGroup.addBinding(armor_skill_1)
-                    skillGroup.addBinding(armor_skill_2)
+                    skillGroup.addBinding(body.skill1)
+                    skillGroup.addBinding(body.skill2)
                 }
             }
             SelectorMode.CHARM -> {
-                scroll_body.layoutResource = R.layout.fragment_charm_filter_body
-                scroll_body.inflate()
-                charm_skill_1.setLabelText(getString(R.string.user_equipment_set_no_skill))
+                binding.scrollBody.layoutResource = R.layout.fragment_charm_filter_body
+                val body = FragmentCharmFilterBodyBinding.bind(binding.scrollBody.inflate())
+                charmBody = body
+                body.skill1.setLabelText(getString(R.string.user_equipment_set_no_skill))
 
-                charm_skill_1.setOnClickListener {
+                body.skill1.setOnClickListener {
                     val skillFragment = SkillSelectorFragment.newInstance(0)
                     skillFragment.setTargetFragment(this, FILTER_RESULT_CODE)
                     skillFragment.show(fragmentManager!!, "Filter")
                 }
-                charm_skill_1.setButtonClickFunction {
+                body.skill1.setButtonClickFunction {
                     skillGroup.removeValue(0)
                 }
 
                 skillGroup = SkillGroup()
                 skillGroup.apply {
-                    skillGroup.addBinding(charm_skill_1)
+                    skillGroup.addBinding(body.skill1)
                 }
             }
             SelectorMode.WEAPON -> {
-                scroll_body.layoutResource = R.layout.fragment_workshop_weapon_filter_body
-                scroll_body.inflate()
+                binding.scrollBody.layoutResource = R.layout.fragment_workshop_weapon_filter_body
+                val body = FragmentWorkshopWeaponFilterBodyBinding.bind(binding.scrollBody.inflate())
+                weaponBody = body
 
                 weaponTypeGroup = CheckedGroup()
                 weaponTypeGroup.apply {
-                    weaponTypeGroup.addBinding(toggle_great_sword, WeaponType.GREAT_SWORD)
-                    weaponTypeGroup.addBinding(toggle_long_sword, WeaponType.LONG_SWORD)
-                    weaponTypeGroup.addBinding(toggle_sword_and_shield, WeaponType.SWORD_AND_SHIELD)
-                    weaponTypeGroup.addBinding(toggle_dual_blades, WeaponType.DUAL_BLADES)
-                    weaponTypeGroup.addBinding(toggle_hammer, WeaponType.HAMMER)
-                    weaponTypeGroup.addBinding(toggle_hunting_horn, WeaponType.HUNTING_HORN)
-                    weaponTypeGroup.addBinding(toggle_lance, WeaponType.LANCE)
-                    weaponTypeGroup.addBinding(toggle_gunlance, WeaponType.GUNLANCE)
-                    weaponTypeGroup.addBinding(toggle_switch_axe, WeaponType.SWITCH_AXE)
-                    weaponTypeGroup.addBinding(toggle_charge_blade, WeaponType.CHARGE_BLADE)
-                    weaponTypeGroup.addBinding(toggle_insect_glaive, WeaponType.INSECT_GLAIVE)
-                    weaponTypeGroup.addBinding(toggle_light_bowgun, WeaponType.LIGHT_BOWGUN)
-                    weaponTypeGroup.addBinding(toggle_heavy_bowgun, WeaponType.HEAVY_BOWGUN)
-                    weaponTypeGroup.addBinding(toggle_bow, WeaponType.BOW)
+                    weaponTypeGroup.addBinding(body.toggleGreatSword, WeaponType.GREAT_SWORD)
+                    weaponTypeGroup.addBinding(body.toggleLongSword, WeaponType.LONG_SWORD)
+                    weaponTypeGroup.addBinding(body.toggleSwordAndShield, WeaponType.SWORD_AND_SHIELD)
+                    weaponTypeGroup.addBinding(body.toggleDualBlades, WeaponType.DUAL_BLADES)
+                    weaponTypeGroup.addBinding(body.toggleHammer, WeaponType.HAMMER)
+                    weaponTypeGroup.addBinding(body.toggleHuntingHorn, WeaponType.HUNTING_HORN)
+                    weaponTypeGroup.addBinding(body.toggleLance, WeaponType.LANCE)
+                    weaponTypeGroup.addBinding(body.toggleGunlance, WeaponType.GUNLANCE)
+                    weaponTypeGroup.addBinding(body.toggleSwitchAxe, WeaponType.SWITCH_AXE)
+                    weaponTypeGroup.addBinding(body.toggleChargeBlade, WeaponType.CHARGE_BLADE)
+                    weaponTypeGroup.addBinding(body.toggleInsectGlaive, WeaponType.INSECT_GLAIVE)
+                    weaponTypeGroup.addBinding(body.toggleLightBowgun, WeaponType.LIGHT_BOWGUN)
+                    weaponTypeGroup.addBinding(body.toggleHeavyBowgun, WeaponType.HEAVY_BOWGUN)
+                    weaponTypeGroup.addBinding(body.toggleBow, WeaponType.BOW)
                 }
 
                 elementGroup = CheckedGroup()
                 elementGroup.apply {
-                    addBinding(toggle_fire, ElementStatus.FIRE)
-                    addBinding(toggle_water, ElementStatus.WATER)
-                    addBinding(toggle_thunder, ElementStatus.THUNDER)
-                    addBinding(toggle_ice, ElementStatus.ICE)
-                    addBinding(toggle_dragon, ElementStatus.DRAGON)
-                    addBinding(toggle_poison, ElementStatus.POISON)
-                    addBinding(toggle_sleep, ElementStatus.SLEEP)
-                    addBinding(toggle_paralysis, ElementStatus.PARALYSIS)
-                    addBinding(toggle_blast, ElementStatus.BLAST)
-                    addBinding(toggle_non_elemental, ElementStatus.NON_ELEMENTAL)
+                    addBinding(body.toggleFire, ElementStatus.FIRE)
+                    addBinding(body.toggleWater, ElementStatus.WATER)
+                    addBinding(body.toggleThunder, ElementStatus.THUNDER)
+                    addBinding(body.toggleIce, ElementStatus.ICE)
+                    addBinding(body.toggleDragon, ElementStatus.DRAGON)
+                    addBinding(body.togglePoison, ElementStatus.POISON)
+                    addBinding(body.toggleSleep, ElementStatus.SLEEP)
+                    addBinding(body.toggleParalysis, ElementStatus.PARALYSIS)
+                    addBinding(body.toggleBlast, ElementStatus.BLAST)
+                    addBinding(body.toggleNonElemental, ElementStatus.NON_ELEMENTAL)
                 }
 
                 slotLevelToggles = CheckedGroup()
                 slotLevelToggles.apply {
-                    slotLevelToggles.addBinding(slot_level_toggle_level_1, 1)
-                    slotLevelToggles.addBinding(slot_level_toggle_level_2, 2)
-                    slotLevelToggles.addBinding(slot_level_toggle_level_3, 3)
-                    slotLevelToggles.addBinding(slot_level_toggle_level_4, 4)
+                    slotLevelToggles.addBinding(body.slotLevelToggleLevel1, 1)
+                    slotLevelToggles.addBinding(body.slotLevelToggleLevel2, 2)
+                    slotLevelToggles.addBinding(body.slotLevelToggleLevel3, 3)
+                    slotLevelToggles.addBinding(body.slotLevelToggleLevel4, 4)
                 }
 
                 rankGroup = CheckedGroup()
                 rankGroup.apply {
-                    rankGroup.addBinding(rank_weapon_toggle_low_rank, Rank.LOW)
-                    rankGroup.addBinding(rank_weapon_toggle_high_rank, Rank.HIGH)
-                    rankGroup.addBinding(rank_weapon_toggle_master_rank, Rank.MASTER)
+                    rankGroup.addBinding(body.rankWeaponToggleLowRank, Rank.LOW)
+                    rankGroup.addBinding(body.rankWeaponToggleHighRank, Rank.HIGH)
+                    rankGroup.addBinding(body.rankWeaponToggleMasterRank, Rank.MASTER)
                 }
             }
             SelectorMode.DECORATION -> {
-                scroll_body.layoutResource = R.layout.fragment_decoration_filter_body
-                scroll_body.inflate()
+                binding.scrollBody.layoutResource = R.layout.fragment_decoration_filter_body
+                val body = FragmentDecorationFilterBodyBinding.bind(binding.scrollBody.inflate())
+                decorationBody = body
                 nameFilter = ""
                 slotLevelToggles = CheckedGroup()
                 slotLevelToggles.apply {
-                    slotLevelToggles.addBinding(slot_level_toggle_level_1, 1)
-                    slotLevelToggles.addBinding(slot_level_toggle_level_2, 2)
-                    slotLevelToggles.addBinding(slot_level_toggle_level_3, 3)
-                    slotLevelToggles.addBinding(slot_level_toggle_level_4, 4)
+                    slotLevelToggles.addBinding(body.slotLevelToggleLevel1, 1)
+                    slotLevelToggles.addBinding(body.slotLevelToggleLevel2, 2)
+                    slotLevelToggles.addBinding(body.slotLevelToggleLevel3, 3)
+                    slotLevelToggles.addBinding(body.slotLevelToggleLevel4, 4)
                 }
             }
+            else -> Unit
         }
 
         // Implement actions
-        action_clear.setOnClickListener {
+        binding.actionClear.setOnClickListener {
             applyState(EquipmentFilterState.default)
         }
-        action_cancel.setOnClickListener {
+        binding.actionCancel.setOnClickListener {
             dismiss()
         }
-        action_apply.setOnClickListener {
+        binding.actionApply.setOnClickListener {
             val data = Intent()
             data.putExtra(FILTER_STATE, calculateState())
             targetFragment?.onActivityResult(targetRequestCode, 0, data)
@@ -299,7 +307,7 @@ class EquipmentFilterFragment : DialogFragment() {
             SelectorMode.ARMOR -> {
                 return EquipmentFilterState(
                         selectorMode = selectorMode,
-                        nameFilter = name_filter_edittext.text.toString(),
+                        nameFilter = armorBody!!.nameFilterEdittext.text.toString(),
                         elementalDefense = elementalDefGroup.getValues().toSet(),
                         rank = rankGroup.getValues().toSet(),
                         slotLevels = null,
@@ -311,7 +319,7 @@ class EquipmentFilterFragment : DialogFragment() {
             SelectorMode.DECORATION -> {
                 return EquipmentFilterState(
                         selectorMode = selectorMode,
-                        nameFilter = name_filter_edittext.text.toString(),
+                        nameFilter = decorationBody!!.nameFilterEdittext.text.toString(),
                         elementalDefense = null,
                         rank = null,
                         slotLevels = slotLevelToggles.getValues().toSet(),
@@ -323,7 +331,7 @@ class EquipmentFilterFragment : DialogFragment() {
             SelectorMode.CHARM -> {
                 return EquipmentFilterState(
                         selectorMode = selectorMode,
-                        nameFilter = name_filter_edittext.text.toString(),
+                        nameFilter = charmBody!!.nameFilterEdittext.text.toString(),
                         elementalDefense = null,
                         rank = null,
                         slotLevels = null,
@@ -334,7 +342,7 @@ class EquipmentFilterFragment : DialogFragment() {
             SelectorMode.WEAPON -> {
                 return EquipmentFilterState(
                         selectorMode = selectorMode,
-                        nameFilter = name_filter_edittext.text.toString(),
+                        nameFilter = weaponBody!!.nameFilterEdittext.text.toString(),
                         elementalDefense = null,
                         rank = rankGroup.getValues().toSet(),
                         slotLevels = slotLevelToggles.getValues().toSet(),
@@ -343,6 +351,7 @@ class EquipmentFilterFragment : DialogFragment() {
                         skills = null
                 )
             }
+            else -> Unit
         }
         return null
     }
@@ -353,26 +362,27 @@ class EquipmentFilterFragment : DialogFragment() {
     fun applyState(state: EquipmentFilterState) {
         when (selectorMode) {
             SelectorMode.ARMOR -> {
-                name_filter_edittext.setText(state.nameFilter)
+                armorBody!!.nameFilterEdittext.setText(state.nameFilter)
                 elementalDefGroup.setValues(state.elementalDefense!!)
                 rankGroup.setValues(state.rank!!)
                 skillGroup.setValues(state.skills!!)
             }
             SelectorMode.DECORATION -> {
-                name_filter_edittext.setText(state.nameFilter)
+                decorationBody!!.nameFilterEdittext.setText(state.nameFilter)
                 slotLevelToggles.setValues(state.slotLevels!!)
             }
             SelectorMode.CHARM -> {
-                name_filter_edittext.setText(state.nameFilter)
+                charmBody!!.nameFilterEdittext.setText(state.nameFilter)
                 skillGroup.setValues(state.skills!!)
             }
             SelectorMode.WEAPON -> {
-                name_filter_edittext.setText(state.nameFilter)
+                weaponBody!!.nameFilterEdittext.setText(state.nameFilter)
                 rankGroup.setValues(state.rank!!)
                 weaponTypeGroup.setValues(state.weaponTypes!!)
                 elementGroup.setValues(state.elements!!)
                 slotLevelToggles.setValues(state.slotLevels!!)
             }
+            else -> Unit
         }
     }
 }

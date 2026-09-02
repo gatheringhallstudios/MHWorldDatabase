@@ -6,7 +6,7 @@ import android.view.*
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
@@ -19,9 +19,12 @@ import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeat
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.BundleBuilder
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.fragment_tool_summary.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentToolSummaryBinding
 
 class ToolDetailFragment : androidx.fragment.app.Fragment() {
+    private var _binding: FragmentToolSummaryBinding? = null
+    private val binding get() = _binding!!
+
     companion object {
         const val ARG_TOOL_ID = "TOOL"
 
@@ -41,11 +44,17 @@ class ToolDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ToolDetailFragment.ViewModel::class.java)
+        ViewModelProvider(this).get(ToolDetailFragment.ViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_tool_summary, parent, false)
+        _binding = FragmentToolSummaryBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,23 +89,23 @@ class ToolDetailFragment : androidx.fragment.app.Fragment() {
         //Rerender the menu bar because we are 100% sure we have the tool data now
         requireActivity().invalidateOptionsMenu()
 
-        tool_header.setTitleText(toolData.name)
-        tool_header.setSubtitleText(when (toolData.tool_type) {
+        binding.toolHeader.setTitleText(toolData.name)
+        binding.toolHeader.setSubtitleText(when (toolData.tool_type) {
             ToolType.MANTLE -> requireContext().getString(R.string.tool_mantle)
             ToolType.BOOSTER -> requireContext().getString(R.string.tool_booster)
         })
-        tool_header.setIconDrawable(AssetLoader.loadIconFor(toolData))
+        binding.toolHeader.setIconDrawable(AssetLoader.loadIconFor(toolData))
 
-        effect_duration_value.text = if (toolData.duration_upgraded != null) String.format("%d (%d)",
+        binding.effectDurationValue.text = if (toolData.duration_upgraded != null) String.format("%d (%d)",
                 toolData.duration, toolData.duration_upgraded) else toolData.duration.toString()
-        recharge_time_value.text = toolData.recharge.toString()
+        binding.rechargeTimeValue.text = toolData.recharge.toString()
 
         val slotImages = toolData.slots.map {
             this.requireContext().getDrawableCompat(SlotEmptyRegistry(it))
         }
-        slot1.setImageDrawable(slotImages[0])
-        slot2.setImageDrawable(slotImages[1])
-        slot3.setImageDrawable(slotImages[2])
+        binding.slot1.setImageDrawable(slotImages[0])
+        binding.slot2.setImageDrawable(slotImages[1])
+        binding.slot3.setImageDrawable(slotImages[2])
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application) {

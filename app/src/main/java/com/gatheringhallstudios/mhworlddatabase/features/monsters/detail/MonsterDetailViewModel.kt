@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
@@ -51,8 +51,8 @@ class MonsterDetailViewModel(application: Application) : AndroidViewModel(applic
      */
     fun getRewardsForRank(rank: Rank?): LiveData<List<MonsterReward>> = when (rank) {
         null -> rewards
-        Rank.LOW -> Transformations.map(rewards) { filterRank(it, Rank.LOW) }
-        Rank.HIGH -> Transformations.map(rewards) { filterRank(it, Rank.HIGH) }
-        Rank.MASTER -> Transformations.map(rewards) { filterRank(it, Rank.MASTER) }
+        Rank.LOW -> rewards.map { filterRank(it, Rank.LOW) }
+        Rank.HIGH -> rewards.map { filterRank(it, Rank.HIGH) }
+        Rank.MASTER -> rewards.map { filterRank(it, Rank.MASTER) }
     }
 }

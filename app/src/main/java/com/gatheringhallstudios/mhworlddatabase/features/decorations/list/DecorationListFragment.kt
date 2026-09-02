@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.decorations.list
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
@@ -18,7 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 class DecorationListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ViewModel::class.java)
+        ViewModelProvider(this).get(ViewModel::class.java)
     }
 
     val adapter = BasicListDelegationAdapter(DecorationAdapterDelegate {

@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.Animatable
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
+import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.Router
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
@@ -14,10 +15,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Armor
 import com.gatheringhallstudios.mhworlddatabase.data.models.Charm
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
-import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.listitem_armorset_armor.*
-import kotlinx.android.synthetic.main.listitem_armorset_header.*
+import com.xwray.groupie.viewbinding.BindableItem
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemArmorsetArmorBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemArmorsetHeaderBinding
 
 private val version = android.os.Build.VERSION.SDK_INT
 
@@ -33,46 +33,48 @@ fun <T> compatSwitchVector(desired: T, fallback: T) = when (version >= android.o
 /**
  * Header item for collapsible armor sets
  */
-class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
+class ArmorSetHeaderItem(val armorSet: ArmorSet) : BindableItem<ListitemArmorsetHeaderBinding>(), ExpandableItem {
     private lateinit var group: ExpandableGroup
 
     override fun getLayout() = R.layout.listitem_armorset_header
+
+    override fun initializeViewBinding(view: View) = ListitemArmorsetHeaderBinding.bind(view)
 
     override fun setExpandableGroup(onToggleListener: ExpandableGroup) {
         group = onToggleListener
     }
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewBinding: ListitemArmorsetHeaderBinding, position: Int) {
         val icon = AssetLoader.loadIconFor(armorSet)
 
-        viewHolder.set_icon.setImageDrawable(icon)
-        viewHolder.armor_set_name.text = armorSet.armorset_name
-        bindCurrentState(viewHolder)
+        viewBinding.setIcon.setImageDrawable(icon)
+        viewBinding.armorSetName.text = armorSet.armorset_name
+        bindCurrentState(viewBinding)
 
-        viewHolder.itemView.setOnClickListener {
+        viewBinding.root.setOnClickListener {
             group.onToggleExpanded()
-            bindCurrentState(viewHolder, stateChanging = true)
+            bindCurrentState(viewBinding, stateChanging = true)
         }
     }
 
     /**
      * Updates view to match current expanded/collapsed state
      */
-    private fun bindCurrentState(viewHolder: ViewHolder, stateChanging: Boolean = false) {
-        val view = viewHolder.itemView
+    private fun bindCurrentState(viewBinding: ListitemArmorsetHeaderBinding, stateChanging: Boolean = false) {
+        val view = viewBinding.root
         view.setBackgroundColor(when (group.isExpanded) {
             true -> ContextCompat.getColor(view.context, R.color.backgroundColorSectionHeader)
             false -> Color.TRANSPARENT
         })
 
         // set dropdown arrow image
-        viewHolder.dropdown_icon.setImageResource(when (group.isExpanded) {
+        viewBinding.dropdownIcon.setImageResource(when (group.isExpanded) {
             true -> compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less)
             false -> compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more)
         })
 
         // animate (if can be animated)
-        val drawable = viewHolder.dropdown_icon.drawable
+        val drawable = viewBinding.dropdownIcon.drawable
         if (stateChanging && drawable is Animatable) {
             drawable.start()
         }
@@ -83,15 +85,17 @@ class ArmorSetHeaderItem(val armorSet: ArmorSet) : Item(), ExpandableItem {
  * Body item for collapsible armor sets.
  * Each one represents a single armor in an armor set.
  */
-class ArmorSetDetailItem(val armor: Armor, private val onSelected: (Armor) -> Unit) : Item() {
+class ArmorSetDetailItem(val armor: Armor, private val onSelected: (Armor) -> Unit) : BindableItem<ListitemArmorsetArmorBinding>() {
     override fun getLayout() = R.layout.listitem_armorset_armor
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        val view = viewHolder.itemView
+    override fun initializeViewBinding(view: View) = ListitemArmorsetArmorBinding.bind(view)
 
-        viewHolder.armor_name.text = armor.name
-        viewHolder.rarity_string.text = view.resources.getString(R.string.format_rarity, armor.rarity)
-        viewHolder.defense_value.text = view.resources.getString(
+    override fun bind(viewBinding: ListitemArmorsetArmorBinding, position: Int) {
+        val view = viewBinding.root
+
+        viewBinding.armorName.text = armor.name
+        viewBinding.rarityString.text = view.resources.getString(R.string.format_rarity, armor.rarity)
+        viewBinding.defenseValue.text = view.resources.getString(
                 R.string.armor_defense_value,
                 armor.defense_base,
                 armor.defense_max,
@@ -102,13 +106,13 @@ class ArmorSetDetailItem(val armor: Armor, private val onSelected: (Armor) -> Un
             view.context.getDrawableCompat(SlotEmptyRegistry(it))
         }
 
-        viewHolder.slot1.setImageDrawable(slotImages[0])
-        viewHolder.slot2.setImageDrawable(slotImages[1])
-        viewHolder.slot3.setImageDrawable(slotImages[2])
+        viewBinding.slot1.setImageDrawable(slotImages[0])
+        viewBinding.slot2.setImageDrawable(slotImages[1])
+        viewBinding.slot3.setImageDrawable(slotImages[2])
 
         val icon = AssetLoader.loadIconFor(armor)
-        viewHolder.armor_icon.setImageDrawable(icon)
-        viewHolder.rarity_string.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
+        viewBinding.armorIcon.setImageDrawable(icon)
+        viewBinding.rarityString.setTextColor(AssetLoader.loadRarityColor(armor.rarity))
 
         view.setOnClickListener {
             onSelected(armor)

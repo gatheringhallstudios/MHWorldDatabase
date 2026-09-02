@@ -198,7 +198,7 @@ abstract class SearchDao {
 
     @Query("""
         SELECT k.id, kt.name, k.rarity, k.previous_kinsect_id,
-            k.attack_type, k.dust_effect, k.power, k.speed, k.heal
+            k.attack_type, k.dust_effect, k.power, k.speed, k.heal, k.final
         FROM kinsect k
             JOIN kinsect_text kt USING (id)
         WHERE kt.lang_id = :langId

@@ -9,19 +9,28 @@ import android.view.View
 import android.view.ViewGroup
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
-import kotlinx.android.synthetic.main.fragment_about.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentAboutBinding
 
 class AboutFragment : androidx.fragment.app.Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_about, container, false)
+    private var _binding: FragmentAboutBinding? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentAboutBinding.inflate(inflater, container, false)
+        return _binding!!.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val aboutLayout = _binding!!.aboutLayout
 
         // Look for IconLabelTextCells and hook up their ClickListeners
-        for (i in 0..about_layout.childCount) {
-            if (about_layout.getChildAt(i) is IconLabelTextCell) {
-                val cell = about_layout.getChildAt(i) as IconLabelTextCell
+        for (i in 0..aboutLayout.childCount) {
+            if (aboutLayout.getChildAt(i) is IconLabelTextCell) {
+                val cell = aboutLayout.getChildAt(i) as IconLabelTextCell
 
                 cell.setOnClickListener {
                     val href = cell.tag as? String

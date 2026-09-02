@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.TouchDelegate
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.Animation
@@ -21,8 +22,8 @@ import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import com.gatheringhallstudios.mhworlddatabase.util.elevationToAlpha
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
 import kotlin.math.abs
+import com.gatheringhallstudios.mhworlddatabase.databinding.CellExpandableCardviewBinding
 
 private const val clickThreshold = 50
 private const val threshold = 700
@@ -46,6 +47,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var swipeRightBackground: Int = Color.parseColor( "#00E676")
     private var cardState: CardState = CardState.COLLAPSED
 
+    private val binding: CellExpandableCardviewBinding
+
     private var onSwipeLeft: () -> Unit = {}
     private var onSwipeRight: () -> Unit = {}
     private var onClick: () -> Unit = {}
@@ -65,9 +68,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
     init {
-        val inflater = getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.cell_expandable_cardview, this, true)
+        val inflater = LayoutInflater.from(getContext())
+        binding = CellExpandableCardviewBinding.inflate(inflater, this, true)
 
         if (attrs != null) {
             val attributes = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView)
@@ -87,13 +89,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             swipeRightEnabled = swipeMode == 2 || swipeMode == 3
 
             if (Build.VERSION.SDK_INT < 21) {
-                card_container.cardElevation = cardElevation
+                binding.cardContainer.cardElevation = cardElevation
             } else {
-                card_container.elevation = cardElevation
+                binding.cardContainer.elevation = cardElevation
             }
-            card_overlay.alpha = elevationToAlpha(cardElevation.toInt())
-            card_container.isClickable = showRipple
-            card_container.isFocusable = showRipple
+            binding.cardOverlay.alpha = elevationToAlpha(cardElevation.toInt())
+            binding.cardContainer.isClickable = showRipple
+            binding.cardContainer.isFocusable = showRipple
             setHeader(headerLayout)
             setBody(bodyLayout)
             this.cardState = CardState.COLLAPSED
@@ -102,35 +104,35 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
         setLeftLayout(swipeLeftIcon, swipeLeftBackground)
         setRightLayout(swipeRightIcon, swipeRightBackground)
-        card_body.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            card_body.measure(MATCH_PARENT, WRAP_CONTENT)
-            if (card_body.measuredHeight <= 0) {
-                card_arrow.alpha = 0.3f
+        binding.cardBody.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            binding.cardBody.measure(MATCH_PARENT, WRAP_CONTENT)
+            if (binding.cardBody.measuredHeight <= 0) {
+                binding.cardArrow.alpha = 0.3f
             } else {
-                card_arrow.alpha = 1.0f
+                binding.cardArrow.alpha = 1.0f
             }
 
             if (cardState == CardState.EXPANDED) {
-                val initialHeight = card_container.height
-                card_body.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-                val targetHeight: Int = card_layout.measuredHeight
+                val initialHeight = binding.cardContainer.height
+                binding.cardBody.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                val targetHeight: Int = binding.cardLayout.measuredHeight
 
                 if (targetHeight - initialHeight > 0) {
                     cardState = CardState.EXPANDING
                     animateViews(initialHeight,
                             targetHeight - initialHeight,
-                            CardAnimation.EXPANDING, card_container, false)
+                            CardAnimation.EXPANDING, binding.cardContainer, false)
                 } else if (targetHeight - initialHeight < 0) {
                     cardState = CardState.COLLAPSING
                     animateViews(initialHeight,
                             initialHeight - targetHeight,
-                            CardAnimation.COLLAPSING, card_container, false)
+                            CardAnimation.COLLAPSING, binding.cardContainer, false)
                 }
             }
         }
 
         //Swipe/onclick handler
-        card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
+        binding.cardContainer.setOnTouchListener(OnSwipeTouchListener(binding.cardLayout, binding.leftIconLayout, binding.rightIconLayout, context,
                 this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
 
         findViewById<LinearLayout>(R.id.card_layout).post {
@@ -152,6 +154,18 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
     }
 
+    /** The container the [setHeader] layout is inflated into. */
+    val cardHeader: ViewGroup get() = binding.cardHeader
+
+    /** The container the [setBody] layout is inflated into. */
+    val cardBody: ViewGroup get() = binding.cardBody
+
+    /** Root view of the layout most recently passed to [setHeader]. */
+    val headerView: View get() = binding.cardHeader.getChildAt(0)
+
+    /** Root view of the layout most recently passed to [setBody]. */
+    val bodyView: View get() = binding.cardBody.getChildAt(0)
+
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         resetState()
@@ -164,58 +178,58 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         when (cardState) {
             CardState.COLLAPSING, CardState.COLLAPSED -> {
                 this.cardState = CardState.COLLAPSED
-                val headerParams = card_header.layoutParams
+                val headerParams = binding.cardHeader.layoutParams
                 //Using the layout params instead of the height param because the height may not yet be set when setCardState is called.
-                card_container.layoutParams = card_container.layoutParams.apply {
+                binding.cardContainer.layoutParams = binding.cardContainer.layoutParams.apply {
                     height = headerParams.height
                 }
-                card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
+                binding.cardArrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
             }
             CardState.EXPANDING, CardState.EXPANDED -> {
-                card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-                card_container.layoutParams.height = card_layout.measuredHeight
+                binding.cardLayout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+                binding.cardContainer.layoutParams.height = binding.cardLayout.measuredHeight
                 this.cardState = CardState.EXPANDED
-                card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_less))
+                binding.cardArrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_less))
             }
         }
     }
 
     fun setLeftLayout(reference: Int?, color: Int?) {
-        if (reference != null) left_icon.setImageDrawable(context.getDrawableCompat(reference))
-        if (color != null) left_icon_layout.setBackgroundColor(color)
+        if (reference != null) binding.leftIcon.setImageDrawable(context.getDrawableCompat(reference))
+        if (color != null) binding.leftIconLayout.setBackgroundColor(color)
     }
 
     fun setRightLayout(reference: Int?, color: Int?) {
-        if (reference != null) right_icon.setImageDrawable(context.getDrawableCompat(reference))
-        if (color != null) right_icon_layout.setBackgroundColor(color)
+        if (reference != null) binding.rightIcon.setImageDrawable(context.getDrawableCompat(reference))
+        if (color != null) binding.rightIconLayout.setBackgroundColor(color)
     }
 
     fun setHeader(layout: Int) {
-        card_header.removeAllViews()
-        val view = LayoutInflater.from(this.context).inflate(layout, card_header, false)
-        card_header.addView(view)
+        binding.cardHeader.removeAllViews()
+        val view = LayoutInflater.from(this.context).inflate(layout, binding.cardHeader, false)
+        binding.cardHeader.addView(view)
         val inflatedHeight = view.layoutParams.height
-        card_header.layoutParams = card_header.layoutParams.apply {
+        binding.cardHeader.layoutParams = binding.cardHeader.layoutParams.apply {
             height = inflatedHeight
         }
 
         //Only adjust the size of the card container if the card is not in it's EXPANDED state
         //When the card is in EXPANDED state, the height is WRAP_CONTENT so it will automatically adjust to match the new header
-        if (this.cardState == CardState.COLLAPSED || this.cardState == CardState.COLLAPSING) card_container.layoutParams = card_container.layoutParams.apply {
+        if (this.cardState == CardState.COLLAPSED || this.cardState == CardState.COLLAPSING) binding.cardContainer.layoutParams = binding.cardContainer.layoutParams.apply {
             height = inflatedHeight
         }
     }
 
     fun setBody(layout: Int) {
-        card_body.removeAllViews()
+        binding.cardBody.removeAllViews()
         if (layout == 0) return
-        LayoutInflater.from(this.context).inflate(layout, card_body, true)
+        LayoutInflater.from(this.context).inflate(layout, binding.cardBody, true)
     }
 
     fun setOnClick(onClick: () -> Unit) {
         this.onClick = onClick
         //Update Swipe/onclick handler
-        card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
+        binding.cardContainer.setOnTouchListener(OnSwipeTouchListener(binding.cardLayout, binding.leftIconLayout, binding.rightIconLayout, context,
                 this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
     }
 
@@ -223,7 +237,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         this.onSwipeLeft = onSwipeLeft
         this.swipeLeftEnabled = true
         //Update Swipe/onclick handler
-        card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
+        binding.cardContainer.setOnTouchListener(OnSwipeTouchListener(binding.cardLayout, binding.leftIconLayout, binding.rightIconLayout, context,
                 this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
     }
 
@@ -231,26 +245,26 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         this.onSwipeRight = onSwipeRight
         this.swipeRightEnabled = true
         //Update Swipe/onclick handler
-        card_container.setOnTouchListener(OnSwipeTouchListener(card_layout, left_icon_layout, right_icon_layout, context,
+        binding.cardContainer.setOnTouchListener(OnSwipeTouchListener(binding.cardLayout, binding.leftIconLayout, binding.rightIconLayout, context,
                 this.onSwipeLeft, this.onSwipeRight, this.onClick, this.swipeReboundAnimationDuration, this.swipeLeftEnabled, this.swipeRightEnabled))
     }
 
     fun resetState() {
-        val layoutParams = left_icon_layout.layoutParams
+        val layoutParams = binding.leftIconLayout.layoutParams
         layoutParams.width = 0
-        left_icon_layout.layoutParams = layoutParams
+        binding.leftIconLayout.layoutParams = layoutParams
 
-        card_layout.x = 0f
+        binding.cardLayout.x = 0f
 
-        val layoutParams3 = right_icon_layout.layoutParams
+        val layoutParams3 = binding.rightIconLayout.layoutParams
         layoutParams3.width = 0
-        right_icon_layout.layoutParams = layoutParams3
+        binding.rightIconLayout.layoutParams = layoutParams3
 
         if (cardState == CardState.EXPANDED) {
-            val cardLayoutParams = card_container.layoutParams
-            cardLayoutParams.height = card_header.height
-            card_container.layoutParams = cardLayoutParams
-            card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
+            val cardLayoutParams = binding.cardContainer.layoutParams
+            cardLayoutParams.height = binding.cardHeader.height
+            binding.cardContainer.layoutParams = cardLayoutParams
+            binding.cardArrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
         }
     }
 
@@ -263,31 +277,31 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
     fun setCardElevation(cardElevation: Float) {
-        card_container.cardElevation = cardElevation
-        card_overlay.alpha = elevationToAlpha(cardElevation.toInt())
+        binding.cardContainer.cardElevation = cardElevation
+        binding.cardOverlay.alpha = elevationToAlpha(cardElevation.toInt())
     }
 
     fun toggle() {
         cardState = if (cardState == CardState.COLLAPSED) CardState.EXPANDING else CardState.COLLAPSING
-        card_body.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        if (card_body.measuredHeight == 0) return
+        binding.cardBody.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        if (binding.cardBody.measuredHeight == 0) return
 
-        val initialHeight = card_container.height
-        val headerHeight = card_header.height
-        card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        val targetHeight: Int = if (initialHeight == headerHeight) card_layout.measuredHeight else headerHeight
+        val initialHeight = binding.cardContainer.height
+        val headerHeight = binding.cardHeader.height
+        binding.cardLayout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        val targetHeight: Int = if (initialHeight == headerHeight) binding.cardLayout.measuredHeight else headerHeight
         if (targetHeight - initialHeight > 0) {
             animateViews(initialHeight,
                     targetHeight - initialHeight,
-                    CardAnimation.EXPANDING, card_container)
+                    CardAnimation.EXPANDING, binding.cardContainer)
             onExpand()
-            card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more))
+            binding.cardArrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more))
         } else {
             animateViews(initialHeight,
                     initialHeight - targetHeight,
-                    CardAnimation.COLLAPSING, card_container)
+                    CardAnimation.COLLAPSING, binding.cardContainer)
             onContract()
-            card_arrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
+            binding.cardArrow.setImageResource(compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less))
         }
     }
 
@@ -303,7 +317,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                 cardView.requestLayout()
                 if (!arrowStarted && animateArrow) {
                     arrowStarted = true
-                    (cardView.card_arrow.drawable as Animatable).start()
+                    (binding.cardArrow.drawable as Animatable).start()
                 }
             }
         }

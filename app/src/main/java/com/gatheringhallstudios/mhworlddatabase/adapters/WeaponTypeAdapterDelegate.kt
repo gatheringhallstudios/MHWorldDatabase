@@ -8,7 +8,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import kotlinx.android.synthetic.main.listitem_large.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemLargeBinding
 
 /**
  * Defines an adapter delegate for weapon types
@@ -21,8 +21,9 @@ class WeaponTypeAdapterDelegate(private val onSelected: (WeaponType) -> Unit) : 
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: WeaponType) {
-        viewHolder.item_name.text = AssetLoader.getNameFor(data)
-        viewHolder.item_icon.setImageDrawable(AssetLoader.loadIconFor(data))
+        val binding = ListitemLargeBinding.bind(viewHolder.itemView)
+        binding.itemName.text = AssetLoader.getNameFor(data)
+        binding.itemIcon.setImageDrawable(AssetLoader.loadIconFor(data))
 
         viewHolder.itemView.setOnClickListener {onSelected(data)}
     }
