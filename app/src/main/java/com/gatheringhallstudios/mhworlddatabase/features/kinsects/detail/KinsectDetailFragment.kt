@@ -47,7 +47,7 @@ class  KinsectDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.kinsectData.observe(this, Observer(::populateKinsect))
+        viewModel.kinsectData.observe(viewLifecycleOwner, Observer(::populateKinsect))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

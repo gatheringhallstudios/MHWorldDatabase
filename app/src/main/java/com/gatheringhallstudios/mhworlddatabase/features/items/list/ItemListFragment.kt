@@ -50,7 +50,7 @@ class ItemListFragment : RecyclerViewFragment() {
 
         viewModel.init(category)
 
-        viewModel.items.observe(this, Observer {
+        viewModel.items.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })

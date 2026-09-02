@@ -22,7 +22,7 @@ class WorkshopListFragment : RecyclerViewFragment() {
         viewModel.getEquipmentSets()
 
         recyclerView.itemAnimator = SlideInRightAnimator(OvershootInterpolator(1f))
-        viewModel.userEquipmentSets.observe(this, Observer<MutableList<UserEquipmentSet>> {
+        viewModel.userEquipmentSets.observe(viewLifecycleOwner, Observer<MutableList<UserEquipmentSet>> {
             // Setup recycler list adapter and the on-selected
             if (!containsEmptyElement(it)) {
                 it.add(UserEquipmentSet.createEmptySet())

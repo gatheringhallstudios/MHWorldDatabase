@@ -80,14 +80,14 @@ class MonsterDamageFragment : androidx.fragment.app.Fragment() {
         // synchronize data loaded
         val damageData = MonsterDamageData()
 
-        viewModel.hitzones.observe(this, Observer  {
+        viewModel.hitzones.observe(viewLifecycleOwner, Observer  {
             if (it != null) damageData.hitzones = it
         })
-        viewModel.breaks.observe(this, Observer {
+        viewModel.breaks.observe(viewLifecycleOwner, Observer {
             if (it != null) damageData.breaks = it
         })
 
-        damageData.observeAllLoaded(this) {
+        damageData.observeAllLoaded(viewLifecycleOwner) {
             // make either empty or damage/hitzones visible depending on if loaded
             if (damageData.hitzones.isEmpty() && damageData.breaks.isEmpty()) {
                 binding.emptySection.root.visibility = View.VISIBLE

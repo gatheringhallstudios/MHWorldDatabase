@@ -31,11 +31,14 @@ class ItemSummaryFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentItemSummaryBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val viewmodel = ViewModelProvider(parentFragment!!).get(ItemDetailViewModel::class.java)
-        viewmodel.item.observe(this, Observer(::populateItem))
-
-        return binding.root
+        viewmodel.item.observe(viewLifecycleOwner, Observer(::populateItem))
     }
 
     override fun onDestroyView() {

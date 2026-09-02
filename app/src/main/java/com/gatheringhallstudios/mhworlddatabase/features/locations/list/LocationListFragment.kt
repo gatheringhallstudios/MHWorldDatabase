@@ -32,7 +32,7 @@ class LocationListFragment : RecyclerViewFragment() {
         // Add dividers between items
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.locations.observe(this, Observer<List<Location>> {
+        viewModel.locations.observe(viewLifecycleOwner, Observer<List<Location>> {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })

@@ -40,7 +40,7 @@ class BookmarksListFragment : RecyclerViewFragment() {
         setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
         viewModel.loadBookmarks()
-        viewModel.bulkModels.observe(this, Observer(::populateBookmarkEntities))
+        viewModel.bulkModels.observe(viewLifecycleOwner, Observer(::populateBookmarkEntities))
     }
 
     private fun populateBookmarkEntities(data: BulkModels) {

@@ -68,7 +68,7 @@ class ItemUsageFragment : RecyclerViewFragment() {
         setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.usageData.observe(this, Observer(::populateData))
+        viewModel.usageData.observe(viewLifecycleOwner, Observer(::populateData))
     }
 
     private fun populateData(data: ItemUsages?) {

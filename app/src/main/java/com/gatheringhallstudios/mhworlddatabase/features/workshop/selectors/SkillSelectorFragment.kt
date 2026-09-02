@@ -66,7 +66,7 @@ class SkillSelectorFragment : DialogFragment() {
         }
 
         binding.scrollBody.skillsRecyclerView.adapter = adapter
-        viewModel.skills.observe(this, Observer {
+        viewModel.skills.observe(viewLifecycleOwner, Observer {
             adapter.items = it
         })
 

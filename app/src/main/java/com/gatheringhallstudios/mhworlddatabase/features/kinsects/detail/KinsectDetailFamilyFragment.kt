@@ -35,7 +35,7 @@ class KinsectDetailFamilyFragment : RecyclerViewFragment() {
 
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.kinsectFamilyData.observe(this, Observer { data ->
+        viewModel.kinsectFamilyData.observe(viewLifecycleOwner, Observer { data ->
             adapter.clear()
             if (data == null) return@Observer
 

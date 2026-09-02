@@ -31,7 +31,7 @@ class ItemCraftingFragment : RecyclerViewFragment() {
         // Add dividers between items
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.combinationListData.observe(this, Observer {
+        viewModel.combinationListData.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })

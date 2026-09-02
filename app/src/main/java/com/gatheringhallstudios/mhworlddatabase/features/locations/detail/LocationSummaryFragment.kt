@@ -61,7 +61,7 @@ class LocationSummaryFragment : RecyclerViewFragment() {
 
         // todo: clean up with coroutines
 
-        viewModel.location.observe(this, Observer {
+        viewModel.location.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.bindLocation(it)
             }
@@ -69,13 +69,13 @@ class LocationSummaryFragment : RecyclerViewFragment() {
             activity!!.invalidateOptionsMenu()
         })
 
-        viewModel.camps.observe(this, Observer {
+        viewModel.camps.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.bindCamps(getString(R.string.header_location_base_camps), it)
             }
         })
 
-        viewModel.locationItems.observe(this, Observer {
+        viewModel.locationItems.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.bindItems(context!!, it)
             }

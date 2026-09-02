@@ -32,7 +32,7 @@ class SkillListFragment : RecyclerViewFragment() {
         // Add dividers between items
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.skills.observe(this, Observer {
+        viewModel.skills.observe(viewLifecycleOwner, Observer {
             if (it != null) adapter.items = it
         })
     }

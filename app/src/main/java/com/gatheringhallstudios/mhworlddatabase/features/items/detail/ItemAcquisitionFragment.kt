@@ -31,7 +31,7 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
         setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.acquisitionData.observe(this, Observer(::populateData))
+        viewModel.acquisitionData.observe(viewLifecycleOwner, Observer(::populateData))
     }
 
     private fun populateData(data: ItemSources?) {

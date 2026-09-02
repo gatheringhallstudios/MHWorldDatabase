@@ -78,30 +78,30 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
         binding.recyclerView.addItemDecoration(divider)
 
         viewModel.setSkill(arguments?.getInt(ARG_SKILLTREE_ID) ?: -1)
-        viewModel.skillTreeFull.observe(this, Observer(::populateSkill))
+        viewModel.skillTreeFull.observe(viewLifecycleOwner, Observer(::populateSkill))
 
-        viewModel.decorations.observe(this, Observer {
+        viewModel.decorations.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val title = getString(R.string.header_decorations)
                 adapterBuilder.setDecorations(title, it)
             }
         })
 
-        viewModel.charms.observe(this, Observer {
+        viewModel.charms.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val title = getString(R.string.header_charms)
                 adapterBuilder.setCharms(title, it)
             }
         })
 
-        viewModel.armorPieces.observe(this, Observer {
+        viewModel.armorPieces.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val title = getString(R.string.header_armor)
                 adapterBuilder.setArmor(title, it)
             }
         })
 
-        viewModel.bonuses.observe(this, Observer {
+        viewModel.bonuses.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val title = getString(R.string.header_set_bonuses)
                 adapterBuilder.setArmorSetBonuses(title, it)

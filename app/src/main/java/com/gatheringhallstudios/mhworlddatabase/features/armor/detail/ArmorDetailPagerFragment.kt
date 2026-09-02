@@ -53,7 +53,7 @@ class ArmorDetailPagerFragment : BasePagerFragment() {
         viewModel = ViewModelProvider(this).get(ArmorDetailViewModel::class.java)
         viewModel.loadArmor(armorId)
 
-        viewModel.armor.observe(this, Observer<ArmorFull> {
+        viewModel.armor.observe(viewLifecycleOwner, Observer<ArmorFull> {
             this.setActivityTitle(it?.armor!!.name)
             //Rerender the menu bar because we are 100% sure we have the item data now
             activity!!.invalidateOptionsMenu()

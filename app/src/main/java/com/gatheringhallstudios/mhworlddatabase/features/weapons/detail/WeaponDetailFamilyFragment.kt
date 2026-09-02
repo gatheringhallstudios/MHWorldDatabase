@@ -41,7 +41,7 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
 
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.weaponFamilyData.observe(this, Observer { data ->
+        viewModel.weaponFamilyData.observe(viewLifecycleOwner, Observer { data ->
             adapter.clear()
             if (data == null) return@Observer
 

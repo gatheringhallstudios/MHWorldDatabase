@@ -53,8 +53,8 @@ class CharmDetailFragment : androidx.fragment.app.Fragment() {
         val decorationId = args!!.getInt(ARG_CHARM_ID)
 
         viewModel.setCharm(decorationId)
-        viewModel.charmFullData.observe(this, Observer<CharmFull>(::populateCharm))
-        viewModel.previousCharm.observe(this, Observer<CharmFull>(::populatePreviousItem))
+        viewModel.charmFullData.observe(viewLifecycleOwner, Observer<CharmFull>(::populateCharm))
+        viewModel.previousCharm.observe(viewLifecycleOwner, Observer<CharmFull>(::populatePreviousItem))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

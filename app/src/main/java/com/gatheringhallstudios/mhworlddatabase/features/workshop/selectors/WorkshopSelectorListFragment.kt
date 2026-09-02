@@ -171,7 +171,7 @@ class WorkshopSelectorListFragment : Fragment() {
 
         binding.equipmentList.adapter = adapter
         binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
-        viewModel.armor.observe(this, Observer {
+        viewModel.armor.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
                 binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)
@@ -204,7 +204,7 @@ class WorkshopSelectorListFragment : Fragment() {
         binding.equipmentList.adapter = adapter
         binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
 
-        viewModel.charms.observe(this, Observer {
+        viewModel.charms.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
                 binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)
@@ -237,7 +237,7 @@ class WorkshopSelectorListFragment : Fragment() {
         binding.equipmentList.adapter = adapter
         binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
 
-        viewModel.decorations.observe(this, Observer {
+        viewModel.decorations.observe(viewLifecycleOwner, Observer {
             val filteredCollection = it.filter { decoration ->
                 decoration.slot <= decorationsConfig.decorationLevelFilter
             }
@@ -273,7 +273,7 @@ class WorkshopSelectorListFragment : Fragment() {
         binding.equipmentList.adapter = adapter
         binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
 
-        viewModel.weapons.observe(this, Observer {
+        viewModel.weapons.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
                 binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)
@@ -305,7 +305,7 @@ class WorkshopSelectorListFragment : Fragment() {
 
         binding.equipmentList.addItemDecoration(SpacesItemDecoration(32))
 
-        viewModel.tools.observe(this, Observer {
+        viewModel.tools.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             if (viewModel.islistStateInitialized()) {
                 binding.equipmentList.layoutManager?.onRestoreInstanceState(viewModel.listState)

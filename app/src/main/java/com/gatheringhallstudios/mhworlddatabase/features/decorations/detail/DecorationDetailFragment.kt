@@ -79,7 +79,7 @@ class DecorationDetailFragment : androidx.fragment.app.Fragment() {
         val decorationId = args!!.getInt(ARG_DECORATION_ID)
 
         viewModel.setDecoration(decorationId)
-        viewModel.decorationData.observe(this, Observer<Decoration>(::populateDecoration))
+        viewModel.decorationData.observe(viewLifecycleOwner, Observer<Decoration>(::populateDecoration))
     }
 
     private fun populateDecoration(decoration: Decoration?) {

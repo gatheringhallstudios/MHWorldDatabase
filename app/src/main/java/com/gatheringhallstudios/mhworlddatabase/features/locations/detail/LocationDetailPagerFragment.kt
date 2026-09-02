@@ -20,7 +20,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.locations.detail
 //        val viewModel = ViewModelProvider(this).get(LocationDetailViewModel::class.java)
 //        viewModel.setLocation(locationId)
 //
-//        viewModel.location.observe(this, Observer<Location> { this.setTitle(it?.name) })
+//        viewModel.location.observe(viewLifecycleOwner, Observer<Location> { this.setTitle(it?.name) })
 //
 //        tabs.addTab(getString(R.string.locations_detail_summary)) {
 //            LocationSummaryFragment()

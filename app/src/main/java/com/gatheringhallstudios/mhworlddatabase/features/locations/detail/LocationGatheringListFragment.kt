@@ -25,7 +25,7 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
         this.setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.locationItems.observe(this, Observer(::setItems))
+        viewModel.locationItems.observe(viewLifecycleOwner, Observer(::setItems))
     }
 
     private fun setItems(locationItems: List<LocationItem>?) {

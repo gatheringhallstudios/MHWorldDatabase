@@ -47,8 +47,8 @@ class MonsterSummaryFragment : androidx.fragment.app.Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.monster.observe(this, Observer(::populateMonster))
-        viewModel.habitats.observe(this, Observer(::populateHabitats))
+        viewModel.monster.observe(viewLifecycleOwner, Observer(::populateMonster))
+        viewModel.habitats.observe(viewLifecycleOwner, Observer(::populateHabitats))
     }
     /**
      * Populate views with the monster data

@@ -52,7 +52,7 @@ class ItemDetailPagerFragment : BasePagerFragment() {
         viewModel = ViewModelProvider(this).get(ItemDetailViewModel::class.java)
         viewModel.loadItem(itemId)
 
-        viewModel.item.observe(this, Observer<Item> {
+        viewModel.item.observe(viewLifecycleOwner, Observer<Item> {
             this.setActivityTitle(it?.name)
             //Rerender the menu bar because we are 100% sure we have the item data now
             activity!!.invalidateOptionsMenu()

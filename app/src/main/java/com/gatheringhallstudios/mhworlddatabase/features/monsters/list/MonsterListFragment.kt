@@ -35,7 +35,7 @@ class MonsterListFragment : RecyclerViewFragment() {
         val tab = arguments?.getSerializable(ARG_TAB) as MonsterSize?
         viewModel.setTab(tab)
 
-        viewModel.monsters.observe(this, Observer {
+        viewModel.monsters.observe(viewLifecycleOwner, Observer {
             if (it != null) adapter.items = it
         })
     }

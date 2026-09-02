@@ -39,7 +39,7 @@ class ArmorSetDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.armorSet.observe(this, Observer(::populateArmorSet))
+        viewModel.armorSet.observe(viewLifecycleOwner, Observer(::populateArmorSet))
     }
 
     //Populate the stats from the other pieces of the armor set

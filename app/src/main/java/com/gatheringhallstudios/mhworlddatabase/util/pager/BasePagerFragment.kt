@@ -38,6 +38,14 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
         // Inflate view
         val binding = FragmentGenericPagerBinding.inflate(inflater, container, false)
         _binding = binding
+        return binding.root
+    }
+
+    // Note: tabs are added here rather than in onCreateView so that subclasses can bind
+    // observers to viewLifecycleOwner from within onAddTabs.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = _binding!!
 
         // Setup tabs
         val adder = InnerTabAdder(context!!)
@@ -47,7 +55,6 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
         val tabs = adder.getTabs()
         val tabIdx = adder.defaultIdx
 
-        // Retrieve the view's elements (we're in onCreateView, can't use on fragment directly)
         val tabLayout = binding.tabLayout.root
         val viewPager = binding.pagerList
 
@@ -59,8 +66,6 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
         if (tabIdx > 0) {
             viewPager.currentItem = tabIdx
         }
-
-        return binding.root
     }
 
     /**

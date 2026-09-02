@@ -29,7 +29,7 @@ class WeaponTreeListFragment : RecyclerViewFragment() {
         }
         setAdapter(adapter)
 
-        viewModel.nodeListData.observe(this, Observer {
+        viewModel.nodeListData.observe(viewLifecycleOwner, Observer {
             adapter.setItems(it ?: emptyList())
         })
 

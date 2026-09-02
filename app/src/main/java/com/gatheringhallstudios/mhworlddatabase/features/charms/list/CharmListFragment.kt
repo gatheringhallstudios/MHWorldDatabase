@@ -40,7 +40,7 @@ class CharmListFragment : RecyclerViewFragment() {
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
         if (adapter.itemCount == 0) {
-            viewModel.charmData.observe(this, Observer<List<Charm>> {
+            viewModel.charmData.observe(viewLifecycleOwner, Observer<List<Charm>> {
                 //Group up charms by type (name)
                 val groups = it?.groupBy {
                     val targetIndex = it.name!!.indexOfLast { itr ->

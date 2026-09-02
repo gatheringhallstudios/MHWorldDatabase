@@ -27,7 +27,7 @@ class WeaponKulveListFragment : RecyclerViewFragment() {
         }
         setAdapter(adapter)
 
-        viewModel.kulveNodeData.observe(this, Observer {
+        viewModel.kulveNodeData.observe(viewLifecycleOwner, Observer {
             adapter.setItems(it ?: emptyList())
             adapter.notifyDataSetChanged()
         })

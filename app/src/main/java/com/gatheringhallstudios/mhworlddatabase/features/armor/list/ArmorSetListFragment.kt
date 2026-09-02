@@ -49,7 +49,7 @@ class ArmorSetListFragment : RecyclerViewFragment() {
         if (adapter.itemCount == 0) {
             val rank = arguments?.getSerializable(ARG_RANK) as? Rank
 
-            viewModel.getArmorSetList(rank).observe(this, Observer<List<ArmorSet>> {
+            viewModel.getArmorSetList(rank).observe(viewLifecycleOwner, Observer<List<ArmorSet>> {
                 val items = it?.map {
                     val headerItem = ArmorSetHeaderItem(it)
                     val bodyItems = it.armor

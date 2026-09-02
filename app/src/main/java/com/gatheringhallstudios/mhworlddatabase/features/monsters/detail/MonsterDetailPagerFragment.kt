@@ -63,7 +63,7 @@ class MonsterDetailPagerFragment : BasePagerFragment() {
         viewModel = ViewModelProvider(this).get(MonsterDetailViewModel::class.java)
         viewModel.setMonster(monsterId)
 
-        viewModel.monster.observe(this, Observer<Monster> {
+        viewModel.monster.observe(viewLifecycleOwner, Observer<Monster> {
             this.setActivityTitle(it?.name)
             //Rerender the menu bar because we are 100% sure we have the monster data now
             activity!!.invalidateOptionsMenu()
