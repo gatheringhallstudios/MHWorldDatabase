@@ -85,6 +85,13 @@ class AppSettings {
          * Settings key for data locale language
          */
         val PROP_DATA_LOCALE = "DATA_LOCALE"
+
+        /**
+         * Settings key for the UI locale. Not persisted here: the per-app locale API owns
+         * that state (the platform on API 33+, AppCompat below it). The key exists only so
+         * the preference in Settings can be looked up.
+         */
+        val PROP_APP_LOCALE = "APP_LOCALE"
         val PROP_ATTACK_VALUE_TYPE = "ATTACK_VALUE_TYPE"
     }
 }

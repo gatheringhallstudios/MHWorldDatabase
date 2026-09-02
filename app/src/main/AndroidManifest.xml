@@ -29,6 +29,19 @@
         <activity
             android:name=".ChangelogActivity">
         </activity>
+
+        <!--
+            Backs the per-app locale API on API < 33. On API 33+ the platform stores the
+            selection itself; below that, AppCompat persists it and re-applies it on start.
+        -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
     </application>
 
 </manifest>

@@ -42,6 +42,12 @@ android {
         viewBinding true
         buildConfig true
     }
+    androidResources {
+        // Generates res/xml/_generated_res_locale_config.xml from the values-* folders and
+        // wires it to android:localeConfig, which is what surfaces this app in the system
+        // per-app language picker. The default locale comes from res/resources.properties.
+        generateLocaleConfig = true
+    }
     buildTypes {
         release {
             minifyEnabled false
