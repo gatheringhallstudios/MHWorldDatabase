@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.locations.list
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.LocationAdapterDelegate
@@ -18,7 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
 
 class LocationListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(LocationsListViewModel::class.java)
+        ViewModelProvider(this).get(LocationsListViewModel::class.java)
     }
 
     // Setup adapter and navigation
@@ -32,7 +32,7 @@ class LocationListFragment : RecyclerViewFragment() {
         // Add dividers between items
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.locations.observe(this, Observer<List<Location>> {
+        viewModel.locations.observe(viewLifecycleOwner, Observer<List<Location>> {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })

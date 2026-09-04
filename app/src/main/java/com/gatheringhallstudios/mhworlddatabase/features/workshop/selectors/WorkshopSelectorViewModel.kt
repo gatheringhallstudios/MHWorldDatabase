@@ -117,6 +117,7 @@ class WorkshopSelectorViewModel(application: Application) : AndroidViewModel(app
 
                     weapons.value = weaponFilters.renderResults()
                 }
+                else -> Unit
             }
         }
     /**

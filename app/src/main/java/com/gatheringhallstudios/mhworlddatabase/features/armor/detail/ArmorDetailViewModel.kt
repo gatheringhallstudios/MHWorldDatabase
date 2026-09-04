@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.armor.detail
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.switchMap
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -19,7 +19,7 @@ class ArmorDetailViewModel(application: Application) : AndroidViewModel(applicat
         if (this.armorId == armorId) return
 
         armor = dao.loadArmorFull(AppSettings.dataLocale, armorId)
-        armorSet= Transformations.switchMap(armor) {
+        armorSet= armor.switchMap {
             dao.loadArmorSetFull(AppSettings.dataLocale, it.armor.armorset_id) }
     }
 }

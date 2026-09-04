@@ -10,8 +10,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemCombination
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.listitem_item_crafting.*
-import kotlinx.android.synthetic.main.listitem_item_crafting.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemItemCraftingBinding
 
 /**
  * Defines an adapter delegate for a list of item combinations
@@ -24,35 +23,36 @@ class ItemCraftingAdapterDelegate : SimpleListDelegate<ItemCombination>() {
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: ItemCombination) {
-        viewHolder.result_icon.setImageDrawable(AssetLoader.loadIconFor(data.result))
-        viewHolder.result_name.text = data.result.name
+        val binding = ListitemItemCraftingBinding.bind(viewHolder.itemView)
+        binding.resultIcon.setImageDrawable(AssetLoader.loadIconFor(data.result))
+        binding.resultName.text = data.result.name
 
-        viewHolder.item1_icon.setImageDrawable(AssetLoader.loadIconFor(data.first))
-        viewHolder.item1_name.text = data.first.name
+        binding.item1Icon.setImageDrawable(AssetLoader.loadIconFor(data.first))
+        binding.item1Name.text = data.first.name
 
-        viewHolder.item2_view.visibility = View.GONE
+        binding.item2View.visibility = View.GONE
         if (data.second != null) {
-            viewHolder.item2_view.visibility = View.VISIBLE
-            viewHolder.item2_icon.setImageDrawable(AssetLoader.loadIconFor(data.second))
-            viewHolder.item2_name.text = data.second.name
+            binding.item2View.visibility = View.VISIBLE
+            binding.item2Icon.setImageDrawable(AssetLoader.loadIconFor(data.second))
+            binding.item2Name.text = data.second.name
         }
 
-        viewHolder.yield_label.text = viewHolder.resources.getString(R.string.item_crafting_yield, data.quantity)
+        binding.yieldLabel.text = viewHolder.resources.getString(R.string.item_crafting_yield, data.quantity)
 
         viewHolder.itemView.setOnClickListener {
             it.getRouter().navigateItemDetail(data.result.id)
         }
 
-        viewHolder.item1_view.setOnClickListener {
+        binding.item1View.setOnClickListener {
             it.getRouter().navigateItemDetail(data.first.id)
         }
 
         if (data.second != null) {
-            viewHolder.item2_view.setOnClickListener {
+            binding.item2View.setOnClickListener {
                 it.getRouter().navigateItemDetail(data.second.id)
             }
         } else {
-            viewHolder.item2_view.setOnClickListener(null)
+            binding.item2View.setOnClickListener(null)
         }
     }
 }

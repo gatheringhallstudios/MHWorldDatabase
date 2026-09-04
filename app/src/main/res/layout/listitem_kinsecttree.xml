@@ -19,5 +19,7 @@
             app:srcCompat="@xml/ui_tree_node_start_base" />
     </LinearLayout>
 
-    <include layout="@layout/listitem_kinsect" />
+    <include
+        android:id="@+id/kinsect_layout"
+        layout="@layout/listitem_kinsect" />
 </LinearLayout>

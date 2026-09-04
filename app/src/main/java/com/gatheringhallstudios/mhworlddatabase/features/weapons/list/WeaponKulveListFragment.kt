@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.weapons.list
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.components.DashedDividerDrawable
@@ -16,7 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.getRouter
  */
 class WeaponKulveListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(WeaponTreeViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(WeaponTreeViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class WeaponKulveListFragment : RecyclerViewFragment() {
         }
         setAdapter(adapter)
 
-        viewModel.kulveNodeData.observe(this, Observer {
+        viewModel.kulveNodeData.observe(viewLifecycleOwner, Observer {
             adapter.setItems(it ?: emptyList())
             adapter.notifyDataSetChanged()
         })

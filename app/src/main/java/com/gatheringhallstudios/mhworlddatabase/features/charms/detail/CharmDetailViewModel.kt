@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.charms.detail
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.switchMap
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
 import com.gatheringhallstudios.mhworlddatabase.data.dao.CharmDao
@@ -24,7 +24,7 @@ class CharmDetailViewModel(application: Application) : AndroidViewModel(applicat
 
         this.id = charmId
         charmFullData = charmDao.loadCharmFull(AppSettings.dataLocale, charmId)
-        previousCharm = Transformations.switchMap(charmFullData, ::setPreviousItem)
+        previousCharm = charmFullData.switchMap(::setPreviousItem)
     }
 
     private fun setPreviousItem(charmFullData: CharmFull): LiveData<CharmFull>? {

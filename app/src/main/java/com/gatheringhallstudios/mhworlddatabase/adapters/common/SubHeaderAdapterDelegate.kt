@@ -7,8 +7,7 @@ import android.view.ViewGroup
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.listitem_sub_header.*
-import kotlinx.android.synthetic.main.listitem_sub_header.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSubHeaderBinding
 
 /**
  * Adapter delegate to handle displaying SubHeader objects inside RecyclerViews.
@@ -32,7 +31,7 @@ class SubHeaderAdapterDelegate : AdapterDelegate<List<Any>>() {
         val subHeader = items[position] as SubHeader
 
         val vh = holder as SimpleViewHolder
-        vh.label_text.text = subHeader.text
+        ListitemSubHeaderBinding.bind(vh.itemView).labelText.text = subHeader.text
         vh.itemView.setTag(R.id.view_is_header, true)
     }
 }

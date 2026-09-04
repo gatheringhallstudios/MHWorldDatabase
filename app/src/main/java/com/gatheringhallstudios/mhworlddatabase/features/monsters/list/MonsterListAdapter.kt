@@ -9,7 +9,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.data.models.MonsterBase
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.listitem_monster.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemMonsterBinding
 
 
 /**
@@ -23,14 +23,15 @@ class MonsterListAdapter: SimpleRecyclerViewAdapter<MonsterBase>() {
 
     override fun bindView(viewHolder: SimpleViewHolder, data: MonsterBase) {
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.icon.setImageDrawable(icon)
-        viewHolder.monster_name.text = data.name
+        val binding = ListitemMonsterBinding.bind(viewHolder.itemView)
+        binding.icon.setImageDrawable(icon)
+        binding.monsterName.text = data.name
 
         if (data.ecology.isNullOrEmpty()) {
-            viewHolder.ecology_text.visibility = View.GONE
+            binding.ecologyText.visibility = View.GONE
         } else {
-            viewHolder.ecology_text.visibility = View.VISIBLE
-            viewHolder.ecology_text.text = data.ecology
+            binding.ecologyText.visibility = View.VISIBLE
+            binding.ecologyText.text = data.ecology
         }
 
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateMonsterDetail(data.id) }

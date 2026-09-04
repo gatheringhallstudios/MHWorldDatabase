@@ -134,7 +134,7 @@
     <string name="preference_data_language">Daten Sprache</string>
     <string name="preference_weapons_attack_values">Zeige wahren Waffenangriff</string>
     <string name="preference_data_language_description">
-        Zeige namen und Beschreibungen in %.
+        Zeige namen und Beschreibungen in %s.
         \n Änderungen werden die App neu starten.
     </string>
     <string name="preference_weapons_attack_values_description">

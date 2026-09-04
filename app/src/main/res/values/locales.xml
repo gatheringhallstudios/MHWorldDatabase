@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        BCP-47 tags for every locale this app ships UI strings for. Keep in sync with the
+        values-* folders: the system picker is driven by the AGP-generated locale config,
+        but the in-app picker in Settings reads this list.
+    -->
+    <string-array name="app_locales" translatable="false">
+        <item>en</item>
+        <item>ar</item>
+        <item>de</item>
+        <item>es</item>
+        <item>fr</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>ko</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ru</item>
+        <item>zh-CN</item>
+    </string-array>
+
+</resources>

@@ -10,14 +10,16 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.gatheringhallstudios.mhworlddatabase.R
-import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.CellIconVerboseLabelTextBinding
 
 class VerboseIconLabelTextCellBinder(val view: View) {
+    private val binding = CellIconVerboseLabelTextBinding.bind(view)
+
     /**
      * Set custom drawable for the left icon
      */
     fun setIconDrawable(drawable: Drawable?) {
-        view.icon.setImageDrawable(drawable)
+        binding.icon.setImageDrawable(drawable)
 
         // Invalidate to trigger layout update
         view.invalidate()
@@ -27,26 +29,26 @@ class VerboseIconLabelTextCellBinder(val view: View) {
      * Sets the icon decoration type
      */
     fun setIconType(type: IconType) {
-        view.icon.applyIconType(type)
+        binding.icon.applyIconType(type)
     }
 
     fun setLabelText(titleText: String?) {
-        view.label_text.text = titleText
+        binding.labelText.text = titleText
     }
 
     fun setSubLabelText(sublabelText: String?) {
-        view.sublabel_text.isVisible = !sublabelText.isNullOrEmpty()
-        view.sublabel_text.text = sublabelText
+        binding.sublabelText.isVisible = !sublabelText.isNullOrEmpty()
+        binding.sublabelText.text = sublabelText
     }
 
     fun setValueText(value: String?) {
-        view.value_text.isVisible = !value.isNullOrEmpty()
-        view.value_text.text = value
+        binding.valueText.isVisible = !value.isNullOrEmpty()
+        binding.valueText.text = value
     }
 
     fun setSubValueText(subValue: String?) {
-        view.subvalue_text.isVisible = !subValue.isNullOrEmpty()
-        view.subvalue_text.text = subValue
+        binding.subvalueText.isVisible = !subValue.isNullOrEmpty()
+        binding.subvalueText.text = subValue
     }
 }
 
@@ -54,13 +56,11 @@ class VerboseIconLabelTextCell : ConstraintLayout {
     lateinit var binder: VerboseIconLabelTextCellBinder
         private set
 
-    constructor(context: Context?) : super(context) {
+    constructor(context: Context) : super(context) {
         init(null, "", "", "", "")
     }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-        context ?: return
-
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.VerboseIconLabelTextCell)
 
         // Set values from attributes

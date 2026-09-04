@@ -4,21 +4,20 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.extensions.LayoutContainer
 import kotlin.reflect.KClass
 
 /**
- * A simple container-only viewholder used by SimpleListDelegate. Using a viewholder
- * when using KTX allows caching to work.
+ * A simple container-only viewholder used by SimpleListDelegate.
+ * Delegates bind their views by calling <Layout>Binding.bind(viewHolder.itemView).
  */
-class SimpleViewHolder(override val containerView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(containerView), LayoutContainer {
+class SimpleViewHolder(val containerView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(containerView) {
     val context get() = itemView.context
     val resources get() = itemView.resources
 }
 
 /**
  * The superclass for any AdapterDelegate with a uniform type that does not require a custom ViewHolder.
- * Subclasses of this type either use KTX for view binding (which caches findViewById lookups if given any viewholder),
+ * Subclasses of this type either use view binding (via <Layout>Binding.bind on the item view),
  * or use a custom View implementation that doubles as a ViewHolder.
  *
  * Anything that requires more complicated logic should extend AdapterDelegate itself

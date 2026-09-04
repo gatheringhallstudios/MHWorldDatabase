@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.ChildDivider
@@ -16,17 +16,20 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.Skill
 import com.gatheringhallstudios.mhworlddatabase.data.models.SkillTreeFull
 import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeature
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.fragment_skill_summary.*
-import kotlinx.android.synthetic.main.listitem_skill_description.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSkillDescriptionBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentSkillSummaryBinding
 
 
 class SkillDetailFragment : androidx.fragment.app.Fragment() {
+    private var _binding: FragmentSkillSummaryBinding? = null
+    private val binding get() = _binding!!
+
     companion object {
         const val ARG_SKILLTREE_ID = "SKILL"
     }
 
     private val viewModel: SkillDetailViewModel by lazy {
-        ViewModelProviders.of(this).get(SkillDetailViewModel::class.java)
+        ViewModelProvider(this).get(SkillDetailViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,13 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_skill_summary, parent, false)
+        _binding = FragmentSkillSummaryBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -62,37 +71,37 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
         val adapterBuilder = SkillDetailAdapterWrapper()
 
         // needs to also be removed in onDestroyView()
-        recycler_view.adapter = adapterBuilder.adapter
-        recycler_view.isNestedScrollingEnabled = false
+        binding.recyclerView.adapter = adapterBuilder.adapter
+        binding.recyclerView.isNestedScrollingEnabled = false
 
         val divider = ChildDivider(DashedDividerDrawable(context!!))
-        recycler_view.addItemDecoration(divider)
+        binding.recyclerView.addItemDecoration(divider)
 
         viewModel.setSkill(arguments?.getInt(ARG_SKILLTREE_ID) ?: -1)
-        viewModel.skillTreeFull.observe(this, Observer(::populateSkill))
+        viewModel.skillTreeFull.observe(viewLifecycleOwner, Observer(::populateSkill))
 
-        viewModel.decorations.observe(this, Observer {
+        viewModel.decorations.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val title = getString(R.string.header_decorations)
                 adapterBuilder.setDecorations(title, it)
             }
         })
 
-        viewModel.charms.observe(this, Observer {
+        viewModel.charms.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val title = getString(R.string.header_charms)
                 adapterBuilder.setCharms(title, it)
             }
         })
 
-        viewModel.armorPieces.observe(this, Observer {
+        viewModel.armorPieces.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val title = getString(R.string.header_armor)
                 adapterBuilder.setArmor(title, it)
             }
         })
 
-        viewModel.bonuses.observe(this, Observer {
+        viewModel.bonuses.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val title = getString(R.string.header_set_bonuses)
                 adapterBuilder.setArmorSetBonuses(title, it)
@@ -109,32 +118,33 @@ class SkillDetailFragment : androidx.fragment.app.Fragment() {
         activity!!.invalidateOptionsMenu()
 
         val icon = AssetLoader.loadIconFor(skillTreeFull)
-        skill_label.setIconDrawable(icon)
-        skill_label.setTitleText(skillTreeFull.name)
-        skill_label.setDescriptionText(skillTreeFull.description)
-        skill_label.removeDecorator()
+        binding.skillLabel.setIconDrawable(icon)
+        binding.skillLabel.setTitleText(skillTreeFull.name)
+        binding.skillLabel.setDescriptionText(skillTreeFull.description)
+        binding.skillLabel.removeDecorator()
         populateDescriptions(skillTreeFull.skills, skillTreeFull.max_level - skillTreeFull.secret)
     }
 
     private fun populateDescriptions(skills: List<Skill>, secretThreshold: Int) {
-        if (skill_level_descriptions.childCount > 0)
-            skill_level_descriptions.removeAllViews()
+        if (binding.skillLevelDescriptions.childCount > 0)
+            binding.skillLevelDescriptions.removeAllViews()
 
         if (skills.isEmpty()) {
-            insertEmptyState(skill_level_descriptions)
+            insertEmptyState(binding.skillLevelDescriptions)
             return
         }
 
         for ((i, skill) in skills.withIndex()) {
-            val view = layoutInflater.inflate(R.layout.listitem_skill_description, skill_level_descriptions, false)
-            view.level_text.text = getString(R.string.level_short_qty, i + 1)
-            view.level_description.text = skill.description
+            val descriptionBinding = ListitemSkillDescriptionBinding.inflate(
+                    layoutInflater, binding.skillLevelDescriptions, false)
+            descriptionBinding.levelText.text = getString(R.string.level_short_qty, i + 1)
+            descriptionBinding.levelDescription.text = skill.description
 
             if (i >= secretThreshold) {
-                view.level_icon_secret.visibility = View.VISIBLE
+                descriptionBinding.levelIconSecret.visibility = View.VISIBLE
             }
 
-            skill_level_descriptions.addView(view)
+            binding.skillLevelDescriptions.addView(descriptionBinding.root)
         }
     }
 

@@ -10,7 +10,6 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconLabelTextCell
 import com.gatheringhallstudios.mhworlddatabase.data.models.ToolBase
 import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
-import kotlinx.android.synthetic.main.listitem_large.*
 
 /**
  * Defines an adapter delegate for weapon types

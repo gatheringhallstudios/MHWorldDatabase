@@ -11,9 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gatheringhallstudios.mhworlddatabase.R
-import kotlinx.android.synthetic.main.fragment_generic_pager.*
-import kotlinx.android.synthetic.main.fragment_generic_pager.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentGenericPagerBinding
 import java.util.*
 
 
@@ -31,9 +29,23 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
     // Override to set a different [TabLayout.Mode]
     open val tabMode: Int = TabLayout.MODE_FIXED
 
+    private var _binding: FragmentGenericPagerBinding? = null
+
+    /** The viewpager hosting the tab contents. Only valid between onCreateView and onDestroyView. */
+    protected val pagerList get() = _binding!!.pagerList
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate view
-        val root = inflater.inflate(R.layout.fragment_generic_pager, container, false)
+        val binding = FragmentGenericPagerBinding.inflate(inflater, container, false)
+        _binding = binding
+        return binding.root
+    }
+
+    // Note: tabs are added here rather than in onCreateView so that subclasses can bind
+    // observers to viewLifecycleOwner from within onAddTabs.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = _binding!!
 
         // Setup tabs
         val adder = InnerTabAdder(context!!)
@@ -43,9 +55,8 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
         val tabs = adder.getTabs()
         val tabIdx = adder.defaultIdx
 
-        // Retrieve the view's elements (we're in onCreateView, can't use on fragment directly)
-        val tabLayout = root.tab_layout as TabLayout
-        val viewPager = root.pager_list
+        val tabLayout = binding.tabLayout.root
+        val viewPager = binding.pagerList
 
         // Initialize ViewPager (tab behavior)
         viewPager.adapter = GenericPagerAdapter(this, tabs)
@@ -53,10 +64,8 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
         tabLayout.tabMode = tabMode
 
         if (tabIdx > 0) {
-            pager_list.currentItem = tabIdx
+            viewPager.currentItem = tabIdx
         }
-
-        return root
     }
 
     /**
@@ -135,7 +144,7 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
      */
     private fun createdCachedBitmap() {
         try {
-            val view = pager_list
+            val view = _binding?.pagerList ?: return
             val bitmap = Bitmap.createBitmap(view.width,
                     view.height, Bitmap.Config.ARGB_8888)
 
@@ -155,10 +164,11 @@ abstract class BasePagerFragment : androidx.fragment.app.Fragment() {
     override fun onDestroyView() {
         cachedBitmap?.let {
             val bitmapDrawable = BitmapDrawable(resources, it)
-            pager_list.background = bitmapDrawable
+            _binding?.pagerList?.background = bitmapDrawable
             cachedBitmap = null
         }
 
         super.onDestroyView()
+        _binding = null
     }
 }

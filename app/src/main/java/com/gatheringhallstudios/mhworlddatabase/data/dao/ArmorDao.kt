@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import androidx.room.Dao
 import androidx.room.Query
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -74,7 +74,7 @@ abstract class ArmorDao {
     fun loadArmorSetFull(langId: String, armorSetId: Int): LiveData<ArmorSetFull> {
         val armorSet = loadArmorListBySet(langId, armorSetId)
 
-        return Transformations.map(armorSet) { data ->
+        return armorSet.map { data ->
             val armorSetId = armorSet.value!!.first().armorset_id
             val armorSetName = armorSet.value!!.first().armorset_name
             val armorList = mutableListOf<ArmorFull>()
@@ -104,7 +104,7 @@ abstract class ArmorDao {
         // Load raw view of Armor with Armor Set info
         val armorSets = loadArmorList(langId, rank)
 
-        return Transformations.map(armorSets) { data ->
+        return armorSets.map { data ->
             // Create a map of armorset_id -> Armor
             val setToArmorMap = data.groupBy { it.armorset_id }
 

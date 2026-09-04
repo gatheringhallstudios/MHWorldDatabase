@@ -23,26 +23,24 @@ import com.gatheringhallstudios.mhworlddatabase.features.bookmarks.BookmarksFeat
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
-import kotlinx.android.synthetic.main.fragment_weapon_summary.*
-import kotlinx.android.synthetic.main.fragment_weapon_summary.defense_value
-import kotlinx.android.synthetic.main.fragment_weapon_summary.slot1
-import kotlinx.android.synthetic.main.fragment_weapon_summary.slot2
-import kotlinx.android.synthetic.main.fragment_weapon_summary.slot3
-import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
-import kotlinx.android.synthetic.main.listitem_bowgun_ammo.view.*
-import kotlinx.android.synthetic.main.listitem_hunting_horn_melody.view.*
-import kotlinx.android.synthetic.main.listitem_skill_level.view.*
-import kotlinx.android.synthetic.main.section_bow_coating.*
-import kotlinx.android.synthetic.main.view_bowgun_detail.*
-import kotlinx.android.synthetic.main.view_hunting_horn_detail.*
-import kotlinx.android.synthetic.main.view_hunting_horn_detail.view.*
-import kotlinx.android.synthetic.main.view_weapon_recipe.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ViewWeaponRecipeBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ViewHuntingHornDetailBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ViewBowgunDetailBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.SectionBowCoatingBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemHuntingHornMelodyBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemBowgunAmmoBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemArmorsetBonusBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSkillLevelBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentWeaponSummaryBinding
 
 
 /**
  * Fragment used to display the main weapon detail information.
  */
 class WeaponDetailFragment : androidx.fragment.app.Fragment() {
+    private var _binding: FragmentWeaponSummaryBinding? = null
+    private val binding get() = _binding!!
+
 
     /**
      * Returns the viewmodel owned by the parent fragment
@@ -57,7 +55,13 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_weapon_summary, parent, false)
+        _binding = FragmentWeaponSummaryBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -103,23 +107,23 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
      */
     private fun populateWeaponBasic(weapon: Weapon) {
         // Set header info
-        weapon_header.setIconType(IconType.ZEMBELLISHED)
-        weapon_header.setIconDrawable(AssetLoader.loadIconFor(weapon))
-        weapon_header.setTitleText(weapon.name)
-        weapon_header.setSubtitleText(getString(R.string.format_rarity, weapon.rarity))
-        weapon_header.setSubtitleColor(AssetLoader.loadRarityColor(weapon.rarity))
+        binding.weaponHeader.setIconType(IconType.ZEMBELLISHED)
+        binding.weaponHeader.setIconDrawable(AssetLoader.loadIconFor(weapon))
+        binding.weaponHeader.setTitleText(weapon.name)
+        binding.weaponHeader.setSubtitleText(getString(R.string.format_rarity, weapon.rarity))
+        binding.weaponHeader.setSubtitleColor(AssetLoader.loadRarityColor(weapon.rarity))
 
-        attack_value.text = weapon.attack.toString()
-        attack_value_true.text = weapon.attack_true.toString()
+        binding.attackValue.text = weapon.attack.toString()
+        binding.attackValueTrue.text = weapon.attack_true.toString()
 
         // Affinity
-        affinity_value.text = getString(when {
+        binding.affinityValue.text = getString(when {
             weapon.affinity != 0 -> R.string.format_plus_percentage
             else -> R.string.format_percentage
         }, weapon.affinity)
 
         // Elderseal
-        elderseal_value.text = when (weapon.elderseal) {
+        binding.eldersealValue.text = when (weapon.elderseal) {
             ElderSealLevel.NONE -> getString(R.string.weapon_elderseal_none)
             ElderSealLevel.LOW -> getString(R.string.weapon_elderseal_low)
             ElderSealLevel.AVERAGE -> getString(R.string.weapon_elderseal_average)
@@ -127,38 +131,38 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
         }
 
         // Element 1
-        element_layout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
-        element_icon.isVisible = weapon.element1 != null
-        element_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
+        binding.elementLayout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
+        binding.elementIcon.isVisible = weapon.element1 != null
+        binding.elementIcon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element1))
         val elementResource = when (weapon.element_hidden) {
             true -> R.string.format_element_hidden
             false -> R.string.format_element
         }
-        element_type_value.text = AssetLoader.localizeElementStatus(weapon.element1)
-        element_value.text = when (weapon.element1) {
+        binding.elementTypeValue.text = AssetLoader.localizeElementStatus(weapon.element1)
+        binding.elementValue.text = when (weapon.element1) {
             null -> getString(R.string.weapon_element_none)
             else -> getString(elementResource, weapon.element1_attack, weapon.element1_attack_max)
         }
 
         // Element 2
-        element2_row.isVisible = weapon.element2 != null
+        binding.element2Row.isVisible = weapon.element2 != null
         if (weapon.element2 != null) {
-            element2_layout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
-            element2_icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element2))
-            element2_type_value.text = AssetLoader.localizeElementStatus(weapon.element2)
-            element2_value.text = getString(elementResource, weapon.element2_attack, weapon.element2_attack_max)
+            binding.element2Layout.alpha = if (weapon.element_hidden) 0.5F else 1.0F
+            binding.element2Icon.setImageDrawable(AssetLoader.loadElementIcon(weapon.element2))
+            binding.element2TypeValue.text = AssetLoader.localizeElementStatus(weapon.element2)
+            binding.element2Value.text = getString(elementResource, weapon.element2_attack, weapon.element2_attack_max)
         }
 
         // Slot information
         val slotImages = weapon.slots.map {
             context?.getDrawableCompat(SlotEmptyRegistry(it))
         }
-        slot1.setImageDrawable(slotImages[0])
-        slot2.setImageDrawable(slotImages[1])
-        slot3.setImageDrawable(slotImages[2])
+        binding.slot1.setImageDrawable(slotImages[0])
+        binding.slot2.setImageDrawable(slotImages[1])
+        binding.slot3.setImageDrawable(slotImages[2])
 
         // Defense
-        defense_value.text = getString(when {
+        binding.defenseValue.text = getString(when {
             weapon.defense != 0 -> R.string.format_plus
             else -> R.string.format_quantity_none
         }, weapon.defense)
@@ -166,64 +170,64 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
     private fun populateWeaponSkills(skills: List<SkillLevel>) {
         if (skills.isEmpty()) {
-            skill_section.visibility = View.GONE
+            binding.skillSection.visibility = View.GONE
             return
         }
 
-        skill_section.visibility = View.VISIBLE
-        skill_list.removeAllViews()
+        binding.skillSection.visibility = View.VISIBLE
+        binding.skillList.removeAllViews()
 
         val inflater = LayoutInflater.from(context)
 
         for (skill in skills) {
             //Set the label for the Set name
-            val view = inflater.inflate(R.layout.listitem_skill_level, skill_list, false)
+            val skillBinding = ListitemSkillLevelBinding.inflate(inflater, binding.skillList, false)
 
-            view.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
-            view.label_text.text = skill.skillTree.name
-            view.level_text.text = getString(R.string.level_qty, skill.level)
-            with(view.skill_level) {
+            skillBinding.icon.setImageDrawable(AssetLoader.loadIconFor(skill.skillTree))
+            skillBinding.labelText.text = skill.skillTree.name
+            skillBinding.levelText.text = getString(R.string.level_qty, skill.level)
+            with(skillBinding.skillLevel) {
                 maxLevel = skill.skillTree.max_level
                 secretLevels = skill.skillTree.secret
                 level = skill.level
             }
 
-            view.setOnClickListener {
+            skillBinding.root.setOnClickListener {
                 getRouter().navigateSkillDetail(skill.skillTree.id)
             }
 
-            skill_list.addView(view)
+            binding.skillList.addView(skillBinding.root)
         }
     }
 
     private fun populateSetBonus(armorSetBonuses: List<ArmorSetBonus>) {
         if (armorSetBonuses.isEmpty()) {
-            armor_set_bonus_section.visibility = View.GONE
+            binding.armorSetBonusSection.visibility = View.GONE
             return
         }
 
         // show set bonus section
-        armor_set_bonus_section.visibility = View.VISIBLE
-        armor_set_bonus_list.removeAllViews()
+        binding.armorSetBonusSection.visibility = View.VISIBLE
+        binding.armorSetBonusList.removeAllViews()
 
         //Set the label for the Set name
-        set_bonus_name.text = armorSetBonuses.first().name
+        binding.setBonusName.text = armorSetBonuses.first().name
 
         for (setBonus in armorSetBonuses) {
             // Now to set the actual skills
             val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
             val reqIcon = SetBonusNumberRegistry(setBonus.required)
-            val listItem = layoutInflater.inflate(R.layout.listitem_armorset_bonus, armor_set_bonus_list, false)
+            val listItem = ListitemArmorsetBonusBinding.inflate(layoutInflater, binding.armorSetBonusList, false)
 
-            listItem.bonus_skill_icon.setImageDrawable(skillIcon)
-            listItem.bonus_skill_name.text = setBonus.skillTree.name
-            listItem.bonus_requirement.setImageResource(reqIcon)
+            listItem.bonusSkillIcon.setImageDrawable(skillIcon)
+            listItem.bonusSkillName.text = setBonus.skillTree.name
+            listItem.bonusRequirement.setImageResource(reqIcon)
 
-            listItem.setOnClickListener {
+            listItem.root.setOnClickListener {
                 getRouter().navigateSkillDetail(setBonus.skillTree.id)
             }
 
-            armor_set_bonus_list.addView(listItem)
+            binding.armorSetBonusList.addView(listItem.root)
         }
     }
 
@@ -235,38 +239,38 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
         when (weapon.weapon_type) {
             WeaponType.SWITCH_AXE, WeaponType.CHARGE_BLADE -> {
-                weapon_specific_section.layoutResource = R.layout.view_blade_phial_detail
-                val view = weapon_specific_section.inflate()
+                binding.weaponSpecificSection.layoutResource = R.layout.view_blade_phial_detail
+                val view = binding.weaponSpecificSection.inflate()
                 bindChargeBladeSwitchAxe(weapon, view)
             }
             WeaponType.INSECT_GLAIVE -> {
-                weapon_specific_section.layoutResource = R.layout.view_insect_glaive_detail
-                val view = weapon_specific_section.inflate()
+                binding.weaponSpecificSection.layoutResource = R.layout.view_insect_glaive_detail
+                val view = binding.weaponSpecificSection.inflate()
                 bindInsectGlaive(weapon, view)
             }
             WeaponType.GUNLANCE -> {
-                weapon_specific_section.layoutResource = R.layout.view_gunlance_detail
-                val view = weapon_specific_section.inflate()
+                binding.weaponSpecificSection.layoutResource = R.layout.view_gunlance_detail
+                val view = binding.weaponSpecificSection.inflate()
                 bindGunlance(weapon, view)
             }
             WeaponType.HUNTING_HORN -> {
-                weapon_specific_section.layoutResource = R.layout.view_hunting_horn_detail
-                val view = weapon_specific_section.inflate()
+                binding.weaponSpecificSection.layoutResource = R.layout.view_hunting_horn_detail
+                val view = binding.weaponSpecificSection.inflate()
                 bindHuntingHorn(weapon, melodies, view)
             }
             WeaponType.BOW -> {
-                weapon_specific_section.layoutResource = R.layout.section_bow_coating
-                val view = weapon_specific_section.inflate()
+                binding.weaponSpecificSection.layoutResource = R.layout.section_bow_coating
+                val view = binding.weaponSpecificSection.inflate()
                 bindBow(weapon, view)
             }
             WeaponType.HEAVY_BOWGUN, WeaponType.LIGHT_BOWGUN -> {
-                weapon_specific_section.layoutResource = R.layout.view_bowgun_detail
-                val view = weapon_specific_section.inflate()
+                binding.weaponSpecificSection.layoutResource = R.layout.view_bowgun_detail
+                val view = binding.weaponSpecificSection.inflate()
                 bindBowgun(ammo, view)
             }
             else -> {
-                weapon_specific_section.layoutResource = R.layout.view_weapon_sharpness
-                val view = weapon_specific_section.inflate()
+                binding.weaponSpecificSection.layoutResource = R.layout.view_weapon_sharpness
+                val view = binding.weaponSpecificSection.inflate()
                 bindBasicBladeWeapon(weapon, view)
             }
         }
@@ -277,17 +281,17 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
      */
     private fun populateComponents(recipes: Map<String?, List<ItemQuantity>>) {
         if (recipes.isEmpty()) {
-            weapon_recipes.visibility = View.GONE
+            binding.weaponRecipes.visibility = View.GONE
             return
         }
 
-        weapon_recipes.visibility = View.VISIBLE
+        binding.weaponRecipes.visibility = View.VISIBLE
 
         // Inner function to inflate a sub recipe view.
         fun inflateRecipe(type: String, items: List<ItemQuantity>): View {
-            val view = layoutInflater.inflate(R.layout.view_weapon_recipe, weapon_recipes, false)
+            val recipeBinding = ViewWeaponRecipeBinding.inflate(layoutInflater, binding.weaponRecipes, false)
 
-            view.weapon_components_list_title.setLabelText(when (type) {
+            recipeBinding.weaponComponentsListTitle.setLabelText(when (type) {
                 "Create" -> getString(R.string.header_required_materials_craft)
                 else -> getString(R.string.header_required_materials_upgrade)
             })
@@ -303,15 +307,15 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
                     getRouter().navigateItemDetail(component.item.id)
                 }
 
-                view.weapon_components_list.addView(itemView)
+                recipeBinding.weaponComponentsList.addView(itemView)
             }
 
-            return view
+            return recipeBinding.root
         }
 
-        weapon_recipes.removeAllViews()
+        binding.weaponRecipes.removeAllViews()
         for (recipe in recipes) {
-            weapon_recipes.addView(inflateRecipe(recipe.key ?: "", recipe.value))
+            binding.weaponRecipes.addView(inflateRecipe(recipe.key ?: "", recipe.value))
         }
     }
 
@@ -388,7 +392,8 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
 
     private fun bindHuntingHorn(weapon: Weapon, melodies: List<WeaponMelody>?, view: View) {
         populateSharpness(weapon.sharpnessData, view)
-        notes_layout.removeAllViews()
+        val hornBinding = ViewHuntingHornDetailBinding.bind(view)
+        hornBinding.notesLayout.removeAllViews()
 
         weapon.notes?.forEachIndexed { index, note ->
             val noteIcon = ImageView(context)
@@ -396,18 +401,19 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
                     resources.getDimension(R.dimen.image_size_xsmall).toInt(),
                     resources.getDimension(R.dimen.image_size_xsmall).toInt())
             noteIcon.setImageDrawable(loadNoteFromChar(note, index))
-            notes_layout.addView(noteIcon)
+            hornBinding.notesLayout.addView(noteIcon)
         }
 
-        view.melody_layout.removeAllViews()
+        hornBinding.melodyLayout.removeAllViews()
         melodies?.forEach { melody ->
-            val melodyView = layoutInflater.inflate(R.layout.listitem_hunting_horn_melody, melody_layout, false)
+            val melodyBinding = ListitemHuntingHornMelodyBinding.inflate(
+                    layoutInflater, hornBinding.melodyLayout, false)
             melody.notes.forEachIndexed { index, note ->
                 val noteIcon = when (index) {
-                    0 -> melodyView.note1_icon
-                    1 -> melodyView.note2_icon
-                    2 -> melodyView.note3_icon
-                    3 -> melodyView.note4_icon
+                    0 -> melodyBinding.note1Icon
+                    1 -> melodyBinding.note2Icon
+                    2 -> melodyBinding.note3Icon
+                    3 -> melodyBinding.note4Icon
                     else -> null
                 }
 
@@ -415,41 +421,42 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
                 noteIcon?.setImageDrawable(loadNoteFromChar(note, noteType))
             }
 
-            melodyView.effect1.text = melody.effect1
-            melodyView.effect2.text = melody.effect2
-            melodyView.base_duration_value.text = if (melody.base_duration != null && melody.base_extension != null) "${melody.base_duration}(+${melody.base_extension})" else ""
-            melodyView.m1_extension_value.text = if (melody.m1_duration != null && melody.m1_extension != null) "${melody.m1_duration}(+${melody.m1_extension})" else ""
-            melodyView.m2_extension_value.text = if (melody.m2_duration != null && melody.m2_extension != null) "${melody.m2_duration}(+${melody.m2_extension})" else ""
-            melody_layout.addView(melodyView)
+            melodyBinding.effect1.text = melody.effect1
+            melodyBinding.effect2.text = melody.effect2
+            melodyBinding.baseDurationValue.text = if (melody.base_duration != null && melody.base_extension != null) "${melody.base_duration}(+${melody.base_extension})" else ""
+            melodyBinding.m1ExtensionValue.text = if (melody.m1_duration != null && melody.m1_extension != null) "${melody.m1_duration}(+${melody.m1_extension})" else ""
+            melodyBinding.m2ExtensionValue.text = if (melody.m2_duration != null && melody.m2_extension != null) "${melody.m2_duration}(+${melody.m2_extension})" else ""
+            hornBinding.melodyLayout.addView(melodyBinding.root)
         }
     }
 
     private fun bindBow(weapon: Weapon, view: View) {
+        val coatingBinding = SectionBowCoatingBinding.bind(view)
         weapon.weaponCoatings?.iterator()?.forEach {
             when (it) {
                 CoatingType.BLAST -> {
-                    blast_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
-                    blast_coating.visibility = View.VISIBLE
+                    coatingBinding.blastCoatingIcon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.BLAST))
+                    coatingBinding.blastCoating.visibility = View.VISIBLE
                 }
                 CoatingType.POWER -> {
-                    power_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
-                    power_coating.visibility = View.VISIBLE
+                    coatingBinding.powerCoatingIcon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POWER))
+                    coatingBinding.powerCoating.visibility = View.VISIBLE
                 }
                 CoatingType.POISON -> {
-                    poison_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
-                    poison_coating.visibility = View.VISIBLE
+                    coatingBinding.poisonCoatingIcon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.POISON))
+                    coatingBinding.poisonCoating.visibility = View.VISIBLE
                 }
                 CoatingType.PARALYSIS -> {
-                    paralysis_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
-                    paralysis_coating.visibility = View.VISIBLE
+                    coatingBinding.paralysisCoatingIcon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.PARALYSIS))
+                    coatingBinding.paralysisCoating.visibility = View.VISIBLE
                 }
                 CoatingType.SLEEP -> {
-                    sleep_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
-                    sleep_coating.visibility = View.VISIBLE
+                    coatingBinding.sleepCoatingIcon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.SLEEP))
+                    coatingBinding.sleepCoating.visibility = View.VISIBLE
                 }
                 CoatingType.CLOSE_RANGE -> {
-                    close_range_coating_icon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
-                    close_range.visibility = View.VISIBLE
+                    coatingBinding.closeRangeCoatingIcon.setImageDrawable(AssetLoader.loadIconFor(CoatingType.CLOSE_RANGE))
+                    coatingBinding.closeRange.visibility = View.VISIBLE
                 }
             }
         }
@@ -462,12 +469,14 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
     private fun bindBowgun(ammo: WeaponAmmoData?, view: View) {
         if (ammo == null) return
 
-        deviation_value.text = ammo.deviation
-        special_ammo_value.text = AssetLoader.localizeSpecialAmmoType(ammo.special_ammo)
+        val bowgunBinding = ViewBowgunDetailBinding.bind(view)
+        bowgunBinding.deviationValue.text = ammo.deviation
+        bowgunBinding.specialAmmoValue.text = AssetLoader.localizeSpecialAmmoType(ammo.special_ammo)
 
         ammo.iterator().forEach {
-            val view = layoutInflater.inflate(R.layout.listitem_bowgun_ammo, ammo_layout, false)
-            view.ammo_type_name.text = when (it.type) {
+            val ammoBinding = ListitemBowgunAmmoBinding.inflate(
+                    layoutInflater, bowgunBinding.ammoLayout, false)
+            ammoBinding.ammoTypeName.text = when (it.type) {
                 AmmoType.NORMAL_AMMO1 -> getString(R.string.weapon_bowgun_ammo_normal, 1)
                 AmmoType.NORMAL_AMMO2 -> getString(R.string.weapon_bowgun_ammo_normal, 2)
                 AmmoType.NORMAL_AMMO3 -> getString(R.string.weapon_bowgun_ammo_normal, 3)
@@ -504,7 +513,7 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
                 AmmoType.ARMOR_AMMO -> getString(R.string.weapon_bowgun_ammo_armor)
                 AmmoType.TRANQ_AMMO -> getString(R.string.weapon_bowgun_ammo_tranq)
             }
-            view.capacity_value.text = it.capacity.toString()
+            ammoBinding.capacityValue.text = it.capacity.toString()
 
             //Determining what kind of shot it actually is, is a combination of ammo type, rapid/normal,
             //And reload speed due to game logic. I know this looks like it makes 0 sense
@@ -521,9 +530,9 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
             }
             val recoilStr = if (it.recoil <= 0) "" else getString(R.string.format_plus, it.recoil)
 
-            view.shot_type_value_recoil.text = String.format("%s%s", shotTypeStr, recoilStr)
+            ammoBinding.shotTypeValueRecoil.text = String.format("%s%s", shotTypeStr, recoilStr)
 
-            view.reload_value.text = when (it.reload) {
+            ammoBinding.reloadValue.text = when (it.reload) {
                 ReloadType.NONE -> getString(R.string.general_none)
                 ReloadType.VERY_SLOW -> getString(R.string.weapon_bowgun_ammo_reload_very_slow)
                 ReloadType.SLOW -> getString(R.string.weapon_bowgun_ammo_reload_slow)
@@ -532,8 +541,8 @@ class WeaponDetailFragment : androidx.fragment.app.Fragment() {
                 ReloadType.VERY_FAST -> getString(R.string.weapon_bowgun_ammo_reload_very_fast)
             }
 
-            view.ammo_icon.setImageDrawable(loadIconFor(it.type))
-            ammo_layout.addView(view)
+            ammoBinding.ammoIcon.setImageDrawable(loadIconFor(it.type))
+            bowgunBinding.ammoLayout.addView(ammoBinding.root)
         }
     }
 }

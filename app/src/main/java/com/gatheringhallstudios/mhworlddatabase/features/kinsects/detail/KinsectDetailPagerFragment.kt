@@ -1,6 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase.features.kinsects.detail
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
 
@@ -13,7 +13,7 @@ class KinsectDetailPagerFragment : BasePagerFragment() {
      * Returns the viewmodel owned by this parent fragment
      */
     private val viewModel: KinsectDetailViewModel by lazy {
-        ViewModelProviders.of(this).get(KinsectDetailViewModel::class.java)
+        ViewModelProvider(this).get(KinsectDetailViewModel::class.java)
     }
 
     override fun onAddTabs(tabs: TabAdder) {

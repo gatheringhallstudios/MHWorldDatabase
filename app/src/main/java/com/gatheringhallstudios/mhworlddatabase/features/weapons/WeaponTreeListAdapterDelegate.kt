@@ -26,9 +26,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.WeaponType
 import com.gatheringhallstudios.mhworlddatabase.util.getDrawableCompat
 import com.gatheringhallstudios.mhworlddatabase.util.px
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.listitem_weapon.view.*
-import kotlinx.android.synthetic.main.listitem_weapontree.view.*
-import kotlinx.android.synthetic.main.section_bow_coating.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.SectionBowCoatingCompactBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemWeapontreeBinding
 
 const val INDENT_SIZE = 16 //This value corresponds to the measured width of each of vectors used for drawing the tree in DP. Convert to pixels before use.
 
@@ -51,9 +50,7 @@ class WeaponTreeListAdapterDelegate(
 
     override fun onCreateViewHolder(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.listitem_weapontree, parent, false)
-
-        return WeaponBaseHolder(v)
+        return WeaponBaseHolder(ListitemWeapontreeBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(items: List<Any>,
@@ -66,9 +63,9 @@ class WeaponTreeListAdapterDelegate(
         val vh = holder as WeaponBaseHolder
         vh.bind(weaponBaseTreeNode)
 
-        holder.view.setOnClickListener { onSelected(weaponBaseTreeNode.value) }
+        holder.itemView.setOnClickListener { onSelected(weaponBaseTreeNode.value) }
         if (onLongSelect != null) {
-            holder.view.setOnLongClickListener {
+            holder.itemView.setOnLongClickListener {
                 // note: cannot pass position as an optimization, as it will not change on list updates unless re-rendered
                 onLongSelect.invoke(weaponBaseTreeNode.value)
                 true // notify that it was consumed
@@ -76,15 +73,16 @@ class WeaponTreeListAdapterDelegate(
         }
     }
 
-    internal inner class WeaponBaseHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    internal inner class WeaponBaseHolder(private val binding: ListitemWeapontreeBinding) :
+            androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("ResourceType")
         fun bind(weaponNode: RenderedTreeNode<Weapon>) {
             val weapon = weaponNode.value
 
-            view.weapon_name.text = weapon.name
-            view.weapon_image.setImageDrawable(AssetLoader.loadIconFor(weapon))
-            view.weapon_craftable_image.visibility = when {
+            binding.weaponLayout.weaponName.text = weapon.name
+            binding.weaponLayout.weaponImage.setImageDrawable(AssetLoader.loadIconFor(weapon))
+            binding.weaponLayout.weaponCraftableImage.visibility = when {
                 weapon.craftable -> View.VISIBLE
                 else -> View.GONE
             }
@@ -100,44 +98,44 @@ class WeaponTreeListAdapterDelegate(
             // Populate tree lines
             createTreeLayout(weaponNode.formatter, weaponNode.isCollapsed, weapon.rarity)
 
-            view.invalidate()
+            itemView.invalidate()
         }
 
         private fun populateStaticStats(weapon: Weapon) {
-            view.attack_value.setLabelText(
+            binding.weaponLayout.attackValue.setLabelText(
                     if (showTrueAttackValues == true) weapon.attack_true.toString()
                     else weapon.attack.toString())
 
             //Render sharpness data if it exists, else hide the bars
             val sharpnessData = weapon.sharpnessData
             if (sharpnessData != null) {
-                view.sharpness_container.visibility = View.VISIBLE
-                view.sharpness_value.drawSharpness(sharpnessData.min)
-                view.sharpness_max_value.drawSharpness(sharpnessData.max)
+                binding.weaponLayout.sharpnessContainer.visibility = View.VISIBLE
+                binding.weaponLayout.sharpnessValue.drawSharpness(sharpnessData.min)
+                binding.weaponLayout.sharpnessMaxValue.drawSharpness(sharpnessData.max)
             } else {
-                view.sharpness_container.visibility = View.GONE
+                binding.weaponLayout.sharpnessContainer.visibility = View.GONE
             }
         }
 
         private fun populateDecorations(weapon: Weapon) {
             val slotImages = weapon.slots.map {
-                view.context.getDrawableCompat(SlotEmptyRegistry(it))
+                itemView.context.getDrawableCompat(SlotEmptyRegistry(it))
             }
 
-            view.slot1.setImageDrawable(slotImages[0])
-            view.slot2.setImageDrawable(slotImages[1])
-            view.slot3.setImageDrawable(slotImages[2])
+            binding.weaponLayout.slot1.setImageDrawable(slotImages[0])
+            binding.weaponLayout.slot2.setImageDrawable(slotImages[1])
+            binding.weaponLayout.slot3.setImageDrawable(slotImages[2])
 
             // Hide views if no slots
-            view.slot1.visibility = when (weapon.slots[0]) {
+            binding.weaponLayout.slot1.visibility = when (weapon.slots[0]) {
                 0 -> View.GONE
                 else -> View.VISIBLE
             }
-            view.slot2.visibility = when (weapon.slots[1]) {
+            binding.weaponLayout.slot2.visibility = when (weapon.slots[1]) {
                 0 -> View.GONE
                 else -> View.VISIBLE
             }
-            view.slot3.visibility = when (weapon.slots[2]) {
+            binding.weaponLayout.slot3.visibility = when (weapon.slots[2]) {
                 0 -> View.GONE
                 else -> View.VISIBLE
             }
@@ -145,7 +143,7 @@ class WeaponTreeListAdapterDelegate(
 
         private fun populateWeaponSpecificStats(weapon: Weapon) {
             //Weapon Specific stats (e.g. phials, kinsect bonus, special ammo etc.)
-            view.tree_weapon_specific_section.removeAllViews()
+            binding.weaponLayout.treeWeaponSpecificSection.removeAllViews()
 
             when (weapon.weapon_type) {
                 WeaponType.CHARGE_BLADE, WeaponType.SWITCH_AXE -> {
@@ -153,14 +151,14 @@ class WeaponTreeListAdapterDelegate(
                     val phialPower = weapon.phial_power
 
                     val phialView = CompactStatCell(
-                            view.context,
+                            itemView.context,
                             R.drawable.ic_ui_phials,
                             when (phialPower) {
                                 0 -> phialValue
                                 else -> "$phialValue $phialPower"
                             }
                     )
-                    view.tree_weapon_specific_section.addView(phialView)
+                    binding.weaponLayout.treeWeaponSpecificSection.addView(phialView)
 
                 }
 
@@ -168,61 +166,63 @@ class WeaponTreeListAdapterDelegate(
                     val kinsectValue = AssetLoader.localizeKinsectBonus(weapon.kinsect_bonus)
 
                     val kinsectView = CompactStatCell(
-                            view.context,
+                            itemView.context,
                             R.drawable.ic_ui_kinsect_white,
                             kinsectValue
                     )
-                    view.tree_weapon_specific_section.addView(kinsectView)
+                    binding.weaponLayout.treeWeaponSpecificSection.addView(kinsectView)
 
                 }
 
                 WeaponType.HUNTING_HORN -> {
-                    val notesView = CompactStatIconLayoutCell(view.context)
+                    val notesView = CompactStatIconLayoutCell(itemView.context)
 
                     weapon.notes?.forEachIndexed { index, note ->
                         notesView.addLayoutIcon(AssetLoader.loadNoteFromChar(note, index)!!)
                     }
 
-                    view.tree_weapon_specific_section.addView(notesView)
+                    binding.weaponLayout.treeWeaponSpecificSection.addView(notesView)
                 }
 
                 WeaponType.GUNLANCE -> {
-                    val shellingValue = AssetLoader.localizeShellingType(weapon.shelling) + " " + view.context.getString(R.string.level_short_qty, weapon.shelling_level)
+                    val shellingValue = AssetLoader.localizeShellingType(weapon.shelling) + " " + itemView.context.getString(R.string.level_short_qty, weapon.shelling_level)
                     val shellingView = CompactStatCell(
-                            view.context,
+                            itemView.context,
                             R.drawable.ic_ui_shelling,
                             shellingValue
                     )
-                    view.tree_weapon_specific_section.addView(shellingView)
+                    binding.weaponLayout.treeWeaponSpecificSection.addView(shellingView)
                 }
 
                 WeaponType.LIGHT_BOWGUN, WeaponType.HEAVY_BOWGUN -> {
                     val specialAmmoValue = AssetLoader.localizeSpecialAmmoType(weapon.special_ammo)
                     val specialAmmoView = CompactStatCell(
-                            view.context,
+                            itemView.context,
                             R.drawable.ic_ui_special_ammo,
                             specialAmmoValue
                     )
-                    view.tree_weapon_specific_section.addView(specialAmmoView)
+                    binding.weaponLayout.treeWeaponSpecificSection.addView(specialAmmoView)
                 }
 
                 WeaponType.BOW -> {
-                    val coatingView = LayoutInflater.from(view.context)
-                            .inflate(R.layout.section_bow_coating_compact, view.tree_weapon_specific_section, false)
+                    val coatingBinding = SectionBowCoatingCompactBinding.inflate(
+                            LayoutInflater.from(itemView.context),
+                            binding.weaponLayout.treeWeaponSpecificSection,
+                            false)
 
                     weapon.weaponCoatings?.iterator()?.forEach {
                         val imageView = when (it) {
-                            CoatingType.CLOSE_RANGE -> coatingView.close_range_coating_icon
-                            CoatingType.POWER -> coatingView.power_coating_icon
-                            CoatingType.PARALYSIS -> coatingView.paralysis_coating_icon
-                            CoatingType.POISON -> coatingView.poison_coating_icon
-                            CoatingType.SLEEP -> coatingView.sleep_coating_icon
-                            CoatingType.BLAST -> coatingView.blast_coating_icon
+                            CoatingType.CLOSE_RANGE -> coatingBinding.closeRangeCoatingIcon
+                            CoatingType.POWER -> coatingBinding.powerCoatingIcon
+                            CoatingType.PARALYSIS -> coatingBinding.paralysisCoatingIcon
+                            CoatingType.POISON -> coatingBinding.poisonCoatingIcon
+                            CoatingType.SLEEP -> coatingBinding.sleepCoatingIcon
+                            CoatingType.BLAST -> coatingBinding.blastCoatingIcon
                         }
                         imageView.setImageDrawable(AssetLoader.loadIconFor(it))
                     }
 
-                    view.tree_weapon_specific_section.addView(coatingView)
+                    binding.weaponLayout.treeWeaponSpecificSection.addView(coatingBinding.root)
                 }
 
                 else -> Unit
@@ -231,12 +231,12 @@ class WeaponTreeListAdapterDelegate(
 
         private fun populateComplexStats(weapon: Weapon) {
             // Clear the placeholder layouts
-            view.complex_stat_layout.removeAllViews()
+            binding.weaponLayout.complexStatLayout.removeAllViews()
 
             // Elemental Stat (added if there's a value)
             if (weapon.element1 != null) {
                 val elementView = CompactStatCell(
-                        view.context,
+                        itemView.context,
                         AssetLoader.loadElementIcon(weapon.element1),
                         createElementString(weapon.element1_attack, weapon.element_hidden))
 
@@ -246,41 +246,41 @@ class WeaponTreeListAdapterDelegate(
                     elementView.labelView.alpha = 1.0.toFloat()
                 }
 
-                view.complex_stat_layout.addView(elementView)
+                binding.weaponLayout.complexStatLayout.addView(elementView)
             }
 
             // Affinity (added if there's a value)
             if (weapon.affinity != 0) {
-                val affinityValue = view.context.getString(R.string.format_plus_percentage, weapon.affinity)
+                val affinityValue = itemView.context.getString(R.string.format_plus_percentage, weapon.affinity)
 
                 val affinityView = CompactStatCell(
-                        view.context,
+                        itemView.context,
                         R.drawable.ic_ui_affinity,
                         affinityValue)
 
-                affinityView.labelView.setTextColor(ContextCompat.getColor(view.context, when {
+                affinityView.labelView.setTextColor(ContextCompat.getColor(itemView.context, when {
                     weapon.affinity > 0 -> R.color.textColorGreen
                     else -> R.color.textColorRed
                 }))
 
-                view.complex_stat_layout.addView(affinityView)
+                binding.weaponLayout.complexStatLayout.addView(affinityView)
             }
 
             // Defense, added if there's a value
             if (weapon.defense != 0) {
-                val defenseValue = view.context.getString(R.string.format_plus, weapon.defense)
+                val defenseValue = itemView.context.getString(R.string.format_plus, weapon.defense)
                 val defenseView = CompactStatCell(
-                        view.context,
+                        itemView.context,
                         R.drawable.ic_ui_defense,
                         defenseValue
                 )
 
-                defenseView.labelView.setTextColor(ContextCompat.getColor(view.context, when {
+                defenseView.labelView.setTextColor(ContextCompat.getColor(itemView.context, when {
                     weapon.defense > 0 -> R.color.textColorGreen
                     else -> R.color.textColorRed
                 }))
 
-                view.complex_stat_layout.addView(defenseView)
+                binding.weaponLayout.complexStatLayout.addView(defenseView)
             }
         }
 
@@ -294,7 +294,7 @@ class WeaponTreeListAdapterDelegate(
         }
 
         private fun createTreeLayout(formatter: List<TreeFormatter>, isCollapsed: Boolean, rarity: Int) {
-            val treeView = view.tree_components
+            val treeView = binding.treeComponents
 
             if (treeView.childCount != 0) treeView.removeAllViews()
 

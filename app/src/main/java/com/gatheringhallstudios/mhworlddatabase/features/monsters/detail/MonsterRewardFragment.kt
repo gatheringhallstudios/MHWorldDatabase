@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 
@@ -35,7 +35,7 @@ class MonsterRewardFragment : RecyclerViewFragment() {
      * The viewmodel of the parent fragment (aka the monster)
      */
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(MonsterDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(MonsterDetailViewModel::class.java)
     }
 
 
@@ -54,7 +54,7 @@ class MonsterRewardFragment : RecyclerViewFragment() {
         val rank = arguments?.getSerializable(ARG_RANK) as Rank?
 
         // Load data
-        viewModel.getRewardsForRank(rank).observe(this, Observer { rewards ->
+        viewModel.getRewardsForRank(rank).observe(viewLifecycleOwner, Observer { rewards ->
             adapter.clear()
             if (rewards == null) {
                 return@Observer

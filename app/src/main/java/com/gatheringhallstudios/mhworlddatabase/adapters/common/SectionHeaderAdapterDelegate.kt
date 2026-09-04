@@ -8,7 +8,7 @@ import android.widget.TextView
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.listitem_section_header.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSectionHeaderBinding
 
 /**
  * Adapter delegate to handle displaying SectionHeader objects inside RecyclerViews.
@@ -31,7 +31,7 @@ class SectionHeaderAdapterDelegate: AdapterDelegate<List<Any>>() {
         val sectionHeader = items[position] as SectionHeader
 
         val vh = holder as SimpleViewHolder
-        vh.label_text.text = sectionHeader.text
+        ListitemSectionHeaderBinding.bind(vh.itemView).labelText.text = sectionHeader.text
         vh.itemView.setTag(R.id.view_is_header, true)
 
         val marginParams = vh.itemView.layoutParams as ViewGroup.MarginLayoutParams

@@ -5,7 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
@@ -50,10 +50,10 @@ class ArmorDetailPagerFragment : BasePagerFragment() {
         val args = arguments
         val armorId = args!!.getInt(ARG_ARMOR_ID)
 
-        viewModel = ViewModelProviders.of(this).get(ArmorDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ArmorDetailViewModel::class.java)
         viewModel.loadArmor(armorId)
 
-        viewModel.armor.observe(this, Observer<ArmorFull> {
+        viewModel.armor.observe(viewLifecycleOwner, Observer<ArmorFull> {
             this.setActivityTitle(it?.armor!!.name)
             //Rerender the menu bar because we are 100% sure we have the item data now
             activity!!.invalidateOptionsMenu()

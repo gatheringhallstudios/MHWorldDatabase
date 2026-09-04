@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
@@ -17,12 +17,15 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.QuestMonster
 import com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDetailPagerFragment.Companion.ARG_QUEST_ID
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import kotlinx.android.synthetic.main.fragment_quest_summary.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentQuestSummaryBinding
 
 /**
  * Fragment that shows view for the quest summary tab
  */
 class QuestSummaryFragment : Fragment() {
+    private var _binding: FragmentQuestSummaryBinding? = null
+    private val binding get() = _binding!!
+
     companion object {
         fun newInstance(questId: Int) = QuestSummaryFragment().applyArguments {
             putInt(ARG_QUEST_ID, questId)
@@ -30,11 +33,17 @@ class QuestSummaryFragment : Fragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(QuestDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(QuestDetailViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_quest_summary, container, false)
+        _binding = FragmentQuestSummaryBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,25 +58,25 @@ class QuestSummaryFragment : Fragment() {
     private fun populateQuest(quest: QuestBase?) {
         quest ?: return
 
-        quest_header.setIconDrawable(AssetLoader.loadIconFor(quest))
-        quest_header.setTitleText(quest.name)
-        quest_header.setSubtitleText(getString(
+        binding.questHeader.setIconDrawable(AssetLoader.loadIconFor(quest))
+        binding.questHeader.setTitleText(quest.name)
+        binding.questHeader.setSubtitleText(getString(
                 R.string.quest_category_combined,
                 AssetLoader.localizeQuestCategory(quest.category),
                 if(quest.stars_raw > 9) " MR" else "",
                 quest.stars))
-        quest_header.setDescriptionText(quest.objective)
+        binding.questHeader.setDescriptionText(quest.objective)
 
-        quest_description.text = quest.description
+        binding.questDescription.text = quest.description
     }
 
     private fun populateQuestLocation(location: Location?) {
         location ?: return
 
-        quest_location.setLeftIconType(IconType.PAPER)
-        quest_location.setLeftIconDrawable(AssetLoader.loadIconFor(location))
-        quest_location.setLabelText(location.name)
-        quest_location.setOnClickListener {
+        binding.questLocation.setLeftIconType(IconType.PAPER)
+        binding.questLocation.setLeftIconDrawable(AssetLoader.loadIconFor(location))
+        binding.questLocation.setLabelText(location.name)
+        binding.questLocation.setOnClickListener {
             getRouter().navigateObject(location)
         }
     }
@@ -75,7 +84,7 @@ class QuestSummaryFragment : Fragment() {
     private fun populateQuestMonsters(monsters: List<QuestMonster>?) {
         monsters ?: return
 
-        quest_monsters.removeAllViews()
+        binding.questMonsters.removeAllViews()
         for (qmonster in monsters) {
             val cell = VerboseIconLabelTextCell(context!!)
             with (cell.binder) {
@@ -92,11 +101,11 @@ class QuestSummaryFragment : Fragment() {
                 getRouter().navigateObject(qmonster.monster)
             }
 
-            quest_monsters.addView(cell)
+            binding.questMonsters.addView(cell)
         }
         if (monsters.isEmpty()) {
-            quest_monsters.addView(
-                    layoutInflater.inflate(R.layout.listitem_empty_medium, quest_monsters, false))
+            binding.questMonsters.addView(
+                    layoutInflater.inflate(R.layout.listitem_empty_medium, binding.questMonsters, false))
         }
     }
 }

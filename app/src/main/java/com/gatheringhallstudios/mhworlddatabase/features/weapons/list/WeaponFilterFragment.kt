@@ -15,8 +15,8 @@ import com.gatheringhallstudios.mhworlddatabase.components.CheckableNotifier
 import com.gatheringhallstudios.mhworlddatabase.components.CheckedImageButton
 import com.gatheringhallstudios.mhworlddatabase.data.types.*
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import kotlinx.android.synthetic.main.fragment_equipment_filter.*
-import kotlinx.android.synthetic.main.fragment_weapon_filter_body.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentWeaponFilterBodyBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentEquipmentFilterBinding
 
 /**
  * Helper class to manage a collection of checkables, including updating and receiving
@@ -134,6 +134,10 @@ class CheckedGroup<T>(val singleOnly: Boolean = false) {
  * it'll call back with a result.
  */
 class WeaponFilterFragment : DialogFragment() {
+    private var _binding: FragmentEquipmentFilterBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var bodyBinding: FragmentWeaponFilterBodyBinding
+
     companion object {
         const val FILTER_WEAPON_TYPE = "FILTER_WEAPON_TYPE"
         const val FILTER_STATE = "FILTER_STATE"
@@ -165,12 +169,18 @@ class WeaponFilterFragment : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_equipment_filter, container, false)
+        _binding = FragmentEquipmentFilterBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        scroll_body.layoutResource = R.layout.fragment_weapon_filter_body
-        scroll_body.inflate()
+        binding.scrollBody.layoutResource = R.layout.fragment_weapon_filter_body
+        bodyBinding = FragmentWeaponFilterBodyBinding.bind(binding.scrollBody.inflate())
 
         // NOTE FOR GROUPS: Only singleOnly groups need to be notified (to enable unselections)
         this.weaponType = arguments?.getSerializable(FILTER_WEAPON_TYPE) as WeaponType
@@ -178,95 +188,95 @@ class WeaponFilterFragment : DialogFragment() {
 
         // define sort group
         sortGroup = CheckedGroup(singleOnly = true)
-        sortGroup.addBinding(sort_attack_toggle, FilterSortCondition.ATTACK)
-        sortGroup.addBinding(sort_affinity_toggle, FilterSortCondition.AFFINITY)
-        sortGroup.addBinding(sort_element_toggle, FilterSortCondition.ELEMENT_STATUS)
+        sortGroup.addBinding(bodyBinding.sortAttackToggle, FilterSortCondition.ATTACK)
+        sortGroup.addBinding(bodyBinding.sortAffinityToggle, FilterSortCondition.AFFINITY)
+        sortGroup.addBinding(bodyBinding.sortElementToggle, FilterSortCondition.ELEMENT_STATUS)
 
         // define element group
         elementGroup = CheckedGroup()
         elementGroup.apply {
-            addBinding(toggle_fire, ElementStatus.FIRE)
-            addBinding(toggle_water, ElementStatus.WATER)
-            addBinding(toggle_thunder, ElementStatus.THUNDER)
-            addBinding(toggle_ice, ElementStatus.ICE)
-            addBinding(toggle_dragon, ElementStatus.DRAGON)
-            addBinding(toggle_poison, ElementStatus.POISON)
-            addBinding(toggle_sleep, ElementStatus.SLEEP)
-            addBinding(toggle_paralysis, ElementStatus.PARALYSIS)
-            addBinding(toggle_blast, ElementStatus.BLAST)
-            addBinding(toggle_non_elemental, ElementStatus.NON_ELEMENTAL)
+            addBinding(bodyBinding.toggleFire, ElementStatus.FIRE)
+            addBinding(bodyBinding.toggleWater, ElementStatus.WATER)
+            addBinding(bodyBinding.toggleThunder, ElementStatus.THUNDER)
+            addBinding(bodyBinding.toggleIce, ElementStatus.ICE)
+            addBinding(bodyBinding.toggleDragon, ElementStatus.DRAGON)
+            addBinding(bodyBinding.togglePoison, ElementStatus.POISON)
+            addBinding(bodyBinding.toggleSleep, ElementStatus.SLEEP)
+            addBinding(bodyBinding.toggleParalysis, ElementStatus.PARALYSIS)
+            addBinding(bodyBinding.toggleBlast, ElementStatus.BLAST)
+            addBinding(bodyBinding.toggleNonElemental, ElementStatus.NON_ELEMENTAL)
         }
 
         // define phial group
         phialGroupCB = CheckedGroup()
         phialGroupCB.apply {
-            addBinding(phial_toggle_impact, PhialType.IMPACT)
-            addBinding(phial_toggle_power_element_cb, PhialType.POWER_ELEMENT)
+            addBinding(bodyBinding.phialToggleImpact, PhialType.IMPACT)
+            addBinding(bodyBinding.phialTogglePowerElementCb, PhialType.POWER_ELEMENT)
         }
         
         phialGroupSWAXE = CheckedGroup()
         phialGroupSWAXE.apply {
-            addBinding(phial_toggle_power, PhialType.POWER)
-            addBinding(phial_toggle_power_element_swaxe, PhialType.POWER_ELEMENT)
-            addBinding(phial_toggle_poison, PhialType.POISON)
-            addBinding(phial_toggle_paralysis, PhialType.PARALYSIS)
-            addBinding(phial_toggle_exhaust, PhialType.EXHAUST)
-            addBinding(phial_toggle_dragon, PhialType.DRAGON)
+            addBinding(bodyBinding.phialTogglePower, PhialType.POWER)
+            addBinding(bodyBinding.phialTogglePowerElementSwaxe, PhialType.POWER_ELEMENT)
+            addBinding(bodyBinding.phialTogglePoison, PhialType.POISON)
+            addBinding(bodyBinding.phialToggleParalysis, PhialType.PARALYSIS)
+            addBinding(bodyBinding.phialToggleExhaust, PhialType.EXHAUST)
+            addBinding(bodyBinding.phialToggleDragon, PhialType.DRAGON)
         }
 
         kinsectGroup = CheckedGroup()
         kinsectGroup.apply {
-            addBinding(kinsect_toggle_speed, KinsectBonus.SPEED)
-            addBinding(kinsect_toggle_stamina, KinsectBonus.STAMINA)
-            addBinding(kinsect_toggle_health, KinsectBonus.HEALTH)
-            addBinding(kinsect_toggle_element, KinsectBonus.ELEMENT)
-            addBinding(kinsect_toggle_sever, KinsectBonus.SEVER)
-            addBinding(kinsect_toggle_blunt, KinsectBonus.BLUNT)
-            addBinding(kinsect_toggle_spirit_strength, KinsectBonus.SPIRIT_STRENGTH)
-            addBinding(kinsect_toggle_stamina_health, KinsectBonus.STAMINA_HEALTH)
+            addBinding(bodyBinding.kinsectToggleSpeed, KinsectBonus.SPEED)
+            addBinding(bodyBinding.kinsectToggleStamina, KinsectBonus.STAMINA)
+            addBinding(bodyBinding.kinsectToggleHealth, KinsectBonus.HEALTH)
+            addBinding(bodyBinding.kinsectToggleElement, KinsectBonus.ELEMENT)
+            addBinding(bodyBinding.kinsectToggleSever, KinsectBonus.SEVER)
+            addBinding(bodyBinding.kinsectToggleBlunt, KinsectBonus.BLUNT)
+            addBinding(bodyBinding.kinsectToggleSpiritStrength, KinsectBonus.SPIRIT_STRENGTH)
+            addBinding(bodyBinding.kinsectToggleStaminaHealth, KinsectBonus.STAMINA_HEALTH)
         }
 
         shellingGroup = CheckedGroup()
         shellingGroup.apply {
-            addBinding(shelling_toggle_normal, ShellingType.NORMAL)
-            addBinding(shelling_toggle_long, ShellingType.LONG)
-            addBinding(shelling_toggle_wide, ShellingType.WIDE)
+            addBinding(bodyBinding.shellingToggleNormal, ShellingType.NORMAL)
+            addBinding(bodyBinding.shellingToggleLong, ShellingType.LONG)
+            addBinding(bodyBinding.shellingToggleWide, ShellingType.WIDE)
         }
 
         shellingLevelGroup = CheckedGroup()
         shellingLevelGroup.apply {
-            addBinding(shelling_toggle_level_1, 1)
-            addBinding(shelling_toggle_level_2, 2)
-            addBinding(shelling_toggle_level_3, 3)
-            addBinding(shelling_toggle_level_4, 4)
-            addBinding(shelling_toggle_level_5, 5)
-            addBinding(shelling_toggle_level_6, 6)
-            addBinding(shelling_toggle_level_7, 7)
+            addBinding(bodyBinding.shellingToggleLevel1, 1)
+            addBinding(bodyBinding.shellingToggleLevel2, 2)
+            addBinding(bodyBinding.shellingToggleLevel3, 3)
+            addBinding(bodyBinding.shellingToggleLevel4, 4)
+            addBinding(bodyBinding.shellingToggleLevel5, 5)
+            addBinding(bodyBinding.shellingToggleLevel6, 6)
+            addBinding(bodyBinding.shellingToggleLevel7, 7)
         }
 
         coatingGroup = CheckedGroup()
         coatingGroup.apply {
-            addBinding(coating_power, CoatingType.POWER)
-            addBinding(coating_para, CoatingType.PARALYSIS)
-            addBinding(coating_poison, CoatingType.POISON)
-            addBinding(coating_sleep, CoatingType.SLEEP)
-            addBinding(coating_blast, CoatingType.BLAST)
+            addBinding(bodyBinding.coatingPower, CoatingType.POWER)
+            addBinding(bodyBinding.coatingPara, CoatingType.PARALYSIS)
+            addBinding(bodyBinding.coatingPoison, CoatingType.POISON)
+            addBinding(bodyBinding.coatingSleep, CoatingType.SLEEP)
+            addBinding(bodyBinding.coatingBlast, CoatingType.BLAST)
         }
 
         specialAmmoGroup = CheckedGroup(singleOnly = true)
         specialAmmoGroup.apply {
-            addBinding(sammo_wyvernheart_toggle, SpecialAmmoType.WYVERNHEART)
-            addBinding(sammo_wyvernsnipe_toggle, SpecialAmmoType.WYVERNSNIPE)
+            addBinding(bodyBinding.sammoWyvernheartToggle, SpecialAmmoType.WYVERNHEART)
+            addBinding(bodyBinding.sammoWyvernsnipeToggle, SpecialAmmoType.WYVERNSNIPE)
         }
 
         // Implement actions
-        action_clear.setOnClickListener {
+        binding.actionClear.setOnClickListener {
             applyState(FilterState.default)
         }
-        action_cancel.setOnClickListener {
+        binding.actionCancel.setOnClickListener {
             dismiss()
         }
-        action_apply.setOnClickListener {
+        binding.actionApply.setOnClickListener {
             val data = Intent()
             data.putExtra(FILTER_STATE, calculateState())
             targetFragment?.onActivityResult(targetRequestCode, 0, data)
@@ -274,32 +284,32 @@ class WeaponFilterFragment : DialogFragment() {
         }
 
         // Enable visibility of elements based on weapon type
-        element_toggles.isVisible = when (weaponType) {
+        bodyBinding.elementToggles.isVisible = when (weaponType) {
             WeaponType.LIGHT_BOWGUN, WeaponType.HEAVY_BOWGUN -> false
             else -> true
         }
 
-        phial_types_cb.isVisible = (weaponType == WeaponType.CHARGE_BLADE)
-        phial_types_swaxe.isVisible = (weaponType == WeaponType.SWITCH_AXE)
-        title_phials.isVisible = phial_types_cb.isVisible || phial_types_swaxe.isVisible
+        bodyBinding.phialTypesCb.isVisible = (weaponType == WeaponType.CHARGE_BLADE)
+        bodyBinding.phialTypesSwaxe.isVisible = (weaponType == WeaponType.SWITCH_AXE)
+        bodyBinding.titlePhials.isVisible = bodyBinding.phialTypesCb.isVisible || bodyBinding.phialTypesSwaxe.isVisible
 
-        title_kinsect.isVisible = (weaponType == WeaponType.INSECT_GLAIVE)
-        kinsect_toggles.isVisible = (weaponType == WeaponType.INSECT_GLAIVE)
+        bodyBinding.titleKinsect.isVisible = (weaponType == WeaponType.INSECT_GLAIVE)
+        bodyBinding.kinsectToggles.isVisible = (weaponType == WeaponType.INSECT_GLAIVE)
 
-        title_shelling.isVisible = (weaponType == WeaponType.GUNLANCE)
-        shelling_toggles.isVisible = (weaponType == WeaponType.GUNLANCE)
+        bodyBinding.titleShelling.isVisible = (weaponType == WeaponType.GUNLANCE)
+        bodyBinding.shellingToggles.isVisible = (weaponType == WeaponType.GUNLANCE)
 
-        title_coatings.isVisible = (weaponType == WeaponType.BOW)
-        coating_toggles.isVisible = (weaponType == WeaponType.BOW)
-        if (coating_toggles.isVisible) {
+        bodyBinding.titleCoatings.isVisible = (weaponType == WeaponType.BOW)
+        bodyBinding.coatingToggles.isVisible = (weaponType == WeaponType.BOW)
+        if (bodyBinding.coatingToggles.isVisible) {
             for ((button, value) in coatingGroup.views) {
                 val icon = AssetLoader.loadIconFor(value)
                 (button as? CheckedImageButton)?.setImageDrawable(icon)
             }
         }
 
-        title_ammo.isVisible = (weaponType == WeaponType.HEAVY_BOWGUN)
-        special_ammo_toggles.isVisible = (weaponType == WeaponType.HEAVY_BOWGUN)
+        bodyBinding.titleAmmo.isVisible = (weaponType == WeaponType.HEAVY_BOWGUN)
+        bodyBinding.specialAmmoToggles.isVisible = (weaponType == WeaponType.HEAVY_BOWGUN)
 
         // Apply and config state from bundle
         val state = arguments?.getSerializable(FILTER_STATE) as? FilterState
@@ -319,7 +329,7 @@ class WeaponFilterFragment : DialogFragment() {
         }
 
         return FilterState(
-                isFinalOnly = final_toggle.isChecked,
+                isFinalOnly = bodyBinding.finalToggle.isChecked,
                 sortBy = sortGroup.getValue() ?: FilterSortCondition.NONE,
                 elements = elementGroup.getValues().toSet(),
                 phials = phials,
@@ -336,7 +346,7 @@ class WeaponFilterFragment : DialogFragment() {
      */
     fun applyState(state: FilterState) {
         // handle final
-        final_toggle.isChecked = state.isFinalOnly
+        bodyBinding.finalToggle.isChecked = state.isFinalOnly
 
         // Set the basic group values
         sortGroup.setValue(state.sortBy)

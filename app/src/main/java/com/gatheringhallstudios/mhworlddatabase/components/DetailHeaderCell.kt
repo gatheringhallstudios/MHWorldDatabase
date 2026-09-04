@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import com.gatheringhallstudios.mhworlddatabase.R
-import kotlinx.android.synthetic.main.cell_detail_header.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.CellDetailHeaderBinding
 
 /**
  * A reusable component for detail page headers.
@@ -19,6 +19,8 @@ import kotlinx.android.synthetic.main.cell_detail_header.view.*
 class DetailHeaderCell : ConstraintLayout {
 
     private val TAG = javaClass.simpleName
+
+    private lateinit var binding: CellDetailHeaderBinding
 
     constructor(context: Context, @DrawableRes imgSrc: Int, titleText: String, descriptionText: String, subtitleText: String? = null) : super(context) {
         val drawable = AppCompatResources.getDrawable(getContext(), imgSrc)
@@ -53,22 +55,22 @@ class DetailHeaderCell : ConstraintLayout {
 
     fun init(drawable: Drawable?, titleText: String?, descriptionText: String?, subtitleText: String?) {
         val inflater = LayoutInflater.from(context)
-        inflater.inflate(R.layout.cell_detail_header, this, true)
+        binding = CellDetailHeaderBinding.inflate(inflater, this)
 
         setTag(R.id.view_is_header, true)
 
-        header_icon.setImageDrawable(drawable)
-        header_title.text = titleText
-        header_description.text = descriptionText
+        binding.headerIcon.setImageDrawable(drawable)
+        binding.headerTitle.text = titleText
+        binding.headerDescription.text = descriptionText
 
         if (!descriptionText.isNullOrEmpty()) {
-            header_description.visibility = View.VISIBLE
-            header_description.text = descriptionText
+            binding.headerDescription.visibility = View.VISIBLE
+            binding.headerDescription.text = descriptionText
         }
 
         if (!subtitleText.isNullOrEmpty()) {
-            header_subtitle.visibility = View.VISIBLE
-            header_subtitle.text = subtitleText
+            binding.headerSubtitle.visibility = View.VISIBLE
+            binding.headerSubtitle.text = subtitleText
         }
 
         layoutParams = ViewGroup.LayoutParams(
@@ -79,7 +81,7 @@ class DetailHeaderCell : ConstraintLayout {
      * Set custom drawable for the left icon
      */
     fun setIconDrawable(drawable: Drawable?) {
-        header_icon.setImageDrawable(drawable)
+        binding.headerIcon.setImageDrawable(drawable)
 
         // Invalidate to trigger layout update
         invalidate()
@@ -89,28 +91,28 @@ class DetailHeaderCell : ConstraintLayout {
      * Sets the icon decoration type
      */
     fun setIconType(type: IconType) {
-        header_icon.applyIconType(type)
+        binding.headerIcon.applyIconType(type)
     }
 
     fun setTitleText(titleText: String?) {
-        header_title.text = titleText
+        binding.headerTitle.text = titleText
     }
 
     fun setDescriptionText(descriptionText: String?) {
-        header_description.visibility = when (descriptionText.isNullOrEmpty()) {
+        binding.headerDescription.visibility = when (descriptionText.isNullOrEmpty()) {
             true -> View.GONE
             false -> View.VISIBLE
         }
-        header_description.text = descriptionText
+        binding.headerDescription.text = descriptionText
     }
 
     fun setSubtitleText(subtitleText: String?) {
-        header_subtitle.visibility = View.VISIBLE
-        header_subtitle.text = subtitleText
+        binding.headerSubtitle.visibility = View.VISIBLE
+        binding.headerSubtitle.text = subtitleText
     }
 
     fun setSubtitleColor(color: Int) {
-        header_subtitle.setTextColor(color)
+        binding.headerSubtitle.setTextColor(color)
     }
 
     fun updateDescriptionVisibility() {
@@ -122,7 +124,7 @@ class DetailHeaderCell : ConstraintLayout {
      * TODO Make this an instantiation flag if necessary
      */
     fun removeDecorator() {
-        header_icon.background = null
-        header_icon.setPadding(0, 0, 0, 0)
+        binding.headerIcon.background = null
+        binding.headerIcon.setPadding(0, 0, 0, 0)
     }
 }

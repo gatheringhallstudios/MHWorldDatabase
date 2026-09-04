@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleListDelega
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.SimpleViewHolder
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.components.applyIconType
-import kotlinx.android.synthetic.main.listitem_universal_simple.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemUniversalSimpleBinding
 
 /**
  * An object that represents a binding for a simple result.
@@ -63,16 +63,17 @@ class SimpleUniversalBinderAdapterDelegate: SimpleListDelegate<SimpleUniversalBi
 
     override fun bindView(viewHolder: SimpleViewHolder, data: SimpleUniversalBinder) {
         val result = data.build(viewHolder.context)
+        val binding = ListitemUniversalSimpleBinding.bind(viewHolder.itemView)
 
-        with(viewHolder.icon) {
+        with(binding.icon) {
             applyIconType(result.iconType)
             setImageDrawable(result.icon)
         }
 
-        viewHolder.label_text.text = result.label
-        viewHolder.value_text.text = result.value
-        viewHolder.sublabel_text.isVisible = !result.subLabel.isNullOrEmpty()
-        viewHolder.sublabel_text.text = result.subLabel
+        binding.labelText.text = result.label
+        binding.valueText.text = result.value
+        binding.sublabelText.isVisible = !result.subLabel.isNullOrEmpty()
+        binding.sublabelText.text = result.subLabel
 
         viewHolder.itemView.setOnClickListener { result.clickFn(viewHolder.itemView) }
     }

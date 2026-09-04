@@ -16,10 +16,9 @@ import com.gatheringhallstudios.mhworlddatabase.assets.getVectorDrawable
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSetBonus
 import com.gatheringhallstudios.mhworlddatabase.data.models.UserEquipmentSet
-import kotlinx.android.synthetic.main.cell_expandable_cardview.view.*
-import kotlinx.android.synthetic.main.listitem_armorset_bonus.view.*
-import kotlinx.android.synthetic.main.view_workshop_header_expandable_cardview_base.view.*
-import kotlinx.android.synthetic.main.view_workshop_body_cardview.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ViewWorkshopBodyCardviewBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ViewWorkshopHeaderExpandableCardviewBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemArmorsetBonusBinding
 
 
 
@@ -57,7 +56,7 @@ class WorkshopAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>
         val userEquipmentSet = dataSet[position]
 
         if (viewHolder is EquipmentSetHolder) {
-            (viewHolder.view as ExpandableCardView).setOnClick { onSelect(userEquipmentSet) }
+            viewHolder.view.setOnClick { onSelect(userEquipmentSet) }
             viewHolder.view.setOnSwipeRight {
                 onDelete(userEquipmentSet, position, this)
                 notifyItemRemoved(position)
@@ -69,69 +68,72 @@ class WorkshopAdapterDelegate(private val dataSet: MutableList<UserEquipmentSet>
             viewHolder.bind(userEquipmentSet)
         } else {
             val vh = viewHolder as NewEquipmentSetHolder
-            (vh.view as ExpandableCardView).setHeader(R.layout.view_workshop_header_expandable_cardview_new_set)
+            vh.view.setHeader(R.layout.view_workshop_header_expandable_cardview_new_set)
             vh.view.setCardElevation(1f)
             vh.view.setOnClick { onSelect(userEquipmentSet) }
         }
     }
 
-    internal inner class EquipmentSetHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    internal inner class EquipmentSetHolder(val view: ExpandableCardView) : RecyclerView.ViewHolder(view) {
         @SuppressLint("ResourceType")
         fun bind(data: UserEquipmentSet) {
-            view.card_header.equipment_icon.setImageDrawable(view.context!!.getVectorDrawable("ArmorSet", "rare${data.maxRarity}"))
+            val header = ViewWorkshopHeaderExpandableCardviewBinding.bind(view.headerView)
+            val body = ViewWorkshopBodyCardviewBinding.bind(view.bodyView)
 
-            view.card_header.equipment_name.text = data.name
-            view.card_header.icon_slots.visibility = View.GONE
-            view.card_header.slot1.visibility = View.GONE
-            view.card_header.slot2.visibility = View.GONE
-            view.card_header.slot3.visibility = View.GONE
-            view.card_header.icon_defense.visibility = View.GONE
-            view.card_header.defense_value.visibility = View.GONE
-            view.card_body.skill_section.visibility = if (data.skills.isNotEmpty()) View.VISIBLE else View.GONE
-            view.card_body.set_bonus_section.visibility = if (data.setBonuses.isNotEmpty()) View.VISIBLE else View.GONE
+            header.equipmentIcon.setImageDrawable(view.context.getVectorDrawable("ArmorSet", "rare${data.maxRarity}"))
+
+            header.equipmentName.text = data.name
+            header.iconSlots.visibility = View.GONE
+            header.slot1.visibility = View.GONE
+            header.slot2.visibility = View.GONE
+            header.slot3.visibility = View.GONE
+            header.iconDefense.visibility = View.GONE
+            header.defenseValue.visibility = View.GONE
+            body.skillSection.visibility = if (data.skills.isNotEmpty()) View.VISIBLE else View.GONE
+            body.setBonusSection.visibility = if (data.setBonuses.isNotEmpty()) View.VISIBLE else View.GONE
             val adapter = WorkshopViewPagerAdapter(view.context, data.skills)
-            view.skill_pager.adapter = adapter
-            view.skill_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            body.skillPager.adapter = adapter
+            body.skillPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
 
                     //Adjust height
                     val pageSize = adapter.getMaxPageSize(position) * view.resources.getDimension(R.dimen.row_height_medium)
-                    val layoutParams = view.skill_pager.layoutParams
+                    val layoutParams = body.skillPager.layoutParams
                     layoutParams.height = pageSize.toInt()
                 }
             })
-            view.worm_dots_indicator.setViewPager2(view.skill_pager)
+            body.wormDotsIndicator.setViewPager2(body.skillPager)
 
             data.setBonuses.forEach {
-                populateArmorSetBonusName(it.key)
-                populateArmorSetBonuses(it.value)
+                populateArmorSetBonusName(body, it.key)
+                populateArmorSetBonuses(body, it.value)
             }
         }
 
-        private fun populateArmorSetBonusName(setBonusName: String) {
+        private fun populateArmorSetBonusName(body: ViewWorkshopBodyCardviewBinding, setBonusName: String) {
             val textView = TextView(view.context)
             textView.text = setBonusName
             TextViewCompat.setTextAppearance(textView, R.style.TextHeadlineMedium)
-            view.card_body.set_bonus_list.addView(textView)
+            body.setBonusList.addView(textView)
         }
 
-        private fun populateArmorSetBonuses(setBonuses: List<ArmorSetBonus>) {
+        private fun populateArmorSetBonuses(body: ViewWorkshopBodyCardviewBinding, setBonuses: List<ArmorSetBonus>) {
             for (setBonus in setBonuses) {
                 val skillIcon = AssetLoader.loadIconFor(setBonus.skillTree)
                 val reqIcon = SetBonusNumberRegistry(setBonus.required)
                 val inflater = LayoutInflater.from(view.context)
-                val listItem = inflater.inflate(R.layout.listitem_armorset_bonus, null, false)
+                val listItem = ListitemArmorsetBonusBinding.inflate(inflater)
 
-                listItem.bonus_skill_icon.setImageDrawable(skillIcon)
-                listItem.bonus_skill_name.text = setBonus.skillTree.name
-                listItem.bonus_requirement.setImageResource(reqIcon)
+                listItem.bonusSkillIcon.setImageDrawable(skillIcon)
+                listItem.bonusSkillName.text = setBonus.skillTree.name
+                listItem.bonusRequirement.setImageResource(reqIcon)
 
-                view.card_body.set_bonus_list.addView(listItem)
+                body.setBonusList.addView(listItem.root)
             }
         }
     }
 
-    internal inner class NewEquipmentSetHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    internal inner class NewEquipmentSetHolder(val view: ExpandableCardView) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
 }
 

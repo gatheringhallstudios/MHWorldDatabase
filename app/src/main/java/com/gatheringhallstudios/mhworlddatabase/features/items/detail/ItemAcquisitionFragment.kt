@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.items.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.R
@@ -18,7 +18,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
  */
 class ItemAcquisitionFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(ItemDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(ItemDetailViewModel::class.java)
     }
 
     val adapter = CategoryAdapter(
@@ -31,7 +31,7 @@ class ItemAcquisitionFragment : RecyclerViewFragment() {
         setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.acquisitionData.observe(this, Observer(::populateData))
+        viewModel.acquisitionData.observe(viewLifecycleOwner, Observer(::populateData))
     }
 
     private fun populateData(data: ItemSources?) {

@@ -11,7 +11,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.gatheringhallstudios.mhworlddatabase.R
-import kotlinx.android.synthetic.main.cell_icon_label_button.view.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.CellIconLabelButtonBinding
 
 /**
  * This is a full height, full width cell that displays an icon, label, and value. Used to generate
@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.cell_icon_label_button.view.*
 class IconLabelButtonCell : ConstraintLayout {
 
     private val TAG = javaClass.simpleName
+
+    private lateinit var binding: CellIconLabelButtonBinding
 
     constructor(context: Context, @DrawableRes imgSrc: Int, labelText: String) : super(context) {
         val drawable = AppCompatResources.getDrawable(getContext(), imgSrc)
@@ -50,9 +52,8 @@ class IconLabelButtonCell : ConstraintLayout {
     }
 
     fun init(drawable: Drawable?, labelText: String?) {
-        val inflater = context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.cell_icon_label_button, this, true)
+        val inflater = LayoutInflater.from(context)
+        binding = CellIconLabelButtonBinding.inflate(inflater, this)
 
         setLeftIconDrawable(drawable)
         setLabelText(labelText)
@@ -70,32 +71,32 @@ class IconLabelButtonCell : ConstraintLayout {
      * Set custom drawable for the left icon
      */
     fun setLeftIconDrawable(drawable: Drawable?) {
-        generic_icon.setImageDrawable(drawable)
+        binding.genericIcon.setImageDrawable(drawable)
 
         // Invalidate to trigger layout update
         invalidate()
     }
 
     fun setLeftIconType(type: IconType) {
-        generic_icon.applyIconType(type)
+        binding.genericIcon.applyIconType(type)
     }
 
     fun setLabelText(labelText: String?) {
-        label_text.text = labelText
+        binding.labelText.text = labelText
     }
 
     fun setButtonClickFunction(clickFunction: () -> Unit) {
-        cell_button.setOnClickListener {
+        binding.cellButton.setOnClickListener {
             clickFunction()
         }
     }
 
     fun hideButton() {
-        cell_button.visibility = View.GONE
+        binding.cellButton.visibility = View.GONE
     }
 
     fun showButton() {
-        cell_button.visibility = View.VISIBLE
+        binding.cellButton.visibility = View.VISIBLE
     }
 
     /**
@@ -103,7 +104,7 @@ class IconLabelButtonCell : ConstraintLayout {
      * TODO Make this an instantiation flag if necessary
      */
     fun removeDecorator() {
-        generic_icon!!.background = null
-        generic_icon!!.setPadding(0, 0, 0, 0)
+        binding.genericIcon.background = null
+        binding.genericIcon.setPadding(0, 0, 0, 0)
     }
 }

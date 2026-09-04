@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.locations.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -23,7 +23,7 @@ class LocationSummaryFragment : RecyclerViewFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(LocationDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(LocationDetailViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +61,7 @@ class LocationSummaryFragment : RecyclerViewFragment() {
 
         // todo: clean up with coroutines
 
-        viewModel.location.observe(this, Observer {
+        viewModel.location.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.bindLocation(it)
             }
@@ -69,13 +69,13 @@ class LocationSummaryFragment : RecyclerViewFragment() {
             activity!!.invalidateOptionsMenu()
         })
 
-        viewModel.camps.observe(this, Observer {
+        viewModel.camps.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.bindCamps(getString(R.string.header_location_base_camps), it)
             }
         })
 
-        viewModel.locationItems.observe(this, Observer {
+        viewModel.locationItems.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.bindItems(context!!, it)
             }

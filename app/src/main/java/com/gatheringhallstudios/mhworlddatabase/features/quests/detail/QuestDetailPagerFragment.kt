@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.quests.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
 import com.gatheringhallstudios.mhworlddatabase.util.pager.BasePagerFragment
@@ -12,7 +12,7 @@ class QuestDetailPagerFragment : BasePagerFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(QuestDetailViewModel::class.java)
+        ViewModelProvider(this).get(QuestDetailViewModel::class.java)
     }
 
     override fun onAddTabs(tabs: TabAdder) {

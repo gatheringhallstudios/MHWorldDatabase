@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.monsters.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,12 +18,10 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Extract
 import com.gatheringhallstudios.mhworlddatabase.util.DataSynchronizer
 import com.gatheringhallstudios.mhworlddatabase.util.DataWatcher
 import com.gatheringhallstudios.mhworlddatabase.util.getColorCompat
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemMonsterHitzoneBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemMonsterBreakBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentMonsterDamageBinding
 
-import kotlinx.android.synthetic.main.fragment_monster_damage.*
-import kotlinx.android.synthetic.main.fragment_monster_damage_breaks.*
-import kotlinx.android.synthetic.main.fragment_monster_damage_hitzones.*
-import kotlinx.android.synthetic.main.listitem_monster_break.view.*
-import kotlinx.android.synthetic.main.listitem_monster_hitzone.view.*
 
 /** Resolves a hitzone text value to a string */
 private fun resolveInt(value: Int?) = when (value) {
@@ -44,9 +42,12 @@ class MonsterDamageData: DataSynchronizer() {
  * Fragment for a monster's hitzone and break values
  */
 class MonsterDamageFragment : androidx.fragment.app.Fragment() {
+    private var _binding: FragmentMonsterDamageBinding? = null
+    private val binding get() = _binding!!
+
 
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(MonsterDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(MonsterDetailViewModel::class.java)
     }
 
     private val TAG = javaClass.simpleName
@@ -66,34 +67,40 @@ class MonsterDamageFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate and bind our layout
-        return inflater.inflate(R.layout.fragment_monster_damage, parent, false)
+        _binding = FragmentMonsterDamageBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // synchronize data loaded
         val damageData = MonsterDamageData()
 
-        viewModel.hitzones.observe(this, Observer  {
+        viewModel.hitzones.observe(viewLifecycleOwner, Observer  {
             if (it != null) damageData.hitzones = it
         })
-        viewModel.breaks.observe(this, Observer {
+        viewModel.breaks.observe(viewLifecycleOwner, Observer {
             if (it != null) damageData.breaks = it
         })
 
-        damageData.observeAllLoaded(this) {
+        damageData.observeAllLoaded(viewLifecycleOwner) {
             // make either empty or damage/hitzones visible depending on if loaded
             if (damageData.hitzones.isEmpty() && damageData.breaks.isEmpty()) {
-                empty_section.visibility = View.VISIBLE
+                binding.emptySection.root.visibility = View.VISIBLE
             } else {
-                damage_section.visibility = View.VISIBLE
+                binding.damageSection.visibility = View.VISIBLE
 
                 if (damageData.hitzones.isNotEmpty()) {
-                    hitzone_section.visibility = View.VISIBLE
+                    binding.hitzoneSection.root.visibility = View.VISIBLE
                     populateHitzones(damageData.hitzones)
                 }
 
                 if (damageData.breaks.isNotEmpty()) {
-                    break_section.visibility = View.VISIBLE
+                    binding.breakSection.root.visibility = View.VISIBLE
                     populateBreaks(damageData.breaks)
                 }
             }
@@ -108,8 +115,8 @@ class MonsterDamageFragment : androidx.fragment.app.Fragment() {
     fun populateHitzones(hitzones: List<MonsterHitzone>?) {
         if (hitzones == null) return
 
-        val physicalDamageLayout = this.physical_damage_layout
-        val elementDamageLayout = this.element_damage_layout
+        val physicalDamageLayout = binding.hitzoneSection.physicalDamageLayout
+        val elementDamageLayout = binding.hitzoneSection.elementDamageLayout
 
         // Clear layouts
         if (physicalDamageLayout.childCount != 0)
@@ -121,10 +128,10 @@ class MonsterDamageFragment : androidx.fragment.app.Fragment() {
 
         // Populate Physical Damage
         for ((data, bodyPartName) in hitzones) {
-            val physical = inflater.inflate(R.layout.listitem_monster_hitzone, physicalDamageLayout, false)
+            val physical = ListitemMonsterHitzoneBinding.inflate(inflater, physicalDamageLayout, false)
 
             // Bind views
-            physical.body_part.text = bodyPartName
+            physical.bodyPart.text = bodyPartName
             // TODO Altered status names should be a different font. Ex: (Enraged)
 
             bindHitzone(physical.dmg2, data.cut, EFFECTIVE_PHYSICAL, ELEMENT_NONE)
@@ -132,15 +139,15 @@ class MonsterDamageFragment : androidx.fragment.app.Fragment() {
             bindHitzone(physical.dmg4, data.shot, EFFECTIVE_PHYSICAL, ELEMENT_NONE)
             bindHitzone(physical.dmg5, data.ko, EFFECTIVE_PHYSICAL, ELEMENT_NONE)
 
-            physicalDamageLayout!!.addView(physical)
+            physicalDamageLayout.addView(physical.root)
         }
 
         // Populate Elemental Damage
         for ((data, bodyPartName) in hitzones) {
-            val elemental = inflater.inflate(R.layout.listitem_monster_hitzone, elementDamageLayout, false)
+            val elemental = ListitemMonsterHitzoneBinding.inflate(inflater, elementDamageLayout, false)
 
             // Bind views
-            elemental.body_part.text = bodyPartName
+            elemental.bodyPart.text = bodyPartName
             // TODO Altered status names should be a different font. Ex: (Enraged)
 
             bindHitzone(elemental.dmg1, data.fire, EFFECTIVE_ELEMENTAL, ELEMENT_FIRE)
@@ -149,20 +156,21 @@ class MonsterDamageFragment : androidx.fragment.app.Fragment() {
             bindHitzone(elemental.dmg4, data.ice, EFFECTIVE_ELEMENTAL, ELEMENT_ICE)
             bindHitzone(elemental.dmg5, data.dragon, EFFECTIVE_ELEMENTAL, ELEMENT_DRAGON)
 
-            elementDamageLayout.addView(elemental)
+            elementDamageLayout.addView(elemental.root)
         }
     }
 
     fun populateBreaks(breaks: List<MonsterBreak>?) {
-        break_layout.removeAllViews()
+        val breakLayout = binding.breakSection.breakLayout
+        breakLayout.removeAllViews()
         if (breaks == null) return
 
         val inflater = LayoutInflater.from(context)
 
         for (breakData in breaks) {
-            val breakView = inflater.inflate(R.layout.listitem_monster_break, break_layout, false)
+            val breakView = ListitemMonsterBreakBinding.inflate(inflater, breakLayout, false)
 
-            breakView.break_part_name.text = breakData.part_name
+            breakView.breakPartName.text = breakData.part_name
 
             breakView.flinch.text = resolveInt(breakData.flinch)
             breakView.flinch.setTextColor(ContextCompat.getColor(context!!, R.color.textColorHigh))
@@ -185,7 +193,7 @@ class MonsterDamageFragment : androidx.fragment.app.Fragment() {
                 Extract.GREEN -> R.color.icon_green
             }) ?: 0)
 
-            break_layout.addView(breakView)
+            breakLayout.addView(breakView.root)
         }
     }
 

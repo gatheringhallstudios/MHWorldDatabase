@@ -22,7 +22,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.DataSynchronizer
 import com.gatheringhallstudios.mhworlddatabase.util.DataWatcher
-import kotlinx.android.synthetic.main.listitem_reward.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemRewardBinding
 
 class LocationData: DataSynchronizer() {
     var location: Location by DataWatcher(this)
@@ -140,10 +140,11 @@ class LocationItemsAdapterDelegate : SimpleListDelegate<LocationItem>() {
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: LocationItem) {
-        viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.item))
-        viewHolder.reward_name.text = data.item.name
-        viewHolder.reward_stack.text = viewHolder.resources.getString(R.string.format_quantity_x, data.stack)
-        viewHolder.reward_percent.text = viewHolder.resources.getString(R.string.format_percentage, data.percentage)
+        val binding = ListitemRewardBinding.bind(viewHolder.itemView)
+        binding.rewardIcon.setImageDrawable(AssetLoader.loadIconFor(data.item))
+        binding.rewardName.text = data.item.name
+        binding.rewardStack.text = viewHolder.resources.getString(R.string.format_quantity_x, data.stack)
+        binding.rewardPercent.text = viewHolder.resources.getString(R.string.format_percentage, data.percentage)
 
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateItemDetail(data.item.id) }
     }

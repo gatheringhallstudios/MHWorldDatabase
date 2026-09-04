@@ -142,6 +142,11 @@
         true attack values instead, which are what\'s used in the damage formula.
     </string>
     <string name="preference_language_default">Default</string>
+    <string name="preference_app_language">App Language</string>
+    <string name="preference_app_language_description">
+        Show the app interface using %s.
+    </string>
+    <string name="preference_app_language_default">System default</string>
 
     <!-- ################### -->
     <!-- ## FEATURE MENUS ## -->

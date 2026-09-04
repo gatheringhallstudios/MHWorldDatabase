@@ -15,8 +15,8 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ItemMonsterReward
 import com.gatheringhallstudios.mhworlddatabase.data.models.ItemQuestReward
 import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.cell_icon_verbose_label_text.*
-import kotlinx.android.synthetic.main.listitem_reward.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemRewardBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.CellIconVerboseLabelTextBinding
 
 
 /**
@@ -33,12 +33,13 @@ class ItemLocationAdapterDelegate : SimpleListDelegate<ItemLocation>() {
 
     override fun bindView(viewHolder: SimpleViewHolder, data: ItemLocation) {
         val ctx = viewHolder.context
+        val binding = ListitemRewardBinding.bind(viewHolder.itemView)
 
-        viewHolder.reward_icon.applyIconType(IconType.PAPER)
-        viewHolder.reward_icon.setImageDrawable(AssetLoader.loadIconFor(data.location))
-        viewHolder.reward_name.text = ctx.getString(R.string.header_location_area, data.area)
-        viewHolder.reward_stack.text = ctx.getString(R.string.format_quantity_x, data.stack)
-        viewHolder.reward_percent.text = ctx.getString(R.string.format_percentage, data.percentage)
+        binding.rewardIcon.applyIconType(IconType.PAPER)
+        binding.rewardIcon.setImageDrawable(AssetLoader.loadIconFor(data.location))
+        binding.rewardName.text = ctx.getString(R.string.header_location_area, data.area)
+        binding.rewardStack.text = ctx.getString(R.string.format_quantity_x, data.stack)
+        binding.rewardPercent.text = ctx.getString(R.string.format_percentage, data.percentage)
 
         viewHolder.itemView.setOnClickListener {
             it.getRouter().navigateLocationDetail(data.location.id)
@@ -72,15 +73,16 @@ class MonsterRewardSourceAdapterDelegate: SimpleListDelegate<ItemMonsterReward>(
         val source = viewHolder.resources.getString(
                 R.string.item_crafting_source_condition_reward, rankStr, data.condition_name)
 
-        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.monster))
-        viewHolder.label_text.text = data.monster.name
-        viewHolder.sublabel_text.text = source
-        viewHolder.value_text.text = when (data.percentage) {
+        val binding = CellIconVerboseLabelTextBinding.bind(viewHolder.itemView)
+        binding.icon.setImageDrawable(AssetLoader.loadIconFor(data.monster))
+        binding.labelText.text = data.monster.name
+        binding.sublabelText.text = source
+        binding.valueText.text = when (data.percentage) {
             0 -> viewHolder.resources.getString(R.string.format_percentage_unknown)
             else -> viewHolder.resources.getString(R.string.format_percentage, data.percentage)
         }
 
-        viewHolder.subvalue_text.text = viewHolder.resources.getString(R.string.format_quantity_none, data.stack)
+        binding.subvalueText.text = viewHolder.resources.getString(R.string.format_quantity_none, data.stack)
 
         viewHolder.itemView.setOnClickListener {
             it.getRouter().navigateMonsterDetail(data.monster.id)

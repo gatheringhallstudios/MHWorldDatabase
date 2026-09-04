@@ -11,7 +11,7 @@ import com.gatheringhallstudios.mhworlddatabase.assets.AssetLoader
 import com.gatheringhallstudios.mhworlddatabase.components.IconType
 import com.gatheringhallstudios.mhworlddatabase.components.applyIconType
 import com.gatheringhallstudios.mhworlddatabase.data.models.Location
-import kotlinx.android.synthetic.main.listitem_large.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemLargeBinding
 
 /**
  * An adapter delegate used to display a list of locations
@@ -26,10 +26,11 @@ class LocationAdapterDelegate(private val onSelected: (Location) -> Unit): Simpl
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: Location) {
+        val binding = ListitemLargeBinding.bind(viewHolder.itemView)
         val icon = AssetLoader.loadIconFor(data)
-        viewHolder.item_icon.applyIconType(IconType.PAPER)
-        viewHolder.item_icon.setImageDrawable(icon)
-        viewHolder.item_name.text = data.name
+        binding.itemIcon.applyIconType(IconType.PAPER)
+        binding.itemIcon.setImageDrawable(icon)
+        binding.itemName.text = data.name
         viewHolder.itemView.setOnClickListener { onSelected(data) }
     }
 }

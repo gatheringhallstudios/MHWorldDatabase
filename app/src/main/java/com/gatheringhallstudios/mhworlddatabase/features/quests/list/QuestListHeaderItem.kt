@@ -2,6 +2,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.quests.list
 
 import android.graphics.Color
 import android.graphics.drawable.Animatable
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
@@ -13,21 +14,22 @@ import com.gatheringhallstudios.mhworlddatabase.data.types.Rank
 import com.gatheringhallstudios.mhworlddatabase.features.armor.list.compatSwitchVector
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
-import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.listitem_quest_header.*
+import com.xwray.groupie.viewbinding.BindableItem
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemQuestHeaderBinding
 
 
-class QuestListHeaderItem(val category: QuestCategory, val stars: Int) : Item(), ExpandableItem {
+class QuestListHeaderItem(val category: QuestCategory, val stars: Int) : BindableItem<ListitemQuestHeaderBinding>(), ExpandableItem {
     private lateinit var group: ExpandableGroup
 
     override fun setExpandableGroup(onToggleListener: ExpandableGroup) {
         group = onToggleListener
     }
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun initializeViewBinding(view: View) = ListitemQuestHeaderBinding.bind(view)
+
+    override fun bind(viewBinding: ListitemQuestHeaderBinding, position: Int) {
         val categoryString = AssetLoader.localizeQuestCategory(category)
-        val res = viewHolder.itemView.resources
+        val res = viewBinding.root.resources
 
         // TODO Change to MR once master rank quest are supported
         val name =
@@ -37,37 +39,37 @@ class QuestListHeaderItem(val category: QuestCategory, val stars: Int) : Item(),
                     else -> stars.toString()
                 }
 
-        viewHolder.quest_group_name.text = name
+        viewBinding.questGroupName.text = name
 
         when (stars) {
-            in 1..5 -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars, Rank.LOW)
-            in 6..9 -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars, Rank.HIGH)
-            else -> addStarsToLayoutLow(viewHolder.quest_star_layout, stars - 10, Rank.MASTER)
+            in 1..5 -> addStarsToLayoutLow(viewBinding.questStarLayout, stars, Rank.LOW)
+            in 6..9 -> addStarsToLayoutLow(viewBinding.questStarLayout, stars, Rank.HIGH)
+            else -> addStarsToLayoutLow(viewBinding.questStarLayout, stars - 10, Rank.MASTER)
         }
 
-        bindCurrentState(viewHolder, false)
-        viewHolder.itemView.setOnClickListener {
+        bindCurrentState(viewBinding, false)
+        viewBinding.root.setOnClickListener {
             group.onToggleExpanded()
-            bindCurrentState(viewHolder, true)
+            bindCurrentState(viewBinding, true)
         }
     }
 
     override fun getLayout() = R.layout.listitem_quest_header
 
-    private fun bindCurrentState(viewHolder: ViewHolder, stateChanging: Boolean) {
-        viewHolder.containerView.setBackgroundColor(when (group.isExpanded) {
-            true -> ContextCompat.getColor(viewHolder.containerView.context, R.color.backgroundColorSectionHeader)
+    private fun bindCurrentState(viewBinding: ListitemQuestHeaderBinding, stateChanging: Boolean) {
+        viewBinding.root.setBackgroundColor(when (group.isExpanded) {
+            true -> ContextCompat.getColor(viewBinding.root.context, R.color.backgroundColorSectionHeader)
             false -> Color.TRANSPARENT
         })
 
         // set dropdown arrow image
-        viewHolder.dropdown_icon.setImageResource(when (group.isExpanded) {
+        viewBinding.dropdownIcon.setImageResource(when (group.isExpanded) {
             true -> compatSwitchVector(R.drawable.ic_expand_less_animated, R.drawable.ic_expand_less)
             false -> compatSwitchVector(R.drawable.ic_expand_more_animated, R.drawable.ic_expand_more)
         })
 
         // animate (if can be animated)
-        val drawable = viewHolder.dropdown_icon.drawable
+        val drawable = viewBinding.dropdownIcon.drawable
         if (stateChanging && drawable is Animatable) {
             drawable.start()
         }

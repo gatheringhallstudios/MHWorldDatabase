@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.itemcrafting
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
@@ -20,7 +20,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.MHWDatabase
  */
 class ItemCraftingFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(this).get(ItemCombinationsViewModel::class.java)
+        ViewModelProvider(this).get(ItemCombinationsViewModel::class.java)
     }
 
     private val adapter = BasicListDelegationAdapter(ItemCraftingAdapterDelegate())
@@ -31,7 +31,7 @@ class ItemCraftingFragment : RecyclerViewFragment() {
         // Add dividers between items
         recyclerView.addItemDecoration(StandardDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.combinationListData.observe(this, Observer {
+        viewModel.combinationListData.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })

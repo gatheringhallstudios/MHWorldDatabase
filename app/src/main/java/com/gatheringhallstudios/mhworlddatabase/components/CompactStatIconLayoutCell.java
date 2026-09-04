@@ -15,8 +15,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * This is a cell that displays a horizontal layout of icons with an optional left icon.
@@ -25,9 +23,7 @@ public class CompactStatIconLayoutCell extends ConstraintLayout {
 
     private final String TAG = getClass().getSimpleName();
 
-    @BindView(R.id.generic_icon)
     public ImageView imageView;
-    @BindView(R.id.value_layout)
     public LinearLayout linearLayout;
 
     public CompactStatIconLayoutCell(Context context, @DrawableRes int imgSrc) {
@@ -63,7 +59,8 @@ public class CompactStatIconLayoutCell extends ConstraintLayout {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.cell_compact_layout_stat, this, true);
-        ButterKnife.bind(this);
+        imageView = findViewById(R.id.generic_icon);
+        linearLayout = findViewById(R.id.value_layout);
 
         setLeftIconDrawable(drawable);
     }

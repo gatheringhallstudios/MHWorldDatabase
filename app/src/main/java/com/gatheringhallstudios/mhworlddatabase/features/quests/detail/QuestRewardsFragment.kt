@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.quests.detail
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.adapters.QuestRewardAdapterDelegate
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
@@ -13,7 +13,6 @@ import com.gatheringhallstudios.mhworlddatabase.features.quests.detail.QuestDeta
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
 import com.gatheringhallstudios.mhworlddatabase.util.applyArguments
-import kotlinx.android.synthetic.main.listitem_quest_header.view.*
 
 class QuestRewardsFragment : RecyclerViewFragment() {
     companion object {
@@ -23,7 +22,7 @@ class QuestRewardsFragment : RecyclerViewFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(QuestDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(QuestDetailViewModel::class.java)
     }
 
     val adapter = CategoryAdapter(QuestRewardAdapterDelegate { reward ->

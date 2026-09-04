@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.weapons.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
@@ -24,7 +24,7 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
      * Returns the viewmodel owned by the parent fragment
      */
     private val viewModel: WeaponDetailViewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(WeaponDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(WeaponDetailViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class WeaponDetailFamilyFragment : RecyclerViewFragment() {
 
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.weaponFamilyData.observe(this, Observer { data ->
+        viewModel.weaponFamilyData.observe(viewLifecycleOwner, Observer { data ->
             adapter.clear()
             if (data == null) return@Observer
 

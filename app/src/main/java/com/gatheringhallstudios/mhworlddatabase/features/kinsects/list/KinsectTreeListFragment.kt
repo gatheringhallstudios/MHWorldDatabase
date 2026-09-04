@@ -7,7 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.AppSettings
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.util.RecyclerViewFragment
@@ -27,7 +27,7 @@ class KinsectTreeListFragment : RecyclerViewFragment() {
     }
 
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(KinsectTreeViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(KinsectTreeViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ class KinsectTreeListFragment : RecyclerViewFragment() {
         }
         setAdapter(adapter)
 
-        viewModel.nodeListData.observe(this, Observer {
+        viewModel.nodeListData.observe(viewLifecycleOwner, Observer {
             adapter.setItems(it ?: emptyList())
             adapter.notifyDataSetChanged()
         })

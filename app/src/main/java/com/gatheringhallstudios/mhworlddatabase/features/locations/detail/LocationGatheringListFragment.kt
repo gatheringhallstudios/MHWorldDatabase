@@ -1,7 +1,7 @@
 package com.gatheringhallstudios.mhworlddatabase.features.locations.detail
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import com.gatheringhallstudios.mhworlddatabase.adapters.common.CategoryAdapter
@@ -16,7 +16,7 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.LocationItem
  */
 class LocationGatheringListFragment : RecyclerViewFragment() {
     private val viewModel by lazy {
-        ViewModelProviders.of(parentFragment!!).get(LocationDetailViewModel::class.java)
+        ViewModelProvider(parentFragment!!).get(LocationDetailViewModel::class.java)
     }
 
     private val adapter = CategoryAdapter(LocationItemsAdapterDelegate())
@@ -25,7 +25,7 @@ class LocationGatheringListFragment : RecyclerViewFragment() {
         this.setAdapter(adapter)
         recyclerView.addItemDecoration(ChildDivider(DashedDividerDrawable(context!!)))
 
-        viewModel.locationItems.observe(this, Observer(::setItems))
+        viewModel.locationItems.observe(viewLifecycleOwner, Observer(::setItems))
     }
 
     private fun setItems(locationItems: List<LocationItem>?) {

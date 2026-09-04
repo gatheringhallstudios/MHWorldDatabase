@@ -15,8 +15,9 @@ import com.gatheringhallstudios.mhworlddatabase.data.models.ArmorSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.CharmSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.data.models.DecorationSkillLevel
 import com.gatheringhallstudios.mhworlddatabase.getRouter
-import kotlinx.android.synthetic.main.listitem_armorset_bonus.*
-import kotlinx.android.synthetic.main.listitem_skill_level_armor.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSkillLevelBonusBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSkillLevelArmorBinding
+import com.gatheringhallstudios.mhworlddatabase.databinding.ListitemSkillLevelOtherBinding
 
 /**
  * A wrapper used to build the adapter for skill details.
@@ -132,12 +133,13 @@ class DecorationSkillLevelAdapterDelegate: SimpleListDelegate<DecorationSkillLev
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: DecorationSkillLevel) {
-        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.decoration))
-        viewHolder.label_text.text = data.decoration.name
-        viewHolder.skill_level.maxLevel = data.skillTree.max_level
-        viewHolder.skill_level.level = data.level
-        viewHolder.skill_level.secretLevels = data.skillTree.secret
-        viewHolder.level_text.text = viewHolder.context.getString(R.string.level_qty, data.level)
+        val binding = ListitemSkillLevelOtherBinding.bind(viewHolder.itemView)
+        binding.icon.setImageDrawable(AssetLoader.loadIconFor(data.decoration))
+        binding.labelText.text = data.decoration.name
+        binding.skillLevel.maxLevel = data.skillTree.max_level
+        binding.skillLevel.level = data.level
+        binding.skillLevel.secretLevels = data.skillTree.secret
+        binding.levelText.text = viewHolder.context.getString(R.string.level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateDecorationDetail(data.decoration.id) }
     }
 }
@@ -151,12 +153,13 @@ class CharmSkillLevelAdapterDelegate: SimpleListDelegate<CharmSkillLevel>() {
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: CharmSkillLevel) {
-        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.charm))
-        viewHolder.label_text.text = data.charm.name
-        viewHolder.skill_level.maxLevel = data.skillTree.max_level
-        viewHolder.skill_level.level = data.level
-        viewHolder.skill_level.secretLevels = data.skillTree.secret
-        viewHolder.level_text.text = viewHolder.context.getString(R.string.level_qty, data.level)
+        val binding = ListitemSkillLevelOtherBinding.bind(viewHolder.itemView)
+        binding.icon.setImageDrawable(AssetLoader.loadIconFor(data.charm))
+        binding.labelText.text = data.charm.name
+        binding.skillLevel.maxLevel = data.skillTree.max_level
+        binding.skillLevel.level = data.level
+        binding.skillLevel.secretLevels = data.skillTree.secret
+        binding.levelText.text = viewHolder.context.getString(R.string.level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateCharmDetail(data.charm.id) }
     }
 }
@@ -170,15 +173,16 @@ class ArmorSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSkillLevel>() {
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: ArmorSkillLevel) {
-        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data.armor))
-        viewHolder.label_text.text = data.armor.name
-        viewHolder.skill_level.maxLevel = data.skillTree.max_level
-        viewHolder.skill_level.level = data.level
-        viewHolder.skill_level.secretLevels = data.skillTree.secret
+        val binding = ListitemSkillLevelArmorBinding.bind(viewHolder.itemView)
+        binding.icon.setImageDrawable(AssetLoader.loadIconFor(data.armor))
+        binding.labelText.text = data.armor.name
+        binding.skillLevel.maxLevel = data.skillTree.max_level
+        binding.skillLevel.level = data.level
+        binding.skillLevel.secretLevels = data.skillTree.secret
 
         // make it possible to reference slots using a list
         val slots = data.armor.slots
-        val slotViews = arrayOf(viewHolder.slot1, viewHolder.slot2, viewHolder.slot3)
+        val slotViews = arrayOf(binding.slot1, binding.slot2, binding.slot3)
 
         // Bind slots (only show those with a value)
         for (i in 0 until 3) {
@@ -196,7 +200,7 @@ class ArmorSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSkillLevel>() {
             slotViews[0].visibility = View.VISIBLE
         }
 
-        viewHolder.level_text.text = viewHolder.context.getString(R.string.level_qty, data.level)
+        binding.levelText.text = viewHolder.context.getString(R.string.level_qty, data.level)
         viewHolder.itemView.setOnClickListener { it.getRouter().navigateArmorDetail(data.armor.id) }
     }
 }
@@ -210,12 +214,13 @@ class ArmorSetBonusSkillLevelAdapterDelegate: SimpleListDelegate<ArmorSetBonus>(
     }
 
     override fun bindView(viewHolder: SimpleViewHolder, data: ArmorSetBonus) {
-        viewHolder.icon.setImageDrawable(AssetLoader.loadIconFor(data))
-        viewHolder.label_text.text = data.name
-        viewHolder.skill_level.maxLevel = data.skillTree.max_level
-        viewHolder.skill_level.secretLevels = data.skillTree.secret
-        viewHolder.skill_level.level = data.points
-        viewHolder.bonus_requirement.setImageResource(SetBonusNumberRegistry(data.required))
+        val binding = ListitemSkillLevelBonusBinding.bind(viewHolder.itemView)
+        binding.icon.setImageDrawable(AssetLoader.loadIconFor(data))
+        binding.labelText.text = data.name
+        binding.skillLevel.maxLevel = data.skillTree.max_level
+        binding.skillLevel.secretLevels = data.skillTree.secret
+        binding.skillLevel.level = data.points
+        binding.bonusRequirement.setImageResource(SetBonusNumberRegistry(data.required))
 
         // todo: allow clicking
     }

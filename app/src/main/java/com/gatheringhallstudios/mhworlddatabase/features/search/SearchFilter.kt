@@ -10,7 +10,7 @@ fun normalize(str: String): String {
             'β' -> "beta"
             'γ' -> "gamma"
             'á' -> 'a'
-            else -> char.toLowerCase()
+            else -> char.lowercaseChar()
         })
     }
 

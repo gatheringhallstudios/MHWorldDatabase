@@ -3,7 +3,7 @@ package com.gatheringhallstudios.mhworlddatabase.features.workshop.detail
 import android.os.Bundle
 import android.view.*
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gatheringhallstudios.mhworlddatabase.R
 import com.gatheringhallstudios.mhworlddatabase.components.ExpandableCardView
 import com.gatheringhallstudios.mhworlddatabase.data.models.*
@@ -14,11 +14,14 @@ import com.gatheringhallstudios.mhworlddatabase.features.workshop.UserEquipmentS
 import com.gatheringhallstudios.mhworlddatabase.features.workshop.selectors.WorkshopSelectorListFragment.Companion
 import com.gatheringhallstudios.mhworlddatabase.getRouter
 import com.gatheringhallstudios.mhworlddatabase.setActivityTitle
-import kotlinx.android.synthetic.main.fragment_workshop_editor.*
+import com.gatheringhallstudios.mhworlddatabase.databinding.FragmentWorkshopEditorBinding
 
 class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.RenameDialogListener {
+    private var _binding: FragmentWorkshopEditorBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel by lazy {
-        ViewModelProviders.of(activity!!).get(UserEquipmentSetViewModel::class.java)
+        ViewModelProvider(activity!!).get(UserEquipmentSetViewModel::class.java)
     }
 
     private lateinit var weaponCard: UserEquipmentCard
@@ -57,7 +60,13 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_workshop_editor, parent, false)
+        _binding = FragmentWorkshopEditorBinding.inflate(inflater, parent, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -74,7 +83,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
     override fun onResume() {
         super.onResume()
 
-        if (scrollY != 0) user_equipment_editor_scroll_view.scrollTo(0, scrollY)
+        if (scrollY != 0) binding.userEquipmentEditorScrollView.scrollTo(0, scrollY)
         viewModel.armorSetCardStates.forEach { (key, value) ->
             when (key) {
                 0 -> weaponCard.setCardState(if (value) ExpandableCardView.CardState.EXPANDED else ExpandableCardView.CardState.COLLAPSED)
@@ -94,7 +103,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
 
     override fun onPause() {
         super.onPause()
-        scrollY = user_equipment_editor_scroll_view.scrollY
+        scrollY = binding.userEquipmentEditorScrollView.scrollY
     }
 
     override fun onDetach() {
@@ -121,15 +130,15 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        this.weaponCard = UserEquipmentCard(user_equipment_weapon_slot)
-        this.headArmorCard = UserEquipmentCard(user_equipment_head_slot)
-        this.armArmorCard = UserEquipmentCard(user_equipment_arms_slot)
-        this.chestArmorCard = UserEquipmentCard(user_equipment_chest_slot)
-        this.waistArmorCard = UserEquipmentCard(user_equipment_waist_slot)
-        this.legArmorCard = UserEquipmentCard(user_equipment_legs_slot)
-        this.charmCard = UserEquipmentCard(user_equipment_charm_slot)
-        this.tool1Card = UserEquipmentCard(user_equipment_tool_1_slot)
-        this.tool2Card = UserEquipmentCard(user_equipment_tool_2_slot)
+        this.weaponCard = UserEquipmentCard(binding.userEquipmentWeaponSlot)
+        this.headArmorCard = UserEquipmentCard(binding.userEquipmentHeadSlot)
+        this.armArmorCard = UserEquipmentCard(binding.userEquipmentArmsSlot)
+        this.chestArmorCard = UserEquipmentCard(binding.userEquipmentChestSlot)
+        this.waistArmorCard = UserEquipmentCard(binding.userEquipmentWaistSlot)
+        this.legArmorCard = UserEquipmentCard(binding.userEquipmentLegsSlot)
+        this.charmCard = UserEquipmentCard(binding.userEquipmentCharmSlot)
+        this.tool1Card = UserEquipmentCard(binding.userEquipmentTool1Slot)
+        this.tool2Card = UserEquipmentCard(binding.userEquipmentTool2Slot)
     }
 
     private fun populateUserEquipmentSet(userEquipmentSet: UserEquipmentSet) {
@@ -379,6 +388,7 @@ class WorkshopEditFragment : androidx.fragment.app.Fragment(), RenameSetDialog.R
                             viewModel.updateCardState(5, false)
                         }
                     }
+                    else -> Unit
                 }
             }
             DataType.WEAPON -> {
