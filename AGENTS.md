@@ -31,6 +31,51 @@ Check before committing:
 git log -1 --format='%B' | wc -c
 ```
 
+## Building locally
+
+Use JDK 17. Gradle 8.14 cannot compile `build.gradle` on newer JDKs (Android Studio's bundled
+JBR 25 fails with `Unsupported class file major version 69`), so point `JAVA_HOME` at a 17
+install for command-line builds.
+
+The debug build installs as `com.gatheringhallstudios.mhworlddatabase.dev`, next to the Play
+Store install and with its own data. Release builds keep the real package name.
+
+## CI (Bitrise)
+
+CI is defined in [bitrise.yml](bitrise.yml) and edited either there or in the Bitrise
+Workflow Editor — the editor rewrites the file and drops YAML comments, so put explanations
+in each workflow's `summary` / `description`. fastlane and CircleCI are no longer used;
+`fastlane/metadata/` only still holds the store listing text and release notes.
+
+| Workflow | Trigger | Does |
+| --- | --- | --- |
+| `pr_check` | every PR | lint, unit tests, debug APK |
+| `main` | push to `master` | `pr_check`, then saves the Gradle cache |
+| `device_tests` | nightly schedule (set in the Bitrise UI) | `androidTest` on Firebase Test Lab via Virtual Device Testing |
+| `release` | `v*` tag | version check, signed AAB + APK, uploaded for Release Management |
+
+Run a workflow locally with `bitrise local run <workflow>`. Steps that only work on Bitrise
+(clone, JDK, cache, artifact upload) carry `run_if: .IsCI` and skip themselves.
+
+Signing: `app/build.gradle` reads `GHSStoreFile` / `GHSStorePW` / `GHSKeyAlias` / `GHSKeyPW`.
+`gradle.properties` holds dummy values; `release` overrides them with `ORG_GRADLE_PROJECT_*`
+env vars mapped from the keystore uploaded under Bitrise Code Signing.
+
+Publishing to Play happens in Bitrise Release Management, not in a workflow. It takes the AAB
+from the `release` build; the APK on the same build page is for installing on a device.
+
+### Cutting a release
+
+1. Bump `versionCode` / `versionName` and add the matching entries in the files listed under
+   pre-flight below.
+2. Merge to `master`, then tag that commit `v<versionName>` (a suffix like `-hotfix` is
+   allowed) and push the tag. `release` fails fast if the tag, `app/build.gradle` and the
+   newest `changelog.xml` entry disagree.
+3. In Release Management, create a release from that build, paste the release notes from
+   `<versionCode>.txt`, and send it to the internal track.
+4. Run the smoke test below on the APK from the `release` build, then promote in Release
+   Management.
+
 ## Release smoke test
 
 Run this before every Play Store upload — after the version bump, on the artifact you are
@@ -41,7 +86,7 @@ actually going to ship. It is a crash-and-obvious-breakage pass, not a QA cycle;
 ### 0. Pre-flight (no device)
 
 ```bash
-./gradlew lint test                                   # what CI runs
+bitrise local run pr_check                            # what CI runs on PRs
 git diff --stat HEAD~1 -- app/build.gradle            # versionCode + versionName bumped?
 ```
 
@@ -51,18 +96,14 @@ Confirm all four are consistent for the new release:
 | --- | --- |
 | `versionCode` / `versionName` | `app/build.gradle` |
 | In-app changelog entry | `app/src/main/res/raw/changelog.xml` |
-| Play Store release notes | `fastlane/metadata/android/en-US/changelogs/<versionCode>.txt` |
+| Play Store release notes | `fastlane/metadata/android/en-US/changelogs/<versionCode>.txt` — same bullets as the `changelog.xml` entry; pasted into Release Management |
 | `DATABASE_VERSION` | `app/build.gradle` — bump **only** if `assets/databases/mhw.db` changed |
 
-Then build the real thing (signed, `minifyEnabled false`, but still the release variant):
-
-```bash
-bundle exec fastlane bundle_release      # app/build/outputs/bundle/release/app-release.aab
-```
-
-Install the bundle on device with `bundletool`, or `./gradlew assembleRelease` and install
-that APK — do not smoke test a debug build. Debug sets `R.bool.DEBUG` true, which exposes
-the "Debug Only" drawer section and changes behaviour.
+Then get the real thing: the signed `app-release.apk` from the tagged `release` build's page
+on Bitrise (signed, `minifyEnabled false`, but still the release variant). Do not smoke test
+a debug build. Debug sets `R.bool.DEBUG` true, which exposes the "Debug Only" drawer section
+and changes behaviour, and it installs as the separate `.dev` app, so it can't exercise the
+upgrade path.
 
 ### 1. Upgrade install (do this first, and don't skip it)
 
@@ -73,7 +114,7 @@ path *before* wiping the device.
 PKG=com.gatheringhallstudios.mhworlddatabase
 # starting from the currently published version already installed, with bookmarks
 # and at least one workshop set saved:
-adb install -r app/build/outputs/apk/release/app-release.apk    # -r, NOT uninstall
+adb install -r app-release.apk    # from the release build page; -r, NOT uninstall
 ```
 
 Verify after launch:
@@ -89,7 +130,7 @@ A migration that throws here shows up as a crash on first launch. Check
 ### 2. Fresh install
 
 ```bash
-adb uninstall $PKG && adb install app/build/outputs/apk/release/app-release.apk
+adb uninstall $PKG && adb install app-release.apk
 adb logcat -b crash -c
 adb shell am start -n $PKG/.SplashActivity
 ```

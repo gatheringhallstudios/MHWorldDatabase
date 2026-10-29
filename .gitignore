@@ -3,6 +3,9 @@
 # Supplied by dependencies
 app/src/main/assets/databases/mhw\.db
 
+# Written by Bitrise Gradle steps during local runs
+/gradle.deps
+
 
 # Created by https://www.gitignore.io/api/androidstudio
 
