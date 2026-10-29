@@ -1,7 +1,6 @@
 package com.gatheringhallstudios.mhworlddatabase
 
 import androidx.lifecycle.LiveData
-import com.squareup.leakcanary.AndroidDebuggerControl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
