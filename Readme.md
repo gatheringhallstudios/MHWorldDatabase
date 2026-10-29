@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/gatheringhallstudios/MHWorldDatabase/tree/master.svg?style=svg)](https://circleci.com/gh/gatheringhallstudios/MHWorldDatabase/tree/master)
-
 # MHWorldDatabase
 
 The main repository for the open source [MHWorld Database](https://play.google.com/store/apps/details?id=com.gatheringhallstudios.mhworlddatabase) Android app. This project displays data from the [MHWorldData](https://github.com/gatheringhallstudios/MHWorldData) project.
@@ -18,8 +16,15 @@ If you wish to chat with us, we also have a [discord server](https://discord.gg/
 ## Build instructions
 
 - Install Android Studio, and use it to open this project directory
-- Install the version 28 Android SDK via the SDK manager
+- Install the version 36 Android SDK via the SDK manager
+- Use JDK 17 for Gradle (Android Studio: Settings > Build Tools > Gradle > Gradle JDK). Newer JDKs fail to compile the build script.
 - Compile and run the project via Android Studio. You may need to create an emulator using the AVD
+
+Debug builds install as a separate `.dev` app, so they don't replace a copy installed from the Play Store.
+
+## CI
+
+CI runs on [Bitrise](https://bitrise.io) and is defined in [bitrise.yml](bitrise.yml). Pull requests run lint, unit tests and a debug build; pushing a `v*` tag builds the signed release, which is published to Google Play through Bitrise Release Management. See [AGENTS.md](AGENTS.md) for the full workflow list and release steps.
 
 ## Contributing
 
