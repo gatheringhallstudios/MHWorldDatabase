@@ -89,8 +89,9 @@ workflows:
   release:
     summary: Signed release AAB for Release Management. Runs on v* tags.
     description: |-
-      Checks that the tag, app/build.gradle and changelog.xml agree, builds the signed AAB
-      and uploads it to bitrise.io, where Release Management picks it up for Play.
+      Checks that the tag, app/build.gradle and changelog.xml agree, then builds the signed
+      AAB and APK and uploads them to bitrise.io. Release Management picks up the AAB for Play;
+      the APK is for installing the release build directly on a device.
 
       Needs the release keystore uploaded under App settings > Code signing > Android keystore
       file. That exposes BITRISEIO_ANDROID_KEYSTORE_URL, _PASSWORD, _ALIAS and
@@ -139,10 +140,18 @@ workflows:
         - destination: $KEYSTORE_PATH
         - use_sudo: "false"
     - android-build@1:
+        title: Build release AAB
         inputs:
         - project_location: $PROJECT_LOCATION
         - module: app
         - variant: release
         - build_type: aab
+    - android-build@1:
+        title: Build release APK
+        inputs:
+        - project_location: $PROJECT_LOCATION
+        - module: app
+        - variant: release
+        - build_type: apk
     - deploy-to-bitrise-io@2:
         run_if: .IsCI
