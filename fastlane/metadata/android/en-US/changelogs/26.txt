@@ -1,0 +1,5 @@
+- Updated to support Android 16.
+- Added an App Language setting.
+- Updated French translations.
+- Fixed a crash on the German settings screen.
+- Fixed tabs sometimes showing up blank.
