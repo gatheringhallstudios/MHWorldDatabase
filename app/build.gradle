@@ -60,6 +60,9 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
+            // Installs alongside the Play Store build instead of replacing it
+            applicationIdSuffix ".dev"
+
             buildConfigField("int", "DB_VERSION", "${DATABASE_VERSION}")
 
             // Debug flag usable through R.bool.DEBUG
